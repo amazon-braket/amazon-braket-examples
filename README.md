@@ -1,4 +1,4 @@
-# braket_tutorials_github
+# Braket Tutorials github
 Private repository for Braket tutorials. 
 In this repo we collect tutorials for Amazon Braket. 
 The repo is structured as follows, with the following sub-folders:  
