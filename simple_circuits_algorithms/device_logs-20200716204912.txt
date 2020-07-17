@@ -1,0 +1,8 @@
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: start polling for completion
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: task status INITIALIZED
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: task status INITIALIZED
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: task status QUEUED
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: task status QUEUED
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: task status QUEUED
+Task arn:aws:aqx:us-east-1:465542368797:quantum-task:6881be77-9f88-44f8-9546-503a1b9b36fb: task status COMPLETED
+Counter({'00011': 496, '00001': 493, '01001': 3, '01011': 3, '10111': 3, '10101': 2})
