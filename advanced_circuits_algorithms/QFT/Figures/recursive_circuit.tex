@@ -1,0 +1,22 @@
+\documentclass[border=2pt]{standalone}
+% \usepackage[margin=0.1in]{geometry}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{quantum}
+\usepackage{qcircuit}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes, arrows, backgrounds, decorations.markings}
+
+\begin{document}
+\Qcircuit @C=1em @R=.3em {				
+&  & \multigate{5}{\text{QFT}_n} & \qw &   										 & & \gate{H}	& \gate{R_2}& \gate{R_3}& \cds{5}{\cdots}	& \gate{R_{n-1}}& \gate{R_n}	& \qw							 & \qw		\\
+&  & \ghost{\text{QFT}_n} 		& \qw &   										 & & \qw 		& \ctrl{-1} & \qw 		& \qw 				& \qw 			& \qw		 	& \multigate{4}{\text{QFT}_{n-1}}& \qw		\\
+&  & \ghost{\text{QFT}_n} 		& \qw & \push{\rule{.3em}{0em}=\rule{.3em}{0em}} & & \qw		& \qw 		& \ctrl{-2} & \qw 				& \qw 			& \qw		 	& \ghost{\text{QFT}_{n-1}}		 & \qw		\\
+&  & \nghost{\text{QFT}_n} 		&	  &   										 & & 			&			& 			& 					& 				& 				& \nghost{\text{QFT}_{n-1}}		 &			\\
+&  & \ghost{\text{QFT}_n} 		& \qw &   										 & & \qw		& \qw 		& \qw		& \qw 				& \ctrl{-4}		& \qw			& \ghost{\text{QFT}_{n-1}}		 & \qw		\\
+&  & \ghost{\text{QFT}_n} 		& \qw &  										 & & \qw		& \qw 		& \qw 		& \qw 				& \qw		 	& \ctrl{-5}		& \ghost{\text{QFT}_{n-1}}		 & \qw		\\
+}
+\end{document}

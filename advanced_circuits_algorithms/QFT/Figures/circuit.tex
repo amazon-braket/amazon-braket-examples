@@ -1,0 +1,22 @@
+\documentclass[border=2pt]{standalone}
+% \usepackage[margin=0.1in]{geometry}
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{quantum}
+\usepackage{qcircuit}
+
+
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes, arrows, backgrounds, decorations.markings}
+
+\begin{document}
+\Qcircuit @C=1em @R=.3em {				
+& \gate{H}	& \gate{R_2}& \gate{R_3}& \cds{5}{\cdots}	& \gate{\cdots} & \gate{R_n}	& \qw		& \qw		& \cds{5}{\cdots} 	& \qw			& \cds{5}{\cdots}	& \qw		& \qw 		 & \qw 		& \qswap \qwx[5]& \qw 			& \qw & \qw 	\\
+& \qw 		& \ctrl{-1} & \qw 		& \qw 				& \qw 			& \qw		 	& \gate{H}	& \gate{R_2}& \qw			 	& \gate{R_{n-1}}& \qw 				& \qw		& \qw  		 & \qw 		& \qw 			& \qswap \qwx[3]& \qw & \qw	\\
+& \qw		& \qw 		& \ctrl{-2} & \qw 				& \qw 			& \qw		 	& \qw		& \ctrl{-1} & \qw			 	& \qw			& \qw			 	& \qw		& \qw 		 & \qw 		& \qw 			& \qw 	& \qswap\qwx[1]& \qw	\\
+& 			&			& 			& 					& 				& 				& 			&			&  					& 				& 					& 		 	& 			 & 			& 	 			& 	 			&  	  &	\\
+& \qw		& \qw 		& \qw		& \qw 				& \ctrl{-4}		& \qw			& \qw		& \qw		& \qw			 	& \qw			& \qw			 	& \gate{H}	& \gate{R_2} & \qw 		& \qw 			& \qswap		& \qw & \qw 	\\
+& \qw		& \qw 		& \qw 		& \qw 				& \qw		 	& \ctrl{-5}		& \qw		& \qw		& \qw				& \ctrl{-4}		& \qw 				& \qw 		& \ctrl{-1}	 & \gate{H} & \qswap 		& \qw 			& \qw & \qw	\\
+}
+\end{document}
