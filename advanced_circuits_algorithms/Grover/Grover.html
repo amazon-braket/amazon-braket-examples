@@ -13250,7 +13250,7 @@ To find a given target item, Grover's algorithm uses the following steps:</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Version: 0.4.1
+<pre>Version: 0.4.2
 </pre>
 </div>
 </div>
@@ -13293,7 +13293,7 @@ To find a given target item, Grover's algorithm uses the following steps:</p>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local Schroedinger Simulator</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local Simulator</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">LocalSimulator</span><span class="p">()</span>
 
 <span class="c1"># set up S3 bucket (where results are stored)</span>
@@ -13521,9 +13521,9 @@ In the next section, we will run the same problem on a quantum IonQ backend.</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set up cloud-based simulator backend </span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">AwsQuantumSimulator</span><span class="p">(</span><span class="n">AwsQuantumSimulatorArns</span><span class="o">.</span><span class="n">QS1</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">AwsQuantumSimulator</span><span class="p">(</span><span class="n">AwsQuantumSimulatorArns</span><span class="o">.</span><span class="n">SV1</span><span class="p">)</span>
 
-<span class="c1"># set up local backend: Local Schroedinger Simulator</span>
+<span class="c1"># set up local backend: Local Simulator</span>
 <span class="c1"># device = LocalSimulator()</span>
 </pre></div>
 
