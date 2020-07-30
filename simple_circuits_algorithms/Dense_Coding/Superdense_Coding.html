@@ -13223,7 +13223,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Function to run quantum task, check the status thereof and collect results</span>
-<span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">,</span> <span class="n">poll_timeout_seconds</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">,</span> <span class="n">poll_timeout_seconds</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
     
     <span class="c1"># get number of qubits</span>
     <span class="n">num_qubits</span> <span class="o">=</span> <span class="n">circ</span><span class="o">.</span><span class="n">qubit_count</span>
@@ -13455,7 +13455,7 @@ T  : |0|1|2|3|4|
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">get_result</span><span class="p">(</span><span class="n">circ</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">get_result</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
 
@@ -13531,7 +13531,7 @@ measurement_counts: Counter({&#39;01&#39;: 1000})
     <span class="n">newcirc</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">()</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">add_circuit</span><span class="p">(</span><span class="n">message</span><span class="p">[</span><span class="n">m</span><span class="p">])</span><span class="o">.</span><span class="n">cnot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">h</span><span class="p">([</span><span class="mi">0</span><span class="p">]);</span>
     
     <span class="c1"># Run the circuit:</span>
-    <span class="n">counts</span> <span class="o">=</span> <span class="n">get_result</span><span class="p">(</span><span class="n">newcirc</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">)</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">get_result</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">newcirc</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Message: &quot;</span> <span class="o">+</span> <span class="n">m</span> <span class="o">+</span> <span class="s2">&quot;. Results:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
