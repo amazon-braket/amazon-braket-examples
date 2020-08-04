@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>GHZ_state_gm_revised</title>
+<title>GHZ</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13085,7 +13085,7 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this hello-world tutorial we prepare a paradigmatic example for a multi-qubit entangled state, the so-called <a href="https://en.wikipedia.org/wiki/Greenberger%E2%80%93Horne%E2%80%93Zeilinger_state">GHZ state</a> (named after the three physicists Greenberger, Horne and Zeilinger). The GHZ state is extremely non-classical, and therefore very sensitive to decoherence. Therefore, it is often used as a performance benchmark for today's hardware. Moreover, in many quantum information protocols it is used as a resource for quantum error correction, quantum communication and quantum metrology.</p>
-<p>For classical backends, we can run our circuit on a local Schroedinger simulator or a cloud-based simulator. As shown below, one can seamlessly swap between different backends without any modifications to the circuit definition, by just re-defining the device object.</p>
+<p>For classical backends, we can run our circuit on a local simulator or a cloud-based managed simulator. As shown below, one can seamlessly swap between different backends without any modifications to the circuit definition, by just re-defining the device object.</p>
 
 </div>
 </div>
@@ -13103,9 +13103,10 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="c1"># AWS imports: Import Braket SDK modules</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
 <span class="kn">from</span> <span class="nn">braket.circuits</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">Gate</span>
 <span class="kn">from</span> <span class="nn">braket.devices</span> <span class="kn">import</span> <span class="n">LocalSimulator</span>
-<span class="kn">from</span> <span class="nn">braket.aws</span> <span class="kn">import</span> <span class="n">AwsQuantumSimulator</span><span class="p">,</span> <span class="n">AwsSession</span><span class="p">,</span> <span class="n">AwsQpu</span><span class="p">,</span> <span class="n">AwsQuantumTask</span><span class="p">,</span> <span class="n">AwsQuantumSimulatorArns</span><span class="p">,</span> <span class="n">AwsQpuArns</span>
+<span class="kn">from</span> <span class="nn">braket.aws</span> <span class="kn">import</span> <span class="n">AwsDevice</span><span class="p">,</span> <span class="n">AwsSession</span>
 </pre></div>
 
     </div>
@@ -13126,9 +13127,10 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up S3 bucket (where results are stored)</span>
-<span class="n">my_bucket</span> <span class="o">=</span> <span class="s2">&quot;braket-bravehearts&quot;</span>
-<span class="n">my_prefix</span> <span class="o">=</span> <span class="s2">&quot;simulation-output&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Set up S3 bucket (where results are stored). Change the bucket_name to the S3 bucket you created.</span>
+<span class="n">aws_account_id</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;sts&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_caller_identity</span><span class="p">()[</span><span class="s2">&quot;Account&quot;</span><span class="p">]</span>
+<span class="n">my_bucket</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;braket-output-</span><span class="si">{</span><span class="n">aws_account_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># the name of the bucket</span>
+<span class="n">my_prefix</span> <span class="o">=</span> <span class="s2">&quot;simulation-output&quot;</span> <span class="c1"># the name of the folder in the bucket</span>
 <span class="n">s3_folder</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_bucket</span><span class="p">,</span> <span class="n">my_prefix</span><span class="p">)</span>
 </pre></div>
 
@@ -13279,14 +13281,14 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Local-Schroedinger-Simulator">Local Schroedinger Simulator<a class="anchor-link" href="#Local-Schroedinger-Simulator">&#182;</a></h3>
+<h3 id="Local-Simulator">Local Simulator<a class="anchor-link" href="#Local-Simulator">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First we run our circuit locally, using an exact Schroedinger simulator.</p>
+<p>First we run our circuit locally, using the local simulator.</p>
 
 </div>
 </div>
@@ -13296,7 +13298,7 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local Schroedinger Simulator</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local Simulator</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">LocalSimulator</span><span class="p">()</span>
 </pre></div>
 
@@ -13311,7 +13313,7 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># run circuit</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ghz</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ghz</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 <span class="c1"># get measurement shots</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">measurement_counts</span>
 <span class="c1"># print counts</span>
@@ -13332,7 +13334,7 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Counter({&#39;0000000000&#39;: 529, &#39;1111111111&#39;: 471})
+<pre>Counter({&#39;0000000000&#39;: 504, &#39;1111111111&#39;: 496})
 </pre>
 </div>
 </div>
@@ -13368,7 +13370,7 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYUAAAEGCAYAAACKB4k+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjEsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+j8jraAAARzElEQVR4nO3df7Ddd13n8eeLhh+ClJY2W0tSDUpntcq2271iUWGkXYEWNV0ELCrEktnszFaBQUejjso6MNO6st0Cykyk2BRRQBAbgQE7pVhxbCGBUlq6yBVbm1iaUNpCKUXSvveP87kfTm/vvTkh/d5zk/t8zJw53+/78/l+z/t07uTV7/d7zvekqpAkCeBR025AkrRyGAqSpM5QkCR1hoIkqTMUJEndmmk3cCiOP/742rBhw7TbkKTDyq5du75UVWsXGjusQ2HDhg3s3Llz2m1I0mElya2LjXn6SJLUGQqSpM5QkCR1hoIkqTMUJEmdoSBJ6gwFSVJnKEiSOkNBktQd1t9olo5kG7Z+YNotaAW75cIXDLJfjxQkSZ2hIEnqDAVJUmcoSJI6Q0GS1BkKkqTOUJAkdYOGQpJbknwmyfVJdrbak5NcmeTz7fnYVk+SNyaZTXJDktOH7E2S9HDLcaTwnKo6rapm2vpW4KqqOhm4qq0DnA2c3B5bgLcsQ2+SpDHTOH20EdjelrcD547VL6+Ra4Fjkpw4hf4kadUaOhQK+Nsku5JsabUTqur2tvxF4IS2vA64bWzb3a32EEm2JNmZZOe+ffuG6luSVqWh733041W1J8l/AK5M8v/GB6uqktTB7LCqtgHbAGZmZg5qW0nS0gY9UqiqPe15L/A+4BnAHXOnhdrz3jZ9D3DS2ObrW02StEwGC4UkT0jyxLll4LnAjcAOYFObtgm4oi3vAF7ePoV0BnDP2GkmSdIyGPL00QnA+5LMvc6fV9WHknwCeHeSzcCtwEva/A8C5wCzwH3A+QP2JklawGChUFVfAE5doH4ncNYC9QIuGKofSdKB+Y1mSVJnKEiSOkNBktQZCpKkzlCQJHVDf6N5xdqw9QPTbkEr2C0XvmDaLUhT4ZGCJKkzFCRJnaEgSeoMBUlSZyhIkjpDQZLUGQqSpM5QkCR1hoIkqTMUJEmdoSBJ6gwFSVJnKEiSOkNBktQZCpKkzlCQJHWGgiSpMxQkSZ2hIEnqDAVJUmcoSJI6Q0GS1BkKkqTOUJAkdYOHQpKjknwqyfvb+lOTXJdkNsm7kjym1R/b1mfb+Iahe5MkPdRyHCm8Crh5bP0i4OKqehpwF7C51TcDd7X6xW2eJGkZDRoKSdYDLwDe2tYDnAm8p03ZDpzblje2ddr4WW2+JGmZDH2k8H+BXwcebOvHAXdX1f62vhtY15bXAbcBtPF72vyHSLIlyc4kO/ft2zdk75K06gwWCkl+CthbVbseyf1W1baqmqmqmbVr1z6Su5akVW/NgPv+MeBnkpwDPA44GrgEOCbJmnY0sB7Y0+bvAU4CdidZAzwJuHPA/iRJ8wx2pFBVv1lV66tqA3Ae8JGq+gXgauBFbdom4Iq2vKOt08Y/UlU1VH+SpIebxvcUfgN4TZJZRtcMLm31S4HjWv01wNYp9CZJq9qQp4+6qvoo8NG2/AXgGQvMuR948XL0I0lamN9oliR1hoIkqTMUJEmdoSBJ6gwFSVJnKEiSOkNBktQZCpKkzlCQJHWGgiSpMxQkSZ2hIEnqDAVJUmcoSJI6Q0GS1BkKkqTOUJAkdYaCJKkzFCRJnaEgSeoMBUlSZyhIkjpDQZLUGQqSpM5QkCR1hoIkqTMUJEmdoSBJ6gwFSVI3USgkeVWSozNyaZJPJnnu0M1JkpbXpEcKr6iqrwDPBY4FXgZcuNQGSR6X5ONJPp3kpiT/q9WfmuS6JLNJ3pXkMa3+2LY+28Y3fNvvSpL0bZk0FNKezwHeXlU3jdUW8w3gzKo6FTgNeH6SM4CLgIur6mnAXcDmNn8zcFerX9zmSZKW0aShsCvJ3zIKhQ8neSLw4FIb1Mi9bfXR7VHAmcB7Wn07cG5b3tjWaeNnJTlQ8EiSHkGThsJmYCvww1V1H/AY4PwDbZTkqCTXA3uBK4F/Bu6uqv1tym5gXVteB9wG0MbvAY5bYJ9bkuxMsnPfvn0Tti9JmsSkoXBlVX2yqu4GqKo7GZ3iWVJVPVBVpwHrgWcA3/9td/qtfW6rqpmqmlm7du2h7k6SNGbNUoNJHgc8Hjg+ybF86zrC0Xzr//APqKruTnI18EzgmCRr2tHAemBPm7YHOAnYnWQN8CTgzoN5M5KkQ3OgI4X/Aexi9H/4u8YeVwBvXmrDJGuTHNOWvwP4SeBm4GrgRW3aprYvgB1tnTb+kaqqg3kzkqRDs+SRQlVdAlyS5Feq6k0Hue8Tge1JjmIUPu+uqvcn+SzwziSvAz4FXNrmXwq8Pcks8GXgvIN8PUnSIVoyFOZU1ZuS/CiwYXybqrp8iW1uAP7zAvUvMLq+ML9+P/DiSfqRJA1jolBI8nbg+4DrgQdauYBFQ0GSdPiZKBSAGeAUz/FL0pFt0o+k3gh815CNSJKmb9IjheOBzyb5OKPbVwBQVT8zSFeSpKmYNBReO2QTkqSVYdJPH/3d0I1IkqZv0k8ffZXRp41gdN+jRwNfq6qjh2pMkrT8Jj1SeOLccrtz6UbgjKGakiRNx0H/HGe7JfZfA88boB9J0hRNevrohWOrj2L0vYX7B+lIkjQ1k3766KfHlvcDtzA6hSRJOoJMek3hgD+oI0k6/E10TSHJ+iTvS7K3Pd6bZP3QzUmSltekF5r/lNHvHTylPf6m1SRJR5BJQ2FtVf1pVe1vj8sAfwtTko4wk4bCnUl+MclR7fGL+FOZknTEmTQUXgG8BPgicDujn8v8pYF6kiRNyaQfSf19YFNV3QWQ5MnAHzIKC0nSEWLSI4X/NBcIAFX1ZRb4qU1J0uFt0lB4VJJj51bakcKkRxmSpMPEpP+wvwH4xyR/2dZfDLx+mJYkSdMy6TeaL0+yEzizlV5YVZ8dri1J0jRMfAqohYBBIElHsIO+dbYk6chlKEiSOkNBktQZCpKkzlCQJHWGgiSpMxQkSd1goZDkpCRXJ/lskpuSvKrVn5zkyiSfb8/HtnqSvDHJbJIbkpw+VG+SpIUNeaSwH/jVqjoFOAO4IMkpwFbgqqo6GbiqrQOcDZzcHluAtwzYmyRpAYOFQlXdXlWfbMtfBW4G1gEbge1t2nbg3La8Ebi8Rq4Fjkly4lD9SZIeblmuKSTZwOhW29cBJ1TV7W3oi8AJbXkdcNvYZrtbTZK0TAYPhSTfCbwXeHVVfWV8rKoKqIPc35YkO5Ps3Ldv3yPYqSRp0FBI8mhGgfCOqvqrVr5j7rRQe97b6nuAk8Y2X99qD1FV26pqpqpm1q5dO1zzkrQKDfnpowCXAjdX1f8ZG9oBbGrLm4Arxuovb59COgO4Z+w0kyRpGQz562k/BrwM+EyS61vtt4ALgXcn2QzcCrykjX0QOAeYBe4Dzh+wN0nSAgYLhar6GJBFhs9aYH4BFwzVjyTpwPxGsySpMxQkSZ2hIEnqDAVJUmcoSJI6Q0GS1BkKkqTOUJAkdYaCJKkzFCRJnaEgSeoMBUlSZyhIkjpDQZLUGQqSpM5QkCR1hoIkqTMUJEmdoSBJ6gwFSVJnKEiSOkNBktQZCpKkzlCQJHWGgiSpMxQkSZ2hIEnqDAVJUmcoSJI6Q0GS1A0WCknelmRvkhvHak9OcmWSz7fnY1s9Sd6YZDbJDUlOH6ovSdLihjxSuAx4/rzaVuCqqjoZuKqtA5wNnNweW4C3DNiXJGkRg4VCVV0DfHleeSOwvS1vB84dq19eI9cCxyQ5cajeJEkLW+5rCidU1e1t+YvACW15HXDb2LzdrSZJWkZTu9BcVQXUwW6XZEuSnUl27tu3b4DOJGn1Wu5QuGPutFB73tvqe4CTxuatb7WHqaptVTVTVTNr164dtFlJWm2WOxR2AJva8ibgirH6y9unkM4A7hk7zSRJWiZrhtpxkr8AfgI4Pslu4PeAC4F3J9kM3Aq8pE3/IHAOMAvcB5w/VF+SpMUNFgpV9dJFhs5aYG4BFwzViyRpMn6jWZLUGQqSpM5QkCR1hoIkqTMUJEmdoSBJ6gwFSVJnKEiSOkNBktQZCpKkzlCQJHWGgiSpMxQkSZ2hIEnqDAVJUmcoSJI6Q0GS1BkKkqTOUJAkdYaCJKkzFCRJnaEgSeoMBUlSZyhIkjpDQZLUGQqSpM5QkCR1hoIkqTMUJEmdoSBJ6gwFSVK3okIhyfOTfC7JbJKt0+5HklabFRMKSY4C/gg4GzgFeGmSU6bblSStLismFIBnALNV9YWq+nfgncDGKfckSavKmmk3MGYdcNvY+m7gR+ZPSrIF2NJW703yuWXobTU4HvjStJtYKXLRtDvQAvwbHXOIf6Pfs9jASgqFiVTVNmDbtPs40iTZWVUz0+5DWox/o8tjJZ0+2gOcNLa+vtUkSctkJYXCJ4CTkzw1yWOA84AdU+5JklaVFXP6qKr2J/ll4MPAUcDbquqmKbe1mnhKTiudf6PLIFU17R4kSSvESjp9JEmaMkNBktQZCitIkrcl2ZvkxrHai5PclOTBJDNj9eOSXJ3k3iRvnref1ye5Lcm98+rPTvLJJPuTvGje2IeS3J3k/fPqv9xuO1JJjh+rf3+Sf0zyjSS/dqD3sdR70eFlodvRtA+IXNdq72ofFiHJY9v6bBvfMLaf32z1zyV53lL7n/ZrrCaGwspyGfD8ebUbgRcC18yr3w/8DvBrPNzfMPqG+Hz/CvwS8OcLjP1v4GUL1P8B+K/ArfPqXwZeCfzhAttcxsPfByz+XnSYWOJ2NBcBF1fV04C7gM1tk83AXa1+cZtH2+Y84AcZ/a38cZKjDnC7m2m+xqphKKwgVXUNo39sx2s3V9XDvrVdVV+rqo8xCof5Y9dW1e0L1G+pqhuABxcYuwr46gL1T1XVLQvU91bVJ4BvTvI+lnovOqwsdjuaM4H3tDnbgXPb8sa2Ths/K0la/Z1V9Y2q+hdgtu17wf23bab5GquGoSDpYCx0O5p1wN1VtX9e7SHz2/g9wHFL7Gex+nFTfo1Vw1CQJHWGgqSDsdjtaI5JsmZe7SHz2/iTgDuX2M9i9Tun/BqrhqEg6WAsdjuaq4G5T7RtAq5oyzvaOm38IzX6xuwO4Lz2yaGnAicDH19s/22bab7G6lFVPlbIA/gL4HZGF293M/rkw39ry98A7gA+PDb/FkYXdO9tc05p9T9o6w+259e2+g+39a8x+r+im8b29ffAPuDrbc7zWv2VbX0/8G/AW1v9u1r9K8Ddbfnoxd5Hqy/6XnwcPg/gHOCfgH8GfrvVvpfRP7izwF8Cj231x7X12Tb+vWP7+e22j88BZy+1/2m/xmp6eJsLSVLn6SNJUmcoSJI6Q0GS1BkKkqTOUJAkdYaCVrUkG+bfzbXV3zp3k7QkvzXBfl6d5PFLjPf9SSuZH0nVqtZus/z+qvqhJebcW1XfeYD93ALMVNWXFhg7qqoeOMRWpWXhkYIEa5K8I8nNSd6T5PFJPppkJsmFwHckub7NeUKSDyT5dJIbk/xcklcCTwGuTnI1jIIkyRuSfBp45tz+xsZe3/ZxbZITWv372vpnkrwu7fcwkpyY5JrWw41JnjWd/0xaDQwFCf4j8MdV9QOMvqH9P+cGqmor8PWqOq2qfoHRffn/rapObUcXH6qqNzL6tvdzquo5bdMnANe1eR+b93pPAK6tqlMZ/bbEf2/1S4BLqurpjL75PefnGX37+zTgVOD6R+6tSw9lKEhwW1X9Q1v+M+DHl5j7GeAnk1yU5FlVdc8i8x4A3rvI2L8Dc79wtwvY0JafyejWCvDQH0L6BHB+ktcCT6+qh/3uhfRIMRQkmH9hbdELbVX1T8DpjMLhdUl+d5Gp9y9xHeGb9a2LeQ8AaxaZN/ea1wDPZnTHzsuSvHyp+dKhMBQk+O4kz2zLPw/MP93zzSSPBkjyFOC+qvozRj9henqb81XgiYfYx7XAz7bl8+aKSb4HuKOq/gR469hrSo84Q0Ea3UHzgiQ3A8cCb5k3vg24Ick7gKcDH09yPfB7wOvG5nxo7kLzt+nVwGuS3AA8jdEviAH8BPDpJJ8Cfo7RtQdpEH4kVVoh2vccvl5VleQ84KVVtXHafWl1WfJcpqRl9V+AN7cfkL8beMWU+9Eq5JGCJKnzmoIkqTMUJEmdoSBJ6gwFSVJnKEiSuv8PnrfBNHWWClwAAAAASUVORK5CYII=
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -13382,7 +13384,7 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As opposed to quantum hardware, where we can only access measurement shots, with a classical simulator we can access the full statevector by simply calling <code>result.state_vector</code>. This can be very useful for debugging.</p>
+<p>As opposed to quantum hardware, where we can only access measurement shots, with a classical simulator we can access the full statevector and amplitudes by assigning the corresponding result types. To do so, we need to append the result types to the circuit before submitting it to run. This can be very useful for debugging.</p>
 
 </div>
 </div>
@@ -13392,35 +13394,13 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># simple helper function to get amplitude for given bitstring from result object</span>
-<span class="k">def</span> <span class="nf">get_amplitude</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">bit_string</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    function to return amplitude for given bitstring from result object</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">state_vector</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">state_vector</span>
-    <span class="n">amplitude</span> <span class="o">=</span> <span class="n">state_vector</span><span class="p">[</span><span class="n">bit_string</span><span class="p">]</span>
-    
-    <span class="k">return</span> <span class="n">amplitude</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># access ampltude of EXACT state vector</span>
-<span class="n">bit_string</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="o">*</span><span class="n">n_qubits</span>
-<span class="n">example_amplitude</span> <span class="o">=</span> <span class="n">get_amplitude</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">bit_string</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Amplitude value from state vector for bitstring </span><span class="si">{}</span><span class="s1"> is: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bit_string</span><span class="p">,</span> <span class="n">example_amplitude</span><span class="p">))</span>
-
-<span class="n">bit_string</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="o">*</span><span class="n">n_qubits</span>
-<span class="n">example_amplitude</span> <span class="o">=</span> <span class="n">get_amplitude</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">bit_string</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Amplitude value from state vector for bitstring </span><span class="si">{}</span><span class="s1"> is: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bit_string</span><span class="p">,</span> <span class="n">example_amplitude</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># the state we want to check its amplitude</span>
+<span class="n">bitstring</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="o">*</span><span class="n">n_qubits</span>
+<span class="c1"># append the result types to the circuit</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">ghz</span><span class="o">.</span><span class="n">state_vector</span><span class="p">()</span><span class="o">.</span><span class="n">amplitude</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="p">[</span><span class="n">bitstring</span><span class="p">])</span> 
+<span class="n">result</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The full state vector is:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Amplitude value from state vector for bitstring </span><span class="si">{}</span><span class="s1"> is: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bitstring</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 
     </div>
@@ -13437,8 +13417,9 @@ T  : |0|1|2|3|4|5|6|7|8|9|
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Amplitude value from state vector for bitstring 0000000000 is: (0.7071067811865475+0j)
-Amplitude value from state vector for bitstring 1111111111 is: (0.7071067811865475+0j)
+<pre>The full state vector is: [0.70710678+0.j 0.        +0.j 0.        +0.j ... 0.        +0.j
+ 0.        +0.j 0.70710678+0.j]
+Amplitude value from state vector for bitstring 0000000000 is: {&#39;0000000000&#39;: (0.7071067811865475+0j)}
 </pre>
 </div>
 </div>
@@ -13450,25 +13431,25 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Cloud-Based-Schroedinger-Simulator">Cloud-Based Schroedinger Simulator<a class="anchor-link" href="#Cloud-Based-Schroedinger-Simulator">&#182;</a></h3>
+<h3 id="The-Cloud-Based-Managed-Simulator">The Cloud-Based Managed Simulator<a class="anchor-link" href="#The-Cloud-Based-Managed-Simulator">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As opposed to the local simulator above, we can also run our circuit against a cloud-based simulator. This approach adds some latency overhead, but may still be beneficial for larger circuits by leveraging the optimized cloud hardware infrastructure. Moreover, all your results will be stored reliably in S3. Here, as part of the API call with <code>run()</code> you need to supply a S3 location where the metadata and results asscociated with this circuit execution will be stored.</p>
+<p>As opposed to the local simulator above, we can also run our circuit on a cloud-based simulator. This approach adds some latency overhead, but is beneficial for larger circuits by leveraging the optimized cloud hardware infrastructure. Moreover, all your results will be stored reliably in S3. Here, as part of the API call with <code>run()</code> you need to supply a S3 location where the metadata and results asscociated with this circuit execution will be stored.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend</span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">AwsQuantumSimulator</span><span class="p">(</span><span class="n">AwsQuantumSimulatorArns</span><span class="o">.</span><span class="n">QS1</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">AwsDevice</span><span class="p">(</span><span class="s2">&quot;arn:aws:braket:::device/quantum-simulator/amazon/sv1&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13478,7 +13459,7 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># define larger GHZ circuit</span>
@@ -13493,11 +13474,11 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># run GHZ circuit on cloud simulator</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ghz</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">,</span> <span class="n">poll_timeout_seconds</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">ghz</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">poll_timeout_seconds</span><span class="o">=</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">measurement_counts</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
@@ -13516,7 +13497,7 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Counter({&#39;111111111111111&#39;: 504, &#39;000000000000000&#39;: 496})
+<pre>Counter({&#39;111111111111111&#39;: 536, &#39;000000000000000&#39;: 464})
 </pre>
 </div>
 </div>
@@ -13527,7 +13508,7 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># plot using Counter</span>
@@ -13552,7 +13533,7 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -13565,7 +13546,7 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print counts of all-zero-string</span>
@@ -13588,8 +13569,8 @@ Amplitude value from state vector for bitstring 1111111111 is: (0.70710678118654
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Counts for all-zero bitstring: 496
-Counts for all-one bitstring: 504
+<pre>Counts for all-zero bitstring: 464
+Counts for all-one bitstring: 536
 </pre>
 </div>
 </div>
@@ -13608,15 +13589,15 @@ Counts for all-one bitstring: 504
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print unique TASK ID (task = execution of individual circuit)</span>
-<span class="n">task_id</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">task_metadata</span><span class="p">[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span>
+<span class="n">task_id</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">task_metadata</span><span class="o">.</span><span class="n">id</span>
 <span class="c1"># recover other metadata information such as number of qubits</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">task_metadata</span><span class="p">[</span><span class="s1">&#39;BackendParameters&#39;</span><span class="p">][</span><span class="s1">&#39;GateModelParameters&#39;</span><span class="p">][</span><span class="s1">&#39;QubitCount&#39;</span><span class="p">]</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">task_metadata</span><span class="o">.</span><span class="n">deviceParameters</span><span class="p">[</span><span class="s1">&#39;gateModelParameters&#39;</span><span class="p">][</span><span class="s1">&#39;qubitCount&#39;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Task ID:&#39;</span><span class="p">,</span> <span class="n">task_id</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of qubits for this task:&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of qubits:&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13633,8 +13614,8 @@ Counts for all-one bitstring: 504
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Task ID: bded8a52-9ed4-476d-9d97-79f75f5cd197
-Number of qubits for this task: 15
+<pre>Task ID: arn:aws:braket:us-west-2:875981177017:quantum-task/273a14c0-fb18-4bdf-8637-2577015af8a3
+Number of qubits: 15
 </pre>
 </div>
 </div>
