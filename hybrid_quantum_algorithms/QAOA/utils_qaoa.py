@@ -90,7 +90,7 @@ def circuit(params, device, n_qubits, ising):
 
 
 # function that computes cost function for given params
-def objective_function(params, device, ising, n_qubits, n_shots, tracker):
+def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_folder):
     """
     objective function takes a list of variational parameters as input,
     and returns the cost associated with those parameters
@@ -170,7 +170,7 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker):
 
 
 # The function to execute the training: run classical minimization.
-def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker):
+def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_folder):
     """
     function to run QAOA algorithm for given, fixed circuit depth p
     """
@@ -198,7 +198,7 @@ def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker):
 
     # run classical optimization (example: method='Nelder-Mead')
     result = minimize(
-        objective_function, params0, args=(device, ising, n_qubits, n_shots, tracker),
+        objective_function, params0, args=(device, ising, n_qubits, n_shots, tracker, s3_folder),
         options=options, method=opt_method, bounds=bnds)
 
     # store result of classical optimization
