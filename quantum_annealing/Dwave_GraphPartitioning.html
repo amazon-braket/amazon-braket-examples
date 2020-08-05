@@ -13144,7 +13144,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up S3 bucket (where results are stored). Change the bucket name to the S3 bucket you created.</span>
 <span class="n">aws_account_id</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;sts&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_caller_identity</span><span class="p">()[</span><span class="s2">&quot;Account&quot;</span><span class="p">]</span>
-<span class="n">my_bucket</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;braket-output-</span><span class="si">{</span><span class="n">aws_account_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># the name of the bucket</span>
+<span class="n">my_bucket</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;amazon-braket-</span><span class="si">{</span><span class="n">aws_account_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># the name of the bucket</span>
 <span class="n">my_prefix</span> <span class="o">=</span> <span class="s2">&quot;simulation-output&quot;</span> <span class="c1"># the name of the folder in the bucket</span>
 <span class="n">s3_folder</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_bucket</span><span class="p">,</span> <span class="n">my_prefix</span><span class="p">)</span>
 </pre></div>
