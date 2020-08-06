@@ -90,14 +90,15 @@ def circuit(params, device, n_qubits, ising):
 
 
 # function that computes cost function for given params
-def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_folder):
+def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_folder, verbose):
     """
     objective function takes a list of variational parameters as input,
     and returns the cost associated with those parameters
     """
 
-    print('==================================' * 2)
-    print('Calling the quantum circuit. Cycle:', tracker['count'])
+    if verbose:
+        print('==================================' * 2)
+        print('Calling the quantum circuit. Cycle:', tracker['count'])
 
     # get a quantum circuit instance from the parameters
     qaoa_circuit = circuit(params, device, n_qubits, ising)
@@ -135,10 +136,8 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
 
     # find minimum and corresponding classical string
     energy_min = np.min(all_energies)
-    print('Minimal energy:', energy_min)
     tracker['opt_energies'].append(energy_min)
     optimal_string = meas_ising[np.argmin(all_energies)]
-    print('Optimal classical string:', optimal_string)
     tracker['opt_bitstrings'].append(optimal_string)
 
     # store optimal (classical) result/bitstring
@@ -157,9 +156,13 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
     energies_scaled = interactions * energies
 
     # get energy expectation value <H_C> = sum_{ij} J_{ij} <Z_i Z_j>
-    energy_expect = np.round(np.sum(energies_scaled), 3)
-    # print cost (could consider other definitions of cost function)
-    print('Energy expectation value (cost):', energy_expect)
+    # note: could consider other definitions of cost function
+    energy_expect = np.sum(energies_scaled)
+
+    if verbose:
+        print('Minimal energy:', energy_min)
+        print('Optimal classical string:', optimal_string)
+        print('Energy expectation value (cost):', energy_expect)
 
     # update tracker
     tracker.update({'count': tracker['count']+1, 'res': result})
@@ -170,7 +173,7 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
 
 
 # The function to execute the training: run classical minimization.
-def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_folder):
+def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_folder, verbose=True):
     """
     function to run QAOA algorithm for given, fixed circuit depth p
     """
@@ -179,6 +182,10 @@ def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_
     print('==================================' * 2)
     print(f'OPTIMIZATION for circuit depth p={p}')
 
+    if not verbose:
+        print('Param "verbose" set to False. Will not print intermediate steps.')
+        print('==================================' * 2)
+
     # initialize
     cost_energy = []
 
@@ -186,9 +193,7 @@ def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_
     gamma_initial = np.random.uniform(0, 2 * np.pi, p).tolist()
     beta_initial = np.random.uniform(0, np.pi, p).tolist()
     params0 = np.array(gamma_initial + beta_initial)
-    # fix starting point for first layers (not necessarily needed)
-    params0[0] = 0.01
-    params0[p] = 0.4
+
     # set bounds for search space
     bnds_gamma = [(0, 2 * np.pi) for _ in range(int(len(params0) / 2))]
     bnds_beta = [(0, np.pi) for _ in range(int(len(params0) / 2))]
@@ -198,8 +203,10 @@ def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_
 
     # run classical optimization (example: method='Nelder-Mead')
     result = minimize(
-        objective_function, params0, args=(device, ising, n_qubits, n_shots, tracker, s3_folder),
-        options=options, method=opt_method, bounds=bnds)
+            objective_function, params0, 
+            args=(device, ising, n_qubits, n_shots, tracker, s3_folder, verbose),
+            options=options, method=opt_method, bounds=bnds
+        )
 
     # store result of classical optimization
     result_energy = result.fun
