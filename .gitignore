@@ -130,3 +130,6 @@ dmypy.json
 
 # Mac specific
 .DS_Store
+
+# Data intermediates
+*.pck
