@@ -13097,7 +13097,7 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">boto3</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">braket.aws</span> <span class="kn">import</span> <span class="n">AwsSession</span><span class="p">,</span> <span class="n">AwsQpu</span>
+<span class="kn">from</span> <span class="nn">braket.aws</span> <span class="kn">import</span> <span class="n">AwsDevice</span>
 <span class="kn">from</span> <span class="nn">braket.ocean_plugin</span> <span class="kn">import</span> <span class="n">BraketSampler</span><span class="p">,</span> <span class="n">BraketDWaveSampler</span>
 </pre></div>
 
@@ -13160,8 +13160,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># session and backend</span>
-<span class="n">aws_session</span> <span class="o">=</span> <span class="n">AwsSession</span><span class="p">()</span>
-<span class="n">device</span> <span class="o">=</span> <span class="n">AwsQpu</span><span class="p">(</span><span class="s2">&quot;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&quot;</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">AwsDevice</span><span class="p">(</span><span class="s2">&quot;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Device backend:&#39;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
 </pre></div>
 
@@ -13374,7 +13373,7 @@ div#notebook {
 <span class="c1"># Run the QUBO on Braket</span>
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-<span class="n">sampler</span> <span class="o">=</span> <span class="n">BraketDWaveSampler</span><span class="p">(</span><span class="n">s3_folder</span><span class="p">,</span><span class="s1">&#39;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&#39;</span><span class="p">,</span><span class="n">aws_session</span><span class="o">=</span><span class="n">aws_session</span><span class="p">)</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">BraketDWaveSampler</span><span class="p">(</span><span class="n">s3_folder</span><span class="p">,</span><span class="s1">&#39;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&#39;</span><span class="p">)</span>
 <span class="n">sampler</span> <span class="o">=</span> <span class="n">EmbeddingComposite</span><span class="p">(</span><span class="n">sampler</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample_qubo</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">chain_strength</span><span class="o">=</span><span class="n">chain_strength</span><span class="p">,</span> <span class="n">num_reads</span><span class="o">=</span><span class="n">num_reads</span><span class="p">)</span>
 
