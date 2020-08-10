@@ -13149,7 +13149,7 @@ div#notebook {
 <span class="o">!</span>pip show amazon-braket-sdk <span class="p">|</span> grep Version
 
 <span class="c1"># Import Braket libraries</span>
-<span class="kn">from</span> <span class="nn">braket.circuits</span> <span class="kn">import</span> <span class="n">AsciiCircuitDiagram</span><span class="p">,</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">Gate</span><span class="p">,</span> <span class="n">Moments</span>
+<span class="kn">from</span> <span class="nn">braket.circuits</span> <span class="kn">import</span> <span class="n">Circuit</span><span class="p">,</span> <span class="n">Gate</span><span class="p">,</span> <span class="n">Moments</span>
 <span class="kn">from</span> <span class="nn">braket.circuits.instruction</span> <span class="kn">import</span> <span class="n">Instruction</span>
 <span class="kn">from</span> <span class="nn">braket.aws</span> <span class="kn">import</span> <span class="n">AwsDevice</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -13180,6 +13180,14 @@ div#notebook {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Typically, we recommend to run circuits &lt;25 qubits on the local simulator to avoid latency bottlenecks. The managed, high-performance simulator SV1 is better suited for larger circuits up to 34 qubits. Nevertheless, for demonstration purposes, we are going to continue this example with SV but it is easy to switch over to the local simulator by replacing the last line in the cell below with <code>device = LocalSimulator()</code></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
@@ -13191,7 +13199,7 @@ div#notebook {
 <span class="n">my_prefix</span> <span class="o">=</span> <span class="s2">&quot;simulation-output&quot;</span> <span class="c1"># the name of the folder in the bucket</span>
 <span class="n">s3_folder</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_bucket</span><span class="p">,</span> <span class="n">my_prefix</span><span class="p">)</span>
 
-<span class="c1"># Select device arn for simulator</span>
+<span class="c1"># Select device arn for the managed simulator</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">AwsDevice</span><span class="p">(</span><span class="s2">&quot;arn:aws:braket:::device/quantum-simulator/amazon/sv1&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -13206,7 +13214,7 @@ div#notebook {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Function to run quantum task, check the status thereof and collect results</span>
-<span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">,</span> <span class="n">poll_timeout_seconds</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">circ</span><span class="p">,</span> <span class="n">s3_folder</span><span class="p">):</span>
     
     <span class="c1"># get number of qubits</span>
     <span class="n">num_qubits</span> <span class="o">=</span> <span class="n">circ</span><span class="o">.</span><span class="n">qubit_count</span>
@@ -13224,7 +13232,7 @@ div#notebook {
 
     <span class="c1"># Get ID of submitted task</span>
     <span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Task ID :&#39;</span><span class="p">,</span> <span class="n">task_id</span><span class="p">)</span>
+<span class="c1">#     print(&#39;Task ID :&#39;, task_id)</span>
 
     <span class="c1"># Wait for job to complete</span>
     <span class="n">status_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -13393,7 +13401,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">AsciiCircuitDiagram</span><span class="o">.</span><span class="n">build_diagram</span><span class="p">(</span><span class="n">circ</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13456,8 +13464,7 @@ T  : |0|1|2|3|4|
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Task ID : arn:aws:braket:us-west-2:875981177017:quantum-task/4f4ce300-0e24-404f-a73a-8c458352047c
-Status: CREATED
+<pre>Status: CREATED
 Status: QUEUED
 Status: RUNNING
 Status: COMPLETED
@@ -13535,8 +13542,7 @@ measurement_counts: Counter({&#39;01&#39;: 1000})
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Task ID : arn:aws:braket:us-west-2:875981177017:quantum-task/caac457f-0a3d-463d-b68b-d0da520b1583
-Status: CREATED
+<pre>Status: CREATED
 Status: QUEUED
 Status: RUNNING
 Status: COMPLETED
@@ -13568,7 +13574,6 @@ measurement_counts: Counter({&#39;00&#39;: 1000})
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Message: 00. Results:
 Counter({&#39;00&#39;: 1000})
-Task ID : arn:aws:braket:us-west-2:875981177017:quantum-task/63570959-73e8-4767-a86b-73955c65ec07
 Status: CREATED
 Status: QUEUED
 Status: RUNNING
@@ -13601,7 +13606,6 @@ measurement_counts: Counter({&#39;01&#39;: 1000})
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Message: 01. Results:
 Counter({&#39;01&#39;: 1000})
-Task ID : arn:aws:braket:us-west-2:875981177017:quantum-task/e8ce9bbb-7919-4343-8f8f-72ece5a6ba16
 Status: CREATED
 Status: QUEUED
 Status: RUNNING
@@ -13634,7 +13638,6 @@ measurement_counts: Counter({&#39;10&#39;: 1000})
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Message: 10. Results:
 Counter({&#39;10&#39;: 1000})
-Task ID : arn:aws:braket:us-west-2:875981177017:quantum-task/dc20615c-b4c5-4741-9ba4-eea8c02d553a
 Status: CREATED
 Status: QUEUED
 Status: RUNNING
