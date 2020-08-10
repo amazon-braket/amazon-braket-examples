@@ -13091,7 +13091,7 @@ Moreover, eigenvalue problems can be found across many disciplines and applicati
 We first review the basics of the QPE algorithm.
 We then implement the QPE algorithm in code using Amazon Braket's SDK and illustrate the application thereof with simple examples. 
 This notebook also showcases Braket's <code>circuit.subroutine</code> functionality, which allows us to use custom-built gates as any other built-in gates. 
-This tutorial is set up to run either on the local simulator or the cloud-based managed simulator; changing between these backend merely requires changing one line of code as demonstrated below in cell [4].</p>
+This tutorial is set up to run either on the local simulator or the cloud-based managed simulator; changing between these devices merely requires changing one line of code as demonstrated below in cell [4].</p>
 
 </div>
 </div>
@@ -13109,9 +13109,8 @@ This tutorial is set up to run either on the local simulator or the cloud-based 
 <p><strong>Introduction</strong>: A unitary matrix is a complex, square matrix whose adjoint (or conjugate transpose) is equal to its inverse. Unitary matrices have many nice properties, including the fact that their eigenvalues are always roots of unity (i.e., phases). Given a unitary matrix $U$ (satisfying $U^{\dagger}U=\mathbb{1}=UU^{\dagger}$) and an eigenstate $|\psi \rangle$ with $U|\psi \rangle = e^{2\pi i\varphi}|\psi \rangle$, the Quantum Phase Estimation (QPE) algorithm provides an estimate $\tilde{\varphi} \approx \varphi$ for the phase $\varphi$ (with $\varphi \in [0,1]$ since the eigenvalues $\lambda = \exp(2\pi i\varphi)$ of a unitary have modulus one). 
 The QPE works with high probability within an additive error $\varepsilon$ using $O(\log(1/\varepsilon))$ qubits (without counting the qubits used to encode the eigenstate) and $O(1/\varepsilon)$ controlled-$U$ operations [1].</p>
 <p><strong>Quantum Phase Estimation Algorithm</strong>: 
-The QPE algorithm takes a unitary $U$ as input. For the sake of simplicity (we will generalize the discussion below), suppose that the algoritihm also takes as input an eigenstate $|\psi \rangle$ fulfilling 
-$$U|\psi \rangle = \lambda |\psi \rangle,$$
-with $\lambda = \exp(2\pi i\varphi)$.</p>
+The QPE algorithm takes a unitary $U$ as input. For the sake of simplicity (we will generalize the discussion below), suppose that the algorithm also takes as input an eigenstate $|\psi \rangle$ fulfilling</p>
+$$U|\psi \rangle = \lambda |\psi \rangle,$$<p>with $\lambda = \exp(2\pi i\varphi)$.</p>
 <p>QPE uses two registers of qubits: we will refer to the first register as <em>precision</em> qubits (as the number of qubits $n$ in the first register sets the achievable precision of our results) and the second register as <em>query</em> qubits (as the second register hosts the eigenstate $|\psi \rangle$). 
 Suppose we have prepared this second register in $|\psi \rangle$.  We then prepare a uniform superposition of all basis vectors in the first register using a series of Hadamard gates.</p>
 <p>Next, we apply a series of controlled-unitaries $C-U^{2^{k}}$ for different powers of $k=0,1,\dots, n-1$ (as illustrated in the circuit diagram below). 
@@ -13121,8 +13120,8 @@ For example, for $k=1$ we get
 (|0 \rangle + |1 \rangle) |\psi \rangle  &amp; \rightarrow |0 \rangle |\psi \rangle + |1 \rangle U|\psi \rangle \\
 &amp; = (|0 \rangle + e^{2\pi i \varphi}|1 \rangle) |\psi \rangle.
 \end{split}
-\end{equation}
-Note that the second register remains unaffected as it stays in the eigenstate $|\psi \rangle$. 
+\end{equation}</p>
+<p>Note that the second register remains unaffected as it stays in the eigenstate $|\psi \rangle$. 
 However, we managed to transfer information about the phase of the eigenvalue of $U$ (i.e., $\varphi$) into the first <em>precision</em> register by encoding it as a relative phase in the state of the qubits in the first register.</p>
 <p>Similarly, for $k=2$ we obtain
 \begin{equation} 
@@ -13130,55 +13129,49 @@ However, we managed to transfer information about the phase of the eigenvalue of
 (|0 \rangle + |1 \rangle) |\psi \rangle  &amp; \rightarrow |0 \rangle |\psi \rangle + |1 \rangle U^{2}|\psi \rangle \\
 &amp; = (|0 \rangle + e^{2\pi i 2\varphi}|1 \rangle) |\psi \rangle,
 \end{split}
-\end{equation}
-where this time we wrote $2\varphi$ into the precision register. The process is similar for all $k&gt;2$.</p>
+\end{equation}</p>
+<p>where this time we wrote $2\varphi$ into the precision register. The process is similar for all $k&gt;2$.</p>
 <p>Introducing the following notation for binary fractions
-$$[0. \varphi_{l}\varphi_{l+1}\dots \varphi_{m}] = \frac{\varphi_{l}}{2^{1}} + \frac{\varphi_{l+1}}{2^{2}} + \frac{\varphi_{m}}{2^{m-l+1}},$$ 
-one can easily show that the application of a controlled unitary $C-U^{2^{k}}$ leads to the following transformation
+$$[0. \varphi_{l}\varphi_{l+1}\dots \varphi_{m}] = \frac{\varphi_{l}}{2^{1}} + \frac{\varphi_{l+1}}{2^{2}} + \frac{\varphi_{m}}{2^{m-l+1}},$$</p>
+<p>one can easily show that the application of a controlled unitary $C-U^{2^{k}}$ leads to the following transformation</p>
 \begin{equation} 
 \begin{split}
 (|0 \rangle + |1 \rangle) |\psi \rangle  &amp; \rightarrow |0 \rangle |\psi \rangle + |1 \rangle U^{2^{k}}|\psi \rangle \\
 &amp; = (|0 \rangle + e^{2\pi i 2^{k}\varphi}|1 \rangle) |\psi \rangle \\
 &amp; = (|0 \rangle + e^{2\pi i [0.\varphi_{k+1}\dots \varphi_{n}]}|1 \rangle) |\psi \rangle,
 \end{split}
-\end{equation}
-where the first $k$ bits of precision in the binary expansion (i.e., those bits to the left of the decimal) can be dropped, since $e^{2\pi i \theta} = 1$ for any whole number $\theta$.</p>
+\end{equation}<p>where the first $k$ bits of precision in the binary expansion (i.e., those bits to the left of the decimal) can be dropped, since $e^{2\pi i \theta} = 1$ for any whole number $\theta$.</p>
 <p>The QPE algorithm implements a series of these transformations for $k=0, 1, \dots, n-1$, using $n$ qubits in the precision register. 
-In its entirety, this sequence of controlled unitaries leads to the transformation
+In its entirety, this sequence of controlled unitaries leads to the transformation</p>
 $$ |0, \dots, 0 \rangle \otimes |\psi \rangle \longrightarrow 
 (|0 \rangle + e^{2\pi i [0.\varphi_{n}]}|1 \rangle) 
 \otimes (|0 \rangle + e^{2\pi i [0.\varphi_{n-1}\varphi_{n}]}|1 \rangle)
 \otimes \dots
 \otimes (|0 \rangle + e^{2\pi i [0.\varphi_{1}\dots\varphi_{n}]}|1 \rangle) 
 \otimes |\psi \rangle.
-$$</p>
-<p>By inspection, one can see that the state of the register qubits above corresponds to a quantum Fourier transform of the state $|\varphi_1,\dots,\varphi_n\rangle$. Thus, the final step of the QPE algorithm is to run the <em>inverse</em> Quantum Fourier Transform (QFT) algorithm on the precision register to extract the phase information from this state. The resulting state is
+$$<p>By inspection, one can see that the state of the register qubits above corresponds to a quantum Fourier transform of the state $|\varphi_1,\dots,\varphi_n\rangle$. Thus, the final step of the QPE algorithm is to run the <em>inverse</em> Quantum Fourier Transform (QFT) algorithm on the precision register to extract the phase information from this state. The resulting state is
 $$|\varphi_{1}, \varphi_{2}, \dots, \varphi_{n}  \rangle \otimes |\psi\rangle.$$</p>
 <p>Measuring the precision qubits in the computational basis then gives the classical bitstring $\varphi_{1}, \varphi_{2}, \dots, \varphi_{n}$, from which we can readily infer the phase estimate $\tilde{\varphi} = 0.\varphi_{1} \dots \varphi_{n}$ with the corresponding eigenvalue $\tilde{\lambda} = \exp(2\pi i \tilde{\varphi})$.</p>
 <p><strong>Simple example for illustration</strong>: For concreteness, let us consider a simple example with the unitary given by the Pauli $X$ gate, $U=X$, for which $|\Psi \rangle = |+\rangle = (|0 \rangle + |1 \rangle)/\sqrt{2}$ is an eigenstate with eigenvalue $\lambda = 1$, i.e., $\varphi=0$. 
 This state can be prepared simply with a Hadamard gate as $|\Psi \rangle = H|0 \rangle$. 
 We take a precision register consisting of just two qubits ($n=2$).</p>
 <p>Thus, after the first layer of Hadamard gates, the quantum state is
-$$|0,0,0 \rangle \rightarrow |+,+,+\rangle.$$
-Next, the applications of the controlled-$U$ gates (equal to $C-X$ operations, or CNOT gates in this example) leave this state untouched, since $|+\rangle$ is an eigenstate of $X$ with eigenvalue $+1$. 
-Finally, applying the inverse QFT leads to 
-$$\mathrm{QFT}^{\dagger}|+++\rangle=\mathrm{QFT}^\dagger\frac{|00\rangle + |01\rangle + |10\rangle + |11\rangle}{4}\otimes |+\rangle = |00\rangle \otimes |+\rangle,$$
-from which we deduce $\varphi = [0.00]=0$ and therefore $\lambda=1$, as expected. 
+$$|0,0,0 \rangle \rightarrow |+,+,+\rangle.$$</p>
+<p>Next, the applications of the controlled-$U$ gates (equal to $C-X$ operations, or CNOT gates in this example) leave this state untouched, since $|+\rangle$ is an eigenstate of $X$ with eigenvalue $+1$. 
+Finally, applying the inverse QFT leads to</p>
+$$\mathrm{QFT}^{\dagger}|+++\rangle=\mathrm{QFT}^\dagger\frac{|00\rangle + |01\rangle + |10\rangle + |11\rangle}{4}\otimes |+\rangle = |00\rangle \otimes |+\rangle,$$<p>from which we deduce $\varphi = [0.00]=0$ and therefore $\lambda=1$, as expected. 
 Here, in the last step we have used $|00\rangle + |01\rangle + |10\rangle + |11\rangle = (|0\rangle + e^{2\pi i[0.0]}|1\rangle)(|0\rangle + e^{2\pi i[0.00]}|1\rangle)$, which makes the effect of the inverse QFT more apparent.</p>
 <p><strong>Initial state of query register</strong>: So far, we have assumed that the query register is prepared in an eigenstate $|\Psi\rangle$ of $U$. What happens if this is not the case? Let's reconsider the simple example above.</p>
 <p>Suppose now that the query register is instead prepared in the state $|\Psi\rangle = |1\rangle$. 
 We can always express this state in the eigenbasis of $U$, i.e., $|1\rangle = \frac{1}{\sqrt{2}}(|+\rangle - |-\rangle)$. 
-By linearity, application of the QPE algorithm then gives (up to normalization)
+By linearity, application of the QPE algorithm then gives (up to normalization)</p>
 \begin{equation} 
 \begin{split}
-\mathrm{QPE}(|0,0,\dots\rangle \otimes |1\rangle) &amp; = \mathrm{QPE}(|0,0,\dots\rangle \otimes |+\rangle)</p>
-<ul>
-<li>\mathrm{QPE}(|0,0,\dots\rangle \otimes |-\rangle) \
-&amp; =  |\varphi<em>{+}\rangle \otimes |+\rangle - |\varphi</em>{-}\rangle \otimes |-\rangle. \
+\mathrm{QPE}(|0,0,\dots\rangle \otimes |1\rangle) &amp; = \mathrm{QPE}(|0,0,\dots\rangle \otimes |+\rangle)
+- \mathrm{QPE}(|0,0,\dots\rangle \otimes |-\rangle) \\
+&amp; =  |\varphi_{+}\rangle \otimes |+\rangle - |\varphi_{-}\rangle \otimes |-\rangle. \\
 \end{split}
-\end{equation}
-When we measure the precision qubits in this state, 50% of the time we will observe the eigenphase $\varphi_{+}$ and 50% of the time we will measure $\varphi_{-}$. We illustrate this example numerically below.</li>
-</ul>
+\end{equation}<p>When we measure the precision qubits in this state, 50% of the time we will observe the eigenphase $\varphi_{+}$ and 50% of the time we will measure $\varphi_{-}$. We illustrate this example numerically below.</p>
 <p>This example motivates the general case: we can pass a state that is not an eigenstate of $U$ to the QPE algorithm, but we may need to repeat our measurements several times in order to obtain an estimate of the desired phase.</p>
 
 </div>
@@ -13196,7 +13189,7 @@ When we measure the precision qubits in this state, 50% of the time we will obse
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The QPE circuit can be implemented using Hadamard gates, controlled-$U$ unitaries, and the inverse QFT (denoted as $\mathrm{QFT}^{-1}$). 
 The details of the calculation can be found in a number of resources (e.g., [1]); we omit them here.
-Following the discussion above, the circuit that implements the QPE algorithm reads as follows:</p>
+Following the discussion above, the circuit that implements the QPE algorithm reads as below, where m is the size of lower query register and n is the size of upper precision register.</p>
 
 </div>
 </div>
@@ -13271,7 +13264,7 @@ Following the discussion above, the circuit that implements the QPE algorithm re
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>NOTE</strong>: Please enter your desired backend device and S3 location (bucket and key) below. If you are working with the local simulator <code>LocalSimulator()</code> you do not need to specify any S3 location. However, if you are using a different cloud-based backend you need to specify the S3 location where your results will be stored. In this case, one generally needs to replace the API call <code>device.run(circuit, shots=SHOTS).result()</code> below with <code>device.run(circuit, s3_folder, shots=SHOTS).result()</code>, but we will use some helper code to make this change automatically.</p>
+<p><strong>NOTE</strong>: Please enter your desired device and S3 location (bucket and key) below. If you are working with the local simulator <code>LocalSimulator()</code> you do not need to specify any S3 location. However, if you are using the managed cloud-based device you need to specify the S3 location where your results will be stored. In this case, one generally needs to replace the API call <code>device.run(circuit, shots=SHOTS).result()</code> below with <code>device.run(circuit, s3_folder, shots=SHOTS).result()</code>, but we will use some helper code to make this change automatically.</p>
 
 </div>
 </div>
@@ -13281,11 +13274,11 @@ Following the discussion above, the circuit that implements the QPE algorithm re
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local simulator or the cloud-based managed simulator</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local simulator or the managed cloud-based simulator</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">LocalSimulator</span><span class="p">()</span>
 <span class="c1"># device = AwsDevice(&quot;arn:aws:braket:::device/quantum-simulator/amazon/sv1&quot;)</span>
 
-<span class="c1"># setup s3 folder (not needed for the LocalSimulator backend, but required for all other backends)</span>
+<span class="c1"># setup s3 folder (not needed for the local simulator, but required for all other devices)</span>
 <span class="c1"># *NOTE*: Update these if using a device other than LocalSimulator()</span>
 <span class="n">aws_account_id</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s2">&quot;sts&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_caller_identity</span><span class="p">()[</span><span class="s2">&quot;Account&quot;</span><span class="p">]</span>
 <span class="n">my_bucket</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;amazon-braket-</span><span class="si">{</span><span class="n">aws_account_id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="c1"># the name of the bucket</span>
@@ -13339,7 +13332,7 @@ Following the discussion above, the circuit that implements the QPE algorithm re
 <p>In <code>utils_qpe.py</code> we provide simple helper functions to implement the quantum circuit for the QPE algorithm. 
 Specifically, in there we demonstrate how such modular building blocks can be registered as subroutines, using <code>@circuit.subroutine(register=True)</code>. 
 Moreover, we provide a helper function (called <code>get_qpe_phases</code>) to perform postprocessing based on the measurement results to extract the phase. The details of <code>utils_qpe.py</code> are shown in the Appendix.</p>
-<p>In order to implement the unitary $C-U^{2^k}$, one can use the fact that $C-U^{2} = (C-U)(C-U)$, so that $C-U^{2^{k}}$ can be constructed by repeatly applying the core building block $C-U$. 
+<p>In order to implement the unitary $C-U^{2^k}$, one can use the fact that $C-U^{2} = (C-U)(C-U)$, so that $C-U^{2^{k}}$ can be constructed by repeatedly applying the core building block $C-U$. 
 However, the circuit generated using this approach will have a significantly larger depth. In our implementation, we instead define the matrix $U^{2^k}$ and create the controlled $C-(U^{2^k})$ gate from that.</p>
 
 </div>
@@ -13572,7 +13565,7 @@ T  : |0|1|2|3|4| 5  |6|     7      |8|
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the follwoing we will verify that our QFT implementation works as expected with a few test examples:</p>
+<p>In the following we will verify that our QFT implementation works as expected with a few test examples:</p>
 <ol>
 <li>We run QPE with $U=X$ and prepare the eigenstate $|\Psi\rangle = |+\rangle = H|0\rangle$ with phase $\varphi=0$ and eigenvalue $\lambda=1$. </li>
 <li>We run QPE with $U=X$ and prepare the eigenstate $|\Psi\rangle = |-\rangle = HX|0\rangle$ with phase $\varphi=0.5$ and eigenvalue $\lambda=-1$. </li>
@@ -13602,7 +13595,7 @@ In this case we should be able to read off the eigenvalue and phase from $U$ and
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">postprocess_qpe_results</span><span class="p">(</span><span class="n">out</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to postprocess pickle file returned by run_qpe </span>
+<span class="sd">    Function to postprocess dictionary returned by run_qpe</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        out: dictionary containing results/information associated with QPE run as produced by run_qpe</span>
@@ -13918,7 +13911,7 @@ QPE eigenvalue estimates: [-1.+0.j]
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next, we apply the QPE algorithm again to the simple single-qubit unitary $U=X$, but we initalize the query register in the state $|\Psi\rangle = |1\rangle$ which is <em>not</em> an eigenstate of $U$. 
+<p>Next, we apply the QPE algorithm again to the simple single-qubit unitary $U=X$, but we initialize the query register in the state $|\Psi\rangle = |1\rangle$ which is <em>not</em> an eigenstate of $U$. 
 Here, following the discussion above, we expect to measure the phases $\varphi=0, 0.5$ (giving the corresponding eigenvalue $\lambda=\pm 1$). Accordingly, here we set <code>items_to_keep=2</code>.</p>
 
 </div>
