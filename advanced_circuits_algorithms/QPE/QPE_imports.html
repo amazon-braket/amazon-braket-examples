@@ -13283,7 +13283,7 @@ Following the discussion above, the circuit that implements the QPE algorithm re
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># set up backend: Local simulator or the cloud-based managed simulator</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">LocalSimulator</span><span class="p">()</span>
-<span class="c1"># device = AwsQuantumSimulator(AwsQuantumSimulatorArns.SV1)</span>
+<span class="c1"># device = AwsDevice(&quot;arn:aws:braket:::device/quantum-simulator/amazon/sv1&quot;)</span>
 
 <span class="c1"># setup s3 folder (not needed for the LocalSimulator backend, but required for all other backends)</span>
 <span class="c1"># *NOTE*: Update these if using a device other than LocalSimulator()</span>
