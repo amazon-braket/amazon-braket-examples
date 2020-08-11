@@ -13113,34 +13113,30 @@ $$ y_j = \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1} x_k e^{\frac{2\pi i}{N}jk}.$$</p>
 $$\left|\mathrm{output}\right&gt; = \sum_{k} y_{k}\left|k\right&gt;,$$ 
 with coefficients
 $$y_{k}=\frac{1}{\sqrt{N}}\sum_{n}x_{n}e^{2\pi i\cdot n\cdot k/N}.$$</p>
-<p><strong>Binary representation (notation)</strong>: We take $N=2^{n}$, with $n$ being the number of qubits. In the binary representation, the states $\{\left|x\right&gt;\}$ read explicitly 
-$$\left|x\right&gt; = \left|x_{1}x_{2}\dots x_{n}\right&gt;,$$ where
-$$x = x_{1}2^{n-1}+x_{2}2^{n-2}+\dots+x_{n}2^{0}.$$
-For example, in a four-qubit system $\left|7\right&gt; = \left|0111\right&gt;$ and $\left|8\right&gt; = \left|1000\right&gt;$.
-Similarly, we use the following notation to represent binary fractions:
-$$[0.x_{l}x_{l+1}\dots x_{m}] = \frac{x_{l}}{2^{1}} + \frac{x_{l+1}}{2^{2}} + \frac{x_{m}}{2^{m-l+1}}.$$</p>
-<p><strong>Product representation of QFT</strong>: Very often, the product representation of the QFT proves useful. Accordingly, the QFT can be expressed (up to normalization) as
+<p><strong>Binary representation (notation)</strong>: We take $N=2^{n}$, with $n$ being the number of qubits. In the binary representation, the states $\{\left|x\right&gt;\}$ read explicitly</p>
+$$\left|x\right&gt; = \left|x_{1}x_{2}\dots x_{n}\right&gt;,$$<p>
+where
+$$x = x_{1}2^{n-1}+x_{2}2^{n-2}+\dots+x_{n}2^{0}.$$</p>
+<p>For example, in a four-qubit system $\left|7\right&gt; = \left|0111\right&gt;$ and $\left|8\right&gt; = \left|1000\right&gt;$.
+Similarly, we use the following notation to represent binary fractions:</p>
+$$[0.x_{l}x_{l+1}\dots x_{m}] = \frac{x_{l}}{2^{1}} + \frac{x_{l+1}}{2^{2}} + \frac{x_{m}}{2^{m-l+1}}.$$<p><strong>Product representation of QFT</strong>: Very often, the product representation of the QFT proves useful. Accordingly, the QFT can be expressed (up to normalization) as
 $$\left|x_{1}x_{2}\dots x_{n}\right&gt; \longrightarrow \frac{(\left|0\right&gt;+e^{2\pi i[0.x_{n}]}\left|1\right&gt;)\otimes (\left|0\right&gt;+e^{2\pi i[0.x_{n-1}x_{n}]}\left|1\right&gt;)\otimes \dots \otimes (\left|0\right&gt;+e^{2\pi i[0.x_{1}x_{2}\dots x_{n}]}\left|1\right&gt;)}{2^{n/2}}.$$
-For example, the QFT on three qubits can be written as 
-$$\mathrm{QFT}\left|x_{1}x_{2}x_{3}\right&gt; = \frac{1}{2^{3/2}}\left(\left|0\right&gt;+e^{2\pi i[0.x_{3}]}\left|1\right&gt;\right) \otimes \left(\left|0\right&gt;+e^{2\pi i[0.x_{2}x_{3}]}\left|1\right&gt;\right) \otimes \left(\left|0\right&gt;+e^{2\pi i[0.x_{1}x_{2}x_{3}]}\left|1\right&gt;\right).$$
-Thus, for the simple input state $\left|0,0,0\right&gt;$ with $x_{i}=0$, it is easy to see that the QFT produces a uniform superposition of all computational basis vectors (since only the Hadamard gates act non-trivially in this case).  Explicitly:
+For example, the QFT on three qubits can be written as</p>
+$$\mathrm{QFT}\left|x_{1}x_{2}x_{3}\right&gt; = \frac{1}{2^{3/2}}\left(\left|0\right&gt;+e^{2\pi i[0.x_{3}]}\left|1\right&gt;\right) \otimes \left(\left|0\right&gt;+e^{2\pi i[0.x_{2}x_{3}]}\left|1\right&gt;\right) \otimes \left(\left|0\right&gt;+e^{2\pi i[0.x_{1}x_{2}x_{3}]}\left|1\right&gt;\right).$$<p>Thus, for the simple input state $\left|0,0,0\right&gt;$ with $x_{i}=0$, it is easy to see that the QFT produces a uniform superposition of all computational basis vectors (since only the Hadamard gates act non-trivially in this case).  Explicitly:
 $$
 \begin{split}
 \mathrm{QFT}\left|0,0,0\right&gt; &amp; = \frac{1}{\sqrt{2^{3}}}(\left|0\right&gt;+\left|1\right&gt;) \otimes (\left|0\right&gt;+\left|1\right&gt;) \otimes (\left|0\right&gt;+\left|1\right&gt;) \\
  &amp; = \frac{1}{\sqrt{2^{3}}} \bigotimes_{i} \left|+\right&gt;_{i}
 \end{split}
 $$</p>
-<p><strong>Inverse QFT</strong>: Below we will also implement the inverse QFT algorithm (denoted by $\mathrm{QFT}^{\dagger}$, or sometimes $\mathrm{QFT}^{-1}$), which fulfills $\mathrm{QFT}\cdot\mathrm{QFT}^{\dagger}=\mathbb{1}$, where $\mathbb{1}$ is the identity. For example, with the inverse QFT we can invert the above three qubit QFT as 
-$$\mathrm{QFT}^\dagger\mathrm{QFT}\left|x_{1}x_{2}x_{3}\right&gt; = \mathrm{QFT}^{\dagger}(\left|0\right&gt;+e^{2\pi i[0.x_{3}]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.x_{2}x_{3}]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.x_{1}x_{2}x_{3}]}\left|1\right&gt;)/2^{3/2}=\left|x_{1}x_{2}x_{3}\right&gt;.$$</p>
-<p><strong>Example for inverse QFT:</strong> For further illustration, we will run a concrete example of this kind below. 
+<p><strong>Inverse QFT</strong>: Below we will also implement the inverse QFT algorithm (denoted by $\mathrm{QFT}^{\dagger}$, or sometimes $\mathrm{QFT}^{-1}$), which fulfills $\mathrm{QFT}\cdot\mathrm{QFT}^{\dagger}=\mathbb{1}$, where $\mathbb{1}$ is the identity. For example, with the inverse QFT we can invert the above three qubit QFT as</p>
+$$\mathrm{QFT}^\dagger\mathrm{QFT}\left|x_{1}x_{2}x_{3}\right&gt; = \mathrm{QFT}^{\dagger}(\left|0\right&gt;+e^{2\pi i[0.x_{3}]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.x_{2}x_{3}]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.x_{1}x_{2}x_{3}]}\left|1\right&gt;)/2^{3/2}=\left|x_{1}x_{2}x_{3}\right&gt;.$$<p><strong>Example for inverse QFT:</strong> For further illustration, we will run a concrete example of this kind below. 
 Specifically, consider the following example with $x_{1}=0$, $x_{2}=1$, and $x_{3}=0$ encoding the number 2 in binary representation. 
-Accordingly, we prepare the initial state (up to normalization)
-$$\left|\Psi_\mathrm{in}\right&gt;=(\left|0\right&gt;+e^{2\pi i[0.0]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.10]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.010]}\left|1\right&gt;),$$
-which is equivalent to 
-$$\left|\Psi_\mathrm{in}\right&gt;=(\left|0\right&gt;+\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i\frac{1}{2}}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i\frac{1}{4}}\left|1\right&gt;).$$
-This state can be prepared using the single-qubits gates $H$ and $R_{z}$ as follows: 
-$$\left|\Psi_\mathrm{in}\right&gt;=H\left|0\right&gt; \otimes R_{z}(\pi)H\left|0\right&gt; \otimes R_{z}(\pi/2)H\left|0\right&gt;.$$
-Based on the analysis above we then expect $\mathrm{QFT}^{\dagger} \left|\Psi_\mathrm{in}\right&gt; = \left|0,1,0\right&gt;$.
+Accordingly, we prepare the initial state (up to normalization)</p>
+$$\left|\Psi_\mathrm{in}\right&gt;=(\left|0\right&gt;+e^{2\pi i[0.0]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.10]}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i[0.010]}\left|1\right&gt;),$$<p>which is equivalent to 
+$$\left|\Psi_\mathrm{in}\right&gt;=(\left|0\right&gt;+\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i\frac{1}{2}}\left|1\right&gt;) \otimes (\left|0\right&gt;+e^{2\pi i\frac{1}{4}}\left|1\right&gt;).$$</p>
+<p>This state can be prepared using the single-qubits gates $H$ and $R_{z}$ as follows:</p>
+$$\left|\Psi_\mathrm{in}\right&gt;=H\left|0\right&gt; \otimes R_{z}(\pi)H\left|0\right&gt; \otimes R_{z}(\pi/2)H\left|0\right&gt;.$$<p>Based on the analysis above we then expect $\mathrm{QFT}^{\dagger} \left|\Psi_\mathrm{in}\right&gt; = \left|0,1,0\right&gt;$.
 We can generalize the above example to multiple qubits with the following state preparation code:</p>
 <div class="highlight"><pre><span></span><span class="n">circ</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">()</span>
 <span class="n">circ</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_qubits</span><span class="p">))</span>
@@ -14318,7 +14314,7 @@ T  : |    0    |1|     2      |       3       |            4             |      
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Version: 0.5.0
+<pre>Version: 0.6.0
 </pre>
 </div>
 </div>
