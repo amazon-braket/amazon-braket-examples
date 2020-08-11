@@ -13084,7 +13084,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this tutorial we discuss both the <code>BraketSampler</code> and <code>BraketDWaveSampler</code>. In essence, they are both doing the same thing; each one just accepts different parameter names. Specifcally, the <code>BraketDWaveSampler</code> allows users familiar with D-Wave to use D-Wave parameter names, e.g., <code>answer_mode</code>, whereas the <code>BraketSampler</code> parameter names are consistent with the rest of the Braket experience.</p>
+<p>In this tutorial we discuss both the <code>BraketSampler</code> and <code>BraketDWaveSampler</code>. In essence, they are both doing the same thing; each one just accepts different parameter names. Specifically, the <code>BraketDWaveSampler</code> allows users familiar with D-Wave to use D-Wave parameter names, e.g., <code>answer_mode</code>, whereas the <code>BraketSampler</code> parameter names are consistent with the rest of the Braket experience.</p>
 
 </div>
 </div>
@@ -13093,14 +13093,6 @@ div#notebook {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Minimum Vertex Cover problem</strong>: Here we consider a well-known combinatorial optimization problem on graphs called the Minimum Vertex Cover problem. Given an undirected graph with a vertex set $V$ and an edge set $E$, a vertex cover is a subset of the vertices (nodes) such that each edge in the graph is incident to at least one vertex in the subset. The Minimum Vertex Cover problem seeks to find a cover with a minimum number of vertices in the subset.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Instructions available here: <a href="https://github.com/aws/braket-ocean-python-plugin">https://github.com/aws/braket-ocean-python-plugin</a></p>
 
 </div>
 </div>
@@ -13168,9 +13160,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># session and backend</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># session and device</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">AwsDevice</span><span class="p">(</span><span class="s2">&quot;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Device backend:&#39;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Device:&#39;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13187,62 +13179,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Device backend: QPU(&#39;name&#39;: D-Wave, &#39;arn&#39;: arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print D-Wave device properties</span>
-<span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">device</span><span class="o">.</span><span class="n">properties</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>annealingDurationRange
-annealingOffsetRanges
-annealingOffsetStep
-annealingOffsetStepPhi0
-couplers
-defaultAnnealingDuration
-defaultProgrammingThermalizationDuration
-defaultReadoutThermalizationDuration
-extendedJRange
-hGainScheduleRange
-hRange
-jRange
-maximumAnnealingSchedulePoints
-maximumHGainSchedulePoints
-perQubitCouplingRange
-programmingThermalizationDurationRange
-qubitCount
-qubits
-quotaConversionRate
-readoutThermalizationDurationRange
-shotsRange
-taskRunDurationRange
-topology
+<pre>Device: Device(&#39;name&#39;: DW_2000Q_6, &#39;arn&#39;: arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6)
 </pre>
 </div>
 </div>
@@ -13964,117 +13901,154 @@ Size of the vertex cover: 9
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># Editable install with no version control (amazon-braket-default-simulator==0.3.1)
+<pre># Editable install with no version control (amazon-braket-default-simulator==0.4.0)
 -e /Users/xxiasos/braketvirtenv/amazon-braket-default-simulator-python/src
 # Editable install with no version control (amazon-braket-ocean-plugin==0.2.0)
 -e /Users/xxiasos/braketvirtenv/amazon-braket-ocean-plugin-python/src
-# Editable install with no version control (amazon-braket-schemas==0.2.5)
+# Editable install with no version control (amazon-braket-schemas==0.3.0)
 -e /Users/xxiasos/braketvirtenv/amazon-braket-schemas-python/src
-# Editable install with no version control (amazon-braket-sdk==0.5.0)
+# Editable install with no version control (amazon-braket-sdk==0.6.0)
 -e /Users/xxiasos/braketvirtenv/amazon-braket-sdk-python/src
+appdirs==1.4.3
 appnope==0.1.0
 argon2-cffi==20.1.0
 attrs==19.3.0
-awscli==1.18.110
-backcall==0.2.0
+autograd==1.3
+awscli==1.18.112
+backcall==0.1.0
 backoff==1.10.0
-bleach==3.1.5
-boltons==20.2.0
-boto3==1.14.33
-botocore==1.17.33
-certifi==2020.6.20
+bleach==3.1.3
+boltons==20.0.0
+boto3==1.12.26
+botocore==1.15.49
+certifi==2019.11.28
 cffi==1.14.1
 chardet==3.0.4
-click==7.1.2
+click==7.1.1
 colorama==0.4.3
 cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
-dimod==0.9.4
+dimod==0.9.0
+distlib==0.3.0
 docutils==0.15.2
-dwave-cloud-client==0.7.4
-dwave-hybrid==0.5.0
-dwave-inspector==0.2.2
-dwave-neal==0.5.4
-dwave-networkx==0.8.6
-dwave-ocean-sdk==2.4.0
+dwave-cloud-client==0.7.0
+dwave-hybrid==0.4.2
+dwave-inspector==0.1.3
+dwave-neal==0.5.3
+dwave-networkx==0.8.4
+dwave-ocean-sdk==2.0.1
 dwave-qbsolv==0.3.0
-dwave-system==0.9.6
-dwave-tabu==0.3.0
-dwavebinarycsp==0.1.2
+dwave-system==0.9.1
+dwave-tabu==0.2.2
+dwavebinarycsp==0.1.1
 entrypoints==0.3
-Flask==1.1.2
+filelock==3.0.12
+Flask==1.1.1
+future==0.18.2
+h5py==2.10.0
 homebase==1.0.1
-idna==2.10
-ipykernel==5.3.4
-ipython==7.17.0
+idna==2.9
+importlib-metadata==1.5.0
+ipykernel==5.1.4
+ipython==7.16.1
 ipython-genutils==0.2.0
 ipywidgets==7.5.1
 itsdangerous==1.1.0
-jedi==0.17.2
-Jinja2==2.11.2
-jmespath==0.10.0
+jedi==0.16.0
+Jinja2==2.11.1
+jmespath==0.9.5
+json5==0.9.4
 jsonschema==3.2.0
 jupyter==1.0.0
-jupyter-client==6.1.6
+jupyter-client==6.1.0
 jupyter-console==6.1.0
+jupyter-contrib-core==0.3.3
+jupyter-contrib-nbextensions==0.5.1
 jupyter-core==4.6.3
-kiwisolver==1.2.0
+jupyter-highlight-selected-word==0.2.0
+jupyter-latex-envs==1.4.6
+jupyter-nbextensions-configurator==0.4.1
+jupyterlab==2.1.2
+jupyterlab-server==1.1.1
+kiwisolver==1.1.0
+lxml==4.5.2
 MarkupSafe==1.1.1
-matplotlib==3.3.0
+matplotlib==3.2.2
 minorminer==0.1.9
 mistune==0.8.4
+more-itertools==8.2.0
+mpmath==1.1.0
 nbconvert==5.6.1
-nbformat==5.0.7
-nest-asyncio==1.4.0
+nbformat==5.0.4
+nest-asyncio==1.3.0
 networkx==2.4
-notebook==6.1.0
-numpy==1.19.1
-opt-einsum==3.3.0
-ortools==7.7.7810
-packaging==20.4
+nose==1.3.7
+notebook==6.0.3
+numpy==1.19.0
+openfermion==0.11.0
+openfermionpsi4==0.4
+openfermionpyscf==0.4
+opt-einsum==3.2.1
+ortools==7.5.7466
+packaging==20.3
+pandas==1.0.5
 pandocfilters==1.4.2
-parso==0.7.1
+parso==0.6.2
 penaltymodel==0.16.3
 penaltymodel-cache==0.4.1
 penaltymodel-lp==0.1.3
-penaltymodel-mip==0.2.3
+penaltymodel-mip==0.2.2
+PennyLane==0.10.0
+PennyLane-Qchem==0.10.0
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==7.2.0
 plucky==0.4.3
-prometheus-client==0.8.0
-prompt-toolkit==3.0.5
-protobuf==3.12.4
+pluggy==0.13.1
+prometheus-client==0.7.1
+prompt-toolkit==3.0.4
+protobuf==3.11.3
 ptyprocess==0.6.0
+PubChemPy==1.0.4
+py==1.8.1
 pyasn1==0.4.8
 pycparser==2.20
 pydantic==1.6.1
 Pygments==2.6.1
-pyparsing==2.4.7
+pyparsing==2.4.6
 pyqubo==0.4.0
-pyrsistent==0.16.0
+pyrsistent==0.15.7
+pyscf==1.7.1
 PySocks==1.7.1
+pytest==5.4.1
 python-dateutil==2.8.1
+pytz==2020.1
 PyYAML==5.3.1
-pyzmq==19.0.2
-qtconsole==4.7.5
+pyzmq==19.0.0
+qtconsole==4.7.1
 QtPy==1.9.0
-requests==2.24.0
-rsa==4.5
+requests==2.23.0
+rsa==3.4.2
 s3transfer==0.3.3
-scipy==1.5.2
+scipy==1.5.1
+semantic-version==2.6.0
 Send2Trash==1.5.0
-six==1.15.0
+six==1.14.0
+sympy==1.6.1
 terminado==0.8.3
 testpath==0.4.4
+toml==0.10.0
 tornado==6.0.4
+tox==3.15.0
 traitlets==4.3.3
-urllib3==1.25.10
-wcwidth==0.2.5
+urllib3==1.25.8
+virtualenv==20.0.20
+wcwidth==0.1.8
 webencodings==0.5.1
-Werkzeug==1.0.1
+Werkzeug==1.0.0
 widgetsnbextension==3.5.1
+zipp==3.1.0
 </pre>
 </div>
 </div>

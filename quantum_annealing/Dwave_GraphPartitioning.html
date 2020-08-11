@@ -13084,7 +13084,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this tutorial we solve a small instance of a graph partitioning problem using the D-Wave backend on Amazon Braket. The derivation for this QUBO problem is nicely explained here: <a href="https://github.com/dwave-examples/graph-partitioning">https://github.com/dwave-examples/graph-partitioning</a>.</p>
+<p>In this tutorial we solve a small instance of a graph partitioning problem using the D-Wave device on Amazon Braket. The derivation for this QUBO problem is nicely explained here: <a href="https://github.com/dwave-examples/graph-partitioning">https://github.com/dwave-examples/graph-partitioning</a>.</p>
 <p>Disclaimer: The code shown in this example has been taken from D-Wave tutorial availbale online <a href="https://github.com/dwave-examples/graph-partitioning">here</a>, with copyright to D-Wave Systems, Inc., licensed under the Apache License. The purpose of this example is to show how existing code using D-Wave's Ocean tool suite can easily be run on Amazon Braket, with minimal code changes, using the <code>BraketDWaveSampler</code>.</p>
 
 </div>
@@ -13159,9 +13159,9 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># session and backend</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># session and device</span>
 <span class="n">device</span> <span class="o">=</span> <span class="n">AwsDevice</span><span class="p">(</span><span class="s2">&quot;arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Device backend:&#39;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Device:&#39;</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13178,7 +13178,7 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Device backend: QPU(&#39;name&#39;: D-Wave, &#39;arn&#39;: arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6)
+<pre>Device: Device(&#39;name&#39;: DW_2000Q_6, &#39;arn&#39;: arn:aws:braket:::device/qpu/d-wave/DW_2000Q_6)
 </pre>
 </div>
 </div>
