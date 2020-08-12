@@ -13115,10 +13115,14 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Grover's algorithm is arguably one of the canonical quantum algorithms that kick-started the field of quantum computing. In the future, it could possibly serve as a hallmark application of quantum computing. Grover's algorithm allows us to find a particular register in an unordered database with $N$ entries in just $O(\sqrt{N})$ steps, compared to the best classical algorithm taking, on average, $O(N/2)$ steps, thereby providing a <strong>quadratic speedup</strong>.</p>
+<p>Grover's algorithm is arguably one of the canonical quantum algorithms that kick-started the field of quantum computing. In the future, it could possibly serve as a hallmark application of quantum computing. Grover's algorithm allows us to find a particular register in an unordered database with $N$ entries in just $O(\sqrt{N})$ steps, compared to the best classical algorithm taking on average $N/2$ steps, thereby providing a <strong>quadratic speedup</strong>.</p>
 <p>For large databases (with a large number of entries, $N$), a quadratic speedup can provide a significant advantage. For a database with one million entries, a quantum computer running Grover's algorithm would need about 1000 runs, while a classical computer would need, on average, $500$k runs.</p>
 <p>Research has been shown that any optimal quantum solution to an unstructured search problem has a speed limit of $O(\sqrt{N})$ runtime. This matches the performance of Grover's algorithm, thus proving that the algorithm is asymptotically optimal [2]. In fact, Grover's algorithm can be generalized to accelerate any type of search where one can construct a quantum oracle, as described in the next section.</p>
-<p>Consider the following problem [2]: In a search space with $N$ elements, we are searching the index of those elements, which is a number in the range $0, 1, \dots, N-1$. We have $N$ bits at our disposal, with which we can store up to $N=2^{n}$ elements. Our search problem can then be expressed with the help of a function $f$, which takes as input an element out of our set of indices (that is, an integer $x$) and generates two possible outputs: $f(x^{*})=1$, if $x^{*}$ is the solution to the search problem or $f(x)=0$ otherwise. This is done with the help of a quantum oracle, which recognizes solutions to the search problem.</p>
+<p>Consider the following problem [2]: 
+In a search space with $N$ elements, we are searching the index of those elements, which is a number in the range $0, 1, \dots, N-1$. 
+We have $n$ bits at our disposal, with which we can store up to $2^{n}$ elements. 
+Our search problem can then be expressed with the help of a function $f$, which takes as input an element out of our set of indices (that is, an integer $x$) and generates two possible outputs: $f(x^{*})=1$, if $x^{*}$ is the solution to the search problem or $f(x)=0$ otherwise (if $N&lt;2^{n}$ we can just set $f(x)=0$ for all extra unused elements). 
+This is done with the help of a quantum oracle, which recognizes solutions to the search problem.</p>
 
 </div>
 </div>
@@ -13133,7 +13137,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Grover's algorithm, like many other quantum algorithms, utilizes the concept of a quantum oracle. which we will denote as $\mathcal{O}$.  In essence, an oracle $\mathcal{O}$ is a black-box operation that serves as a subroutine to another algorithm. Typically, oracles are defined using a classical function $f:\{0,1\}^{n} \rightarrow \{0,1\}^{m}$, that maps an $n$-input bitstring to an $m$-output bitstring. With $x \in \{0,1\}^{n}$, i.e., $x=(x_{0}, x_{1}, \dots, x_{n-1})$ is a bitstring vector, and $y \in \{0,1\}^{n}$, the oracle $\mathcal{O}$ is a unitary operator, commonly defined by its effect on an arbitrary computational basis state as:</p>
+<p>Grover's algorithm, like many other quantum algorithms, utilizes the concept of a quantum oracle which we will denote as $\mathcal{O}$.  In essence, an oracle $\mathcal{O}$ is a black-box operation that serves as a subroutine to another algorithm. Typically, oracles are defined using a classical function $f:\{0,1\}^{n} \rightarrow \{0,1\}^{m}$, that maps an $n$-input bitstring to an $m$-output bitstring. With $x \in \{0,1\}^{n}$, i.e., $x=(x_{0}, x_{1}, \dots, x_{n-1})$ is a bitstring vector, and $y \in \{0,1\}^{m}$, the oracle $\mathcal{O}$ is a unitary operator, commonly defined by its effect on an arbitrary computational basis state as:</p>
 $$\mathcal{O} (\left|x\right&gt; \otimes \left|y\right&gt;) = \left|x\right&gt; \otimes \left|y \oplus f(x)\right&gt;,$$<p>where $\oplus$ denotes addition modulo 2.</p>
 <p>This means that the second qubit register of size $m$ stores the result of the computation. 
 For $m=1$, which is the scenario we will focus on here, the second register $\left|y\right&gt;$ is a single qubit that is flipped if (and only if) $f(x)=1$. 
@@ -13143,14 +13147,14 @@ Accordingly, we can check if $x$ is a solution to our search problem by first pr
 We can distinguish two cases: 
 (i) If $x$ is not a solution to our search problem (i.e., $f(x)=0$), then the application of the oracle operator $\mathcal{O}$ to the input state $\left|x\right&gt; \otimes (\left|0\right&gt; - \left|1\right&gt;)/\sqrt{2}$ leaves this state simply untouched. 
 (ii) Conversely, if $x$ is a solution to our search problem (i.e., $f(x)=1$), then the oracle states $\left|0\right&gt;$ and $\left|1\right&gt;$ are flipped, such that the state picks up a minus sign, giving the final output state $-\left|x\right&gt; \otimes (\left|0\right&gt; - \left|1\right&gt;)/\sqrt{2}$. 
-Note that global phase factors do not matter in quantum computing, but the relative minus sign we encounter here does make all the difference for a superposition state, which would include both the solution among all other possible input states.</p>
+Note that global phase factors do not matter in quantum computing, but the relative minus sign we encounter here does make all the difference for a superposition state, which would include the solution among all other possible input states.</p>
 <p>For both cases (i) and (ii), the action of the oracle can be summarized as:</p>
 $$\left|x\right&gt; \otimes (\left|0\right&gt; - \left|1\right&gt;)/\sqrt{2} \longrightarrow (-1)^{f(x)} \left|x\right&gt; \otimes (\left|0\right&gt; - \left|1\right&gt;)/\sqrt{2}.$$<p><br>
 Accordingly, the solution to our search problem gets <em>marked</em> by shifting the corresponding phase. 
 Since the oracle qubit remains unchanged, one can omit this oracle qubit from further discussion and simply express the action of the oracle as:</p>
 $$\left|x\right&gt; \longrightarrow (-1)^{f(x)}\left|x\right&gt;.$$<p></p>
 <p>This expression also captures the definition of a <em>phase oracle</em>, which will be used in our examples below. 
-If a phase oracle is applied on a computational basis state $\left|x\right&gt;$, then we only get a global phase that is not observable. However, when applied to a superposition of computational basis states, this phase oracle becomes a powerful tool. As it turns out, the search oracle needs to be applied only $O(\sqrt{N})$ times to obtain the solution with high probability [2].</p>
+If a phase oracle is applied on a computational basis state $\left|x\right&gt;$, then we only get a global phase that is not observable. However, when applied to a superposition of computational basis states, this phase oracle becomes a powerful tool. As it turns out, the search oracle needs to be applied only $O(\sqrt{N})$ times to obtain the solution with high probability [2]; more generally, if there are $G$ solutions, the oracle needs to be applied only $O(\sqrt{N/G})$ times).</p>
 
 </div>
 </div>
@@ -13168,13 +13172,13 @@ If a phase oracle is applied on a computational basis state $\left|x\right&gt;$,
 <p>In this tutorial, we will be working with three bits $(n=3)$, leading to eight possible items $(N=2^{3}=8)$. 
 To find a given target item, Grover's algorithm uses the following steps:</p>
 <ol>
-<li><p><strong>Initialize</strong>: Start with a uniform superposition of all possible bit strings by applying Hadamard gates. This will result in all inputs having the same amplitude.</p>
+<li><p><strong>Initialize</strong>: Start with a uniform superposition of all possible bit strings by applying Hadamard gates. This will result in all inputs having the same amplitude. Since we do not have any prior knowledge about the solution, we initialize to an equal superposition of all possible candidate solutions.</p>
 </li>
 <li><p><strong>Oracle</strong>: Item bits are then passed through an oracle. The oracle produces only two results. If it detects the target item, its amplitude will be flipped to negative. For all other items, their amplitudes will remain positive. Because the oracle is specifically engineered to change amplitudes based on a certain bit pattern, each target item would have its own associated oracle.</p>
 </li>
 <li><p><strong>Amplification</strong>: While the oracle in step 2 distinguishes the target item by flipping its amplitude in the negative direction, this difference remains too small to detect. Hence, we use a trick to magnify the difference in amplitudes; by flipping every amplitude around the mean amplitude. Recall that only the target item's amplitude was flipped to negative. In other words, the mean amplitude would still be positive, and its value would only be slightly lower than the amplitudes of other items. By flipping all amplitudes about the mean, the amplitudes of non-target items would decrease only slightly. On the other hand, the amplitude of the target item, being much less than the mean value to start, would be reflected back up into the positive direction by a large margin.</p>
 </li>
-<li><p><strong>Repeat</strong>: By repeating steps 2 and 3, we can magnify the amplitude of the target item to a point where it can be identified with overwhelming probability. To get to this point, we need to repeat the steps $\sqrt{N}$ times.</p>
+<li><p><strong>Repeat</strong>: By repeating steps 2 and 3, we can magnify the amplitude of the target item to a point where it can be identified with overwhelming probability. To get to this point, we need to repeat these steps approximately $\sqrt{N}$ times (again assuming a single solution and large $N$). As discussed in more detail in our Quantum Amplification Algorithm (QAA) tutorial, to ensure we measure a solution with high probability, we apply the Grover iterator $\left\lfloor\frac{\pi}{4\theta}\right\rfloor=\left\lfloor\frac{\pi}{4}\sqrt{\frac{N}{G}}\right\rfloor$ times, with $G$ denoting the number of solutions. Since we may not know $G$ in advance, we not know the ideal number of iterations a priori. To address this issue, however, we may use quantum counting techniques with the help of the phase estimation procedure (QPE); for details we refer to Ref.[2].</p>
 </li>
 <li><p><strong>Measurement</strong>: Measure the resulting amplitudes to identify the target item.</p>
 </li>
@@ -13278,7 +13282,8 @@ To find a given target item, Grover's algorithm uses the following steps:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>NOTE</strong>: Please enter your desired device and S3 location (bucket and key) below. If you are working with the local simulator <code>LocalSimulator()</code> you do not need to specify any S3 location. However, if you are using the managed cloud-based device you need to specify the S3 location where your results will be stored. In this case, you need to replace the API call <code>device.run(circuit, shots=SHOTS).result()</code> below with <code>device.run(circuit, s3_folder, shots=SHOTS).result()</code>.</p>
+<p><strong>NOTE</strong>: Please enter your desired device and S3 location (bucket and key) below. If you are working with the local simulator <code>LocalSimulator()</code> you do not need to specify any S3 location. However, if you are using the managed cloud-based device you need to specify the S3 location where your results will be stored. In this case, you need to replace the API call <code>device.run(circuit, ...)</code> below with <code>device.run(circuit, s3_folder, ...)</code>. 
+We provide some helper logic below to make this change automatically.</p>
 
 </div>
 </div>
@@ -13579,7 +13584,8 @@ We will leverage Braket's <code>circuit.subroutine</code> functionality, which a
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, we are ready to run our circuit for a few test cases. To recap on the steps:</p>
+<p>Now, we are ready to run our circuit for a few test cases. 
+To recap, the steps are as follows:</p>
 <ol>
 <li>Create a uniform superposition</li>
 <li>Apply the phase oracle corresponding to our target item</li>
@@ -14115,7 +14121,8 @@ T  : |0|1|2|3|4 |5|6|7|8 |9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|2
 <p>This circuit could potentially be optimized, as detailed in Ref.[1], but we will use this version for simplicity.</p>
 <p>In the final step, we retrieve the probabilistic counts for our target item. 
 To this end, we submit our circuit to the IonQ device, by setting the device as <code>AwsDevice("arn:aws:braket:::device/qpu/ionq/ionQdevice")</code>.</p>
-<p>This task may not be executed immediately as it enters a queue for this machine. Should we need to interrupt our kernel to work on something else, we can always our results using the unique ID of this task, as shown below.</p>
+<p>This task may not be executed immediately as it enters a queue for this machine. 
+Should we need to interrupt our kernel to work on something else, we can always recover our results using the unique ID of this task, as shown below.</p>
 
 </div>
 </div>
