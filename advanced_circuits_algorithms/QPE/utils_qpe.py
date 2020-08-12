@@ -193,7 +193,7 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
 
 
 def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
-            device, items_to_keep=1, shots=1000, poll_time=1000, save_to_pck=False):
+            device, s3_folder, items_to_keep=1, shots=1000, poll_time=1000, save_to_pck=False):
     """
     Function to run QPE algorithm end-to-end and return measurement counts.
 
