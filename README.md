@@ -1,5 +1,5 @@
 # Braket Tutorials github
-Primary repository for Amazon Braket tutorials, in which we provide tutorials on quantum computing, some real-world problem solutions, and the Amazon Braket SDK. 
+Primary repository for Amazon Braket tutorials, in which we provide tutorials on quantum computing, using Amazon Braket. We provide examples for both quantum circuits and quantum annealing. We cover both canonical routines such as the Quantum Fourier Transform as well as hybrid quantum algorithms such as the Variational Quantum Eigensolver. 
 
 The repo is structured as follows:  
 
@@ -10,7 +10,7 @@ The repo is structured as follows:
     
   * Superdense Coding
   
-    Superdense coding is a method of transmitting two classical bits by sending only one qubit.
+    In this tutorial, we construct an implementation of the superdense coding protocol via Amazon Braket's SDK. Superdense coding is a method of transmitting two classical bits by sending only one qubit. Starting with a pair of entanged qubits, the sender (aka Alice) applies a certain quantum gate to their qubit and sends the result to the receiver (aka Bob), who is then able to decode the full two-bit message. 
   
 * [Circuit-simple / Backends-Devices] Exploring Braket Devices and Backends
 
@@ -29,7 +29,7 @@ The repo is structured as follows:
   
   * QFT
   
-    In this tutorial, we provide a detailed implementation of the Quantum Fourier Transform (QFT) and the inverse thereof, using Amazon Braket's SDK. We provide two different implementations, with and without recursion. The QFT is an important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring and the quantum phase estimation (QPE) algorithm for estimating the eigenvalues of a unitary operator. The QFT can be performed efficiently on a quantum computer, using only 𝑂(𝑛2) single-qubit Hadamard gates and two-qubit controlled phase shift gates, where 𝑛 is the number of qubits. We first review the basics of the quantum Fourier transform, and its relation to the discrete (classical) Fourier transform. We then implement the QFT in code two ways: recursively and non-recursively. This notebook also showcases Braket's circuit.subroutine functionality, which allows one to define custom methods and add them to the Circuit class.
+    In this tutorial, we provide a detailed implementation of the Quantum Fourier Transform (QFT) and the inverse thereof, using Amazon Braket's SDK. We provide two different implementations, with and without recursion. The QFT is an important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring and the quantum phase estimation (QPE) algorithm for estimating the eigenvalues of a unitary operator. The QFT can be performed efficiently on a quantum computer, using only O(n<sup>2</sup>) single-qubit Hadamard gates and two-qubit controlled phase shift gates, where 𝑛 is the number of qubits. We first review the basics of the quantum Fourier transform, and its relation to the discrete (classical) Fourier transform. We then implement the QFT in code two ways: recursively and non-recursively. This notebook also showcases Braket's circuit.subroutine functionality, which allows one to define custom methods and add them to the Circuit class.
   
   * QPE
   
