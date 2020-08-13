@@ -112,7 +112,7 @@ def plot_colored_graph(J, N, colors, pos):
 
 def solve_classical_ising(J, N, pos):
     """
-    function to solve calssical optimization problem defined by graph
+    function to solve classical optimization problem defined by graph
     """
 
     # define and build classical Ising
