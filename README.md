@@ -47,14 +47,7 @@ The repo is structured as follows:
   * VQE Transverse Ising Model
   
     In this tutorial we show how to solve for the ground state of the Transverse Ising Model, arguably one of the most prominent, canonical quantum spin systems, using the variational quantum eigenvalue solver (VQE). The VQE algorithm belongs to the class of hybrid quantum algorithms (leveraging both classical as well as quantum compute), that are widely believed to be the working horse for the current NISQ (noisy intermediate-scale quantum) era. To validate our approach we benchmark our results with exact results as obtained from a Jordan-Wigner transformation. 
-  
-  * VQE Chemistry
-  
-    In this notebook, we illustrate how to implement the Variational Quantum Eigensolver (VQE) algorithm in Amazon Braket SDK to compute the potential energy surface (PES) for the Hydrogen molecule. Specifically, we illustrate the following features of Amazon Braket SDK:
 
-    - LocalSimulator which allows one to simulate quantum circuits on their local machine
-    - Construction of the ansatz circuit for VQE in Braket SDK
-    - Computing expectation values of the individual terms in the Hamiltonian in Braket SDK
 
 * [Annealing] Quantum annealing with D-Wave 
   * Anatomy of annealing with ocean 
