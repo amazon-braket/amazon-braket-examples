@@ -102,17 +102,7 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
 
     # get a quantum circuit instance from the parameters
     qaoa_circuit = circuit(params, device, n_qubits, ising)
-
-    # add expectation values for all non-zero ZZ terms in Hamiltonian <ZZ>
-    # first define two-qubit operator ZZ
-    obs = Observable.Z() @ Observable.Z()
-    # get all non-zero edges
-    idx = ising.nonzero()
-    edges = list(zip(idx[0], idx[1]))
-    # add all <ZZ> terms as required based on cost Hamitlonian
-    for qubit_pair in edges:
-        qaoa_circuit.expectation(obs, target=qubit_pair)
-
+   
     # classically simulate the circuit
     # execute the correct device.run call depending on whether the backend is local or cloud based
     if device.name == 'DefaultSimulator':
@@ -148,17 +138,9 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
     # store global minimum
     tracker['global_energies'].append(tracker['optimal_energy'])
 
-    # get all <ZZ> expectation values
-    energies = np.array(result.values)
-    # get all non-zero interaction stengths from Ising matrix
-    interactions = np.array([ising[q[0], q[1]] for q in edges])
-    # multiply expectation values <ZZ> by J_ij
-    energies_scaled = interactions * energies
-
-    # get energy expectation value <H_C> = sum_{ij} J_{ij} <Z_i Z_j>
-    # note: could consider other definitions of cost function
-    energy_expect = np.sum(energies_scaled)
-
+    # energy expectation value
+    energy_expect = np.sum(all_energies) / n_shots
+    
     if verbose:
         print('Minimal energy:', energy_min)
         print('Optimal classical string:', optimal_string)
