@@ -1,9 +1,5 @@
 # vqe_chem_env
 
-boto3==1.12.26
-jupyter==1.0.0
-amazon-braket-sdk==1.0.0.post1
 numpy==1.19.1
 openfermion==0.11.0
 openfermionpyscf==0.4
-matplotlib==3.3.1
