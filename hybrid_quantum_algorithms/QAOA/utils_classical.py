@@ -120,8 +120,7 @@ def solve_classical_ising(J, N, pos):
 
     # Solve classical Ising model
     solution = solve_ising(linear, quad)
-    decoded_solution, broken, energy = model.decode_solution(solution, vartype="BINARY")
-
+    
     # print calssical solution
     print('Classical solution:', solution)
 
@@ -131,10 +130,10 @@ def solve_classical_ising(J, N, pos):
     # Obtain colors of each vertex
     colors = [0 for _ in range(N)]
     for ii in range(N):
-        if decoded_solution['s' + str(ii)] == 1:
+        if solution['s' + str(ii)] == 1:
             colors[ii] = 1
 
     # Plot graph after coloring
     # plot_colored_graph(J, N, colors, pos)
 
-    return solution, decoded_solution, energy_min, colors
+    return solution, energy_min, colors
