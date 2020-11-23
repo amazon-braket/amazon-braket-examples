@@ -1,6 +1,3 @@
-# Editable install with no version control (amazon-braket-default-simulator-python==0.2.0)
--e /Users/maschuet/WorkDocs/AWS_MS/AWS-quantum/braket_v041i/amazon-braket-default-simulator-python/src
--e git+https://github.com/aws/amazon-braket-pennylane-plugin-python.git@633f70848145a56c413b761b883b52d2be015cee#egg=amazon_braket_pennyLane_plugin_python
 appdirs==1.4.4
 appnope==0.1.0
 attrs==19.3.0
@@ -11,12 +8,6 @@ bleach==3.1.5
 boltons==20.1.0
 boto3==1.13.26
 botocore==1.16.26
-# Editable install with no version control (braket-ir==0.2.4)
--e /Users/maschuet/WorkDocs/AWS_MS/AWS-quantum/braket_v041i/braket-python-ir/src
-# Editable install with no version control (braket-ocean-plugin==0.1.3)
--e /Users/maschuet/WorkDocs/AWS_MS/AWS-quantum/braket_v041i/braket-ocean-python-plugin/src
-# Editable install with no version control (braket-sdk==0.4.1)
--e /Users/maschuet/WorkDocs/AWS_MS/AWS-quantum/braket_v041i/braket-python-sdk/src
 certifi==2020.4.5.1
 chardet==3.0.4
 click==7.1.2
