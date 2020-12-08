@@ -50,7 +50,7 @@ The repo is structured as follows:
   
     In this tutorial we show how to solve for the ground state of the Transverse Ising Model, arguably one of the most prominent, canonical quantum spin systems, using the variational quantum eigenvalue solver (VQE). The VQE algorithm belongs to the class of hybrid quantum algorithms (leveraging both classical as well as quantum compute), that are widely believed to be the working horse for the current NISQ (noisy intermediate-scale quantum) era. To validate our approach we benchmark our results with exact results as obtained from a Jordan-Wigner transformation. 
 
-* [pennylane_braket] Quantum machine learning and optimization with PennyLane
+* [pennylane] Quantum machine learning and optimization with PennyLane
   * Combining PennyLane with Amazon Braket
   
     This tutorial shows you how to construct circuits and evaluate their gradients in PennyLane with execution performed using Amazon Braket.
