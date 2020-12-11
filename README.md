@@ -70,35 +70,35 @@ The repository is structured as follows:
 ## [quantum_annealing] Quantum annealing with D-Wave 
   * **Anatomy of annealing with ocean**
   
-    This tutorial notebook dives deep into the anatomy of quantum annealing with D-Wave on Amazon Braket. First, we introduce the concept of quantum annealing, as used by D-Wave, to probabilistically find the (approximate) optimum to some optimization problem. We then discuss the underlying structures of D-Wave QPUs, including the Chimera graph for the 2000Q system and the Pegasus graph for the Advantage system. We explain the problem of finding an embedding of the original problem onto the sparse graph of a device, and discuss the distinction between logical and physical variables. Finally, we solve an example QUBO problem to analyze the sampling process and provide a breakdown of the QPU access time. 
- 
+    This tutorial notebook dives deep into the anatomy of quantum annealing with D-Wave on Amazon Braket. First, we introduce the concept of quantum annealing, as used by D-Wave. We apply annealing to an optimization problem, to find the (approximate) optimum probabilistically. We then discuss the underlying structures of D-Wave QPUs, including the Chimera graph for the 2000Q system and the Pegasus graph for the Advantage system. We explain the problem of finding an embedding of the original problem onto the sparse graph of a device, and discuss the distinction between logical and physical variables. Finally, we solve an example QUBO problem to analyze the sampling process, and we provide a breakdown of the QPU access time. 
+   
   * **Running large problems with QBSolv**
   
-    This tutorial demonstrates how to solve problems with sizes larger than a D-Wave device can support using a hybrid solver called QBSolv. QBSolv can decompose large problems into sub-problems, which are solved using either both the QPU and a classical Tabu solver, or the classical solver alone. The results of the sub-problems then construct the solution to the problem. 
-    
+    This tutorial demonstrates how to solve problems with sizes larger than a D-Wave device can support, by using a hybrid solver called QBSolv. QBSolv can decompose large problems into sub-problems, which are solved by the QPU and a classical Tabu solver, or by the classical solver alone. The results of the sub-problems then construct the solution to the problem. 
+       
   * **Maximum Cut**
   
     This tutorial solves a small instance of the famous maximum cut (MaxCut) problem using a D-Wave device on Amazon Braket. The MaxCut problem is one of the most famous NP-hard problems in combinatorial optimization. Given an undirected graph 𝐺(𝑉,𝐸) with a vertex set 𝑉 and an edge set 𝐸, the MaxCut problem seeks to partition 𝑉 into two sets, such that the number of edges between the two sets (considered to be severed by the cut), is as large as possible. Applications can be found in clustering problems for marketing purposes, or for portfolio optimization problems in finance. 
   
   * **Minimum Vertex**
   
-    This tutorial solves a small instance of the minimum vertex problem while discusses the BraketSampler and the BraketDWaveSampler. In essence, they are doing the same thing; however, each accepts different parameter names. Specifically, the BraketDWaveSampler allows users familiar with D-Wave to use D-Wave parameter names, such as `answer_mode`, whereas the BraketSampler parameter names are consistent with the rest of the Amazon Braket experience.
-  
+    This tutorial solves a small instance of the minimum vertex problem while it discusses the BraketSampler and the BraketDWaveSampler. In essence, they are doing the same thing; however, each accepts different parameter names. Specifically, the BraketDWaveSampler allows users familiar with D-Wave to use D-Wave parameter names, such as `answer_mode`, whereas the BraketSampler parameter names are consistent with the rest of the Amazon Braket experience.
+   
   * **Graph partitioning**
   
     This tutorial solves a small instance of a graph partitioning problem using a D-Wave device on Amazon Braket. The derivation for this QUBO problem is nicely explained here: https://github.com/dwave-examples/graph-partitioning.
 
   * **Factoring**
   
-    This tutorial shows how to solve a constraint satisfaction problem (CSP) problem, with the example of factoring, using a D-Wave device on Amazon Braket. Particularly, the factoring is expressed as a CSP using Boolean logic operations, and is converted to a binary quadratic model which can be solved by a D-Wave device.
-    
+    This tutorial shows how to solve a constraint satisfaction problem (CSP) problem, with the example of factoring, using a D-Wave device on Amazon Braket. Particularly, the factoring is expressed as a CSP using Boolean logic operations, and it is converted to a binary quadratic model that can be solved by a D-Wave device.
+      
   * **Structural Imbalance**
   
-    This tutorial solves a structural imbalance problem using a D-Wave device on Amazon Braket. Social networks map relationships between people or organizations onto graphs, with the people/organizations as nodes and relationships as edges. Signed social networks map both friendly and hostile relationships. Such networks are said to be structurally balanced when they can be cleanly divided into two sets, with each set containing only friends, and all relations between these sets are hostile. The measure of structural imbalance or frustration, when it cannot be cleanly divided, is the minimum number of edges that violate the social rule. Given a social network as a graph, D-Wave devices can find a partition of the graph into two colored sets and the frustrated edges.
-    
+    This tutorial solves a structural imbalance problem using a D-Wave device on Amazon Braket. Social networks map relationships between people or organizations onto graphs. The people and organizations are represented as as nodes, and relationships are represented as edges. Signed social networks can map friendly or hostile relationships. These networks are said to be structurally balanced when they can be cleanly divided into two sets, in which each set contains only friends, and all relations between these sets are hostile. The measure of structural imbalance or frustration, when it cannot be cleanly divided, is the minimum number of edges that violate the social rule. Given a social network as a graph, D-Wave devices can partition the graph into two colored sets, and show the frustrated edges.
+      
   * **Traveling Salesman Problem**
 
-    This tutorial solves small instances of the famous travelling salesman problem (TSP) using D-Wave devices on Amazon Braket. TSP is an NP-hard problem in combinatorial optimization, asking for the shortest possible route that visits each city exactly once, given a list of cities and the distances between each pair of cities. To solve the problem, cities with distances is mapped to a graph with weighted edges, and a Hamiltonian cycle with the least weight is searched for as the solution.
+    This tutorial solves small instances of the famous travelling salesman problem (TSP) using D-Wave devices on Amazon Braket. TSP is an NP-hard problem in combinatorial optimization. The solution finds the shortest possible route that visits each city exactly once, given a list of cities and the distances between each pair of cities. To solve the problem, cities and distances are mapped to a graph with weighted edges. A solution, when found on that graph, is the Hamiltonian cycle that has the least weight.
 
 ## [braket_features] Amazon Braket features
 This folder contains examples that illustrate the usage of individual features of Amazon Braket
