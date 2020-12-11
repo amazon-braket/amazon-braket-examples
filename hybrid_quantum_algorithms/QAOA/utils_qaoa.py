@@ -47,7 +47,7 @@ def cost_circuit(gamma, n_qubits, ising, device):
     idx = ising.nonzero()
     edges = list(zip(idx[0], idx[1]))
 
-    # apply ZZ gate for every edge (with corresponding interation strength)
+    # apply ZZ gate for every edge (with corresponding interaction strength)
     for qubit_pair in edges:
         # get interaction strength from Ising matrix
         int_strength = ising[qubit_pair[0], qubit_pair[1]]
