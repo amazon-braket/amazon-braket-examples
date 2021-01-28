@@ -98,7 +98,7 @@ The repository is structured as follows:
       
   * **Traveling Salesman Problem**
 
-    This tutorial solves small instances of the famous travelling salesman problem (TSP) using D-Wave devices on Amazon Braket. TSP is an NP-hard problem in combinatorial optimization. The solution finds the shortest possible route that visits each city exactly once, given a list of cities and the distances between each pair of cities. To solve the problem, cities and distances are mapped to a graph with weighted edges. A solution, when found on that graph, is the Hamiltonian cycle that has the least weight.
+    This tutorial solves small instances of the famous traveling salesman problem (TSP) using D-Wave devices on Amazon Braket. TSP is an NP-hard problem in combinatorial optimization. The solution finds the shortest possible route that visits each city exactly once, given a list of cities and the distances between each pair of cities. To solve the problem, cities and distances are mapped to a graph with weighted edges. A solution, when found on that graph, is the Hamiltonian cycle that has the least weight.
 
 ## [braket_features] Amazon Braket features
 This folder contains examples that illustrate the usage of individual features of Amazon Braket
