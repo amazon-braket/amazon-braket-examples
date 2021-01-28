@@ -90,7 +90,7 @@ The repository is structured as follows:
 
   * **Factoring**
   
-    This tutorial shows how to solve a constraint satisfaction problem (CSP) problem, with the example of factoring, using a D-Wave device on Amazon Braket. Particularly, the factoring is expressed as a CSP using Boolean logic operations, and it is converted to a binary quadratic model that can be solved by a D-Wave device.
+    This tutorial shows how to solve a constraint satisfaction problem (CSP) problem, with the example of factoring, using a D-Wave device on Amazon Braket. Particularly, factoring is expressed as a CSP using Boolean logic operations, and it is converted to a binary quadratic model that can be solved by a D-Wave device.
       
   * **Structural Imbalance**
   
@@ -118,4 +118,3 @@ This folder contains examples that illustrate the usage of individual features o
 * **Using the tensor network simulator TN1**
 
     This notebook introduces the Amazon Braket managed tensor network simulator, TN1. You will learn about how TN1 works, how to use it, and which problems are best suited to run on TN1. 
-
