@@ -22,7 +22,16 @@ The repository is structured as follows:
     
   * **Superdense coding**
   
-    This tutorial constructs an implementation of the _superdense coding_ protocol, by means of the Amazon Braket SDK. Superdense coding is a method of transmitting two classical bits by sending only one qubit. Starting with a pair of entanged qubits, the sender (_aka_ Alice) applies a certain quantum gate to their qubit and sends the result to the receiver (_aka_ Bob), who is then able to decode the full two-bit message.     
+    This tutorial constructs an implementation of the _superdense coding_ protocol, by means of the Amazon Braket SDK. Superdense coding is a method of transmitting two classical bits by sending only one qubit. Starting with a pair of entanged qubits, the sender (_aka_ Alice) applies a certain quantum gate to their qubit and sends the result to the receiver (_aka_ Bob), who is then able to decode the full two-bit message.  
+    
+  * **Quantum Teleportation**
+  
+    This tutorial constructs an implementation of the _quantum teleportation_ protocol using the Amazon Braket SDK. Quantum teleportation is a technique for moving quantum states around, even in the absence of a quantum communications channel linking the sender of the quantum state to the recipient. Starting with a pair of entanged qubits, the sender (_aka_ Alice) delivers their qubit to the receiver (_aka_ Bob) by only sending classical information.
+    
+  * **Understanding Qubits and Quantum Gates**
+  
+    This tutorial introduces some of the fundemental concepts of quantum computing - qubits, Bloch sphere, quantum gates, superposition and entanglement. We also use Amazon Braket SDK and local simulator to explore these concepts.
+    
   
 ## [advanced_circuits_algorithms] Advanced circuits and algorithms
   * **Grover**
