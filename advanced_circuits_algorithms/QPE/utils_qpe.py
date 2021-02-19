@@ -193,7 +193,7 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
 
 
 def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
-            device, s3_folder, items_to_keep=1, shots=1000, poll_time=1000, save_to_pck=False):
+            device, s3_folder, items_to_keep=1, shots=1000, save_to_pck=False):
     """
     Function to run QPE algorithm end-to-end and return measurement counts.
 
@@ -211,8 +211,6 @@ def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
         device: Braket device backend
 
         shots: (optional) number of measurement shots (default is 1000)
-
-        poll_time: (optional) polling time in seconds for device.run(...) call
 
         save_to_pck: (optional) save results to pickle file if True (default is False)
     """
@@ -234,7 +232,7 @@ def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
     if device.name == 'DefaultSimulator':
         task = device.run(circ, shots=shots)
     else:
-        task = device.run(circ, s3_folder, shots=shots, poll_timeout_seconds=poll_time)
+        task = device.run(circ, s3_folder, shots=shots)
 
     # get result for this task
     result = task.result()
