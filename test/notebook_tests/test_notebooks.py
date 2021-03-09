@@ -81,8 +81,6 @@ def test_ipynb(dir_path, notebook, s3_bucket, region):
                 notebook, [errors[row]["evalue"] for row in range(len(errors))]
             )
         else:
-            pytest.mark.skip(notebook)
             logger.info("Skipped testing due to device unavailable in", region)
-            print("Skipped testing due to device unavailable in", region)
     except TimeoutError:
         os.remove(dest_file)
