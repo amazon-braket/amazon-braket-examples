@@ -16,17 +16,23 @@ from setuptools import find_namespace_packages, setup
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-# with open("requirements.txt") as f:
-#     required = f.read().splitlines()
-
-
 setup(
     name="amazon-braket-examples",
     license="Apache License 2.0",
-    python_requires=">= 3.6",
+    python_requires=">= 3.7",
     packages=find_namespace_packages(where="examples", exclude=("tests",)),
     package_dir={"": "examples"},
-    install_requires=[],
+    install_requires=[
+        "ipykernel",
+        "boto3",
+        "amazon-braket-sdk",
+        "amazon-braket-default-simulator",
+        "dwave-ocean-sdk",
+        "amazon-braket-ocean-plugin",
+        "amazon-braket-pennylane-plugin",
+        "amazon-braket-schemas",
+        "PennyLane",
+    ],
     extras_require={
         "test": [
             "black",

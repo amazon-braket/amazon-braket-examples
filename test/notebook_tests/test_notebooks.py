@@ -1,14 +1,25 @@
 import fileinput
 import os
 import logging
-from shutil import copyfile
-
 import nbformat
 import pytest
+import traceback
+
+from shutil import copyfile
 from nbconvert.preprocessors import ExecutePreprocessor
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+_EXCLUSIVE_DEVICE_REGIONS = {
+    "TN1": {
+        "ARN": "arn:aws:braket:::device/quantum-simulator/amazon/tn1",
+        "REGION": [
+            "us-west-2",
+            "us-east-1",
+        ],
+    }
+}
 
 demo_path = "examples/"
 demo_notebooks = []
@@ -21,7 +32,7 @@ for dir_, _, files in os.walk(demo_path):
             demo_notebooks.append((dir_, rel_file))
 
 
-def rename_bucket(notebook_path, s3_bucket):
+def _rename_bucket(notebook_path, s3_bucket):
     with fileinput.FileInput(notebook_path, inplace=True) as file:
         for line in file:
             print(
@@ -32,19 +43,17 @@ def rename_bucket(notebook_path, s3_bucket):
             )
 
 
-def check_tn1_availability(notebook_path, region):
-    tn1_device = "arn:aws:braket:::device/quantum-simulator/amazon/tn1"
-    tn1_regions = ["us-west-2", "us-east-1"]
-    if region not in tn1_regions:
+def _check_exclusive_device_availability(notebook_path, region):
+    device_arn = _EXCLUSIVE_DEVICE_REGIONS["TN1"]["ARN"]
+    if region not in _EXCLUSIVE_DEVICE_REGIONS["TN1"]["REGION"]:
         with open(notebook_path) as file:
             for line in file:
-                if tn1_device in line:
-                    return False
-    return True
+                if device_arn in line:
+                    return device_arn, False
+    return device_arn, True
 
 
-def run_notebook(dir_path, notebook_path):
-    nb_name, _ = os.path.splitext(os.path.basename(notebook_path))
+def _run_notebook(dir_path, notebook_path):
 
     with open(notebook_path) as f:
         nb = nbformat.read(f, as_version=4)
@@ -53,34 +62,34 @@ def run_notebook(dir_path, notebook_path):
     proc.allow_errors = True
 
     proc.preprocess(
-        nb, {"metadata": {"path": dir_path}},
+        nb,
+        {"metadata": {"path": dir_path}},
     )
 
-    errors = []
-    for cell in nb.cells:
-        if "outputs" in cell:
-            for output in cell["outputs"]:
-                if output.output_type == "error":
-                    errors.append(output)
-
-    return errors
+    return [
+        output
+        for cell in nb.cells
+        for output in cell.get("outputs", [])
+        if output.output_type == "error"
+    ]
 
 
 @pytest.mark.parametrize("dir_path, notebook", demo_notebooks)
 def test_ipynb(dir_path, notebook, s3_bucket, region):
-    tn1_status = check_tn1_availability(notebook, region)
+    device_arn, device_status = _check_exclusive_device_availability(notebook, region)
     try:
-        if tn1_status:
-            logger.info("Testing: ", notebook)
+        if device_status:
+            logger.info(f"Testing {notebook}")
             dest_file = notebook.replace(".ipynb", "_copy.ipynb")
             copyfile(notebook, dest_file)
-            rename_bucket(dest_file, s3_bucket)
-            errors = run_notebook(dir_path, dest_file)
+            _rename_bucket(dest_file, s3_bucket)
+            errors = _run_notebook(dir_path, dest_file)
             os.remove(dest_file)
             assert errors == [], "Errors found in {}\n{}".format(
                 notebook, [errors[row]["evalue"] for row in range(len(errors))]
             )
         else:
-            logger.info("Skipped testing due to device unavailable in", region)
+            logger.info(f"Skipped testing due to {device_arn} unavailable in {region}")
     except TimeoutError:
         os.remove(dest_file)
+        logger.error(traceback.print_exc())
