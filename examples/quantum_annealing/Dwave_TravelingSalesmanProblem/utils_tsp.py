@@ -1,8 +1,8 @@
 # imports
-import numpy as np
-import networkx as nx
 import dimod
 import dwave_networkx as dnx
+import networkx as nx
+import numpy as np
 
 
 # helper function to compute distance from route
@@ -13,10 +13,10 @@ def get_distance(route, data):
     # get the total distance without return
     total_dist = 0
     for idx, node in enumerate(route[:-1]):
-        dist = data[route[idx+1]][route[idx]]
+        dist = data[route[idx + 1]][route[idx]]
         total_dist += dist
 
-    print('Total distance (without return):', total_dist)
+    print("Total distance (without return):", total_dist)
 
     # add distance between start and end point to complete cycle
     return_distance = data[route[0]][route[-1]]
@@ -24,15 +24,16 @@ def get_distance(route, data):
 
     # get distance for full cyle
     distance_with_return = total_dist + return_distance
-    print('Total distance (including return):', distance_with_return)
+    print("Total distance (including return):", distance_with_return)
 
     return total_dist, distance_with_return
 
 
 # helper function for solving TSP with D-Wave adapted from Ocean
 # including some heuristical filling if not all contraints have been met
-def traveling_salesperson(G, sampler=None, lagrange=None, weight='weight',
-                          start=None, **sampler_args):
+def traveling_salesperson(
+    G, sampler=None, lagrange=None, weight="weight", start=None, **sampler_args
+):
     """Returns an approximate minimum traveling salesperson route.
 
     Defines a QUBO with ground states corresponding to the
@@ -105,7 +106,7 @@ def traveling_salesperson(G, sampler=None, lagrange=None, weight='weight',
     sample = response.first.sample
 
     # fill route with None values
-    route = [None]*len(G)
+    route = [None] * len(G)
     # get cities from sample
     # NOTE: Prevent duplicate city entries by enforcing only one occurrence per city along route
     for (city, time), val in sample.items():

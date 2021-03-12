@@ -13,23 +13,30 @@
 #    limitations under the License.
 
 import sys
-
 from collections import defaultdict
 from itertools import product
 
 import networkx as nx
-
-from bokeh.io import show, output_notebook
+from bokeh.io import output_notebook, show
 from bokeh.models import (
-    Plot, Range1d, MultiLine, Circle, HoverTool, WheelZoomTool, ZoomInTool, ZoomOutTool, PanTool,
-    Row, LabelSet, ColumnDataSource
+    Circle,
+    ColumnDataSource,
+    HoverTool,
+    LabelSet,
+    MultiLine,
+    PanTool,
+    Plot,
+    Range1d,
+    Row,
+    WheelZoomTool,
+    ZoomInTool,
+    ZoomOutTool,
 )
-from bokeh.models.graphs import from_networkx, EdgesAndLinkedNodes
-
+from bokeh.models.graphs import EdgesAndLinkedNodes, from_networkx
 
 # call output_notebook once on import, so we don't reload bokeh every time.
 me = sys.modules[__name__]
-if not hasattr(me, 'bokeh_loaded'):
+if not hasattr(me, "bokeh_loaded"):
     output_notebook()
     bokeh_loaded = True
 
@@ -73,7 +80,9 @@ def draw(S, position=None, with_labels=False):
                 for u, v in product(nodelist, repeat=2):
                     if u == v:  # node has no distance from itself
                         dist[u][v] = 0
-                    elif nodelist[u]['color'] == nodelist[v]['color']:  # make same color nodes closer together
+                    elif (
+                        nodelist[u]["color"] == nodelist[v]["color"]
+                    ):  # make same color nodes closer together
                         dist[u][v] = 1
                     else:  # make different color nodes further apart
                         dist[u][v] = 2
@@ -82,10 +91,13 @@ def draw(S, position=None, with_labels=False):
                 # default to circular layout if nodes aren't colored
                 pos = nx.circular_layout(S)
         return pos
+
     # call layout wrapper once with all nodes to store position for calls with partial graph
     position = layout_wrapper(S)
 
-    plot = Plot(plot_width=600, plot_height=400, x_range=Range1d(-1.2, 1.2), y_range=Range1d(-1.2, 1.2))
+    plot = Plot(
+        plot_width=600, plot_height=400, x_range=Range1d(-1.2, 1.2), y_range=Range1d(-1.2, 1.2)
+    )
     tools = [WheelZoomTool(), ZoomInTool(), ZoomOutTool(), PanTool()]
     plot.add_tools(*tools)
     plot.toolbar.active_scroll = tools[0]
@@ -96,63 +108,74 @@ def draw(S, position=None, with_labels=False):
         nodelist = S.nodes()
 
         # get the colors assigned to each edge based on friendly/hostile
-        sign_edge_color = ['#87DACD' if S[u][v]['sign'] == 1 else '#FC9291' for u, v in edgelist]
+        sign_edge_color = ["#87DACD" if S[u][v]["sign"] == 1 else "#FC9291" for u, v in edgelist]
 
         # get the colors assigned to each node by coloring
         try:
-            coloring_node_color = ['#4378F8' if nodelist[v]['color'] else '#FFE897' for v in nodelist]
+            coloring_node_color = [
+                "#4378F8" if nodelist[v]["color"] else "#FFE897" for v in nodelist
+            ]
         except KeyError:
-            coloring_node_color = ['#FFFFFF' for __ in nodelist]
+            coloring_node_color = ["#FFFFFF" for __ in nodelist]
 
         graph_renderer = from_networkx(S, layout_wrapper)
 
         circle_size = 10
-        graph_renderer.node_renderer.data_source.add(coloring_node_color, 'color')
-        graph_renderer.node_renderer.glyph = Circle(size=circle_size, fill_color='color')
+        graph_renderer.node_renderer.data_source.add(coloring_node_color, "color")
+        graph_renderer.node_renderer.glyph = Circle(size=circle_size, fill_color="color")
 
         edge_size = 2
-        graph_renderer.edge_renderer.data_source.add(sign_edge_color, 'color')
+        graph_renderer.edge_renderer.data_source.add(sign_edge_color, "color")
         try:
-            graph_renderer.edge_renderer.data_source.add([S[u][v]['event_year'] for u, v in edgelist], 'event_year')
             graph_renderer.edge_renderer.data_source.add(
-                [S[u][v]['event_description'] for u, v in edgelist], 'event_description')
-            plot.add_tools(HoverTool(tooltips=[("Year", "@event_year"), ("Description", "@event_description")],
-                                    line_policy="interp"))
+                [S[u][v]["event_year"] for u, v in edgelist], "event_year"
+            )
+            graph_renderer.edge_renderer.data_source.add(
+                [S[u][v]["event_description"] for u, v in edgelist], "event_description"
+            )
+            plot.add_tools(
+                HoverTool(
+                    tooltips=[("Year", "@event_year"), ("Description", "@event_description")],
+                    line_policy="interp",
+                )
+            )
         except KeyError:
             pass
-        graph_renderer.edge_renderer.glyph = MultiLine(line_color='color', line_dash=line_dash)
+        graph_renderer.edge_renderer.glyph = MultiLine(line_color="color", line_dash=line_dash)
 
         graph_renderer.inspection_policy = EdgesAndLinkedNodes()
 
         return graph_renderer
 
     try:
-        S_dash = S.edge_subgraph(((u, v) for u, v in edgelist if S[u][v]['frustrated']))
-        S_solid = S.edge_subgraph(((u, v) for u, v in edgelist if not S[u][v]['frustrated']))
-        plot.renderers.append(get_graph_renderer(S_dash, 'dashed'))
-        plot.renderers.append(get_graph_renderer(S_solid, 'solid'))
+        S_dash = S.edge_subgraph(((u, v) for u, v in edgelist if S[u][v]["frustrated"]))
+        S_solid = S.edge_subgraph(((u, v) for u, v in edgelist if not S[u][v]["frustrated"]))
+        plot.renderers.append(get_graph_renderer(S_dash, "dashed"))
+        plot.renderers.append(get_graph_renderer(S_solid, "solid"))
     except KeyError:
-        plot.renderers.append(get_graph_renderer(S, 'solid'))
-
-
+        plot.renderers.append(get_graph_renderer(S, "solid"))
 
     plot.background_fill_color = "#202239"
 
     positions = layout_wrapper(S)
     if with_labels:
-        data = {
-            'xpos': [],
-            'ypos': [],
-            'label': []
-        }
+        data = {"xpos": [], "ypos": [], "label": []}
         for label, pos in positions.items():
-            data['label'].append(label)
-            data['xpos'].append(pos[0])
-            data['ypos'].append(pos[1])
+            data["label"].append(label)
+            data["xpos"].append(pos[0])
+            data["ypos"].append(pos[1])
 
-        labels = LabelSet(x='xpos', y='ypos', text='label',
-                        level='glyph', source=ColumnDataSource(data),
-                        x_offset=-5, y_offset=10, text_color="#F5F7FB", text_font_size='12pt')
+        labels = LabelSet(
+            x="xpos",
+            y="ypos",
+            text="label",
+            level="glyph",
+            source=ColumnDataSource(data),
+            x_offset=-5,
+            y_offset=10,
+            text_color="#F5F7FB",
+            text_font_size="12pt",
+        )
         plot.add_layout(labels)
 
     show(Row(plot))
