@@ -13,8 +13,8 @@
 #    limitations under the License.
 
 import csv
-import datetime
 import os
+import datetime
 
 import networkx as nx
 
@@ -40,9 +40,9 @@ def global_signed_social_network():
 
     current_directory = os.path.dirname(__file__)
 
-    links_file = os.path.join(current_directory, "links.csv")
-    with open(links_file, "r", encoding="utf8") as links:
-        data_iter = csv.reader(links, delimiter=",")
+    links_file = os.path.join(current_directory, 'links.csv')
+    with open(links_file, 'r', encoding="utf8") as links:
+        data_iter = csv.reader(links, delimiter=',')
 
         # skip descriptions line
         next(data_iter)
@@ -61,7 +61,7 @@ def global_signed_social_network():
                 continue
 
             # get the date of the event
-            year, month, day = map(int, date.split("-"))
+            year, month, day = map(int, date.split('-'))
             if month == 0:
                 month = 1
             if day == 0:
@@ -69,34 +69,32 @@ def global_signed_social_network():
             dateinfo = datetime.date(year, month, day)
 
             # fill out the datafield
-            data = {
-                "event_id": id_,
-                "event_type": type_,
-                "event_year": int(year),  # whole date isn't needed
-                "event_description": description,
-            }
+            data = {'event_id': id_,
+                    'event_type': type_,
+                    'event_year': int(year), # whole date isn't needed
+                    'event_description': description}
 
             # finally cast the different relation types to either hostile (sign=-1)
             # or friendly (sign=1)
-            if type_ == "riv":
+            if type_ == 'riv':
                 S.add_edge(u, v, sign=-1, **data)
-            elif type_ == "all" or type_ == "aff" or type_ == "spl" or type_ == "mer":
+            elif type_ == 'all' or type_ == 'aff' or type_ == 'spl' or type_ == 'mer':
                 S.add_edge(u, v, sign=1, **data)
             else:
                 raise ValueError('unexpected relation type "{}"'.format(type_))
 
     # we are also interested in which region each group operates
-    maps_file = os.path.join(current_directory, "maps.csv")
+    maps_file = os.path.join(current_directory, 'maps.csv')
     map_id_to_name = {}
-    with open(maps_file, "r") as maps:
-        data_iter = csv.reader(maps, delimiter=",")
+    with open(maps_file, 'r') as maps:
+        data_iter = csv.reader(maps, delimiter=',')
         next(data_iter)  # skip descriptions line
 
         for map_id, __, map_name, description, __, __, __, __ in data_iter:
             map_id_to_name[map_id] = map_name
-    groups_file = os.path.join(current_directory, "map_groups.csv")
-    with open(groups_file, "r") as groups:
-        data_iter = csv.reader(groups, delimiter=",")
+    groups_file = os.path.join(current_directory, 'map_groups.csv')
+    with open(groups_file, 'r') as groups:
+        data_iter = csv.reader(groups, delimiter=',')
         next(data_iter)  # skip descriptions line
 
         for __, map_id, group_id, __, __, __ in data_iter:
@@ -108,6 +106,6 @@ def global_signed_social_network():
             group_id = int(group_id)
 
             if group_id in S:
-                S.nodes[group_id]["map"] = map_name
+                S.nodes[group_id]['map'] = map_name
 
     return S

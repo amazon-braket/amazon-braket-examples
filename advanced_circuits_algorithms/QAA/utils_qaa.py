@@ -1,6 +1,7 @@
 import numpy as np
 from braket.circuits import Circuit, circuit
-from utils_circuit import adjoint, get_unitary
+
+from utils_circuit import get_unitary, adjoint
 
 # monkey patch to Circuit class
 Circuit.get_unitary = get_unitary
@@ -17,18 +18,17 @@ def minus_R_B(qubit):
     """
     # instantiate circuit object
     circ = Circuit()
-
+    
     # Apply sequence XZX to given qubit
     circ.x(qubit).z(qubit).x(qubit)
-
+    
     return circ
-
 
 # Helper function to apply rotation -R0
 @circuit.subroutine(register=True)
 def minus_R_zero(qubits, use_explicit_unitary=False):
     """
-    Function to implement transformation: |0,0,...0> -> -|0,0,...0>, all others unchanged.
+    Function to implement transformation: |0,0,...0> -> -|0,0,...0>, all others unchanged. 
 
     Args:
         qubits: list of qubits on which to apply the gates
@@ -37,15 +37,15 @@ def minus_R_zero(qubits, use_explicit_unitary=False):
     """
 
     circ = Circuit()
-
+    
     # If the use_explicit_matrix flag is True, we just apply the unitary defined by |0,0,...0> -> -|0,0,...0>
     if use_explicit_unitary:
         # Create the matrix diag(-1,1,1,...,1)
-        unitary = np.eye(2 ** len(qubits))
-        unitary[0][0] = -1
+        unitary = np.eye(2**len(qubits))
+        unitary[0][0]=-1
         # Add a gate defined by this matrix
         circ.unitary(matrix=unitary, targets=qubits)
-
+    
     # Otherwise implement the unitary using ancilla qubits:
     else:
         # Flip all qubits. We now need to check if all qubits are |1>, rather than |0>.
@@ -65,34 +65,33 @@ def minus_R_zero(qubits, use_explicit_unitary=False):
             ancilla_start = max(qubits) + 1
 
             # Check that the first two register qubits are both 1's using a CCNOT on a new ancilla qubit.
-            circ.ccnot(qubits[0], qubits[1], ancilla_start)
+            circ.ccnot(qubits[0],qubits[1],ancilla_start)
 
             # Now add a CCNOT from each of the next register qubits, comparing with the ancilla we just added.
             # Target on a new ancilla. If len(qubits) is 2, this does not execute.
-            for ii, qubit in enumerate(qubits[2:]):
-                circ.ccnot(qubit, ancilla_start + ii, ancilla_start + ii + 1)
+            for ii,qubit in enumerate(qubits[2:]):
+                circ.ccnot(qubit,ancilla_start+ii, ancilla_start+ii+1)
 
             # Apply a Z gate to the last ancilla qubit to pick up a minus sign if all of the register qubits are |1>
             ancilla_end = ancilla_start + len(qubits[2:])
             circ.z(ancilla_end)
 
             # Now uncompute to disentangle the ancilla qubits by applying CCNOTs in the reverse order to above.
-            for jj, qubit in enumerate(reversed(qubits[2:])):
-                circ.ccnot(qubit, ancilla_end - jj - 1, ancilla_end - jj)
+            for jj,qubit in enumerate(reversed(qubits[2:])):
+                circ.ccnot(qubit,ancilla_end-jj-1, ancilla_end-jj)
 
             # Finally undo the last CCNOT on the first two register qubits.
-            circ.ccnot(qubits[0], qubits[1], ancilla_start)
+            circ.ccnot(qubits[0],qubits[1],ancilla_start)
 
         # Flip all qubits back
         circ.x(qubits)
-
+    
     return circ
 
-
 @circuit.subroutine(register=True)
-def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
+def grover_iterator(A,flag_qubit,qubits=None,use_explicit_unitary=False):
     """
-    Function to implement the Grover iterator Q=A R_0 A* R_B.
+    Function to implement the Grover iterator Q=A R_0 A* R_B. 
 
     Args:
         A: Circuit defining the unitary A
@@ -108,41 +107,34 @@ def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
         qubits = A.qubits
     else:
         # If qubits are passed, make sure it's the right number to remap from A.
-        if len(qubits) != len(A.qubits):
-            raise ValueError(
-                "Number of desired target qubits differs from number of targets in A".format(
-                    flag_qubit=repr(flag_qubit)
-                )
-            )
-
+        if len(qubits)!=len(A.qubits):
+            raise ValueError('Number of desired target qubits differs from number of targets in A'.format(flag_qubit=repr(flag_qubit)))
+    
     # Verify that flag_qubit is one of the qubits on which A acts, or one of the user defined qubits
     if flag_qubit not in qubits:
-        raise ValueError(
-            "flag_qubit {flag_qubit} is not in targets of A".format(flag_qubit=repr(flag_qubit))
-        )
-
+        raise ValueError('flag_qubit {flag_qubit} is not in targets of A'.format(flag_qubit=repr(flag_qubit)))
+    
     # Instantiate the circuit
     circ = Circuit()
-
+    
     # Apply -R_B to the flag qubit
     circ.minus_R_B(flag_qubit)
-
+    
     # Apply A^\dagger. Use target mapping if different qubits are specified
-    circ.add_circuit(A.adjoint(), target=qubits)
-
+    circ.add_circuit(A.adjoint(),target=qubits)
+    
     # Apply -R_0
-    circ.minus_R_zero(qubits, use_explicit_unitary)
-
+    circ.minus_R_zero(qubits,use_explicit_unitary)
+    
     # Apply A, mapping targets if desired.
-    circ.add_circuit(A, target=qubits)
-
+    circ.add_circuit(A,target=qubits)
+    
     return circ
 
-
 @circuit.subroutine(register=True)
-def qaa(A, flag_qubit, num_iterations, qubits=None, use_explicit_unitary=False):
+def qaa(A,flag_qubit,num_iterations,qubits=None,use_explicit_unitary=False):
     """
-    Function to implement the Quantum Amplitude Amplification Q^m, where Q=A R_0 A* R_B, m=num_iterations.
+    Function to implement the Quantum Amplitude Amplification Q^m, where Q=A R_0 A* R_B, m=num_iterations. 
 
     Args:
         A: Circuit defining the unitary A
@@ -156,9 +148,9 @@ def qaa(A, flag_qubit, num_iterations, qubits=None, use_explicit_unitary=False):
     """
     # Instantiate the circuit
     circ = Circuit()
-
+    
     # Apply the Grover iterator num_iterations times:
     for _ in range(num_iterations):
-        circ.grover_iterator(A, flag_qubit, qubits, use_explicit_unitary)
-
+        circ.grover_iterator(A,flag_qubit,qubits,use_explicit_unitary)
+    
     return circ
