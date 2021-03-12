@@ -48,21 +48,4 @@ setup(
             "tox",
         ]
     },
-    url="https://github.com/aws/amazon-braket-examples",
-    author="Amazon Web Services",
-    description=(
-        "An open source library for tutorials on quantum computing using Amazon Braket."
-    ),
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    keywords="Amazon AWS Quantum",
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "Natural Language :: English",
-        "License :: OSI Approved :: Apache Software License",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-    ],
 )
