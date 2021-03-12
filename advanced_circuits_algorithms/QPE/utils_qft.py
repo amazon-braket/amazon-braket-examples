@@ -1,7 +1,6 @@
 # general imports
-import math
-
 import numpy as np
+import math
 
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
@@ -30,7 +29,7 @@ def qft_no_swap(qubits):
 
         # Then apply the controlled rotations, with weights (angles) defined by the distance to the control qubit.
         for k, qubit in enumerate(qubits[1:]):
-            qftcirc.cphaseshift(qubit, qubits[0], 2 * math.pi / (2 ** (k + 2)))
+            qftcirc.cphaseshift(qubit, qubits[0], 2*math.pi/(2**(k+2)))
 
         # Now apply the above gates recursively to the rest of the qubits
         qftcirc.add(qft_no_swap(qubits[1:]))
@@ -54,8 +53,8 @@ def qft_recursive(qubits):
     qftcirc.add(qft_no_swap(qubits))
 
     # Then add SWAP gates to reverse the order of the qubits:
-    for i in range(math.floor(len(qubits) / 2)):
-        qftcirc.swap(qubits[i], qubits[-i - 1])
+    for i in range(math.floor(len(qubits)/2)):
+        qftcirc.swap(qubits[i], qubits[-i-1])
 
     return qftcirc
 
@@ -80,13 +79,13 @@ def qft(qubits):
 
         # Then apply the controlled rotations, with weights (angles) defined by the distance to the control qubit.
         # Start on the qubit after qubit k, and iterate until the end.  When num_qubits==1, this loop does not run.
-        for j in range(1, num_qubits - k):
-            angle = 2 * math.pi / (2 ** (j + 1))
-            qftcirc.cphaseshift(qubits[k + j], qubits[k], angle)
+        for j in range(1,num_qubits - k):
+            angle = 2*math.pi/(2**(j+1))
+            qftcirc.cphaseshift(qubits[k+j],qubits[k], angle)
 
     # Then add SWAP gates to reverse the order of the qubits:
-    for i in range(math.floor(num_qubits / 2)):
-        qftcirc.swap(qubits[i], qubits[-i - 1])
+    for i in range(math.floor(num_qubits/2)):
+        qftcirc.swap(qubits[i], qubits[-i-1])
 
     return qftcirc
 
@@ -108,8 +107,8 @@ def inverse_qft(qubits):
     num_qubits = len(qubits)
 
     # First add SWAP gates to reverse the order of the qubits:
-    for i in range(math.floor(num_qubits / 2)):
-        qftcirc.swap(qubits[i], qubits[-i - 1])
+    for i in range(math.floor(num_qubits/2)):
+        qftcirc.swap(qubits[i], qubits[-i-1])
 
     # Start on the last qubit and work to the first.
     for k in reversed(range(num_qubits)):
@@ -119,8 +118,8 @@ def inverse_qft(qubits):
         # Start on the last qubit and iterate until the qubit after k.
         # When num_qubits==1, this loop does not run.
         for j in reversed(range(1, num_qubits - k)):
-            angle = -2 * math.pi / (2 ** (j + 1))
-            qftcirc.cphaseshift(qubits[k + j], qubits[k], angle)
+            angle = -2*math.pi/(2**(j+1))
+            qftcirc.cphaseshift(qubits[k+j],qubits[k], angle)
 
         # Then add a Hadamard gate
         qftcirc.h(qubits[k])
