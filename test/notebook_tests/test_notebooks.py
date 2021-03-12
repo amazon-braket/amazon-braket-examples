@@ -1,24 +1,21 @@
 import fileinput
-import os
 import logging
+import os
+import traceback
+from shutil import copyfile
+
 import nbformat
 import pytest
-import traceback
-
-from shutil import copyfile
 from nbconvert.preprocessors import ExecutePreprocessor
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 _EXCLUSIVE_DEVICE_REGIONS = {
-    "TN1": {
-        "ARN": "arn:aws:braket:::device/quantum-simulator/amazon/tn1",
-        "REGION": [
-            "us-west-2",
-            "us-east-1",
-        ],
-    }
+    "arn:aws:braket:::device/quantum-simulator/amazon/tn1": [
+        "us-west-2",
+        "us-east-1",
+    ],
 }
 
 demo_path = "examples/"
@@ -44,13 +41,13 @@ def _rename_bucket(notebook_path, s3_bucket):
 
 
 def _check_exclusive_device_availability(notebook_path, region):
-    device_arn = _EXCLUSIVE_DEVICE_REGIONS["TN1"]["ARN"]
-    if region not in _EXCLUSIVE_DEVICE_REGIONS["TN1"]["REGION"]:
-        with open(notebook_path) as file:
-            for line in file:
-                if device_arn in line:
-                    return device_arn, False
-    return device_arn, True
+    for device, availabilty in _EXCLUSIVE_DEVICE_REGIONS.items():
+        if region not in availabilty:
+            with open(notebook_path) as file:
+                for line in file:
+                    if device in line:
+                        return device, False
+    return device, True
 
 
 def _run_notebook(dir_path, notebook_path):
@@ -61,10 +58,7 @@ def _run_notebook(dir_path, notebook_path):
     proc = ExecutePreprocessor(kernel_name="python3")
     proc.allow_errors = True
 
-    proc.preprocess(
-        nb,
-        {"metadata": {"path": dir_path}},
-    )
+    proc.preprocess(nb, {"metadata": {"path": dir_path}})
 
     return [
         output

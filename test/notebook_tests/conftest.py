@@ -61,4 +61,4 @@ def s3_bucket(s3_resource, s3_client, account_id, boto_session):
 
 @pytest.fixture(scope="module")
 def s3_destination_folder(s3_bucket, s3_prefix):
-    return AwsSession.S3DestinationFolder(s3_bucket, s3_prefix)
+    return (s3_bucket, s3_prefix)
