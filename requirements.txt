@@ -88,7 +88,7 @@ pyzmq==19.0.1
 qtconsole==4.7.4
 QtPy==1.9.0
 requests==2.23.0
-rsa==3.4.2
+rsa==4.1
 s3transfer==0.3.3
 scipy==1.4.1
 seaborn==0.10.1
