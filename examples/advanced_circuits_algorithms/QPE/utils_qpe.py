@@ -1,9 +1,10 @@
 # general imports
-import numpy as np
 import math
+import pickle
 from collections import Counter
 from datetime import datetime
-import pickle
+
+import numpy as np
 
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
@@ -26,11 +27,9 @@ def controlled_unitary(control, target_qubits, unitary):
     """
 
     # Define projectors onto the computational basis
-    p0 = np.array([[1., 0.],
-                   [0., 0.]])
+    p0 = np.array([[1.0, 0.0], [0.0, 0.0]])
 
-    p1 = np.array([[0., 0.],
-                   [0., 1.]])
+    p1 = np.array([[0.0, 0.0], [0.0, 1.0]])
 
     # Instantiate circuit object
     circ = Circuit()
@@ -82,13 +81,13 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
         # Alterantive 1: Implement C-(U^{2^k})
         if control_unitary:
             # Define the matrix U^{2^k}
-            Uexp = np.linalg.matrix_power(unitary,2**power)
+            Uexp = np.linalg.matrix_power(unitary, 2 ** power)
 
             # Apply the controlled unitary C-(U^{2^k})
             qpe_circ.controlled_unitary(qubit, query_qubits, Uexp)
         # Alterantive 2: One can instead apply controlled-unitary (2**power) times to get C-U^{2^power}
         else:
-            for _ in range(2**power):
+            for _ in range(2 ** power):
                 qpe_circ.controlled_unitary(qubit, query_qubits, unitary)
 
     # Apply inverse qft to the precision_qubits
@@ -110,7 +109,7 @@ def substring(key, precision_qubits):
         precision_qubits: List of qubits corresponding to precision_qubits.
                           Currently assumed to be a list of integers corresponding to the indices of the qubits.
     """
-    short_key = ''
+    short_key = ""
     for idx in precision_qubits:
         short_key = short_key + key[idx]
 
@@ -134,7 +133,7 @@ def binaryToDecimal(binary):
     twos = 2
 
     for ii in range(length):
-        fracDecimal += ((ord(binary[ii]) - ord('0')) / twos);
+        fracDecimal += (ord(binary[ii]) - ord("0")) / twos
         twos *= 2.0
 
     # return fractional part
@@ -158,7 +157,9 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
     # Aggregate the results (i.e., ignore/trace out the query register qubits):
 
     # First get bitstrings with corresponding counts for precision qubits only
-    bitstrings_precision_register = [substring(key, precision_qubits)  for key in measurement_counts.keys()]
+    bitstrings_precision_register = [
+        substring(key, precision_qubits) for key in measurement_counts.keys()
+    ]
     # Then keep only the unique strings
     bitstrings_precision_register_set = set(bitstrings_precision_register)
     # Cast as a list for later use
@@ -179,7 +180,7 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
 
     # Get topmost values only
     c = Counter(precision_results_dic)
-    topmost= c.most_common(items_to_keep)
+    topmost = c.most_common(items_to_keep)
     # get decimal phases from bitstrings for topmost bitstrings
     phases_decimal = [binaryToDecimal(item[0]) for item in topmost]
 
@@ -192,8 +193,17 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
     return phases_decimal, precision_results_dic
 
 
-def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
-            device, s3_folder, items_to_keep=1, shots=1000, save_to_pck=False):
+def run_qpe(
+    unitary,
+    precision_qubits,
+    query_qubits,
+    query_circuit,
+    device,
+    s3_folder,
+    items_to_keep=1,
+    shots=1000,
+    save_to_pck=False,
+):
     """
     Function to run QPE algorithm end-to-end and return measurement counts.
 
@@ -229,7 +239,7 @@ def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
     # Run the circuit with all zeros input.
     # The query_circuit subcircuit generates the desired input from all zeros.
     # The code below executes the correct device.run call depending on whether the backend is local or cloud based
-    if device.name == 'DefaultSimulator':
+    if device.name == "DefaultSimulator":
         task = device.run(circ, shots=shots)
     else:
         task = device.run(circ, s3_folder, shots=shots)
@@ -250,30 +260,34 @@ def run_qpe(unitary, precision_qubits, query_qubits, query_circuit,
     measurement_probabilities = result.measurement_probabilities
 
     # bitstrings
-    format_bitstring = '{0:0' + str(num_qubits) + 'b}'
-    bitstring_keys = [format_bitstring.format(ii) for ii in range(2**num_qubits)]
+    format_bitstring = "{0:0" + str(num_qubits) + "b}"
+    bitstring_keys = [format_bitstring.format(ii) for ii in range(2 ** num_qubits)]
 
     # QPE postprocessing
-    phases_decimal, precision_results_dic = get_qpe_phases(measurement_counts, precision_qubits, items_to_keep)
-    eigenvalues = [np.exp(2*np.pi*1j*phase) for phase in phases_decimal]
+    phases_decimal, precision_results_dic = get_qpe_phases(
+        measurement_counts, precision_qubits, items_to_keep
+    )
+    eigenvalues = [np.exp(2 * np.pi * 1j * phase) for phase in phases_decimal]
 
     # aggregate results
-    out = {'circuit': circ,
-           'task_metadata': metadata,
-           'measurements': measurements,
-           'measured_qubits': measured_qubits,
-           'measurement_counts': measurement_counts,
-           'measurement_probabilities': measurement_probabilities,
-           'probs_values': probs_values,
-           'bitstring_keys': bitstring_keys,
-           'precision_results_dic': precision_results_dic,
-           'phases_decimal': phases_decimal,
-           'eigenvalues': eigenvalues}
+    out = {
+        "circuit": circ,
+        "task_metadata": metadata,
+        "measurements": measurements,
+        "measured_qubits": measured_qubits,
+        "measurement_counts": measurement_counts,
+        "measurement_probabilities": measurement_probabilities,
+        "probs_values": probs_values,
+        "bitstring_keys": bitstring_keys,
+        "precision_results_dic": precision_results_dic,
+        "phases_decimal": phases_decimal,
+        "eigenvalues": eigenvalues,
+    }
 
     if save_to_pck:
         # store results: dump output to pickle with timestamp in filename
-        time_now = datetime.strftime(datetime.now(), '%Y%m%d%H%M%S')
-        results_file = 'results-'+time_now+'.pck'
+        time_now = datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")
+        results_file = "results-" + time_now + ".pck"
         pickle.dump(out, open(results_file, "wb"))
         # you can load results as follows
         # out = pickle.load(open(results_file, "rb"))
