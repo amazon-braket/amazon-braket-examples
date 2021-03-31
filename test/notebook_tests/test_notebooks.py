@@ -18,15 +18,17 @@ _EXCLUSIVE_DEVICE_REGIONS = {
     ],
 }
 
-demo_path = "examples/"
-demo_notebooks = []
+test_path = "examples/"
+test_notebooks = []
 
 
-for dir_, _, files in os.walk(demo_path):
+for dir_, _, files in os.walk(test_path):
     for file_name in files:
         rel_file = os.path.join(dir_, file_name)
+        if file_name.endswith("copy.ipynb"):
+            os.remove(rel_file)
         if file_name.endswith(".ipynb") and "QPU" not in file_name:
-            demo_notebooks.append((dir_, rel_file))
+            test_notebooks.append((dir_, rel_file))
 
 
 def _rename_bucket(notebook_path, s3_bucket):
@@ -68,7 +70,7 @@ def _run_notebook(dir_path, notebook_path):
     ]
 
 
-@pytest.mark.parametrize("dir_path, notebook", demo_notebooks)
+@pytest.mark.parametrize("dir_path, notebook", test_notebooks)
 def test_ipynb(dir_path, notebook, s3_bucket, region):
     device_arn, device_status = _check_exclusive_device_availability(notebook, region)
     try:
@@ -83,6 +85,7 @@ def test_ipynb(dir_path, notebook, s3_bucket, region):
                 notebook, [errors[row]["evalue"] for row in range(len(errors))]
             )
         else:
+            pytest.skip()
             logger.info(f"Skipped testing due to {device_arn} unavailable in {region}")
     except TimeoutError:
         os.remove(dest_file)
