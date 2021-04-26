@@ -138,27 +138,10 @@ conda deactivate
 
 For more information, please see [conda usage](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 
-## Testing
-
-This repository has testing for tutorial notebooks.
-
-First, configure a profile to use your account to interact with AWS. To learn more, see [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
+To run the notebook examples locally on your IDE, first, configure a profile to use your account to interact with AWS. To learn more, see [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
 After you create a profile, use the following command to set the `AWS_PROFILE` so that all future commands can access your AWS account and resources.
 
 ```bash
 export AWS_PROFILE=YOUR_PROFILE_NAME
 ```
-
-To run the tests, make sure to create a conda environment first with environment file discussed in `create a conda environment` section above.
-
-For more information, please see [conda usage](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-
-To run the tests for tutorial notebooks:
-
-```bash
-pytest -v test/notebook_tests
-```
-**Note:** This will test all the notebooks under the examples folder of this repository. 
-
-For more information, please see [pytest usage](https://docs.pytest.org/en/stable/usage.html).
