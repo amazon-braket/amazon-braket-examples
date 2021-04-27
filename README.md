@@ -119,19 +119,8 @@ This folder contains examples that illustrate the usage of individual features o
 
     This notebook introduces the Amazon Braket managed tensor network simulator, TN1. You will learn about how TN1 works, how to use it, and which problems are best suited to run on TN1. 
 
-## Testing
-
-This repository has testing for tutorial notebooks.
-
-First, configure a profile to use your account to interact with AWS. To learn more, see [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
-
-After you create a profile, use the following command to set the `AWS_PROFILE` so that all future commands can access your AWS account and resources.
-
-```bash
-export AWS_PROFILE=YOUR_PROFILE_NAME
-```
-
-To run the tests, make sure to create a conda environment first with environment file:
+## Create a conda environment
+To install the dependencies required for running the notebook examples in this repository you can create a conda environment with below commands. 
 
 ```bash
 conda env create -n <your_env_name> -f environment.yml
@@ -149,11 +138,10 @@ conda deactivate
 
 For more information, please see [conda usage](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
 
-To run the tests for tutorial notebooks:
+To run the notebook examples locally on your IDE, first, configure a profile to use your account to interact with AWS. To learn more, see [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
+
+After you create a profile, use the following command to set the `AWS_PROFILE` so that all future commands can access your AWS account and resources.
 
 ```bash
-pytest test/notebook_tests
+export AWS_PROFILE=YOUR_PROFILE_NAME
 ```
-**Note:** This will test all the notebooks under the examples folder of this repository. 
-
-For more information, please see [pytest usage](https://docs.pytest.org/en/stable/usage.html).
