@@ -118,6 +118,10 @@ This folder contains examples that illustrate the usage of individual features o
 * **Using the tensor network simulator TN1**
 
     This notebook introduces the Amazon Braket managed tensor network simulator, TN1. You will learn about how TN1 works, how to use it, and which problems are best suited to run on TN1. 
+    
+* **Simulating noise on Amazon Braket**
+
+    This notebook provides a detailed overview of noise simulation on Amazon Braket. You will learn how to define noise channels, apply noise to new or existing circuits, and run those circuits on the Amazon Braket noise simulators.
 
 ## Create a conda environment
 To install the dependencies required for running the notebook examples in this repository you can create a conda environment with below commands. 
