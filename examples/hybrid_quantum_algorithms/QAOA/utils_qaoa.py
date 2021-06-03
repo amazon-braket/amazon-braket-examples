@@ -1,6 +1,7 @@
 # IMPORTS
 import numpy as np
 from braket.circuits import Circuit, Observable
+from braket.devices import LocalSimulator
 from scipy.optimize import minimize
 
 
@@ -105,7 +106,7 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
 
     # classically simulate the circuit
     # execute the correct device.run call depending on whether the backend is local or cloud based
-    if device.name == "DefaultSimulator":
+    if isinstance(device, LocalSimulator):
         task = device.run(qaoa_circuit, shots=n_shots)
     else:
         task = device.run(
