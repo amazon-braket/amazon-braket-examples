@@ -90,7 +90,6 @@ def test_ipynb(dir_path, notebook, s3_bucket, region):
             copyfile(notebook, dest_file)
             _rename_bucket(dest_file, s3_bucket)
             errors = _run_notebook(dir_path, dest_file)
-            os.remove(dest_file)
             assert errors == [], "Errors found in {}\n{}".format(
                 notebook, [errors[row]["evalue"] for row in range(len(errors))]
             )
@@ -98,5 +97,6 @@ def test_ipynb(dir_path, notebook, s3_bucket, region):
             pytest.skip()
             logger.info(f"Skipped testing due to {device_arn} unavailable in {region}")
     except TimeoutError:
-        os.remove(dest_file)
         logger.error(traceback.print_exc())
+    finally:
+        os.remove(dest_file)
