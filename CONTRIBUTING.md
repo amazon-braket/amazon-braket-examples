@@ -53,8 +53,8 @@ Before sending us a pull request, please ensure that:
 When you make a contribute please ensure that you
 1. Follow the existing flow of a notebook ([example](https://github.com/aws/amazon-braket-examples/blob/main/examples/getting_started/1_Running_quantum_circuits_on_simulators.ipynb)).
 1. Do not duplicate existing information but refer to other examples as relevant.
-1. Do not rely on dependencies unless they're common Open Source licenses such as Apache 2.0 or BSD.
-1. Ensure that you example runs without issues on both a recent Braket Notebook Instance (create a new Braket Notebook Instance or restart one from Amazon Braket [in the console](https://docs.aws.amazon.com/braket/latest/developerguide/braket-get-started-create-notebook.html)) and on our most [recently released Amazon Braket SDK version](https://github.com/aws/amazon-braket-sdk-python/blob/main/README.md#installing-the-amazon-braket-python-sdk).
+1. If you rely on dependencies please make sure the dependencies are Open Sourced licensed.
+1. Ensure that your example runs without issues on both a recent Braket Notebook Instance (create a new Braket Notebook Instance or restart one from Amazon Braket [in the console](https://docs.aws.amazon.com/braket/latest/developerguide/braket-get-started-create-notebook.html)) and locally, using our most [recently released Amazon Braket SDK version](https://github.com/aws/amazon-braket-sdk-python/blob/main/README.md#installing-the-amazon-braket-python-sdk).
 
 
 ### Send a Pull Request
