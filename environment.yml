@@ -37,7 +37,7 @@ dependencies:
       - jax==0.2.12
       - keras==2.4.0
       - openfermion==1.0.0
-      - pennylane==0.16
+      - pennylane==0.17
       - pennylane-qchem==0.16
       - tensorflow==2.4.1
       - torch==1.8.1
