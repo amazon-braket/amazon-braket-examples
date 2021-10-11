@@ -11,6 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+import datetime
 import fileinput
 import logging
 import os
@@ -31,13 +32,32 @@ _EXCLUSIVE_DEVICE_REGIONS = {
 test_path = "examples/"
 test_notebooks = []
 
+CURRENT_UTC = datetime.datetime.utcnow()
+CURRENT_TIME = CURRENT_UTC.time().strftime("%H:%M:%S")
+
+# Currently adding rigetti notebooks to skip as files, since other notebook files also have rigetti arn.
+RIGETTI_NOTEBOOKS = [
+    "2_Running_quantum_circuits_on_QPU_devices.ipynb",
+    "Allocating_Qubits_on_QPU_Devices.ipynb",
+    "Verbatim_Compilation.ipynb",
+]
+
+
+def _rigetti_availability(file_name):
+    rigetti_start_time = str(datetime.time(15, 0))
+    rigetti_end_time = str(datetime.time(19, 0))
+    is_within_time_window = rigetti_start_time < CURRENT_TIME < rigetti_end_time
+    if file_name in RIGETTI_NOTEBOOKS and not is_within_time_window:
+        return False
+    return True
+
 
 for dir_, _, files in os.walk(test_path):
     for file_name in files:
         rel_file = os.path.join(dir_, file_name)
         if file_name.endswith("copy.ipynb"):
             os.remove(rel_file)
-        if file_name.endswith(".ipynb") and "QPU" not in file_name:
+        if file_name.endswith(".ipynb") and _rigetti_availability(file_name):
             test_notebooks.append((dir_, rel_file))
 
 
