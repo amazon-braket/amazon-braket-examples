@@ -39,6 +39,6 @@ for _ in range(5):
     counts_list.append(counts)
     print(counts)
 
-save_job_result({"counts": counts_list, "angle": angle_list})
+save_job_result({"counts": counts_list, "angles": angle_list})
 
 print("Test job completed!!!!!")
