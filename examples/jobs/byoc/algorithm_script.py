@@ -20,10 +20,10 @@ def main():
     nlp = spacy_sentence_bert.load_model(
                                     'xx_distiluse_base_multilingual_cased_v2')
 
-    banana_string = ["I eat a banana everyday.",
+    banana_string = ["I eat a banana every day.",
                      "Bananas are not for her.",
                      "Banana shakes are delicious.",
-                     "How could you like bananas?"
+                     "How can you like bananas?"
                      ]
     banana_embeding = [nlp(d) for d in banana_string]
     data = [d.vector for d in banana_embeding]
