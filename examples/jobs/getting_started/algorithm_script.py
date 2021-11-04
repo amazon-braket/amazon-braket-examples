@@ -30,9 +30,9 @@ counts_list = []
 angle_list = []
 for _ in range(5):
     angle = np.pi * np.random.randn()
-    random_curcuit = Circuit().rx(0, angle)
+    random_circuit = Circuit().rx(0, angle)
 
-    task = device.run(random_curcuit, shots=100)
+    task = device.run(random_circuit, shots=100)
     counts = task.result().measurement_counts
 
     angle_list.append(angle)
