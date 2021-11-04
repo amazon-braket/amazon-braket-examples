@@ -17,31 +17,61 @@ from abc import ABC, abstractmethod
 class QAOAInterface(ABC):
     @classmethod
     @abstractmethod
-    # Initialize params to the appropriate format for the autodiff library.
     def initialize_params(cls, np_array):
+        """Initialize the parameters to the appropriate format for the autodiff library.
+        Args:
+            np_array (np.ndarray): Input parameters in Numpy array format.
+        Returns:
+            array_like: Parameter format needed for the autodiff library.
+        """
         pass
 
     @classmethod
     @abstractmethod
-    # Returns the gradient descent optimizer to use, based on the ML framework.
     def get_sgd_optimizer(cls, stepsize, params):
+        """Returns the gradient descent optimizer to use, based on the ML framework.
+        Args:
+            stepsize (float): Step size for the gradient descent optimizer.
+            params (array_like): Input parameters, required for the PyTorch optimizer.
+        Returns:
+            callable: Gradient descent optimizer for the ML framework.
+        """
         pass
 
     @classmethod
     @abstractmethod
-    # Convert params to base Numpy arrays.
     def convert_params_to_numpy(cls, params):
+        """Convert params to base Numpy arrays.
+        Args:
+            params (array_like): A set of parameters.
+        Returns:
+            np.ndarray: The parameters converted to a Numpy array.
+        """
         pass
 
     @classmethod
     @abstractmethod
-    # Evaluate the cost function, then take a step.
     def get_cost_and_step(cls, cost_function, params, optimizer):
+        """Evaluate the cost function, then take a step.
+        Args:
+            cost_function (callable): The cost function.
+            params (array_like): The current set of parameters.
+            optimizer (callable): The optimizer.
+        Returns:
+            tuple(array_like, float): The updated set of parameters, and the cost function evaluated
+            before the update.
+        """
         pass
 
     @staticmethod
-    # Get the appropriate interface to use based on the string input.
     def get_interface(interface):
+        """Get the appropriate interface to use based on the string input.
+        Args:
+            interface (string): A string specifying the interface to use.
+            Must be "autograd", "tf", or "torch".
+        Returns:
+            QAOAInterface: An interface matching the specified string.
+        """
         if interface == "autograd":
             return AutogradInterface()
         elif interface == "tf":
@@ -61,7 +91,7 @@ class AutogradInterface(QAOAInterface):
 
     @classmethod
     def initialize_params(cls, np_array):
-        return np_array
+        return qml.numpy.array(np_array, requires_grad=True)
 
     @classmethod
     def get_sgd_optimizer(cls, stepsize, params):
