@@ -59,43 +59,28 @@ def main():
     save_job_result({"weights": weights})
 
 
-    #################### See Performance ####################
-    print("="*25 + "  Training Result  " + "="*25)
-    for i in range(4):
-        print(banana_string[i])
-        score = qml_model.score(*weights, data=data[i])
-        pred = 1 if score>0 else -1
-        print("label: {}  predict:{}".format(label[i], pred))
-        print()
-
-    print("="*25 + "  Testing Result  " + "="*25)
-    test_string = "A banana a day keeps the doctor away."
-    test_data = nlp(test_string).vector
-    test_label = 1
-    print(test_string)
-    score = qml_model.score(*weights, data=test_data)
-    pred = 1 if score>0 else -1
-    print("label: {}  predict:{}".format(test_label, pred))
-    print()
-
-
 class CCQC:
     """ Circuit-Centric Quantum Classifier
     Reference: https://arxiv.org/abs/1804.00633
     """
-    def __init__(self, nwires):
+    def __init__(self, nwires, device_arn==None):
         """
         Args:
             nwires (int): Number of qubits.
+            device_arn (str): arn of a Braket QPU or simulator. 
         """
         self.nwires = nwires
+        if device_arn is None:
+            self.device_arn = os.environ["AMZN_BRAKET_DEVICE_ARN"]
+        else:
+            self.device_arn = device_arn
 
     def q_circuit(self):
         """ Quantum circuit for CCQC.
         See figure 4 of https://arxiv.org/abs/1804.00633
         """
         dev = qml.device('braket.aws.qubit',
-                         device_arn=os.environ["AMZN_BRAKET_DEVICE_ARN"],
+                         device_arn=self.device_arn,
                          wires=self.nwires,
                          # Set s3_destination_folder=None to output task
                          # results to a default folder
@@ -103,7 +88,7 @@ class CCQC:
                          )
         nwires = self.nwires
 
-        @qml.qnode(dev, interface='autograd', diff_method='parameter-shift')
+        @qml.qnode(dev, interface='autograd')
         def circuit(*weights, features=np.zeros(2**nwires)):
             AmplitudeEmbedding(features=features,
                                wires=range(nwires),
