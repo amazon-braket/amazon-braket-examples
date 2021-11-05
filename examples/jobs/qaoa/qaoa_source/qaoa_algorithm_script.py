@@ -40,7 +40,7 @@ def init_pl_device(device_arn, num_nodes, shots, max_parallel):
     )
 
 
-def start_here():
+def main():
     # lets see the env variables
     # print statements can be viewed in cloudwatch
     print(os.environ)
@@ -160,3 +160,7 @@ def start_here():
     # We're done with the job, so save the result.
     # This will be returned in job.result()
     save_job_result({"params": np_params.tolist(), "cost": final_cost})
+    
+    
+if __name__ == "__main__":
+    main()
