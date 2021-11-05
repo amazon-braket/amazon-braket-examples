@@ -136,3 +136,5 @@ dmypy.json
 
 # Data intermediates
 *.pck
+examples/jobs/quantum_machine_learning/qcbm-gaussian-training-5-4-1636123165/log.txt
+examples/jobs/quantum_machine_learning/data.npy
