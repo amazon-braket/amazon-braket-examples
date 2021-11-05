@@ -26,10 +26,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 _EXCLUSIVE_DEVICE_REGIONS = {
-    "arn:aws:braket:::device/quantum-simulator/amazon/tn1": ["us-west-2", "us-east-1",],
+    "arn:aws:braket:::device/quantum-simulator/amazon/tn1": ["us-west-2", "us-east-1"],
 }
 
 test_path = "examples/"
+test_path = "examples/hybrid_quantum_algorithms/QAOA/"
 test_notebooks = []
 
 CURRENT_UTC = datetime.datetime.utcnow()
@@ -110,9 +111,16 @@ def test_ipynb(dir_path, notebook, s3_bucket, region):
             copyfile(notebook, dest_file)
             _rename_bucket(dest_file, s3_bucket)
             errors = _run_notebook(dir_path, dest_file)
-            assert errors == [], "Errors found in {}\n{}".format(
-                notebook, [errors[row]["evalue"] for row in range(len(errors))]
-            )
+            acceptable_error_names = ["DeviceOfflineException"]
+            unacceptable_errors = [
+                error for error in errors if error["ename"] not in acceptable_error_names
+            ]
+            assert unacceptable_errors == [], \
+                f"Errors found in {notebook}\n{[error['evalue'] for error in unacceptable_errors]}"
+            if errors:
+                logger.warning(
+                    f"Errors found in {notebook}\n{[error['evalue'] for error in unacceptable_errors]}"
+                )
         else:
             pytest.skip()
             logger.info(f"Skipped testing due to {device_arn} unavailable in {region}")
