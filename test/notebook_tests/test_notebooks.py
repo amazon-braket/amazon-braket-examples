@@ -16,6 +16,7 @@ import fileinput
 import logging
 import os
 import traceback
+import warnings
 from shutil import copyfile
 
 import nbformat
@@ -30,7 +31,6 @@ _EXCLUSIVE_DEVICE_REGIONS = {
 }
 
 test_path = "examples/"
-test_path = "examples/hybrid_quantum_algorithms/QAOA/"
 test_notebooks = []
 
 CURRENT_UTC = datetime.datetime.utcnow()
@@ -112,15 +112,12 @@ def test_ipynb(dir_path, notebook, s3_bucket, region):
             _rename_bucket(dest_file, s3_bucket)
             errors = _run_notebook(dir_path, dest_file)
             acceptable_error_names = ["DeviceOfflineException"]
-            unacceptable_errors = [
-                error for error in errors if error["ename"] not in acceptable_error_names
-            ]
-            assert unacceptable_errors == [], \
-                f"Errors found in {notebook}\n{[error['evalue'] for error in unacceptable_errors]}"
             if errors:
-                logger.warning(
-                    f"Errors found in {notebook}\n{[error['evalue'] for error in unacceptable_errors]}"
+                error_string = (
+                   f"Errors found in {notebook}\n{[error['evalue'] for error in errors]}"
                 )
+                assert errors[0]["ename"] in acceptable_error_names, error_string
+                warnings.warn(error_string)
         else:
             pytest.skip()
             logger.info(f"Skipped testing due to {device_arn} unavailable in {region}")
