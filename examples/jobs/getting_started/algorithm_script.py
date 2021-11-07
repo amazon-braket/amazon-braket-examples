@@ -22,7 +22,7 @@ from braket.jobs import save_job_result
 
 print("Test job started!!!!!")
 
-# Use the device declared in the Orchestration Script
+# Use the device declared in the creation script
 device = AwsDevice(os.environ["AMZN_BRAKET_DEVICE_ARN"])
 
 counts_list = []
