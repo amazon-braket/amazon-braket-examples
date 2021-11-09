@@ -63,7 +63,7 @@ class CCQC:
     """ Circuit-Centric Quantum Classifier
     Reference: https://arxiv.org/abs/1804.00633
     """
-    def __init__(self, nwires, device_arn==None):
+    def __init__(self, nwires, device_arn=None):
         """
         Args:
             nwires (int): Number of qubits.
