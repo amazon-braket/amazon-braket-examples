@@ -36,7 +36,7 @@ def main():
 
 
 def load_hyperparameters():
-    """Load the Hybird Job hyperparameters"""
+    """Load the Hybrid Job hyperparameters"""
     hp_file = os.environ["AMZN_BRAKET_HP_FILE"]
     with open(hp_file) as f:
         hyperparams = json.load(f)
