@@ -63,30 +63,32 @@ class CCQC:
     """ Circuit-Centric Quantum Classifier
     Reference: https://arxiv.org/abs/1804.00633
     """
-    def __init__(self, nwires, device_arn=None):
+    def __init__(self, nwires, device=None):
         """
         Args:
             nwires (int): Number of qubits.
-            device_arn (str): arn of a Braket QPU or simulator. 
+            device (str): arn of a Braket QPU or simulator.
         """
         self.nwires = nwires
-        if device_arn is None:
+        if device is None:
             self.device_arn = os.environ["AMZN_BRAKET_DEVICE_ARN"]
         else:
-            self.device_arn = device_arn
+            self.device_arn = device
 
     def q_circuit(self):
         """ Quantum circuit for CCQC.
         See figure 4 of https://arxiv.org/abs/1804.00633
         """
+        nwires = self.nwires
         dev = qml.device('braket.aws.qubit',
                          device_arn=self.device_arn,
-                         wires=self.nwires,
+                         wires=nwires,
+                         parallel=True,
+                         max_parallel=35,
                          # Set s3_destination_folder=None to output task
                          # results to a default folder
                          s3_destination_folder=None,
-                         )
-        nwires = self.nwires
+                         )        
 
         @qml.qnode(dev, interface='autograd')
         def circuit(*weights, features=np.zeros(2**nwires)):
