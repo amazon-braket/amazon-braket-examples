@@ -110,7 +110,7 @@ class QCBM:
 
 
     def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
-        """Gaussian radial basis function (RBF) kernel.
+        r"""Gaussian radial basis function (RBF) kernel.
 
         K(x, y) = sum_\sigma exp(-|x-y|^2/(2\sigma^2 ))
 
@@ -130,7 +130,7 @@ class QCBM:
 
 
     def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
-        """Maximum Mean Discrepancy loss (MMD).
+        r"""Maximum Mean Discrepancy loss (MMD).
 
         MMD is determines if two distributions are equal by looking at the difference between their means in feature space.
 
