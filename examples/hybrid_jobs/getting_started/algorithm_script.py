@@ -18,7 +18,6 @@ from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.jobs import save_job_result
 
-# def start_here():
 
 print("Test job started!!!!!")
 
