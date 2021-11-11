@@ -80,7 +80,7 @@ class CCQC:
             device_arn=self.device_arn,
             wires=nwires,
             parallel=True,
-            max_parallel=35,
+            max_parallel=30,
             # Set s3_destination_folder=None to output task
             # results to a default folder
             s3_destination_folder=None,
