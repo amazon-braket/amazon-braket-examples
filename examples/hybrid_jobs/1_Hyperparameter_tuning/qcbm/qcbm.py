@@ -109,51 +109,51 @@ class QCBM:
         return grad
 
 
-    def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
-        r"""Gaussian radial basis function (RBF) kernel.
+def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
+    r"""Gaussian radial basis function (RBF) kernel.
 
-        K(x, y) = sum_\sigma exp(-|x-y|^2/(2\sigma^2 ))
+    K(x, y) = sum_\sigma exp(-|x-y|^2/(2\sigma^2 ))
 
-        Args:
-            px (np.ndarray): Probabilities distribution
-            py (np.ndarray): Target probabilities distribution
-            sigma_list (list, optional): [description]. Defaults to [0.1, 1].
+    Args:
+        px (np.ndarray): Probabilities distribution
+        py (np.ndarray): Target probabilities distribution
+        sigma_list (list, optional): [description]. Defaults to [0.1, 1].
 
-        Returns:
-            kernel (float): Value of the Gaussian RBF function for kernel(px, py).
-        """
-        x = np.arange(len(px))
-        y = np.arange(len(py))
-        K = sum(np.exp(-np.abs(x[:, None] - y[None, :]) ** 2 / (2 * s ** 2)) for s in sigma_list)
-        kernel = px @ K @ py
-        return kernel
+    Returns:
+        kernel (float): Value of the Gaussian RBF function for kernel(px, py).
+    """
+    x = np.arange(len(px))
+    y = np.arange(len(py))
+    K = sum(np.exp(-np.abs(x[:, None] - y[None, :]) ** 2 / (2 * s ** 2)) for s in sigma_list)
+    kernel = px @ K @ py
+    return kernel
 
 
-    def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
-        r"""Maximum Mean Discrepancy loss (MMD).
+def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
+    r"""Maximum Mean Discrepancy loss (MMD).
 
-        MMD is determines if two distributions are equal by looking at the difference between their means in feature space.
+    MMD is determines if two distributions are equal by looking at the difference between their means in feature space.
 
-        MMD(x, y ) = | \sum_{j=1}^N \phi(y_j) - \sum_{i=1}^N \phi(x_i) |_2^2
+    MMD(x, y ) = | \sum_{j=1}^N \phi(y_j) - \sum_{i=1}^N \phi(x_i) |_2^2
 
-        With a RBF kernel, we apply the kenerl trick to expand MMD to
+    With a RBF kernel, we apply the kernel trick to expand MMD to
 
-        MMD(x, y) = \sum_{j=1}^N \sum_{j'=1}^N k(y_j, y_{j'})
-                    + \sum_{i=1}^N \sum_{i'=1}^N k(x_i, x_{i'})
-                    - 2 \sum_{j=1}^N \sum_{i=1}^N k(y_j, x_i)
+    MMD(x, y) = \sum_{j=1}^N \sum_{j'=1}^N k(y_j, y_{j'})
+                + \sum_{i=1}^N \sum_{i'=1}^N k(x_i, x_{i'})
+                - 2 \sum_{j=1}^N \sum_{i=1}^N k(y_j, x_i)
 
-        For the RBF kernel, MMD is zero if and only if the distributiosn are identical.
+    For the RBF kernel, MMD is zero if and only if the distributiosn are identical.
 
-        Args:
-            px (np.ndarray): Probabilities distribution
-            py (np.ndarray): Target probabilities distribution
-            sigma_list (list, optional): [description]. Defaults to [0.1, 1].
+    Args:
+        px (np.ndarray): Probabilities distribution
+        py (np.ndarray): Target probabilities distribution
+        sigma_list (list, optional): [description]. Defaults to [0.1, 1].
 
-        Returns:
-            mmd (float): Value of the MMD loss
-        """
+    Returns:
+        mmd (float): Value of the MMD loss
+    """
 
-        mmd_xx = compute_kernel(px, px, sigma_list)
-        mmd_yy = compute_kernel(py, py, sigma_list)
-        mmd_xy = compute_kernel(px, py, sigma_list)
-        return mmd_xx + mmd_yy - 2 * mmd_xy
+    mmd_xx = compute_kernel(px, px, sigma_list)
+    mmd_yy = compute_kernel(py, py, sigma_list)
+    mmd_xy = compute_kernel(px, py, sigma_list)
+    return mmd_xx + mmd_yy - 2 * mmd_xy
