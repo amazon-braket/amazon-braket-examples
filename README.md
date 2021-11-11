@@ -144,7 +144,7 @@ This folder contains examples that illustrate the usage of individual features o
 
 ---
 ## <a name="jobs">Amazon Braket Hybrid Jobs</a>
-This folder contains examples that illustrate the use of Amazon Braket Hybrid Jobs.
+This folder contains examples that illustrate the use of Amazon Braket Hybrid Jobs (Braket Jobs for short).
 
 * [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Getting_started/Getting_started.ipynb)
 
