@@ -115,8 +115,8 @@ def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
     K(x, y) = sum_\sigma exp(-|x-y|^2/(2\sigma^2 ))
 
     Args:
-        px (np.ndarray): Probabilities distribution
-        py (np.ndarray): Target probabilities distribution
+        px (np.ndarray): Probability distribution
+        py (np.ndarray): Target probability distribution
         sigma_list (list, optional): [description]. Defaults to [0.1, 1].
 
     Returns:
@@ -132,9 +132,9 @@ def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
 def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
     r"""Maximum Mean Discrepancy loss (MMD).
 
-    MMD is determines if two distributions are equal by looking at the difference between their means in feature space.
+    MMD determines if two distributions are equal by looking at the difference between their means in feature space.
 
-    MMD(x, y ) = | \sum_{j=1}^N \phi(y_j) - \sum_{i=1}^N \phi(x_i) |_2^2
+    MMD(x, y) = | \sum_{j=1}^N \phi(y_j) - \sum_{i=1}^N \phi(x_i) |_2^2
 
     With a RBF kernel, we apply the kernel trick to expand MMD to
 
@@ -142,11 +142,11 @@ def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
                 + \sum_{i=1}^N \sum_{i'=1}^N k(x_i, x_{i'})
                 - 2 \sum_{j=1}^N \sum_{i=1}^N k(y_j, x_i)
 
-    For the RBF kernel, MMD is zero if and only if the distributiosn are identical.
+    For the RBF kernel, MMD is zero if and only if the distributions are identical.
 
     Args:
-        px (np.ndarray): Probabilities distribution
-        py (np.ndarray): Target probabilities distribution
+        px (np.ndarray): Probability distribution
+        py (np.ndarray): Target probability distribution
         sigma_list (list, optional): [description]. Defaults to [0.1, 1].
 
     Returns:
