@@ -136,4 +136,3 @@ dmypy.json
 
 # Data intermediates
 *.pck
-examples/hybrid_jobs/qaoa/input-data.adjlist
