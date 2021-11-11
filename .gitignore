@@ -136,4 +136,4 @@ dmypy.json
 
 # Data intermediates
 *.pck
-examples/jobs/2_Using_PennyLane_with_Braket_Jobs/input-data.adjlist
+examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Jobs/input-data.adjlist
