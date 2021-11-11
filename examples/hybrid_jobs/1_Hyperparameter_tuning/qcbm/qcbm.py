@@ -1,4 +1,5 @@
 import numpy as np
+
 from braket.circuits import Circuit
 
 
@@ -18,10 +19,12 @@ class QCBM:
 
     def __init__(self, device, n_qubits, n_layers, data):
         """Quantum circuit Born machine.
-        Consists of `n_layers`, where each layer is a rotation layer (rx, rz, rx) followed by an entangling layer of cnot gates.
+        Consists of `n_layers`, where each layer is a rotation layer (rx, rz, rx)
+        followed by an entangling layer of cnot gates.
 
         Args:
-            device (braket.devices): Amazon Braket device to use (could be AwsDevice() or LocalSimulator())
+            device (braket.devices): Amazon Braket device to use (could be AwsDevice()
+                or LocalSimulator())
             n_qubits (int): Number of qubits
             n_layers (int): Number of layers
             data (np.ndarray): Target probabilities
@@ -47,7 +50,8 @@ class QCBM:
         """Creates a QCBM circuit, and returns the probabilities
 
         Args:
-            params (np.ndarray): Parameters for the rotation gates in the circuit, length = 3 * n_qubits * n_layers
+            params (np.ndarray): Parameters for the rotation gates in the circuit,
+                length = 3 * n_qubits * n_layers
 
         Returns:
             circ (braket.circuit): Circuit with parameters fixed to `params`.
@@ -56,7 +60,8 @@ class QCBM:
             params = params.reshape(self.n_layers, self.n_qubits, 3)
         except:
             print(
-                f"Length of initial parameters was not correct. Expected: {self.n_layers*self.n_qubits*3} but got {len(params)}."
+                "Length of initial parameters was not correct. Expected: "
+                + f"{self.n_layers*self.n_qubits*3} but got {len(params)}."
             )
         circ = Circuit()
         self.rotation_layer(circ, params[0])
@@ -89,7 +94,9 @@ class QCBM:
         """
         qcbm_probs = self.probabilities(params)
         shift = np.ones_like(params) * np.pi / 2
-        shifted_params = np.stack([params + np.diag(shift), params - np.diag(shift)]).reshape(2 * len(params), len(params))
+        shifted_params = np.stack([params + np.diag(shift), params - np.diag(shift)]).reshape(
+            2 * len(params), len(params)
+        )
         circuits = [self.create_circuit(p) for p in shifted_params]
 
         try:  # try parallel simulations
@@ -132,7 +139,8 @@ def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
 def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
     r"""Maximum Mean Discrepancy loss (MMD).
 
-    MMD determines if two distributions are equal by looking at the difference between their means in feature space.
+    MMD determines if two distributions are equal by looking at the difference between
+    their means in feature space.
 
     MMD(x, y) = | \sum_{j=1}^N \phi(y_j) - \sum_{i=1}^N \phi(x_i) |_2^2
 

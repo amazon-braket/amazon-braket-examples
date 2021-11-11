@@ -2,11 +2,12 @@ import json
 import os
 
 import numpy as np
+from scipy.optimize import minimize
+
 from braket.aws import AwsDevice
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 from qcbm.qcbm import QCBM, mmd_loss
-from scipy.optimize import minimize
 
 np.random.seed(42)
 
