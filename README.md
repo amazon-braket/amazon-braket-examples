@@ -156,7 +156,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
     
 * [**QAOA with Amazon Braket Hybrid Jobs and PennyLane**](examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Jobs/Using_PennyLane_with_Braket_Jobs.ipynb)
 
-    This notebook shows how to run the QAOA algorithm with PennyLane (similar to a pprevious notebook](examples/pennylane/2_Graph_optimization_with_QAOA.ipynb)), but this time using Braket Jobs. In the process, you will learn how to select a container image that supports PennyLane, and how to use checkpoints to save and load training progress of a job.
+    This notebook shows how to run the QAOA algorithm with PennyLane (similar to a [previous notebook](examples/pennylane/2_Graph_optimization_with_QAOA.ipynb)), but this time using Braket Jobs. In the process, you will learn how to select a container image that supports PennyLane, and how to use checkpoints to save and load training progress of a job.
     
 * [**Bring your own containers to Braket Job**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
 
