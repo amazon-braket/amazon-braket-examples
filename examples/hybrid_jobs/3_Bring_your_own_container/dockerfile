@@ -6,9 +6,3 @@ RUN python3 -m pip install amazon-braket-pennylane-plugin \
                            pennylane \
                            spacy \
                            spacy_sentence_bert
-
-RUN python3 -m pip install --no-cache --upgrade sagemaker-training
-
-COPY braket_container.py /opt/ml/code/braket_container.py
-
-ENV SAGEMAKER_PROGRAM braket_container.py
