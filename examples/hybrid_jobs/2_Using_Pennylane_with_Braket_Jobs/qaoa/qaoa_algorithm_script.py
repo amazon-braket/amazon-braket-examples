@@ -160,7 +160,7 @@ def main():
     # We're done with the job, so save the result.
     # This will be returned in job.result()
     save_job_result({"params": np_params.tolist(), "cost": final_cost})
-    
-    
+
+
 if __name__ == "__main__":
     main()
