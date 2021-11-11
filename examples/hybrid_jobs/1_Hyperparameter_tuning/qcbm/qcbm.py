@@ -74,39 +74,39 @@ class QCBM:
 
     def gradient(self, params: np.ndarray):
         """Gradient for QCBM via:
-            Liu, Jin-Guo, and Lei Wang.
-            “Differentiable Learning of Quantum Circuit Born Machine.”
-            Physical Review A 98, no. 6 (December 19, 2018): 062324.
-            https://doi.org/10.1103/PhysRevA.98.062324.
+        Liu, Jin-Guo, and Lei Wang.
+        “Differentiable Learning of Quantum Circuit Born Machine.”
+        Physical Review A 98, no. 6 (December 19, 2018): 062324.
+        https://doi.org/10.1103/PhysRevA.98.062324.
 
-            Args:
-                qcbm (QCBM): QCBM class
-                data (np.ndarray): Probability vector for the data
-                params (np.ndarray): Parameters for the rotation gates in the QCBM
+        Args:
+            qcbm (QCBM): QCBM class
+            data (np.ndarray): Probability vector for the data
+            params (np.ndarray): Parameters for the rotation gates in the QCBM
 
-            Returns:
-                grad (np.ndarray): Gradient vector
-            """
-            qcbm_probs = self.probabilities(params)
-            shift = np.ones_like(params) * np.pi / 2
-            shifted_params = np.stack([params + np.diag(shift), params - np.diag(shift)]).reshape(2 * len(params), len(params))
-            circuits = [self.create_circuit(p) for p in shifted_params]
+        Returns:
+            grad (np.ndarray): Gradient vector
+        """
+        qcbm_probs = self.probabilities(params)
+        shift = np.ones_like(params) * np.pi / 2
+        shifted_params = np.stack([params + np.diag(shift), params - np.diag(shift)]).reshape(2 * len(params), len(params))
+        circuits = [self.create_circuit(p) for p in shifted_params]
 
-            try:  # try parallel simulations
-                result = self.device.run_batch(circuits, shots=self.shots, max_parallel=10).results()
-            except:  # fallback to sequential simulator
-                result = [self.device.run(c, shots=self.shots).result() for c in circuits]
+        try:  # try parallel simulations
+            result = self.device.run_batch(circuits, shots=self.shots, max_parallel=10).results()
+        except:  # fallback to sequential simulator
+            result = [self.device.run(c, shots=self.shots).result() for c in circuits]
 
-            res = [result[i].values[0] for i in range(len(circuits))]
-            res = np.array(res).reshape(2, len(params), 2 ** self.n_qubits)
+        res = [result[i].values[0] for i in range(len(circuits))]
+        res = np.array(res).reshape(2, len(params), 2 ** self.n_qubits)
 
-            grad = np.zeros(len(params))
-            for i in range(len(params)):
-                print(f"updating parameter: {i}")
-                grad_pos = compute_kernel(qcbm_probs, res[0][i]) - compute_kernel(qcbm_probs, res[1][i])
-                grad_neg = compute_kernel(self.data, res[0][i]) - compute_kernel(self.data, res[1][i])
-                grad[i] = grad_pos - grad_neg
-            return grad
+        grad = np.zeros(len(params))
+        for i in range(len(params)):
+            print(f"updating parameter: {i}")
+            grad_pos = compute_kernel(qcbm_probs, res[0][i]) - compute_kernel(qcbm_probs, res[1][i])
+            grad_neg = compute_kernel(self.data, res[0][i]) - compute_kernel(self.data, res[1][i])
+            grad[i] = grad_pos - grad_neg
+        return grad
 
 
     def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
