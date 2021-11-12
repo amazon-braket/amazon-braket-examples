@@ -148,7 +148,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Getting_started/Getting_started.ipynb)
 
-    This notebook provides a demonstration of running a simple Braket Job. You will learn how to create a Braket Job using the Braket SDK or the Braket console, how to set the AWS region and output S3 folder for a job, and how to retrieve results. You will also learn how to specify the Braket device to run your job on simulators or QPUs. Finally, you will learn how to use local mode to quickly debug your code.
+    This notebook provides a demonstration of running a simple Braket Job. You will learn how to create a Braket Job using the Braket SDK or the Braket console, how to set the output S3 folder for a job, and how to retrieve results. You will also learn how to specify the Braket device to run your job on simulators or QPUs. Finally, you will learn how to use local mode to quickly debug your code.
     
 * [**Quantum machine learning in Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/1_Hyperparameter_tuning/Hyperparameter_tuning.ipynb)
     
@@ -160,7 +160,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
     
 * [**Bring your own containers to Braket Job**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
 
-    This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Jobs. While Amazon Braket has pre-configured containers supporting many use cases of Braket Jobs, for more involved cases that require packages not supported by these containers, bringing a custom container may be the best solution. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Job using the custom container.
+    This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Job using the custom container.
 
 ---
 ## <a name="conda">Creating a conda environment</a>
