@@ -38,10 +38,8 @@ then
     aws ecr create-repository --repository-name "${image}" > /dev/null
 fi
 
-# Get the login command from ECR and execute it directly
-$(aws ecr get-login --region ${region} --no-include-email)
-
-docker login -u AWS -p $(aws ecr get-login-password --region us-west-2) 292282985366.dkr.ecr.us-west-2.amazonaws.com
+aws ecr get-login-password --region us-west-2 | docker login -u AWS --password-stdin 292282985366.dkr.ecr.us-west-2.amazonaws.com
+aws ecr get-login-password --region ${region} | docker login -u AWS --password-stdin ${account}.dkr.ecr.${region}.amazonaws.com
 
 
 
