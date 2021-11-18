@@ -31,11 +31,16 @@ fullname="${account}.dkr.ecr.${region}.amazonaws.com/${image}:latest"
 
 # If the repository doesn't exist in ECR, create it.
 
-aws ecr describe-repositories --repository-names "${image}" > /dev/null 2>&1
+desc_output=$(aws ecr describe-repositories --repository-names ${image} 2>&1)
 
 if [ $? -ne 0 ]
 then
-    aws ecr create-repository --repository-name "${image}" > /dev/null
+    if echo ${desc_output} | grep -q RepositoryNotFoundException
+    then
+        aws ecr create-repository --repository-name "${image}" > /dev/null
+    else
+        >&2 echo ${desc_output}
+    fi
 fi
 
 aws ecr get-login-password --region us-west-2 | docker login -u AWS --password-stdin 292282985366.dkr.ecr.us-west-2.amazonaws.com
