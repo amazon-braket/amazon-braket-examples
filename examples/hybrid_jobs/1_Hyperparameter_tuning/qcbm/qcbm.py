@@ -99,8 +99,8 @@ class QCBM:
         )
         circuits = [self.create_circuit(p) for p in shifted_params]
 
-        try:  # try parallel simulations
-            result = self.device.run_batch(circuits, shots=self.shots, max_parallel=8).results()
+        try:  # try parallel simulations, max_parallel=10 by default
+            result = self.device.run_batch(circuits, shots=self.shots).results()
         except:  # fallback to sequential simulator
             result = [self.device.run(c, shots=self.shots).result() for c in circuits]
 
