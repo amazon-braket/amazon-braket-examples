@@ -65,10 +65,10 @@ class QCBM:
             )
         circ = Circuit()
         self.rotation_layer(circ, params[0])
-        self.entangler(circ)
         for L in range(1, self.n_layers):
             self.entangler(circ)
             self.rotation_layer(circ, params[L])
+        self.entangler(circ)
         circ.probability()
         return circ
 
