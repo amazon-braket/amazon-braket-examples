@@ -9,6 +9,7 @@ The repository is structured as follows:
 - [Quantum machine learning and optimization with PennyLane](#pennylane)
 - [Quantum annealing with D-Wave](#annealing)
 - [Amazon Braket features](#braket)
+- [Amazon Braket Hybrid Jobs](#jobs)
 - [Creating a Conda environment](#conda)
 
 ---
@@ -140,6 +141,26 @@ This folder contains examples that illustrate the usage of individual features o
 * [**Simulating noise on Amazon Braket**](examples/braket_features/Simulating_Noise_On_Amazon_Braket.ipynb)
 
     This notebook provides a detailed overview of noise simulation on Amazon Braket. You will learn how to define noise channels, apply noise to new or existing circuits, and run those circuits on the Amazon Braket noise simulators.
+
+---
+## <a name="jobs">Amazon Braket Hybrid Jobs</a>
+This folder contains examples that illustrate the use of Amazon Braket Hybrid Jobs (Braket Jobs for short).
+
+* [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Getting_started/Getting_started.ipynb)
+
+    This notebook provides a demonstration of running a simple Braket Job. You will learn how to create a Braket Job using the Braket SDK or the Braket console, how to set the output S3 folder for a job, and how to retrieve results. You will also learn how to specify the Braket device to run your job on simulators or QPUs. Finally, you will learn how to use local mode to quickly debug your code.
+    
+* [**Quantum machine learning in Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/1_Hyperparameter_tuning/Hyperparameter_tuning.ipynb)
+    
+    This notebook shows a typical quantum machine learning workflow using Braket Jobs. In the process, you will learn how to upload input data, how to set up hyperparameters for your job, and how to retrieve and plot metrics. Finally, you will see how to run multiple Braket Jobs in parallel with different sets of hyperparameters.
+    
+* [**QAOA with Amazon Braket Hybrid Jobs and PennyLane**](examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Jobs/Using_PennyLane_with_Braket_Jobs.ipynb)
+
+    This notebook shows how to run the QAOA algorithm with PennyLane (similar to a [previous notebook](examples/pennylane/2_Graph_optimization_with_QAOA.ipynb)), but this time using Braket Jobs. In the process, you will learn how to select a container image that supports PennyLane, and how to use checkpoints to save and load training progress of a job.
+    
+* [**Bring your own containers to Braket Jobs**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
+
+    This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Job using the custom container.
 
 ---
 ## <a name="conda">Creating a conda environment</a>
