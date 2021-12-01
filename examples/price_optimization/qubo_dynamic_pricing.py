@@ -203,7 +203,7 @@ def dwave_solver(obj):
     num_shots = 10000
 
     sampler = BraketDWaveSampler(('amazon-braket-481358cc730d', 'qubo'),
-                                 'arn:aws:braket:::device/qpu/d-wave/Advantage_system1')
+                                 'arn:aws:braket:::device/qpu/d-wave/Advantage_system4')
     sampler = EmbeddingComposite(sampler)
     response = sampler.sample(model, num_reads=num_shots)
     return response
