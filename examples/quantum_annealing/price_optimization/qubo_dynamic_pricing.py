@@ -149,6 +149,7 @@ def main(
         sigma,
         beta,
         vol_bound,
+        s3_folder,
         dwave=True
 ):
     """
@@ -179,7 +180,7 @@ def main(
     )
 
     # qubo solver
-    response = dwave_solver(obj) if dwave else qubo_solver(obj)
+    response = dwave_solver(obj,s3_folder) if dwave else qubo_solver(obj)
     # get optimal prices
     opt_prices, _, energy = decoder_price_response(response, len(a), price_levels)
     opt_demand, max_revenue = get_demands_rev(a, b, selected_hist_prices, opt_prices)
@@ -198,11 +199,11 @@ def qubo_solver(obj):
     return response
 
 
-def dwave_solver(obj):
+def dwave_solver(obj,s3_folder):
     model = (-obj).compile().to_bqm()
     num_shots = 10000
 
-    sampler = BraketDWaveSampler(('amazon-braket-481358cc730d', 'qubo'),
+    sampler = BraketDWaveSampler(s3_folder,
                                  'arn:aws:braket:::device/qpu/d-wave/Advantage_system4')
     sampler = EmbeddingComposite(sampler)
     response = sampler.sample(model, num_reads=num_shots)
