@@ -30,7 +30,7 @@ def main():
     print("Done.")
 
     ###################### QML ######################
-    # Initialze and train the quantum model
+    # Initialize and train the quantum model
     print("=" * 25 + "  Training  " + "=" * 25)
     qml_model = CCQC(nwires=9)
     opt = qml.AdamOptimizer(stepsize=0.1)
