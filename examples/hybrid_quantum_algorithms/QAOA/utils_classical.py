@@ -37,7 +37,7 @@ def build_classical_ising(J, N):
 def get_classical_energy_min(J, solution):
     """
     function to return min energy for given classical solution of
-    Ising Hamiltonian with two-body terms for weigthed graph
+    Ising Hamiltonian with two-body terms for weighted graph
     NO SINGLE BIT TERMS, NO CONSTANT OFFSET
     """
 

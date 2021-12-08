@@ -78,8 +78,8 @@ def _rename_bucket(notebook_path, s3_bucket):
 
 
 def _check_exclusive_device_availability(notebook_path, region):
-    for device, availabilty in _EXCLUSIVE_DEVICE_REGIONS.items():
-        if region not in availabilty:
+    for device, availability in _EXCLUSIVE_DEVICE_REGIONS.items():
+        if region not in availability:
             with open(notebook_path) as file:
                 for line in file:
                     if device in line:

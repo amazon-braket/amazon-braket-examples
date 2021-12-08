@@ -22,7 +22,7 @@ def get_distance(route, data):
     return_distance = data[route[0]][route[-1]]
     # print('Distance between start and end:', return_distance)
 
-    # get distance for full cyle
+    # get distance for full cycle
     distance_with_return = total_dist + return_distance
     print("Total distance (including return):", distance_with_return)
 
@@ -30,7 +30,7 @@ def get_distance(route, data):
 
 
 # helper function for solving TSP with D-Wave adapted from Ocean
-# including some heuristical filling if not all contraints have been met
+# including some heuristical filling if not all constraints have been met
 def traveling_salesperson(
     G, sampler=None, lagrange=None, weight="weight", start=None, **sampler_args
 ):
