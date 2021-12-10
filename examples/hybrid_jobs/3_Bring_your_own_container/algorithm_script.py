@@ -1,8 +1,8 @@
 import os
 from datetime import datetime
 
-import numpy as np
 import pennylane as qml
+from pennylane import numpy as np
 import spacy_sentence_bert
 from pennylane.templates import AmplitudeEmbedding
 
