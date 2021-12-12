@@ -100,7 +100,7 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
 def substring(key, precision_qubits):
     """
     Helper function to get substring from keys for dedicated string positions as given by precision_qubits.
-    This function is necessary to allow for arbitary qubit mappings in the precision and query registers
+    This function is necessary to allow for arbitrary qubit mappings in the precision and query registers
     (i.e., so that the register qubits need not be contiguous.)
 
     Args:
@@ -229,7 +229,7 @@ def run_qpe(
     number_precision_qubits = len(precision_qubits)
     num_qubits = len(precision_qubits) + len(query_qubits)
 
-    # Define the circuit. Start by copying the query_circuit, then add ther QPE:
+    # Define the circuit. Start by copying the query_circuit, then add the QPE:
     circ = query_circuit
     circ.qpe(precision_qubits, query_qubits, unitary)
 

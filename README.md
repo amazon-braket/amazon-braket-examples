@@ -132,7 +132,7 @@ This folder contains examples that illustrate the usage of individual features o
 
 * [**Getting Devices and Checking Device Properties**](examples/braket_features/Getting_Devices_and_Checking_Device_Properties.ipynb)
 
-    This example shows how to interact with the Amazon Braket GetDevice API to retrieve Amazon Braket devices (such as simulators and QPUs) programatically, and how to gain access to their properties.
+    This example shows how to interact with the Amazon Braket GetDevice API to retrieve Amazon Braket devices (such as simulators and QPUs) programmatically, and how to gain access to their properties.
 
 * [**Using the tensor network simulator TN1**](examples/braket_features/Using_the_tensor_network_simulator_TN1.ipynb)
 
@@ -170,7 +170,7 @@ To install the dependencies required for running the notebook examples in this r
 conda env create -n <your_env_name> -f environment.yml
 ```
 
-Activate the conda enviroment using: 
+Activate the conda environment using: 
 ```bash
 conda activate <your_env_name>
 ```

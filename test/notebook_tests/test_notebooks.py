@@ -26,7 +26,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 _EXCLUSIVE_DEVICE_REGIONS = {
-    "arn:aws:braket:::device/quantum-simulator/amazon/tn1": ["us-west-2", "us-east-1",],
+    "arn:aws:braket:::device/quantum-simulator/amazon/tn1": [
+        "us-west-2",
+        "us-east-1",
+    ],
 }
 
 test_path = "examples/"
@@ -36,10 +39,12 @@ CURRENT_UTC = datetime.datetime.utcnow()
 CURRENT_TIME = CURRENT_UTC.time().strftime("%H:%M:%S")
 
 # Currently adding rigetti notebooks to skip as files, since other notebook files also have rigetti arn.
-RIGETTI_NOTEBOOKS = [
+EXCLUDED_NOTEBOOKS = [
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
     "Allocating_Qubits_on_QPU_Devices.ipynb",
     "Verbatim_Compilation.ipynb",
+    "Hyperparameter_tuning.ipynb",
+    "bring_your_own_container.ipynb",
 ]
 
 
@@ -47,7 +52,7 @@ def _rigetti_availability(file_name):
     rigetti_start_time = str(datetime.time(15, 0))
     rigetti_end_time = str(datetime.time(19, 0))
     is_within_time_window = rigetti_start_time < CURRENT_TIME < rigetti_end_time
-    if file_name in RIGETTI_NOTEBOOKS and not is_within_time_window:
+    if file_name in EXCLUDED_NOTEBOOKS and not is_within_time_window:
         return False
     return True
 
@@ -73,8 +78,8 @@ def _rename_bucket(notebook_path, s3_bucket):
 
 
 def _check_exclusive_device_availability(notebook_path, region):
-    for device, availabilty in _EXCLUSIVE_DEVICE_REGIONS.items():
-        if region not in availabilty:
+    for device, availability in _EXCLUSIVE_DEVICE_REGIONS.items():
+        if region not in availability:
             with open(notebook_path) as file:
                 for line in file:
                     if device in line:
