@@ -1,8 +1,8 @@
 import os
 from datetime import datetime
 
-import numpy as np
 import pennylane as qml
+from pennylane import numpy as np
 import spacy_sentence_bert
 from pennylane.templates import AmplitudeEmbedding
 
@@ -30,7 +30,7 @@ def main():
     print("Done.")
 
     ###################### QML ######################
-    # Initialze and train the quantum model
+    # Initialize and train the quantum model
     print("=" * 25 + "  Training  " + "=" * 25)
     qml_model = CCQC(nwires=9)
     opt = qml.AdamOptimizer(stepsize=0.1)

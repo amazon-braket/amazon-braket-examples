@@ -4,7 +4,7 @@ from braket.circuits import Circuit, circuit
 
 def get_unitary(self):
     """
-    Funtion to get the unitary matrix corresponding to an entire circuit.
+    Function to get the unitary matrix corresponding to an entire circuit.
     Acts on self and returns the corresponding unitary
     """
     num_qubits = int(
