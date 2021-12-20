@@ -3,6 +3,7 @@ import numpy as np
 import dimod
 from braket.ocean_plugin import BraketSampler, BraketDWaveSampler
 from dwave.system.composites import EmbeddingComposite
+from itertools import combinations
 
 np.random.seed(0)
 
@@ -156,7 +157,7 @@ def inequality_penalty(demand, demand_name, vol_bounday, d_const, Ld):
     return ((demand-vol_bounday-slack)**2)*Ld
 
 
-def main(
+def optimize(
         a,
         b,
         data_x,
@@ -270,5 +271,13 @@ def get_overall_revenue_variance(data_x, hist_p, p, sigma):
     var = 0
     for i in range(t):
         var += get_variance(data_x, all_p[i+1:i+1+t], sigma) * (p[i]**2)
+
+    for i, j in combinations(list(range(t)), 2):
+        var += get_covariance(
+            data_x,
+            all_p[i + 1:i + 1 + t],
+            all_p[j + 1:j + 1 + t],
+            sigma
+        ) * 2 * p[i] * p[j]
 
     return var
