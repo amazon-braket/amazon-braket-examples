@@ -136,3 +136,9 @@ dmypy.json
 
 # Data intermediates
 *.pck
+.idea/amazon-braket-examples.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml

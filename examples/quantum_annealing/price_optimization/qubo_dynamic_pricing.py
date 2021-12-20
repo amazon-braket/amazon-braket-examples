@@ -47,6 +47,24 @@ def get_variance(data_x, p, sigma):
     return variance
 
 
+def get_covariance(data_x, p1, p2, sigma):
+    """
+    :param data_x (np.array): [n_samples, n_days]
+    :param p1, p2 (list): [n_days]
+    :return: variance
+    """
+    n_samples, t = data_x.shape
+    ones = np.ones((n_samples, 1), dtype=np.float)
+    x_mat = np.concatenate([ones, data_x], axis=1)  # [n_samples, n_days+1]
+    x_mat = np.linalg.inv(
+        np.dot(x_mat.T, x_mat)
+    )
+    p1 = np.array([1.] + p1)
+    p2 = np.array([1.] + p2)
+    variance = (sigma**2) * (1. + p1.dot(x_mat).dot(p2))
+    return variance
+
+
 def create_program(a,b, p_data, price_levels, data_x, Lp, Ld, sigma, beta, vol_bound):
     """
 
