@@ -34,8 +34,10 @@ dependencies:
       - amazon-braket-pennylane-plugin
       - amazon-braket-schemas
       - amazon-braket-sdk
+      - cvxpy==1.1.17
       - dask==2.30.0
       - dwave-ocean-sdk==3.3.0
+      - ecos==2.0.7.post1
       - jax==0.2.21
       - keras==2.6.0
       - openfermion==1.0.0
