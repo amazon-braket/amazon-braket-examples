@@ -45,6 +45,8 @@ EXCLUDED_NOTEBOOKS = [
     "Verbatim_Compilation.ipynb",
     "Hyperparameter_tuning.ipynb",
     "bring_your_own_container.ipynb",
+    "Getting_started.ipynb",
+    "Using_PennyLane_with_Braket_Jobs.ipynb"
 ]
 
 
