@@ -199,7 +199,6 @@ def run_qpe(
     query_qubits,
     query_circuit,
     device,
-    s3_folder,
     items_to_keep=1,
     shots=1000,
     save_to_pck=False,
@@ -242,7 +241,7 @@ def run_qpe(
     if device.name == "DefaultSimulator":
         task = device.run(circ, shots=shots)
     else:
-        task = device.run(circ, s3_folder, shots=shots)
+        task = device.run(circ, shots=shots)
 
     # get result for this task
     result = task.result()
