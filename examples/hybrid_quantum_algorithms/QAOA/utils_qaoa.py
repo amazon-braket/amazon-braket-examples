@@ -1,5 +1,6 @@
 # IMPORTS
 import numpy as np
+from braket.aws import AwsDevice
 from braket.circuits import Circuit, Observable
 from braket.devices import LocalSimulator
 from scipy.optimize import minimize
@@ -53,7 +54,7 @@ def cost_circuit(gamma, n_qubits, ising, device):
         # get interaction strength from Ising matrix
         int_strength = ising[qubit_pair[0], qubit_pair[1]]
         # for Rigetti we decompose ZZ using CNOT gates
-        if device.provider_name == "Rigetti":
+        if isinstance(device, AwsDevice) and device.provider_name == "Rigetti":
             gate = ZZgate(qubit_pair[0], qubit_pair[1], gamma * int_strength)
             circ.add(gate)
         # classical simulators and IonQ support ZZ gate
