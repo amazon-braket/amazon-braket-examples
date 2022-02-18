@@ -238,7 +238,7 @@ def run_qpe(
     # Run the circuit with all zeros input.
     # The query_circuit subcircuit generates the desired input from all zeros.
     # The code below executes the correct device.run call depending on whether the backend is local or cloud based
-    if device.name == "DefaultSimulator":
+    if device.name in ("StateVectorSimulator", "DensityMatrixSimulator"):
         task = device.run(circ, shots=shots)
     else:
         task = device.run(circ, shots=shots)
