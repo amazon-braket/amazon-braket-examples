@@ -53,7 +53,7 @@ def cost_circuit(gamma, n_qubits, ising, device):
         # get interaction strength from Ising matrix
         int_strength = ising[qubit_pair[0], qubit_pair[1]]
         # for Rigetti we decompose ZZ using CNOT gates
-        if device.name == "Rigetti":
+        if device.provider_name == "Rigetti":
             gate = ZZgate(qubit_pair[0], qubit_pair[1], gamma * int_strength)
             circ.add(gate)
         # classical simulators and IonQ support ZZ gate
