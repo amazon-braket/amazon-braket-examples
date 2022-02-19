@@ -12,6 +12,14 @@
 # language governing permissions and limitations under the License.
 
 import os
+import subprocess
+
+os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-schemas-python-staging")
+subprocess.run(["pip", "install", "."])
+os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging")
+subprocess.run(["pip", "install", "."])
+os.chdir("/")
+
 
 import numpy as np
 from braket.aws import AwsDevice, AwsQuantumTask

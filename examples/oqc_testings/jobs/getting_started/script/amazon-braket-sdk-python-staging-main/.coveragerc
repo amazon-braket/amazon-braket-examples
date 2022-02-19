@@ -1,0 +1,26 @@
+[run]
+parallel = True
+branch = True
+source =
+    braket
+omit = 
+    **/braket/ir/*
+    **/braket/device_schema/*
+    **/braket/schema_common/*
+    **/braket/task_result/*
+    **/braket/simulator/*
+
+[paths]
+source =
+    src/braket
+    .tox/*/lib/python*/site-packages/braket
+
+[report]
+show_missing = True
+ignore_errors = True
+
+[html]
+directory = build/coverage
+
+[xml]
+output = build/coverage/coverage.xml
