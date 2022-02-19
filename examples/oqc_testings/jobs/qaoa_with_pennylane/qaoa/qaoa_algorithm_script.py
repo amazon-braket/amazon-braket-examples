@@ -14,6 +14,14 @@
 import json
 import os
 import time
+import subprocess
+
+subprocess.run(["pip", "install", "pennylane"])
+os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-schemas-python-staging-main")
+subprocess.run(["pip", "install", "."])
+os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-sdk-python-staging-main")
+subprocess.run(["pip", "install", "."])
+os.chdir("/")
 
 import networkx as nx
 import numpy as np
