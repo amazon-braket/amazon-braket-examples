@@ -25,8 +25,17 @@ from braket.jobs.metrics import log_metric
 
 import qaoa.qaoa_utils as qaoa_utils  # isort:skip
 
+import boto3
+from braket.aws import AwsSession
+
 
 def init_pl_device(device_arn, num_nodes, shots, max_parallel):
+    # work around for Gamma
+    region_name = "eu-west-2"
+    endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"
+    braket_client = boto3.client("braket", region_name=region_name, endpoint_url=endpoint_url)
+    aws_session = AwsSession(braket_client=braket_client)
+
     return qml.device(
         "braket.aws.qubit",
         device_arn=device_arn,
@@ -36,6 +45,7 @@ def init_pl_device(device_arn, num_nodes, shots, max_parallel):
         s3_destination_folder=None,
         parallel=True,
         max_parallel=max_parallel,
+        aws_session=aws_session,
         # poll_timeout_seconds=30,
     )
 
