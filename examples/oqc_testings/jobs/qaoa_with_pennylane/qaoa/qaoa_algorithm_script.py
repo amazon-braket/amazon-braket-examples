@@ -17,6 +17,8 @@ import time
 import subprocess
 
 subprocess.run(["pip", "install", "pennylane"])
+subprocess.run(["pip", "install", "amazon-braket-pennylane-plugin"])
+
 os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-schemas-python-staging-main")
 subprocess.run(["pip", "install", "."])
 os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-sdk-python-staging-main")
