@@ -38,6 +38,7 @@ from braket.device_schema.dwave.dwave_advantage_device_level_parameters_v1 impor
     DwaveAdvantageDeviceLevelParameters,
 )
 from braket.device_schema.ionq import IonqDeviceParameters
+from braket.device_schema.oqc import OqcDeviceParameters
 from braket.device_schema.rigetti import RigettiDeviceParameters
 from braket.device_schema.simulators import GateModelSimulatorDeviceParameters
 from braket.ir.openqasm import Program as OpenQasmProgram
@@ -454,6 +455,8 @@ def _(
         device_parameters = IonqDeviceParameters(paradigmParameters=paradigm_parameters)
     elif "rigetti" in device_arn:
         device_parameters = RigettiDeviceParameters(paradigmParameters=paradigm_parameters)
+    elif "oqc" in device_arn:
+        device_parameters = OqcDeviceParameters(paradigmParameters=paradigm_parameters)
     else:  # default to use simulator
         device_parameters = GateModelSimulatorDeviceParameters(
             paradigmParameters=paradigm_parameters

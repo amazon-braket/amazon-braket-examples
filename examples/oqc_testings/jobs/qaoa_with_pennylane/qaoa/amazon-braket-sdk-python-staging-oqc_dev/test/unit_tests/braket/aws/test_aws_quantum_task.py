@@ -33,6 +33,7 @@ from braket.device_schema.dwave import (
     DwaveDeviceParameters,
 )
 from braket.device_schema.ionq import IonqDeviceParameters
+from braket.device_schema.oqc import OqcDeviceParameters
 from braket.device_schema.rigetti import RigettiDeviceParameters
 from braket.device_schema.simulators import GateModelSimulatorDeviceParameters
 from braket.ir.openqasm import Program as OpenQasmProgram
@@ -42,11 +43,13 @@ S3_TARGET = AwsSession.S3DestinationFolder("foo", "bar")
 
 IONQ_ARN = "device/qpu/ionq"
 RIGETTI_ARN = "device/qpu/rigetti"
+OQC_ARN = "device/qpu/oqc"
 SIMULATOR_ARN = "device/quantum-simulator"
 
 DEVICE_PARAMETERS = [
     (IONQ_ARN, IonqDeviceParameters),
     (RIGETTI_ARN, RigettiDeviceParameters),
+    (OQC_ARN, OqcDeviceParameters),
     (SIMULATOR_ARN, GateModelSimulatorDeviceParameters),
 ]
 
