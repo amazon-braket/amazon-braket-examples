@@ -4,7 +4,7 @@ import subprocess
 
 os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-schemas-python-staging-main")
 subprocess.run(["pip", "install", "."])
-os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging-main")
+os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging-oqc_dev")
 subprocess.run(["pip", "install", "."])
 os.chdir("/")
 

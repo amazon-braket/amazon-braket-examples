@@ -21,7 +21,7 @@ subprocess.run(["pip", "install", "amazon-braket-pennylane-plugin"])
 
 os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-schemas-python-staging-main")
 subprocess.run(["pip", "install", "."])
-os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-sdk-python-staging-main")
+os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-sdk-python-staging-oqc_dev")
 subprocess.run(["pip", "install", "."])
 os.chdir("/")
 
@@ -42,7 +42,9 @@ from braket.aws import AwsSession
 def init_pl_device(device_arn, num_nodes, shots, max_parallel):
     # work around for Gamma
     region_name = "eu-west-2"
-    endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"
+    endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"  
+#     region_name = "us-west-1"
+#     endpoint_url = "https://braket-gamma.us-west-1.amazonaws.com"
     braket_client = boto3.client("braket", region_name=region_name, endpoint_url=endpoint_url)
     aws_session = AwsSession(braket_client=braket_client)
 
@@ -101,6 +103,8 @@ def main():
     plt.savefig(f"{output_dir}/graph.png")
 
     # Set up the QAOA problem
+    dev = init_pl_device(device_arn, num_nodes, shots, max_parallel)
+
     cost_h, mixer_h = qml.qaoa.maxcut(g)
 
     def qaoa_layer(gamma, alpha):
@@ -111,8 +115,7 @@ def main():
         for i in range(num_nodes):
             qml.Hadamard(wires=i)
         qml.layer(qaoa_layer, p, params[0], params[1])
-
-    dev = init_pl_device(device_arn, num_nodes, shots, max_parallel)
+        return qml.expval(cost_h)
 
     np.random.seed(seed)
     cost_function = qml.ExpvalCost(circuit, cost_h, dev, optimize=True, interface=pl_interface)
