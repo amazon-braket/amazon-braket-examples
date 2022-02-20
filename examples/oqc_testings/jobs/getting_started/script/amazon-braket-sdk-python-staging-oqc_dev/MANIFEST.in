@@ -1,0 +1,14 @@
+include *.md
+include *.yaml
+include *.yml
+include .coveragerc
+include CODEOWNERS
+include tox.ini
+recursive-include src *.json
+recursive-include bin *.py
+recursive-include doc *.py
+recursive-include doc *.rst
+recursive-include doc *.txt
+recursive-include doc Makefile
+recursive-include examples *.py
+recursive-include test *.py
