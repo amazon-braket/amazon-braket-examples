@@ -115,7 +115,6 @@ def main():
         for i in range(num_nodes):
             qml.Hadamard(wires=i)
         qml.layer(qaoa_layer, p, params[0], params[1])
-        return qml.expval(cost_h)
 
     np.random.seed(seed)
     cost_function = qml.ExpvalCost(circuit, cost_h, dev, optimize=True, interface=pl_interface)
