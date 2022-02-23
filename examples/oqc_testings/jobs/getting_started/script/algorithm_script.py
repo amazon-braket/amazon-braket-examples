@@ -2,9 +2,9 @@
 import os
 import subprocess
 
-os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-schemas-python-staging-main")
+os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-schemas-python-staging-oqc-without-qasm")
 subprocess.run(["pip", "install", "."])
-os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging-oqc_dev")
+os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging-oqc-without-qasm")
 subprocess.run(["pip", "install", "."])
 os.chdir("/")
 
@@ -23,7 +23,8 @@ print("Test job started!!!!!")
 import boto3
 from braket.aws import AwsQuantumTask, AwsSession
 region_name = "eu-west-2"
-endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"
+# endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"
+endpoint_url = "https://5sk8cnl96i.execute-api.eu-west-2.amazonaws.com/Prod"
 braket_client = boto3.client("braket", region_name=region_name, endpoint_url=endpoint_url)
 aws_session = AwsSession(braket_client=braket_client)
 
