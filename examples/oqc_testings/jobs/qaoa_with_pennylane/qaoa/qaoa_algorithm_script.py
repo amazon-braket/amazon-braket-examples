@@ -19,9 +19,9 @@ import subprocess
 subprocess.run(["pip", "install", "pennylane"])
 subprocess.run(["pip", "install", "amazon-braket-pennylane-plugin"])
 
-os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-schemas-python-staging-main")
+os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-schemas-python-staging-oqc-without-qasm")
 subprocess.run(["pip", "install", "."])
-os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-sdk-python-staging-oqc_dev")
+os.chdir("/opt/ml/code/customer_code/extracted/qaoa/amazon-braket-sdk-python-staging-oqc-without-qasm")
 subprocess.run(["pip", "install", "."])
 os.chdir("/")
 
@@ -42,9 +42,9 @@ from braket.aws import AwsSession
 def init_pl_device(device_arn, num_nodes, shots, max_parallel):
     # work around for Gamma
     region_name = "eu-west-2"
-    endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"  
-#     region_name = "us-west-1"
-#     endpoint_url = "https://braket-gamma.us-west-1.amazonaws.com"
+    # endpoint_url = "https://braket-gamma.eu-west-2.amazonaws.com"  
+    endpoint_url = "https://5sk8cnl96i.execute-api.eu-west-2.amazonaws.com/Prod"
+    
     braket_client = boto3.client("braket", region_name=region_name, endpoint_url=endpoint_url)
     aws_session = AwsSession(braket_client=braket_client)
 
