@@ -2,11 +2,11 @@
 import os
 import subprocess
 
-os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-schemas-python-staging-oqc-without-qasm")
-subprocess.run(["pip", "install", "."])
-os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging-oqc-without-qasm")
-subprocess.run(["pip", "install", "."])
-os.chdir("/")
+# os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-schemas-python-staging-oqc-without-qasm")
+# subprocess.run(["pip", "install", "."])
+# os.chdir("/opt/ml/code/customer_code/extracted/script/amazon-braket-sdk-python-staging-oqc-without-qasm")
+# subprocess.run(["pip", "install", "."])
+# os.chdir("/")
 
 
 import numpy as np
