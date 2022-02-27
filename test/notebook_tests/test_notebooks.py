@@ -66,7 +66,7 @@ for dir_, _, files in os.walk(test_path):
         if file_name.endswith("copy.ipynb"):
             os.remove(rel_file)
         if file_name.endswith(".ipynb") and _rigetti_availability(file_name) and \
-                file_name.endswith("bring_your_own_container.ipynb"):
+                not file_name.endswith("bring_your_own_container.ipynb"):
             test_notebooks.append((dir_, rel_file))
 
 
