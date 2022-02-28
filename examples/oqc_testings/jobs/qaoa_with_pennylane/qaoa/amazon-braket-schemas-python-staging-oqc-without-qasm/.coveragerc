@@ -1,0 +1,19 @@
+[run]
+parallel = True
+branch = True
+source =
+    braket
+
+[paths]
+source =
+    src/braket
+    .tox/*/lib/python*/site-packages/braket
+
+[report]
+show_missing = True
+
+[html]
+directory = build/coverage
+
+[xml]
+output = build/coverage/coverage.xml

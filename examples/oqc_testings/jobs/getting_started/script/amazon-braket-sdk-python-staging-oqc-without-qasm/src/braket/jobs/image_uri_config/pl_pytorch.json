@@ -1,0 +1,13 @@
+{
+  "versions": {
+    "1.8.1": {
+      "registries": {
+          "us-east-1": "292282985366",
+          "us-west-1": "292282985366",
+          "us-west-2": "292282985366",
+          "eu-west-2": "292282985366"
+      },
+      "repository": "amazon-braket-pytorch-jobs"
+    }
+  }
+}

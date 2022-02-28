@@ -1,0 +1,41 @@
+name: Dependent tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.7, 3.8, 3.9]
+        dependent: [amazon-braket-ocean-plugin-python, amazon-braket-pennylane-plugin-python]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install --upgrade git+ssh://git@github.com/aws/amazon-braket-schemas-python-staging.git
+        pip install --upgrade git+ssh://git@github.com/aws/amazon-braket-default-simulator-python-staging.git
+        pip install -e .
+        cd ..
+        git clone https://github.com/aws/${{ matrix.dependent }}.git
+        cd ${{ matrix.dependent }}
+        pip install -e .[test]
+    - name: Run unit tests
+      run: |
+        cd ../${{ matrix.dependent }}
+        pytest
