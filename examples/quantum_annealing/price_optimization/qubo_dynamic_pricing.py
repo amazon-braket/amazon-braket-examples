@@ -1,7 +1,7 @@
 from pyqubo import Binary
 import numpy as np
 import dimod
-from braket.ocean_plugin import BraketSampler, BraketDWaveSampler
+from braket.ocean_plugin import BraketDWaveSampler
 from dwave.system.composites import EmbeddingComposite
 from itertools import combinations
 
@@ -168,6 +168,7 @@ def optimize(
         sigma,
         beta,
         vol_bound,
+        s3_folder=None,
         dwave=True
 ):
     """
@@ -198,7 +199,8 @@ def optimize(
     )
 
     # qubo solver
-    response = dwave_solver(obj) if dwave else qubo_solver(obj)
+    response = dwave_solver(obj, s3_folder) if dwave else qubo_solver(obj)
+
     # get optimal prices
     opt_prices, _, energy = decoder_price_response(response, len(a), price_levels)
     opt_demand, max_revenue = get_demands_rev(a, b, selected_hist_prices, opt_prices)
@@ -217,12 +219,16 @@ def qubo_solver(obj):
     return response
 
 
-def dwave_solver(obj):
+def dwave_solver(obj, s3_folder):
     model = (-obj).compile().to_bqm()
     num_shots = 10000
 
-    sampler = BraketDWaveSampler(device_arn=
-                                 'arn:aws:braket:::device/qpu/d-wave/Advantage_system4')
+    device_arn = 'arn:aws:braket:::device/qpu/d-wave/Advantage_system4'
+    if s3_folder:
+        sampler = BraketDWaveSampler(s3_folder, device_arn=device_arn)
+    else:
+        sampler = BraketDWaveSampler(device_arn=device_arn)
+
     sampler = EmbeddingComposite(sampler)
     response = sampler.sample(model, num_reads=num_shots)
     return response
