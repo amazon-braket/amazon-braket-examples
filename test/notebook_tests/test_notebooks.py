@@ -45,6 +45,9 @@ EXCLUDED_NOTEBOOKS = [
     "Verbatim_Compilation.ipynb",
     "Hyperparameter_tuning.ipynb",
     "bring_your_own_container.ipynb",
+    "Getting_started.ipynb",
+    "Using_PennyLane_with_Braket_Jobs.ipynb"
+    ""
 ]
 
 
@@ -62,7 +65,8 @@ for dir_, _, files in os.walk(test_path):
         rel_file = os.path.join(dir_, file_name)
         if file_name.endswith("copy.ipynb"):
             os.remove(rel_file)
-        if file_name.endswith(".ipynb") and _rigetti_availability(file_name):
+        if file_name.endswith(".ipynb") and _rigetti_availability(file_name) and \
+                not file_name.endswith("bring_your_own_container.ipynb"):
             test_notebooks.append((dir_, rel_file))
 
 

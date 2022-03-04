@@ -1,5 +1,6 @@
 # IMPORTS
 import numpy as np
+from braket.aws import AwsDevice
 from braket.circuits import Circuit, Observable
 from braket.devices import LocalSimulator
 from scipy.optimize import minimize
@@ -53,7 +54,7 @@ def cost_circuit(gamma, n_qubits, ising, device):
         # get interaction strength from Ising matrix
         int_strength = ising[qubit_pair[0], qubit_pair[1]]
         # for Rigetti we decompose ZZ using CNOT gates
-        if device.name == "Rigetti":
+        if isinstance(device, AwsDevice) and device.provider_name == "Rigetti":
             gate = ZZgate(qubit_pair[0], qubit_pair[1], gamma * int_strength)
             circ.add(gate)
         # classical simulators and IonQ support ZZ gate
@@ -91,7 +92,7 @@ def circuit(params, device, n_qubits, ising):
 
 
 # function that computes cost function for given params
-def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_folder, verbose):
+def objective_function(params, device, ising, n_qubits, n_shots, tracker, verbose):
     """
     objective function takes a list of variational parameters as input,
     and returns the cost associated with those parameters
@@ -110,7 +111,7 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
         task = device.run(qaoa_circuit, shots=n_shots)
     else:
         task = device.run(
-            qaoa_circuit, s3_folder, shots=n_shots, poll_timeout_seconds=3 * 24 * 60 * 60
+            qaoa_circuit, shots=n_shots, poll_timeout_seconds=3 * 24 * 60 * 60
         )
 
     # get result for this task
@@ -158,7 +159,7 @@ def objective_function(params, device, ising, n_qubits, n_shots, tracker, s3_fol
 
 # The function to execute the training: run classical minimization.
 def train(
-    device, options, p, ising, n_qubits, n_shots, opt_method, tracker, s3_folder, verbose=True
+    device, options, p, ising, n_qubits, n_shots, opt_method, tracker, verbose=True
 ):
     """
     function to run QAOA algorithm for given, fixed circuit depth p
@@ -191,7 +192,7 @@ def train(
     result = minimize(
         objective_function,
         params0,
-        args=(device, ising, n_qubits, n_shots, tracker, s3_folder, verbose),
+        args=(device, ising, n_qubits, n_shots, tracker, verbose),
         options=options,
         method=opt_method,
         bounds=bnds,
