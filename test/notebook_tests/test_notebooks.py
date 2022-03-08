@@ -56,7 +56,7 @@ def _rigetti_availability(file_name):
     rigetti_end_time = str(datetime.time(19, 0))
     is_within_time_window = rigetti_start_time < CURRENT_TIME < rigetti_end_time
     if file_name == "Verbatim_Compilation.ipynb" and is_within_time_window:
-	return True
+        return True
     if file_name in EXCLUDED_NOTEBOOKS:
         return False
     return True
