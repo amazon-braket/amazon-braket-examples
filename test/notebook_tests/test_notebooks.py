@@ -56,7 +56,7 @@ def _rigetti_availability(file_name):
     rigetti_start_time = str(datetime.time(15, 0))
     rigetti_end_time = str(datetime.time(19, 0))
     is_within_time_window = rigetti_start_time < CURRENT_TIME < rigetti_end_time
-    if file_name in EXCLUDED_NOTEBOOKS:
+    if file_name in EXCLUDED_NOTEBOOKS and not is_within_time_window:
         return False
     return True
 
