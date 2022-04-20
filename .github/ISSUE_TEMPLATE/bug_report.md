@@ -23,11 +23,11 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-** System information (please complete the following information as applicable):**
+**System information (please complete the following information as applicable):**
  - Package Versions [e.g. amazon-braket-sdk==1.9.5]
  - Working Environment: [e.g. Local, Braket Notebook Instances] 
  - Browser [e.g. chrome, safari]
- - Region [e.g us-west-2]
+ - Region [e.g. us-west-2]
 
 **Additional context**
 Add any other context about the problem here.
