@@ -15,28 +15,18 @@ class QuantumCircuit:
         self.nwires = len(qc_dev.wires)
 
     def q_circuit(self):
-        """Quantum circuit.
-        See figure 4 of https://arxiv.org/abs/1804.00633
+        """Quantum circuit
         """
         nwires = self.nwires
-        # qc_dev = qml.device("lightning.qubit", wires=nwires)
-        # qc_dev = qml.device("lightning.gpu", wires=nwires)
-        # qc_dev = qml.device("default.qubit.torch", wires=nwires)
         qc_dev = self.qc_dev
-        # qc_dev.R_DTYPE = np.float32
-        # qc_dev.C_DTYPE = np.complex64
-        # print(qc_dev)
 
-        # @qml.qnode(qc_dev, interface="torch", diff_method="backprop")
         @qml.qnode(qc_dev, interface="torch", diff_method="adjoint")
         def circuit(inputs, w_layer1, w_layer2, rotation):
-            # AmplitudeEmbedding(features=inputs, wires=range(nwires), normalize=True, pad_with=0.0)
             AngleEmbedding(features=inputs, wires=range(nwires))
             self._entangle_layer(p1=w_layer1[0], p2=w_layer1[1], rng=1)
             self._entangle_layer(p1=w_layer2[0], p2=w_layer2[1], rng=3)
             qml.Rot(rotation[0], rotation[1], rotation[2], wires=0)
             return [qml.expval(qml.PauliZ(0))]
-            # return qml.expval(qml.PauliZ(0))
 
         return circuit
 

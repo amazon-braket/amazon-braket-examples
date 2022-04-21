@@ -35,12 +35,7 @@ class Dataset(torch.utils.data.Dataset):
 
 
 def random_dataset(ndata):
-#     np.random.seed(42)
     data = [np.random.randn(60).astype('float32') for _ in range(ndata)]
-#     label = [np.random.choice([1, -1]).astype('int') for _ in range(ndata)]
-#     np.random.seed(None)
-
-    # data = [d / np.sqrt(np.sum(d**2)) for d in data] # normalize data
     label = np.concatenate((np.ones(int(ndata/2)), -1*np.ones(int(ndata/2))))
 
     train_dataset = Dataset(data=data, label=label)
@@ -57,28 +52,9 @@ def sonar_dataset(ndata, input_dir):
             one_label = 1 if data_point[-1]=="M" else -1
             label.append(one_label)
 
-      # data = np.array(data)
-      # label = np.array(label)
       idx = np.random.permutation(208)
       data = np.array(data)[idx[0:ndata]].astype('float32')
       label = np.array(label)[idx[0:ndata]].astype('float32')
-
-      train_dataset = Dataset(data=data, label=label)
-
-      return train_dataset
-
-
-def cancer_dataset():
-      raw_data = read_csv_raw('data/wdbc.data')
-      data = []
-      label = []
-      for data_point in raw_data:
-            data.append([float(element) for element in data_point[2:-1]])
-            one_label = 1 if data_point[1]=="M" else -1
-            label.append(one_label)
-
-      data = np.array(data[0:100])
-      label = np.array(label[0:100])
 
       train_dataset = Dataset(data=data, label=label)
 

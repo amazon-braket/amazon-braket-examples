@@ -26,17 +26,11 @@ class DressedQNN(nn.Module):
                                         )
         self.input_layer = nn.Linear(60, nwires, dtype=torch.float32)
         self.output_layer = nn.Linear(1, 1, dtype=torch.float32)
-        # self.bias = nn.Parameter(torch.tensor(0.0))
 
     def forward(self, x):
         x = self.input_layer(x)
         x = (torch.sigmoid(x)-0.5) * 2 * np.pi
-        # x = F.sigmoid(x) * 2 * np.pi
-
         x = self.qlayer(x)
-        # x = torch.stack([self.circuit(f, self.w1 ,self.w2 ,self.rot) for f in x])
-
         x = self.output_layer(x)
-        # x = x + self.bias
         x = torch.squeeze(x)
         return x

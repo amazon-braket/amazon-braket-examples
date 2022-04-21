@@ -45,21 +45,10 @@ def main():
     gamma = float(hyperparams["gamma"])
     lr = float(hyperparams["lr"])
     seed = int(hyperparams["seed"])
-    to_eval = int(hyperparams["to_eval"])
     
     torch.manual_seed(seed)
     np.random.seed(seed)
     
-#     print("nwires", nwires)
-#     print("ndata", ndata)
-#     print("batch_size", batch_size)
-#     print("epochs", epochs)
-#     print("gamma", gamma)
-#     print("lr", lr)
-#     print("seed", seed)
-#     print("to_eval", to_eval)
-#     print("qc_dev_name", qc_dev_name)
-
 
     ########## DP setup ##########    
     dp_info = {
@@ -75,7 +64,6 @@ def main():
     ########## Dataset ##########
     train_dataset = random_dataset(ndata)
 #     train_dataset = sonar_dataset(ndata, input_dir)
-    # train_dataset = cancer_dataset()
     
     # Create sampler for distributed training
     train_sampler = torch.utils.data.distributed.DistributedSampler(
@@ -136,20 +124,6 @@ def main():
         torch.save(model.state_dict(), f"{output_dir}/test_local.pt")
         save_job_result({"last loss": float(loss_before.detach().cpu())})
     
-    
-    ########## Accuracy Evaluation (optional) ##########
-    if to_eval and dp_info["rank"]==0:
-        eval_loader = torch.utils.data.DataLoader(
-            train_dataset,
-            batch_size=ndata,
-            shuffle=True,
-            num_workers=0,
-            pin_memory=True,
-        )
-        accuracy = eval_accuracy(model, device, eval_loader)
-        print("accuracy: ", accuracy)
-        save_job_result({"accuracy": accuracy})
-
 
         
 def train(dp_info, model, device, train_loader, optimizer, epoch):
@@ -159,13 +133,9 @@ def train(dp_info, model, device, train_loader, optimizer, epoch):
 
         optimizer.zero_grad()
         output = model(data)
-#         print(output.shape)
-#         print(target.shape)
 
-        # loss = F.nll_loss(output, target)
-        # loss = F.hinge_embedding_loss(output, target, margin=0.0)
         loss = F.margin_ranking_loss(output, torch.zeros_like(output), target, margin=0.1)
-        
+
         loss.backward()
         optimizer.step()
         if dp_info["rank"]==0:
@@ -182,30 +152,7 @@ def train(dp_info, model, device, train_loader, optimizer, epoch):
     return loss
 
 
-def eval_accuracy(model, device, eval_loader):
-    model.eval()
-    correct = 0
-    # with torch.no_grad():
-    for batch_idx, (data, target) in enumerate(eval_loader):
-        data, target = data.to(device), target.to(device)
-        output = model(data)
-
-        pred = torch.where(output>=0, +1, -1)
-        pred = pred.to(device)
-        # print("pred ", pred)
-        # print("target ", target)
-        print("data size: ", len(eval_loader.dataset))
-
-        correct += pred.eq(target.view_as(pred)).sum().item()
-        print("correct predictions: ", correct)
-
-    accuracy = correct / len(eval_loader.dataset)
-
-    return accuracy
-        
-        
-
-
+    
 if __name__ == "__main__":
     main()
     # try:
