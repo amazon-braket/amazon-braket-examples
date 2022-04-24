@@ -63,7 +63,7 @@ def main():
     qc_dev = get_device(nwires, device_string)
     qc_dev_name = qc_dev.short_name
     
-    if qc_dev_name=="lightning.gpu":
+    if qc_dev_name == "lightning.gpu":
         device = torch.device("cuda")
     else:
         device = torch.device("cpu")

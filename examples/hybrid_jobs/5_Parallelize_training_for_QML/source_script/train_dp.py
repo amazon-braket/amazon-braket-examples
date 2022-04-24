@@ -85,7 +85,7 @@ def main():
     qc_dev = get_device(nwires, qc_dev_string)
     qc_dev_name = qc_dev.short_name
     
-    if qc_dev_name=="lightning.gpu":
+    if qc_dev_name == "lightning.gpu":
         device = torch.device("cuda")
     else:
         device = torch.device("cpu")
@@ -111,7 +111,7 @@ def main():
         scheduler.step()
         
         # Log the loss before the update step as a metric
-        if dp_info["rank"]==0:
+        if dp_info["rank"] == 0:
             log_metric(
                 metric_name="Loss",
                 value=loss_before,
@@ -119,7 +119,7 @@ def main():
             )
     elapsed = time.time()-start
 
-    if dp_info["rank"]==0:    
+    if dp_info["rank"] == 0:    
         print('elapsed time: ', elapsed)
         torch.save(model.state_dict(), f"{output_dir}/test_local.pt")
         save_job_result({"last loss": float(loss_before.detach().cpu())})
@@ -138,7 +138,7 @@ def train(dp_info, model, device, train_loader, optimizer, epoch):
 
         loss.backward()
         optimizer.step()
-        if dp_info["rank"]==0:
+        if dp_info["rank"] == 0:
             print(
                 "Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}".format(
                     epoch,
