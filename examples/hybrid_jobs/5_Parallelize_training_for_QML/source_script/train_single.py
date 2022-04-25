@@ -14,7 +14,7 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import StepLR
 
 # Network definition
-from source_script.model_def import DressedQNN
+from source_script.model import DressedQNN
 
 # Dataset
 from source_script.helper_funs import sonar_dataset, random_dataset, get_device
