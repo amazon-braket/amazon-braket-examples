@@ -34,15 +34,6 @@ class Dataset(torch.utils.data.Dataset):
         return x, y
 
 
-def random_dataset(ndata):
-    data = [np.random.randn(60).astype('float32') for _ in range(ndata)]
-    label = np.concatenate((np.ones(int(ndata/2)), -1*np.ones(int(ndata/2))))
-
-    train_dataset = Dataset(data=data, label=label)
-
-    return train_dataset
-
-
 def sonar_dataset(ndata, input_dir):  
       raw_data = read_csv_raw(f"{input_dir}/input-data/sonar.all-data")
       data = []

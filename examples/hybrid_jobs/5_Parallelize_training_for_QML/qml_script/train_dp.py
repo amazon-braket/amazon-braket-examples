@@ -17,7 +17,7 @@ from torch.optim.lr_scheduler import StepLR
 from qml_script.model import DressedQNN
 
 # Dataset
-from qml_script.helper_funs import sonar_dataset, random_dataset, get_device
+from qml_script.helper_funs import sonar_dataset, get_device
 
 # Import SMDataParallel PyTorch Modules
 import smdistributed.dataparallel.torch.distributed as dist
@@ -61,8 +61,7 @@ def main():
 
 
     ########## Dataset ##########
-    train_dataset = random_dataset(ndata)
-#     train_dataset = sonar_dataset(ndata, input_dir)
+    train_dataset = sonar_dataset(ndata, input_dir)
     
     # Create sampler for distributed training
     train_sampler = torch.utils.data.distributed.DistributedSampler(
@@ -124,7 +123,6 @@ def main():
         save_job_result({"last loss": float(loss_before.detach().cpu())})
     
 
-        
 def train(dp_info, model, device, train_loader, optimizer, epoch):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -151,14 +149,5 @@ def train(dp_info, model, device, train_loader, optimizer, epoch):
     return loss
 
 
-    
 if __name__ == "__main__":
     main()
-    # try:
-    #     main()
-    #     print("Training Successful!!")
-    # except BaseException as e:
-    #     print(e)
-    #     print("Training Fails...")
-
-
