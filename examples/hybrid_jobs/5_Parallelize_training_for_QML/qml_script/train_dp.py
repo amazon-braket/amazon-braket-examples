@@ -14,17 +14,15 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import StepLR
 
 # Network definition
-from source_script.model import DressedQNN
+from qml_script.model import DressedQNN
 
 # Dataset
-from source_script.helper_funs import sonar_dataset, random_dataset, get_device
+from qml_script.helper_funs import sonar_dataset, random_dataset, get_device
 
 # Import SMDataParallel PyTorch Modules
 import smdistributed.dataparallel.torch.distributed as dist
 from smdistributed.dataparallel.torch.parallel.distributed import DistributedDataParallel as DDP
 
-
-dist.init_process_group()
 
 def main():
     input_dir = os.environ["AMZN_BRAKET_INPUT_DIR"]  
@@ -50,7 +48,8 @@ def main():
     np.random.seed(seed)
     
 
-    ########## DP setup ##########    
+    ########## DP setup ##########
+    dist.init_process_group()
     dp_info = {
         "world_size": dist.get_world_size(),
         "rank": dist.get_rank(),

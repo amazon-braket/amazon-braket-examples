@@ -5,7 +5,7 @@ import numpy as np
 
 import pennylane as qml
 
-from source_script.quantum_circuit import QuantumCircuit
+from qml_script.quantum_circuit import QuantumCircuit
 
 
 class DressedQNN(nn.Module):
