@@ -17,7 +17,7 @@ from torch.optim.lr_scheduler import StepLR
 from qml_script.model import DressedQNN
 
 # Dataset
-from qml_script.helper_funs import sonar_dataset, random_dataset, get_device
+from qml_script.helper_funs import sonar_dataset, get_device
 
 
 def main():
@@ -46,7 +46,6 @@ def main():
     
 
     ########## Dataset ##########
-    # train_dataset = random_dataset(ndata)
     train_dataset = sonar_dataset(ndata, input_dir)
     
     train_loader = torch.utils.data.DataLoader(
@@ -118,14 +117,6 @@ def train(model, device, train_loader, optimizer, epoch):
         
     return loss
 
-     
         
 if __name__ == "__main__":
-    try:
-        main()
-        print("Training Successful!!")
-    except BaseException as e:
-        print(e)
-        print("Training Fails...")
-
-
+    main()
