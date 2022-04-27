@@ -16,6 +16,7 @@ import os
 import boto3
 import pytest
 from botocore.exceptions import ClientError
+from braket.aws.aws_device import AwsDevice, AwsDeviceType
 from braket.aws.aws_session import AwsSession
 
 
@@ -33,6 +34,28 @@ def region(boto_session):
 @pytest.fixture(scope="session")
 def aws_session(boto_session):
     return AwsSession(boto_session)
+
+
+@pytest.fixture(scope="session")
+def aws_devices():
+    return AwsDevice.get_devices()
+
+
+@pytest.fixture(scope="session")
+def unavailable_devices(aws_devices, aws_session):
+    def _can_instantiate_device(device):
+        try:
+            AwsDevice(arn=device.arn, aws_session=aws_session)
+            return True
+        except Exception as _:
+            return False
+
+    unavailable_simulators = [device for device in aws_devices
+                              if ("quantum-simulator" in device.arn
+                                  and not _can_instantiate_device(device))]
+    unavailable_qpus = [device for device in aws_devices
+                        if ("qpu" in device.arn and not device.is_available)]
+    return unavailable_qpus + unavailable_simulators
 
 
 @pytest.fixture(scope="session")
