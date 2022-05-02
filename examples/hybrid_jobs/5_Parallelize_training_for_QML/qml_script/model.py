@@ -24,8 +24,8 @@ class DressedQNN(nn.Module):
                                                         "rotation": self.rot.shape,
                                                         }
                                         )
-        self.input_layer = nn.Linear(60, nwires, dtype=torch.float32)
-        self.output_layer = nn.Linear(1, 1, dtype=torch.float32)
+        self.input_layer = nn.Linear(60, nwires)
+        self.output_layer = nn.Linear(1, 1)
 
     def forward(self, x):
         x = self.input_layer(x)
