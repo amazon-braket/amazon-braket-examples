@@ -35,10 +35,8 @@ def main():
     ndata = int(hyperparams["ndata"])
     batch_size = int(hyperparams["batch_size"])
     epochs = int(hyperparams["epochs"])
-
     gamma = float(hyperparams["gamma"])
     lr = float(hyperparams["lr"])
-        
     seed = int(hyperparams["seed"])
     
     torch.manual_seed(seed)
