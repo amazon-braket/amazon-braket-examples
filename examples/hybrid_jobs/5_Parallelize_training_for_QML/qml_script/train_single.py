@@ -1,5 +1,4 @@
 import os
-import time
 import numpy as np
 import json
 import pennylane as qml
@@ -18,6 +17,7 @@ from qml_script.model import DressedQNN
 
 # Dataset
 from qml_script.helper_funs import sonar_dataset, get_device
+
 
 
 def main():
@@ -73,7 +73,6 @@ def main():
 
     
     ########## Optimization ##########
-    start = time.time()
     for epoch in range(1, epochs + 1):
         loss_before = train(model, device, train_loader, optimizer, epoch)
         scheduler.step()
@@ -84,9 +83,6 @@ def main():
             value=loss_before,
             iteration_number=epoch,
         )
-
-    elapsed = time.time()-start
-    print('elapsed time: ', elapsed)
     
     torch.save(model.state_dict(), f"{output_dir}/test_local.pt")
     save_job_result({"last loss": float(loss_before.detach().cpu())})

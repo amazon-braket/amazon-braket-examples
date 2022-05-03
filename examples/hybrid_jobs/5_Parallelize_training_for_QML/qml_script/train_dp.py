@@ -1,5 +1,4 @@
 import os
-import time
 import numpy as np
 import json
 import pennylane as qml
@@ -22,6 +21,7 @@ from qml_script.helper_funs import sonar_dataset, get_device
 # Import SMDataParallel PyTorch Modules
 import smdistributed.dataparallel.torch.distributed as dist
 from smdistributed.dataparallel.torch.parallel.distributed import DistributedDataParallel as DDP
+
 
 
 def main():
@@ -98,7 +98,6 @@ def main():
 
     
     ########## Optimization ##########
-    start = time.time()
     for epoch in range(1, epochs + 1):
         loss_before = train(dp_info,
                             model, 
@@ -115,10 +114,9 @@ def main():
                 value=loss_before,
                 iteration_number=epoch,
             )
-    elapsed = time.time()-start
 
     if dp_info["rank"] == 0:    
-        print('elapsed time: ', elapsed)
+        print("Training Finished!!")
         torch.save(model.state_dict(), f"{output_dir}/test_local.pt")
         save_job_result({"last loss": float(loss_before.detach().cpu())})
     
