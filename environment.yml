@@ -26,9 +26,9 @@ dependencies:
   - six=1.15.0
   - typing_extensions=3.7.4.3
   - pip:
-      - awscli==1.22.17
-      - botocore==1.23.17
-      - boto3==1.20.17
+      - awscli==1.23.7
+      - botocore==1.25.7
+      - boto3==1.22.7
       - amazon-braket-default-simulator
       - amazon-braket-ocean-plugin
       - amazon-braket-pennylane-plugin
