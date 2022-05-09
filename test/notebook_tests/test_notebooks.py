@@ -30,17 +30,6 @@ EXCLUDED_NOTEBOOKS = [
     "bring_your_own_container.ipynb"
 ]
 
-# These notebooks would not be tested unless the devices used in the notebook
-# are available at the time of the test run.
-NOTEBOOKS_REQUIRING_DEVICE_AVAILABILITY = [
-    "2_Running_quantum_circuits_on_QPU_devices.ipynb",
-    "Allocating_Qubits_on_QPU_Devices.ipynb",
-    "Verbatim_Compilation.ipynb",
-    "Using_the_tensor_network_simulator_TN1.ipynb",
-    "TN1_demo_local_vs_non-local_random_circuits.ipynb",
-    "Getting_Started_with_OpenQASM_on_Braket.ipynb"
-]
-
 
 for dir_, _, files in os.walk(test_path):
     for file_name in files:
@@ -52,15 +41,11 @@ for dir_, _, files in os.walk(test_path):
 
 
 def _check_exclusive_device_availability(notebook_path, unavailable_devices):
-    if notebook_path.split("/")[-1] not in NOTEBOOKS_REQUIRING_DEVICE_AVAILABILITY:
-        return "None", True
-
     with open(notebook_path) as file:
-        for line in file:
-            for device in unavailable_devices:
-                if device.arn in line:
-                    return device.arn, False
-
+        content = file.read()
+        for device in unavailable_devices:
+            if device.arn in content:
+                return device.arn, False
     return "None", True
 
 
@@ -78,6 +63,7 @@ def _run_notebook(dir_path, notebook_path):
         for output in cell.get("outputs", [])
         if output.output_type == "error"
     ]
+
 
 @pytest.mark.parametrize("dir_path, notebook", test_notebooks)
 def test_ipynb(dir_path, notebook, region, unavailable_devices):
