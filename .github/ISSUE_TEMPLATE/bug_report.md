@@ -29,5 +29,8 @@ If applicable, add screenshots to help explain your problem.
  - Browser [e.g. chrome, safari]
  - Region [e.g. us-west-2]
 
+ **Known workaround (if applicable)**
+ Add a known workaround with steps to follow. 
+
 **Additional context**
 Add any other context about the problem here.
