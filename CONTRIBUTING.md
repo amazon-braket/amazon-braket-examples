@@ -55,6 +55,7 @@ When you make a contribution please ensure that you
 1. Do not duplicate existing information but refer to other examples as relevant.
 1. Only have Open Source licensed dependencies in your example.
 1. Ensure that your example runs without issues on both a recent Braket Notebook Instance (create a new Braket Notebook Instance or restart one from Amazon Braket [in the console](https://docs.aws.amazon.com/braket/latest/developerguide/braket-get-started-create-notebook.html)) and locally, using our most [recently released Amazon Braket SDK version](https://github.com/aws/amazon-braket-sdk-python/blob/main/README.md#installing-the-amazon-braket-python-sdk). Run the entire notebook by clicking `Cells > Run All`, either in the console or locally, and confirm that every cell completes without error.
+1. Ensure that you are using HTML elements to source images in the notebooks, and that sourced images are saved in the appropriate example folder.
 ### Send a Pull Request
 
 GitHub provides additional documentation on [Creating a Pull Request](https://help.github.com/articles/creating-a-pull-request/).
