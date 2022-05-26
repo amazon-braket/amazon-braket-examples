@@ -12,19 +12,25 @@ def get_device(n_wires, shots):
         device = qml.device(device_name, wires=n_wires, shots=shots)
         print("Using local simulator: ", device.name)
     else:
-        device = qml.device('braket.aws.qubit', 
-                             device_arn=device_string, 
-                             s3_destination_folder=None,
-                             wires=n_wires,
-                             parallel=True,
-                             max_parallel=30,
-                             shots=shots)
-        print("Using AWS managed device: ", device.name)        
+        device = qml.device(
+            "braket.aws.qubit",
+            device_arn=device_string,
+            s3_destination_folder=None,
+            wires=n_wires,
+            parallel=True,
+            max_parallel=30,
+            shots=shots,
+        )
+        print("Using AWS managed device: ", device.name)
     return device
 
 
 def str2bool(logic_str):
-    return logic_str.lower() in ("yes", "true", "t", "1")
+    if logic_str == "True":
+        return True
+    if logic_str == "False":
+        return False
+    raise ValueError("Invalid boolean value.")
 
 
 def train(opt, max_iter, params_init, qnode):
