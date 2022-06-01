@@ -1,5 +1,0 @@
-# vqe_chem_env
-
-numpy==1.19.1
-openfermion==0.11.0
-openfermionpyscf==0.4
