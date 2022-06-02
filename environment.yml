@@ -34,6 +34,7 @@ dependencies:
       - amazon-braket-pennylane-plugin==1.6.5
       - amazon-braket-schemas
       - amazon-braket-sdk
+      - amazon-braket-strawberryfields-plugin==1.0.0
       - cvxpy==1.1.17
       - dask==2.30.0
       - dwave-ocean-sdk==3.3.0
@@ -48,3 +49,4 @@ dependencies:
       - s3transfer==0.5.0
       - tensorflow==2.6.0
       - torch==1.8.1
+      - strawberryfields==0.23.0
