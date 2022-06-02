@@ -185,7 +185,7 @@ This folder contains examples that illustrate the use of Strawberry Fields to ru
     
 * [**Time-domain multiplexing**](examples/photonics/3_Time_domain_photonic_circuits.ipynb)
 
-    This notebook introduces the concept of time-domain multiplexing (TDM), a technique for creating large entangle quantum systems in a limited size photonic quantum computer by sending the qumodes at different times. You will learn the basic ideas of TDM, construct a small TDM program, and execute it on a built-in local simulator.
+    This notebook introduces the concept of time-domain multiplexing (TDM), a technique for creating large entangled quantum systems in a limited size photonic quantum computer by sending the qumodes at different times. You will learn the basic ideas of TDM, construct a small TDM program, and execute it on a built-in local simulator.
     
 * [**Operating Borealis: beginner tutorial**](examples/photonics/4_Operating_Borealis_beginner_tutorial.ipynb)
 
