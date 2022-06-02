@@ -165,7 +165,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
     
 ---
 ## <a name="jobs">Photonic quantum computing with Strawberry Fields</a>
-This folder contains examples that illustrate the use of Strawberry Fields to run photonic quantum circuits, on both Strawberry Field's built-in local simulators and Xanadu's Borealis device. These examples are based on existing tutorials on the [Strawberry Fields website](https://strawberryfields.ai/photonics/demonstrations.html).
+This folder contains examples that illustrate the use of Strawberry Fields to run photonic quantum circuits on both Strawberry Field's built-in local simulators and Xanadu's Borealis device. These examples are based on existing tutorials on the [Strawberry Fields website](https://strawberryfields.ai/photonics/demonstrations.html).
 
 * [**Borealis Quickstart**](examples/photonics/Borealis_quickstart.ipynb)
 
