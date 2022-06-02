@@ -181,7 +181,7 @@ This folder contains examples that illustrate the use of Strawberry Fields to ru
 
 * [**Gaussian boson sampling**](examples/photonics/2_Gaussian_boson_sampling_and_the_Hafnian.ipynb)
 
-    This notebook explains the problem of Gaussian boson sampling (GBS), the computational problem that the Borealis quantum computer solves, and explains why it is believed to be difficult to simualte classically. You will construct a small GBS circuit, execute it on a local simulator, and compare the results to theoretically expected values.
+    This notebook explains the problem of Gaussian boson sampling (GBS), the computational problem that the Borealis quantum computer solves, and explains why it is believed to be difficult to simulate classically. You will construct a small GBS circuit, execute it on a local simulator, and compare the results to theoretically expected values.
     
 * [**Time-domain multiplexing**](examples/photonics/3_Time_domain_photonic_circuits.ipynb)
 
