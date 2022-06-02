@@ -169,7 +169,7 @@ This folder contains examples that illustrate the use of Strawberry Fields to ru
 
 * [**Borealis Quickstart**](examples/photonics/Borealis_quickstart.ipynb)
 
-    This notebook provides a demonstration of running a circuit on Xanadu's Borealis device. Through the use of helper functions, you will learn how to generate random GBS circuits closely resembling the circuits used in Xanadu's quantum advantage experiment, and submit them to Borealis via the [Amazon Braket Strawberry Fields plugin](https://github.com/aws/amazon-braket-strawberryfields-plugin-python). For more details, see the Borealis beginner tutorial and other introductory tutorials to Strawberry Fields. 
+    This notebook provides a demonstration of running a circuit on Xanadu's Borealis device. Through the use of helper functions, you will learn how to generate random [Gaussian Boson Sampling](examples/photonics/2_Gaussian_boson_sampling_and_the_Hafnian.ipynb) (GBS) circuits closely resembling the circuits used in Xanadu's quantum advantage experiment, and submit them to Borealis via the [Amazon Braket Strawberry Fields plugin](https://github.com/aws/amazon-braket-strawberryfields-plugin-python). For more details, see the [Borealis beginner tutorial](examples/photonics/4_Operating_Borealis_beginner_tutorial.ipynb) and other introductory tutorials to Strawberry Fields. 
 
 * [**Introduction to Blackbird**](examples/photonics/0_Introduction_to_Blackbird.ipynb)
 
