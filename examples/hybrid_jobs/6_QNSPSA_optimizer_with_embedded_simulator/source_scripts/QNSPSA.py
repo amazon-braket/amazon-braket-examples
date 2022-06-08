@@ -2,6 +2,7 @@ import random
 import pennylane as qml
 from pennylane import numpy as np
 from scipy.linalg import sqrtm
+import warnings
 
 
 class QNSPSA:
@@ -69,11 +70,14 @@ class QNSPSA:
             np.array: The new variable values after step-wise update.
         """
         if self.blocking:
-            raise Exception(
-                "Use step_and_cost function when blocking is turned on,"
-                "as the algorithm requires computing of the loss function "
-                "per step."
+            warnings.warn(
+                "step_and_cost() instead of step() is called when "
+                "blocking is turned on, as the step-wise loss value "
+                "is required by the algorithm.",
+                stacklevel=2,
             )
+            return self.step_and_cost(cost, params)[0]
+
         if self.disable_metric_tensor:
             return self.__step_core_first_order(cost, params)
         return self.__step_core(cost, params)
