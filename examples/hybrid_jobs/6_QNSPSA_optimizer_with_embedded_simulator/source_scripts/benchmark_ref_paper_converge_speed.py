@@ -7,9 +7,11 @@ from source_scripts.utils import get_device, str2bool, train
 from source_scripts.QNSPSA import QNSPSA
 from braket.jobs import save_job_result
 import time
+import functools
 
 
-def sample_gates(n_qubits, n_layers):
+def sample_gates(n_qubits, n_layers, seed):
+    random.seed(seed)
     rot_gates = [qml.RX, qml.RY, qml.RZ]
     sampled_gates = []
     for i in range(n_qubits):
@@ -57,11 +59,14 @@ def main():
     max_iter = int(hyperparams["max_iter"])
     lr = float(hyperparams["learn_rate"])
     spsa_repeats = int(hyperparams["spsa_repeats"])
+    optimizer_name = hyperparams["optimizer"]
+    seed = int(hyperparams["seed"])
 
     dev = get_device(n_qubits, shots)
 
+    np.random.seed(seed)
     params_init = 2 * (np.random.rand(n_qubits * n_layers) - 0.5) * np.pi
-    sampled_gates = sample_gates(n_qubits, n_layers)
+    sampled_gates = sample_gates(n_qubits, n_layers, seed)
 
     H = qml.PauliZ(n_qubits // 2 - 1) @ qml.PauliZ(n_qubits // 2)
 
@@ -71,89 +76,40 @@ def main():
 
     results = {}
 
-    # Benchmarking: gradient descent
-    print("\nGradient descent optimizer:")
-    start_time = time.time()
-    opt_gd = qml.GradientDescentOptimizer(stepsize=lr)
-    params, loss_recording = train(
-        opt_gd,
-        max_iter,
-        params_init,
-        cost,
-    )
-    end_time = time.time()
-    results["gd_loss_per_iter"] = loss_recording
-    results["gd_duration"] = end_time - start_time
-
-    # Benchmarking: quantum natural gradient
-    print("\nQuantum natural gradient optimizer:")
-    start_time = time.time()
-    opt_qnd = qml.QNGOptimizer(stepsize=lr)
-    params, loss_recording = train(
-        opt_qnd,
-        max_iter,
-        params_init,
-        cost,
-    )
-    end_time = time.time()
-    results["qng_loss_per_iter"] = loss_recording
-    results["qng_duration"] = end_time - start_time
-
-    # Benchmarking: QN-SPSA
-    # To account for the stochastic nature of the optimizer,
-    # the traces are taken multiple times (defined by hyperparameter
-    # SPSA_repeats).
-    print("\nQN-SPSA optimizer:")
-    start_time = time.time()
-    loss_recording = []
-    for j in range(spsa_repeats):
-        print(f"Trace {j}:")
-        opt_qnspsa = QNSPSA(
-            lr=lr,
-            finite_diff_step=1e-2,
-            resamplings=1,
-            blocking=True,
-        )
-        params, loss_per_trace = train(
-            opt_qnspsa,
-            max_iter,
-            params_init,
-            cost,
-        )
-        loss_recording.append(loss_per_trace)
-    end_time = time.time()
-    results["qnspsa_loss_per_iter"] = loss_recording
-    results["qnspsa_duration"] = end_time - start_time
-
-    # Benchmarking: SPSA
     # SPSA optimizer is initialized with the QNSPSA class, with
     # disable_metric_tensor option set to be True.
+    opt_choice = {
+        "GD": qml.GradientDescentOptimizer,
+        "QNG": qml.QNGOptimizer,
+        "QNSPSA": QNSPSA,
+        "SPSA": functools.partial(
+            QNSPSA,
+            blocking=False,
+            disable_metric_tensor=True,
+        ),
+    }
+
+    print(f"{optimizer_name} optimizer:")
+    start_time = time.time()
+    loss_recording = []
 
     # To account for the stochastic nature of the optimizer,
     # the traces are taken multiple times (defined by hyperparameter
     # SPSA_repeats).
-    print("\nSPSA optimizer:")
-    start_time = time.time()
-    loss_recording = []
     for j in range(spsa_repeats):
         print(f"Trace {j}:")
-        opt_spsa = QNSPSA(
-            lr=lr,
-            finite_diff_step=1e-2,
-            resamplings=1,
-            blocking=False,
-            disable_metric_tensor=True,
-        )
+        opt = opt_choice[optimizer_name](stepsize=lr)
+
         params, loss_per_trace = train(
-            opt_spsa,
+            opt,
             max_iter,
             params_init,
             cost,
         )
         loss_recording.append(loss_per_trace)
     end_time = time.time()
-    results["spsa_loss_per_iter"] = loss_recording
-    results["spsa_duration"] = end_time - start_time
+    results[f"{optimizer_name}_loss_per_iter"] = loss_recording
+    results[f"{optimizer_name}_duration"] = end_time - start_time
 
     save_job_result(results)
 

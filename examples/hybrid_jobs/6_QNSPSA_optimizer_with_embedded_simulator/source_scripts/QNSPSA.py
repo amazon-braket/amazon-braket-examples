@@ -12,7 +12,7 @@ class QNSPSA:
     reduced to be a SPSA optimizer.
 
     Args:
-        lr (float): The learn rate.
+        stepsize (float): The learn rate.
         regularization (float): Regularitzation term to the Fubini-Study
             metric tensor for numerical stability.
         finite_diff_step (float): step size to compute the finite difference
@@ -32,7 +32,7 @@ class QNSPSA:
 
     def __init__(
         self,
-        lr=1e-3,
+        stepsize=1e-3,
         regularization=1e-3,
         finite_diff_step=1e-2,
         resamplings=1,
@@ -41,7 +41,7 @@ class QNSPSA:
         disable_metric_tensor=False,
         seed=None,
     ):
-        self.lr = lr
+        self.stepsize = stepsize
         self.reg = regularization
         self.finite_diff_step = finite_diff_step
         self.metric_tensor = None
@@ -129,7 +129,7 @@ class QNSPSA:
             raw_results = qml.execute(grad_tapes, cost.device, None)
             grad = self.__post_process_grad(raw_results, grad_dir)
             grad_avg = grad_avg * i / (i + 1) + grad / (i + 1)
-        return params - self.lr * grad_avg
+        return params - self.stepsize * grad_avg
 
     def __post_process_grad(self, grad_raw_results, grad_dir):
         loss_forward, loss_backward = grad_raw_results
@@ -157,7 +157,7 @@ class QNSPSA:
         grad_vec, params_vec = gradient.reshape(-1), params.reshape(-1)
         new_params_vec = np.linalg.solve(
             self.metric_tensor,
-            (-self.lr * grad_vec + np.matmul(self.metric_tensor, params_vec)),
+            (-self.stepsize * grad_vec + np.matmul(self.metric_tensor, params_vec)),
         )
         return new_params_vec.reshape(params.shape)
 
