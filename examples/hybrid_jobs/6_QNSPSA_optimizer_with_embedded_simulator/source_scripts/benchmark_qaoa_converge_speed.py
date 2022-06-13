@@ -1,6 +1,7 @@
 import os
 
-# update pennylane version to 0.23 for the QAOA benchmarking.
+# update pennylane version to 0.23 for QNG to be compatible with
+# QAOA use cases.
 os.system("pip install pennylane==0.23.0 -q")
 
 import pennylane as qml
