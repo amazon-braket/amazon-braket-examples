@@ -19,7 +19,7 @@ class QNSPSA:
             gradient and the Fubini-Study metric tensor.
         resamplings (int): The number of samples to average for each parameter
             update.
-        blocking (boolean): When set to be True, the optimizer only accept
+        blocking (boolean): When set to be True, the optimizer only accepts
             updates that leads to a loss value no larger than the loss value
             before update, plus a tolerance. The tolerance is set with the
             parameter history_length.
