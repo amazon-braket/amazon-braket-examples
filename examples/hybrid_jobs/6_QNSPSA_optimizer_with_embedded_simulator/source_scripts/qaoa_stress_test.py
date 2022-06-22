@@ -1,8 +1,13 @@
+import subprocess
+
+subprocess.run(["pip", "install", "pennylane==0.24.0", "-q"])
+subprocess.run(["pip", "install", "pennylane-lightning-gpu==0.24.0", "-q"])
+import os
 import pennylane as qml
 from pennylane import numpy as np
 import random
 import json
-import os
+
 from source_scripts.utils import get_device, str2bool, train
 from source_scripts.QNSPSA import QNSPSA
 from braket.jobs import save_job_result
@@ -69,7 +74,7 @@ def main():
     print("\nQN-SPSA optimizer:")
     start_time = time.time()
     opt_qnspsa = QNSPSA(
-        lr=lr,
+        stepsize=lr,
         finite_diff_step=1e-2,
         resamplings=1,
         blocking=True,
