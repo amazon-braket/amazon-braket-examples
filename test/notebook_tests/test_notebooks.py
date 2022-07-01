@@ -28,7 +28,8 @@ test_notebooks = []
 # These notebooks would not be tested.
 EXCLUDED_NOTEBOOKS = [
     "4_Operating_Borealis_beginner_tutorial.ipynb",
-    "bring_your_own_container.ipynb"
+    "bring_your_own_container.ipynb",
+    "qnspsa_with_embedded_simulator.ipynb"
 ]
 
 
