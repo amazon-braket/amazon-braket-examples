@@ -29,7 +29,8 @@ test_notebooks = []
 EXCLUDED_NOTEBOOKS = [
     "4_Operating_Borealis_beginner_tutorial.ipynb",
     "bring_your_own_container.ipynb",
-    "qnspsa_with_embedded_simulator.ipynb"
+    "qnspsa_with_embedded_simulator.ipynb",
+    "Parallelize_training_for_QML.ipynb"
 ]
 
 
