@@ -8,9 +8,11 @@ from pennylane.templates import AmplitudeEmbedding
 
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
+from braket.tracking import Tracker
 
 
 def main():
+    t = Tracker().start()
     np.random.seed(42)
 
     #################### Set up ####################
@@ -50,7 +52,7 @@ def main():
         log_metric(metric_name="Cost", value=cost, iteration_number=i)
 
     weights = [w.tolist() for w in weights]
-    save_job_result({"weights": weights})
+    save_job_result({"weights": weights,"task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
 
 
 class CCQC:
