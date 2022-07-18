@@ -17,7 +17,9 @@ import numpy as np
 from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.jobs import save_job_result
+from braket.tracking import Tracker
 
+t = Tracker().start()
 
 print("Test job started!!!!!")
 
@@ -37,6 +39,6 @@ for _ in range(5):
     counts_list.append(counts)
     print(counts)
 
-save_job_result({"counts": counts_list, "angles": angle_list})
+save_job_result({"counts": counts_list, "angles": angle_list, "task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
 
 print("Test job completed!!!!!")

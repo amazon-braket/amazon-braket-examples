@@ -7,12 +7,14 @@ from scipy.optimize import minimize
 from braket.aws import AwsDevice
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
+from braket.tracking import Tracker
 from qcbm.qcbm import QCBM, mmd_loss
 
 np.random.seed(42)
 
 
 def main():
+    t = Tracker().start()
     print("Starting QCBM basic hybrid job...")
 
     device_arn = os.environ["AMZN_BRAKET_DEVICE_ARN"]
@@ -32,7 +34,7 @@ def main():
     params = train_circuit(device, hyperparams, data)
     print("Final parameters were:", params)
 
-    save_job_result({"params": params.tolist()})
+    save_job_result({"params": params.tolist(),"task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
     print("Saved results. All done.")
 
 

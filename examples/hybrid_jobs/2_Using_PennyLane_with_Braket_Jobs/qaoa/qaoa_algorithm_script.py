@@ -22,6 +22,7 @@ from matplotlib import pyplot as plt
 
 from braket.jobs import load_job_checkpoint, save_job_checkpoint, save_job_result
 from braket.jobs.metrics import log_metric
+from braket.tracking import Tracker
 
 import qaoa.qaoa_utils as qaoa_utils  # isort:skip
 
@@ -41,6 +42,7 @@ def init_pl_device(device_arn, num_nodes, shots, max_parallel):
 
 
 def main():
+    t = Tracker().start()
     # lets see the env variables
     # print statements can be viewed in cloudwatch
     print(os.environ)
@@ -159,7 +161,7 @@ def main():
 
     # We're done with the job, so save the result.
     # This will be returned in job.result()
-    save_job_result({"params": np_params.tolist(), "cost": final_cost})
+    save_job_result({"params": np_params.tolist(), "cost": final_cost,"task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
 
 
 if __name__ == "__main__":
