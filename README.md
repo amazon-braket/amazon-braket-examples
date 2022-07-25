@@ -68,26 +68,26 @@ The repository is structured as follows:
 
 ---
 ## <a name="pennylane">Quantum machine learning and optimization with PennyLane</a>
-  * [**Combining PennyLane with Amazon Braket**](examples/pennylane/0_Getting_started.ipynb)
+  * [**Combining PennyLane with Amazon Braket**](examples/pennylane/0_Getting_started/0_Getting_started.ipynb)
 
     This tutorial shows you how to construct circuits and evaluate their gradients in PennyLane with execution performed using Amazon Braket.
 
-  * [**Computing gradients in parallel with PennyLane-Braket**](examples/pennylane/1_Parallelized_optimization_of_quantum_circuits.ipynb)
+  * [**Computing gradients in parallel with PennyLane-Braket**](examples/pennylane/1_Parallelized_optimization_of_quantum_circuits/1_Parallelized_optimization_of_quantum_circuits.ipynb)
 
     In this tutorial, we explore how to speed up training of quantum circuits by using parallel execution on Amazon Braket. We begin by discussing why quantum circuit training involving gradients requires multiple device executions and motivate how the Braket SV1 simulator can be used to overcome this. The tutorial benchmarks SV1 against a local simulator, showing that SV1 outperforms the local simulator for both executions and gradient calculations. This illustrates how parallel capabilities can be combined between PennyLane and SV1.
 
-  * [**Graph optimization with QAOA**](examples/pennylane/2_Graph_optimization_with_QAOA.ipynb)
+  * [**Graph optimization with QAOA**](examples/pennylane/2_Graph_optimization_with_QAOA/2_Graph_optimization_with_QAOA.ipynb)
 
     In this tutorial we dig deeper into how quantum circuit training can be applied to a problem of practical relevance in graph optimization. We show how easy it is to train a QAOA circuit in PennyLane to solve the maximum clique problem on a simple example graph. The tutorial then extends to a more difficult 20-node graph and uses the parallel capabilities of the Amazon Braket SV1 simulator to speed up gradient calculations and hence train the quantum circuit faster, using around 1-2 minutes per iteration.
 
-  * [**Quantum chemistry with VQE**](examples/pennylane/3_Quantum_chemistry_with_VQE.ipynb)
+  * [**Quantum chemistry with VQE**](examples/pennylane/3_Quantum_chemistry_with_VQE/3_Quantum_chemistry_with_VQE.ipynb)
 
     In this tutorial, we see how PennyLane and Amazon Braket can be combined to solve an important problem in quantum chemistry. The ground state energy of molecular hydrogen is calculated by optimizing a VQE circuit using the local Braket simulator. This tutorial highlights how qubit-wise commuting observables can be measured together in PennyLane and Braket, making optimization more efficient.
 
 ---
 ## <a name="annealing">Quantum annealing with D-Wave</a>
 
-  * [**Anatomy of annealing with Ocean**](examples/quantum_annealing/Dwave_Anatomy.ipynb)
+  * [**Anatomy of annealing with Ocean**](examples/quantum_annealing/Dwave_Anatomy/Dwave_Anatomy.ipynb)
 
     This tutorial notebook dives deep into the anatomy of quantum annealing with D-Wave on Amazon Braket. First, we introduce the concept of quantum annealing, as used by D-Wave. We apply annealing to an optimization problem, to find the (approximate) optimum probabilistically. We then discuss the underlying structures of D-Wave QPUs, including the Chimera graph for the 2000Q system and the Pegasus graph for the Advantage system. We explain the problem of finding an embedding of the original problem onto the sparse graph of a device, and discuss the distinction between logical and physical variables. Finally, we solve an example QUBO problem to analyze the sampling process, and we provide a breakdown of the QPU access time.
 
@@ -107,7 +107,7 @@ The repository is structured as follows:
 
     This tutorial solves a small instance of a graph partitioning problem using a D-Wave device on Amazon Braket. The derivation for this QUBO problem is nicely explained here: https://github.com/dwave-examples/graph-partitioning.
 
-  * [**Factoring**](examples/quantum_annealing/Dwave_Factoring/Dwave_factoring.ipynb)
+  * [**Factoring**](examples/quantum_annealing/Dwave_Factoring/Dwave_factoring/Dwave_factoring.ipynb)
 
     This tutorial shows how to solve a constraint satisfaction problem (CSP) problem, with the example of factoring, using a D-Wave device on Amazon Braket. Particularly, factoring is expressed as a CSP using Boolean logic operations, and it is converted to a binary quadratic model that can be solved by a D-Wave device.
 
