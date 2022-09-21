@@ -31,6 +31,37 @@ def show_global_drive(drive):
     axes[-1].set_xlabel('time [s]')
     plt.tight_layout()
     
+def show_local_shift(shift):
+    data = shift.magnitude.time_series
+    pattern = shift.magnitude.pattern.series
+    
+    plt.plot(data.times(), data.values(), '.-', label="pattern: " + str(pattern))
+    plt.xlabel('time [s]')
+    plt.ylabel('shift [rad/s]')
+    plt.legend()
+    plt.tight_layout()
+    
+def show_drive_and_shift(drive, shift):
+    drive_data = {
+        'amplitude [rad/s]': drive.amplitude.time_series,
+        'detuning [rad/s]': drive.detuning.time_series,
+        'phase [rad]': drive.phase.time_series,
+    }
+    
+    fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
+    for ax, data_name in zip(axes, drive_data.keys()):
+        ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
+        ax.set_ylabel(data_name)
+        ax.grid(ls=':')
+        
+    shift_data = shift.magnitude.time_series
+    pattern = shift.magnitude.pattern.series   
+    axes[-1].plot(shift_data.times(), shift_data.values(), '.-', label="pattern: " + str(pattern))
+    axes[-1].set_ylabel('shift [rad/s]')
+    axes[-1].set_xlabel('time [s]')
+    axes[-1].legend()
+    axes[-1].grid()
+    plt.tight_layout()
     
 def get_avg_density(result):
     measurements = result.measurements
