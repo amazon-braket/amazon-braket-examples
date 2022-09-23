@@ -103,7 +103,7 @@ def show_drive_and_shift(drive, shift):
     
 def get_avg_density(result):
     measurements = result.measurements
-    postSeqs = [measurement.shotResult.postSequence for measurement in measurements]
+    postSeqs = [measurement.post_sequence for measurement in measurements]
     postSeqs = 1 - np.array(postSeqs) # change the notation such 1 for rydberg state, and 0 for ground state
     
     avg_density = np.sum(postSeqs, axis=0)/len(postSeqs)
