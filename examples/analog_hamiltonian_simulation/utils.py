@@ -35,11 +35,11 @@ def get_drive(times, amplitude_values, detuning_values, phase_values):
         detuning.put(t, detuning_value)
         phase.put(t, phase_value) 
 
-        drive = DrivingField(
-            amplitude=amplitude, 
-            detuning=detuning, 
-            phase=phase
-        )    
+    drive = DrivingField(
+        amplitude=amplitude, 
+        detuning=detuning, 
+        phase=phase
+    )    
     
     return drive
 
