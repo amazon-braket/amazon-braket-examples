@@ -7,19 +7,24 @@ from braket.ahs.shifting_field import ShiftingField
 from braket.ahs.field import Field
 from braket.ahs.pattern import Pattern
 
-def show_register(register, blockade_radius=0.0):
+def show_register(register, blockade_radius=0.0, what_to_draw="bond"):
     filled_sites = [site.coordinate for site in register if site.site_type == SiteType.FILLED]
     fig = plt.figure(figsize=(7, 7))
     plt.plot(np.array(filled_sites)[:, 0], np.array(filled_sites)[:, 1], 'r.', ms=15, label='filled')
     plt.legend(bbox_to_anchor=(1.1, 1.05))
     
-    if blockade_radius > 0:
+    if blockade_radius > 0 and what_to_draw=="bond":
         for i in range(len(filled_sites)):
             for j in range(i+1, len(filled_sites)):            
                 dist = np.linalg.norm(np.array(filled_sites[i]) - np.array(filled_sites[j]))
                 if dist <= blockade_radius:
                     plt.plot([filled_sites[i][0], filled_sites[j][0]], [filled_sites[i][1], filled_sites[j][1]], 'b')
-
+                    
+    if blockade_radius > 0 and what_to_draw=="circle":
+        for site in filled_sites:
+            plt.gca().add_patch( plt.Circle((site[0],site[1]), blockade_radius, color="b", alpha=0.3) )
+        plt.gca().set_aspect(1)
+        
 
 def get_drive(times, amplitude_values, detuning_values, phase_values):
     assert len(times) == len(amplitude_values)
