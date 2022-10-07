@@ -7,11 +7,20 @@ from braket.ahs.shifting_field import ShiftingField
 from braket.ahs.field import Field
 from braket.ahs.pattern import Pattern
 
-def show_register(register, blockade_radius=0.0, what_to_draw="bond"):
+def show_register(register, blockade_radius=0.0, what_to_draw="bond", show_atom_index=True):
     filled_sites = [site.coordinate for site in register if site.site_type == SiteType.FILLED]
+    empty_sites = [site.coordinate for site in register if site.site_type == SiteType.VACANT]
+    
     fig = plt.figure(figsize=(7, 7))
-    plt.plot(np.array(filled_sites)[:, 0], np.array(filled_sites)[:, 1], 'r.', ms=15, label='filled')
+    if filled_sites:
+        plt.plot(np.array(filled_sites)[:, 0], np.array(filled_sites)[:, 1], 'r.', ms=15, label='filled')
+    if empty_sites:
+        plt.plot(np.array(empty_sites)[:, 0], np.array(empty_sites)[:, 1], 'k.', ms=5, label='empty')
     plt.legend(bbox_to_anchor=(1.1, 1.05))
+    
+    if show_atom_index:
+        for idx, site in enumerate(register):
+            plt.text(*site.coordinate, f"  {idx}", fontsize=12)
     
     if blockade_radius > 0 and what_to_draw=="bond":
         for i in range(len(filled_sites)):
@@ -93,7 +102,10 @@ def show_drive_and_shift(drive, shift):
     
     fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
     for ax, data_name in zip(axes, drive_data.keys()):
-        ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
+        if data_name == 'phase [rad]':
+            ax.step(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
+        else:
+            ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
         ax.set_ylabel(data_name)
         ax.grid(ls=':')
         
