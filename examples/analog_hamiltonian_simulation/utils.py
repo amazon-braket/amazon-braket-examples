@@ -77,7 +77,10 @@ def show_global_drive(drive):
     
     fig, axes = plt.subplots(3, 1, figsize=(7, 7), sharex=True)
     for ax, data_name in zip(axes, data.keys()):
-        ax.plot(data[data_name].times(), data[data_name].values(), '.-')
+        if data_name == 'phase [rad]':
+            ax.step(data[data_name].times(), data[data_name].values(), '.-', where='post')
+        else:
+            ax.plot(data[data_name].times(), data[data_name].values(), '.-')
         ax.set_ylabel(data_name)
         ax.grid(ls=':')
     axes[-1].set_xlabel('time [s]')
@@ -103,7 +106,7 @@ def show_drive_and_shift(drive, shift):
     fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
     for ax, data_name in zip(axes, drive_data.keys()):
         if data_name == 'phase [rad]':
-            ax.step(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
+            ax.step(drive_data[data_name].times(), drive_data[data_name].values(), '.-', where='post')
         else:
             ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
         ax.set_ylabel(data_name)
