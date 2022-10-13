@@ -129,8 +129,8 @@ def get_counts(result):
         A count of strings (of length = # of atoms) are returned, where
         each character denotes the state of an atom (site):
             e: empty site
-            r: Rydberg state spin
-            g: ground state spin
+            r: Rydberg state atom
+            g: ground state atom
 
         Args:
             result (braket.tasks.analog_hamiltonian_simulation_quantum_task_result.AnalogHamiltonianSimulationQuantumTaskResult)
