@@ -6,6 +6,7 @@ from braket.ahs.driving_field import DrivingField
 from braket.ahs.shifting_field import ShiftingField
 from braket.ahs.field import Field
 from braket.ahs.pattern import Pattern
+from collections import Counter
 
 def show_register(register, blockade_radius=0.0, what_to_draw="bond", show_atom_index=True):
     filled_sites = [site.coordinate for site in register if site.site_type == SiteType.FILLED]
@@ -120,6 +121,38 @@ def show_drive_and_shift(drive, shift):
     axes[-1].legend()
     axes[-1].grid()
     plt.tight_layout()
+    
+
+def get_counts(result):
+    """Aggregate state counts from AHS shot results
+
+        A count of strings (of length = # of atoms) are returned, where
+        each character denotes the state of an atom (site):
+            e: empty site
+            r: Rydberg state spin
+            g: ground state spin
+
+        Args:
+            result (braket.tasks.analog_hamiltonian_simulation_quantum_task_result.AnalogHamiltonianSimulationQuantumTaskResult)
+
+        Returns:
+            dict: number of times each state configuration is measured
+
+    """
+
+    state_counts = Counter()
+    states = ['e', 'r', 'g']
+    for shot in result.measurements:
+        pre = shot.pre_sequence
+        post = shot.post_sequence
+        state_idx = np.array(pre) * (1 + np.array(post))
+        state = "".join(map(lambda s_idx: states[s_idx], state_idx))
+        state_counts.update((state,))
+
+    return dict(state_counts)
+
+
+# counts = get_counts(result)    
     
 def get_avg_density(result):
     measurements = result.measurements
