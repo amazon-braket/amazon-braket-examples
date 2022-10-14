@@ -151,8 +151,37 @@ def get_counts(result):
 
     return dict(state_counts)
 
+def create_time_series(tv_pairs):
+    ts = TimeSeries()
+    for t,v in tv_pairs:
+        ts.put(t, v)
+    return ts
 
-# counts = get_counts(result)    
+def zero_time_series_like(other_time_series):
+    ts = TimeSeries()
+    for t in other_time_series.times():
+        ts.put(t, 0.0)
+    return ts
+
+def rabi_pulse(
+    rabi_phase, 
+    omega_max,
+    omega_slew_rate_max
+):
+    phase_threshold = omega_max**2 / omega_slew_rate_max
+    if rabi_phase <= phase_threshold:
+        t_ramp = np.sqrt(rabi_phase / omega_slew_rate_max)
+        t_plateau = 0
+    else:
+        t_ramp = omega_max / omega_slew_rate_max
+        t_plateau = (rabi_phase / omega_max) - t_ramp
+    t_pules = 2 * t_ramp + t_plateau
+    time_points = [0, t_ramp, t_ramp + t_plateau, t_pules]
+    amplitude_values = [0, t_ramp * omega_slew_rate_max, t_ramp * omega_slew_rate_max, 0]
+    
+#     return list(zip(times, amplitude_values))
+    return time_points, amplitude_values
+
     
 def get_avg_density(result):
     measurements = result.measurements
