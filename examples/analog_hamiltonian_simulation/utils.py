@@ -6,6 +6,7 @@ from braket.ahs.driving_field import DrivingField
 from braket.ahs.shifting_field import ShiftingField
 from braket.ahs.field import Field
 from braket.ahs.pattern import Pattern
+from collections import Counter
 
 def show_register(register, blockade_radius=0.0, what_to_draw="bond", show_atom_index=True):
     filled_sites = [site.coordinate for site in register if site.site_type == SiteType.FILLED]
@@ -120,6 +121,67 @@ def show_drive_and_shift(drive, shift):
     axes[-1].legend()
     axes[-1].grid()
     plt.tight_layout()
+    
+
+def get_counts(result):
+    """Aggregate state counts from AHS shot results
+
+        A count of strings (of length = # of atoms) are returned, where
+        each character denotes the state of an atom (site):
+            e: empty site
+            r: Rydberg state atom
+            g: ground state atom
+
+        Args:
+            result (braket.tasks.analog_hamiltonian_simulation_quantum_task_result.AnalogHamiltonianSimulationQuantumTaskResult)
+
+        Returns:
+            dict: number of times each state configuration is measured
+
+    """
+
+    state_counts = Counter()
+    states = ['e', 'r', 'g']
+    for shot in result.measurements:
+        pre = shot.pre_sequence
+        post = shot.post_sequence
+        state_idx = np.array(pre) * (1 + np.array(post))
+        state = "".join(map(lambda s_idx: states[s_idx], state_idx))
+        state_counts.update((state,))
+
+    return dict(state_counts)
+
+def create_time_series(tv_pairs):
+    ts = TimeSeries()
+    for t,v in tv_pairs:
+        ts.put(t, v)
+    return ts
+
+def zero_time_series_like(other_time_series):
+    ts = TimeSeries()
+    for t in other_time_series.times():
+        ts.put(t, 0.0)
+    return ts
+
+def rabi_pulse(
+    rabi_phase, 
+    omega_max,
+    omega_slew_rate_max
+):
+    phase_threshold = omega_max**2 / omega_slew_rate_max
+    if rabi_phase <= phase_threshold:
+        t_ramp = np.sqrt(rabi_phase / omega_slew_rate_max)
+        t_plateau = 0
+    else:
+        t_ramp = omega_max / omega_slew_rate_max
+        t_plateau = (rabi_phase / omega_max) - t_ramp
+    t_pules = 2 * t_ramp + t_plateau
+    time_points = [0, t_ramp, t_ramp + t_plateau, t_pules]
+    amplitude_values = [0, t_ramp * omega_slew_rate_max, t_ramp * omega_slew_rate_max, 0]
+    
+#     return list(zip(times, amplitude_values))
+    return time_points, amplitude_values
+
     
 def get_avg_density(result):
     measurements = result.measurements
