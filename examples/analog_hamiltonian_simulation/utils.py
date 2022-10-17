@@ -8,7 +8,26 @@ from braket.ahs.field import Field
 from braket.ahs.pattern import Pattern
 from collections import Counter
 
-def show_register(register, blockade_radius=0.0, what_to_draw="bond", show_atom_index=True):
+from typing import Dict, List, Tuple
+from braket.tasks.analog_hamiltonian_simulation_quantum_task_result import AnalogHamiltonianSimulationQuantumTaskResult
+from braket.ahs.atom_arrangement import AtomArrangement
+
+def show_register(
+    register: AtomArrangement, 
+    blockade_radius: float=0.0, 
+    what_to_draw: str="bond", 
+    show_atom_index:bool=True
+):
+    """Plot the given register 
+
+        Args:
+            register (AtomArrangement): A given register
+            blockade_radius (float): The blockade radius for the register. Default is 0
+            what_to_draw (str): Either "bond" or "circle" to indicate the blockade region. 
+                Default is "bond"
+            show_atom_index (bool): Whether showing the indices of the atoms. Default is True
+        
+    """
     filled_sites = [site.coordinate for site in register if site.site_type == SiteType.FILLED]
     empty_sites = [site.coordinate for site in register if site.site_type == SiteType.VACANT]
     
@@ -32,11 +51,17 @@ def show_register(register, blockade_radius=0.0, what_to_draw="bond", show_atom_
                     
     if blockade_radius > 0 and what_to_draw=="circle":
         for site in filled_sites:
-            plt.gca().add_patch( plt.Circle((site[0],site[1]), blockade_radius, color="b", alpha=0.3) )
+            plt.gca().add_patch( plt.Circle((site[0],site[1]), blockade_radius/2, color="b", alpha=0.3) )
         plt.gca().set_aspect(1)
         
     
-def show_drive_and_shift(drive, shift):
+def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
+    """Plot the driving and shifting fields
+
+        Args:
+            drive (DrivingField): The driving field to be plot
+            shift (ShiftingField): The shifting field to be plot
+    """        
     drive_data = {
         'amplitude [rad/s]': drive.amplitude.time_series,
         'detuning [rad/s]': drive.detuning.time_series,
@@ -62,17 +87,41 @@ def show_drive_and_shift(drive, shift):
     plt.tight_layout()
     
 
-def zero_time_series_like(other_time_series):
+def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
+    """Obtain a zero time series with the same time points as the given time series
+
+        Args:
+            other_time_series (TimeSeries): The given time series
+
+        Returns:
+            TimeSeries: A zero time series with the same time points as the given time series
+    """            
     ts = TimeSeries()
     for t in other_time_series.times():
         ts.put(t, 0.0)
     return ts
 
 def rabi_pulse(
-    rabi_phase, 
-    omega_max,
-    omega_slew_rate_max
-):
+    rabi_phase: float, 
+    omega_max: float,
+    omega_slew_rate_max: float
+) -> Tuple[List[float], List[float]]:
+    """Get a time series for Rabi frequency with specified Rabi phase, maximum amplitude
+    and maximum slew rate
+
+        Args:
+            rabi_phase (float): The Rabi phase 
+            omega_max (float): The maximum amplitude 
+            omega_slew_rate_max (float): The maximum slew rate
+
+        Returns:
+            Tuple[List[float], List[float]]: A tuple containing the time points and values
+                of the time series for the time dependent Rabi frequency
+
+        Notes: By Rabi phase, it means the integral of the amplitude of a time-dependent 
+            Rabi frequency, \int_0^T\Omega(t)dt, where T is the duration.
+    """
+
     phase_threshold = omega_max**2 / omega_slew_rate_max
     if rabi_phase <= phase_threshold:
         t_ramp = np.sqrt(rabi_phase / omega_slew_rate_max)
@@ -87,6 +136,12 @@ def rabi_pulse(
     return time_points, amplitude_values
 
 def show_global_drive(drive):
+    """Plot the driving field
+
+        Args:
+            drive (DrivingField): The driving field to be plot
+    """   
+
     data = {
         'amplitude [rad/s]': drive.amplitude.time_series,
         'detuning [rad/s]': drive.detuning.time_series,
@@ -105,21 +160,20 @@ def show_global_drive(drive):
     plt.tight_layout()
             
 
-def get_counts(result):
+def get_counts(result: AnalogHamiltonianSimulationQuantumTaskResult) -> Dict[str, int]:
     """Aggregate state counts from AHS shot results
 
-        A count of strings (of length = # of atoms) are returned, where
-        each character denotes the state of an atom (site):
+        Args:
+            result (AnalogHamiltonianSimulationQuantumTaskResult): The result 
+                from which the aggregated state counts are obtained
+
+        Returns:
+            Dict[str, int]: number of times each state configuration is measured
+
+        Notes: We use the following convention to denote the state of an atom (site):
             e: empty site
             r: Rydberg state atom
             g: ground state atom
-
-        Args:
-            result (braket.tasks.analog_hamiltonian_simulation_quantum_task_result.AnalogHamiltonianSimulationQuantumTaskResult)
-
-        Returns:
-            dict: number of times each state configuration is measured
-
     """
 
     state_counts = Counter()
@@ -134,7 +188,24 @@ def get_counts(result):
     return dict(state_counts)
 
 
-def get_drive(times, amplitude_values, detuning_values, phase_values):
+def get_drive(
+    times: List[float], 
+    amplitude_values: List[float], 
+    detuning_values: List[float], 
+    phase_values: List[float]
+) -> DrivingField:
+    """Get the driving field from a set of time points and values of the fields
+
+        Args:
+            times (List[float]): The time points of the driving field
+            amplitude_values (List[float]): The values of the amplitude
+            detuning_values (List[float]): The values of the detuning
+            phase_values (List[float]): The values of the phase
+
+        Returns:
+            DrivingField: The driving field obtained
+    """
+
     assert len(times) == len(amplitude_values)
     assert len(times) == len(detuning_values)
     assert len(times) == len(phase_values)
@@ -157,24 +228,17 @@ def get_drive(times, amplitude_values, detuning_values, phase_values):
     return drive
 
 
-def get_avg_density(result):
-    measurements = result.measurements
-    postSeqs = [measurement.post_sequence for measurement in measurements]
-    postSeqs = 1 - np.array(postSeqs) # change the notation such 1 for rydberg state, and 0 for ground state
-    
-    avg_density = np.sum(postSeqs, axis=0)/len(postSeqs)
-    
-    return avg_density
+def get_shift(times: List[float], values: List[float], pattern: List[float]) -> ShiftingField:
+    """Get the shifting field from a set of time points, values and pattern
 
-def show_final_avg_density(result):
-    avg_density = get_avg_density(result)
-    
-    plt.bar(range(len(avg_density)), avg_density)
-    plt.xlabel("Indices of atoms")
-    plt.ylabel("Average Rydberg density")
+        Args:
+            times (List[float]): The time points of the shifting field
+            values (List[float]): The values of the shifting field
+            pattern (List[float]): The pattern of the shifting field
 
-
-def get_shift(times, values, pattern):
+        Returns:
+            ShiftingField: The shifting field obtained
+    """    
     assert len(times) == len(values)    
     
     magnitude = TimeSeries()
@@ -183,3 +247,38 @@ def get_shift(times, values, pattern):
     shift = ShiftingField(Field(magnitude, Pattern(pattern)))
 
     return shift
+
+
+
+def get_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult) -> np.ndarray:
+    """Get the average Rydberg densities from the result
+
+        Args:
+            result (AnalogHamiltonianSimulationQuantumTaskResult): The result 
+                from which the aggregated state counts are obtained
+
+        Returns: 
+            ndarray: The average densities from the result
+    """    
+
+    measurements = result.measurements
+    postSeqs = [measurement.post_sequence for measurement in measurements]
+    postSeqs = 1 - np.array(postSeqs) # change the notation such 1 for rydberg state, and 0 for ground state
+    
+    avg_density = np.sum(postSeqs, axis=0)/len(postSeqs)
+    
+    return avg_density
+
+def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult):
+    """Showing a bar plot for the average Rydberg densities from the result
+
+        Args:
+            result (AnalogHamiltonianSimulationQuantumTaskResult): The result 
+                from which the aggregated state counts are obtained
+    """    
+    avg_density = get_avg_density(result)
+    
+    plt.bar(range(len(avg_density)), avg_density)
+    plt.xlabel("Indices of atoms")
+    plt.ylabel("Average Rydberg density")
+
