@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import networkx as nx
 from braket.ahs.atom_arrangement import SiteType
 from braket.ahs.time_series import TimeSeries
 from braket.ahs.driving_field import DrivingField
@@ -206,7 +207,7 @@ def plot_avg_density(result, register):
     
     # construct graph
     g = nx.Graph()
-    g.add_nodes_from(list(range(len(avg_densities))))
+    g.add_nodes_from(list(range(len(densities))))
     
     # display
     fig, ax = plt.subplots()
