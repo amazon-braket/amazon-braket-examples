@@ -190,15 +190,40 @@ def constant_time_series(other_time_series, constant=0.0):
         ts.put(t, constant)
     return ts
 
-def plot_avg_density(result, register):
+def plot_avg_density_2D(result, register, batch_index=None, batch_mapping=None):
+    
     # get atom coordinates
     atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
     
-    # get Rydberg Densities
-    densities = get_avg_density(result)
-    
-    # create positions for networkx
-    pos = {i:coord for i,coord in enumerate(atom_coords)}
+    plot_fov = False
+    plot_single_batch = False
+    plot_avg_of_avgs = False
+        
+    if batch_index is not None:
+        if batch_mapping is not None:
+                plot_single_batch = True
+                # provided both batch and batch_mapping, show averages of single batch
+                batch_subindices = batch_mapping[batch_index]
+                batch_labels = {i:label for i,label in enumerate(batch_subindices)}
+                # get relevant densities
+                densities = [densities[atom_index] for atom_index in batch_subindices]
+                # get proper positions
+                pos = {batch_subindex:atom_coords[i] for batch_subindex in batch_subindices}
+        else:
+            raise Exception("batch_mapping required to index into")
+    else:
+        if batch_mapping is not None:
+            plot_avg_of_avgs = True
+            # do average of averages
+            densities = get_avg_of_avg_density(result, batch_mapping)
+            # just need the coordinates for first batch_mapping
+            pos = {i:coord for i,coord in enumerate(batch_mapping[(0,0)])}                                     
+        else:
+            plot_fov = True
+            densities = get_avg_density(result)
+            pos = {i:coord for i,coord in enumerate(atom_coords)}
+            # both not provided just do standard fov
+            
     
     # get colors
     vmin = min(densities)
@@ -209,8 +234,9 @@ def plot_avg_density(result, register):
     g = nx.Graph()
     g.add_nodes_from(list(range(len(densities))))
     
-    # display
+
     fig, ax = plt.subplots()
+    
     nx.draw(g, 
             pos,
             node_color=densities,
@@ -218,14 +244,65 @@ def plot_avg_density(result, register):
             node_shape="o",
             vmin=vmin,
             vmax=vmax,
+            labels= batch_labels if plot_single_batch else None, 
             with_labels=True,
             ax = ax)
+                
+        
     ## Set axes
-    ax.set_axis_on()
-    ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True)
+    if plot_fov or plot_single_batch:
+        ax.set_axis_on()
+        ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True)
     ## Set colorbar
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
     sm.set_array([])
-    plt.colorbar(sm, ax=ax, label="Rydberg Density")
+    
+    
+    if plot_avg_of_avgs:
+        cbar_label = "Averaged Rydberg Density"
+    else:
+        cbar_label = "Rydberg Density"
+        
+    plt.colorbar(sm, ax=ax, label=cbar_label)
     
     return fig,ax
+
+# def plot_avg_density(result, register):
+#     # get atom coordinates
+#     atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
+    
+#     # get Rydberg Densities
+#     densities = get_avg_density(result)
+    
+#     # create positions for networkx
+#     pos = {i:coord for i,coord in enumerate(atom_coords)}
+    
+#     # get colors
+#     vmin = min(densities)
+#     vmax = max(densities)
+#     cmap = plt.cm.Blues
+    
+#     # construct graph
+#     g = nx.Graph()
+#     g.add_nodes_from(list(range(len(densities))))
+    
+#     # display
+#     fig, ax = plt.subplots()
+#     nx.draw(g, 
+#             pos,
+#             node_color=densities,
+#             cmap=cmap,
+#             node_shape="o",
+#             vmin=vmin,
+#             vmax=vmax,
+#             with_labels=True,
+#             ax = ax)
+#     ## Set axes
+#     ax.set_axis_on()
+#     ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True)
+#     ## Set colorbar
+#     sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
+#     sm.set_array([])
+#     plt.colorbar(sm, ax=ax, label="Rydberg Density")
+    
+#     return fig,ax
