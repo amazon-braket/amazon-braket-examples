@@ -104,7 +104,7 @@ def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
     return ts
 
 def rabi_pulse(
-    rabi_phase: float, 
+    rabi_pulse_area: float, 
     omega_max: float,
     omega_slew_rate_max: float
 ) -> Tuple[List[float], List[float]]:
@@ -112,7 +112,7 @@ def rabi_pulse(
     and maximum slew rate
 
         Args:
-            rabi_phase (float): The Rabi phase 
+            rabi_pulse_area (float): Total area under the Rabi frequency time series
             omega_max (float): The maximum amplitude 
             omega_slew_rate_max (float): The maximum slew rate
 
@@ -125,12 +125,12 @@ def rabi_pulse(
     """
 
     phase_threshold = omega_max**2 / omega_slew_rate_max
-    if rabi_phase <= phase_threshold:
-        t_ramp = np.sqrt(rabi_phase / omega_slew_rate_max)
+    if rabi_pulse_area <= phase_threshold:
+        t_ramp = np.sqrt(rabi_pulse_area / omega_slew_rate_max)
         t_plateau = 0
     else:
         t_ramp = omega_max / omega_slew_rate_max
-        t_plateau = (rabi_phase / omega_max) - t_ramp
+        t_plateau = (rabi_pulse_area / omega_max) - t_ramp
     t_pules = 2 * t_ramp + t_plateau
     time_points = [0, t_ramp, t_ramp + t_plateau, t_pules]
     amplitude_values = [0, t_ramp * omega_slew_rate_max, t_ramp * omega_slew_rate_max, 0]
