@@ -53,6 +53,7 @@ def show_register(
         for site in filled_sites:
             plt.gca().add_patch( plt.Circle((site[0],site[1]), blockade_radius/2, color="b", alpha=0.3) )
         plt.gca().set_aspect(1)
+    plt.show()
         
     
 def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
@@ -85,6 +86,7 @@ def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
     axes[-1].legend()
     axes[-1].grid()
     plt.tight_layout()
+    plt.show()
     
 
 def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
@@ -158,6 +160,7 @@ def show_global_drive(drive):
         ax.grid(ls=':')
     axes[-1].set_xlabel('time [s]')
     plt.tight_layout()
+    plt.show()
             
 
 def get_counts(result: AnalogHamiltonianSimulationQuantumTaskResult) -> Dict[str, int]:
@@ -281,4 +284,4 @@ def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult)
     plt.bar(range(len(avg_density)), avg_density)
     plt.xlabel("Indices of atoms")
     plt.ylabel("Average Rydberg density")
-
+    plt.show()
