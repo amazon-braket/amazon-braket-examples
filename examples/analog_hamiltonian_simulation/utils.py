@@ -256,8 +256,8 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
                        right=True,
                        labelleft=True, 
                        labelbottom=True, 
-                       labeltop=True,
-                       labelright=True,
+                       # labeltop=True,
+                       # labelright=True,
                        direction="in")
     ## Set colorbar
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
