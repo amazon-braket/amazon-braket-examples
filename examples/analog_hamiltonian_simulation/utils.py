@@ -34,9 +34,104 @@ def show_register(register, blockade_radius=0.0, what_to_draw="bond", show_atom_
         for site in filled_sites:
             plt.gca().add_patch( plt.Circle((site[0],site[1]), blockade_radius, color="b", alpha=0.3) )
         plt.gca().set_aspect(1)
-        
+    plt.show()
 
-def get_drive(times, amplitude_values, detuning_values, phase_values):
+
+def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
+    """Obtain a zero time series with the same time points as the given time series
+
+        Args:
+            other_time_series (TimeSeries): The given time series
+
+        Returns:
+            TimeSeries: A zero time series with the same time points as the given time series
+    """            
+    ts = TimeSeries()
+    for t in other_time_series.times():
+        ts.put(t, 0.0)
+    return ts
+
+
+def rabi_pulse(
+    rabi_phase: float, 
+    omega_max: float,
+    omega_slew_rate_max: float
+) -> Tuple[List[float], List[float]]:
+    """Get a time series for Rabi frequency with specified Rabi phase, maximum amplitude
+    and maximum slew rate
+
+        Args:
+            rabi_phase (float): The Rabi phase 
+            omega_max (float): The maximum amplitude 
+            omega_slew_rate_max (float): The maximum slew rate
+
+        Returns:
+            Tuple[List[float], List[float]]: A tuple containing the time points and values
+                of the time series for the time dependent Rabi frequency
+
+        Notes: By Rabi phase, it means the integral of the amplitude of a time-dependent 
+            Rabi frequency, \int_0^T\Omega(t)dt, where T is the duration.
+    """
+
+    phase_threshold = omega_max**2 / omega_slew_rate_max
+    if rabi_phase <= phase_threshold:
+        t_ramp = np.sqrt(rabi_phase / omega_slew_rate_max)
+        t_plateau = 0
+    else:
+        t_ramp = omega_max / omega_slew_rate_max
+        t_plateau = (rabi_phase / omega_max) - t_ramp
+    t_pules = 2 * t_ramp + t_plateau
+    time_points = [0, t_ramp, t_ramp + t_plateau, t_pules]
+    amplitude_values = [0, t_ramp * omega_slew_rate_max, t_ramp * omega_slew_rate_max, 0]
+    
+    return time_points, amplitude_values
+
+
+def get_counts(result: AnalogHamiltonianSimulationQuantumTaskResult) -> Dict[str, int]:
+    """Aggregate state counts from AHS shot results
+
+        Args:
+            result (AnalogHamiltonianSimulationQuantumTaskResult): The result 
+                from which the aggregated state counts are obtained
+
+        Returns:
+            Dict[str, int]: number of times each state configuration is measured
+
+        Notes: We use the following convention to denote the state of an atom (site):
+            e: empty site
+            r: Rydberg state atom
+            g: ground state atom
+    """
+
+    state_counts = Counter()
+    states = ['e', 'r', 'g']
+    for shot in result.measurements:
+        pre = shot.pre_sequence
+        post = shot.post_sequence
+        state_idx = np.array(pre) * (1 + np.array(post))
+        state = "".join(map(lambda s_idx: states[s_idx], state_idx))
+        state_counts.update((state,))
+
+    return dict(state_counts)
+
+
+def get_drive(
+    times: List[float], 
+    amplitude_values: List[float], 
+    detuning_values: List[float], 
+    phase_values: List[float]
+) -> DrivingField:
+    """Get the driving field from a set of time points and values of the fields
+
+        Args:
+            times (List[float]): The time points of the driving field
+            amplitude_values (List[float]): The values of the amplitude
+            detuning_values (List[float]): The values of the detuning
+            phase_values (List[float]): The values of the phase
+
+        Returns:
+            DrivingField: The driving field obtained
+    """
     assert len(times) == len(amplitude_values)
     assert len(times) == len(detuning_values)
     assert len(times) == len(phase_values)
@@ -69,7 +164,15 @@ def get_shift(times, values, pattern):
 
     return shift
                     
-def show_global_drive(drive,axes=None,**plot_ops):
+def show_global_drive(drive, axes=None, **plot_ops):
+    """Plot the driving field
+
+        Args:
+            drive (DrivingField): The driving field to be plot
+            axes: matplotlib axis to draw on
+            **plot_ops: options passed to matplitlib.pyplot.plot
+    """   
+
     data = {
         'amplitude [rad/s]': drive.amplitude.time_series,
         'detuning [rad/s]': drive.detuning.time_series,
@@ -90,6 +193,7 @@ def show_global_drive(drive,axes=None,**plot_ops):
     axes[-1].set_xlabel('time [s]')
     plt.tight_layout()
     return axes
+
     
 def show_local_shift(shift):
     data = shift.magnitude.time_series
@@ -101,7 +205,13 @@ def show_local_shift(shift):
     plt.legend()
     plt.tight_layout()
     
-def show_drive_and_shift(drive, shift):
+def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
+    """Plot the driving and shifting fields
+
+        Args:
+            drive (DrivingField): The driving field to be plot
+            shift (ShiftingField): The shifting field to be plot
+    """        
     drive_data = {
         'amplitude [rad/s]': drive.amplitude.time_series,
         'detuning [rad/s]': drive.detuning.time_series,
@@ -125,6 +235,7 @@ def show_drive_and_shift(drive, shift):
     axes[-1].legend()
     axes[-1].grid()
     plt.tight_layout()
+    plt.show()
     
 def get_avg_density(result):
     measurements = result.measurements
@@ -141,7 +252,9 @@ def show_final_avg_density(result):
     plt.bar(range(len(avg_density)), avg_density)
     plt.xlabel("Indices of atoms")
     plt.ylabel("Average Rydberg density")
-    
+    plt.show()
+
+
 def concatenate_time_series(time_series_1, time_series_2):
     assert time_series_1.values()[-1] == time_series_2.values()[0]
     
