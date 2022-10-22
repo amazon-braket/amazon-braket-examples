@@ -190,6 +190,9 @@ def constant_time_series(other_time_series, constant=0.0):
         ts.put(t, constant)
     return ts
 
+import matplotlib.pyplot as plt
+import networkx as nx
+
 def plot_avg_density_2D(densities, register, with_labels = True, batch_index=None, batch_mapping=None):
     
     # get atom coordinates
@@ -215,7 +218,9 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
         if batch_mapping is not None:
             plot_avg_of_avgs = True
             # just need the coordinates for first batch_mapping
-            pos = {i:coord for i,coord in enumerate(batch_mapping[(0,0)])}                                     
+            ##
+            subcoordinates = np.array(atom_coords)[batch_mapping[(0,0)]]
+            pos = {i:coord for i,coord in enumerate(subcoordinates)}                                     
         else:
             # both not provided just do standard fov
             plot_fov = True
@@ -242,7 +247,7 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
             node_shape="o",
             vmin=vmin,
             vmax=vmax,
-            font_size=10,
+            font_size=9,
             with_labels=with_labels,
             labels= batch_labels if plot_single_batch else None,
             ax = ax)
@@ -264,7 +269,7 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
     sm.set_array([])
 
     
-    ax.ticklabel_format(style="sci",useOffset=False)
+    ax.ticklabel_format(style="sci", useOffset=False)
     
     # set titles on x and y axes
     plt.xlabel("x [μm]")
