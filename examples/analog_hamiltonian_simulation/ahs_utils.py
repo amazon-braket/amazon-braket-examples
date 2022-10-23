@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import networkx as nx
 from braket.ahs.atom_arrangement import SiteType
 from braket.ahs.time_series import TimeSeries
 from braket.ahs.driving_field import DrivingField
@@ -11,6 +12,7 @@ from collections import Counter
 from typing import Dict, List, Tuple
 from braket.tasks.analog_hamiltonian_simulation_quantum_task_result import AnalogHamiltonianSimulationQuantumTaskResult
 from braket.ahs.atom_arrangement import AtomArrangement
+
 
 def show_register(
     register: AtomArrangement, 
@@ -54,40 +56,7 @@ def show_register(
             plt.gca().add_patch( plt.Circle((site[0],site[1]), blockade_radius/2, color="b", alpha=0.3) )
         plt.gca().set_aspect(1)
     plt.show()
-        
-    
-def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
-    """Plot the driving and shifting fields
 
-        Args:
-            drive (DrivingField): The driving field to be plot
-            shift (ShiftingField): The shifting field to be plot
-    """        
-    drive_data = {
-        'amplitude [rad/s]': drive.amplitude.time_series,
-        'detuning [rad/s]': drive.detuning.time_series,
-        'phase [rad]': drive.phase.time_series,
-    }
-    
-    fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
-    for ax, data_name in zip(axes, drive_data.keys()):
-        if data_name == 'phase [rad]':
-            ax.step(drive_data[data_name].times(), drive_data[data_name].values(), '.-', where='post')
-        else:
-            ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
-        ax.set_ylabel(data_name)
-        ax.grid(ls=':')
-        
-    shift_data = shift.magnitude.time_series
-    pattern = shift.magnitude.pattern.series   
-    axes[-1].plot(shift_data.times(), shift_data.values(), '.-', label="pattern: " + str(pattern))
-    axes[-1].set_ylabel('shift [rad/s]')
-    axes[-1].set_xlabel('time [s]')
-    axes[-1].legend()
-    axes[-1].grid()
-    plt.tight_layout()
-    plt.show()
-    
 
 def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
     """Obtain a zero time series with the same time points as the given time series
@@ -102,6 +71,7 @@ def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
     for t in other_time_series.times():
         ts.put(t, 0.0)
     return ts
+
 
 def rabi_pulse(
     rabi_pulse_area: float, 
@@ -137,31 +107,6 @@ def rabi_pulse(
     
     return time_points, amplitude_values
 
-def show_global_drive(drive):
-    """Plot the driving field
-
-        Args:
-            drive (DrivingField): The driving field to be plot
-    """   
-
-    data = {
-        'amplitude [rad/s]': drive.amplitude.time_series,
-        'detuning [rad/s]': drive.detuning.time_series,
-        'phase [rad]': drive.phase.time_series,
-    }
-    
-    fig, axes = plt.subplots(3, 1, figsize=(7, 7), sharex=True)
-    for ax, data_name in zip(axes, data.keys()):
-        if data_name == 'phase [rad]':
-            ax.step(data[data_name].times(), data[data_name].values(), '.-', where='post')
-        else:
-            ax.plot(data[data_name].times(), data[data_name].values(), '.-')
-        ax.set_ylabel(data_name)
-        ax.grid(ls=':')
-    axes[-1].set_xlabel('time [s]')
-    plt.tight_layout()
-    plt.show()
-            
 
 def get_counts(result: AnalogHamiltonianSimulationQuantumTaskResult) -> Dict[str, int]:
     """Aggregate state counts from AHS shot results
@@ -252,6 +197,80 @@ def get_shift(times: List[float], values: List[float], pattern: List[float]) -> 
     return shift
 
 
+def show_global_drive(drive, axes=None, **plot_ops):
+    """Plot the driving field
+        Args:
+            drive (DrivingField): The driving field to be plot
+            axes: matplotlib axis to draw on
+            **plot_ops: options passed to matplitlib.pyplot.plot
+    """   
+
+    data = {
+        'amplitude [rad/s]': drive.amplitude.time_series,
+        'detuning [rad/s]': drive.detuning.time_series,
+        'phase [rad]': drive.phase.time_series,
+    }
+
+
+    if axes is None:
+        fig, axes = plt.subplots(3, 1, figsize=(7, 7), sharex=True)
+
+    for ax, data_name in zip(axes, data.keys()):
+        if data_name == 'phase [rad]':
+            ax.step(data[data_name].times(), data[data_name].values(), '.-', where='post',**plot_ops)
+        else:
+            ax.plot(data[data_name].times(), data[data_name].values(), '.-',**plot_ops)
+        ax.set_ylabel(data_name)
+        ax.grid(ls=':')
+    axes[-1].set_xlabel('time [s]')
+    plt.tight_layout()
+    return axes
+
+
+def show_local_shift(shift):
+    data = shift.magnitude.time_series
+    pattern = shift.magnitude.pattern.series
+    
+    plt.plot(data.times(), data.values(), '.-', label="pattern: " + str(pattern))
+    plt.xlabel('time [s]')
+    plt.ylabel('shift [rad/s]')
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    
+def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
+    """Plot the driving and shifting fields
+    
+        Args:
+            drive (DrivingField): The driving field to be plot
+            shift (ShiftingField): The shifting field to be plot
+    """        
+    drive_data = {
+        'amplitude [rad/s]': drive.amplitude.time_series,
+        'detuning [rad/s]': drive.detuning.time_series,
+        'phase [rad]': drive.phase.time_series,
+    }
+    
+    fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
+    for ax, data_name in zip(axes, drive_data.keys()):
+        if data_name == 'phase [rad]':
+            ax.step(drive_data[data_name].times(), drive_data[data_name].values(), '.-', where='post')
+        else:
+            ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), '.-')
+        ax.set_ylabel(data_name)
+        ax.grid(ls=':')
+        
+    shift_data = shift.magnitude.time_series
+    pattern = shift.magnitude.pattern.series   
+    axes[-1].plot(shift_data.times(), shift_data.values(), '.-', label="pattern: " + str(pattern))
+    axes[-1].set_ylabel('shift [rad/s]')
+    axes[-1].set_xlabel('time [s]')
+    axes[-1].legend()
+    axes[-1].grid()
+    plt.tight_layout()
+    plt.show()
+
 
 def get_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult) -> np.ndarray:
     """Get the average Rydberg densities from the result
@@ -272,6 +291,7 @@ def get_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult) -> np.
     
     return avg_density
 
+
 def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult):
     """Showing a bar plot for the average Rydberg densities from the result
 
@@ -285,3 +305,144 @@ def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult)
     plt.xlabel("Indices of atoms")
     plt.ylabel("Average Rydberg density")
     plt.show()
+
+
+def concatenate_time_series(time_series_1, time_series_2):
+    assert time_series_1.values()[-1] == time_series_2.values()[0]
+    
+    duration_1 = time_series_1.times()[-1] - time_series_1.times()[0]
+    
+    new_time_series = TimeSeries()
+    new_times = time_series_1.times() + [t + duration_1 - time_series_2.times()[0] for t in time_series_2.times()[1:]]
+    new_values = time_series_1.values() + time_series_2.values()[1:]
+    for t, v in zip(new_times, new_values):
+        new_time_series.put(t, v)
+    
+    return new_time_series
+
+
+def concatenate_drives(drive_1, drive_2):
+    return DrivingField(
+        amplitude=concatenate_time_series(drive_1.amplitude.time_series, drive_2.amplitude.time_series),
+        detuning=concatenate_time_series(drive_1.detuning.time_series, drive_2.detuning.time_series),
+        phase=concatenate_time_series(drive_1.phase.time_series, drive_2.phase.time_series)
+    )
+
+
+def concatenate_shifts(shift_1, shift_2):
+    assert shift_1.magnitude.pattern.series == shift_2.magnitude.pattern.series
+    
+    new_magnitude = concatenate_time_series(shift_1.magnitude.time_series, shift_2.magnitude.time_series)
+    return ShiftingField(Field(new_magnitude, shift_1.magnitude.pattern))
+
+
+def concatenate_drive_list(drive_list):
+    drive = drive_list[0]
+    for dr in drive_list[1:]:
+        drive = concatenate_drives(drive, dr)
+    return drive    
+
+
+def concatenate_shift_list(shift_list):
+    shift = shift_list[0]
+    for sf in shift_list[1:]:
+        shift = concatenate_shifts(shift, sf)
+    return shift
+
+
+def constant_time_series(other_time_series, constant=0.0):
+    ts = TimeSeries()
+    for t in other_time_series.times():
+        ts.put(t, constant)
+    return ts
+
+
+def plot_avg_density_2D(densities, register, with_labels = True, batch_index=None, batch_mapping=None):
+    
+    # get atom coordinates
+    atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
+    # convert all to micromemters
+    atom_coords = [(atom_coord[0] * 10**6, atom_coord[1] * 10**6) for atom_coord in atom_coords]
+    
+    plot_fov = False
+    plot_single_batch = False
+    plot_avg_of_avgs = False
+        
+    if batch_index is not None:
+        if batch_mapping is not None:
+                plot_single_batch = True
+                # provided both batch and batch_mapping, show averages of single batch
+                batch_subindices = batch_mapping[batch_index]
+                batch_labels = {i:label for i,label in enumerate(batch_subindices)}
+                # get proper positions
+                pos = {batch_subindex:atom_coords[i] for batch_subindex in batch_subindices}
+        else:
+            raise Exception("batch_mapping required to index into")
+    else:
+        if batch_mapping is not None:
+            plot_avg_of_avgs = True
+            # just need the coordinates for first batch_mapping
+            pos = {i:coord for i,coord in enumerate(batch_mapping[(0,0)])}                                     
+        else:
+            # both not provided just do standard fov
+            plot_fov = True
+            # densities = get_avg_density(result)
+            # handle 1D case
+            pos = {i:coord for i,coord in enumerate(atom_coords)}
+           
+    # get colors
+    vmin = 0
+    vmax = 1
+    cmap = plt.cm.Blues
+    
+    # construct graph
+    g = nx.Graph()
+    g.add_nodes_from(list(range(len(densities))))
+    
+    # construct plot
+    fig, ax = plt.subplots()
+    
+    nx.draw(g, 
+            pos,
+            node_color=densities,
+            cmap=cmap,
+            node_shape="o",
+            vmin=vmin,
+            vmax=vmax,
+            font_size=10,
+            with_labels=with_labels,
+            labels= batch_labels if plot_single_batch else None,
+            ax = ax)
+        
+    ## Set axes
+    if plot_fov or plot_single_batch:
+        ax.set_axis_on()
+        ax.tick_params(left=True, 
+                       bottom=True, 
+                       top=True,
+                       right=True,
+                       labelleft=True, 
+                       labelbottom=True, 
+                       labeltop=True,
+                       labelright=True,
+                       direction="in")
+    ## Set colorbar
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
+    sm.set_array([])
+
+    
+    ax.ticklabel_format(style="sci",useOffset=False)
+    
+    # set titles on x and y axes
+    plt.xlabel("x [μm]")
+    plt.ylabel("y [μm]")
+    
+    
+    if plot_avg_of_avgs:
+        cbar_label = "Averaged Rydberg Density"
+    else:
+        cbar_label = "Rydberg Density"
+        
+    plt.colorbar(sm, ax=ax, label=cbar_label)
+    
+    return fig,ax
