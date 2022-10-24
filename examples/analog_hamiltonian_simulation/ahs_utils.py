@@ -357,7 +357,7 @@ def constant_time_series(other_time_series, constant=0.0):
     return ts
 
 
-def plot_avg_density_2D(densities, register, with_labels = True, batch_index=None, batch_mapping=None):
+def plot_avg_density_2D(densities, register, with_labels = True, batch_index = None, batch_mapping = None, custom_axes = None):
     
     # get atom coordinates
     atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
@@ -401,7 +401,10 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
     g.add_nodes_from(list(range(len(densities))))
     
     # construct plot
-    fig, ax = plt.subplots()
+    if custom_axes is None:
+        fig, ax = plt.subplots()
+    else:
+        ax = custom_axes
     
     nx.draw(g, 
             pos,
@@ -413,7 +416,7 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
             font_size=9,
             with_labels=with_labels,
             labels= batch_labels if plot_single_batch else None,
-            ax = ax)
+            ax = custom_axes if custom_axes is not None else ax)
         
     ## Set axes
     ax.set_axis_on()
@@ -445,4 +448,8 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
         
     plt.colorbar(sm, ax=ax, label=cbar_label)
     
-    return fig,ax
+    if custom_axes is None:
+        return fig,ax
+    else:
+        # custom_axes has been modified, no need to return
+        return None 
