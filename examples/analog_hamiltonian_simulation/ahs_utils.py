@@ -357,16 +357,15 @@ def constant_time_series(other_time_series, constant=0.0):
     return ts
 
 
-def plot_avg_density_2D(densities, register, with_labels = True, batch_index=None, batch_mapping=None):
+def plot_avg_density_2D(densities, register, with_labels = True, batch_index = None, batch_mapping = None, custom_axes = None):
     
     # get atom coordinates
     atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
-    # convert all to micromemters
+    # convert all to micrometers
     atom_coords = [(atom_coord[0] * 10**6, atom_coord[1] * 10**6) for atom_coord in atom_coords]
     
-    plot_fov = False
-    plot_single_batch = False
     plot_avg_of_avgs = False
+    plot_single_batch = False
         
     if batch_index is not None:
         if batch_mapping is not None:
@@ -375,18 +374,20 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
                 batch_subindices = batch_mapping[batch_index]
                 batch_labels = {i:label for i,label in enumerate(batch_subindices)}
                 # get proper positions
-                pos = {batch_subindex:atom_coords[i] for batch_subindex in batch_subindices}
+                pos = {i:tuple(coord) for i,coord in enumerate(list(np.array(atom_coords)[batch_subindices]))}
+                # narrow down densities
+                densities = np.array(densities)[batch_subindices]
+                
         else:
             raise Exception("batch_mapping required to index into")
     else:
         if batch_mapping is not None:
             plot_avg_of_avgs = True
             # just need the coordinates for first batch_mapping
-            pos = {i:coord for i,coord in enumerate(batch_mapping[(0,0)])}                                     
+            subcoordinates = np.array(atom_coords)[batch_mapping[(0,0)]]
+            pos = {i:coord for i,coord in enumerate(subcoordinates)}                                     
         else:
-            # both not provided just do standard fov
-            plot_fov = True
-            # densities = get_avg_density(result)
+            # If both not provided do standard FOV
             # handle 1D case
             pos = {i:coord for i,coord in enumerate(atom_coords)}
            
@@ -400,7 +401,10 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
     g.add_nodes_from(list(range(len(densities))))
     
     # construct plot
-    fig, ax = plt.subplots()
+    if custom_axes is None:
+        fig, ax = plt.subplots()
+    else:
+        ax = custom_axes
     
     nx.draw(g, 
             pos,
@@ -409,29 +413,28 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
             node_shape="o",
             vmin=vmin,
             vmax=vmax,
-            font_size=10,
+            font_size=9,
             with_labels=with_labels,
             labels= batch_labels if plot_single_batch else None,
-            ax = ax)
+            ax = custom_axes if custom_axes is not None else ax)
         
     ## Set axes
-    if plot_fov or plot_single_batch:
-        ax.set_axis_on()
-        ax.tick_params(left=True, 
-                       bottom=True, 
-                       top=True,
-                       right=True,
-                       labelleft=True, 
-                       labelbottom=True, 
-                       labeltop=True,
-                       labelright=True,
-                       direction="in")
+    ax.set_axis_on()
+    ax.tick_params(left=True, 
+                   bottom=True, 
+                   top=True,
+                   right=True,
+                   labelleft=True, 
+                   labelbottom=True, 
+                   # labeltop=True,
+                   # labelright=True,
+                   direction="in")
     ## Set colorbar
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
     sm.set_array([])
 
     
-    ax.ticklabel_format(style="sci",useOffset=False)
+    ax.ticklabel_format(style="sci", useOffset=False)
     
     # set titles on x and y axes
     plt.xlabel("x [μm]")
@@ -445,4 +448,8 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index=Non
         
     plt.colorbar(sm, ax=ax, label=cbar_label)
     
-    return fig,ax
+    if custom_axes is None:
+        return fig,ax
+    else:
+        # custom_axes has been modified, no need to return
+        return None 
