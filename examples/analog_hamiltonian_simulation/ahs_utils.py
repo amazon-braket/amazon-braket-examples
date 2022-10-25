@@ -452,4 +452,4 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index = N
         return fig,ax
     else:
         # custom_axes has been modified, no need to return
-        return None 
+        return None
