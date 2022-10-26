@@ -58,21 +58,6 @@ def show_register(
     plt.show()
 
 
-def zero_time_series_like(other_time_series: TimeSeries) -> TimeSeries:
-    """Obtain a zero time series with the same time points as the given time series
-
-        Args:
-            other_time_series (TimeSeries): The given time series
-
-        Returns:
-            TimeSeries: A zero time series with the same time points as the given time series
-    """            
-    ts = TimeSeries()
-    for t in other_time_series.times():
-        ts.put(t, 0.0)
-    return ts
-
-
 def rabi_pulse(
     rabi_pulse_area: float, 
     omega_max: float,
@@ -227,7 +212,11 @@ def show_global_drive(drive, axes=None, **plot_ops):
     return axes
 
 
-def show_local_shift(shift):
+def show_local_shift(shift:ShiftingField):
+    """Plot the shifting field
+        Args:
+            shift (ShiftingField): The shifting field to be plot
+    """       
     data = shift.magnitude.time_series
     pattern = shift.magnitude.pattern.series
     
@@ -307,7 +296,32 @@ def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult)
     plt.show()
 
 
-def concatenate_time_series(time_series_1, time_series_2):
+def constant_time_series(other_time_series: TimeSeries, constant: float=0.0) -> TimeSeries:
+    """Obtain a constant time series with the same time points as the given time series
+
+        Args:
+            other_time_series (TimeSeries): The given time series
+
+        Returns:
+            TimeSeries: A constant time series with the same time points as the given time series
+    """
+    ts = TimeSeries()
+    for t in other_time_series.times():
+        ts.put(t, constant)
+    return ts
+
+
+def concatenate_time_series(time_series_1: TimeSeries, time_series_2: TimeSeries) -> TimeSeries:
+    """Concatenate two time series to a single time series
+
+        Args:
+            time_series_1 (TimeSeries): The first time series to be concatenated
+            time_series_2 (TimeSeries): The second time series to be concatenated
+
+        Returns:
+            TimeSeries: The concatenated time series
+
+    """
     assert time_series_1.values()[-1] == time_series_2.values()[0]
     
     duration_1 = time_series_1.times()[-1] - time_series_1.times()[0]
@@ -321,7 +335,16 @@ def concatenate_time_series(time_series_1, time_series_2):
     return new_time_series
 
 
-def concatenate_drives(drive_1, drive_2):
+def concatenate_drives(drive_1: DrivingField, drive_2: DrivingField) -> DrivingField:
+    """Concatenate two driving fields to a single driving field
+
+        Args:
+            drive_1 (DrivingField): The first driving field to be concatenated
+            drive_2 (DrivingField): The second driving field to be concatenated
+
+        Returns:
+            DrivingField: The concatenated driving field
+    """    
     return DrivingField(
         amplitude=concatenate_time_series(drive_1.amplitude.time_series, drive_2.amplitude.time_series),
         detuning=concatenate_time_series(drive_1.detuning.time_series, drive_2.detuning.time_series),
@@ -329,32 +352,50 @@ def concatenate_drives(drive_1, drive_2):
     )
 
 
-def concatenate_shifts(shift_1, shift_2):
+def concatenate_shifts(shift_1: ShiftingField, shift_2: ShiftingField) -> ShiftingField:
+    """Concatenate two driving fields to a single driving field
+
+        Args:
+            shift_1 (ShiftingField): The first shifting field to be concatenated
+            shift_2 (ShiftingField): The second shifting field to be concatenated
+
+        Returns:
+            ShiftingField: The concatenated shifting field
+    """        
     assert shift_1.magnitude.pattern.series == shift_2.magnitude.pattern.series
     
     new_magnitude = concatenate_time_series(shift_1.magnitude.time_series, shift_2.magnitude.time_series)
     return ShiftingField(Field(new_magnitude, shift_1.magnitude.pattern))
 
 
-def concatenate_drive_list(drive_list):
+def concatenate_drive_list(drive_list: List[DrivingField]) -> DrivingField:
+    """Concatenate a list of driving fields to a single driving field
+
+        Args:
+            drive_list (List[DrivingField]): The list of driving fields to be concatenated
+
+        Returns:
+            DrivingField: The concatenated driving field
+    """        
     drive = drive_list[0]
     for dr in drive_list[1:]:
         drive = concatenate_drives(drive, dr)
     return drive    
 
 
-def concatenate_shift_list(shift_list):
+def concatenate_shift_list(shift_list: List[ShiftingField]) -> ShiftingField:
+    """Concatenate a list of shifting fields to a single driving field
+
+        Args:
+            shift_list (List[ShiftingField]): The list of shifting fields to be concatenated
+
+        Returns:
+            ShiftingField: The concatenated shifting field
+    """            
     shift = shift_list[0]
     for sf in shift_list[1:]:
         shift = concatenate_shifts(shift, sf)
     return shift
-
-
-def constant_time_series(other_time_series, constant=0.0):
-    ts = TimeSeries()
-    for t in other_time_series.times():
-        ts.put(t, constant)
-    return ts
 
 
 def plot_avg_density_2D(densities, register, with_labels = True, batch_index = None, batch_mapping = None, custom_axes = None):
@@ -453,3 +494,4 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index = N
     else:
         # custom_axes has been modified, no need to return
         return None
+
