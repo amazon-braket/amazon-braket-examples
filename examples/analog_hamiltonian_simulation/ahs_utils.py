@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 from braket.ahs.atom_arrangement import SiteType
-from braket.ahs.time_series import TimeSeries
+from braket.timings.time_series import TimeSeries
 from braket.ahs.driving_field import DrivingField
 from braket.ahs.shifting_field import ShiftingField
 from braket.ahs.field import Field
