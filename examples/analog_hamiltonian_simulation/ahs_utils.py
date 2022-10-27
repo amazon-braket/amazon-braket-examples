@@ -400,6 +400,35 @@ def concatenate_shift_list(shift_list: List[ShiftingField]) -> ShiftingField:
 
 def plot_avg_density_2D(densities, register, with_labels = True, batch_index = None, batch_mapping = None, custom_axes = None):
     
+    """Plot the average Rydberg densities for any 2D geometry from the result, including parallel jobs containg multiple
+    batches.
+    
+       Args:
+           densities (List[Float]): The average Rydberg densities from the result, obtainable via
+               invoking get_avg_density() on an AnalogHamiltonianSimulationQuantumTaskResult instance OR the average 
+               across all batches in a parallel job, in which case batch_mapping must be supplied and additional
+               calculations necessary beyond get_avg_density().
+            register (AtomArrangement): The register used in creating the Hamiltonian
+                with_labels (Bool): Choose if each atom's index is displayed. If a batch_mapping is supplied, the order of
+                the atom indices associated to the keys will affect the plot and should be presorted in nondecreasing
+                order. Default is True.
+            batch_index (Tuple[Int, Int]): If a batch_mapping dictionary is supplied, use batch_index as a key to plot
+                just the average densities for the atoms in that batch. Densities must still contain the average
+                densities of ALL atoms in the register. Default is None.
+            batch_mapping (Dict[Tuple[Int, Int], List[Float]]): mapping between a coordinate indicating the batch position 
+                and a list of atom indices associated with batch position. If supplied with no batch_index argument and
+                compatible densities argument (length must be equal to number of atoms in one batch), the average of the
+                average densities across all batches will be displayed. Default is None.
+            custom_axes (matplotlib.axes.Axes): a matplotlib axis. If argument is given, the plot will use the supplied
+                axis for displaying data and the function will not return anything. Otherwise, a new matplotlib Figure and
+                Axes will be generated and returned. Default is None. 
+                
+        Returns:
+            Tuple[matplotlib.figure.Figure, matplotlib.axes.Axes] or None: A plot of the average Rydberg densities with
+                original 2D atom geometry preserved.
+
+    """
+    
     # get atom coordinates
     atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
     # convert all to micrometers
