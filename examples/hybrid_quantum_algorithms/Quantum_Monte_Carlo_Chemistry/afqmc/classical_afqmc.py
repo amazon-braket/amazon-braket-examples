@@ -247,9 +247,15 @@ def ImagTimePropagator(v_0: np.ndarray, v_gamma: list, mf_shift: np.array, dtau:
 
 
 
+def multi_run_wrapper(args):
+    '''
+    Wrapper function for multiprocessing
+    '''
+    return ImagTimePropagator(*args)
+
 
 def cAFQMC(num_walkers, num_steps, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, Enuc, Ehf,
-           multi_run_wrapper, max_pool):
+           max_pool):
     '''
     Args:
     

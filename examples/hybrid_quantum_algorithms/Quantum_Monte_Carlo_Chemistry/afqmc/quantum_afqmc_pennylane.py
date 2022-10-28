@@ -17,7 +17,7 @@ from openfermion.circuits.primitives import bogoliubov_transform
 from openfermion.circuits.primitives.state_preparation import prepare_slater_determinant
 from openfermion.circuits.slater_determinants import slater_determinant_preparation_circuit
 from openfermion.linalg.givens_rotations import givens_decomposition, givens_decomposition_square
-from afqmc.classical_afqmc import G_pq, local_energy, PropagateWalker
+from afqmc.classical_afqmc import G_pq, local_energy, PropagateWalker, ImagTimePropagator
 
 
 def reortho(A):
@@ -464,9 +464,23 @@ def ImagTimePropagator_QAEE(v_0, v_gamma, mf_shift, dtau, trial, walker, weight,
 
 
 
+def multi_run_wrapper(args):
+    '''
+    Wrapper function for classical AFQMC
+    '''
+    return ImagTimePropagator(*args)
+
+
+def multi_run_wrapper_QAEE(args):
+    '''
+    Wrapper function for quantum AFQMC
+    '''    
+    return ImagTimePropagator_QAEE(*args)
+
+
 
 def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, Enuc, Ehf,
-           h_chem, lambda_l, U_l, V_T, dev, multi_run_wrapper, multi_run_wrapper_QAEE, max_pool):
+           h_chem, lambda_l, U_l, V_T, dev, max_pool):
     '''
     Args:
     
