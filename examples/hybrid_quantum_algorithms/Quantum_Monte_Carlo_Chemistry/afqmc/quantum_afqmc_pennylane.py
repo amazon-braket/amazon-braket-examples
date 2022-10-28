@@ -13,6 +13,8 @@ from scipy.linalg import expm, qr, det
 
 from braket.circuits import Circuit, FreeParameter
 from braket.devices import LocalSimulator
+from braket.jobs.metrics import log_metric
+
 from openfermion.circuits.primitives import bogoliubov_transform
 from openfermion.circuits.primitives.state_preparation import prepare_slater_determinant
 from openfermion.circuits.slater_determinants import slater_determinant_preparation_circuit
@@ -513,13 +515,16 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
     total_time = np.linspace(dtau, int(dtau*num_steps), num=num_steps)
     walkers = [trial]*num_walkers
     weights = [1.0]*num_walkers
-    t = 0.0
+    # t = 0.0
+    t_step = 0
     
     def generator():
-        while t < int(dtau*num_steps):
-            yield
+        # while t < int(dtau*num_steps):
+        while t_step <= num_steps:
+            yield   
             
     for _ in tqdm(generator(), disable=not progress_bar):
+        t = t_step * dtau
         weight_list = []
         walker_list = []
         cenergy_list = []
@@ -548,7 +553,10 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
             for i in range(len(weights)):
                 numerator += weights[i]*qenergy_list[i]
                 denominator += weights[i]*ovlpratio_list[i]    
-            qE_list.append(np.real(numerator / denominator))
+            qE = np.real(numerator / denominator)    
+            qE_list.append(qE)
+            if not progress_bar:
+                log_metric(metric_name="qE_list", value=qE, iteration_number=t_step)            
 
         else:
             for i in range(len(weights)):
@@ -557,7 +565,6 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
 
             with mp.Pool(max_pool) as pool:
                 results = list(pool.map(multi_run_wrapper, inputs))
-                #results = list(tqdm(pool.imap_unordered(multi_run_wrapper, inputs), total=len(inputs)))
 
             for (E_loc, new_walker, new_weight) in results:
                 cenergy_list.append(E_loc)
@@ -568,8 +575,11 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
         E = np.real(np.average(cenergy_list, weights=weights))
         cE_list.append(E)
         E_shift = E
+        if not progress_bar:
+            log_metric(metric_name="cE_list", value=E, iteration_number=t_step)        
 
-        t += dtau
+        # t += dtau
+        t_step += 1
         walkers = walker_list
         weights = weight_list
         

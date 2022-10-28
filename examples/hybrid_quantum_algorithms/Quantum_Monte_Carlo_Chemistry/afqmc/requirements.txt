@@ -1,4 +1,4 @@
-pyscf==1.7.6
+pyscf==2.1.1
 openfermion==1.0.0
 tqdm==4.64.1
 
