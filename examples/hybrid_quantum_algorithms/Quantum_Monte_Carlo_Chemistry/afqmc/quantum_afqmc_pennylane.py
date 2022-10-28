@@ -17,7 +17,7 @@ from openfermion.circuits.primitives import bogoliubov_transform
 from openfermion.circuits.primitives.state_preparation import prepare_slater_determinant
 from openfermion.circuits.slater_determinants import slater_determinant_preparation_circuit
 from openfermion.linalg.givens_rotations import givens_decomposition, givens_decomposition_square
-from classical_afqmc import G_pq, local_energy, PropagateWalker
+from afqmc.classical_afqmc import G_pq, local_energy, PropagateWalker
 
 
 def reortho(A):
