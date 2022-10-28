@@ -480,7 +480,7 @@ def multi_run_wrapper_QAEE(args):
 
 
 def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, Enuc, Ehf,
-           h_chem, lambda_l, U_l, V_T, dev, max_pool):
+           h_chem, lambda_l, U_l, V_T, dev, max_pool, progress_bar=True):
     '''
     Args:
     
@@ -499,7 +499,7 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
         while t < int(dtau*num_steps):
             yield
             
-    for _ in tqdm(generator()):
+    for _ in tqdm(generator(), disable=not progress_bar):
         weight_list = []
         walker_list = []
         cenergy_list = []
