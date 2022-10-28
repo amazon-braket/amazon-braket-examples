@@ -464,6 +464,26 @@ def ImagTimePropagator_QAEE(v_0, v_gamma, mf_shift, dtau, trial, walker, weight,
 
 
 
+##############################################################
+# Define V_T through UCCSD circuit.                          #
+##############################################################
+def V_T():
+    qml.RX(np.pi/2., wires=0)
+    for i in range(1, 4):
+        qml.Hadamard(wires=i)
+
+    for i in range(3):
+        qml.CNOT(wires=[i, i+1])
+
+    qml.RZ(0.12, wires=3)
+    for i in range(3)[::-1]:
+        qml.CNOT(wires=[i, i+1])
+
+    qml.RX(-np.pi/2., wires=0)
+    for i in range(1, 4):
+        qml.Hadamard(wires=i)
+
+
 def multi_run_wrapper(args):
     '''
     Wrapper function for classical AFQMC
@@ -480,7 +500,7 @@ def multi_run_wrapper_QAEE(args):
 
 
 def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, Enuc, Ehf,
-           h_chem, lambda_l, U_l, V_T, dev, max_pool, progress_bar=True):
+           h_chem, lambda_l, U_l, dev, max_pool, progress_bar=True):
     '''
     Args:
     
