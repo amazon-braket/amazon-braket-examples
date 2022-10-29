@@ -41,7 +41,7 @@ def G_pq(psi: np.ndarray, phi: np.ndarray):
     Args:
         psi, phi: np.ndarray
     Returns:
-        G
+        G: one-body Green's function
     '''
     overlap_inverse = np.linalg.inv(psi.transpose()@phi)
     G = phi@overlap_inverse@psi.transpose()
@@ -155,10 +155,10 @@ def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
         dtau: imaginary time step size
         trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
         walker: walker state as np.ndarray, others are the same as trial
-        G: 
+        G: one-body Green's function
         
     Returns:
-        new_walker:
+        new_walker
     '''
     num_spin_orbitals, num_electrons = trial.shape
     num_fields = len(v_gamma)
@@ -254,13 +254,25 @@ def multi_run_wrapper(args):
     return ImagTimePropagator(*args)
 
 
-def cAFQMC(num_walkers, num_steps, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, Enuc, Ehf,
+def cAFQMC(num_walkers, num_steps, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, enuc, Ehf,
            max_pool, progress_bar=True):
     '''
     Args:
-    
+        num_walkers:
+        num_steps: number of steps for imaginary time evolution
+        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
+        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
+        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
+        dtau: imaginary time step size
+        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
+        h1e, eri: one- and two-electron integral stored in spatial orbitals basis
+        enuc: nuclear repulsion energy
+        E_shift: reference energy, usually taken as the HF energy
+        max_pool: number of cores to parallelize the calculations
+        progress_bar: bool
     Returns:
-    
+        total_time: list that stores the time series of the evolution
+        E_list: list that stores the computed energy
     '''
     E_list = []
     E_shift = Ehf      # set energy shift E_0 as HF energy from earlier
@@ -282,7 +294,7 @@ def cAFQMC(num_walkers, num_steps, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri
         inputs = []
         for i in range(len(weights)):
             inputs.append((v_0, v_gamma, mf_shift, dtau, trial, walkers[i], 
-                           weights[i], h1e, eri, Enuc, E_shift))
+                           weights[i], h1e, eri, enuc, E_shift))
 
         with mp.Pool(max_pool) as pool:
             results = list(pool.map(multi_run_wrapper, inputs))
