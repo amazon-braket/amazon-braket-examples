@@ -1,6 +1,3 @@
-# import subprocess
-# subprocess.call(['pip','install','-r','afqmc/requirements.txt','--quiet'])
-
 import json
 import os
 import sys
@@ -24,7 +21,6 @@ from afqmc.quantum_afqmc_pennylane import qAFQMC
 
 
 def main():
-
     ##############################################################
     # We prepare the necessary operators for AFQMC calculations. #
     ##############################################################
@@ -62,7 +58,6 @@ def main():
     hp_file = os.environ["AMZN_BRAKET_HP_FILE"]
     with open(hp_file, "r") as f:
         hyperparams = json.load(f)
-    # print(hyperparams)
 
     num_walkers = int(hyperparams["num_walkers"])
     num_steps = int(hyperparams["num_steps"])
@@ -70,8 +65,9 @@ def main():
     max_pool = int(hyperparams["max_pool"]) 
     q_total_time = json.loads(hyperparams["q_total_time"])
 
-    dev = qml.device("lightning.qubit", wires=4)
+    dev = get_pennylane_device(4)
     
+    # Start QC-QFQMC computation
     start = time.time()
     total_time, cE_list, qE_list = qAFQMC(
         num_walkers, 
@@ -88,6 +84,7 @@ def main():
     )
     elapsed = time.time()-start
     
+    # save results and log metrics
     print("elapsed: ", elapsed)
     print("cE_list: ", cE_list)
     print("qE_list: ", qE_list)
@@ -100,13 +97,30 @@ def main():
             )
     log_metric(metric_name="elapsed", value=elapsed, iteration_number=0)        
             
+
+def get_pennylane_device(n_wires):
+    """ Create Pennylane device from the `device` keyword argument of AwsQuantumJob.create().
+    See https://docs.aws.amazon.com/braket/latest/developerguide/pennylane-embedded-simulators.html
+    about the format of the `device` argument.
     
+    Args: 
+        n_wires (int): number of qubits to initiate the local simulator. 
+    
+    """
+    device_string = os.environ["AMZN_BRAKET_DEVICE_ARN"]
+    device_prefix = device_string.split(":")[0]
+
+    prefix, device_name = device_string.split("/")
+    device = qml.device(device_name, wires=n_wires)
+    print("Using local simulator: ", device.name)
+        
+    return device        
+        
     
 if __name__ == "__main__":
-    main()
-    # try:
-    #     main()
-    #     print("Training Successful!!")
-    # except BaseException as e:
-    #     print(e)
-    #     print("Training Fails...")
+    try:
+        main()
+        print("Training Successful!!")
+    except BaseException as e:
+        print(e)
+        print("Training Fails...")
