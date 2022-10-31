@@ -489,6 +489,8 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index = N
         
     plt.colorbar(sm, ax=ax, label=cbar_label)
     
+    plt.show()
+    
     if custom_axes is None:
         return fig,ax
     else:
