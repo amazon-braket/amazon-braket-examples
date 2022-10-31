@@ -209,7 +209,7 @@ def show_global_drive(drive, axes=None, **plot_ops):
         ax.grid(ls=':')
     axes[-1].set_xlabel('time [s]')
     plt.tight_layout()
-    return axes
+    plt.show()
 
 
 def show_local_shift(shift:ShiftingField):
