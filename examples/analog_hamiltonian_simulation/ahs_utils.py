@@ -488,12 +488,3 @@ def plot_avg_density_2D(densities, register, with_labels = True, batch_index = N
         cbar_label = "Rydberg Density"
         
     plt.colorbar(sm, ax=ax, label=cbar_label)
-    
-    plt.show()
-    
-    if custom_axes is None:
-        return fig,ax
-    else:
-        # custom_axes has been modified, no need to return
-        return None
-
