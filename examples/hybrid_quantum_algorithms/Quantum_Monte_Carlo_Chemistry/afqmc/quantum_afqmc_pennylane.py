@@ -170,8 +170,8 @@ def amplitude_estimate(Q, V_T, dev):
         amplitude: numpy.complex128
     '''
     num_qubits, num_particles = Q.shape
-    
-    @qml.qnode(dev)
+        
+    @qml.qnode(dev, interface=None, diff_method=None)
     def compute_real(Q, V_T):
         amplitude_real(Q, V_T)
         return qml.probs(range(num_qubits))
@@ -179,7 +179,7 @@ def amplitude_estimate(Q, V_T, dev):
     probs_values = compute_real(Q, V_T)
     real = probs_values[0] - probs_values[int(2**num_qubits/2)]
 
-    @qml.qnode(dev)
+    @qml.qnode(dev, interface=None, diff_method=None)
     def compute_imag(Q, V_T):
         amplitude_imag(Q, V_T)
         return qml.probs(range(num_qubits))
@@ -260,7 +260,7 @@ def pauli_estimate(Q, V_T, U, pauli: list, dev):
     '''
     num_qubits, num_particles = Q.shape
     
-    @qml.qnode(dev)
+    @qml.qnode(dev, interface=None, diff_method=None)
     def compute_real(Q, V_T, U, pauli):
         pauli_real(Q, V_T, U, pauli)
         return qml.probs(range(num_qubits))
@@ -268,7 +268,7 @@ def pauli_estimate(Q, V_T, U, pauli: list, dev):
     probs_values = compute_real(Q, V_T, U, pauli)
     real = probs_values[0] - probs_values[int(2**num_qubits/2)]
     
-    @qml.qnode(dev)
+    @qml.qnode(dev, interface=None, diff_method=None)
     def compute_imag(Q, V_T, U, pauli):
         pauli_imag(Q, V_T, U, pauli)
         return qml.probs(range(num_qubits))
