@@ -18,7 +18,7 @@ def load_hyperparams():
         hyperparams[key] = int(value)  # ["default"])  # convert to int for now
     print(hyperparams)
     hyperparams["device_arn"] = os.environ["AMZN_BRAKET_DEVICE_ARN"]
-    hyperparams["fig_dir"] = os.environ["AMZN_BRAKET_JOB_RESULTS_DIR"]
+    hyperparams["results_dir"] = os.environ["AMZN_BRAKET_JOB_RESULTS_DIR"]
 
     print(hyperparams)
 
