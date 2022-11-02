@@ -1,3 +1,5 @@
 black
 papermill
 jupytext
+jupyter
+boto3

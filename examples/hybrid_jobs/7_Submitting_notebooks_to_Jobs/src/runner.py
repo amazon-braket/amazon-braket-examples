@@ -1,54 +1,59 @@
+import ast
 import glob
 import json
 import os
 
 import papermill as pm
 
-os.system("pip install jupyter black papermill boto3")
+
+def convert_to_value(value):
+    try:
+        return ast.literal_eval(value)
+    except ValueError:
+        return value
 
 
 def load_hyperparams():
-    hp_file = os.environ["AMZN_BRAKET_HP_FILE"]
-    with open(hp_file) as f:
-        params = json.load(f)
-    print(params)
+    # Load Braket Jobs hyperparameters
+    with open(os.environ["AMZN_BRAKET_HP_FILE"]) as f:
+        braket_hyperparams = json.load(f)
 
-    hyperparams = {}
-    for key, value in params.items():
-        hyperparams[key] = int(value)  # ["default"])  # convert to int for now
-    print(hyperparams)
-    hyperparams["device_arn"] = os.environ["AMZN_BRAKET_DEVICE_ARN"]
-    hyperparams["results_dir"] = os.environ["AMZN_BRAKET_JOB_RESULTS_DIR"]
+    print(f"Braket hyperparameters are: {braket_hyperparams}")
 
-    print(hyperparams)
+    # Convert Braket hyperparameters to Papermill parameters
+    papermill_params = {}
+    for key, value in braket_hyperparams.items():
+        papermill_params[key] = convert_to_value(value)
 
-    return hyperparams
+    papermill_params["device_arn"] = os.environ["AMZN_BRAKET_DEVICE_ARN"]
+    papermill_params["results_dir"] = os.environ["AMZN_BRAKET_JOB_RESULTS_DIR"]
+
+    print(f"Papermill parameters are: {papermill_params}")
+    return papermill_params
 
 
 def run_notebook():
+    papermill_params = load_hyperparams()
 
-    hyperparams = load_hyperparams()
-
-    resultsdir = os.environ.get("AMZN_BRAKET_JOB_RESULTS_DIR")
+    results_dir = os.environ.get("AMZN_BRAKET_JOB_RESULTS_DIR")
     input_dir = os.environ["AMZN_BRAKET_INPUT_DIR"]
+
     notebooks = list(glob.glob(f"{input_dir}/input/*.ipynb"))
-    print("Notebooks are")
-    print(notebooks)
+    print(f"Notebooks are {notebooks}")
 
     if len(notebooks) > 1:
-        raise Exception("To many input notebooks provided.")
+        raise ValueError("To many input notebooks provided.")
 
     notebook_name = notebooks[0].split("/")[-1]
     filename = f"{input_dir}/input/{notebook_name}"
     print("Loading dataset from: ", filename)
 
-    print("Saving to")
-    print(f"{resultsdir}/{notebook_name}")
-    os.system("jupyter kernelspec list")
+    print(f"Saving results to {results_dir}/{notebook_name}")
+
     pm.execute_notebook(
         filename,
-        f"{resultsdir}/{notebook_name}",
-        parameters=hyperparams,
+        f"{results_dir}/{notebook_name}",
+        parameters=papermill_params,
         kernel_name="python3",
     )
 
