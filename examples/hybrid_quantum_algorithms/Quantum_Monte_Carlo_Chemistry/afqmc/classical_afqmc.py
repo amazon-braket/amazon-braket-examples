@@ -17,16 +17,13 @@ def reortho(A):
     Performs a QR decomposition of A. Note that for consistency elsewhere we
     want to preserve detR > 0 which is not guaranteed. We thus factor the signs
     of the diagonal of R into Q.
-    Parameters
-    ----------
-    A : :class:`np.ndarray`
-        MxN matrix.
-    Returns
-    -------
-    Q : :class:`np.ndarray`
-        Orthogonal matrix. A = QR.
-    detR : float
-        Determinant of upper triangular matrix (R) from QR decomposition.
+    
+    Args:
+        A (np.ndarray): MxN matrix.
+    
+    Returns:
+        Q (np.ndarray): Orthogonal matrix. A = QR.
+        detR (float): Determinant of upper triangular matrix (R) from QR decomposition.
     """
     (Q, R) = qr(A, mode='economic')
     signs = np.diag(np.sign(np.diag(R)))
@@ -35,11 +32,12 @@ def reortho(A):
     return (Q, detR)
 
 
-
 def G_pq(psi: np.ndarray, phi: np.ndarray):
     '''This function coomputes the one-body Green's function
+    
     Args:
         psi, phi: np.ndarray
+    
     Returns:
         G: one-body Green's function
     '''
@@ -48,19 +46,17 @@ def G_pq(psi: np.ndarray, phi: np.ndarray):
     return G
 
 
-
 def local_energy(h1e, eri, G, enuc):
     r"""Calculate local for generic two-body hamiltonian.
     This uses the full (spatial) form for the two-electron integrals.
-    Parameters
-    ----------
-    h1e: one-body term
-    eri: two-body term
-    G: numpy.ndarray; Walker's "green's function"
-    Returns
-    -------
-    T + V + enuc: float
-        kinetic, potential energies and nuclear repulsion energy.
+    
+    Args: 
+        h1e (np.ndarray): one-body term
+        eri (np.ndarray): two-body term
+        G (np.ndarray): Walker's "green's function"
+    
+    Returns:
+        T + V + enuc (float): kinetic, potential energies and nuclear repulsion energy.
     """
     e1 = np.einsum('ij,ij->', h1e, G[0]) + np.einsum('ij,ij->', h1e, G[1])
     
@@ -73,20 +69,21 @@ def local_energy(h1e, eri, G, enuc):
     return e1 + e2 + enuc
 
 
-
 def chemistry_preparation(mol, hf, trial):
     '''
     This function returns one- and two-electron integrals from PySCF.
+    
     Args:
-        mol: PySCF gto.M()
-        hf: mol.RHF()
-        trial:
+        mol (pyscf.gto.mole.Mole): PySCF molecular structure
+        hf (pyscf.scf.hf.RHF): PySCF non-relativistic RHF
+        trial (np.ndarray): trial wavefunction
+    
     Returns:
         v_0: one-body term stored as np.ndarray, with mean-field subtraction
         h_chem: one-body term stored as np.ndarray, without mean-field subtraction
         v_gamma: 1.j*L_gamma
         L_gamma: Cholesky vector decomposed from two-body terms
-        mf_shift:
+        mf_shift: mean-field shift
         nuclear_repulsion: nuclear repulsion constant
     '''
     
@@ -143,7 +140,6 @@ def chemistry_preparation(mol, hf, trial):
     return h1e, eri, nuclear_repulsion, v_0, h_chem, v_gamma, L_gamma, mf_shift, lambda_l, U_l
 
 
-
 def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
     '''This function updates the walker from imaginary time propagation.
     
@@ -158,7 +154,7 @@ def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
         G: one-body Green's function
         
     Returns:
-        new_walker
+        new_walker: new walker for next time step
     '''
     num_spin_orbitals, num_electrons = trial.shape
     num_fields = len(v_gamma)
@@ -193,8 +189,6 @@ def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
     return new_walker
 
 
-
-
 def ImagTimePropagator(v_0: np.ndarray, v_gamma: list, mf_shift: np.array, dtau: float,
                        trial: np.ndarray, walker: np.ndarray, weight: float, h1e, eri, enuc, E_shift: float):
     '''This function defines the imaginary propagation process and will return new walker state and new weight.
@@ -213,8 +207,8 @@ def ImagTimePropagator(v_0: np.ndarray, v_gamma: list, mf_shift: np.array, dtau:
     
     Returns:
         E_loc: local energy
-        new_weight:
-        new_walker:
+        new_weight: new weight for next time step
+        new_walker: new walker for next time step
         
     '''
     seed = np.random.seed(int.from_bytes(os.urandom(4), byteorder='little'))
