@@ -27,16 +27,13 @@ def reortho(A):
     Performs a QR decomposition of A. Note that for consistency elsewhere we
     want to preserve detR > 0 which is not guaranteed. We thus factor the signs
     of the diagonal of R into Q.
-    Parameters
-    ----------
-    A : :class:`np.ndarray`
-        MxN matrix.
-    Returns
-    -------
-    Q : :class:`np.ndarray`
-        Orthogonal matrix. A = QR.
-    detR : float
-        Determinant of upper triangular matrix (R) from QR decomposition.
+    
+    Args:
+        A (np.ndarray): MxN matrix.
+    
+    Returns:
+        Q (np.ndarray): Orthogonal matrix. A = QR.
+        detR (float): Determinant of upper triangular matrix (R) from QR decomposition.
     """
     (Q, R) = qr(A, mode='economic')
     signs = np.diag(np.sign(np.diag(R)))
@@ -45,10 +42,9 @@ def reortho(A):
     return (Q, detR)
 
 
-
-# Implement Givens rotation
 def givens_block_circuit(givens):
     '''This function defines the Givens rotation circuit from a single givens tuple
+    
     Args:
         givens: (i, j, \theta, \varphi)
     '''
@@ -66,11 +62,12 @@ def givens_block_circuit(givens):
     qml.CNOT(wires=[j, i])
 
 
-
 def prepare_slater_circuit(circuit_description):
     '''Creating Givens rotation circuit to prepare arbitrary Slater determinant.
+    
     Args:
-        circuit_description: list of tuples containing Givens rotation (i, j, theta, phi) in reversed order.
+        circuit_description (List[Tuple]): list of tuples containing Givens rotation 
+            (i, j, theta, phi) in reversed order.
     '''
     
     for parallel_ops in circuit_description:
@@ -78,11 +75,11 @@ def prepare_slater_circuit(circuit_description):
             qml.adjoint(givens_block_circuit)(givens)
 
 
-
 def circuit_first_half(Q):
     '''Construct the first half of the vacuum reference circuit
+    
     Args:
-        Q: orthonormalized walker state
+        Q (np.ndarray): orthonormalized walker state
     '''
     num_qubits, num_particles = Q.shape
     qml.Hadamard(wires=0)
@@ -104,9 +101,10 @@ def circuit_first_half(Q):
     
 def circuit_second_half_real(Q, V_T):
     '''Construct the second half of the vacuum reference circuit (for real expectation values)
+    
     Args:
-        Q: orthonormalized walker state
-        V_T: quantum trial state
+        Q (np.ndarray): orthonormalized walker state
+        V_T (function): quantum trial state
     '''
     num_qubits, num_particles = Q.shape
     qml.adjoint(V_T)()
@@ -120,8 +118,8 @@ def circuit_second_half_real(Q, V_T):
 def circuit_second_half_imag(Q, V_T):
     '''Construct the second half of the vacuum reference circuit (for imaginary expectation values)
     Args:
-        Q: orthonormalized walker state
-        V_T: quantum trial state
+        Q (np.ndarray): orthonormalized walker state
+        V_T (function): quantum trial state
     '''
     num_qubits, num_particles = Q.shape
     qml.adjoint(V_T)()
@@ -136,36 +134,34 @@ def circuit_second_half_imag(Q, V_T):
     qml.Hadamard(wires=0)
     
 
-
 def amplitude_real(Q, V_T):
     '''Construct the the vacuum reference circuit for measuring amplitude real part
     Args:
-        Q: orthonormalized walker state
-        V_T: quantum trial state
+        Q (np.ndarray): orthonormalized walker state
+        V_T (function): quantum trial state
     '''
     circuit_first_half(Q)
     circuit_second_half_real(Q, V_T)
     
 
-
 def amplitude_imag(Q, V_T):
     '''Construct the the vacuum reference circuit for measuring amplitude imaginary part
     Args:
-        Q: orthonormalized walker state
-        V_T: quantum trial state
+        Q (np.ndarray): orthonormalized walker state
+        V_T (function): quantum trial state
     '''
     circuit_first_half(Q)
     circuit_second_half_imag(Q, V_T)
     
-      
 
 def amplitude_estimate(Q, V_T, dev):
     '''This function computes the amplitude between walker state and quantum trial state.
     Args:
-        Q: orthonormalized walker state
-        V_T: quantum trial state
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
-             qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
+        Q (np.ndarray): orthonormalized walker state
+        V_T (function): quantum trial state
+        dev (qml.device): qml.device('lightning.qubit', wires=wires) for simulator;
+                          qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots)
+                          for quantum device;
     Returns:
         amplitude: numpy.complex128
     '''
@@ -190,7 +186,6 @@ def amplitude_estimate(Q, V_T, dev):
     return (real + 1.j*imag)
 
 
-
 def U_circuit(U):
     '''Construct circuit to perform unitary transformation U.'''
     
@@ -203,12 +198,11 @@ def U_circuit(U):
     if circuit_description != []:
         prepare_slater_circuit(circuit_description)
     
-    
 
 def pauli_real(Q, V_T, U, pauli):
     '''Construct the the vacuum reference circuit for measuring expectation value of a pauli real part
     Args:
-        Q: orthonormalized walker state
+        Q : orthonormalized walker state
         V_T: quantum trial state
         U: unitary transformation to change the Pauli into Z basis
         pauli: list that stores the position of the Z gate, e.g., [0,1] represents 'ZZII'.
@@ -221,7 +215,6 @@ def pauli_real(Q, V_T, U, pauli):
         
     qml.adjoint(U_circuit)(U)
     circuit_second_half_real(Q, V_T)
-
 
 
 def pauli_imag(Q, V_T, U, pauli):
@@ -240,7 +233,6 @@ def pauli_imag(Q, V_T, U, pauli):
         
     qml.adjoint(U_circuit)(U)
     circuit_second_half_imag(Q, V_T)
-
 
 
 def pauli_estimate(Q, V_T, U, pauli: list, dev):
@@ -277,8 +269,6 @@ def pauli_estimate(Q, V_T, U, pauli: list, dev):
     imag = probs_values[0] - probs_values[int(2**num_qubits/2)]
     
     return (real + 1.j*imag)
-
-
 
 
 def qExpect_OneBody(walker, one_bodies, ovlp, V_T, dev):
@@ -323,8 +313,6 @@ def qExpect_OneBody(walker, one_bodies, ovlp, V_T, dev):
             expectation = np.append(expectation, value)
     
     return expectation
-
-
 
 
 def local_energy_quantum(walker, ovlp, one_body, lambda_l, U_l, V_T, dev):
@@ -391,8 +379,6 @@ def local_energy_quantum(walker, ovlp, one_body, lambda_l, U_l, V_T, dev):
     return energy
 
 
-
-
 def qPropagateWalker(x, v_0, v_gamma, mf_shift, dtau, walker, V_T, ovlp, dev):
     '''This function updates the walker from imaginary time propagation.
     
@@ -409,7 +395,7 @@ def qPropagateWalker(x, v_0, v_gamma, mf_shift, dtau, walker, V_T, ovlp, dev):
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
     
     Returns:
-        new_walker:
+        new_walker: new walker for the next time step
         
     '''
     num_spin_orbitals, num_electrons = walker.shape
@@ -441,8 +427,6 @@ def qPropagateWalker(x, v_0, v_gamma, mf_shift, dtau, walker, V_T, ovlp, dev):
     return new_walker
 
 
-
-
 def ImagTimePropagator_QAEE(v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift,
                             h_chem, lambda_l, U_l, V_T, dev):
     '''This function defines the imaginary propagation process and will return new walker state and new weight.
@@ -466,11 +450,11 @@ def ImagTimePropagator_QAEE(v_0, v_gamma, mf_shift, dtau, trial, walker, weight,
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
     
     Returns:
-        E_loc:
+        E_loc: local energy
         E_loc_q / c_ovlp: numerator 
         q_ovlp / c_ovlp: demoninator for evaluation of total energy
-        new_weight:
-        new_walker:
+        new_weight: new weight for the next time step
+        new_walker: new walker for the next time step
         
     '''
     seed = np.random.seed(int.from_bytes(os.urandom(4), byteorder='little'))
@@ -507,11 +491,9 @@ def ImagTimePropagator_QAEE(v_0, v_gamma, mf_shift, dtau, trial, walker, weight,
     return E_loc, (E_loc_q/c_ovlp), (q_ovlp/c_ovlp), new_walker, new_weight
 
 
-
-##############################################################
-# Define V_T through UCCSD circuit.                          #
-##############################################################
 def V_T():
+    """ Define V_T through UCCSD circuit.
+    """
     qml.RX(np.pi/2., wires=0)
     for i in range(1, 4):
         qml.Hadamard(wires=i)
@@ -542,8 +524,6 @@ def multi_run_wrapper_QAEE(args):
     return ImagTimePropagator_QAEE(*args)
 
 
-
-
 def qImagTimePropagator(v_0, v_gamma, mf_shift, dtau, walker, weight, ovlp, h1e, eri, enuc, E_shift, h_chem, lambda_l, U_l, 
                         V_T, dev):
     '''This function defines the consistent imaginary propagation process on quantum computer, and will return new walker state 
@@ -568,11 +548,10 @@ def qImagTimePropagator(v_0, v_gamma, mf_shift, dtau, walker, weight, ovlp, h1e,
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
     
     Returns:
-        E_loc:
-        new_ovlp:
-        new_weight:
-        new_walker:
-        
+        E_loc: local energy
+        new_ovlp: new overlap for the next time step
+        new_weight: new weight for the next time step
+        new_walker: new walker for the next time step
     '''
     seed = np.random.seed(int.from_bytes(os.urandom(4), byteorder='little'))
     
@@ -594,9 +573,6 @@ def qImagTimePropagator(v_0, v_gamma, mf_shift, dtau, walker, weight, ovlp, h1e,
     new_weight = weight*np.exp(-dtau*(np.real(E_loc) - E_shift))*np.max([0., np.cos(arg)])
     
     return E_loc, new_ovlp, new_walker, new_weight
-
-
-
 
 
 def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri, enuc, Ehf,
@@ -621,7 +597,11 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
         U_l: eigenvectors of Cholesky vectors
         dev: qml.device('lightning.qubit', wires=wires) for simulator;
         max_pool: number of cores for parallelization
+    
     Returns:
+        total_time: List of time steps for classical AFQMC
+        cE_list: energy evolution for classical AFQMC
+        qE_list: energy evolution for quantum AFQMC
     
     '''
     cE_list = []
