@@ -8,26 +8,23 @@ import multiprocessing as mp
 from scipy.linalg import expm
 from tqdm import tqdm
 import pennylane as qml
+from pyscf import gto, scf, fci
+from itertools import product
 np.set_printoptions(precision=4, edgeitems=10, linewidth=150, suppress=True)
 
-from itertools import product
 from braket.circuits import Circuit, FreeParameter
 from braket.devices import LocalSimulator
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 
-from afqmc.classical_afqmc import cAFQMC
+from afqmc.classical_afqmc import cAFQMC, G_pq, local_energy, chemistry_preparation
 from afqmc.quantum_afqmc_pennylane import qAFQMC
 
 
 def main():
-    ##############################################################
-    # We prepare the necessary operators for AFQMC calculations. #
-    ##############################################################
-
-    from pyscf import gto, scf, fci
-    from afqmc.classical_afqmc import G_pq, local_energy, chemistry_preparation
-
+    #####################################################################
+    # We prepare the necessary operators for AFQMC calculations.        #
+    #####################################################################
     # perform HF calculations
     mol = gto.M(atom = 'H 0. 0. 0.; H 0. 0. 0.75', basis = 'sto-3g')
     hf = mol.RHF()
@@ -49,7 +46,6 @@ def main():
     G = [G_pq(trial_up, trial_up), G_pq(trial_down, trial_down)]
     Ehf = local_energy(h1e, eri, G, nuclear_repulsion)
     print(f'The Hartree-Fock energy computed from local_energy is {np.round(Ehf, 10)}.')
-
 
     #####################################################################
     # Execution.                                                        #
