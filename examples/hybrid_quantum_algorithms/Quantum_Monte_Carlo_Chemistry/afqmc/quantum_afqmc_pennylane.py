@@ -610,11 +610,9 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
     total_time = np.linspace(dtau, int(dtau*num_steps), num=num_steps)
     walkers = [trial]*num_walkers
     weights = [1.0]*num_walkers
-    # t = 0.0
     t_step = 0
     
     def generator():
-        # while t < int(dtau*num_steps):
         while t_step <= num_steps:
             yield   
             
@@ -673,7 +671,6 @@ def qAFQMC(num_walkers, num_steps, q_total_time, v_0, v_gamma, mf_shift, dtau, t
         if not progress_bar:
             log_metric(metric_name="cE_list", value=E, iteration_number=t_step)        
 
-        # t += dtau
         t_step += 1
         walkers = walker_list
         weights = weight_list

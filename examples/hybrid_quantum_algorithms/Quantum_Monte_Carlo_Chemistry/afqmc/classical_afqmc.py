@@ -273,14 +273,14 @@ def cAFQMC(num_walkers, num_steps, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri
     total_time = np.linspace(dtau, int(dtau*num_steps), num=num_steps)
     walkers = [trial]*num_walkers
     weights = [1.0]*num_walkers
-    t = 0.0
+    t_step = 0
     
     def generator():
-        while t < dtau*num_steps:
-            yield
+        while t_step <= num_steps:
+            yield  
 
-    for _ in tqdm(generator(), disable=not progress_bar):  # For progress bar
-    #while t < dtau*num_steps:
+    for _ in tqdm(generator(), disable=not progress_bar):
+        t = t_step * dtau        
         weight_list = []
         walker_list = []
         energy_list = []
@@ -304,8 +304,8 @@ def cAFQMC(num_walkers, num_steps, v_0, v_gamma, mf_shift, dtau, trial, h1e, eri
         E = np.real(np.average(energy_list, weights=weights))
         E_list.append(E)
         E_shift = E
-        t += dtau
 
+        t_step += 1
         walkers = walker_list   # update the walkers
         weights = weight_list   # update the weights    
         
