@@ -32,34 +32,6 @@ def qAFQMC(
     progress_bar: bool = True,
     log_metrics: bool = False,
 ):
-
-    r"""
-    Args:
-        num_walkers: size of the total samples
-        num_steps: imaginary time steps taken
-        q_total_time: list that stores the specific time where energy evaluation on quantum simulator is invoked.
-        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
-        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
-        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
-        dtau: imaginary time step size
-        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
-        walker: normalized walker state as np.ndarray, others are the same as trial
-        weight:
-        h1e, eri: one-electron and two-electron integral stored in spatial orbitals
-        enuc: nuclear repulsion energy
-        Ehf: reference energy, usually taken as the HF energy.
-        h_chem: modified one-body term from reordering the two-body operator
-        lambda_l: eigenvalues of Cholesky vectors
-        U_l: eigenvectors of Cholesky vectors
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
-        max_pool: number of cores for parallelization
-
-    Returns:
-        total_time: List of time steps for classical AFQMC
-        cE_list: energy evolution for classical AFQMC
-        qE_list: energy evolution for quantum AFQMC
-
-    """
     cE_list = []
     qE_list = []
     E_list = []
