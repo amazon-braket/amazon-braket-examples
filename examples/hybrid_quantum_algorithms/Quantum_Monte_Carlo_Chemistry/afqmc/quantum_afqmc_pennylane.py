@@ -606,14 +606,16 @@ def qAFQMC(
     cE_list = []
     qE_list = []
     E_shift = Ehf
-    total_time = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
-    step = 0
+
+    qtimes = []
+    ctimes = []
 
     for step in tqdm(range(num_steps), disable=not progress_bar):
         t = step * dtau
         if np.round(t, 4) in q_total_time:
+            qtimes.append(t)
             inputs = [
                 (
                     v_0,
@@ -646,6 +648,7 @@ def qAFQMC(
             if not progress_bar:
                 log_metric(metric_name="qE_list", value=qE, iteration_number=step)
         else:
+            ctimes.append(t)
             inputs = [
                 (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
                 for walker, weight in zip(walkers, weights)
@@ -663,7 +666,7 @@ def qAFQMC(
         walkers = walker_list
         weights = weight_list
 
-    return total_time, cE_list, qE_list
+    return ctimes, qtimes, cE_list, qE_list
 
 
 def quanutm_energy(weights, ovlpratio_list, qenergy_list):
