@@ -27,7 +27,7 @@ def qAFQMC(
     dtau: float,
     trial: np.ndarray,
     prop: ChemicalProperties,
-    dev,  # Pennylane Device
+    dev: qml.Device,
     max_pool: int = 8,
     progress_bar: bool = True,
     log_metrics: bool = False,
@@ -475,27 +475,9 @@ def ImagTimePropagator_QAEE(
     weight: float,
     prop: ChemicalProperties,
     E_shift: float,
-    dev,
+    dev: qml.Device,
 ):
 
-    # def ImagTimePropagator_QAEE(
-    #     v_0,
-    #     v_gamma,
-    #     mf_shift,
-    #     dtau,
-    #     trial,
-    #     walker,
-    #     weight,
-    #     h1e,
-    #     eri,
-    #     enuc,
-    #     E_shift,
-    #     h_chem,
-    #     lambda_l,
-    #     U_l,
-    #     V_T,
-    #     dev,
-    # ):
     r"""This function defines the imaginary propagation process and will return new walker state and new weight.
 
     Args:
