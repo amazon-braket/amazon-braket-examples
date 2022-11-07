@@ -12,6 +12,126 @@ from tqdm import tqdm
 CUTOFF = 1e-14
 
 
+def qAFQMC(
+    num_walkers: int,
+    num_steps: int,
+    q_total_time,
+    v_0,
+    v_gamma,
+    mf_shift,
+    dtau: float,
+    trial,
+    h1e,
+    eri,
+    enuc: float,
+    Ehf: float,
+    h_chem,
+    lambda_l,
+    U_l,
+    dev,
+    max_pool: int,
+    progress_bar: bool = True,
+    log_metrics: bool = False,
+):
+    r"""
+    Args:
+        num_walkers: size of the total samples
+        num_steps: imaginary time steps taken
+        q_total_time: list that stores the specific time where energy evaluation on quantum simulator is invoked.
+        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
+        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
+        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
+        dtau: imaginary time step size
+        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
+        walker: normalized walker state as np.ndarray, others are the same as trial
+        weight:
+        h1e, eri: one-electron and two-electron integral stored in spatial orbitals
+        enuc: nuclear repulsion energy
+        Ehf: reference energy, usually taken as the HF energy.
+        h_chem: modified one-body term from reordering the two-body operator
+        lambda_l: eigenvalues of Cholesky vectors
+        U_l: eigenvectors of Cholesky vectors
+        dev: qml.device('lightning.qubit', wires=wires) for simulator;
+        max_pool: number of cores for parallelization
+
+    Returns:
+        total_time: List of time steps for classical AFQMC
+        cE_list: energy evolution for classical AFQMC
+        qE_list: energy evolution for quantum AFQMC
+
+    """
+    cE_list = []
+    qE_list = []
+    E_list = []
+    qtimes = []
+    ctimes = []
+    E_shift = Ehf
+    walkers = [trial] * num_walkers
+    weights = [1.0] * num_walkers
+
+    for step in tqdm(range(num_steps), disable=not progress_bar):
+        t = step * dtau
+        # check if t is in times without floating point errors
+        if np.any(np.isclose(t, q_total_time)):
+            qtimes.append(t)
+            inputs = [
+                (
+                    v_0,
+                    v_gamma,
+                    mf_shift,
+                    dtau,
+                    trial,
+                    walker,
+                    weight,
+                    h1e,
+                    eri,
+                    enuc,
+                    E_shift,
+                    h_chem,
+                    lambda_l,
+                    U_l,
+                    V_T,
+                    dev,
+                )
+                for walker, weight in zip(walkers, weights)
+            ]
+
+            energy_list, ovlpratio_list, qenergy_list, weight_list, walker_list = run_quantum_qmc(
+                max_pool, inputs
+            )
+
+            qE = quantum_energy(weights, ovlpratio_list, qenergy_list)
+            qE_list.append(qE)
+            E = qE
+
+            if log_metrics:
+                log_metric(metric_name="qE_list", value=qE, iteration_number=step)
+        else:
+            ctimes.append(t)
+            inputs = [
+                (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
+                for walker, weight in zip(walkers, weights)
+            ]
+
+            weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
+            cE = np.real(np.average(energy_list, weights=weights))
+            cE_list.append(cE)
+            E = cE
+            if log_metrics:
+                log_metric(metric_name="cE_list", value=cE, iteration_number=step)
+
+        E_shift = E
+        E_list.append(E)
+
+        if log_metrics:
+            log_metric(metric_name="E_list", value=E, iteration_number=step)
+
+        walkers = walker_list
+        weights = weight_list
+
+    return ctimes, qtimes, cE_list, qE_list, E_list
+
+
 def givens_block_circuit(givens):
     """This function defines the Givens rotation circuit from a single givens tuple
 
@@ -554,125 +674,6 @@ def qImagTimePropagator(
     new_weight = weight * np.exp(-dtau * (np.real(E_loc) - E_shift)) * np.max([0.0, np.cos(arg)])
 
     return E_loc, new_ovlp, new_walker, new_weight
-
-
-def qAFQMC(
-    num_walkers,
-    num_steps,
-    q_total_time,
-    v_0,
-    v_gamma,
-    mf_shift,
-    dtau,
-    trial,
-    h1e,
-    eri,
-    enuc,
-    Ehf,
-    h_chem,
-    lambda_l,
-    U_l,
-    dev,
-    max_pool,
-    progress_bar=True,
-):
-    r"""
-    Args:
-        num_walkers: size of the total samples
-        num_steps: imaginary time steps taken
-        q_total_time: list that stores the specific time where energy evaluation on quantum simulator is invoked.
-        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
-        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
-        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
-        dtau: imaginary time step size
-        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
-        walker: normalized walker state as np.ndarray, others are the same as trial
-        weight:
-        h1e, eri: one-electron and two-electron integral stored in spatial orbitals
-        enuc: nuclear repulsion energy
-        Ehf: reference energy, usually taken as the HF energy.
-        h_chem: modified one-body term from reordering the two-body operator
-        lambda_l: eigenvalues of Cholesky vectors
-        U_l: eigenvectors of Cholesky vectors
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
-        max_pool: number of cores for parallelization
-
-    Returns:
-        total_time: List of time steps for classical AFQMC
-        cE_list: energy evolution for classical AFQMC
-        qE_list: energy evolution for quantum AFQMC
-
-    """
-    cE_list = []
-    qE_list = []
-    E_list = []
-    qtimes = []
-    ctimes = []
-    E_shift = Ehf
-    walkers = [trial] * num_walkers
-    weights = [1.0] * num_walkers
-
-    for step in tqdm(range(num_steps), disable=not progress_bar):
-        t = step * dtau
-        # check if t is in times without floating point errors
-        if np.any(np.isclose(t, q_total_time)):
-            qtimes.append(t)
-            inputs = [
-                (
-                    v_0,
-                    v_gamma,
-                    mf_shift,
-                    dtau,
-                    trial,
-                    walker,
-                    weight,
-                    h1e,
-                    eri,
-                    enuc,
-                    E_shift,
-                    h_chem,
-                    lambda_l,
-                    U_l,
-                    V_T,
-                    dev,
-                )
-                for walker, weight in zip(walkers, weights)
-            ]
-
-            energy_list, ovlpratio_list, qenergy_list, weight_list, walker_list = run_quantum_qmc(
-                max_pool, inputs
-            )
-
-            qE = quantum_energy(weights, ovlpratio_list, qenergy_list)
-            qE_list.append(qE)
-            E = qE
-
-            if not progress_bar:
-                log_metric(metric_name="qE_list", value=qE, iteration_number=step)
-        else:
-            ctimes.append(t)
-            inputs = [
-                (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
-                for walker, weight in zip(walkers, weights)
-            ]
-
-            weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
-            cE = np.real(np.average(energy_list, weights=weights))
-            cE_list.append(cE)
-            E = cE
-            if not progress_bar:
-                log_metric(metric_name="cE_list", value=cE, iteration_number=step)
-
-        E_shift = E
-        E_list.append(E)
-
-        if not progress_bar:
-            log_metric(metric_name="E_list", value=E, iteration_number=step)
-
-        walkers = walker_list
-        weights = weight_list
-
-    return ctimes, qtimes, cE_list, qE_list, E_list
 
 
 def quantum_energy(weights, ovlpratio_list, qenergy_list):

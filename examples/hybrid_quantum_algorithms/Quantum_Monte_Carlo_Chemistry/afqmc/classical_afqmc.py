@@ -10,7 +10,80 @@ from tqdm import tqdm
 CUTOFF = 1e-14
 
 
-def reortho(A):
+def cAFQMC(
+    num_walkers: int,
+    num_steps: int,
+    v_0,
+    v_gamma,
+    mf_shift,
+    dtau: float,
+    trial,
+    h1e,
+    eri,
+    enuc: float,
+    Ehf: float,
+    max_pool: int,
+    progress_bar: bool = True,
+):
+    r"""
+    Args:
+        num_walkers:
+        num_steps: number of steps for imaginary time evolution
+        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
+        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
+        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
+        dtau: imaginary time step size
+        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
+        h1e, eri: one- and two-electron integral stored in spatial orbitals basis
+        enuc: nuclear repulsion energy
+        E_shift: reference energy, usually taken as the HF energy
+        max_pool: number of cores to parallelize the calculations
+        progress_bar: bool
+    Returns:
+        total_time: list that stores the time series of the evolution
+        E_list: list that stores the computed energy
+    """
+    E_list = []
+    E_shift = Ehf  # set energy shift E_0 as HF energy from earlier
+    ctimes = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
+    walkers = [trial] * num_walkers
+    weights = [1.0] * num_walkers
+
+    for _ in tqdm(range(num_steps), disable=not progress_bar):
+        inputs = [
+            (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
+            for walker, weight in zip(walkers, weights)
+        ]
+
+        weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
+
+        E = np.real(np.average(energy_list, weights=weights))
+        E_list.append(E)
+        E_shift = E
+
+        walkers = walker_list  # update the walkers
+        weights = weight_list  # update the weights
+
+    return ctimes, E_list
+
+
+def run_classical_qmc(max_pool, inputs):
+    with mp.Pool(max_pool) as pool:
+        results = list(pool.map(ImagTimePropagatorWrapper, inputs))
+
+    weight_list = []
+    walker_list = []
+    energy_list = []
+    for (E_loc, new_walker, new_weight) in results:
+        energy_list.append(E_loc)
+        # for computational stability, we neglect the weights that are too small.
+        if new_weight > CUTOFF:
+            weight_list.append(new_weight)
+            walker_list.append(new_walker)
+    return weight_list, walker_list, energy_list
+
+
+def reortho(A: np.ndarray):
     """Reorthogonalise a MxN matrix A.
     Performs a QR decomposition of A. Note that for consistency elsewhere we
     want to preserve detR > 0 which is not guaranteed. We thus factor the signs
@@ -44,7 +117,7 @@ def G_pq(psi: np.ndarray, phi: np.ndarray):
     return G
 
 
-def local_energy(h1e, eri, G, enuc):
+def local_energy(h1e: np.ndarray, eri: np.ndarray, G: np.ndarray, enuc: float):
     r"""Calculate local for generic two-body hamiltonian.
     This uses the full (spatial) form for the two-electron integrals.
 
@@ -52,6 +125,7 @@ def local_energy(h1e, eri, G, enuc):
         h1e (np.ndarray): one-body term
         eri (np.ndarray): two-body term
         G (np.ndarray): Walker's "green's function"
+        enuc (float): Nuclear repulsion energy
 
     Returns:
         T + V + enuc (float): kinetic, potential energies and nuclear repulsion energy.
@@ -71,7 +145,7 @@ def local_energy(h1e, eri, G, enuc):
     return e1 + e2 + enuc
 
 
-def chemistry_preparation(mol, hf, trial):
+def chemistry_preparation(mol, hf, trial: np.ndarray):
     """
     This function returns one- and two-electron integrals from PySCF.
 
@@ -181,8 +255,7 @@ def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
 
     # Note that v_gamma doesn't include the mf_shift, there is an additional term coming from
     # -(x - xbar)*mf_shift, this term is also a complex value.
-    # cmf = -np.sqrt(dtau)*np.dot(xshifted, mf_shift)
-    # prefactor = np.exp(-dtau*(H_0 - E_0) + cmf)
+
     B = exp_v0 @ exp_V @ exp_v0
 
     # Find the new walker state
@@ -199,9 +272,9 @@ def ImagTimePropagator(
     trial: np.ndarray,
     walker: np.ndarray,
     weight: float,
-    h1e,
-    eri,
-    enuc,
+    h1e: np.ndarray,
+    eri: np.ndarray,
+    enuc: float,
     E_shift: float,
 ):
     r"""This function defines the imaginary propagation process and will return new walker state and new weight.
@@ -214,7 +287,8 @@ def ImagTimePropagator(
         trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
         walker: walker state as np.ndarray, others are the same as trial
         weight: weight associated with the specific walker
-        h1e, eri: one- and two-electron integral stored in spatial orbitals basis
+        h1e: one-electron integral stored in spatial orbitals basis
+        eri: two-electron integral stored in spatial orbitals basis
         enuc: nuclear repulsion energy
         E_shift: reference energy, usually taken as the HF energy.
 
@@ -258,76 +332,3 @@ def ImagTimePropagatorWrapper(args):
     Wrapper function for multiprocessing
     """
     return ImagTimePropagator(*args)
-
-
-def cAFQMC(
-    num_walkers,
-    num_steps,
-    v_0,
-    v_gamma,
-    mf_shift,
-    dtau,
-    trial,
-    h1e,
-    eri,
-    enuc,
-    Ehf,
-    max_pool,
-    progress_bar=True,
-):
-    r"""
-    Args:
-        num_walkers:
-        num_steps: number of steps for imaginary time evolution
-        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
-        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
-        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
-        dtau: imaginary time step size
-        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
-        h1e, eri: one- and two-electron integral stored in spatial orbitals basis
-        enuc: nuclear repulsion energy
-        E_shift: reference energy, usually taken as the HF energy
-        max_pool: number of cores to parallelize the calculations
-        progress_bar: bool
-    Returns:
-        total_time: list that stores the time series of the evolution
-        E_list: list that stores the computed energy
-    """
-    E_list = []
-    E_shift = Ehf  # set energy shift E_0 as HF energy from earlier
-    ctimes = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
-    walkers = [trial] * num_walkers
-    weights = [1.0] * num_walkers
-
-    for _ in tqdm(range(num_steps), disable=not progress_bar):
-        inputs = [
-            (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
-            for walker, weight in zip(walkers, weights)
-        ]
-
-        weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
-
-        E = np.real(np.average(energy_list, weights=weights))
-        E_list.append(E)
-        E_shift = E
-
-        walkers = walker_list  # update the walkers
-        weights = weight_list  # update the weights
-
-    return ctimes, E_list
-
-
-def run_classical_qmc(max_pool, inputs):
-    with mp.Pool(max_pool) as pool:
-        results = list(pool.map(ImagTimePropagatorWrapper, inputs))
-
-    weight_list = []
-    walker_list = []
-    energy_list = []
-    for (E_loc, new_walker, new_weight) in results:
-        energy_list.append(E_loc)
-        # for computational stability, we neglect the weights that are too small.
-        if new_weight > CUTOFF:
-            weight_list.append(new_weight)
-            walker_list.append(new_walker)
-    return weight_list, walker_list, energy_list
