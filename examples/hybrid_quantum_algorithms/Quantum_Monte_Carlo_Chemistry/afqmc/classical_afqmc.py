@@ -297,7 +297,7 @@ def cAFQMC(
     """
     E_list = []
     E_shift = Ehf  # set energy shift E_0 as HF energy from earlier
-    total_time = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
+    ctimes = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
 
@@ -316,7 +316,7 @@ def cAFQMC(
         walkers = walker_list  # update the walkers
         weights = weight_list  # update the weights
 
-    return total_time, E_list
+    return ctimes, E_list
 
 
 def run_classical_qmc(max_pool, inputs):

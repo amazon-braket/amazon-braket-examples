@@ -605,12 +605,12 @@ def qAFQMC(
     """
     cE_list = []
     qE_list = []
+    E_list = []
+    qtimes = []
+    ctimes = []
     E_shift = Ehf
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
-
-    qtimes = []
-    ctimes = []
 
     for step in tqdm(range(num_steps), disable=not progress_bar):
         t = step * dtau
@@ -642,8 +642,9 @@ def qAFQMC(
                 max_pool, inputs
             )
 
-            qE = quanutm_energy(weights, ovlpratio_list, qenergy_list)
+            qE = quantum_energy(weights, ovlpratio_list, qenergy_list)
             qE_list.append(qE)
+            E = qE
 
             if not progress_bar:
                 log_metric(metric_name="qE_list", value=qE, iteration_number=step)
@@ -655,21 +656,25 @@ def qAFQMC(
             ]
 
             weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
+            cE = np.real(np.average(energy_list, weights=weights))
+            cE_list.append(cE)
+            E = cE
+            if not progress_bar:
+                log_metric(metric_name="cE_list", value=cE, iteration_number=step)
 
-        E = np.real(np.average(energy_list, weights=weights))
-        cE_list.append(E)
         E_shift = E
+        E_list.append(E)
 
         if not progress_bar:
-            log_metric(metric_name="cE_list", value=E, iteration_number=step)
+            log_metric(metric_name="E_list", value=E, iteration_number=step)
 
         walkers = walker_list
         weights = weight_list
 
-    return ctimes, qtimes, cE_list, qE_list
+    return ctimes, qtimes, cE_list, qE_list, E_list
 
 
-def quanutm_energy(weights, ovlpratio_list, qenergy_list):
+def quantum_energy(weights, ovlpratio_list, qenergy_list):
     numerator = 0.0 + 0.0j
     denominator = 0.0 + 0.0j
     for i in range(len(weights)):
