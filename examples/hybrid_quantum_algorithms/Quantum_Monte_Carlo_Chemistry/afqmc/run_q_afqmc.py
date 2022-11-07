@@ -52,7 +52,7 @@ def run(
         properties,
         dev,
         max_pool=max_pool,
-        progress_bar=False,
+        progress_bar=True,
         log_metrics=True,
     )
     elapsed = time.time() - start
