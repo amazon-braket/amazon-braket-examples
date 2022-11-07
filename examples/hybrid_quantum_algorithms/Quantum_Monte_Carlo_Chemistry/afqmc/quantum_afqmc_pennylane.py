@@ -5,31 +5,11 @@ import os
 
 import numpy as np
 import pennylane as qml
-from afqmc.classical_afqmc import G_pq, ImagTimePropagator, PropagateWalker, local_energy
+from afqmc.classical_afqmc import G_pq, ImagTimePropagator, PropagateWalker, local_energy, reortho
 from braket.jobs.metrics import log_metric
 from openfermion.linalg.givens_rotations import givens_decomposition_square
-from scipy.linalg import det, expm, qr
+from scipy.linalg import expm
 from tqdm import tqdm
-
-
-def reortho(A):
-    """Reorthogonalise a MxN matrix A.
-    Performs a QR decomposition of A. Note that for consistency elsewhere we
-    want to preserve detR > 0 which is not guaranteed. We thus factor the signs
-    of the diagonal of R into Q.
-
-    Args:
-        A (np.ndarray): MxN matrix.
-
-    Returns:
-        Q (np.ndarray): Orthogonal matrix. A = QR.
-        detR (float): Determinant of upper triangular matrix (R) from QR decomposition.
-    """
-    (Q, R) = qr(A, mode="economic")
-    signs = np.diag(np.sign(np.diag(R)))
-    Q = Q.dot(signs)
-    detR = det(signs.dot(R))
-    return (Q, detR)
 
 
 def givens_block_circuit(givens):

@@ -8,6 +8,7 @@ from pyscf import fci, gto
 
 np.set_printoptions(precision=4, edgeitems=10, linewidth=150, suppress=True)
 
+
 from afqmc.classical_afqmc import G_pq, chemistry_preparation, local_energy
 from afqmc.quantum_afqmc_pennylane import qAFQMC
 from braket.jobs import save_job_result
