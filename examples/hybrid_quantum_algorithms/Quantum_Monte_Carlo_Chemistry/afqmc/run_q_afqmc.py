@@ -50,16 +50,8 @@ def main(
     #####################################################################
     # Execution.                                                        #
     #####################################################################
-    # Read the hyperparameters
-    hp_file = os.environ["AMZN_BRAKET_HP_FILE"]
-    with open(hp_file) as f:
-        hyperparams = json.load(f)
 
-    num_walkers = int(hyperparams["num_walkers"])
-    num_steps = int(hyperparams["num_steps"])
-    dtau = float(hyperparams["dtau"])
-    max_pool = int(hyperparams["max_pool"])
-    q_total_time = json.loads(hyperparams["q_total_time"])
+    q_total_time = json.loads(q_total_time)
 
     dev = get_pennylane_device(4)
 
@@ -114,19 +106,7 @@ def get_pennylane_device(n_wires):
 
     """
     device_string = os.environ["AMZN_BRAKET_DEVICE_ARN"]
-    device_prefix = device_string.split(":")[0]
-
     prefix, device_name = device_string.split("/")
     device = qml.device(device_name, wires=n_wires)
-    print("Using local simulator: ", device.name)
-
+    print("Using simulator: ", device.name)
     return device
-
-
-if __name__ == "__main__":
-    try:
-        main()
-        print("Training Successful!!")
-    except BaseException as e:
-        print(e)
-        print("Training Fails...")
