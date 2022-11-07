@@ -9,7 +9,7 @@ from pyscf import fci, gto
 np.set_printoptions(precision=4, edgeitems=10, linewidth=150, suppress=True)
 
 
-from afqmc.classical_afqmc import G_pq, chemistry_preparation, local_energy
+from afqmc.classical_afqmc import chemistry_preparation
 from afqmc.quantum_afqmc_pennylane import qAFQMC
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
@@ -35,21 +35,7 @@ def run(
     myci.kernel()
 
     trial = np.array([[1, 0], [0, 1], [0, 0], [0, 0]])
-    operators = chemistry_preparation(mol, hf, trial)
-    h1e, eri, nuclear_repulsion, v_0, h_chem, v_gamma, L_gamma, mf_shift, lambda_l, U_l = operators
-
-    # Then we separate the spin up and spin down channel of the trial state
-    trial_up = trial[::2, ::2]
-    trial_down = trial[1::2, 1::2]
-
-    # compute its one particle Green's function
-    G = [G_pq(trial_up, trial_up), G_pq(trial_down, trial_down)]
-    Ehf = local_energy(h1e, eri, G, nuclear_repulsion)
-    print(f"The Hartree-Fock energy computed from local_energy is {np.round(Ehf, 10)}.")
-
-    #####################################################################
-    # Execution.                                                        #
-    #####################################################################
+    properties = chemistry_preparation(mol, hf, trial)
 
     q_total_time = json.loads(q_total_time)
 
@@ -58,24 +44,15 @@ def run(
     # Start QC-QFQMC computation
     start = time.time()
     ctimes, qtimes, cE_list, qE_list, E_list = qAFQMC(
+        q_total_time,
         num_walkers,
         num_steps,
-        q_total_time,
-        v_0,
-        v_gamma,
-        mf_shift,
         dtau,
         trial,
-        h1e,
-        eri,
-        nuclear_repulsion,
-        Ehf,
-        h_chem,
-        lambda_l,
-        U_l,
+        properties,
         dev,
         max_pool=max_pool,
-        progress_bar=False,
+        progress_bar=True,
         log_metrics=True,
     )
     elapsed = time.time() - start
