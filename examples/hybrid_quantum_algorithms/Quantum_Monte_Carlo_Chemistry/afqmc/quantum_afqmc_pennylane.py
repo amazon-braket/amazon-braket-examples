@@ -5,17 +5,13 @@ import os
 
 import numpy as np
 import pennylane as qml
-from afqmc.classical_afqmc import (
-    G_pq,
-    ImagTimePropagatorWrapper,
-    PropagateWalker,
-    local_energy,
-    reortho,
-)
+from afqmc.classical_afqmc import G_pq, PropagateWalker, local_energy, reortho, run_classical_qmc
 from braket.jobs.metrics import log_metric
 from openfermion.linalg.givens_rotations import givens_decomposition_square
 from scipy.linalg import expm
 from tqdm import tqdm
+
+CUTOFF = 1e-14
 
 
 def givens_block_circuit(givens):
@@ -640,46 +636,32 @@ def qAFQMC(
 
     for _ in tqdm(generator(), disable=not progress_bar):
         t = t_step * dtau
-        weight_list = []
-        walker_list = []
-        cenergy_list = []
-        qenergy_list = []
-        ovlpratio_list = []
-
-        inputs = []
         if np.round(t, 4) in q_total_time:
-            for i in range(len(weights)):
-                inputs.append(
-                    (
-                        v_0,
-                        v_gamma,
-                        mf_shift,
-                        dtau,
-                        trial,
-                        walkers[i],
-                        weights[i],
-                        h1e,
-                        eri,
-                        enuc,
-                        E_shift,
-                        h_chem,
-                        lambda_l,
-                        U_l,
-                        V_T,
-                        dev,
-                    )
+            inputs = [
+                (
+                    v_0,
+                    v_gamma,
+                    mf_shift,
+                    dtau,
+                    trial,
+                    walker,
+                    weight,
+                    h1e,
+                    eri,
+                    enuc,
+                    E_shift,
+                    h_chem,
+                    lambda_l,
+                    U_l,
+                    V_T,
+                    dev,
                 )
+                for walker, weight in zip(walkers, weights)
+            ]
 
-            with mp.Pool(max_pool) as pool:
-                results = list(pool.map(ImagTimePropagatorQAEEWrapper, inputs))
-
-            for (E_loc, E_loc_q, ovlp_ratio, new_walker, new_weight) in results:
-                cenergy_list.append(E_loc)
-                ovlpratio_list.append(ovlp_ratio)
-                qenergy_list.append(E_loc_q)
-                if new_weight > 1e-16:
-                    weight_list.append(new_weight)
-                    walker_list.append(new_walker)
+            cenergy_list, ovlpratio_list, qenergy_list, weight_list, walker_list = run_quantum_qmc(
+                max_pool, inputs
+            )
 
             numerator = 0.0 + 0.0j
             denominator = 0.0 + 0.0j
@@ -688,39 +670,21 @@ def qAFQMC(
                 denominator += weights[i] * ovlpratio_list[i]
             qE = np.real(numerator / denominator)
             qE_list.append(qE)
+
             if not progress_bar:
                 log_metric(metric_name="qE_list", value=qE, iteration_number=t_step)
 
         else:
-            for i in range(len(weights)):
-                inputs.append(
-                    (
-                        v_0,
-                        v_gamma,
-                        mf_shift,
-                        dtau,
-                        trial,
-                        walkers[i],
-                        weights[i],
-                        h1e,
-                        eri,
-                        enuc,
-                        E_shift,
-                    )
-                )
-
-            with mp.Pool(max_pool) as pool:
-                results = list(pool.map(ImagTimePropagatorWrapper, inputs))
-
-            for (E_loc, new_walker, new_weight) in results:
-                cenergy_list.append(E_loc)
-                if new_weight > 1e-16:
-                    weight_list.append(new_weight)
-                    walker_list.append(new_walker)
+            inputs = [
+                (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
+                for walker, weight in zip(walkers, weights)
+            ]
+            weight_list, walker_list, cenergy_list = run_classical_qmc(max_pool, inputs)
 
         E = np.real(np.average(cenergy_list, weights=weights))
         cE_list.append(E)
         E_shift = E
+
         if not progress_bar:
             log_metric(metric_name="cE_list", value=E, iteration_number=t_step)
 
@@ -729,3 +693,23 @@ def qAFQMC(
         weights = weight_list
 
     return total_time, cE_list, qE_list
+
+
+def run_quantum_qmc(max_pool, inputs):
+    weight_list = []
+    walker_list = []
+    cenergy_list = []
+    qenergy_list = []
+    ovlpratio_list = []
+
+    with mp.Pool(max_pool) as pool:
+        results = list(pool.map(ImagTimePropagatorQAEEWrapper, inputs))
+
+    for (E_loc, E_loc_q, ovlp_ratio, new_walker, new_weight) in results:
+        cenergy_list.append(E_loc)
+        ovlpratio_list.append(ovlp_ratio)
+        qenergy_list.append(E_loc_q)
+        if new_weight > CUTOFF:
+            weight_list.append(new_weight)
+            walker_list.append(new_walker)
+    return cenergy_list, ovlpratio_list, qenergy_list, weight_list, walker_list

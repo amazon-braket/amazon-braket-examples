@@ -9,6 +9,8 @@ from openfermion.circuits.low_rank import low_rank_two_body_decomposition
 from scipy.linalg import det, expm, qr
 from tqdm import tqdm
 
+CUTOFF = 1e-14
+
 
 def reortho(A):
     """Reorthogonalise a MxN matrix A.
@@ -305,18 +307,7 @@ def cAFQMC(
             for walker, weight in zip(walkers, weights)
         ]
 
-        with mp.Pool(max_pool) as pool:
-            results = list(pool.map(ImagTimePropagatorWrapper, inputs))
-
-        weight_list = []
-        walker_list = []
-        energy_list = []
-        for (E_loc, new_walker, new_weight) in results:
-            energy_list.append(E_loc)
-            # for computational stability, we neglect the weights that are too small.
-            if new_weight > 1e-14:
-                weight_list.append(new_weight)
-                walker_list.append(new_walker)
+        weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
 
         E = np.real(np.average(energy_list, weights=weights))
         E_list.append(E)
@@ -326,3 +317,19 @@ def cAFQMC(
         weights = weight_list  # update the weights
 
     return total_time, E_list
+
+
+def run_classical_qmc(max_pool, inputs):
+    with mp.Pool(max_pool) as pool:
+        results = list(pool.map(ImagTimePropagatorWrapper, inputs))
+
+    weight_list = []
+    walker_list = []
+    energy_list = []
+    for (E_loc, new_walker, new_weight) in results:
+        energy_list.append(E_loc)
+        # for computational stability, we neglect the weights that are too small.
+        if new_weight > CUTOFF:
+            weight_list.append(new_weight)
+            walker_list.append(new_walker)
+    return weight_list, walker_list, energy_list
