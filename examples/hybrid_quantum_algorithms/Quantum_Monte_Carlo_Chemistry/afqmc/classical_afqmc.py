@@ -1,5 +1,3 @@
-#!/usr/bin/env
-
 import copy
 import multiprocessing as mp
 import os
