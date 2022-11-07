@@ -15,7 +15,7 @@ from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 
 
-def main(
+def run(
     num_walkers: int,
     num_steps: int,
     dtau: float,
