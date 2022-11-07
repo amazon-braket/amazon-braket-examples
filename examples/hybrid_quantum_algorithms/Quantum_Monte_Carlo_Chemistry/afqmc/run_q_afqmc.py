@@ -35,8 +35,18 @@ def run(
     myci.kernel()
 
     trial = np.array([[1, 0], [0, 1], [0, 0], [0, 0]])
-    operators = chemistry_preparation(mol, hf, trial)
-    h1e, eri, nuclear_repulsion, v_0, h_chem, v_gamma, L_gamma, mf_shift, lambda_l, U_l = operators
+    (
+        h1e,
+        eri,
+        nuclear_repulsion,
+        v_0,
+        h_chem,
+        v_gamma,
+        L_gamma,
+        mf_shift,
+        lambda_l,
+        U_l,
+    ) = chemistry_preparation(mol, hf, trial)
 
     # Then we separate the spin up and spin down channel of the trial state
     trial_up = trial[::2, ::2]
