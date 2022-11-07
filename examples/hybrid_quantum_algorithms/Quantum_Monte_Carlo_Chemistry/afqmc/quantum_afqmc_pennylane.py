@@ -614,7 +614,8 @@ def qAFQMC(
 
     for step in tqdm(range(num_steps), disable=not progress_bar):
         t = step * dtau
-        if np.round(t, 4) in q_total_time:
+        # check if t is in times without floating point errors
+        if np.any(np.isclose(t, q_total_time)):
             qtimes.append(t)
             inputs = [
                 (
