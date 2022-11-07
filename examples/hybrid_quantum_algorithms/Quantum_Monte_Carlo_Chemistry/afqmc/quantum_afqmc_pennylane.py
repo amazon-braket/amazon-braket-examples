@@ -425,7 +425,7 @@ def ImagTimePropagator_QAEE(
     Returns:
         E_loc: local energy
         E_loc_q / c_ovlp: numerator
-        q_ovlp / c_ovlp: demoninator for evaluation of total energy
+        q_ovlp / c_ovlp: denominator for evaluation of total energy
         new_weight: new weight for the next time step
         new_walker: new walker for the next time step
 
