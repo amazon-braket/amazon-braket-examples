@@ -3,7 +3,7 @@ import os
 
 import numpy as np
 import pennylane as qml
-from afqmc.classical_afqmc import G_pq, PropagateWalker, local_energy, reortho
+from afqmc.classical_afqmc import G_pq, PropagateWalker, local_energy, reortho, run_classical_qmc
 from braket.jobs.metrics import log_metric
 from openfermion.linalg.givens_rotations import givens_decomposition_square
 from scipy.linalg import expm
@@ -609,39 +609,49 @@ def qAFQMC(
     total_time = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
+    step = 0
 
     for step in tqdm(range(num_steps), disable=not progress_bar):
-        inputs = [
-            (
-                v_0,
-                v_gamma,
-                mf_shift,
-                dtau,
-                trial,
-                walker,
-                weight,
-                h1e,
-                eri,
-                enuc,
-                E_shift,
-                h_chem,
-                lambda_l,
-                U_l,
-                V_T,
-                dev,
+        t = step * dtau
+        if np.round(t, 4) in q_total_time:
+            inputs = [
+                (
+                    v_0,
+                    v_gamma,
+                    mf_shift,
+                    dtau,
+                    trial,
+                    walker,
+                    weight,
+                    h1e,
+                    eri,
+                    enuc,
+                    E_shift,
+                    h_chem,
+                    lambda_l,
+                    U_l,
+                    V_T,
+                    dev,
+                )
+                for walker, weight in zip(walkers, weights)
+            ]
+
+            energy_list, ovlpratio_list, qenergy_list, weight_list, walker_list = run_quantum_qmc(
+                max_pool, inputs
             )
-            for walker, weight in zip(walkers, weights)
-        ]
 
-        energy_list, ovlpratio_list, qenergy_list, weight_list, walker_list = run_quantum_qmc(
-            max_pool, inputs
-        )
+            qE = quanutm_energy(weights, ovlpratio_list, qenergy_list)
+            qE_list.append(qE)
 
-        qE = quanutm_energy(weights, ovlpratio_list, qenergy_list)
-        qE_list.append(qE)
+            if not progress_bar:
+                log_metric(metric_name="qE_list", value=qE, iteration_number=step)
+        else:
+            inputs = [
+                (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
+                for walker, weight in zip(walkers, weights)
+            ]
 
-        if not progress_bar:
-            log_metric(metric_name="qE_list", value=qE, iteration_number=step)
+            weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
 
         E = np.real(np.average(energy_list, weights=weights))
         cE_list.append(E)
