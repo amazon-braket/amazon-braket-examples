@@ -59,7 +59,7 @@ def main():
 
     # Start QC-QFQMC computation
     start = time.time()
-    total_time, cE_list, qE_list = qAFQMC(
+    ctimes, qtimes, cE_list, qE_list, E_list = qAFQMC(
         num_walkers,
         num_steps,
         q_total_time,
@@ -90,8 +90,9 @@ def main():
             "elapsed": elapsed,
             "cE_list": cE_list,
             "qE_list": qE_list,
-            "total_time": list(total_time),
-            "q_total_time": list(q_total_time),
+            "E_list": E_list,
+            "ctimes": list(ctimes),
+            "qtimes": list(qtimes),
         }
     )
     log_metric(metric_name="elapsed", value=elapsed, iteration_number=0)
