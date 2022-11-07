@@ -15,7 +15,13 @@ from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 
 
-def main():
+def main(
+    num_walkers: int,
+    num_steps: int,
+    dtau: float,
+    max_pool: int,
+    q_total_time: str,
+):
     #####################################################################
     # We prepare the necessary operators for AFQMC calculations.        #
     #####################################################################
