@@ -301,7 +301,7 @@ def cAFQMC(
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
 
-    for _ in tqdm(range(num_steps + 1), disable=not progress_bar):
+    for _ in tqdm(range(num_steps), disable=not progress_bar):
         inputs = [
             (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
             for walker, weight in zip(walkers, weights)

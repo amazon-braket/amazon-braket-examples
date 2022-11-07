@@ -1,5 +1,3 @@
-#!/usr/bin/env
-
 import multiprocessing as mp
 import os
 
@@ -257,33 +255,26 @@ def qExpect_OneBody(walker, one_bodies, ovlp, V_T, dev):
         value:
     """
     num_qubits, num_particles = walker.shape
-    I = np.identity(num_qubits)
+    Id = np.identity(num_qubits)
 
     expectation = np.array([])
-    Dict = {}
-    for i in range(num_qubits):
-        Dict.update({(i): pauli_estimate(walker, V_T, I, [i], dev)})
-
+    pauli_dict = {i: pauli_estimate(walker, V_T, Id, [i], dev) for i in range(num_qubits)}
     for one_body in one_bodies:
         value = 0.0 + 0.0j
         # check if the one-body term is already diagonal or not
         if np.count_nonzero(np.round(one_body - np.diag(np.diagonal(one_body)), 7)) != 0:
-            Dic = {}
             lamb, U = np.linalg.eigh(one_body)
-            for i in range(num_qubits):
-                Dic.update({(i): pauli_estimate(walker, V_T, U, [i], dev)})
+            pauli_dict_2 = {i: pauli_estimate(walker, V_T, U, [i], dev) for i in range(num_qubits)}
 
             for i in range(num_qubits):
-                expectation_value = 0.5 * (ovlp - Dic.get(i))
+                expectation_value = 0.5 * (ovlp - pauli_dict_2.get(i))
                 value += lamb[i] * expectation_value
 
-            expectation = np.append(expectation, value)
         else:
             for i in range(num_qubits):
-                expectation_value = 0.5 * (ovlp - Dict.get(i))
+                expectation_value = 0.5 * (ovlp - pauli_dict.get(i))
                 value += one_body[i, i] * expectation_value
-            expectation = np.append(expectation, value)
-
+        expectation = np.append(expectation, value)
     return expectation
 
 
@@ -310,48 +301,38 @@ def local_energy_quantum(walker, ovlp, one_body, lambda_l, U_l, V_T, dev):
     num_qubits, num_particles = walker.shape
 
     # one-body term assuming diagonal form already
-    I = np.identity(num_qubits)
-    Dic = {}
+    Id = np.identity(num_qubits)
+    dictionary = {}
     for i in range(num_qubits):
-        Dic.update({(i): pauli_estimate(walker, V_T, I, [i], dev)})
+        dictionary[i] = pauli_estimate(walker, V_T, Id, [i], dev)
         for j in range(i + 1, num_qubits):
-            Dic.update({(i, j): pauli_estimate(walker, V_T, I, [i, j], dev)})
+            dictionary[(i, j)] = pauli_estimate(walker, V_T, Id, [i, j], dev)
 
     for i in range(num_qubits):
-        expectation_value = 0.5 * (ovlp - Dic.get(i))
+        expectation_value = 0.5 * (ovlp - dictionary.get(i))
         energy += one_body[i, i] * expectation_value
 
     # Cholesky decomposed two-body term
     for lamb, U in zip(lambda_l, U_l):
         # define a dictionary to store all the expectation values
         if np.count_nonzero(np.round(U - np.diag(np.diagonal(U)), 7)) == 0:
-            Dict = Dic
-            for i in range(num_qubits):
-                for j in range(i, num_qubits):
-                    if i == j:
-                        expectation_value = 0.5 * (ovlp - Dict.get(i))
-                    else:
-                        expectation_value = 0.5 * (
-                            ovlp - Dict.get(i) - Dict.get(j) + Dict.get((i, j))
-                        )
-                    energy += 0.5 * lamb[i] * lamb[j] * expectation_value
+            new_dict = dictionary
         else:
-            Dict = {}
+            new_dict = {}
             for i in range(num_qubits):
-                Dict.update({(i): pauli_estimate(walker, V_T, U, [i], dev)})
+                new_dict[i] = pauli_estimate(walker, V_T, U, [i], dev)
                 for j in range(i, num_qubits):
-                    Dict.update({(i, j): pauli_estimate(walker, V_T, U, [i, j], dev)})
+                    new_dict[(i, j)] = pauli_estimate(walker, V_T, U, [i, j], dev)
 
-            for i in range(num_qubits):
-                for j in range(i, num_qubits):
-                    if i == j:
-                        expectation_value = 0.5 * (ovlp - Dict.get(i))
-                    else:
-                        expectation_value = 0.5 * (
-                            ovlp - Dict.get(i) - Dict.get(j) + Dict.get((i, j))
-                        )
-                    energy += 0.5 * lamb[i] * lamb[j] * expectation_value
-
+        for i in range(num_qubits):
+            for j in range(i, num_qubits):
+                if i == j:
+                    expectation_value = 0.5 * (ovlp - new_dict.get(i))
+                else:
+                    expectation_value = 0.5 * (
+                        ovlp - new_dict.get(i) - new_dict.get(j) + new_dict.get((i, j))
+                    )
+                energy += 0.5 * lamb[i] * lamb[j] * expectation_value
     return energy
 
 
@@ -629,7 +610,7 @@ def qAFQMC(
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
 
-    for step in tqdm(range(num_steps + 1), disable=not progress_bar):
+    for step in tqdm(range(num_steps), disable=not progress_bar):
         inputs = [
             (
                 v_0,
