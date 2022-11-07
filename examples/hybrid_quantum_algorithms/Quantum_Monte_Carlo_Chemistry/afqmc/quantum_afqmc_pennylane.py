@@ -1,9 +1,17 @@
 import multiprocessing as mp
 import os
+from typing import Iterable
 
 import numpy as np
 import pennylane as qml
-from afqmc.classical_afqmc import G_pq, PropagateWalker, local_energy, reortho, run_classical_qmc
+from afqmc.classical_afqmc import (
+    ChemicalProperties,
+    G_pq,
+    PropagateWalker,
+    local_energy,
+    reortho,
+    run_classical_qmc,
+)
 from braket.jobs.metrics import log_metric
 from openfermion.linalg.givens_rotations import givens_decomposition_square
 from scipy.linalg import expm
@@ -13,26 +21,18 @@ CUTOFF = 1e-14
 
 
 def qAFQMC(
+    q_total_time: Iterable,
     num_walkers: int,
     num_steps: int,
-    q_total_time,
-    v_0,
-    v_gamma,
-    mf_shift,
     dtau: float,
-    trial,
-    h1e,
-    eri,
-    enuc: float,
-    Ehf: float,
-    h_chem,
-    lambda_l,
-    U_l,
-    dev,
-    max_pool: int,
+    trial: np.ndarray,
+    prop: ChemicalProperties,
+    dev,  # Pennylane Device
+    max_pool: int = 8,
     progress_bar: bool = True,
     log_metrics: bool = False,
 ):
+
     r"""
     Args:
         num_walkers: size of the total samples
@@ -65,7 +65,15 @@ def qAFQMC(
     E_list = []
     qtimes = []
     ctimes = []
-    E_shift = Ehf
+
+    trial_up = trial[::2, ::2]
+    trial_down = trial[1::2, 1::2]
+
+    # compute its one particle Green's function
+    G = [G_pq(trial_up, trial_up), G_pq(trial_down, trial_down)]
+    Ehf = local_energy(prop.h1e, prop.eri, G, prop.nuclear_repulsion)
+    E_shift = Ehf  # set energy shift E_0 as HF energy from earlier
+
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
 
@@ -75,24 +83,7 @@ def qAFQMC(
         if np.any(np.isclose(t, q_total_time)):
             qtimes.append(t)
             inputs = [
-                (
-                    v_0,
-                    v_gamma,
-                    mf_shift,
-                    dtau,
-                    trial,
-                    walker,
-                    weight,
-                    h1e,
-                    eri,
-                    enuc,
-                    E_shift,
-                    h_chem,
-                    lambda_l,
-                    U_l,
-                    V_T,
-                    dev,
-                )
+                (dtau, trial, walker, weight, prop, E_shift, dev)
                 for walker, weight in zip(walkers, weights)
             ]
 
@@ -109,11 +100,12 @@ def qAFQMC(
         else:
             ctimes.append(t)
             inputs = [
-                (v_0, v_gamma, mf_shift, dtau, trial, walker, weight, h1e, eri, enuc, E_shift)
+                (dtau, trial, walker, weight, prop, E_shift)
                 for walker, weight in zip(walkers, weights)
             ]
 
             weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
+
             cE = np.real(np.average(energy_list, weights=weights))
             cE_list.append(cE)
             E = cE
@@ -505,23 +497,33 @@ def qPropagateWalker(x, v_0, v_gamma, mf_shift, dtau, walker, V_T, ovlp, dev):
 
 
 def ImagTimePropagator_QAEE(
-    v_0,
-    v_gamma,
-    mf_shift,
-    dtau,
-    trial,
-    walker,
-    weight,
-    h1e,
-    eri,
-    enuc,
-    E_shift,
-    h_chem,
-    lambda_l,
-    U_l,
-    V_T,
+    dtau: float,
+    trial: np.ndarray,
+    walker: np.ndarray,
+    weight: float,
+    prop: ChemicalProperties,
+    E_shift: float,
     dev,
 ):
+
+    # def ImagTimePropagator_QAEE(
+    #     v_0,
+    #     v_gamma,
+    #     mf_shift,
+    #     dtau,
+    #     trial,
+    #     walker,
+    #     weight,
+    #     h1e,
+    #     eri,
+    #     enuc,
+    #     E_shift,
+    #     h_chem,
+    #     lambda_l,
+    #     U_l,
+    #     V_T,
+    #     dev,
+    # ):
     r"""This function defines the imaginary propagation process and will return new walker state and new weight.
 
     Args:
@@ -554,7 +556,7 @@ def ImagTimePropagator_QAEE(
 
     # First compute the bias force using the expectation value of L operators
     num_spin_orbitals, num_electrons = trial.shape
-    num_fields = len(v_gamma)
+    num_fields = len(prop.v_gamma)
     np.identity(num_spin_orbitals)
     # compute the overlap integral
     ovlp = np.linalg.det(trial.transpose().conj() @ walker)
@@ -564,17 +566,20 @@ def ImagTimePropagator_QAEE(
     walker_up = walker[::2, ::2]
     walker_down = walker[1::2, 1::2]
     G = [G_pq(trial_up, walker_up), G_pq(trial_down, walker_down)]
-    E_loc = local_energy(h1e, eri, G, enuc)
+    E_loc = local_energy(prop.h1e, prop.eri, G, prop.nuclear_repulsion)
 
     # Quantum-assisted energy evaluation
     # compute the overlap between qtrial state and walker
     c_ovlp = np.linalg.det(trial.transpose().conj() @ walker)
     q_ovlp = amplitude_estimate(walker, V_T, dev)
-    E_loc_q = local_energy_quantum(walker, q_ovlp, h_chem, lambda_l, U_l, V_T, dev) + q_ovlp * enuc
+    E_loc_q = (
+        local_energy_quantum(walker, q_ovlp, prop.h_chem, prop.lambda_l, prop.U_l, V_T, dev)
+        + q_ovlp * prop.nuclear_repulsion
+    )
 
     # update the walker
     x = np.random.normal(0.0, 1.0, size=num_fields)
-    new_walker = PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G)
+    new_walker = PropagateWalker(x, prop.v_0, prop.v_gamma, prop.mf_shift, dtau, trial, walker, G)
 
     # Define the I operator and find new weight
     new_ovlp = np.linalg.det(trial.transpose().conj() @ new_walker)
