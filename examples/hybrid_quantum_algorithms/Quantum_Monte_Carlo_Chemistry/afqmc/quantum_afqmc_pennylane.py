@@ -5,7 +5,13 @@ import os
 
 import numpy as np
 import pennylane as qml
-from afqmc.classical_afqmc import G_pq, ImagTimePropagator, PropagateWalker, local_energy, reortho
+from afqmc.classical_afqmc import (
+    G_pq,
+    ImagTimePropagatorWrapper,
+    PropagateWalker,
+    local_energy,
+    reortho,
+)
 from braket.jobs.metrics import log_metric
 from openfermion.linalg.givens_rotations import givens_decomposition_square
 from scipy.linalg import expm
@@ -499,14 +505,7 @@ def V_T():
         qml.Hadamard(wires=i)
 
 
-def multi_run_wrapper(args):
-    """
-    Wrapper function for classical AFQMC
-    """
-    return ImagTimePropagator(*args)
-
-
-def multi_run_wrapper_QAEE(args):
+def ImagTimePropagatorQAEEWrapper(args):
     """
     Wrapper function for quantum AFQMC
     """
@@ -672,7 +671,7 @@ def qAFQMC(
                 )
 
             with mp.Pool(max_pool) as pool:
-                results = list(pool.map(multi_run_wrapper_QAEE, inputs))
+                results = list(pool.map(ImagTimePropagatorQAEEWrapper, inputs))
 
             for (E_loc, E_loc_q, ovlp_ratio, new_walker, new_weight) in results:
                 cenergy_list.append(E_loc)
@@ -711,7 +710,7 @@ def qAFQMC(
                 )
 
             with mp.Pool(max_pool) as pool:
-                results = list(pool.map(multi_run_wrapper, inputs))
+                results = list(pool.map(ImagTimePropagatorWrapper, inputs))
 
             for (E_loc, new_walker, new_weight) in results:
                 cenergy_list.append(E_loc)
