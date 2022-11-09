@@ -34,8 +34,8 @@ def quantum_afqmc(
             Otherwise, it uses classical evaluations.
         num_walkers (int): Number of walkers.
         num_steps (int): Number of (imaginary) time steps
-        quantum_evaluations_every_n_steps (int): How often to evaluate the energy using quantum
         dtau (float): Increment of each time step
+        quantum_evaluations_every_n_steps (int): How often to evaluate the energy using quantum
         trial (np.ndarray): Trial wavefunction.
         prop (ChemicalProperties): Chemical properties.
         dev (qml.Device): Pennylane device to run circuits on.

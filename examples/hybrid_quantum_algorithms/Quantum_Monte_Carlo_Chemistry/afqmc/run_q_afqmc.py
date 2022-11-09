@@ -1,4 +1,3 @@
-import json
 import os
 import time
 
@@ -11,7 +10,11 @@ from pyscf import fci, gto
 
 
 def run(
-    quantum_times, num_walkers: int, num_steps: int, dtau: float, max_pool: int  # no type hint
+    num_walkers: int,
+    num_steps: int,
+    dtau: float,
+    quantum_evaluations_every_n_steps: int,
+    max_pool: int,
 ):
 
     # perform HF calculations, where the geometry information and basis set are defined
@@ -47,13 +50,17 @@ def run(
 
     dev = qml.device("lightning.qubit", wires=4)
 
-    quantum_times = json.loads(quantum_times)
-    print(f"Runnign with quantum times:\n {quantum_times}")
-
     # Start QC-QFQMC computation
     start = time.time()
     quantum_energies, energies = quantum_afqmc(
-        quantum_times, num_walkers, num_steps, dtau, trial, prop, max_pool=max_pool, dev=dev
+        num_walkers,
+        num_steps,
+        dtau,
+        quantum_evaluations_every_n_steps,
+        trial,
+        prop,
+        max_pool=max_pool,
+        dev=dev,
     )
     elapsed = time.time() - start
 
