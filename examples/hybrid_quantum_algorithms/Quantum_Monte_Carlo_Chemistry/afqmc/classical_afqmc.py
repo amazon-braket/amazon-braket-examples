@@ -7,100 +7,96 @@ from typing import List
 import numpy as np
 from openfermion.circuits.low_rank import low_rank_two_body_decomposition
 from scipy.linalg import det, expm, qr
-from tqdm import tqdm
-
-CUTOFF = 1e-14
 
 
 @dataclass
 class ChemicalProperties:
-    h1e: np.ndarray
-    eri: np.ndarray
-    nuclear_repulsion: float
-    v_0: np.ndarray
-    h_chem: np.ndarray
-    v_gamma: List[np.ndarray]
-    L_gamma: List[np.ndarray]
-    mf_shift: np.ndarray
-    lambda_l: List[np.ndarray]
-    U_l: List[np.ndarray]
+    h1e: np.ndarray  # one-body term
+    eri: np.ndarray  # two-body term
+    nuclear_repulsion: float  # nuclear repulsion energy
+    v_0: np.ndarray  # one-body term stored as np.ndarray with mean-field subtraction
+    h_chem: np.ndarray  # one-body term stored as np.ndarray, without mean-field subtraction
+    v_gamma: List[np.ndarray]  # 1j * L_gamma
+    L_gamma: List[np.ndarray]  # Cholesky vector decomposed from two-body terms
+    mf_shift: np.ndarray  # mean-field shift
+    lambda_l: List[np.ndarray]  # eigenvalues of Cholesky vectors
+    U_l: List[np.ndarray]  # eigenvectors of Cholesky vectors
 
 
-def cAFQMC(
+def classical_afqmc(
     num_walkers: int,
     num_steps: int,
     dtau: float,
     trial: np.ndarray,
     prop: ChemicalProperties,
     max_pool: int = 8,
-    progress_bar: bool = True,
 ):
-    r"""
+    """Classical Auxiliary-Field Quantum Monte Carlo
+
     Args:
-        num_walkers:
-        num_steps: number of steps for imaginary time evolution
-        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
-        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
-        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
-        dtau: imaginary time step size
-        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
-        h1e, eri: one- and two-electron integral stored in spatial orbitals basis
-        enuc: nuclear repulsion energy
-        E_shift: reference energy, usually taken as the HF energy
-        max_pool: number of cores to parallelize the calculations
-        progress_bar: bool
+        num_walkers (int): Number of walkers.
+        num_steps (int): Number of (imaginary) time steps
+        dtau (float): Increment of each time step
+        trial (np.ndarray): Trial wavefunction.
+        prop (ChemicalProperties): Chemical properties.
+        max_pool (int, optional): Max workers. Defaults to 8.
+
     Returns:
-        total_time: list that stores the time series of the evolution
-        E_list: list that stores the computed energy
+        energies, weights, weighted_mean: Energies,
     """
-    E_list = []
+    Ehf = hartree_fock_energy(trial, prop)
 
-    trial_up = trial[::2, ::2]
-    trial_down = trial[1::2, 1::2]
-
-    # compute its one particle Green's function
-    G = [G_pq(trial_up, trial_up), G_pq(trial_down, trial_down)]
-    Ehf = local_energy(prop.h1e, prop.eri, G, prop.nuclear_repulsion)
-
-    E_shift = Ehf  # set energy shift E_0 as HF energy from earlier
-    ctimes = np.linspace(dtau, int(dtau * num_steps), num=num_steps)
     walkers = [trial] * num_walkers
     weights = [1.0] * num_walkers
 
-    for _ in tqdm(range(num_steps), disable=not progress_bar):
-        inputs = [
-            (dtau, trial, walker, weight, prop, E_shift) for walker, weight in zip(walkers, weights)
-        ]
+    inputs = [
+        (num_steps, dtau, trial, prop, Ehf, walker, weight)
+        for walker, weight in zip(walkers, weights)
+    ]
 
-        weight_list, walker_list, energy_list = run_classical_qmc(max_pool, inputs)
-
-        E = np.real(np.average(energy_list, weights=weights))
-        E_list.append(E)
-        E_shift = E
-
-        walkers = walker_list  # update the walkers
-        weights = weight_list  # update the weights
-
-    return ctimes, E_list
-
-
-def run_classical_qmc(max_pool, inputs):
+    # parallelize with multiprocessing
     with mp.Pool(max_pool) as pool:
-        results = list(pool.map(ImagTimePropagatorWrapper, inputs))
+        results = list(pool.map(full_imag_time_evolution_wrapper, inputs))
 
-    weight_list = []
-    walker_list = []
-    energy_list = []
-    for (E_loc, new_walker, new_weight) in results:
+    local_energies, weights = map(np.array, zip(*results))
+    energies = np.real(np.average(local_energies, weights=weights, axis=0))
+    return local_energies, energies
+
+
+def hartree_fock_energy(trial: np.ndarray, prop: ChemicalProperties) -> float:
+    trial_up = trial[::2, ::2]
+    trial_down = trial[1::2, 1::2]
+    # compute  one particle Green's function
+    G = [greens_pq(trial_up, trial_up), greens_pq(trial_down, trial_down)]
+    Ehf = local_energy(prop.h1e, prop.eri, G, prop.nuclear_repulsion)
+    return Ehf
+
+
+def full_imag_time_evolution_wrapper(args):
+    return full_imag_time_evolution(*args)
+
+
+def full_imag_time_evolution(
+    num_steps: int,
+    dtau: float,
+    trial: np.ndarray,
+    prop: ChemicalProperties,
+    E_shift: float,
+    walker: np.ndarray,
+    weight: float,
+):
+    # random seed for multiprocessing
+    np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
+
+    energy_list, weights = [], []
+    for _ in range(num_steps):
+        E_loc, walker, weight = imag_time_propogator(dtau, trial, walker, weight, prop, E_shift)
         energy_list.append(E_loc)
-        # for computational stability, we neglect the weights that are too small.
-        if new_weight > CUTOFF:
-            weight_list.append(new_weight)
-            walker_list.append(new_walker)
-    return weight_list, walker_list, energy_list
+        weights.append(weight)
+    return energy_list, weights
 
 
-def ImagTimePropagator(
+def imag_time_propogator(
     dtau: float,
     trial: np.ndarray,
     walker: np.ndarray,
@@ -108,31 +104,7 @@ def ImagTimePropagator(
     prop: ChemicalProperties,
     E_shift: float,
 ):
-    r"""This function defines the imaginary propagation process and will return new walker state and new weight.
-
-    Args:
-        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
-        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
-        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
-        dtau: imaginary time step size
-        trial: trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
-        walker: walker state as np.ndarray, others are the same as trial
-        weight: weight associated with the specific walker
-        h1e: one-electron integral stored in spatial orbitals basis
-        eri: two-electron integral stored in spatial orbitals basis
-        enuc: nuclear repulsion energy
-        E_shift: reference energy, usually taken as the HF energy.
-
-    Returns:
-        E_loc: local energy
-        new_weight: new weight for next time step
-        new_walker: new walker for next time step
-
-    """
-    seed = np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
-
     # First compute the bias force using the expectation value of L operators
-    num_spin_orbitals, num_electrons = trial.shape
     num_fields = len(prop.v_gamma)
 
     # compute the overlap integral
@@ -142,54 +114,22 @@ def ImagTimePropagator(
     trial_down = trial[1::2, 1::2]
     walker_up = walker[::2, ::2]
     walker_down = walker[1::2, 1::2]
-    G = [G_pq(trial_up, walker_up), G_pq(trial_down, walker_down)]
+    G = [greens_pq(trial_up, walker_up), greens_pq(trial_down, walker_down)]
     E_loc = local_energy(prop.h1e, prop.eri, G, prop.nuclear_repulsion)
 
     # sampling the auxiliary fields
     x = np.random.normal(0.0, 1.0, size=num_fields)
-    # update the walker
-    new_walker = PropagateWalker(x, prop.v_0, prop.v_gamma, prop.mf_shift, dtau, trial, walker, G)
 
-    # Define the I operator and find new weight
+    # update the walker
+    new_walker = propagate_walker(x, prop.v_0, prop.v_gamma, prop.mf_shift, dtau, trial, walker, G)
+
+    # Define the Id operator and find new weight
     new_ovlp = np.linalg.det(trial.transpose().conj() @ new_walker)
     arg = np.angle(new_ovlp / ovlp)
+
     new_weight = weight * np.exp(-dtau * (np.real(E_loc) - E_shift)) * np.max([0.0, np.cos(arg)])
 
     return E_loc, new_walker, new_weight
-
-
-def reortho(A: np.ndarray):
-    """Reorthogonalise a MxN matrix A.
-    Performs a QR decomposition of A. Note that for consistency elsewhere we
-    want to preserve detR > 0 which is not guaranteed. We thus factor the signs
-    of the diagonal of R into Q.
-
-    Args:
-        A (np.ndarray): MxN matrix.
-
-    Returns:
-        Q (np.ndarray): Orthogonal matrix. A = QR.
-        detR (float): Determinant of upper triangular matrix (R) from QR decomposition.
-    """
-    (Q, R) = qr(A, mode="economic")
-    signs = np.diag(np.sign(np.diag(R)))
-    Q = Q.dot(signs)
-    detR = det(signs.dot(R))
-    return (Q, detR)
-
-
-def G_pq(psi: np.ndarray, phi: np.ndarray):
-    """This function coomputes the one-body Green's function
-
-    Args:
-        psi, phi: np.ndarray
-
-    Returns:
-        G: one-body Green's function
-    """
-    overlap_inverse = np.linalg.inv(psi.transpose() @ phi)
-    G = phi @ overlap_inverse @ psi.transpose()
-    return G
 
 
 def local_energy(h1e: np.ndarray, eri: np.ndarray, G: np.ndarray, enuc: float):
@@ -218,6 +158,40 @@ def local_energy(h1e: np.ndarray, eri: np.ndarray, G: np.ndarray, enuc: float):
     e2 = euu + edd + eud + edu
 
     return e1 + e2 + enuc
+
+
+def reortho(A: np.ndarray):
+    """Reorthogonalise a MxN matrix A.
+    Performs a QR decomposition of A. Note that for consistency elsewhere we
+    want to preserve detR > 0 which is not guaranteed. We thus factor the signs
+    of the diagonal of R into Q.
+
+    Args:
+        A (np.ndarray): MxN matrix.
+
+    Returns:
+        Q (np.ndarray): Orthogonal matrix. A = QR.
+        detR (float): Determinant of upper triangular matrix (R) from QR decomposition.
+    """
+    (Q, R) = qr(A, mode="economic")
+    signs = np.diag(np.sign(np.diag(R)))
+    Q = Q.dot(signs)
+    detR = det(signs.dot(R))
+    return (Q, detR)
+
+
+def greens_pq(psi: np.ndarray, phi: np.ndarray):
+    """This function computes the one-body Green's function
+
+    Args:
+        psi, phi: np.ndarray
+
+    Returns:
+        G: one-body Green's function
+    """
+    overlap_inverse = np.linalg.inv(psi.transpose() @ phi)
+    G = phi @ overlap_inverse @ psi.transpose()
+    return G
 
 
 def chemistry_preparation(mol, hf, trial: np.ndarray):
@@ -264,7 +238,7 @@ def chemistry_preparation(mol, hf, trial: np.ndarray):
 
     trial_up = trial[::2, ::2]
     trial_down = trial[1::2, 1::2]
-    G = [G_pq(trial_up, trial_up), G_pq(trial_down, trial_down)]
+    G = [greens_pq(trial_up, trial_up), greens_pq(trial_down, trial_down)]
 
     # compute mean-field shift as an imaginary value
     mf_shift = np.array([])
@@ -293,7 +267,7 @@ def chemistry_preparation(mol, hf, trial: np.ndarray):
     )
 
 
-def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
+def propagate_walker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
     r"""This function updates the walker from imaginary time propagation.
 
     Args:
@@ -339,10 +313,3 @@ def PropagateWalker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
     new_walker, _ = reortho(B @ walker)
 
     return new_walker
-
-
-def ImagTimePropagatorWrapper(args):
-    """
-    Wrapper function for multiprocessing
-    """
-    return ImagTimePropagator(*args)

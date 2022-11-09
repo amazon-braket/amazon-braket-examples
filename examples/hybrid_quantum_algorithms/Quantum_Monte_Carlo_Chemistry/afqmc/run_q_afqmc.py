@@ -4,29 +4,23 @@ import time
 
 import numpy as np
 import pennylane as qml
-from pyscf import fci, gto
-
-np.set_printoptions(precision=4, edgeitems=10, linewidth=150, suppress=True)
-
-
-from afqmc.classical_afqmc import chemistry_preparation
-from afqmc.quantum_afqmc_pennylane import qAFQMC
+from afqmc.classical_afqmc import chemistry_preparation, greens_pq, local_energy
+from afqmc.quantum_afqmc_pennylane import quantum_afqmc
 from braket.jobs import save_job_result
-from braket.jobs.metrics import log_metric
+from pyscf import fci, gto
 
 
 def run(
-    num_walkers: int,
-    num_steps: int,
-    dtau: float,
-    max_pool: int,
-    q_total_time: str,
+    quantum_times, num_walkers: int, num_steps: int, dtau: float, max_pool: int  # no type hint
 ):
-    #####################################################################
-    # We prepare the necessary operators for AFQMC calculations.        #
-    #####################################################################
-    # perform HF calculations
+
+    # perform HF calculations, where the geometry information and basis set are defined
     mol = gto.M(atom="H 0. 0. 0.; H 0. 0. 0.75", basis="sto-3g")
+    # the atom argument provides the geometry of the molecule being studied, for example we
+    # have hydrogen molecule above, where 0.75 is the bond distance in unit of angstrom;
+    # for more complicated molecules, like lithium hydride, it should be:
+    # gto.M(atom = ‘Li 0. 0. 0.; H 0. 0. 1.2’, basis = ‘sto-3g’)
+
     hf = mol.RHF()
     hf.kernel()
 
@@ -34,44 +28,42 @@ def run(
     myci = fci.FCI(hf)
     myci.kernel()
 
+    # define the classical trial state, here we use the Hartree-Fock state as an example;
+    # the dimension of the matrix should be (N * N_e), where N is the number of basis functions
+    # here we have hf Slater determinant for hydrogen
     trial = np.array([[1, 0], [0, 1], [0, 0], [0, 0]])
-    properties = chemistry_preparation(mol, hf, trial)
 
-    q_total_time = json.loads(q_total_time)
+    prop = chemistry_preparation(mol, hf, trial)
 
-    dev = get_pennylane_device(4)
+    # Separate the spin up and spin down channel of the trial state
+    trial_up = trial[::2, ::2]
+    trial_down = trial[1::2, 1::2]
+
+    # compute its one particle Green's function
+    G = [greens_pq(trial_up, trial_up), greens_pq(trial_down, trial_down)]
+    Ehf = local_energy(prop.h1e, prop.eri, G, prop.nuclear_repulsion)
+
+    print(f"The Hartree-Fock energy computed from local_energy is {np.round(Ehf, 10)}.")
+
+    dev = qml.device("lightning.qubit", wires=4)
+
+    quantum_times = json.loads(quantum_times)
+    print(f"Runnign with quantum times:\n {quantum_times}")
 
     # Start QC-QFQMC computation
     start = time.time()
-    ctimes, qtimes, cE_list, qE_list, E_list = qAFQMC(
-        q_total_time,
-        num_walkers,
-        num_steps,
-        dtau,
-        trial,
-        properties,
-        dev,
-        max_pool=max_pool,
-        progress_bar=True,
-        log_metrics=True,
+    quantum_energies, energies = quantum_afqmc(
+        quantum_times, num_walkers, num_steps, dtau, trial, prop, max_pool=max_pool, dev=dev
     )
     elapsed = time.time() - start
 
-    # save results and log metrics
-    print("elapsed: ", elapsed)
-    print("cE_list: ", cE_list)
-    print("qE_list: ", qE_list)
     save_job_result(
         {
             "elapsed": elapsed,
-            "cE_list": cE_list,
-            "qE_list": qE_list,
-            "E_list": E_list,
-            "ctimes": list(ctimes),
-            "qtimes": list(qtimes),
+            "quantum_energies": quantum_energies.tolist(),
+            "energies": energies.tolist(),
         }
     )
-    log_metric(metric_name="elapsed", value=elapsed, iteration_number=0)
 
 
 def get_pennylane_device(n_wires):
