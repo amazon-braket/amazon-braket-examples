@@ -423,7 +423,7 @@ def pauli_imag(Q, V_T, U, pauli):
     circuit_second_half_imag(Q, V_T)
 
 
-def pauli_estimate(Q, V_T, U, pauli: list, dev):
+def pauli_estimate(Q, V_T, U, pauli, dev):
     """This function returns the expectation value of $\\langle \\Psi_Q|pauli|\\phi_l\rangle$.
     Args:
         Q: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
@@ -431,7 +431,7 @@ def pauli_estimate(Q, V_T, U, pauli: list, dev):
         dev: qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots),
              if shots is specified as nonzero
         U: eigenvector of Cholesky vectors, $L = U \\lambda U^{\\dagger}$
-        pauli: Pauli string, e.g., [0,1] represents 'ZZII'.
+        pauli: list of 0 and 1 as the representation of a Pauli string, e.g., [0,1] represents 'ZZII'.
         dev: qml.device('lightning.qubit', wires=wires) for simulator;
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
 
