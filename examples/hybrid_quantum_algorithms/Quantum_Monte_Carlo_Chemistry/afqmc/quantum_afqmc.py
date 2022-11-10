@@ -1,5 +1,7 @@
 import multiprocessing as mp
+from typing import Callable
 import os
+from typing import List, Tuple
 
 import numpy as np
 import pennylane as qml
@@ -177,7 +179,7 @@ def local_energy_quantum(
         one_body: np.ndarray, 
         lambda_l: np.ndarray, 
         U_l: np.ndarray, 
-        V_T: function, 
+        V_T: Callable, 
         dev: qml.device
     ):
     """This function estimates the integral $\\langle \\Psi_Q|H|\\phi_l\rangle$ with rotated basis.
@@ -294,7 +296,7 @@ def circuit_first_half(Q: np.ndarray):
     prepare_slater_circuit(circuit_description)
 
 
-def circuit_second_half_real(Q: np.ndarray, V_T: function):
+def circuit_second_half_real(Q: np.ndarray, V_T: Callable):
     """Construct the second half of the vacuum reference circuit (for real expectation values)
 
     Args:
@@ -310,7 +312,7 @@ def circuit_second_half_real(Q: np.ndarray, V_T: function):
     qml.Hadamard(wires=0)
 
 
-def circuit_second_half_imag(Q: np.ndarray, V_T: function):
+def circuit_second_half_imag(Q: np.ndarray, V_T: Callable):
     """Construct the second half of the vacuum reference circuit (for imaginary expectation values)
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -329,7 +331,7 @@ def circuit_second_half_imag(Q: np.ndarray, V_T: function):
     qml.Hadamard(wires=0)
 
 
-def amplitude_real(Q: np.ndarray, V_T: function):
+def amplitude_real(Q: np.ndarray, V_T: Callable):
     """Construct the the vacuum reference circuit for measuring amplitude real part
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -339,7 +341,7 @@ def amplitude_real(Q: np.ndarray, V_T: function):
     circuit_second_half_real(Q, V_T)
 
 
-def amplitude_imag(Q: np.ndarray, V_T: function):
+def amplitude_imag(Q: np.ndarray, V_T: Callable):
     """Construct the the vacuum reference circuit for measuring amplitude imaginary part
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -351,7 +353,7 @@ def amplitude_imag(Q: np.ndarray, V_T: function):
 
 def amplitude_estimate(
         Q: np.ndarray, 
-        V_T: function, 
+        V_T: Callable, 
         dev: qml.device
     ):
     """This function computes the amplitude between walker state and quantum trial state.
@@ -400,7 +402,7 @@ def U_circuit(U: np.ndarray):
 
 def pauli_real(
         Q: np.ndarray, 
-        V_T: function, 
+        V_T: Callable, 
         U: np.ndarray, 
         pauli: List[int]
     ):
@@ -423,7 +425,7 @@ def pauli_real(
 
 def pauli_imag(
         Q: np.ndarray, 
-        V_T: function, 
+        V_T: Callable, 
         U: np.ndarray, 
         pauli: List[int]
     ):
@@ -446,7 +448,7 @@ def pauli_imag(
 
 def pauli_estimate(
         Q: np.ndarray, 
-        V_T: function, 
+        V_T: Callable, 
         U: np.ndarray, 
         pauli: List[int],
         dev: qml.device
@@ -509,7 +511,7 @@ def q_propogate_walker(
         mf_shift: np.ndarray, 
         dtau: float, 
         walker: np.ndarray, 
-        V_T: function, 
+        V_T: Callable, 
         ovlp: float, 
         dev: qml.device
     ):
@@ -561,7 +563,7 @@ def one_body_expectation(
         walker: np.ndarray, 
         one_bodies: List[np.ndarray], 
         ovlp: float, 
-        V_T: function, 
+        V_T: Callable, 
         dev: qml.device
     ):
     """This function computes the expectation value of one-body operator between quantum trial state and walker

@@ -2,7 +2,7 @@ import copy
 import multiprocessing as mp
 import os
 from dataclasses import dataclass
-from typing import List
+from typing import List, Tuple
 
 import numpy as np
 from openfermion.circuits.low_rank import low_rank_two_body_decomposition
