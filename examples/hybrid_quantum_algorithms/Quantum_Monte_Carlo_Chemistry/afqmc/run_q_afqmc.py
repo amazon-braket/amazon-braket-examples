@@ -48,7 +48,7 @@ def run(
 
     print(f"The Hartree-Fock energy computed from local_energy is {np.round(Ehf, 10)}.")
 
-    dev = qml.device("lightning.qubit", wires=4)
+    dev = get_pennylane_device(n_wires=4)
 
     # Start QC-QFQMC computation
     start = time.time()
