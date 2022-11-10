@@ -4,7 +4,7 @@ import time
 import numpy as np
 import pennylane as qml
 from afqmc.classical_afqmc import chemistry_preparation, greens_pq, local_energy
-from afqmc.quantum_afqmc_pennylane import quantum_afqmc
+from afqmc.quantum_afqmc import quantum_afqmc
 from braket.jobs import save_job_result
 from pyscf import fci, gto
 
