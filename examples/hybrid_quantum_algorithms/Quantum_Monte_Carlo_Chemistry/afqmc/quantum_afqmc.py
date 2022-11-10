@@ -171,7 +171,15 @@ def imag_time_propogator_qaee(
     return E_loc, numerator, denominator, new_walker, new_weight
 
 
-def local_energy_quantum(walker, ovlp, one_body, lambda_l, U_l, V_T, dev):
+def local_energy_quantum(
+        walker: np.ndarray, 
+        ovlp: float, 
+        one_body: np.ndarray, 
+        lambda_l: np.ndarray, 
+        U_l: np.ndarray, 
+        V_T: function, 
+        dev: qml.device
+    ):
     """This function estimates the integral $\\langle \\Psi_Q|H|\\phi_l\rangle$ with rotated basis.
 
     Args:
@@ -229,7 +237,7 @@ def local_energy_quantum(walker, ovlp, one_body, lambda_l, U_l, V_T, dev):
     return energy
 
 
-def givens_block_circuit(givens):
+def givens_block_circuit(givens: Tuple):
     """This function defines the Givens rotation circuit from a single givens tuple
 
     Args:
@@ -249,7 +257,7 @@ def givens_block_circuit(givens):
     qml.CNOT(wires=[j, i])
 
 
-def prepare_slater_circuit(circuit_description):
+def prepare_slater_circuit(circuit_description: Tuple):
     """Creating Givens rotation circuit to prepare arbitrary Slater determinant.
 
     Args:
@@ -262,7 +270,7 @@ def prepare_slater_circuit(circuit_description):
             qml.adjoint(givens_block_circuit)(givens)
 
 
-def circuit_first_half(Q):
+def circuit_first_half(Q: np.ndarray):
     """Construct the first half of the vacuum reference circuit
 
     Args:
@@ -286,7 +294,7 @@ def circuit_first_half(Q):
     prepare_slater_circuit(circuit_description)
 
 
-def circuit_second_half_real(Q, V_T):
+def circuit_second_half_real(Q: np.ndarray, V_T: function):
     """Construct the second half of the vacuum reference circuit (for real expectation values)
 
     Args:
@@ -302,7 +310,7 @@ def circuit_second_half_real(Q, V_T):
     qml.Hadamard(wires=0)
 
 
-def circuit_second_half_imag(Q, V_T):
+def circuit_second_half_imag(Q: np.ndarray, V_T: function):
     """Construct the second half of the vacuum reference circuit (for imaginary expectation values)
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -321,7 +329,7 @@ def circuit_second_half_imag(Q, V_T):
     qml.Hadamard(wires=0)
 
 
-def amplitude_real(Q, V_T):
+def amplitude_real(Q: np.ndarray, V_T: function):
     """Construct the the vacuum reference circuit for measuring amplitude real part
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -331,7 +339,7 @@ def amplitude_real(Q, V_T):
     circuit_second_half_real(Q, V_T)
 
 
-def amplitude_imag(Q, V_T):
+def amplitude_imag(Q: np.ndarray, V_T: function):
     """Construct the the vacuum reference circuit for measuring amplitude imaginary part
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -341,7 +349,11 @@ def amplitude_imag(Q, V_T):
     circuit_second_half_imag(Q, V_T)
 
 
-def amplitude_estimate(Q, V_T, dev):
+def amplitude_estimate(
+        Q: np.ndarray, 
+        V_T: function, 
+        dev: qml.device
+    ):
     """This function computes the amplitude between walker state and quantum trial state.
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -373,7 +385,7 @@ def amplitude_estimate(Q, V_T, dev):
     return real + 1.0j * imag
 
 
-def U_circuit(U):
+def U_circuit(U: np.ndarray):
     """Construct circuit to perform unitary transformation U."""
 
     decomposition, diagonal = givens_decomposition_square(U)
@@ -386,7 +398,12 @@ def U_circuit(U):
         prepare_slater_circuit(circuit_description)
 
 
-def pauli_real(Q, V_T, U, pauli):
+def pauli_real(
+        Q: np.ndarray, 
+        V_T: function, 
+        U: np.ndarray, 
+        pauli: List[int]
+    ):
     """Construct the the vacuum reference circuit for measuring expectation value of a pauli real part
     Args:
         Q : orthonormalized walker state
@@ -404,7 +421,12 @@ def pauli_real(Q, V_T, U, pauli):
     circuit_second_half_real(Q, V_T)
 
 
-def pauli_imag(Q, V_T, U, pauli):
+def pauli_imag(
+        Q: np.ndarray, 
+        V_T: function, 
+        U: np.ndarray, 
+        pauli: List[int]
+    ):
     """Construct the the vacuum reference circuit for measuring expectation value of a pauli imaginary part
     Args:
         Q: orthonormalized walker state
@@ -422,16 +444,21 @@ def pauli_imag(Q, V_T, U, pauli):
     circuit_second_half_imag(Q, V_T)
 
 
-def pauli_estimate(Q, V_T, U, pauli, dev):
+def pauli_estimate(
+        Q: np.ndarray, 
+        V_T: function, 
+        U: np.ndarray, 
+        pauli: List[int],
+        dev: qml.device
+    ):    
     """This function returns the expectation value of $\\langle \\Psi_Q|pauli|\\phi_l\rangle$.
     Args:
         Q: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
         V_T: circuit unitary to prepare the quantum trial state
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
-             qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
         U: eigenvector of Cholesky vectors, $L = U \\lambda U^{\\dagger}$
         pauli: list of 0 and 1 as the representation of a Pauli string, e.g., [0,1] represents 'ZZII'.
-
+        dev: qml.device('lightning.qubit', wires=wires) for simulator;
+             qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
 
     Returns:
         expectation value
@@ -475,7 +502,17 @@ def V_T():
         qml.Hadamard(wires=i)
 
 
-def q_propogate_walker(x, v_0, v_gamma, mf_shift, dtau, walker, V_T, ovlp, dev):
+def q_propogate_walker(
+        x: np.ndarray, 
+        v_0: List[np.ndarray], 
+        v_gamma: List[np.ndarray], 
+        mf_shift: np.ndarray, 
+        dtau: float, 
+        walker: np.ndarray, 
+        V_T: function, 
+        ovlp: float, 
+        dev: qml.device
+    ):
     r"""This function updates the walker from imaginary time propagation.
     Args:
         x: auxiliary fields
@@ -520,7 +557,13 @@ def q_propogate_walker(x, v_0, v_gamma, mf_shift, dtau, walker, V_T, ovlp, dev):
     return new_walker
 
 
-def one_body_expectation(walker, one_bodies, ovlp, V_T, dev):
+def one_body_expectation(
+        walker: np.ndarray, 
+        one_bodies: List[np.ndarray], 
+        ovlp: float, 
+        V_T: function, 
+        dev: qml.device
+    ):
     """This function computes the expectation value of one-body operator between quantum trial state and walker
     Args:
         walker: walker Slater determinant

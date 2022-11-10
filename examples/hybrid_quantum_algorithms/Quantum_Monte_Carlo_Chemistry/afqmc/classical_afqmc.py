@@ -7,6 +7,8 @@ from typing import List
 import numpy as np
 from openfermion.circuits.low_rank import low_rank_two_body_decomposition
 from scipy.linalg import det, expm, qr
+from pyscf.gto.mole import Mole
+from pyscf.scf.hf import RHF
 
 
 @dataclass
@@ -220,7 +222,7 @@ def greens_pq(psi: np.ndarray, phi: np.ndarray):
     return G
 
 
-def chemistry_preparation(mol, hf, trial: np.ndarray):
+def chemistry_preparation(mol: Mole, hf: RHF, trial: np.ndarray):
     """
     This function returns one- and two-electron integrals from PySCF.
 
@@ -293,7 +295,15 @@ def chemistry_preparation(mol, hf, trial: np.ndarray):
     )
 
 
-def propagate_walker(x, v_0, v_gamma, mf_shift, dtau, trial, walker, G):
+def propagate_walker(x: np.ndarray, 
+                     v_0: List[np.ndarray], 
+                     v_gamma: List[np.ndarray], 
+                     mf_shift: np.ndarray, 
+                     dtau: float, 
+                     trial: np.ndarray, 
+                     walker: np.ndarray, 
+                     G: List[np.ndarray]
+    ):
     r"""This function updates the walker from imaginary time propagation.
 
     Args:

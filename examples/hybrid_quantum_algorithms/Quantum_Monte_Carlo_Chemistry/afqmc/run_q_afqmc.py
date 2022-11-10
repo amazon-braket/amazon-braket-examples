@@ -73,7 +73,7 @@ def run(
     )
 
 
-def get_pennylane_device(n_wires):
+def get_pennylane_device(n_wires: int):
     """Create Pennylane device from the `device` keyword argument of AwsQuantumJob.create().
     See https://docs.aws.amazon.com/braket/latest/developerguide/pennylane-embedded-simulators.html
     about the format of the `device` argument.
