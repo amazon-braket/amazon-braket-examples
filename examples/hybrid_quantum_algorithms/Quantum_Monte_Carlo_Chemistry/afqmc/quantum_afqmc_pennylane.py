@@ -428,12 +428,11 @@ def pauli_estimate(Q, V_T, U, pauli, dev):
     Args:
         Q: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
         V_T: circuit unitary to prepare the quantum trial state
-        dev: qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots),
-             if shots is specified as nonzero
-        U: eigenvector of Cholesky vectors, $L = U \\lambda U^{\\dagger}$
-        pauli: list of 0 and 1 as the representation of a Pauli string, e.g., [0,1] represents 'ZZII'.
         dev: qml.device('lightning.qubit', wires=wires) for simulator;
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
+        U: eigenvector of Cholesky vectors, $L = U \\lambda U^{\\dagger}$
+        pauli: list of 0 and 1 as the representation of a Pauli string, e.g., [0,1] represents 'ZZII'.
+
 
     Returns:
         expectation value
@@ -532,7 +531,7 @@ def one_body_expectation(walker, one_bodies, ovlp, V_T, dev):
         dev: qml.device('lightning.qubit', wires=wires) for simulator;
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
     Returns:
-        value:
+        expectation values
     """
     num_qubits, num_particles = walker.shape
     Id = np.identity(num_qubits)
