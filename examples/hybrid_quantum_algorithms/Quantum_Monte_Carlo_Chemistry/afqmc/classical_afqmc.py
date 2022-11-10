@@ -64,6 +64,12 @@ def classical_afqmc(
 
 
 def hartree_fock_energy(trial: np.ndarray, prop: ChemicalProperties) -> float:
+    """ Compute Hatree Fock energy
+
+    Args:
+        trial (np.ndarray): Trial wavefunction.
+        prop (ChemicalProperties): Chemical properties.
+    """
     trial_up = trial[::2, ::2]
     trial_down = trial[1::2, 1::2]
     # compute  one particle Green's function
@@ -85,6 +91,16 @@ def full_imag_time_evolution(
     walker: np.ndarray,
     weight: float,
 ):
+    """ Imaginary time evolution of a single walker
+    Args:
+        num_steps (int): number of time steps 
+        dtau (float): imaginary time step size
+        trial (np.ndarray): trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
+        prop (ChemicalProperties): Chemical properties.
+        E_shift (float): Reference energy, i.e. Hartree-Fock energy
+        walker (np.ndarray): normalized walker state as np.ndarray, others are the same as trial
+        weight (float): weight for sampling.        
+    """
     # random seed for multiprocessing
     np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
 
@@ -104,6 +120,16 @@ def imag_time_propogator(
     prop: ChemicalProperties,
     E_shift: float,
 ):
+    """ Propagate a walker by one time step
+
+    Args:
+        dtau (float): imaginary time step size
+        trial (np.ndarray): trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
+        walker (np.ndarray): normalized walker state as np.ndarray, others are the same as trial
+        weight (float): weight for sampling.
+        prop (ChemicalProperties): Chemical properties.
+        E_shift (float): Reference energy, i.e. Hartree-Fock energy
+    """
     # First compute the bias force using the expectation value of L operators
     num_fields = len(prop.v_gamma)
 

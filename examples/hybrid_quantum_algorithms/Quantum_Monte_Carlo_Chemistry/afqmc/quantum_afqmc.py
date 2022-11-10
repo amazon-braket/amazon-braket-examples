@@ -31,7 +31,6 @@ def quantum_afqmc(
     """Quantum assisted Auxiliary-Field Quantum Monte Carlo
 
     Args:
-            Otherwise, it uses classical evaluations.
         num_walkers (int): Number of walkers.
         num_steps (int): Number of (imaginary) time steps
         dtau (float): Increment of each time step
@@ -177,7 +176,7 @@ def local_energy_quantum(walker, ovlp, one_body, lambda_l, U_l, V_T, dev):
 
     Args:
         walker: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
-        ovlp:
+        ovlp: amplitude between walker and the quantum trial state
         one_body: (corrected) one-body term in the second quantized hamiltonian written in chemist's notation.
                   This term is assumed to be diagonal in the current implementation, but should be rather
                   straight forward to generalize if it's not.
