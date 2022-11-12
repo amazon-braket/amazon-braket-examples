@@ -1,0 +1,4 @@
+openfermion==1.0.0
+pennylane==0.23.1
+pennylane-lightning==0.23.0
+pyscf==2.1.1
