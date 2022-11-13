@@ -6,9 +6,9 @@ from typing import List, Tuple
 
 import numpy as np
 from openfermion.circuits.low_rank import low_rank_two_body_decomposition
-from scipy.linalg import det, expm, qr
 from pyscf.gto.mole import Mole
 from pyscf.scf.hf import RHF
+from scipy.linalg import det, expm, qr
 
 
 @dataclass
@@ -32,8 +32,8 @@ def classical_afqmc(
     trial: np.ndarray,
     prop: ChemicalProperties,
     max_pool: int = 8,
-):
-    """Classical Auxiliary-Field Quantum Monte Carlo
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Classical Auxiliary-Field Quantum Monte Carlo.
 
     Args:
         num_walkers (int): Number of walkers.
@@ -41,10 +41,10 @@ def classical_afqmc(
         dtau (float): Increment of each time step
         trial (np.ndarray): Trial wavefunction.
         prop (ChemicalProperties): Chemical properties.
-        max_pool (int, optional): Max workers. Defaults to 8.
+        max_pool (int): Max workers. Defaults to 8.
 
     Returns:
-        energies, weights, weighted_mean: Energies,
+        ndarray, ndarray: local_energies and energies
     """
     Ehf = hartree_fock_energy(trial, prop)
 
@@ -66,11 +66,14 @@ def classical_afqmc(
 
 
 def hartree_fock_energy(trial: np.ndarray, prop: ChemicalProperties) -> float:
-    """ Compute Hatree Fock energy
+    """Compute Hatree Fock energy.
 
     Args:
         trial (np.ndarray): Trial wavefunction.
         prop (ChemicalProperties): Chemical properties.
+
+    Retruns:
+        float: The Hartree-Fock energy.
     """
     trial_up = trial[::2, ::2]
     trial_down = trial[1::2, 1::2]
@@ -92,16 +95,20 @@ def full_imag_time_evolution(
     E_shift: float,
     walker: np.ndarray,
     weight: float,
-):
-    """ Imaginary time evolution of a single walker
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Imaginary time evolution of a single walker.
+
     Args:
-        num_steps (int): number of time steps 
+        num_steps (int): number of time steps
         dtau (float): imaginary time step size
         trial (np.ndarray): trial state as np.ndarray, e.g., for h2 HartreeFock state, it is np.array([[1,0], [0,1], [0,0], [0,0]])
         prop (ChemicalProperties): Chemical properties.
         E_shift (float): Reference energy, i.e. Hartree-Fock energy
         walker (np.ndarray): normalized walker state as np.ndarray, others are the same as trial
-        weight (float): weight for sampling.        
+        weight (float): weight for sampling.
+
+    Returns:
+        Tuple[ndarray, ndarray]: The energy and weights.
     """
     # random seed for multiprocessing
     np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
@@ -122,7 +129,7 @@ def imag_time_propogator(
     prop: ChemicalProperties,
     E_shift: float,
 ):
-    """ Propagate a walker by one time step
+    """Propagate a walker by one time step.
 
     Args:
         dtau (float): imaginary time step size
@@ -160,9 +167,9 @@ def imag_time_propogator(
     return E_loc, new_walker, new_weight
 
 
-def local_energy(h1e: np.ndarray, eri: np.ndarray, G: np.ndarray, enuc: float):
-    r"""Calculate local for generic two-body hamiltonian.
-    This uses the full (spatial) form for the two-electron integrals.
+def local_energy(h1e: np.ndarray, eri: np.ndarray, G: np.ndarray, enuc: float) -> float:
+    r"""Calculate local for generic two-body hamiltonian. This uses the full (spatial)
+        form for the two-electron integrals.
 
     Args:
         h1e (np.ndarray): one-body term
@@ -190,6 +197,7 @@ def local_energy(h1e: np.ndarray, eri: np.ndarray, G: np.ndarray, enuc: float):
 
 def reortho(A: np.ndarray):
     """Reorthogonalise a MxN matrix A.
+
     Performs a QR decomposition of A. Note that for consistency elsewhere we
     want to preserve detR > 0 which is not guaranteed. We thus factor the signs
     of the diagonal of R into Q.
@@ -295,15 +303,16 @@ def chemistry_preparation(mol: Mole, hf: RHF, trial: np.ndarray):
     )
 
 
-def propagate_walker(x: np.ndarray, 
-                     v_0: List[np.ndarray], 
-                     v_gamma: List[np.ndarray], 
-                     mf_shift: np.ndarray, 
-                     dtau: float, 
-                     trial: np.ndarray, 
-                     walker: np.ndarray, 
-                     G: List[np.ndarray]
-    ):
+def propagate_walker(
+    x: np.ndarray,
+    v_0: List[np.ndarray],
+    v_gamma: List[np.ndarray],
+    mf_shift: np.ndarray,
+    dtau: float,
+    trial: np.ndarray,
+    walker: np.ndarray,
+    G: List[np.ndarray],
+):
     r"""This function updates the walker from imaginary time propagation.
 
     Args:

@@ -15,8 +15,16 @@ def run(
     dtau: float,
     quantum_evaluations_every_n_steps: int,
     max_pool: int,
-):
+) -> None:
+    """Run the entire QMC algorithm.
 
+    Args:
+        num_walkers (int): Number of walkers.
+        num_steps (int): Number of (imaginary) time steps
+        dtau (float): Increment of each time step
+        quantum_evaluations_every_n_steps (int): How often to evaluate the energy using quantum
+        max_pool (int): Max workers. Defaults to 8.
+    """
     # perform HF calculations, where the geometry information and basis set are defined
     mol = gto.M(atom="H 0. 0. 0.; H 0. 0. 0.75", basis="sto-3g")
     # the atom argument provides the geometry of the molecule being studied, for example we
@@ -73,7 +81,7 @@ def run(
     )
 
 
-def get_pennylane_device(n_wires: int):
+def get_pennylane_device(n_wires: int) -> qml.device:
     """Create Pennylane device from the `device` keyword argument of AwsQuantumJob.create().
     See https://docs.aws.amazon.com/braket/latest/developerguide/pennylane-embedded-simulators.html
     about the format of the `device` argument.
@@ -81,6 +89,8 @@ def get_pennylane_device(n_wires: int):
     Args:
         n_wires (int): number of qubits to initiate the local simulator.
 
+    Returns:
+        device: The Pennylane device
     """
     device_string = os.environ["AMZN_BRAKET_DEVICE_ARN"]
     prefix, device_name = device_string.split("/")

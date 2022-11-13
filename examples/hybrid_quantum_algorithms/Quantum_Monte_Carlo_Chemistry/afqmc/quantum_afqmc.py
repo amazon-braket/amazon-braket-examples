@@ -1,7 +1,6 @@
 import multiprocessing as mp
-from typing import Callable
 import os
-from typing import List, Tuple
+from typing import Callable, List, Tuple
 
 import numpy as np
 import pennylane as qml
@@ -174,27 +173,27 @@ def imag_time_propogator_qaee(
 
 
 def local_energy_quantum(
-        walker: np.ndarray, 
-        ovlp: float, 
-        one_body: np.ndarray, 
-        lambda_l: np.ndarray, 
-        U_l: np.ndarray, 
-        V_T: Callable, 
-        dev: qml.device
-    ):
+    walker: np.ndarray,
+    ovlp: float,
+    one_body: np.ndarray,
+    lambda_l: np.ndarray,
+    U_l: np.ndarray,
+    V_T: Callable,
+    dev: qml.device,
+):
     """This function estimates the integral $\\langle \\Psi_Q|H|\\phi_l\rangle$ with rotated basis.
 
     Args:
-        walker: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
-        ovlp: amplitude between walker and the quantum trial state
-        one_body: (corrected) one-body term in the second quantized hamiltonian written in chemist's notation.
+        walker (ndarray): np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
+        ovlp (float): amplitude between walker and the quantum trial state
+        one_body (ndarray): (corrected) one-body term in the second quantized hamiltonian written in chemist's notation.
                   This term is assumed to be diagonal in the current implementation, but should be rather
                   straight forward to generalize if it's not.
 
-        lambda_l: eigenvalues of Cholesky vectors
-        U_l: eigenvectors of Cholesky vectors
-        V_T: quantum trial state
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
+        lambda_l (ndarray): eigenvalues of Cholesky vectors
+        U_l (ndarray): eigenvectors of Cholesky vectors
+        V_T (Callable): quantum trial state
+        dev (device): qml.device('lightning.qubit', wires=wires) for simulator;
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
 
     Returns:
@@ -351,11 +350,7 @@ def amplitude_imag(Q: np.ndarray, V_T: Callable):
     circuit_second_half_imag(Q, V_T)
 
 
-def amplitude_estimate(
-        Q: np.ndarray, 
-        V_T: Callable, 
-        dev: qml.device
-    ):
+def amplitude_estimate(Q: np.ndarray, V_T: Callable, dev: qml.device):
     """This function computes the amplitude between walker state and quantum trial state.
     Args:
         Q (np.ndarray): orthonormalized walker state
@@ -388,8 +383,11 @@ def amplitude_estimate(
 
 
 def U_circuit(U: np.ndarray):
-    """Construct circuit to perform unitary transformation U."""
+    """Construct circuit to perform unitary transformation U.
 
+    Args:
+        U (np.ndarray): Unitary transformation.
+    """
     decomposition, diagonal = givens_decomposition_square(U)
     circuit_description = list(reversed(decomposition))
 
@@ -400,12 +398,7 @@ def U_circuit(U: np.ndarray):
         prepare_slater_circuit(circuit_description)
 
 
-def pauli_real(
-        Q: np.ndarray, 
-        V_T: Callable, 
-        U: np.ndarray, 
-        pauli: List[int]
-    ):
+def pauli_real(Q: np.ndarray, V_T: Callable, U: np.ndarray, pauli: List[int]):
     """Construct the the vacuum reference circuit for measuring expectation value of a pauli real part
     Args:
         Q : orthonormalized walker state
@@ -423,18 +416,13 @@ def pauli_real(
     circuit_second_half_real(Q, V_T)
 
 
-def pauli_imag(
-        Q: np.ndarray, 
-        V_T: Callable, 
-        U: np.ndarray, 
-        pauli: List[int]
-    ):
+def pauli_imag(Q: np.ndarray, V_T: Callable, U: np.ndarray, pauli: List[int]):
     """Construct the the vacuum reference circuit for measuring expectation value of a pauli imaginary part
     Args:
-        Q: orthonormalized walker state
-        V_T: quantum trial state
-        U: unitary transformation to change the Pauli into Z basis
-        pauli: list that stores the position of the Z gate, e.g., [0,1] represents 'ZZII'.
+        Q (ndarray): orthonormalized walker state
+        V_T (Callable): quantum trial state
+        U (ndarray): unitary transformation to change the Pauli into Z basis
+        pauli (List[int]): list that stores the position of the Z gate, e.g., [0,1] represents 'ZZII'.
     """
     circuit_first_half(Q)
 
@@ -447,23 +435,20 @@ def pauli_imag(
 
 
 def pauli_estimate(
-        Q: np.ndarray, 
-        V_T: Callable, 
-        U: np.ndarray, 
-        pauli: List[int],
-        dev: qml.device
-    ):    
+    Q: np.ndarray, V_T: Callable, U: np.ndarray, pauli: List[int], dev: qml.device
+) -> float:
     """This function returns the expectation value of $\\langle \\Psi_Q|pauli|\\phi_l\rangle$.
+
     Args:
-        Q: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
-        V_T: circuit unitary to prepare the quantum trial state
-        U: eigenvector of Cholesky vectors, $L = U \\lambda U^{\\dagger}$
-        pauli: list of 0 and 1 as the representation of a Pauli string, e.g., [0,1] represents 'ZZII'.
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
+        Q (ndarray): np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
+        V_T (Callable): circuit unitary to prepare the quantum trial state
+        U (ndarray): eigenvector of Cholesky vectors, $L = U \\lambda U^{\\dagger}$
+        pauli (List[int]): list of 0 and 1 as the representation of a Pauli string, e.g., [0,1] represents 'ZZII'.
+        dev (device): qml.device('lightning.qubit', wires=wires) for simulator;
              qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
 
     Returns:
-        expectation value
+        float: expectation value.
     """
     num_qubits, num_particles = Q.shape
 
@@ -488,6 +473,7 @@ def pauli_estimate(
 
 def V_T():
     """Define V_T through UCCSD circuit."""
+
     qml.RX(np.pi / 2.0, wires=0)
     for i in range(1, 4):
         qml.Hadamard(wires=i)
@@ -505,30 +491,32 @@ def V_T():
 
 
 def q_propogate_walker(
-        x: np.ndarray, 
-        v_0: List[np.ndarray], 
-        v_gamma: List[np.ndarray], 
-        mf_shift: np.ndarray, 
-        dtau: float, 
-        walker: np.ndarray, 
-        V_T: Callable, 
-        ovlp: float, 
-        dev: qml.device
-    ):
+    x: np.ndarray,
+    v_0: List[np.ndarray],
+    v_gamma: List[np.ndarray],
+    mf_shift: np.ndarray,
+    dtau: float,
+    walker: np.ndarray,
+    V_T: Callable,
+    ovlp: float,
+    dev: qml.device,
+) -> np.ndarray:
     r"""This function updates the walker from imaginary time propagation.
+
     Args:
-        x: auxiliary fields
-        v_0: modified one-body term from reordering the two-body operator + mean-field subtraction.
-        v_gamma: Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
-        mf_shift: mean-field shift \Bar{v}_{\gamma} stored in np.array format
-        dtau: imaginary time step size
-        walker: walker state as np.ndarray, others are the same as trial
-        V_T: quantum trial state
-        ovlp: amplitude between walker and the quantum trial state
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
-             qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
+        x (ndarray): auxiliary fields
+        v_0 (List[ndarray]): modified one-body term from reordering the two-body operator + mean-field subtraction.
+        v_gamma (List[ndarray]): Cholesky vectors stored in list (L, num_spin_orbitals, num_spin_orbitals), without mf_shift
+        mf_shift (ndarray): mean-field shift \Bar{v}_{\gamma} stored in np.array format
+        dtau (float): imaginary time step size
+        walker (ndarray): walker state as np.ndarray, others are the same as trial
+        V_T (Callable): quantum trial state
+        ovlp (float): amplitude between walker and the quantum trial state
+        dev (device): qml.device('lightning.qubit', wires=wires) for simulator;
+            qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
+
     Returns:
-        new_walker: new walker for the next time step
+        ndarray: Walker for the next time step
     """
     num_spin_orbitals, num_electrons = walker.shape
     num_fields = len(v_gamma)
@@ -560,22 +548,18 @@ def q_propogate_walker(
 
 
 def one_body_expectation(
-        walker: np.ndarray, 
-        one_bodies: List[np.ndarray], 
-        ovlp: float, 
-        V_T: Callable, 
-        dev: qml.device
-    ):
+    walker: np.ndarray, one_bodies: List[np.ndarray], ovlp: float, V_T: Callable, dev: qml.device
+) -> np.ndarray:
     """This function computes the expectation value of one-body operator between quantum trial state and walker
     Args:
-        walker: walker Slater determinant
-        one_bodies: list of one_body operators whose expectation value is to be computed;
-        ovlp: amplitude between walker and the quantum trial state
-        V_T: quantum trial state
-        dev: qml.device('lightning.qubit', wires=wires) for simulator;
-             qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
+        walker (ndarray): walker Slater determinant
+        one_bodies (List[ndarray]): list of one_body operators whose expectation value is to be computed;
+        ovlp (float): amplitude between walker and the quantum trial state
+        V_T (Callable): quantum trial state
+        dev (device): qml.device('lightning.qubit', wires=wires) for simulator;
+            i.e. qml.device('braket.aws.qubit', device_arn=device_arn, wires=wires, shots=shots) for real device;
     Returns:
-        expectation values
+        np.ndarray: expectation values
     """
     num_qubits, num_particles = walker.shape
     Id = np.identity(num_qubits)
