@@ -1,5 +1,6 @@
 import os
 import tarfile
+import time
 
 from boto3.session import Session
 from braket.aws import AwsQuantumJob
@@ -12,6 +13,7 @@ def submit_notebook(notebook, device_arn, hyperparameters):
         entry_point="src.runner",
         hyperparameters=hyperparameters,
         input_data=notebook,
+        job_name=f"papermill-job-{int(time.time())}",
     )
     return job
 
