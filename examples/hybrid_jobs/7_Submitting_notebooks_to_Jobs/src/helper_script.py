@@ -37,7 +37,7 @@ def load_jobs_hyperparams() -> Dict[str, str]:
     return braket_hyperparams
 
 
-def convert_jobs_hyperparams_to_pm_params(braket_hyperparams: Dict[str, str]):
+def convert_jobs_hyperparams_to_pm_params(braket_hyperparams: Dict[str, str]) -> Dict[str, Any]:
     """Converts Braket Jobs hyperparameters to Papermill parameters.
 
     Args:
@@ -71,7 +71,7 @@ def get_notebook_name(input_dir: PathLike) -> str:
     return notebook_name
 
 
-def run_notebook():
+def run_notebook() -> None:
     """Run the notebook with Papermill."""
     results_dir = os.environ.get("AMZN_BRAKET_JOB_RESULTS_DIR")
     input_dir = os.environ["AMZN_BRAKET_INPUT_DIR"]
