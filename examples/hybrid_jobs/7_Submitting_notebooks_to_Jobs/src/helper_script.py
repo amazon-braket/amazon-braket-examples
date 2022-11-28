@@ -88,8 +88,3 @@ def run_notebook() -> None:
         parameters=papermill_params,
         kernel_name="python3",
     )
-
-
-# # Run the notebook if this
-# if __name__ == "__main__":
-#     run_notebook()
