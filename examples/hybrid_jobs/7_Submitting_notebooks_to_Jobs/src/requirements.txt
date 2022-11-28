@@ -1,5 +1,2 @@
-black
-papermill
-jupytext
 jupyter
-boto3
+papermill
