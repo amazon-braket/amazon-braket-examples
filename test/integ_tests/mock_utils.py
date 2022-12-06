@@ -1,3 +1,4 @@
+import builtins
 import os
 import boto3
 import unittest.mock as mock
@@ -68,7 +69,6 @@ def mock_default_device_calls(mocker):
         }
     })
     mocker.set_task_result_return(load_json("default_results.json"))
-
 
 
 def set_level(mock_level):

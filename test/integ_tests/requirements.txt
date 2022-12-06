@@ -1,0 +1,5 @@
+amazon-braket-sdk
+cvxpy
+pandas
+pennylane
+strawberryfields

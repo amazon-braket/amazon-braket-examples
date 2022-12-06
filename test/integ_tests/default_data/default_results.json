@@ -17072,6 +17072,16 @@
     },
     "rigettiMetadata": {
       "compiledProgram": "DECLARE ro BIT[2];"
+    },
+    "oqcMetadata": {
+      "compiledProgram": "DECLARE ro BIT[2];"
+    },
+    "simulatorMetadata": {
+      "braketSchemaHeader": {
+        "name": "braket.task_result.simulator_metadata",
+        "version": "1"
+      },
+      "executionDuration": 16
     }
   }
 }

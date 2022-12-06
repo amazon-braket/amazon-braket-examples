@@ -12,34 +12,34 @@ logger = logging.getLogger(__name__)
 if "integ_tests" in os.getcwd():
     os.chdir(os.path.join("..", ".."))
 
-test_path = "examples/"
+root_path = os.getcwd()
+examples_path = "examples/"
 test_notebooks = []
 
-for dir_, _, files in os.walk(test_path):
+for dir_, _, files in os.walk(examples_path):
     for file_name in files:
-        rel_file = os.path.join(dir_, file_name)
-        if file_name.endswith("copy.ipynb"):
-            os.remove(rel_file)
-        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
-            test_notebooks.append((dir_, rel_file))
+        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_ and "hybrid_" not in dir_:
+            test_notebooks.append((dir_, file_name))
 
 
-def get_mock_paths(notebook):
-    mock_path = notebook.replace(".ipynb", "_mocks.py")
-    split_mock_path = mock_path.split(os.sep)
-    path_to_mocks = os.path.join(*split_mock_path[1:])
-    path_to_mocks = os.path.join("test", "integ_tests", path_to_mocks)
-    # assert os.path.exists(relative_mock_path), f"Test mocks not found. Please add '{relative_mock_path}'"
+def get_mock_paths(notebook_dir, notebook_file):
+    mock_file = notebook_file.replace(".ipynb", "_mocks.py")
+    split_notebook_dir = notebook_dir.split(os.sep)
+    path_to_root = os.path.join(*([".."] * len(split_notebook_dir)))
+    mock_dir = os.path.join(*split_notebook_dir[1:])
+    path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", mock_dir, mock_file)
     if not os.path.exists(path_to_mocks):
-        pytest.skip(f"Test mocks not found. Please add '{path_to_mocks}'")
-    path_to_utils = os.path.join("test", "integ_tests", "mock_utils.py")
+        path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py")
+    path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
 
 
-@pytest.mark.parametrize("dir_path, notebook", test_notebooks)
-def test_all_notebooks(dir_path, notebook, mock_level):
-    path_to_utils, path_to_mocks = get_mock_paths(notebook)
-    with testbook(notebook) as tb:
+@pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
+def test_all_notebooks(notebook_dir, notebook_file, mock_level):
+    os.chdir(root_path)
+    os.chdir(notebook_dir)
+    path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
+    with testbook(notebook_file) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
