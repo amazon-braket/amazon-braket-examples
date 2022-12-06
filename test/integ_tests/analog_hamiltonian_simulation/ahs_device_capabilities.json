@@ -1,0 +1,80 @@
+{
+  "service": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.device_service_properties",
+      "version": "1"
+    },
+    "executionWindows": [
+      {
+        "executionDay": "Everyday",
+        "windowStartHour": "11:00",
+        "windowEndHour": "12:00"
+      }
+    ],
+    "shotsRange": [1, 1000],
+    "deviceCost": {
+      "price": 0.01,
+      "unit": "shot"
+    },
+    "deviceLocation": "Boston, USA"
+  },
+  "action": {
+    "braket.ir.ahs.program": {
+      "actionType": "braket.ir.ahs.program",
+      "version": [
+        "1"
+      ]
+    }
+  },
+  "deviceParameters": {},
+  "braketSchemaHeader": {
+    "name": "braket.device_schema.quera.quera_device_capabilities",
+    "version": "1"
+  },
+  "paradigm": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.quera.quera_ahs_paradigm_properties",
+      "version": "1"
+    },
+    "qubitCount": 256,
+    "lattice": {
+      "area": {
+        "width": 0.000075,
+        "height": 0.000076
+      },
+      "geometry": {
+        "spacingRadialMin": 0.000004,
+        "spacingVerticalMin": 0.000004,
+        "positionResolution": 1E-7,
+        "numberSitesMax": 256
+      }
+    },
+    "rydberg": {
+      "c6Coefficient": 5.42E-24,
+      "rydbergGlobal": {
+        "rabiFrequencyRange": [0.0, 15800000.0],
+        "rabiFrequencyResolution": 400.0,
+        "rabiFrequencySlewRateMax": 250000000000000.0,
+        "detuningRange": [-125000000.0, 125000000.0],
+        "detuningResolution": 0.2,
+        "detuningSlewRateMax": 2500000000000000.0,
+        "phaseRange": [-99.0, 99.0],
+        "phaseResolution": 5E-7,
+        "timeResolution": 1E-9,
+        "timeDeltaMin": 5E-8,
+        "timeMin": 0.0,
+        "timeMax": 0.000004
+      }
+    },
+    "performance": {
+      "lattice": {
+        "positionErrorAbs": 1E-7
+      },
+      "rydberg": {
+        "rydbergGlobal": {
+          "rabiFrequencyErrorRel": 0.02
+        }
+      }
+    }
+  }
+}

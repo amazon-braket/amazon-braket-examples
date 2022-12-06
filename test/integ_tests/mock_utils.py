@@ -28,14 +28,35 @@ class Mocker:
     def set_get_quantum_task_result(self, result):
         self._wrapper.boto_client.get_quantum_task.return_value = result
 
-    def set_search_devices_result(self, result):
-        self._wrapper.boto_client.get_paginator.return_value.paginate.return_value = result
-
     def set_cancel_quantum_task_result(self, result):
         self._wrapper.boto_client.cancel_quantum_task.return_value = result
 
     def set_task_result_return(self, result):
         self._wrapper.task_result_mock.return_value = result
+
+    def set_search_result(self, result):
+        self._wrapper.boto_client.get_paginator.return_value.paginate.return_value = result
+
+    def set_create_job_result(self, result):
+        self._wrapper.boto_client.create_job.return_value = result
+
+    def set_get_job_result(self, result):
+        self._wrapper.boto_client.get_job.return_value = result
+
+    def set_cancel_job_result(self, result):
+        self._wrapper.boto_client.cancel_job.return_value = result
+
+    def set_log_streams_result(self, result):
+        self._wrapper.boto_client.describe_log_streams.return_value = result
+
+    def set_start_query_result(self, result):
+        self._wrapper.boto_client.start_query.return_value = result
+
+    def set_get_query_results_result(self, result):
+        self._wrapper.boto_client.get_query_results.return_value = result
+
+    def set_list_objects_v2_result(self, result):
+        self._wrapper.boto_client.list_objects_v2.return_value = result
 
 
 def load_json(name, file_path = None):
@@ -89,6 +110,14 @@ class SessionWrapper():
         self.boto_client.get_caller_identity.return_value = {
             "Account": "TestAccount"
         }
+        self.boto_client.meta.region_name = "us-west-2"
+        self.boto_client.get_authorization_token.return_value = {
+            "authorizationData" : [
+                {
+                    "authorizationToken" : "TestToken"
+                }
+            ]
+        }
 
 
 class Boto3SessionAllWrapper(SessionWrapper):
@@ -108,11 +137,12 @@ class Boto3SessionAllWrapper(SessionWrapper):
     def profile_name(self, *args, **kwargs):
         return mock.Mock()
 
-    def region_name(self, *args, **kwargs):
-        return mock.Mock()
-
     def get_credentials(self, *args, **kwargs):
         return mock.Mock()
+
+    @property
+    def region_name(self):
+        return "us-west-2"
 
 
 class AwsSessionMinWrapper(SessionWrapper):

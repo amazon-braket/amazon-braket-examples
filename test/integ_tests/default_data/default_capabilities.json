@@ -23,7 +23,48 @@
         "1"
       ],
       "supportedOperations": [
-        "H"
+        "amplitude_damping",
+        "bit_flip",
+        "ccnot",
+        "cnot",
+        "cphaseshift",
+        "cphaseshift00",
+        "cphaseshift01",
+        "cphaseshift10",
+        "cswap",
+        "cy",
+        "cz",
+        "depolarizing",
+        "pauli_channel",
+        "generalized_amplitude_damping",
+        "h",
+        "i",
+        "iswap",
+        "kraus",
+        "phase_flip",
+        "phase_damping",
+        "phaseshift",
+        "pswap",
+        "rx",
+        "ry",
+        "rz",
+        "s",
+        "si",
+        "swap",
+        "t",
+        "ti",
+        "two_qubit_dephasing",
+        "two_qubit_depolarizing",
+        "unitary",
+        "v",
+        "vi",
+        "x",
+        "xx",
+        "xy",
+        "y",
+        "yy",
+        "z",
+        "zz"
       ]
     },
     "braket.ir.openqasm.program": {
@@ -32,11 +73,95 @@
         "1"
       ],
       "supportedOperations": [
-        "H"
+        "amplitude_damping",
+        "bit_flip",
+        "ccnot",
+        "cnot",
+        "cphaseshift",
+        "cphaseshift00",
+        "cphaseshift01",
+        "cphaseshift10",
+        "cswap",
+        "cy",
+        "cz",
+        "depolarizing",
+        "pauli_channel",
+        "generalized_amplitude_damping",
+        "h",
+        "i",
+        "iswap",
+        "kraus",
+        "phase_flip",
+        "phase_damping",
+        "phaseshift",
+        "pswap",
+        "rx",
+        "ry",
+        "rz",
+        "s",
+        "si",
+        "swap",
+        "t",
+        "ti",
+        "two_qubit_dephasing",
+        "two_qubit_depolarizing",
+        "unitary",
+        "v",
+        "vi",
+        "x",
+        "xx",
+        "xy",
+        "y",
+        "yy",
+        "z",
+        "zz"
       ],
       "supportedResultTypes": [
         {
-          "name": "Sample"
+          "name": "Sample",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 1,
+          "maxShots": 1000
+        },
+        {
+          "name": "Expectation",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 1,
+          "maxShots": 1000
+        },
+        {
+          "name": "Variance",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 1,
+          "maxShots": 1000
+        },
+        {
+          "name": "Probability",
+          "minShots": 1,
+          "maxShots": 100000
+        },
+        {
+          "name": "Amplitude",
+          "minShots": 0,
+          "maxShots": 0
         }
       ]
     }
@@ -54,12 +179,6 @@
           "2",
           "3"
         ]
-      }
-    },
-    "lattice": {
-      "area": {
-        "width": 10,
-        "height": 10
       }
     }
   },
