@@ -25,6 +25,20 @@
       "supportedOperations": [
         "H"
       ]
+    },
+    "braket.ir.openqasm.program": {
+      "actionType": "braket.ir.openqasm.program",
+      "version": [
+        "1"
+      ],
+      "supportedOperations": [
+        "H"
+      ],
+      "supportedResultTypes": [
+        {
+          "name": "Sample"
+        }
+      ]
     }
   },
   "paradigm": {

@@ -46,6 +46,31 @@ def load_json(name, file_path = None):
         return file.read()
 
 
+def mock_default_device_calls(mocker):
+    mocker.set_get_device_result({
+        "deviceType" : "QPU",
+        "deviceCapabilities" : load_json("default_capabilities.json")
+    })
+    mocker.set_create_quantum_task_result({
+        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+    })
+    mocker.set_get_quantum_task_result({
+        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        "status" : "COMPLETED",
+        "outputS3Bucket" : "Test Bucket",
+        "outputS3Directory" : "Test Directory",
+        "shots": 10,
+        "deviceArn": "Test Device Arn",
+        "ResponseMetadata": {
+            "HTTPHeaders": {
+                "date": ""
+            }
+        }
+    })
+    mocker.set_task_result_return(load_json("default_results.json"))
+
+
+
 def set_level(mock_level):
     Mocker.mock_level = mock_level
 

@@ -2,22 +2,7 @@
 
 def pre_run(mock_utils):
     mocker = mock_utils.Mocker()
-    mocker.set_get_device_result({
-        "deviceType" : "QPU",
-        "deviceCapabilities" : mock_utils.load_json("default_capabilities.json")
-    })
-    mocker.set_create_quantum_task_result({
-        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-    })
-    mocker.set_get_quantum_task_result({
-        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-        "status" : "COMPLETED",
-        "outputS3Bucket" : "Test Bucket",
-        "outputS3Directory" : "Test Directory",
-        "shots": 10,
-        "deviceArn": "Test Device Arn"
-    })
-    mocker.set_task_result_return(mock_utils.load_json("default_results.json"))
+    mock_utils.mock_default_device_calls(mocker)
 
 
 def post_run(tb):
