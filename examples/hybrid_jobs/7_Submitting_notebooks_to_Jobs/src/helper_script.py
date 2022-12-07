@@ -6,6 +6,22 @@ import os
 import pathlib
 from typing import Any, Dict, TypeVar
 
+entry_point=os.environ["AMZN_BRAKET_SCRIPT_ENTRY_POINT"]
+if not entry_point.endswith("run_notebook"):
+    print("installing jupyter, papermill")
+    required = {'jupyter', 'papermill'}
+    import pkg_resources
+    import sys
+    import subprocess
+    installed = {pkg.key for pkg in pkg_resources.working_set}
+    missing = required - installed
+    #print("missing:",missing)
+
+    if missing:
+        python = sys.executable
+        subprocess.check_call([python, '-m', 'pip', 'install', *missing])
+        
+
 import papermill as pm
 
 PathLike = TypeVar("PathLike", str, pathlib.Path, None)
@@ -88,3 +104,8 @@ def run_notebook() -> None:
         parameters=papermill_params,
         kernel_name="python3",
     )
+
+
+if not entry_point.endswith("run_notebook"):
+    print("This helper submitted directly in Braket console. calling run_notebook explicitly")
+    run_notebook()
