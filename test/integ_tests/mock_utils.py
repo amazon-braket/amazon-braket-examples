@@ -34,6 +34,9 @@ class Mocker:
     def set_task_result_return(self, result):
         self._wrapper.task_result_mock.return_value = result
 
+    def set_task_result_side_effect(self, side_effect):
+        self._wrapper.task_result_mock.side_effect = side_effect
+
     def set_search_result(self, result):
         self._wrapper.boto_client.get_paginator.return_value.paginate.return_value = result
 

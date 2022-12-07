@@ -5,9 +5,9 @@ def pre_run(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_get_device_result({
         "deviceType" : "QPU",
-        "deviceCapabilities" : mock_utils.load_json("2_pulse_device_capabilities.json", __file__)
+        "deviceCapabilities" : mock_utils.load_json("oqc_pulse_device_capabilities.json", __file__)
     })
-    mocker.set_task_result_return(mock_utils.load_json("2_pulse_results.json", __file__))
+    mocker.set_task_result_return(mock_utils.load_json("pulse_results.json", __file__))
 
 
 def post_run(tb):
