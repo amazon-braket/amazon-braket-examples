@@ -7,3 +7,4 @@ pennylane
 pytest
 strawberryfields
 testbook
+jupyter
