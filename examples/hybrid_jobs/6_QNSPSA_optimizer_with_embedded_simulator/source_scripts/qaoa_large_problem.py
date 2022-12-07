@@ -1,7 +1,3 @@
-import subprocess
-
-subprocess.run(["pip", "install", "pennylane==0.24.0", "-q"])
-subprocess.run(["pip", "install", "pennylane-lightning-gpu~=0.24", "-q"])
 import os
 import pennylane as qml
 from pennylane import numpy as np
