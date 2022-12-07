@@ -6,3 +6,4 @@ pandas
 pennylane
 pytest
 strawberryfields
+testbook
