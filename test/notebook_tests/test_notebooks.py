@@ -32,6 +32,10 @@ EXCLUDED_NOTEBOOKS = [
     "qnspsa_with_embedded_simulator.ipynb",
     "Parallelize_training_for_QML.ipynb",
     "Embedded_simulators_in_Braket_Jobs.ipynb",
+    # Temporarily exclude Aquila notebooks
+    "01_Introduction_to_Aquila.ipynb",
+    "02_Ordered_phases_in_Rydberg_systems.ipynb",
+    "03_Parallel_tasks_on_Aquila.ipynb"
 ]
 
 
