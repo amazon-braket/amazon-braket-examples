@@ -29,11 +29,10 @@ dependencies:
       - botocore==1.25.7
       - awscli==1.23.7
       - boto3==1.22.7
-      - amazon-braket-default-simulator
-      - amazon-braket-ocean-plugin
-      - amazon-braket-pennylane-plugin==1.6.5
-      - amazon-braket-schemas
-      - amazon-braket-sdk
+      - amazon-braket-default-simulator>=1.11.0
+      - amazon-braket-pennylane-plugin>=1.10.0
+      - amazon-braket-schemas>=1.14.0
+      - amazon-braket-sdk>=1.35.0
       - amazon-braket-strawberryfields-plugin==1.0.0
       - cvxpy==1.1.17
       - dask==2.30.0
