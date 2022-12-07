@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.7, 3.8, 3.9]
 
     steps:
@@ -33,4 +33,4 @@ jobs:
         pip install -r test/integ_tests/requirements.txt
     - name: Run integ tests
       run: |
-        pytest test/integ_tests/
+        pytest -ra -v test/integ_tests/

@@ -21,7 +21,7 @@ if "integ_tests" in os.getcwd():
     os.chdir(os.path.join("..", ".."))
 
 root_path = os.getcwd()
-examples_path = "examples/"
+examples_path = "examples"
 test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):
