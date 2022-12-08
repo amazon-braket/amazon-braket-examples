@@ -70,3 +70,32 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         tb.execute()
         test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
         test_mocks.post_run(tb)
+
+
+def test_record():
+    # Set the path here to record results.
+    notebook_file_search = ""
+    if not notebook_file_search:
+        return
+    for dir_, _, files in os.walk(examples_path):
+        for file_name in files:
+            if notebook_file_search in file_name:
+                notebook_file = file_name
+                notebook_dir = dir_
+                break
+    if not notebook_file or not notebook_dir:
+        pytest.skip(f"Notebook not found: '{notebook_file_search}'")
+    os.chdir(root_path)
+    os.chdir(notebook_dir)
+    path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
+    path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
+    with testbook(notebook_file, timeout=300) as tb:
+        tb.inject(
+            f"""
+            from importlib.machinery import SourceFileLoader
+            mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
+            """,
+            run=False,
+            before=0
+        )
+        tb.execute()

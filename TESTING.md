@@ -46,3 +46,32 @@ These tests work using the same mechanisms and use the same test data as provide
 by "All Mock Testing", but only override functions in AwsSession that
 create/get/cancel tasks and jobs. These tests take longer to run, but test
 integration with braket services more thoroughly. 
+
+## Recording
+It is possible to use our test framework to record some calls that are made
+to Braket using the code below.
+
+Create a code cell at the top of the notebook with the following code:
+```python
+import os
+record_path = None
+curr_path = ".."
+while record_path == None:
+    files = os.listdir(curr_path)
+    if "TESTING.md" in files:
+        record_path = os.path.join(curr_path, "test", "integ_tests", "record_utils.py")
+        break
+    curr_path = os.path.join("..", curr_path)
+from importlib.machinery import SourceFileLoader
+record_utils = SourceFileLoader("notebook_record_utils", record_path).load_module()
+```
+Running the entire notebook will generate several files, which can then be used
+for playback.
+
+## Playback
+
+Simply append the following line to the code cell specified in the Recording section
+```
+record_utils.playback()
+```
+Re-running the notebook will use the generated files made during recording.
