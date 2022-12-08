@@ -170,6 +170,15 @@ class AwsSessionMinWrapper(SessionWrapper):
     def cancel_quantum_task(self, arn):
         return self.boto_client.cancel_quantum_task(arn)
 
+    def create_job(self, **boto3_kwargs):
+        return self.boto_client.create_job(boto3_kwargs)["jobArn"]
+
+    def get_job(self, arn):
+        return self.boto_client.get_job(arn)
+
+    def cancel_job(self, arn):
+        return self.boto_client.cancel_job(arn)
+
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
         return self.task_result_mock.return_value
 
