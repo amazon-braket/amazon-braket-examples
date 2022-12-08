@@ -1,4 +1,3 @@
-import builtins
 import os
 import boto3
 import unittest.mock as mock
@@ -152,6 +151,8 @@ class AwsSessionMinWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
         import braket.aws.aws_session
+        import braket.aws.aws_quantum_job
+        import braket.jobs.metrics_data.cwl_insights_metrics_fetcher as md
         self.real_create_quantum_task = braket.aws.aws_session.AwsSession.create_quantum_task
         braket.aws.aws_session.AwsSession.create_quantum_task = self.create_quantum_task
         self.real_get_quantum_task = braket.aws.aws_session.AwsSession.get_quantum_task
@@ -160,6 +161,16 @@ class AwsSessionMinWrapper(SessionWrapper):
         braket.aws.aws_session.AwsSession.cancel_quantum_task = self.cancel_quantum_task
         self.real_retrieve_s3_object_body = braket.aws.aws_session.AwsSession.retrieve_s3_object_body
         braket.aws.aws_session.AwsSession.retrieve_s3_object_body = self.retrieve_s3_object_body
+        self.real_create_job = braket.aws.aws_session.AwsSession.create_job
+        braket.aws.aws_session.AwsSession.create_job = self.create_job
+        self.real_get_job = braket.aws.aws_session.AwsSession.get_job
+        braket.aws.aws_session.AwsSession.get_job = self.get_job
+        self.real_cancel_job = braket.aws.aws_session.AwsSession.cancel_job
+        braket.aws.aws_session.AwsSession.cancel_job = self.cancel_job
+        self.real_get_metrics_results_sync = md.CwlInsightsMetricsFetcher._get_metrics_results_sync
+        md.CwlInsightsMetricsFetcher._get_metrics_results_sync = self.get_job_metrics
+        braket.aws.aws_quantum_job.AwsQuantumJob._attempt_results_download = mock.Mock()
+
 
     def create_quantum_task(self, **boto3_kwargs):
         return self.boto_client.create_quantum_task(boto3_kwargs)["quantumTaskArn"]
@@ -181,4 +192,7 @@ class AwsSessionMinWrapper(SessionWrapper):
 
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
         return self.task_result_mock.return_value
+
+    def get_job_metrics(self, query_id):
+        return self.boto_client.get_query_results(query_id)["results"]
 
