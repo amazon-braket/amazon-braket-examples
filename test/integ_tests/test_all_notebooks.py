@@ -55,7 +55,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=30) as tb:
+    with testbook(notebook_file, timeout=300) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
