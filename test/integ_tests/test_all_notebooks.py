@@ -31,7 +31,7 @@ test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
-        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
+        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_ and "Creating_your_first_Hybrid_Job" in file_name:
             test_notebooks.append((dir_, file_name))
 
 
@@ -55,7 +55,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=300) as tb:
+    with testbook(notebook_file, timeout=30) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
