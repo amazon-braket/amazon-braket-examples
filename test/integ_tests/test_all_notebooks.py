@@ -50,12 +50,12 @@ def get_mock_paths(notebook_dir, notebook_file):
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
-        pytest.skip(f"Skipping Notebook: '{file_name}'")
+        pytest.skip(f"Skipping Notebook: '{notebook_file}'")
 
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=300) as tb:
+    with testbook(notebook_file, timeout=600) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
