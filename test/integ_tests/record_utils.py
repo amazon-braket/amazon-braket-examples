@@ -45,7 +45,7 @@ class BraketClientWrapper():
             result = self.braket_client.get_quantum_task(quantumTaskArn=quantumTaskArn)
             with open(f"get_task_results_{self.num_get_task_calls}.json", "w") as f:
                 json.dump(result, f, indent=2, default=str)
-            if result["status"] != "RUNNING":
+            if result["status"] in braket.aws.aws_quantum_task.AwsQuantumTask.TERMINAL_STATES:
                 # There is not need to record every time we poll.
                 self.num_get_task_calls += 1
         else:
