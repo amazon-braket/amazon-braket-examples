@@ -46,6 +46,8 @@ def pre_run(mock_utils):
     subprocess.check_output = subprocess_check_output
     subprocess.Popen = subprocess_open
 
+    os.environ["AMZN_BRAKET_DEVICE_ARN"] = "arn:aws:braket:us-west-2::device/qpu/arn/TestARN"
+
 
 def post_run(tb):
     tb.inject(
