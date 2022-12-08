@@ -12,7 +12,7 @@ EXCLUDED_NOTEBOOKS = [
     "bring_your_own_container.ipynb",
     "qnspsa_with_embedded_simulator.ipynb",
     "VQE_chemistry_braket.ipynb",
-    "Using_The_Adjoint_Gradient_Result_Type"
+    "Using_The_Adjoint_Gradient_Result_Type.ipynb"
 ]
 
 logging.basicConfig(level=logging.INFO)
