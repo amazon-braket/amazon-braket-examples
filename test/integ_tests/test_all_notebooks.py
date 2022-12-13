@@ -89,7 +89,7 @@ def test_record():
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
-    with testbook(notebook_file, timeout=300) as tb:
+    with testbook(notebook_file, timeout=600) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader

@@ -61,7 +61,7 @@ class Mocker:
         self._wrapper.boto_client.list_objects_v2.return_value = result
 
 
-def load_json(name, file_path = None):
+def read_file(name, file_path = None):
     if file_path:
         json_path = os.path.join(os.path.dirname(file_path), name)
     else:
@@ -73,7 +73,7 @@ def load_json(name, file_path = None):
 def mock_default_device_calls(mocker):
     mocker.set_get_device_result({
         "deviceType" : "QPU",
-        "deviceCapabilities" : load_json("default_capabilities.json")
+        "deviceCapabilities" : read_file("default_capabilities.json")
     })
     mocker.set_create_quantum_task_result({
         "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
@@ -91,7 +91,7 @@ def mock_default_device_calls(mocker):
             }
         }
     })
-    mocker.set_task_result_return(load_json("default_results.json"))
+    mocker.set_task_result_return(read_file("default_results.json"))
 
 
 def set_level(mock_level):
@@ -153,24 +153,15 @@ class AwsSessionMinWrapper(SessionWrapper):
         import braket.aws.aws_session
         import braket.aws.aws_quantum_job
         import braket.jobs.metrics_data.cwl_insights_metrics_fetcher as md
-        self.real_create_quantum_task = braket.aws.aws_session.AwsSession.create_quantum_task
         braket.aws.aws_session.AwsSession.create_quantum_task = self.create_quantum_task
-        self.real_get_quantum_task = braket.aws.aws_session.AwsSession.get_quantum_task
         braket.aws.aws_session.AwsSession.get_quantum_task = self.get_quantum_task
-        self.real_cancel_quantum_task = braket.aws.aws_session.AwsSession.cancel_quantum_task
         braket.aws.aws_session.AwsSession.cancel_quantum_task = self.cancel_quantum_task
-        self.real_retrieve_s3_object_body = braket.aws.aws_session.AwsSession.retrieve_s3_object_body
         braket.aws.aws_session.AwsSession.retrieve_s3_object_body = self.retrieve_s3_object_body
-        self.real_create_job = braket.aws.aws_session.AwsSession.create_job
         braket.aws.aws_session.AwsSession.create_job = self.create_job
-        self.real_get_job = braket.aws.aws_session.AwsSession.get_job
         braket.aws.aws_session.AwsSession.get_job = self.get_job
-        self.real_cancel_job = braket.aws.aws_session.AwsSession.cancel_job
         braket.aws.aws_session.AwsSession.cancel_job = self.cancel_job
-        self.real_get_metrics_results_sync = md.CwlInsightsMetricsFetcher._get_metrics_results_sync
         md.CwlInsightsMetricsFetcher._get_metrics_results_sync = self.get_job_metrics
         braket.aws.aws_quantum_job.AwsQuantumJob._attempt_results_download = mock.Mock()
-
 
     def create_quantum_task(self, **boto3_kwargs):
         return self.boto_client.create_quantum_task(boto3_kwargs)["quantumTaskArn"]

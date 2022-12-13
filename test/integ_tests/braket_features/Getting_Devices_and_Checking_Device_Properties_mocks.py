@@ -2,7 +2,7 @@ def pre_run(mock_utils):
     mocker = mock_utils.Mocker()
     mocker.set_get_device_result({
         "deviceType": "QPU",
-        "deviceCapabilities": mock_utils.load_json("default_capabilities.json")
+        "deviceCapabilities": mock_utils.read_file("default_capabilities.json")
     })
     mocker.set_search_result([
         {

@@ -37,7 +37,7 @@ def pre_run(mock_utils):
         "logStreams": []
     })
     global default_job_results
-    default_job_results = mock_utils.load_json("../job_results.json", __file__)
+    default_job_results = mock_utils.read_file("../job_results.json", __file__)
     with open("results.json", "w") as f:
         f.write(default_job_results)
     with tarfile.open("model.tar.gz", "w:gz") as tar:
