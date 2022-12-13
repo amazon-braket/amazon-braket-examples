@@ -1,9 +1,9 @@
 
 
-def pre_run_2(mock_utils):
+def pre_run_inject_2(mock_utils):
     pass
 
-def pre_run(mock_utils):
+def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
     res1 = mock_utils.read_file("ag_results.json", __file__)

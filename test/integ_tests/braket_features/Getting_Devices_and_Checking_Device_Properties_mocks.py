@@ -1,4 +1,4 @@
-def pre_run(mock_utils):
+def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mocker.set_get_device_result({
         "deviceType": "QPU",

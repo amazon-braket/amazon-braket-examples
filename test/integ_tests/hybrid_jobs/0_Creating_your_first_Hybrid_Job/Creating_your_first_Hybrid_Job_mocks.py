@@ -7,7 +7,7 @@ import unittest.mock as mock
 default_job_results = ""
 
 
-def pre_run(mock_utils):
+def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_search_result([

@@ -62,7 +62,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
             mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
             mock_utils.set_level("{mock_level}")
             test_mocks = SourceFileLoader("notebook_mocks","{path_to_mocks}").load_module()
-            test_mocks.pre_run(mock_utils)
+            test_mocks.pre_run_inject(mock_utils)
             """,
             run=False,
             before=0
