@@ -3,6 +3,8 @@ import boto3
 import unittest.mock as mock
 import braket.tracking
 import matplotlib.pyplot as plt
+import json
+import braket.aws
 
 
 plt.savefig = mock.Mock()
@@ -150,40 +152,79 @@ class Boto3SessionAllWrapper(SessionWrapper):
 class AwsSessionMinWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
-        import braket.aws.aws_session
-        import braket.aws.aws_quantum_job
         import braket.jobs.metrics_data.cwl_insights_metrics_fetcher as md
-        braket.aws.aws_session.AwsSession.create_quantum_task = self.create_quantum_task
-        braket.aws.aws_session.AwsSession.get_quantum_task = self.get_quantum_task
-        braket.aws.aws_session.AwsSession.cancel_quantum_task = self.cancel_quantum_task
-        braket.aws.aws_session.AwsSession.retrieve_s3_object_body = self.retrieve_s3_object_body
-        braket.aws.aws_session.AwsSession.create_job = self.create_job
-        braket.aws.aws_session.AwsSession.get_job = self.get_job
-        braket.aws.aws_session.AwsSession.cancel_job = self.cancel_job
-        md.CwlInsightsMetricsFetcher._get_metrics_results_sync = self.get_job_metrics
+        AwsSessionFacade._wrapper = self
+        AwsSessionFacade.real_create_quantum_task = braket.aws.aws_session.AwsSession.create_quantum_task
+        braket.aws.aws_session.AwsSession.create_quantum_task = AwsSessionFacade.create_quantum_task
+        AwsSessionFacade.real_get_quantum_task = braket.aws.aws_session.AwsSession.get_quantum_task
+        braket.aws.aws_session.AwsSession.get_quantum_task = AwsSessionFacade.get_quantum_task
+        AwsSessionFacade.real_cancel_quantum_task = braket.aws.aws_session.AwsSession.cancel_quantum_task
+        braket.aws.aws_session.AwsSession.cancel_quantum_task = AwsSessionFacade.cancel_quantum_task
+        AwsSessionFacade.real_retrieve_s3_object_body = braket.aws.aws_session.AwsSession.retrieve_s3_object_body
+        braket.aws.aws_session.AwsSession.retrieve_s3_object_body = AwsSessionFacade.retrieve_s3_object_body
+        braket.aws.aws_session.AwsSession.create_job = AwsSessionFacade.create_job
+        braket.aws.aws_session.AwsSession.get_job = AwsSessionFacade.get_job
+        braket.aws.aws_session.AwsSession.cancel_job = AwsSessionFacade.cancel_job
+        md.CwlInsightsMetricsFetcher._get_metrics_results_sync = AwsSessionFacade.get_job_metrics
         braket.aws.aws_quantum_job.AwsQuantumJob._attempt_results_download = mock.Mock()
+        AwsSessionMinWrapper.parse_mock_devices()
+
+    @staticmethod
+    def parse_mock_devices():
+        mock_device_config_str = os.getenv("MOCK_DEVICE_CONFIG")
+        if mock_device_config_str:
+            AwsSessionFacade.mock_device_config = json.loads(mock_device_config_str)
+        else:
+            AwsSessionFacade.mock_device_config = {}
+
+
+class AwsSessionFacade(braket.aws.AwsSession):
+    created_task_arns = set()
+    created_task_locations = set()
 
     def create_quantum_task(self, **boto3_kwargs):
-        return self.boto_client.create_quantum_task(boto3_kwargs)["quantumTaskArn"]
+        if boto3_kwargs and boto3_kwargs["deviceArn"]:
+            device_arn = boto3_kwargs["deviceArn"]
+            if device_arn in AwsSessionFacade.mock_device_config:
+                device_sub = AwsSessionFacade.mock_device_config[device_arn]
+                if device_sub == "MOCK":
+                    return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
+                        "quantumTaskArn"]
+                else:
+                    boto3_kwargs["deviceArn"] = device_sub
+            task_arn = AwsSessionFacade.real_create_quantum_task(self, **boto3_kwargs)
+            AwsSessionFacade.created_task_arns.add(task_arn)
+            return task_arn
+        return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
+            "quantumTaskArn"]
 
     def get_quantum_task(self, arn):
-        return self.boto_client.get_quantum_task(arn)
+        if arn in AwsSessionFacade.created_task_arns:
+            task_data = AwsSessionFacade.real_get_quantum_task(self, arn)
+            AwsSessionFacade.created_task_locations.add(task_data["outputS3Directory"])
+            return task_data
+        return AwsSessionFacade._wrapper.boto_client.get_quantum_task(arn)
 
     def cancel_quantum_task(self, arn):
-        return self.boto_client.cancel_quantum_task(arn)
+        if arn in AwsSessionFacade.created_task_arns:
+            return AwsSessionFacade.real_cancel_quantum_task(self, arn)
+        return AwsSessionFacade._wrapper.boto_client.cancel_quantum_task(arn)
 
     def create_job(self, **boto3_kwargs):
-        return self.boto_client.create_job(boto3_kwargs)["jobArn"]
+        return AwsSessionFacade._wrapper.boto_client.create_job(boto3_kwargs)["jobArn"]
 
     def get_job(self, arn):
-        return self.boto_client.get_job(arn)
+        return AwsSessionFacade._wrapper.boto_client.get_job(arn)
 
     def cancel_job(self, arn):
-        return self.boto_client.cancel_job(arn)
+        return AwsSessionFacade._wrapper.boto_client.cancel_job(arn)
 
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
-        return self.task_result_mock.return_value
+        location = s3_object_key[:s3_object_key.rindex("/")]
+        if location in AwsSessionFacade.created_task_locations:
+            return AwsSessionFacade.real_retrieve_s3_object_body(self, s3_bucket, s3_object_key)
+        return AwsSessionFacade._wrapper.task_result_mock.return_value
 
     def get_job_metrics(self, query_id):
-        return self.boto_client.get_query_results(query_id)["results"]
+        return AwsSessionFacade._wrapper.boto_client.get_query_results(query_id)["results"]
 
