@@ -113,11 +113,12 @@ def full_imag_time_evolution(
     # random seed for multiprocessing
     np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
 
-    energy_list, weights = [], []
+    energy_list, weights = [], [1.0]
     for _ in range(num_steps):
         E_loc, walker, weight = imag_time_propogator(dtau, trial, walker, weight, prop, E_shift)
         energy_list.append(E_loc)
         weights.append(weight)
+    weights = weights[:-1]
     return energy_list, weights
 
 
