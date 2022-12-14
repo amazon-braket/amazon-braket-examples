@@ -113,6 +113,8 @@ def full_imag_time_evolution(
     # random seed for multiprocessing
     np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
 
+    # energy is computed from the last element of `weights`. `imag_time_propogator` computes
+    # the energy of current time step as well as the weight of the next time step. 
     energy_list, weights = [], [1.0]
     for _ in range(num_steps):
         E_loc, walker, weight = imag_time_propogator(dtau, trial, walker, weight, prop, E_shift)
