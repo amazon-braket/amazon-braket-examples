@@ -40,10 +40,9 @@ phases:
       - source $LCC_CONDA_INSTALL_DIR/bin/activate $BRAKET_ENV
       - pip install --no-cache-dir $LCC_PIP_PKGS
       - source $LCC_CONDA_INSTALL_DIR/bin/deactivate
-      - conda pack --name $BRAKET_ENV --output envs/Braket.tgz
+      - conda pack --name $BRAKET_ENV --output Braket.tgz
 
 artifacts:
   files:
-    - envs/Braket.tgz
+    - Braket.tgz
   name: CONDA_BUILD_RESULTS
-  discard-paths: yes
