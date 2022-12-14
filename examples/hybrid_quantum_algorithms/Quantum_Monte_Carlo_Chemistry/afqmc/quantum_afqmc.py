@@ -88,7 +88,10 @@ def q_full_imag_time_evolution(
     # random seed for mutliprocessing
     np.random.seed(int.from_bytes(os.urandom(4), byteorder="little"))
 
-    energy_list, weights, qs, cs = [], [], [], []
+    # energy is computed from the last element of `weights`. `imag_time_propogator` and 
+    # `imag_time_propogator_qaee` computes the energy of current time step as well as
+    # the weight of the next time step. 
+    energy_list, weights, qs, cs = [], [1.0], [], []
     for time in range(num_steps):
         # If the time step is in the quantum times, evaluate the energy with quantum
         if time % quantum_evaluations_every_n_steps == 0:
@@ -104,6 +107,7 @@ def q_full_imag_time_evolution(
         weights.append(weight)
         qs.append(num)
         cs.append(denom)
+    weights = weights[:-1]
     return energy_list, weights, qs, cs
 
 
