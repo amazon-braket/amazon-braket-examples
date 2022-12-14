@@ -1,10 +1,12 @@
 version: 0.2
-
+env:
+  shell: bash
+  variables: {}
 phases:
   install:
     commands:
-      - export _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
-      - export _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
+      - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
+      - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
       - export LCC_CONDA_INSTALLER=Anaconda3-2020.07-Linux-x86_64.sh
       - export LCC_CONDA_INSTALLER_URL=$_ANACONDA_ARCHIVE_URL/$LCC_CONDA_INSTALLER
       - export LCC_CONDA_INSTALLER_MD5=1046c40a314ab2531e4c099741530ada
@@ -15,6 +17,7 @@ phases:
       - ./$LCC_CONDA_INSTALLER -b -p $LCC_CONDA_INSTALL_DIR
   pre_build:
     commands:
+      - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
       - for CHANNEL in conda-forge cf-staging; do conda config --system --append channels $CHANNEL; done
       - conda install --yes conda-pack
