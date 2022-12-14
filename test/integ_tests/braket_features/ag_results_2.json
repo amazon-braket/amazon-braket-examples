@@ -189,7 +189,7 @@
             "name": "braket.task_result.task_metadata",
             "version": "1"
         },
-        "id": "arn:aws:braket:us-west-2:618226667951:quantum-task/82a205d7-7b8c-404a-8a70-213f39ec6c8e",
+        "id": "arn:aws:braket:us-west-2:00000000000:quantum-task/82a205d7-7b8c-404a-8a70-213f39ec6c8e",
         "shots": 0,
         "deviceId": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
         "deviceParameters": {
