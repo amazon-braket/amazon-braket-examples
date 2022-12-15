@@ -1,0 +1,63 @@
+{
+    "braketSchemaHeader": {
+        "name": "braket.task_result.gate_model_task_result",
+        "version": "1"
+    },
+    "resultTypes": [
+        {
+            "type": {
+                "observable": [
+                    "z"
+                ],
+                "targets": [
+                    1
+                ],
+                "type": "expectation"
+            },
+            "value": -0.9999996577749632
+        }
+    ],
+    "taskMetadata": {
+        "braketSchemaHeader": {
+            "name": "braket.task_result.task_metadata",
+            "version": "1"
+        },
+        "id": "arn:aws:braket:us-west-2:00000000000:quantum-task/bb46fa7d-d7e4-4683-96ab-4729e59f294d",
+        "shots": 0,
+        "deviceId": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+        "deviceParameters": {
+            "braketSchemaHeader": {
+                "name": "braket.device_schema.simulators.gate_model_simulator_device_parameters",
+                "version": "1"
+            },
+            "paradigmParameters": {
+                "braketSchemaHeader": {
+                    "name": "braket.device_schema.gate_model_parameters",
+                    "version": "1"
+                },
+                "qubitCount": 2,
+                "disableQubitRewiring": false
+            }
+        },
+        "createdAt": "2022-12-06T23:06:45.614Z",
+        "endedAt": "2022-12-06T23:06:47.313Z",
+        "status": "COMPLETED"
+    },
+    "additionalMetadata": {
+        "action": {
+            "braketSchemaHeader": {
+                "name": "braket.ir.openqasm.program",
+                "version": "1"
+            },
+            "inputs": {},
+            "source": "OPENQASM 3.0;\nqubit[2] q;\nrx(0.0004196185026715787) q[0];\nry(3.1408796525696636) q[1];\ncnot q[0], q[1];\n#pragma braket result expectation z(q[1])"
+        },
+        "simulatorMetadata": {
+            "braketSchemaHeader": {
+                "name": "braket.task_result.simulator_metadata",
+                "version": "1"
+            },
+            "executionDuration": 4
+        }
+    }
+}
