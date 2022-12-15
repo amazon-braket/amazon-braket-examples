@@ -5,9 +5,10 @@ env:
 phases:
   build:
     commands:
-      - echo "Hello There" >> Braket.tgz
+      - mkdir envs
+      - echo "Hello There" >> envs/Braket.tgz
 
 artifacts:
   files:
-    - Braket.tgz
+    - envs/Braket.tgz
   name: CONDA_BUILD_RESULTS
