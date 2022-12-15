@@ -1,0 +1,13 @@
+version: 0.2
+env:
+  shell: bash
+  variables: {}
+phases:
+  build:
+    commands:
+      - echo "Hello There" >> Braket.tgz
+
+artifacts:
+  files:
+    - Braket.tgz
+  name: CONDA_BUILD_RESULTS
