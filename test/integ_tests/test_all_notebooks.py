@@ -30,8 +30,7 @@ test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
-        # Limit number of tests while we're working on the test pipeline.
-        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_ and "getting_started" in dir_:
+        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
             test_notebooks.append((dir_, file_name))
 
 
@@ -70,7 +69,6 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         tb.execute()
         test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
         test_mocks.post_run(tb)
-        assert False, "This test is failing on purpose"
 
 
 def test_record():
