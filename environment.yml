@@ -30,10 +30,10 @@ dependencies:
       - botocore==1.25.7
       - awscli==1.23.7
       - boto3==1.22.7
-      - amazon-braket-default-simulator==1.11.0
-      - amazon-braket-pennylane-plugin==1.10.1
-      - amazon-braket-schemas==1.14.0
-      - amazon-braket-sdk==1.35.0
+      - amazon-braket-default-simulator==1.10.1
+      - amazon-braket-pennylane-plugin==1.9.0
+      - amazon-braket-schemas==1.13.1
+      - amazon-braket-sdk==1.34.1
       - amazon-braket-strawberryfields-plugin==1.0.0
       - cvxpy==1.1.17
       - dask==2.30.0
@@ -46,7 +46,9 @@ dependencies:
       - openfermionpyscf==0.5
       - pennylane==0.27.0
       - PennyLane-Lightning==0.27.0
+      - pytest-xdist
       - s3transfer==0.5.0
       - strawberryfields==0.23.0
       - tensorflow==2.7.0
       - torch==1.9.1
+      - testbook
