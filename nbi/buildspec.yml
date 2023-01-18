@@ -24,9 +24,6 @@ phases:
   build:
     commands:
       - BRAKET_ENV=Braket
-      # TODO Consider migrating package lists for conda/pip out to environment.yml
-      # TODO Consider process for how to upgrade versions and validate; how will notebook creation team interact/upgrade
-      # versions for notebooks?  Can they own environment.yml that is imported for this build?
       # Conda packages
       - LCC_CONDA_PKGS="conda-pack=0.6.0 idna=2.10 ipython_genutils=0.2.0 ipykernel=5.3.4 matplotlib=3.2.2 nbconvert=6.0.7 " \
       - LCC_CONDA_PKGS="$LCC_CONDA_PKGS networkx=2.4 numpy=1.21.6 openbabel==3.1.1=py37h200e996_1 pandas==1.1.4=py37h10a2094_0 protobuf=3.12.4 " \
