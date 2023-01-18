@@ -34,7 +34,7 @@ phases:
       # Pip packages
       - LCC_PIP_PKGS="botocore==1.25.7 awscli==1.23.7 boto3==1.22.7 amazon-braket-sdk==1.35.1 amazon-braket-default-simulator==1.11.0 " \
       - LCC_PIP_PKGS="amazon-braket-schemas==1.14.0 amazon-braket-pennylane-plugin==1.10.2 amazon-braket-strawberryfields-plugin==1.0.0 cvxpy==1.1.17 " \
-      - LCC_PIP_PKGS="$LCC_PIP_PKGS openfermion==1.0.0 PennyLane==0.27.0 PennyLane-Lightning==0.27.0 openfermionpyscf==0.5 oqpy==0.1.1 " \
+      - LCC_PIP_PKGS="$LCC_PIP_PKGS openfermion==1.0.0 PennyLane==0.27.0 PennyLane-Lightning==0.27.0 oqpy==0.1.1 " \
       - LCC_PIP_PKGS="$LCC_PIP_PKGS dask==2.30.0 keras==2.7.0 s3transfer==0.5.0 tensorflow==2.7.0 torch==1.9.1 jax==0.2.21 ecos==2.0.7.post1 " \
       - LCC_PIP_PKGS="$LCC_PIP_PKGS strawberryfields==0.23.0 mypy-extensions==0.4.3 "
       # # Resolve conflicts with conda/pip installs
