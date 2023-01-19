@@ -51,3 +51,4 @@ dependencies:
       - strawberryfields==0.23.0
       - tensorflow==2.7.0
       - torch==1.9.1
+      - testbook
