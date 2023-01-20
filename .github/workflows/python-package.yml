@@ -34,3 +34,7 @@ jobs:
     - name: Run integ tests
       run: |
         pytest -ra -v test/integ_tests/
+    - name: Build conda environment
+      run: |
+        ./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a .
+        rm -rf Braket.tar.gz
