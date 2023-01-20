@@ -27,10 +27,10 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    # - name: Install dependencies
-    #   run: |
-    #     pip install --upgrade pip
-    #     pip install -r test/integ_tests/requirements.txt
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r test/integ_tests/requirements.txt
     # - name: Run integ tests
     #   run: |
     #     # pytest -ra -v test/integ_tests/
