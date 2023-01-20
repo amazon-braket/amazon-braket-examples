@@ -18,8 +18,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python-version: [3.7]
+        os: [ubuntu-latest, macos-latest]
+        python-version: [3.7, 3.8, 3.9]
 
     steps:
     - uses: actions/checkout@v2
@@ -34,11 +34,12 @@ jobs:
     # - name: Run integ tests
     #   run: |
     #     # pytest -ra -v test/integ_tests/
-    - name: pull docker images
+    - name: Pull codebuild docker images
       run: |
         docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
         docker pull public.ecr.aws/codebuild/local-builds:latest
+      if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest'
     - name: Build conda environment
       run: |
         ./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a .
-    #     rm -rf Braket.tar.gz
+      if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest'
