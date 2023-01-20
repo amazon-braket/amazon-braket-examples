@@ -46,9 +46,7 @@ dependencies:
       - openfermionpyscf==0.5
       - pennylane==0.27.0
       - PennyLane-Lightning==0.27.0
-      - pytest-xdist
       - s3transfer==0.5.0
       - strawberryfields==0.23.0
       - tensorflow==2.7.0
       - torch==1.9.1
-      - testbook
