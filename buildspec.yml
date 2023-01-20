@@ -24,6 +24,7 @@ phases:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
+      - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml
       - conda pack --name $BRAKET_ENV --output ./Braket.tgz
 
