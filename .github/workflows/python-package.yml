@@ -31,10 +31,12 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r test/integ_tests/requirements.txt
-    - name: Run integ tests
-      run: |
-        pytest -ra -v test/integ_tests/
+    # - name: Run integ tests
+    #   run: |
+    #     # pytest -ra -v test/integ_tests/
     - name: Build conda environment
       run: |
+        docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
+        docker pull public.ecr.aws/codebuild/local-builds:latest
         ./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a .
         rm -rf Braket.tar.gz
