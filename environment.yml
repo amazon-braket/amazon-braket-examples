@@ -15,6 +15,7 @@ dependencies:
   - matplotlib=3.2.2
   - networkx=2.4
   - numpy=1.21.6
+  - nbconvert=6.5.4
   - openbabel=3.1.1
   - pandas=1.1.4
   - pip
@@ -42,7 +43,6 @@ dependencies:
       - jinja2==3.1.2
       - keras==2.7.0
       - mypy-extensions==0.4.3
-      - nbconvert==7.2.7
       - openfermion==1.0.0
       - openfermionpyscf==0.5
       - pennylane==0.27.0
