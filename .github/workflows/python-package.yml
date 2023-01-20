@@ -38,8 +38,8 @@ jobs:
       run: |
         docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
         docker pull public.ecr.aws/codebuild/local-builds:latest
-      if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest'
+      if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest' && ${{ github.event.head_commit.modified }} == *".yml"*
     - name: Build conda environment
       run: |
         ./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a .
-      if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest'
+      if: matrix.python-version == '3.7' && matrix.os == 'ubuntu-latest' && ${{ github.event.head_commit.modified }} == *".yml"*
