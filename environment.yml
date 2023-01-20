@@ -10,6 +10,7 @@ dependencies:
   - idna=2.10
   - ipython_genutils=0.2.0
   - ipykernel=5.3.4
+  - jupyter_core=4.6.3
   - markupsafe=2.1.1
   - matplotlib=3.2.2
   - networkx=2.4
