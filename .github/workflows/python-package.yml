@@ -34,16 +34,4 @@ jobs:
     # - name: Run integ tests
     #   run: |
     #     # pytest -ra -v test/integ_tests/
-    - name: Pull codebuild docker images
-      run: |
-        if [[ ${{ github.event.head_commit.modified }} == *".yml"* ]] && [[ ${{ matrix.os }} == 'ubuntu-latest' ]] && [[ ${{ matrix.python-version }} == '3.7' ]]; then
-          docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
-          docker pull public.ecr.aws/codebuild/local-builds:latest
-        fi
-      # if: contains(github.event.head_commit.modified, '*.yml') && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
-    - name: Build conda environment
-      run: |
-        if [[ ${{ github.event.head_commit.modified }} == *".yml"* ]] && [[ ${{ matrix.os }} == 'ubuntu-latest' ]] && [[ ${{ matrix.python-version }} == '3.7' ]]; then
-          ./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a envs
-        fi
-      # if: contains(github.event.head_commit.modified, '*.yml') && matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
+   
