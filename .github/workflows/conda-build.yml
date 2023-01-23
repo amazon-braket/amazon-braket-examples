@@ -1,3 +1,6 @@
+# This workflow will setup a conda build for dependency checks by pulling in the codebuild docker images 
+# and will execute only on modification of yml files for PRs and merges.
+
 name: Build Conda Environment
 
 on:
@@ -27,8 +30,6 @@ jobs:
       run: |
         docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
         docker pull public.ecr.aws/codebuild/local-builds:latest
-      # if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'
     - name: Build conda environment
       run: |
         ./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a envs
-      # if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.7'

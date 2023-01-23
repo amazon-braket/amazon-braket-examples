@@ -31,9 +31,7 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r test/integ_tests/requirements.txt
-    - name: Echo GITHUB_WORKSPACE
-      run: echo $GITHUB_WORKSPACE
-    # - name: Run integ tests
-    #   run: |
-    #     # pytest -ra -v test/integ_tests/
+    - name: Run integ tests
+      run: |
+        # pytest -ra -v test/integ_tests/
    
