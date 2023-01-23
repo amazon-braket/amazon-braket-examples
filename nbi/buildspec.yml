@@ -17,33 +17,15 @@ phases:
       - ./$LCC_CONDA_INSTALLER -b -p $LCC_CONDA_INSTALL_DIR
   pre_build:
     commands:
-      - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
       - for CHANNEL in conda-forge cf-staging; do conda config --system --append channels $CHANNEL; done
       - conda install --yes conda-pack
   build:
     commands:
       - BRAKET_ENV=Braket
-      # Conda packages
-      - LCC_CONDA_PKGS="conda-pack=0.6.0 idna=2.10 ipython_genutils=0.2.0 ipykernel=5.3.4 matplotlib=3.2.2 nbconvert=6.0.7 " \
-      - LCC_CONDA_PKGS="$LCC_CONDA_PKGS networkx=2.4 numpy=1.21.6 openbabel==3.1.1=py37h200e996_1 pandas==1.1.4=py37h10a2094_0 protobuf=3.12.4 " \
-      - LCC_CONDA_PKGS="$LCC_CONDA_PKGS python=3.7 "
-      # Pip packages
-      - LCC_PIP_PKGS="botocore==1.25.7 awscli==1.23.7 boto3==1.22.7 amazon-braket-sdk==1.35.1 amazon-braket-default-simulator==1.11.0 " \
-      - LCC_PIP_PKGS="amazon-braket-schemas==1.14.0 amazon-braket-pennylane-plugin==1.10.2 amazon-braket-strawberryfields-plugin==1.0.0 cvxpy==1.1.17 " \
-      - LCC_PIP_PKGS="$LCC_PIP_PKGS openfermion==1.0.0 PennyLane==0.27.0 PennyLane-Lightning==0.27.0 openfermionpyscf==0.5 oqpy==0.1.1 " \
-      - LCC_PIP_PKGS="$LCC_PIP_PKGS dask==2.30.0 keras==2.7.0 s3transfer==0.5.0 tensorflow==2.7.0 torch==1.9.1 jax==0.2.21 ecos==2.0.7.post1 " \
-      - LCC_PIP_PKGS="$LCC_PIP_PKGS strawberryfields==0.23.0 mypy-extensions==0.4.3 "
-      # # Resolve conflicts with conda/pip installs
-      - LCC_CONDA_PKGS="$LCC_CONDA_PKGS jinja2=2.11.3 markupsafe=1.1.1 python-dateutil=2.8.2 six=1.15 scipy=1.5.2 decorator=4.4.0 "
-      - LCC_PIP_PKGS="$LCC_PIP_PKGS jinja2==2.11.3 markupsafe==1.1.1 python-dateutil==2.8.2 six==1.15 scipy==1.5.2 decorator==4.4.0 "
       - mkdir -p envs
-      - conda create --name $BRAKET_ENV --yes $LCC_CONDA_PKGS
-      # conda active <env> does not work in CodeBuild, likely due to non-interactive shell and conda init <shell> and all it's non-interactive
-      # shell workarounds not working either.  Use deprecated direct use of activate to make this work.
-      - source $LCC_CONDA_INSTALL_DIR/bin/activate $BRAKET_ENV
-      - pip install --no-cache-dir $LCC_PIP_PKGS
-      - source $LCC_CONDA_INSTALL_DIR/bin/deactivate
+      - conda config --set path_conflict warn
+      - conda env create --name $BRAKET_ENV -f environment.yml
       - conda pack --name $BRAKET_ENV --output envs/Braket.tgz
 
 artifacts:
