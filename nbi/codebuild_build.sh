@@ -1,3 +1,5 @@
+# This copied this file from https://github.com/aws/aws-codebuild-docker-images/tree/master/local_builds, and have modified a bit as per the use case here. 
+
 #!/bin/bash
 
 COMPOSE_HTTP_TIMEOUT=120 

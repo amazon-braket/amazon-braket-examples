@@ -34,4 +34,3 @@ jobs:
     - name: Run integ tests
       run: |
         pytest -ra -v test/integ_tests/
-   
