@@ -44,6 +44,7 @@ function usage {
     echo "               * For sourceIdentifier, use a value that is fewer than 128 characters and contains only alphanumeric characters and underscores"
     echo "  -c        Use the AWS configuration and credentials from your local host. This includes ~/.aws and any AWS_* environment variables."
     echo "  -p        Used to specify the AWS CLI Profile."
+    echo "  -b FILE   Used to specify a buildspec override file. Defaults to buildspec.yml in the source directory."
     echo "  -m        Used to mount the source directory to the customer build container directly."
     echo "  -d        Used to run the build container in docker privileged mode."
     echo "  -e FILE   Used to specify a file containing environment variables."
@@ -62,11 +63,12 @@ awsconfig_flag=false
 mount_src_dir_flag=false
 docker_privileged_mode_flag=false
 
-while getopts "cmdi:a:r:s:e:l:p:h" opt; do
+while getopts "cmdi:a:r:s:b:e:l:p:h" opt; do
     case $opt in
         i  ) image_flag=true; image_name=$OPTARG;;
         a  ) artifact_flag=true; artifact_dir=$OPTARG;;
         r  ) report_dir=$OPTARG;;
+        b  ) buildspec="./buildspec.yml";;
         c  ) awsconfig_flag=true;;
         m  ) mount_src_dir_flag=true;;
         d  ) docker_privileged_mode_flag=true;;
@@ -129,7 +131,10 @@ else
     done
 fi
 
-docker_command+=" -e \"BUILDSPEC=$(allOSRealPath)\""
+if [ -n "$buildspec" ]
+then
+    docker_command+=" -e \"BUILDSPEC=$(allOSRealPath "$buildspec")\""
+fi
 
 if [ -n "$environment_variable_file" ]
 then
