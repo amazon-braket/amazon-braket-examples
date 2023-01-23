@@ -83,6 +83,8 @@ while getopts "cmdi:a:r:s:b:e:l:p:h" opt; do
     esac
 done
 
+echo "$(buildspec) file path"
+
 if  ! $image_flag
 then
     echo "The image name flag (-i) must be included for a build to run" >&2
