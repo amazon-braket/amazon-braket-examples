@@ -68,7 +68,7 @@ while getopts "cmdi:a:r:s:b:e:l:p:h" opt; do
         i  ) image_flag=true; image_name=$OPTARG;;
         a  ) artifact_flag=true; artifact_dir=$OPTARG;;
         r  ) report_dir=$OPTARG;;
-        b  ) buildspec="./buildspec.yml";;
+        b  ) buildspec="$pwd/buildspec.yml";;
         c  ) awsconfig_flag=true;;
         m  ) mount_src_dir_flag=true;;
         d  ) docker_privileged_mode_flag=true;;
