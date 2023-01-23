@@ -5,15 +5,15 @@ on:
     branches:
       - main
     paths: 
-      - ./environment.yml
-      - ./buildspec.yml
+      - $GITHUB_WORKSPACE/environment.yml
+      - $GITHUB_WORKSPACE/buildspec.yml
   pull_request:
     branches:
       - main
       - feature/**
     paths: 
-      - ./environment.yml
-      - ./buildspec.yml
+      - $GITHUB_WORKSPACE/environment.yml
+      - $GITHUB_WORKSPACE/buildspec.yml
 
 jobs:
   build:
