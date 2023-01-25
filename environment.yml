@@ -12,9 +12,9 @@ dependencies:
   - ipykernel=5.3.4
   - markupsafe=2.1.1
   - matplotlib=3.2.2
-  - nbconvert=6.0.7
   - networkx=2.4
   - numpy=1.21.6
+  - nbconvert=6.5.4
   - openbabel=3.1.1
   - pandas=1.1.4
   - pip
@@ -31,9 +31,9 @@ dependencies:
       - awscli==1.23.7
       - boto3==1.22.7
       - amazon-braket-default-simulator==1.11.0
-      - amazon-braket-pennylane-plugin==1.10.1
+      - amazon-braket-pennylane-plugin==1.10.2
       - amazon-braket-schemas==1.14.0
-      - amazon-braket-sdk==1.35.0
+      - amazon-braket-sdk==1.35.1
       - amazon-braket-strawberryfields-plugin==1.0.0
       - cvxpy==1.1.17
       - dask==2.30.0
