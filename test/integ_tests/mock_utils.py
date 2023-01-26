@@ -165,6 +165,7 @@ class AwsSessionMinWrapper(SessionWrapper):
         braket.aws.aws_session.AwsSession.create_job = AwsSessionFacade.create_job
         braket.aws.aws_session.AwsSession.get_job = AwsSessionFacade.get_job
         braket.aws.aws_session.AwsSession.cancel_job = AwsSessionFacade.cancel_job
+        braket.aws.aws_session.AwsSession.copy_s3_directory = AwsSessionFacade.copy_s3_directory
         md.CwlInsightsMetricsFetcher._get_metrics_results_sync = AwsSessionFacade.get_job_metrics
         braket.aws.aws_quantum_job.AwsQuantumJob._attempt_results_download = mock.Mock()
         AwsSessionMinWrapper.parse_mock_devices()
@@ -218,6 +219,9 @@ class AwsSessionFacade(braket.aws.AwsSession):
 
     def cancel_job(self, arn):
         return AwsSessionFacade._wrapper.boto_client.cancel_job(arn)
+
+    def copy_s3_directory(self, source_s3_path, destination_s3_path):
+        return
 
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
         location = s3_object_key[:s3_object_key.rindex("/")]
