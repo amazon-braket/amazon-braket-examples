@@ -228,6 +228,8 @@ class AwsSessionFacade(braket.aws.AwsSession):
         location = s3_object_key[:s3_object_key.rindex("/")]
         if location in AwsSessionFacade.created_task_locations:
             return AwsSessionFacade.real_retrieve_s3_object_body(self, s3_bucket, s3_object_key)
+        if AwsSessionFacade._wrapper.task_result_mock.side_effect is not None:
+            return next(AwsSessionFacade._wrapper.task_result_mock.side_effect)
         return AwsSessionFacade._wrapper.task_result_mock.return_value
 
     def get_job_metrics(self, query_id):
