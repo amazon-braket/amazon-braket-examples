@@ -186,8 +186,9 @@ class AwsSessionFacade(braket.aws.AwsSession):
     def create_quantum_task(self, **boto3_kwargs):
         if boto3_kwargs and boto3_kwargs["deviceArn"]:
             device_arn = boto3_kwargs["deviceArn"]
-            if device_arn in AwsSessionFacade.mock_device_config:
-                device_sub = AwsSessionFacade.mock_device_config[device_arn]
+            device_name = device_arn.split("/")[-1]
+            if device_name in AwsSessionFacade.mock_device_config:
+                device_sub = AwsSessionFacade.mock_device_config[device_name]
                 if device_sub == "MOCK":
                     return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
                         "quantumTaskArn"]
