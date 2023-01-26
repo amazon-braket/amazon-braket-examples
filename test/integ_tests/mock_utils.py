@@ -154,6 +154,8 @@ class AwsSessionMinWrapper(SessionWrapper):
         super().__init__()
         import braket.jobs.metrics_data.cwl_insights_metrics_fetcher as md
         AwsSessionFacade._wrapper = self
+        AwsSessionFacade.real_get_device = braket.aws.aws_session.AwsSession.get_device
+        braket.aws.aws_session.AwsSession.get_device = AwsSessionFacade.get_device
         AwsSessionFacade.real_create_quantum_task = braket.aws.aws_session.AwsSession.create_quantum_task
         braket.aws.aws_session.AwsSession.create_quantum_task = AwsSessionFacade.create_quantum_task
         AwsSessionFacade.real_get_quantum_task = braket.aws.aws_session.AwsSession.get_quantum_task
@@ -168,25 +170,39 @@ class AwsSessionMinWrapper(SessionWrapper):
         braket.aws.aws_session.AwsSession.copy_s3_directory = AwsSessionFacade.copy_s3_directory
         md.CwlInsightsMetricsFetcher._get_metrics_results_sync = AwsSessionFacade.get_job_metrics
         braket.aws.aws_quantum_job.AwsQuantumJob._attempt_results_download = mock.Mock()
-        AwsSessionMinWrapper.parse_mock_devices()
+        AwsSessionMinWrapper.parse_device_config()
 
     @staticmethod
-    def parse_mock_devices():
+    def parse_device_config():
         mock_device_config_str = os.getenv("MOCK_DEVICE_CONFIG")
         if mock_device_config_str:
             AwsSessionFacade.mock_device_config = json.loads(mock_device_config_str)
         else:
             AwsSessionFacade.mock_device_config = {}
+        unsupported_device_config_str = os.getenv("UNSUPPORTED_DEVICE_CONFIG")
+        if unsupported_device_config_str:
+            AwsSessionFacade.unsupported_device_config = set(json.loads(unsupported_device_config_str))
+        else:
+            AwsSessionFacade.unsupported_device_config = {}
 
 
 class AwsSessionFacade(braket.aws.AwsSession):
     created_task_arns = set()
     created_task_locations = set()
 
+    def get_device(self, arn):
+        device_name = arn.split("/")[-1]
+        if device_name in AwsSessionFacade.unsupported_device_config:
+            return AwsSessionFacade._wrapper.boto_client.get_device(arn)
+        return AwsSessionFacade.real_get_device(self, arn)
+
     def create_quantum_task(self, **boto3_kwargs):
         if boto3_kwargs and boto3_kwargs["deviceArn"]:
             device_arn = boto3_kwargs["deviceArn"]
             device_name = device_arn.split("/")[-1]
+            if device_name in AwsSessionFacade.unsupported_device_config:
+                return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
+                    "quantumTaskArn"]
             if device_name in AwsSessionFacade.mock_device_config:
                 device_sub = AwsSessionFacade.mock_device_config[device_name]
                 if device_sub == "MOCK":
