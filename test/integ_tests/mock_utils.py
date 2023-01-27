@@ -63,6 +63,10 @@ class Mocker:
         self._wrapper.boto_client.list_objects_v2.return_value = result
 
 
+def default_region():
+    return boto3.session.Session().region_name
+
+
 def read_file(name, file_path = None):
     if file_path:
         json_path = os.path.join(os.path.dirname(file_path), name)
