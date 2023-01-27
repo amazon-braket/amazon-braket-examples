@@ -62,9 +62,9 @@ class Mocker:
     def set_list_objects_v2_result(self, result):
         self._wrapper.boto_client.list_objects_v2.return_value = result
 
-
-def default_region():
-    return boto3.session.Session().region_name
+    @property
+    def region_name(self):
+        return self._wrapper.region_name
 
 
 def read_file(name, file_path = None):
@@ -188,6 +188,10 @@ class AwsSessionMinWrapper(SessionWrapper):
             AwsSessionFacade.unsupported_device_config = set(json.loads(unsupported_device_config_str))
         else:
             AwsSessionFacade.unsupported_device_config = {}
+
+    @property
+    def region_name(self):
+        return boto3.session.Session().region_name
 
 
 class AwsSessionFacade(braket.aws.AwsSession):

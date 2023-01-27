@@ -20,9 +20,8 @@ def pre_run_inject(mock_utils):
             ]
         }
     ])
-    region = mock_utils.default_region()
     mocker.set_create_job_result({
-        "jobArn" : f"arn:aws:braket:{region}:000000:job/testJob"
+        "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
     })
     mocker.set_get_job_result({
         "instanceConfig" : {
@@ -47,7 +46,7 @@ def pre_run_inject(mock_utils):
     subprocess.check_output = subprocess_check_output
     subprocess.Popen = subprocess_open
 
-    os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{region}::device/qpu/arn/TestARN"
+    os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
 
 
 def post_run(tb):

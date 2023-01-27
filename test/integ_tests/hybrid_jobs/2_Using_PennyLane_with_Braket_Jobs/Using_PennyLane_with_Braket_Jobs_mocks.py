@@ -14,9 +14,8 @@ def pre_run_inject(mock_utils):
             ]
         }
     ])
-    region = mock_utils.default_region()
     mocker.set_create_job_result({
-        "jobArn" : f"arn:aws:braket:{region}:000000:job/testJob"
+        "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
     })
     mocker.set_get_job_result({
         "instanceConfig" : {
