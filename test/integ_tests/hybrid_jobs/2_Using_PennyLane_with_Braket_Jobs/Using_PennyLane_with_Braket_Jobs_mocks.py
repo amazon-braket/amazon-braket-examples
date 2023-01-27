@@ -1,7 +1,9 @@
 import tarfile
+import os
 
 
 def pre_run_inject(mock_utils):
+    region = os.getenv("AWS_DEFAULT_REGION", "us-west-2")
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_search_result([
@@ -15,7 +17,7 @@ def pre_run_inject(mock_utils):
         }
     ])
     mocker.set_create_job_result({
-        "jobArn" : "arn:aws:braket:us-west-2:000000:job/testJob"
+        "jobArn" : f"arn:aws:braket:{region}:000000:job/testJob"
     })
     mocker.set_get_job_result({
         "instanceConfig" : {
