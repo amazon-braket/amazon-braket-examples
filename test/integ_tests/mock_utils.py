@@ -179,15 +179,13 @@ class AwsSessionMinWrapper(SessionWrapper):
     @staticmethod
     def parse_device_config():
         mock_device_config_str = os.getenv("MOCK_DEVICE_CONFIG")
-        if mock_device_config_str:
-            AwsSessionFacade.mock_device_config = json.loads(mock_device_config_str)
-        else:
-            AwsSessionFacade.mock_device_config = {}
+        AwsSessionFacade.mock_device_config = (
+            json.loads(mock_device_config_str) if mock_device_config_str else {}
+        )
         unsupported_device_config_str = os.getenv("UNSUPPORTED_DEVICE_CONFIG")
-        if unsupported_device_config_str:
-            AwsSessionFacade.unsupported_device_config = set(json.loads(unsupported_device_config_str))
-        else:
-            AwsSessionFacade.unsupported_device_config = {}
+        AwsSessionFacade.unsupported_device_config = (
+            set(json.loads(unsupported_device_config_str)) if unsupported_device_config_str else {}
+        )
 
     @property
     def region_name(self):
