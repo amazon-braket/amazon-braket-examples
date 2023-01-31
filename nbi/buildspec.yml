@@ -32,4 +32,5 @@ phases:
 artifacts:
   files:
     - envs/Braket.tgz
+    - environment.yml
   name: CONDA_BUILD_RESULTS
