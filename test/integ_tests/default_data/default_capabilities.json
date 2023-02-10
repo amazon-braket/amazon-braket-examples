@@ -1,0 +1,228 @@
+{
+  "braketSchemaHeader": {
+    "name": "braket.device_schema.rigetti.rigetti_device_capabilities",
+    "version": "1"
+  },
+  "service": {
+    "executionWindows": [
+      {
+        "executionDay": "Everyday",
+        "windowStartHour": "11:00",
+        "windowEndHour": "12:00"
+      }
+    ],
+    "shotsRange": [
+      1,
+      10
+    ]
+  },
+  "action": {
+    "braket.ir.jaqcd.program": {
+      "actionType": "braket.ir.jaqcd.program",
+      "version": [
+        "1"
+      ],
+      "supportedOperations": [
+        "amplitude_damping",
+        "bit_flip",
+        "ccnot",
+        "cnot",
+        "cphaseshift",
+        "cphaseshift00",
+        "cphaseshift01",
+        "cphaseshift10",
+        "cswap",
+        "cy",
+        "cz",
+        "depolarizing",
+        "pauli_channel",
+        "generalized_amplitude_damping",
+        "h",
+        "i",
+        "iswap",
+        "kraus",
+        "phase_flip",
+        "phase_damping",
+        "phaseshift",
+        "pswap",
+        "rx",
+        "ry",
+        "rz",
+        "s",
+        "si",
+        "swap",
+        "t",
+        "ti",
+        "two_qubit_dephasing",
+        "two_qubit_depolarizing",
+        "unitary",
+        "v",
+        "vi",
+        "x",
+        "xx",
+        "xy",
+        "y",
+        "yy",
+        "z",
+        "zz"
+      ]
+    },
+    "braket.ir.openqasm.program": {
+      "actionType": "braket.ir.openqasm.program",
+      "version": [
+        "1"
+      ],
+      "supportedOperations": [
+        "amplitude_damping",
+        "bit_flip",
+        "ccnot",
+        "cnot",
+        "cphaseshift",
+        "cphaseshift00",
+        "cphaseshift01",
+        "cphaseshift10",
+        "cswap",
+        "cy",
+        "cz",
+        "depolarizing",
+        "pauli_channel",
+        "generalized_amplitude_damping",
+        "h",
+        "i",
+        "iswap",
+        "kraus",
+        "phase_flip",
+        "phase_damping",
+        "phaseshift",
+        "pswap",
+        "rx",
+        "ry",
+        "rz",
+        "s",
+        "si",
+        "swap",
+        "t",
+        "ti",
+        "two_qubit_dephasing",
+        "two_qubit_depolarizing",
+        "unitary",
+        "v",
+        "vi",
+        "x",
+        "xx",
+        "xy",
+        "y",
+        "yy",
+        "z",
+        "zz"
+      ],
+      "supportedResultTypes": [
+        {
+          "name": "Sample",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 1,
+          "maxShots": 1000
+        },
+        {
+          "name": "Expectation",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 1,
+          "maxShots": 1000
+        },
+        {
+          "name": "Variance",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 1,
+          "maxShots": 1000
+        },
+        {
+          "name": "Probability",
+          "minShots": 1,
+          "maxShots": 100000
+        },
+        {
+          "name": "Amplitude",
+          "minShots": 0,
+          "maxShots": 0
+        }
+      ]
+    }
+  },
+  "paradigm": {
+    "qubitCount": 30,
+    "nativeGateSet": [
+      "ccnot",
+      "cy"
+    ],
+    "connectivity": {
+      "fullyConnected": false,
+      "connectivityGraph": {
+        "1": [
+          "2",
+          "3"
+        ]
+      }
+    }
+  },
+  "deviceParameters": {},
+  "provider": {
+    "specs": {
+      "1Q": {
+        "0": {
+          "T1": 2.766141842913683e-05,
+          "T2": 1.2520845863383872e-05,
+          "f1QRB": 0.9990014768242277,
+          "f1QRB_std_err": 8.73150855778037e-05,
+          "f1Q_simultaneous_RB": 0.9970022479211442,
+          "f1Q_simultaneous_RB_std_err": 0.0003912205868794068,
+          "fActiveReset": 0.9990000000000001,
+          "fRO": 0.964
+        }
+      },
+      "2Q": {
+        "0-1": {
+          "fCPHASE": 0.8710661743452028,
+          "fCPHASE_std_err": 0.007276963769977784,
+          "fCZ": 0.8446295075190559,
+          "fCZ_std_err": 0.009150823348255658,
+          "fXY": 0.82638351218334,
+          "fXY_std_err": 0.01638730580261261
+        },
+        "10-11": {
+          "fCPHASE": 0.8710661743452028,
+          "fCPHASE_std_err": 0.007276963769977784,
+          "fCZ": 0.8446295075190559,
+          "fCZ_std_err": 0.009150823348255658,
+          "fXY": 0.82638351218334,
+          "fXY_std_err": 0.01638730580261261
+        },
+        "10-17": {
+          "fCPHASE": 0.8710661743452028,
+          "fCPHASE_std_err": 0.007276963769977784,
+          "fCZ": 0.8446295075190559,
+          "fCZ_std_err": 0.009150823348255658,
+          "fXY": 0.82638351218334,
+          "fXY_std_err": 0.01638730580261261
+        }
+      }
+    }
+  }
+}

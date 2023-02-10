@@ -1,0 +1,11 @@
+amazon-braket-sdk
+amazon-braket-strawberryfields-plugin
+amazon-braket-pennylane-plugin
+cvxpy
+matplotlib
+pandas
+pennylane
+pytest
+strawberryfields
+testbook
+jupyter
