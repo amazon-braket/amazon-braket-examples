@@ -62,6 +62,10 @@ class Mocker:
     def set_list_objects_v2_result(self, result):
         self._wrapper.boto_client.list_objects_v2.return_value = result
 
+    @property
+    def region_name(self):
+        return self._wrapper.region_name
+
 
 def read_file(name, file_path = None):
     if file_path:
@@ -154,6 +158,8 @@ class AwsSessionMinWrapper(SessionWrapper):
         super().__init__()
         import braket.jobs.metrics_data.cwl_insights_metrics_fetcher as md
         AwsSessionFacade._wrapper = self
+        AwsSessionFacade.real_get_device = braket.aws.aws_session.AwsSession.get_device
+        braket.aws.aws_session.AwsSession.get_device = AwsSessionFacade.get_device
         AwsSessionFacade.real_create_quantum_task = braket.aws.aws_session.AwsSession.create_quantum_task
         braket.aws.aws_session.AwsSession.create_quantum_task = AwsSessionFacade.create_quantum_task
         AwsSessionFacade.real_get_quantum_task = braket.aws.aws_session.AwsSession.get_quantum_task
@@ -165,28 +171,46 @@ class AwsSessionMinWrapper(SessionWrapper):
         braket.aws.aws_session.AwsSession.create_job = AwsSessionFacade.create_job
         braket.aws.aws_session.AwsSession.get_job = AwsSessionFacade.get_job
         braket.aws.aws_session.AwsSession.cancel_job = AwsSessionFacade.cancel_job
+        braket.aws.aws_session.AwsSession.copy_s3_directory = AwsSessionFacade.copy_s3_directory
         md.CwlInsightsMetricsFetcher._get_metrics_results_sync = AwsSessionFacade.get_job_metrics
         braket.aws.aws_quantum_job.AwsQuantumJob._attempt_results_download = mock.Mock()
-        AwsSessionMinWrapper.parse_mock_devices()
+        AwsSessionMinWrapper.parse_device_config()
 
     @staticmethod
-    def parse_mock_devices():
+    def parse_device_config():
         mock_device_config_str = os.getenv("MOCK_DEVICE_CONFIG")
-        if mock_device_config_str:
-            AwsSessionFacade.mock_device_config = json.loads(mock_device_config_str)
-        else:
-            AwsSessionFacade.mock_device_config = {}
+        AwsSessionFacade.mock_device_config = (
+            json.loads(mock_device_config_str) if mock_device_config_str else {}
+        )
+        unsupported_device_config_str = os.getenv("UNSUPPORTED_DEVICE_CONFIG")
+        AwsSessionFacade.unsupported_device_config = (
+            set(json.loads(unsupported_device_config_str)) if unsupported_device_config_str else {}
+        )
+
+    @property
+    def region_name(self):
+        return boto3.session.Session().region_name
 
 
 class AwsSessionFacade(braket.aws.AwsSession):
     created_task_arns = set()
     created_task_locations = set()
 
+    def get_device(self, arn):
+        device_name = arn.split("/")[-1]
+        if device_name in AwsSessionFacade.unsupported_device_config:
+            return AwsSessionFacade._wrapper.boto_client.get_device(arn)
+        return AwsSessionFacade.real_get_device(self, arn)
+
     def create_quantum_task(self, **boto3_kwargs):
         if boto3_kwargs and boto3_kwargs["deviceArn"]:
             device_arn = boto3_kwargs["deviceArn"]
-            if device_arn in AwsSessionFacade.mock_device_config:
-                device_sub = AwsSessionFacade.mock_device_config[device_arn]
+            device_name = device_arn.split("/")[-1]
+            if device_name in AwsSessionFacade.unsupported_device_config:
+                return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
+                    "quantumTaskArn"]
+            if device_name in AwsSessionFacade.mock_device_config:
+                device_sub = AwsSessionFacade.mock_device_config[device_name]
                 if device_sub == "MOCK":
                     return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
                         "quantumTaskArn"]
@@ -219,10 +243,15 @@ class AwsSessionFacade(braket.aws.AwsSession):
     def cancel_job(self, arn):
         return AwsSessionFacade._wrapper.boto_client.cancel_job(arn)
 
+    def copy_s3_directory(self, source_s3_path, destination_s3_path):
+        return
+
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
         location = s3_object_key[:s3_object_key.rindex("/")]
         if location in AwsSessionFacade.created_task_locations:
             return AwsSessionFacade.real_retrieve_s3_object_body(self, s3_bucket, s3_object_key)
+        if AwsSessionFacade._wrapper.task_result_mock.side_effect is not None:
+            return next(AwsSessionFacade._wrapper.task_result_mock.side_effect)
         return AwsSessionFacade._wrapper.task_result_mock.return_value
 
     def get_job_metrics(self, query_id):
