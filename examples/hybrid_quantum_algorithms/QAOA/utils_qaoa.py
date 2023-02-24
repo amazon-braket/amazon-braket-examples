@@ -204,7 +204,6 @@ def train(
         args=(qaoa_circ, ising, device, n_shots, tracker, verbose),
         options=options,
         method=opt_method,
-        bounds=bnds,
     )
 
     # store result of classical optimization
