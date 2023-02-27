@@ -136,7 +136,7 @@ def main():
         log_metric(
             metric_name="braket_cost",
             value=braket_cost,
-            iteration_number=num_iterations,
+            iteration_number=iteration,
             timestamp=timestamp,
         )
 
@@ -144,7 +144,7 @@ def main():
         log_metric(
             metric_name="Cost",
             value=cost_before,
-            iteration_number=num_iterations,
+            iteration_number=iteration,
             timestamp=timestamp,
         )
 
