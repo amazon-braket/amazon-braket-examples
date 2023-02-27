@@ -162,19 +162,6 @@ def main():
         print(f"Time to complete iteration: {t1 - t0} seconds")
 
     final_cost = float(cost_function(params))
-    braket_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
-
-    timestamp = time.time()
-    log_metric(
-        metric_name="braket_cost",
-        value=braket_cost,
-        iteration_number=num_iterations,
-        timestamp=timestamp,
-    )
-    log_metric(
-        metric_name="Cost", value=final_cost, iteration_number=num_iterations, timestamp=timestamp
-    )
-
     print(f"Cost at step {num_iterations}:", final_cost)
 
     # We're done with the job, so save the result.

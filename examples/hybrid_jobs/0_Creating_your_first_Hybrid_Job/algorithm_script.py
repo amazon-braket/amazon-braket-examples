@@ -29,7 +29,7 @@ device = AwsDevice(os.environ["AMZN_BRAKET_DEVICE_ARN"])
 
 counts_list = []
 angle_list = []
-for _ in range(5):
+for i in range(5):
     angle = np.pi * np.random.randn()
     random_circuit = Circuit().rx(0, angle)
 
@@ -41,7 +41,7 @@ for _ in range(5):
     print(counts)
 
     braket_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
-    log_metric(metric_name="braket_cost", value=braket_cost)
+    log_metric(metric_name="braket_cost", value=braket_cost, iteration_number=i)
 
 
 save_job_result(

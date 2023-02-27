@@ -30,7 +30,7 @@ def main():
     print(f"Using device {device}")
 
     print("Starting circuit training...")
-    params = train_circuit(device, hyperparams, data)
+    params, cost_tracker = train_circuit(device, hyperparams, data)
     print("Final parameters were:", params)
 
     save_job_result(
@@ -92,4 +92,4 @@ def train_circuit(device, hyperparams: dict, data: np.ndarray):
         options={"maxiter": n_iterations},
         callback=callback,
     )
-    return res.x
+    return res.x, cost_tracker
