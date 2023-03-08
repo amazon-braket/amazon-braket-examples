@@ -132,10 +132,12 @@ def main():
 
         # Track the cost as a metric
         timestamp = time.time()
-        braket_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
+        braket_tasks_cost = float(
+            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
+        )
         log_metric(
-            metric_name="braket_cost",
-            value=braket_cost,
+            metric_name="braket_tasks_cost",
+            value=braket_tasks_cost,
             iteration_number=iteration,
             timestamp=timestamp,
         )

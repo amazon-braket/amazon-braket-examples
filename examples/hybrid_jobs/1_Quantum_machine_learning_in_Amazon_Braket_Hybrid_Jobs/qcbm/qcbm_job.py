@@ -15,7 +15,7 @@ np.random.seed(42)
 
 def main():
     print("Starting QCBM basic hybrid job...")
-
+    cost_tracker = Tracker().start()
     device_arn = os.environ["AMZN_BRAKET_DEVICE_ARN"]
     input_dir = os.environ["AMZN_BRAKET_INPUT_DIR"]
 
@@ -30,7 +30,8 @@ def main():
     print(f"Using device {device}")
 
     print("Starting circuit training...")
-    params, cost_tracker = train_circuit(device, hyperparams, data)
+
+    params = train_circuit(device, hyperparams, data)
     print("Final parameters were:", params)
 
     save_job_result(
@@ -72,11 +73,13 @@ def train_circuit(device, hyperparams: dict, data: np.ndarray):
 
         timestamp = time.time()
 
-        braket_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
+        braket_tasks_cost = float(
+            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
+        )
 
         log_metric(
-            metric_name="braket_cost",
-            value=braket_cost,
+            metric_name="braket_tasks_cost",
+            value=braket_tasks_cost,
             iteration_number=iteration_number,
             timestamp=timestamp,
         )
@@ -92,4 +95,4 @@ def train_circuit(device, hyperparams: dict, data: np.ndarray):
         options={"maxiter": n_iterations},
         callback=callback,
     )
-    return res.x, cost_tracker
+    return res.x

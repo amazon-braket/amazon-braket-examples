@@ -40,8 +40,8 @@ for i in range(5):
     counts_list.append(counts)
     print(counts)
 
-    braket_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
-    log_metric(metric_name="braket_cost", value=braket_cost, iteration_number=i)
+    braket_tasks_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
+    log_metric(metric_name="braket_tasks_cost", value=braket_tasks_cost, iteration_number=i)
 
 
 save_job_result(
@@ -49,7 +49,7 @@ save_job_result(
         "counts": counts_list,
         "angles": angle_list,
         "task summary": cost_tracker.quantum_tasks_statistics(),
-        "estimated cost": braket_cost,
+        "estimated cost": braket_tasks_cost,
     }
 )
 

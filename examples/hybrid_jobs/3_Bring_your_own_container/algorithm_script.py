@@ -50,11 +50,16 @@ def main():
 
         # log the cost function as a metric
 
-        braket_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
+        braket_tasks_cost = float(
+            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
+        )
 
         timestamp = time.time()
         log_metric(
-            metric_name="braket_cost", value=braket_cost, iteration_number=i, timestamp=timestamp
+            metric_name="braket_tasks_cost",
+            value=braket_tasks_cost,
+            iteration_number=i,
+            timestamp=timestamp,
         )
 
         log_metric(metric_name="Cost", value=cost, iteration_number=i, timestamp=timestamp)
@@ -64,7 +69,7 @@ def main():
         {
             "weights": weights,
             "task summary": cost_tracker.quantum_tasks_statistics(),
-            "estimated cost": braket_cost,
+            "estimated cost": braket_tasks_cost,
         }
     )
 
