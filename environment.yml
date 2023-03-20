@@ -5,7 +5,7 @@ channels:
 dependencies:
   - conda-pack=0.7.0
   - pip
-  - python=3.8
+  - python=3.9
   - pip:
       - botocore==1.29.65
       - awscli==1.27.65
