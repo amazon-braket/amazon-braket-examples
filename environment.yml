@@ -10,7 +10,7 @@ dependencies:
       - botocore==1.29.65
       - awscli==1.27.65
       - boto3==1.26.64
-      - amazon-braket-default-simulator==1.12.0
+      - amazon-braket-default-simulator==1.12.1
       - amazon-braket-pennylane-plugin==1.13.0
       - amazon-braket-schemas==1.15.0
       - amazon-braket-sdk==1.36.1
