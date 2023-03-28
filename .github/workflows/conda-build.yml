@@ -7,14 +7,10 @@ on:
   push:
     branches:
       - main
-    paths: 
-      - '*.yml'
   pull_request:
     branches:
       - main
       - feature/**
-    paths: 
-      - '*.yml'
 
 jobs:
   build:
