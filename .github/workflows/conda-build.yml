@@ -9,12 +9,14 @@ on:
       - main
     paths: 
       - '*.yml'
+      - '*.py'
   pull_request:
     branches:
       - main
       - feature/**
     paths: 
       - '*.yml'
+      - '*.py'
 
 jobs:
   build:
