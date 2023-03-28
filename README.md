@@ -182,3 +182,18 @@ After you create a profile, use the following command to set the `AWS_PROFILE` s
 ```bash
 export AWS_PROFILE=YOUR_PROFILE_NAME
 ```
+
+---
+## Support
+
+### Issues and Bug Reports
+
+If you encounter bugs or face issues while using the examples, please let us know by posting 
+the issue on our [Github issue tracker](https://github.com/aws/amazon-braket-examples/issues/).  
+For other issues or general questions, please ask on the [Quantum Computing Stack Exchange](https://quantumcomputing.stackexchange.com/questions/ask) and add the tag [amazon-braket](https://quantumcomputing.stackexchange.com/questions/tagged/amazon-braket).
+
+### Feedback and Feature Requests
+
+If you have feedback or features that you would like to see on Amazon Braket, we would love to hear from you!  
+[Github issues](https://github.com/aws/amazon-braket-examples/issues/) is our preferred mechanism for collecting feedback and feature requests, allowing other users 
+to engage in the conversation, and +1 issues to help drive priority. 
