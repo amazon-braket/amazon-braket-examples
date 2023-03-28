@@ -15,7 +15,8 @@ EXCLUDED_NOTEBOOKS = [
     "VQE_chemistry_braket.ipynb",
     "6_Adjoint_gradient_computation.ipynb",
     # These notebooks are in flux
-    "Using_The_Adjoint_Gradient_Result_Type.ipynb"
+    "Using_The_Adjoint_Gradient_Result_Type.ipynb",
+    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb"
 ]
 
 logging.basicConfig(level=logging.INFO)
