@@ -107,7 +107,7 @@ class CCQC:
             s3_destination_folder=None,
         )
 
-        @qml.qnode(dev, interface="autograd")
+        @qml.qnode(dev, diff_method="device", interface="autograd")
         def circuit(*weights, features=np.zeros(2**nwires)):
             AmplitudeEmbedding(features=features, wires=range(nwires), normalize=True, pad_with=0.0)
             w_layer1, w_layer2, rotation = weights
