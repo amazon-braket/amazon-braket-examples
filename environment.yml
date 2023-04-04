@@ -5,7 +5,7 @@ channels:
 dependencies:
   - conda-pack=0.7.0
   - pip
-  - python=3.9
+  - python=3.10
   - pip:
       - botocore==1.29.65
       - awscli==1.27.65
@@ -31,7 +31,7 @@ dependencies:
       - oqpy==0.1.1
       - nbconvert==7.2.9
       - numpy==1.23.5
-      - pandas==1.5.2
+      - pandas==2.0.0
       - pennylane==0.29.1
       - PennyLane-Lightning==0.29.0
       - qiskit-aer==0.12.0
@@ -41,5 +41,5 @@ dependencies:
       - scipy==1.9.3
       - six==1.16.0
       - strawberryfields==0.23.0
-      - tensorflow==2.11.0
+      - tensorflow==2.12.0
       - torch==1.9.1
