@@ -42,4 +42,4 @@ dependencies:
       - six==1.16.0
       - strawberryfields==0.23.0
       - tensorflow==2.12.0
-      - torch==1.9.1
+      - torch==2.0.0
