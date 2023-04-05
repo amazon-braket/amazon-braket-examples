@@ -26,7 +26,7 @@ dependencies:
       - markupsafe==2.1.2
       - matplotlib==3.6.3
       - mypy-extensions==0.4.3
-      - openfermion==1.0.0
+      - openfermion==1.1.0
       - openfermionpyscf==0.5
       - oqpy==0.1.1
       - nbconvert==7.2.9
