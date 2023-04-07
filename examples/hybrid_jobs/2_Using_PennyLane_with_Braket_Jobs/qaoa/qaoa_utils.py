@@ -120,7 +120,7 @@ class TensorFlowInterface(QAOAInterface):
 
     @classmethod
     def get_sgd_optimizer(cls, stepsize, params):
-        return tf.keras.optimizers.SGD(learning_rate=stepsize)
+        return tf.keras.optimizers.legacy.SGD(learning_rate=stepsize)
 
     @classmethod
     def convert_params_to_numpy(cls, params):
