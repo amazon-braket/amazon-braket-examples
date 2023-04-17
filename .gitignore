@@ -133,6 +133,8 @@ dmypy.json
 
 # IDE
 .vscode
+*.idea
+*.iml*
 
 # Data intermediates
 *.pck
