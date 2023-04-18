@@ -26,6 +26,7 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
+      - df $PWD | awk '/[0-9]%/{print $(NF-2)}'
       - conda env create --name $BRAKET_ENV -f environment.yml
       - conda pack --name $BRAKET_ENV --output envs/Braket.tgz
 
