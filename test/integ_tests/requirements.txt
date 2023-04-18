@@ -6,6 +6,7 @@ matplotlib
 pandas
 pennylane
 pytest
+qiskit_braket_provider
 strawberryfields
 testbook
 jupyter

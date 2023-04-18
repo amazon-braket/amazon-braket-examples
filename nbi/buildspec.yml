@@ -7,9 +7,9 @@ phases:
     commands:
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
-      - export LCC_CONDA_INSTALLER=Anaconda3-2020.07-Linux-x86_64.sh
+      - export LCC_CONDA_INSTALLER=Anaconda3-2023.03-Linux-x86_64.sh
       - export LCC_CONDA_INSTALLER_URL=$_ANACONDA_ARCHIVE_URL/$LCC_CONDA_INSTALLER
-      - export LCC_CONDA_INSTALLER_MD5=1046c40a314ab2531e4c099741530ada
+      - export LCC_CONDA_INSTALLER_MD5=b4b52d8c977f4f7fd6079a77bac8641a
       - export LCC_CONDA_INSTALL_DIR=$HOME/Braket/anaconda3
       - wget --quiet $LCC_CONDA_INSTALLER_URL --output-document $LCC_CONDA_INSTALLER
       - echo "$LCC_CONDA_INSTALLER_MD5  $LCC_CONDA_INSTALLER" | md5sum --status --check -

@@ -18,11 +18,10 @@ import time
 import networkx as nx
 import numpy as np
 import pennylane as qml
-from matplotlib import pyplot as plt
-
 from braket.jobs import load_job_checkpoint, save_job_checkpoint, save_job_result
 from braket.jobs.metrics import log_metric
 from braket.tracking import Tracker
+from matplotlib import pyplot as plt
 
 import qaoa.qaoa_utils as qaoa_utils  # isort:skip
 
@@ -42,7 +41,8 @@ def init_pl_device(device_arn, num_nodes, shots, max_parallel):
 
 
 def main():
-    t = Tracker().start()
+    cost_tracker = Tracker().start()
+
     # lets see the env variables
     # print statements can be viewed in cloudwatch
     print(os.environ)
@@ -55,7 +55,7 @@ def main():
     device_arn = os.environ["AMZN_BRAKET_DEVICE_ARN"]
 
     # Read the hyperparameters
-    with open(hp_file, "r") as f:
+    with open(hp_file) as f:
         hyperparams = json.load(f)
     print(hyperparams)
 
@@ -97,8 +97,12 @@ def main():
     dev = init_pl_device(device_arn, num_nodes, shots, max_parallel)
 
     np.random.seed(seed)
-    cost_function = qml.ExpvalCost(circuit, cost_h, dev, optimize=True, interface=pl_interface)
-
+    
+    @qml.qnode(dev, interface=pl_interface)
+    def cost_function(params, **kwargs):
+        circuit(params, **kwargs)
+        return qml.expval(cost_h)
+    
     # Load checkpoint if it exists
     if copy_checkpoints_from_job:
         checkpoint_1 = load_job_checkpoint(
@@ -130,11 +134,24 @@ def main():
         else:
             print(f"Cost at step {iteration}:", cost_before)
 
+        # Track the cost as a metric
+        timestamp = time.time()
+        braket_tasks_cost = float(
+            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
+        )
+        log_metric(
+            metric_name="braket_tasks_cost",
+            value=braket_tasks_cost,
+            iteration_number=iteration,
+            timestamp=timestamp,
+        )
+
         # Log the loss before the update step as a metric
         log_metric(
             metric_name="Cost",
             value=cost_before,
             iteration_number=iteration,
+            timestamp=timestamp,
         )
 
         # Save the current params and previous cost to a checkpoint
@@ -151,17 +168,18 @@ def main():
         print(f"Time to complete iteration: {t1 - t0} seconds")
 
     final_cost = float(cost_function(params))
-    log_metric(
-        metric_name="Cost",
-        value=final_cost,
-        iteration_number=num_iterations,
-    )
-
     print(f"Cost at step {num_iterations}:", final_cost)
 
     # We're done with the job, so save the result.
     # This will be returned in job.result()
-    save_job_result({"params": np_params.tolist(), "cost": final_cost,"task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
+    save_job_result(
+        {
+            "params": np_params.tolist(),
+            "cost": final_cost,
+            "task summary": cost_tracker.quantum_tasks_statistics(),
+            "estimated cost": cost_tracker.qpu_tasks_cost() + cost_tracker.simulator_tasks_cost(),
+        }
+    )
 
 
 if __name__ == "__main__":
