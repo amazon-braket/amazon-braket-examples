@@ -29,7 +29,6 @@ dependencies:
       - openfermion==1.5.1
       - openfermionpyscf==0.5
       - oqpy==0.1.1
-      - nbconvert==7.2.9
       - numpy==1.23.5
       - pandas==2.0.0
       - pennylane==0.29.1
