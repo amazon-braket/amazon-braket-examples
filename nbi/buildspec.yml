@@ -29,6 +29,7 @@ phases:
       - df $PWD | awk '/[0-9]%/{print $(NF-2)}'
       - conda env create --name $BRAKET_ENV -f environment.yml
       - conda pack --name $BRAKET_ENV --output envs/Braket.tgz
+      - df $PWD | awk '/[0-9]%/{print $(NF-2)}'
 
 artifacts:
   files:
