@@ -38,4 +38,3 @@ dependencies:
       - qiskit-terra==0.23.3
       - scipy==1.9.3
       - strawberryfields==0.23.0
-      - torch==2.0.0
