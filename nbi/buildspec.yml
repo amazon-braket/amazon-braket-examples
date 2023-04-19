@@ -20,7 +20,6 @@ phases:
       - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
       - for CHANNEL in conda-forge cf-staging; do conda config --system --append channels $CHANNEL; done
-      - conda install --yes conda-pack
   build:
     commands:
       - BRAKET_ENV=Braket
