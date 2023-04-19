@@ -3,8 +3,8 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - conda-pack=0.6.0-pyhd3eb1b0_0
-  - pip=22.3.1-py310h06a4308_0
+  - conda-pack=0.6.0=pyhd3eb1b0_0
+  - pip=22.3.1=py310h06a4308_0
   - python=3.10
   - pip:
       - botocore==1.29.65
