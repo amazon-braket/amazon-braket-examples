@@ -48,7 +48,7 @@ def convert_to_value(value: str) -> Any:
 
 
 def load_jobs_hyperparams() -> Dict[str, str]:
-    """Return the the Braket Jobs hyperparameters file as a dictionary.
+    """Return the Braket Jobs hyperparameters file as a dictionary.
 
     Returns:
         Dict[str, str]: Hyperparameters as a dictionary.
