@@ -3,7 +3,10 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - pip=23.1
+  - setuptools=67.6.1
   - python=3.10
+  - wheel=0.40.0
   - pip:
       - botocore==1.29.65
       - awscli==1.27.65
