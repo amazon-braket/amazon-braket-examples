@@ -20,7 +20,7 @@ phases:
       - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
       - for CHANNEL in conda-forge cf-staging; do conda config --system --append channels $CHANNEL; done
-      - conda install --force-reinstall --yes conda-pack setuptools pip wheel
+      - conda install --force-reinstall --yes conda-pack setuptools=67.6.1 pip=23.1 wheel=0.40.0
   build:
     commands:
       - BRAKET_ENV=Braket
