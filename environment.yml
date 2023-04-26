@@ -4,9 +4,9 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  - pip=23.1.1
-  - setuptools=67.6.1
-  - wheel=0.40.0
+  - pip=23.1.1=conda-forge
+  - setuptools=67.6.1=conda-forge
+  - wheel=0.40.0=conda-forge
   - pip:
       - botocore==1.29.65
       - awscli==1.27.65
@@ -39,5 +39,3 @@ dependencies:
       - qiskit-terra==0.23.3
       - scipy==1.9.3
       - strawberryfields==0.23.0
-      - setuptools==67.6.1
-      - wheel==0.40.0
