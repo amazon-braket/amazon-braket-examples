@@ -20,13 +20,14 @@ phases:
       - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
       - for CHANNEL in conda-forge cf-staging; do conda config --system --append channels $CHANNEL; done
-      - conda install --yes conda-pack
+      - conda install --force-reinstall --yes conda-pack=0.7.0
   build:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
-      - conda env create --name $BRAKET_ENV -f environment.yml
+      - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package
+      - conda list
       - conda pack --name $BRAKET_ENV --output envs/Braket.tgz
 
 artifacts:
