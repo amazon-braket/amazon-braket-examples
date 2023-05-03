@@ -9,7 +9,7 @@ dependencies:
       - awscli==1.27.65
       - boto3==1.26.64
       - amazon-braket-default-simulator==1.12.1
-      - amazon-braket-pennylane-plugin==1.13.0
+      - amazon-braket-pennylane-plugin==1.15.0.post0
       - amazon-braket-schemas==1.15.0
       - amazon-braket-sdk==1.37.0
       - amazon-braket-strawberryfields-plugin==1.1.0
@@ -29,8 +29,8 @@ dependencies:
       - oqpy==0.1.1
       - numpy==1.23.5
       - pandas==2.0.0
-      - pennylane==0.29.1
-      - PennyLane-Lightning==0.29.0
+      - pennylane==0.30.0
+      - PennyLane-Lightning==0.30.0
       - qiskit-aer==0.12.0
       - qiskit_braket_provider==0.0.3
       - qiskit-terra==0.23.3
