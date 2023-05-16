@@ -10,8 +10,8 @@ dependencies:
       - boto3==1.26.64
       - amazon-braket-default-simulator==1.12.1
       - amazon-braket-pennylane-plugin==1.15.1
-      - amazon-braket-schemas==1.15.0
-      - amazon-braket-sdk==1.37.0
+      - amazon-braket-schemas==1.17.0
+      - amazon-braket-sdk==1.39.0
       - amazon-braket-strawberryfields-plugin==1.1.0
       - amazon-braket-algorithm-library==1.3.2
       - cvxpy==1.3.1
