@@ -2,18 +2,18 @@ import numpy as np
 from braket.circuits import Circuit
 
 
-def phase_estimation_circuit(n_precision_qubits: int, target_phase_in_resolution: int) -> Circuit:
-    """Phase estimation circuit. The circuit has 1 query qubit and `n_precision_qubits`
-    precision qubits. The resolution of phase estimation is `(1/2**n_precision_qubits)*2*pi`.
-    The circuit has `n_precision_qubits+1` qubits. To make benchmark easier, the target phase
-    is integer multiple of the phase resolution, `(fraction/2**n_precision_qubits)*2*pi`.
-    For example, if `n_precision_qubits=3` and `fraction=3`, the target phase is `(3/8)*2*pi`.
+def phase_estimation_circuit(n_qubits: int, phase: float) -> Circuit:
+    """Phase estimation circuit.
 
     Args:
-        n_precision_qubits (int): Number of precision qubits.
-        target_phase_in_resolution (int): Number of fraction, (1/2**n_precision_qubits)*2*pi.
-            The oracle phase is (fraction/2**n_precision_qubits)*2*pi.
+        n_qubits (int): Number of total qubits in the circuit.
+        phase (float): Phase in radians.
+
+    Returns:
+        Circuit: Circuit for phase estimation.
     """
+    n_precision_qubits = n_qubits - 1
+
     q_precision = range(n_precision_qubits)
     q_query = [n_precision_qubits]
 
@@ -21,23 +21,25 @@ def phase_estimation_circuit(n_precision_qubits: int, target_phase_in_resolution
     circ.h(q_precision)
     circ.x(q_query)
 
-    theta = 2 * np.pi * (target_phase_in_resolution / 2 ** len(q_precision))
-    for ii, qubit in enumerate(reversed(q_precision)):
-        circ.add(_custom_control_phase(qubit, q_query, theta * 2**ii))
+    for i, qubit in enumerate(reversed(q_precision)):
+        circ.add(_custom_control_phase(qubit, q_query, phase * 2**i))
 
-    qft_circuit = _inverse_quantum_fourier_transform_circuit(len(q_precision))
-    circ.add(qft_circuit)
+    iqft_circuit = _inverse_quantum_fourier_transform_circuit(n_precision_qubits)
+    circ.add(iqft_circuit)
 
     return circ
 
 
 def _custom_control_phase(control: int, target: int, angle: float) -> Circuit:
-    """Custom decomposition of cphaseshift gate into CNot and Rz gates.
+    """Custom control phase shift using CNots and Rz rotations.
 
     Args:
-        control (int): control qubit
-        target (int): target qubit
-        angle (float): angle of controlled-phaseshift
+        control (int): Control qubit
+        target (int): Target qubit
+        angle (float): Angle of controlled-phaseshift.
+
+    Returns:
+        Circuit: Circuit for control phase shift.
     """
     circuit = Circuit()
     circuit.rz(control, angle / 2).cnot(control, target)
@@ -45,21 +47,23 @@ def _custom_control_phase(control: int, target: int, angle: float) -> Circuit:
     return circuit
 
 
-def _inverse_quantum_fourier_transform_circuit(num_qubits: int) -> Circuit:
-    """Construct a circuit object implementing the inverse Quantum Fourier Transform (QFT)
-    algorithm, applied to the argument qubits. Does not use recursion to generate the circuit.
+def _inverse_quantum_fourier_transform_circuit(n_qubits: int) -> Circuit:
+    """Inverse quanutm Fourier transform (iQFT).
 
     Args:
-        num_qubits (int): number of qubits on which to apply the inverse QFT
+        n_qubits (int): Number of qubits.
+
+    Returns:
+        Circuit: inverse QFT circuit.
     """
     qft_circ = Circuit()
-    qubits = list(range(num_qubits))
+    qubits = list(range(n_qubits))
 
-    for i in range(num_qubits // 2):
+    for i in range(n_qubits // 2):
         qft_circ.swap(qubits[i], qubits[-i - 1])
 
-    for k in reversed(range(num_qubits)):
-        for j in reversed(range(1, num_qubits - k)):
+    for k in reversed(range(n_qubits)):
+        for j in reversed(range(1, n_qubits - k)):
             angle = -2 * np.pi / (2 ** (j + 1))
             qft_circ.add(_custom_control_phase(qubits[k + j], qubits[k], angle))
 
