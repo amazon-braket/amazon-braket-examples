@@ -18,7 +18,8 @@ dependencies:
       - dask==2023.1.1
       - ecos==2.0.12
       - ipykernel==6.21.1
-      - jax==0.4.2
+      - jax==0.4.10
+      - jaxlib==0.4.10
       - jinja2==3.1.2
       - keras==2.12.0
       - markupsafe==2.1.2
@@ -26,6 +27,7 @@ dependencies:
       - mypy-extensions==0.4.3
       - openfermion==1.5.1
       - openfermionpyscf==0.5
+      - optax==0.1.5
       - oqpy==0.1.1
       - numpy==1.23.5
       - pandas==2.0.0
@@ -36,6 +38,4 @@ dependencies:
       - qiskit-terra==0.23.3
       - scipy==1.9.3
       - strawberryfields==0.23.0
-      - jax==0.4.10
-      - jaxlib==0.4.10
-      - optax==0.1.5
+      
