@@ -9,7 +9,6 @@ The repository is structured as follows:
 - [Quantum machine learning and optimization with PennyLane](#pennylane)
 - [Amazon Braket features](#braket)
 - [Amazon Braket Hybrid Jobs](#jobs)
-- [Photonic quantum computing with Strawberry Fields](#photonics)
 - [Creating a Conda environment](#conda)
 
 ---
@@ -127,34 +126,6 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
     This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Job using the custom container.
     
----
-## <a name="jobs">Photonic quantum computing with Strawberry Fields</a>
-This folder contains examples that illustrate the use of Strawberry Fields to run photonic quantum circuits on both Strawberry Field's built-in local simulators and Xanadu's Borealis device. These examples are based on existing tutorials on the [Strawberry Fields website](https://strawberryfields.ai/photonics/demonstrations.html).
-
-* [**Borealis Quickstart**](examples/photonics/Borealis_quickstart.ipynb)
-
-    This notebook provides a demonstration of running a circuit on Xanadu's Borealis device. Through the use of helper functions, you will learn how to generate random [Gaussian Boson Sampling](examples/photonics/2_Gaussian_boson_sampling_and_the_Hafnian.ipynb) (GBS) circuits closely resembling the circuits used in Xanadu's quantum advantage experiment, and submit them to Borealis via the [Amazon Braket Strawberry Fields plugin](https://github.com/aws/amazon-braket-strawberryfields-plugin-python). For more details, see the [Borealis beginner tutorial](examples/photonics/4_Operating_Borealis_beginner_tutorial.ipynb) and other introductory tutorials to Strawberry Fields. 
-
-* [**Introduction to Blackbird**](examples/photonics/0_Introduction_to_Blackbird.ipynb)
-
-    This notebook introduces Blackbird, an open source programming language for expressing photonic quantum circuits. Blackbird is built into, and used by, Strawberry Fields. You will learn how to create simple circuits in Blackbird.
-
-* [**Basic tutorial: quantum teleportation**](examples/photonics/1_Basic_tutorial_quantum_teleportation.ipynb)
-
-    In this notebook, you will learn how to write a continuous-variable program in Strawberry Fields end-to-end by studying the problem of quantum teleportation, and execute the program on a Strawberry Fields built-in local simulator.
-
-* [**Gaussian boson sampling**](examples/photonics/2_Gaussian_boson_sampling_and_the_Hafnian.ipynb)
-
-    This notebook explains the problem of Gaussian boson sampling (GBS), the computational problem that the Borealis quantum computer solves, and explains why it is believed to be difficult to simulate classically. You will construct a small GBS circuit, execute it on a local simulator, and compare the results to theoretically expected values.
-    
-* [**Time-domain multiplexing**](examples/photonics/3_Time_domain_photonic_circuits.ipynb)
-
-    This notebook introduces the concept of time-domain multiplexing (TDM), a technique for creating large entangled quantum systems in a limited size photonic quantum computer by sending the qumodes at different times. You will learn the basic ideas of TDM, construct a small TDM program, and execute it on a built-in local simulator.
-    
-* [**Operating Borealis: beginner tutorial**](examples/photonics/4_Operating_Borealis_beginner_tutorial.ipynb)
-
-    In this example, you will learn how to create and run circuits on Borealis. You will learn how to write a time-domain program for Borealis and specify the gate parameters to customize your own GBS experiment. You will learn how to run GBS circuits on Borealis via the [Amazon Braket Strawberry Fields plugin](https://github.com/aws/amazon-braket-strawberryfields-plugin-python). Finally, you will learn how to do basic analysis to compare the experimental results with theory.
-
 ---
 ## <a name="conda">Creating a conda environment</a>
 To install the dependencies required for running the notebook examples in this repository you can create a conda environment with below commands.

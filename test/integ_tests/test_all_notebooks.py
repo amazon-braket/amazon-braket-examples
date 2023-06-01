@@ -8,7 +8,6 @@ from importlib.machinery import SourceFileLoader
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
     # These notebooks have cells that have syntax errors
-    "4_Operating_Borealis_beginner_tutorial.ipynb",
     "bring_your_own_container.ipynb",
     "qnspsa_with_embedded_simulator.ipynb",
     # These notebooks have dependency issues
