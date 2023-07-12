@@ -1,8 +1,18 @@
-from braket.pulse import PulseSequence
+from braket.pulse.pulse_sequence import PulseSequence
+from braket.pulse.waveforms import ArbitraryWaveform, Waveform
 
 import numpy as np
 import matplotlib.pyplot as plt
 
+def draw_waveform(waveform: Waveform, dt: float):
+    if isinstance(waveform, ArbitraryWaveform):
+        plt.plot(np.arange(0, len(waveform.amplitudes))*dt*1e9, [amp.real for amp in waveform.amplitudes])
+    else:
+        y=waveform.sample(dt)
+        plt.plot(np.arange(0, len(y))*dt*1e9, y)
+
+    plt.xlabel('Time (ns)')
+    plt.ylabel('Amplitude (a. u.)')
 
 def draw(pulse_sequence: PulseSequence):
     data = pulse_sequence.to_time_trace()
