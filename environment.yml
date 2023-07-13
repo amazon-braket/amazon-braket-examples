@@ -28,7 +28,7 @@ dependencies:
       - oqpy==0.1.1
       - numpy==1.23.5
       - pandas==2.0.0
-      - pennylane==0.30.0
+      - pennylane==0.31.0
       - PennyLane-Lightning==0.30.0
       - qiskit-aer==0.12.0
       - qiskit_braket_provider==0.0.4
