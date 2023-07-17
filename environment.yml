@@ -7,7 +7,7 @@ dependencies:
   - pip>=23.0
   - pip:
       - botocore==1.29.65
-      - awscli==1.27.65
+      - awscliv2==2.2.0
       - boto3==1.26.64
       - amazon-braket-default-simulator==1.16.0
       - amazon-braket-pennylane-plugin==1.17.0
@@ -35,4 +35,3 @@ dependencies:
       - qiskit_braket_provider==0.0.4
       - qiskit-terra==0.23.3
       - scipy==1.9.3
-      - PyYAML==5.4
