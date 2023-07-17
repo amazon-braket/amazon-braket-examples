@@ -1,0 +1,416 @@
+%% LaTeX package providing quantum mechanics notation.
+%%
+%% Copyright (C) 2008--2012  Toby Cubitt
+%% See the files README and COPYING.
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.2
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in:
+%%
+%%    http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\ProvidesPackage{quantum}
+ [2011/01/23 v0.3 Dirac notation, operator commands,
+ and other quantum stuff]
+
+% need amsmath for all kinds of stuff
+\usepackage{amsmath}
+% need blackboard fonts for identity and field symbols
+\usepackage{bbm}
+
+
+%---- identity symbol ----
+\newcommand{\identity}{\mathbbm{1}}
+%\newcommand{\identity}{\mbox{$1 \hspace{-1.0mm} {\bf l}$}}
+
+% various fields
+\newcommand{\R}{\mathbbm{R}}
+\newcommand{\C}{\mathbbm{C}}
+\newcommand{\F}{\mathbbm{F}}
+\newcommand{\N}{\mathbbm{N}}
+\newcommand{\Z}{\mathbbm{Z}}
+%\newcommand{\PP}{\mathbbm{P}}
+\newcommand{\Q}{\mathbbm{Q}}
+\newcommand{\U}{\mathbbm{U}}
+\newcommand{\E}{\mathbbm{E}}
+
+
+
+%---- basic Dirac notation ----%
+\newcommand{\bra}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \mathinner{\langle #2\rvert}%
+  \else%
+    \mathinner{\langle #2\rvert}_{#1}%
+  \fi}
+\newcommand{\ket}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \mathinner{\lvert#2\rangle}%
+  \else%
+    \mathinner{\lvert#2\rangle}_{\hspace{-0.1em}#1}%
+  \fi}
+\newcommand{\Bra}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \left<#2\right|%
+  \else%
+    \left<#2\right|_{#1}%
+  \fi}
+\newcommand{\Ket}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \left|#2\right>%
+  \else%
+    \left|#2\right>_{\hspace{-0.1em}#1}%
+  \fi}
+\newcommand{\bigBra}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \bigl<#2\bigr|%
+  \else%
+    \bigl<#2\bigr|_{#1}%
+  \fi}
+\newcommand{\bigKet}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \bigl|#2\bigr>%
+  \else%
+    \bigl|#2\bigr>_{\hspace{-0.1em}#1}%
+  \fi}
+\newcommand{\BigBra}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \Bigl<#2\Bigr|%
+  \else%
+    \Bigl<#2\Bigr|_{#1}%
+  \fi}
+\newcommand{\BigKet}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \Bigl|#2\Bigr>%
+  \else%
+    \Bigl|#2\Bigr>_{\hspace{-0.1em}#1}%
+  \fi}
+\newcommand{\biggBra}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \biggl<#2\biggr|%
+  \else%
+    \biggl<#2\biggr|_{#1}%
+\fi}
+\newcommand{\biggKet}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \biggl|#2\biggr>
+  \else%
+    \biggl|#2\biggr>_{\hspace{-0.1em}#1}%
+  \fi}
+\newcommand{\BiggBra}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \Biggl<#2\Biggr|%
+  \else%
+    \Biggl<#2\Biggr|_{#1}%
+\fi}
+\newcommand{\BiggKet}[2][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \Biggl|#2\Biggr>%
+  \else%
+    \Biggl|#2\Biggr>_{\hspace{-0.1em}#1}%
+  \fi}
+
+
+% ---- compound Dirac notation ----
+\newcommand{\ketbra}[3][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \mathinner{\lvert#2\rangle\langle #3\rvert}%
+  \else%
+    \mathinner{\lvert#2\rangle\langle #3\rvert}_{#1}%
+  \fi}
+\newcommand{\Ketbra}[3][]{%
+  \def\@tempa{#1}%
+  \ifx\@tempa\@empty\relax%
+    \left|#2\middle>\middle<#3\right|%
+  \else%
+    \left|#2\middle>\middle<#3\right|_{#1}%
+  \fi}
+\newcommand{\proj}[2][]{\ketbra[#1]{#2}{#2}}
+\newcommand{\Proj}[2][]{\Ketbra[#1]{#2}{#2}}
+
+
+% ---- fancy braket syntax ----
+\newcommand{\braket}[2][]{%
+  \Braket@syntax#2|\@nil[#1]{}{}{}{\langle}{\rangle}}
+\newcommand\Braket[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\left}{\middle}{\right}{\langle}{\rangle}}
+\newcommand\bigBraket[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\bigl}{\bigm}{\bigr}{\langle}{\rangle}}
+\newcommand\BigBraket[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\Bigl}{\Bigm}{\Bigr}{\langle}{\rangle}}
+\newcommand\biggBraket[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\biggl}{\biggm}{\biggr}{\langle}{\rangle}}
+\newcommand\BiggBraket[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\Biggl}{\Biggm}{\Biggr}{\langle}{\rangle}}
+
+\def\Braket@syntax#1|#2\@nil{%
+  \def\@tempa{#2}%
+  \ifx\@tempa\@empty%
+    \def\@tempb{\Braket@args{#1}}%
+  \else%
+    \def\@tempb{\@Braket#1|#2\@nil}%
+  \fi%
+  \@tempb}
+
+\def\Braket@args#1[#2]#3#4#5#6#7#8{%
+  \Braket@two{#1}{#8}[#2]{#3}{#4}{#5}{#6}{#7}}
+
+\def\@Braket#1|#2|#3\@nil{%
+  \def\@tempa{#3}%
+  \ifx\@tempa\@empty%
+    \def\@tempb{\Braket@two{#1}{#2}}%
+  \else%
+    \def\@tempb{\@Braket@three{#1}{#2}#3\@nil}%
+  \fi\@tempb}
+\def\@Braket@three#1#2#3|\@nil{%
+  \Braket@three{#1}{#2}{#3}}%
+
+\def\Braket@two#1#2[#3]#4#5#6#7#8{%|
+  \def\@tempa{#3}%
+  \ifx\@tempa\@empty%
+    #4#7#1#5|#2#6#8%
+  \else%
+    #4#7#1#5|#2#6#8_{\hspace{-0.1em}#3}%
+  \fi}
+
+\def\Braket@three#1#2#3[#4]#5#6#7#8#9{%
+  \def\@tempa{#4}%
+  \ifx\@tempa\@empty%
+    #5#8#1\vphantom{#2#3}#7|#2%
+    #5\vert#3\vphantom{#1#2}#7#9%
+  \else%
+    #5#8#1\vphantom{#2#3}#7|#2%
+    #5\vert#3\vphantom{#1#2}#7#9_{\hspace{-0.1em}#4}%
+  \fi}
+
+
+% ---- matrix elements without fancy braket syntax ----
+\newcommand\braXket[4][]{\mathinner{\langle#2\vert#3\vert#4\rangle}_{#1}}
+\newcommand\BraXket[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\left}{\middle}{\right}{\langle}{\rangle}}
+\newcommand\bigBraXket[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\bigl}{\bigm}{\bigr}{\langle}{\rangle}}
+\newcommand\BigBraXket[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\Bigl}{\Bigm}{\Bigr}{\langle}{\rangle}}
+\newcommand\biggBraXket[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\biggl}{\biggm}{\biggr}{\langle}{\rangle}}
+\newcommand\BiggBraXket[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\Biggl}{\Biggm}{\Biggr}{\langle}{\rangle}}
+
+\newcommand\braKet{%
+  \message{\string\braKet\space is obsolete
+    - use \string\braket\space or \string\braXket\space instead}
+  \braXket}
+\newcommand\BraKet{%
+  \message{\string\BraKet\space is obsolete
+    - use \string\Braket\space or \string\BraXket\space instead}
+  \BraXket}
+
+
+% ---- \llangle and \rrangle, without MnSymbol package ----
+\DeclareFontFamily{OMX}{MnSymbolE}{}
+\DeclareSymbolFont{MnLargeSymbols}{OMX}{MnSymbolE}{m}{n}
+\SetSymbolFont{MnLargeSymbols}{bold}{OMX}{MnSymbolE}{b}{n}
+\DeclareFontShape{OMX}{MnSymbolE}{m}{n}{
+    <-6>  MnSymbolE5
+   <6-7>  MnSymbolE6
+   <7-8>  MnSymbolE7
+   <8-9>  MnSymbolE8
+   <9-10> MnSymbolE9
+  <10-12> MnSymbolE10
+  <12->   MnSymbolE12
+}{}
+\DeclareFontShape{OMX}{MnSymbolE}{b}{n}{
+    <-6>  MnSymbolE-Bold5
+   <6-7>  MnSymbolE-Bold6
+   <7-8>  MnSymbolE-Bold7
+   <8-9>  MnSymbolE-Bold8
+   <9-10> MnSymbolE-Bold9
+  <10-12> MnSymbolE-Bold10
+  <12->   MnSymbolE-Bold12
+}{}
+
+\let\llangle\@undefined
+\let\rrangle\@undefined
+\DeclareMathDelimiter{\llangle}{\mathopen}%
+                     {MnLargeSymbols}{'164}{MnLargeSymbols}{'164}
+\DeclareMathDelimiter{\rrangle}{\mathclose}%
+                     {MnLargeSymbols}{'171}{MnLargeSymbols}{'171}
+
+
+
+% ---- super-kets and super-bras ----
+\newcommand{\braa}[2][]{\mathinner{\llangle #2\rvert}_{#1}}
+\newcommand{\kett}[2][]{\mathinner{\lvert#2\rrangle}_{\hspace{-0.1em}#1}}
+\newcommand{\Braa}[2][]{\left\llangle#2\right|_{#1}}
+\newcommand{\Kett}[2][]{\left|#2\right\rrangle_{\hspace{-0.1em}#1}}
+\newcommand{\bigBraa}[2][]{\bigl\llangle#2\bigr|_{#1}}
+\newcommand{\bigKett}[2][]{\bigl|#2\bigr\rrangle_{\hspace{-0.1em}#1}}
+\newcommand{\BigBraa}[2][]{\Bigl\llangle#2\Bigr|_{#1}}
+\newcommand{\BigKett}[2][]{\Bigl|#2\Bigr\rrangle_{\hspace{-0.1em}#1}}
+\newcommand{\biggBraa}[2][]{\biggl\llangle#2\biggr|_{#1}}
+\newcommand{\biggKett}[2][]{\biggl|#2\biggr\rrangle_{\hspace{-0.1em}#1}}
+\newcommand{\BiggBraa}[2][]{\Biggl\llangle#2\Biggr|_{#1}}
+\newcommand{\BiggKett}[2][]{\Biggl|#2\Biggr\rrangle_{\hspace{-0.1em}#1}}
+
+\newcommand{\kettbraa}[3][]{\mathinner{\lvert#2\rrangle\llangle #3\rvert}_{#1}}
+\newcommand{\Kettbraa}[3][]{%
+  \left|#2\middle\rrangle\middle\llangle#3\right|_{#1}}
+
+\newcommand{\braakett}[2][]{%
+  \Braket@syntax#2|\@nil[#1]{}{}{}{\llangle}{\rrangle}}
+\newcommand\Braakett[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\left}{\middle}{\right}{\llangle}{\rrangle}}
+\newcommand\bigBraakett[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\bigl}{\bigm}{\bigr}{\llangle}{\rrangle}}
+\newcommand\BigBraakett[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\Bigl}{\Bigm}{\Bigr}{\llangle}{\rrangle}}
+\newcommand\biggBraakett[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\biggl}{\biggm}{\biggr}{\llangle}{\rrangle}}
+\newcommand\BiggBraakett[2][]{%
+  \Braket@syntax#2|\@nil[#1]{\Biggl}{\Biggm}{\Biggr}{\llangle}{\rrangle}}
+
+\newcommand\braaXkett[4][]{\mathinner{\llangle#2\vert#3\vert#4\rrangle}_{#1}}
+\newcommand\BraaXkett[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\left}{\middle}{\right}{\llangle}{\rrangle}}
+\newcommand\bigBraaXkett[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\bigl}{\bigm}{\bigr}{\llangle}{\rrangle}}
+\newcommand\BigBraaXkett[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\Bigl}{\Bigm}{\Bigr}{\llangle}{\rrangle}}
+\newcommand\biggBraaXkett[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\biggl}{\biggm}{\biggr}{\llangle}{\rrangle}}
+\newcommand\BiggBraaXkett[4][]{%
+  \Braket@three{#2}{#3}{#4}[#1]{\Biggl}{\Biggm}{\Biggr}{\llangle}{\rrangle}}
+
+
+%---- expectation values ----
+\newcommand{\expect}[1]{\mathinner{\langle #1\rangle}}
+\newcommand{\Expect}[1]{\left< #1 \right>}
+\newcommand{\bigExpect}[1]{\bigl< #1 \bigr>}
+\newcommand{\BigExpect}[1]{\Bigl< #1 \Bigr>}
+\newcommand{\biggExpect}[1]{\biggl< #1 \biggr>}
+\newcommand{\BiggExpect}[1]{\Biggl< #1 \Biggr>}
+
+%---- miscelaneous quantum notation ----
+\newcommand{\prj}{\Pi}
+\newcommand{\comm}[2]{[#1,#2]}
+\newcommand{\Comm}[2]{\left[#1,#2\right]}
+\newcommand{\Anticomm}[2]{\left\{#1,#2\right\}}
+\newcommand{\anticomm}[2]{\{#1,#2\}}
+
+%---- norms ----
+\newcommand\abs[1]{\lvert#1\rvert}
+\newcommand\Abs[1]{\left|#1\right|}
+\newcommand\bigAbs[1]{\bigl|#1\bigr|}
+\newcommand\BigAbs[1]{\Bigl|#1\Bigr|}
+\newcommand\biggAbs[1]{\biggl|#1\biggr|}
+\newcommand\BiggAbs[1]{\Biggl|#1\Biggr|}
+\newcommand\norm[1]{\lVert#1\rVert}
+\newcommand\Norm[1]{\left\|#1\right\|}
+\newcommand\bigNorm[1]{\bigl\|#1\bigr\|}
+\newcommand\BigNorm[1]{\Bigl\|#1\Bigr\|}
+\newcommand\biggNorm[1]{\biggl\|#1\biggr\|}
+\newcommand\BiggNorm[1]{\Biggl\|#1\Biggr\|}
+\newcommand\tracenorm[1]{\norm{#1}_{\text{tr}}}
+\newcommand\Tracenorm[1]{\Norm{#1}_{\text{tr}}}
+\newcommand\onenorm[1]{\norm{#1}_1}
+\newcommand\Onenorm[1]{\Norm{#1}_1}
+\newcommand\twonorm[1]{\norm{#1}_2}
+\newcommand\Twonorm[1]{\Norm{#1}_2}
+\newcommand\pnorm[1]{\norm{#1}_p}
+\newcommand\Pnorm[1]{\Norm{#1}_p}
+\newcommand\inftynorm[1]{\norm{#1}_\infty}
+\newcommand\Inftynorm[1]{\Norm{#1}_\infty}
+\newcommand\hsnorm[1]{\norm{#1}_{\text{HS}}}
+\newcommand\HSnorm[1]{\Norm{#1}_{\text{HS}}}
+\newcommand\frnorm[1]{\norm{#1}_{\text{Fr}}}
+\newcommand\Frnorm[1]{\Norm{#1}_{\text{Fr}}}
+
+% backwards-compatibility -- deprecated
+\let\matnorm\norm
+\let\Matnorm\Norm
+\let\bigMatnorm\bigNorm
+\let\BigMatnorm\BigNorm
+\let\biggMatnorm\biggNorm
+\let\BiggMatnorm\BiggNorm
+
+
+% ---- Horizontal version of \smash ----
+\@ifpackageloaded{mathtools}{}{%
+  \newcommand\clap[1]{\hbox to 0pt{\hss#1\hss}}
+  \newcommand\mathclap{\mathpalette\@mathclap}
+  \newcommand\mathllap{\mathpalette\@mathllap}
+  \newcommand\mathrlap{\mathpalette\@mathrlap}
+  \def\@mathclap#1#2{\clap{$\mathsurround=0pt#1{#2}$}}
+  \def\@mathllap#1#2{\llap{$\mathsurround=0pt#1{#2}$}}
+  \def\@mathrlap#1#2{\rlap{$\mathsurround=0pt#1{#2}$}}
+}
+
+
+%---- Shorthands ----
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\real}{Re}
+\DeclareMathOperator{\imag}{Im}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\pfaf}{Pf}
+\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\linspan}{span}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\schmidt}{Sch}
+\DeclareMathOperator{\prob}{Pr}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\poly}{poly}
+\newcommand{\ox}{\otimes}
+\newcommand{\dg}{\dagger}
+\newcommand{\Span}[1]{\linspan\left\{#1\right\}}
+\newcommand{\1}{\identity}
+\newcommand{\id}{\identity}
+\newcommand{\expectation}{\mathbb{E}}
+\newcommand{\order}[1]{O({#1})}
+\newcommand{\Order}[1]{O\left({#1}\right)}
+\newcommand{\bigOrder}[1]{O\bigl({#1}\bigr)}
+\newcommand{\BigOrder}[1]{O\Bigl({#1}\Bigr)}
+\newcommand{\biggOrder}[1]{O\biggl({#1}\biggr)}
+\newcommand{\BiggOrder}[1]{O\Biggl({#1}\Biggr)}
+\newcommand{\bipartition}[2]{#1|#2}
+\newcommand{\Bipartition}[2]{\left.#1\middle|#2\right.}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dt}{\delta t}
+\newcommand{\HS}{\mathcal{H}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\ebit}{\mathrm{ebit}}
+\newcommand{\hc}{\mathrm{h.c.}}
+\newcommand{\Wlog}{w.l.o.g.}
+\newcommand{\WLOG}{W.l.o.g.}
+\newcommand{\etal}{\textit{et al.}}
+
+
+\endinput
+%%
+%% End of file `quantum.sty'

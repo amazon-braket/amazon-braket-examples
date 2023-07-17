@@ -1,0 +1,2 @@
+pennylane==0.24.0
+pennylane-lightning-gpu~=0.24
