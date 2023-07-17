@@ -4,6 +4,7 @@ channels:
   - defaults
 dependencies:
   - python=3.10
+  - pip>=23.0
   - pip:
       - botocore==1.29.65
       - awscli==1.27.65
