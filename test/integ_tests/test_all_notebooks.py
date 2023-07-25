@@ -8,7 +8,6 @@ from importlib.machinery import SourceFileLoader
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
     # These notebooks have cells that have syntax errors
-    "4_Operating_Borealis_beginner_tutorial.ipynb",
     "bring_your_own_container.ipynb",
     "qnspsa_with_embedded_simulator.ipynb",
     # These notebooks have dependency issues
@@ -16,7 +15,10 @@ EXCLUDED_NOTEBOOKS = [
     "6_Adjoint_gradient_computation.ipynb",
     # These notebooks are in flux
     "Using_The_Adjoint_Gradient_Result_Type.ipynb",
-    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb"
+    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
+    "Error_Mitigation_on_Amazon_Braket.ipynb",
+    # These notebooks are run from within a job (see Running_notebooks_as_jobs.ipynb)
+    "0_Getting_started_papermill.ipynb"
 ]
 
 logging.basicConfig(level=logging.INFO)

@@ -97,8 +97,12 @@ def main():
     dev = init_pl_device(device_arn, num_nodes, shots, max_parallel)
 
     np.random.seed(seed)
-    cost_function = qml.ExpvalCost(circuit, cost_h, dev, optimize=True, interface=pl_interface)
-
+    
+    @qml.qnode(dev, interface=pl_interface)
+    def cost_function(params, **kwargs):
+        circuit(params, **kwargs)
+        return qml.expval(cost_h)
+    
     # Load checkpoint if it exists
     if copy_checkpoints_from_job:
         checkpoint_1 = load_job_checkpoint(
