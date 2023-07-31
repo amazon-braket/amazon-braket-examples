@@ -140,8 +140,6 @@ The repository is structured as follows:
 
       * [**When to use Braket Jobs**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/hybrid_jobs/README_hybrid_jobs.md)
 
-        This README file provides a brief description of Braket Jobs and when to use them.
-
       * [**Getting started with Braket Jobs**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/hybrid_jobs/0_Creating_your_first_Hybrid_Job/Creating_your_first_Hybrid_Job.ipynb)
 
         This notebook provides a demonstration of running a simple Braket Job. You will learn how to create a Braket Job using the Braket SDK or the Braket console, how to set the output S3 folder for a job, and how to retrieve results. You will also learn how to specify the Braket device to run your job on simulators or QPUs. Finally, you will learn how to use local mode to quickly debug your code.
@@ -255,9 +253,12 @@ The repository is structured as follows:
 
 ---
 ## <a name="course">Braket Certification Course</a>
+  *Currently under development.*
 
 ---
 ## <a name="qbraid">Braket through QBraid</a>
+
+  * [**Getting started with Braket through QBraid**](modules/QBraid/README.md)
 
 ---
 ## <a name="conda">Creating a conda environment</a>
