@@ -15,7 +15,7 @@ The repository is structured as follows:
   - [Advanced Braket features](#advanced)
   - [Applications and industry uses](#applications)
 - [Braket through qBraid](#qbraid)
-- [Braket Certification Course](#course)
+- [Braket Badge](#badge)
 - [Creating a Conda environment](#conda)
 
 ---
@@ -252,7 +252,7 @@ The repository is structured as follows:
   *Currently under development.*
 
 ---
-## <a name="course">Braket Certification Course</a>
+## <a name="badge">Braket Badge</a>
   *Currently under development.*
 
 ---
