@@ -19,6 +19,10 @@ The repository is structured as follows:
 - [Creating a Conda environment](#conda)
 
 ---
+## Alternative exploration sequence
+An arrangement of the Amazon Braket tutorials meant to be reflective of what is encountered in standard courses and textbooks on quantum computing and quantum information science can be found [here](ALTERNATIVE_ORGANIZATION.md). In addition to the notebooks found in this repository, relevant Amazon Braket blogposts are featured as well.
+
+---
 ## <a name="start">Getting started</a>
 
   * [**Getting started with Amazon Braket**](modules/Getting_Started/0_Getting_started/0_Getting_started.ipynb)
