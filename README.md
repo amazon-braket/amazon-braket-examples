@@ -10,7 +10,7 @@ The repository is structured as follows:
   - [Quantum algorithms and protocols](#algorithms)
     - [Canonical](#canonical)
     - [Variational](#variational)
-    - [Implementation library](#implementations)
+    - [Algorithm implementation library](#implementations)
   - [Quantum frameworks and plugins](#frameworks)
   - [Advanced Braket features](#advanced)
   - [Applications and industry uses](#applications)
@@ -172,7 +172,7 @@ The repository is structured as follows:
 
         This notebook shows how users can run notebooks on different quantum hardware with priority access by using Amazon Braket Hybrid Jobs.
 
-#### <a name="implementations">Implementation library</a>
+#### <a name="implementations">Algorithm implementation library</a>
   The Braket Algorithm Library Notebooks provide ready-to-run example notebooks of algorithm implementations.
 
   * [**Local setup instructions**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/README.md)
