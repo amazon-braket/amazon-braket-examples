@@ -1,21 +1,21 @@
-# Braket Tutorials GitHub
+# Amazon Braket Examples 
 Welcome to the primary repository for Amazon Braket tutorials. We provide tutorials on quantum computing, using Amazon Braket. We provide examples for quantum circuits and quantum annealing. We cover canonical routines, such as the Quantum Fourier Transform (QFT), as well as hybrid quantum algorithms, such as the Variational Quantum Eigensolver (VQE).
 
 The repository is structured as follows:  
 
-- [Getting Started: Simple circuits and algorithms](#start)
-- [Continue Exploring](#continue)
+- [Getting started: Simple circuits and algorithms](#start)
+- [Continue exploring](#continue)
   - [Quantum hardware](#hardware)
   - [Quantum simulations](#simulations)
   - [Quantum algorithms and protocols](#algorithms)
     - [Canonical](#canonical)
     - [Variational](#variational)
-    - [Implementation Library](#implementations)
+    - [Implementation library](#implementations)
   - [Quantum frameworks and plugins](#frameworks)
   - [Advanced Braket features](#advanced)
   - [Applications and industry uses](#applications)
 - [Braket through qBraid](#qbraid)
-- [Braket Badge](#badge)
+- [Braket badge](#badge)
 - [Creating a Conda environment](#conda)
 
 ---
@@ -33,20 +33,20 @@ The repository is structured as follows:
 
     This tutorial prepares a maximally-entangled Bell state between two qubits, for classical simulators and for QPUs. For classical devices, we can run the circuit on a local simulator or a cloud-based on-demand simulator. For the quantum devices, we run the circuit on the superconducting machine from Rigetti, and on the ion-trap machine provided by IonQ. As shown, one can swap between different devices seamlessly, without any modifications to the circuit definition, by re-defining the device object. We also show how to recover results using the unique Amazon resource identifier (ARN) associated with every task. This tool is useful if you must deal with potential delays, which can occur if your quantum task sits in the queue awaiting execution.  
 
-  * [**Deep Dive into the anatomy of quantum circuits**](modules/Getting_Started/3_Deep_dive_into_the_anatomy_of_quantum_circuits/3_Deep_dive_into_the_anatomy_of_quantum_circuits.ipynb)
+  * [**Deep dive into the anatomy of quantum circuits**](modules/Getting_Started/3_Deep_dive_into_the_anatomy_of_quantum_circuits/3_Deep_dive_into_the_anatomy_of_quantum_circuits.ipynb)
 
     This tutorial discusses in detail the anatomy of quantum circuits in the Amazon Braket SDK. Specifically, you'll learn how to build (parameterized) circuits and display them graphically, and how to append circuits to each other. We discuss the associated circuit depth and circuit size. Finally we show how to execute the circuit on a device of our choice (defining a quantum task). We then learn how to track, log, recover, or cancel such a _quantum task_ efficiently.
 
-  * [**Getting Devices and Checking Device Properties**](modules/Getting_Started/4_Getting_Devices_and_Checking_Device_Properties/4_Getting_Devices_and_Checking_Device_Properties.ipynb)
+  * [**Getting devices and checking device properties**](modules/Getting_Started/4_Getting_Devices_and_Checking_Device_Properties/4_Getting_Devices_and_Checking_Device_Properties.ipynb)
 
     This tutorial shows how to interact with the Amazon Braket GetDevice API to retrieve Amazon Braket devices (such as simulators and QPUs) programmatically, and how to gain access to their properties.
 
 ---  
-## <a name="continue">Continue Exploring</a>
+## <a name="continue">Continue exploring</a>
 
 ### <a name="hardware">Quantum hardware</a>
 
-  * [**Allocating Qubits on QPU Devices**](modules/Continue_Exploring/quantum_hardware/Allocating_Qubits_on_QPU_Devices.ipynb)
+  * [**Allocating qubits on QPU devices**](modules/Continue_Exploring/quantum_hardware/Allocating_Qubits_on_QPU_Devices.ipynb)
 
     This tutorial explains how you can use the Amazon Braket SDK to allocate the qubit selection for your circuits manually, when running on QPUs.
 
@@ -79,7 +79,7 @@ The repository is structured as follows:
 
     This notebook explores a class of random quantum circuits known as Hayden-Preskill circuits using the tensor network simulator backend in Amazon Braket. The goal is to understand the degree to which the tensor network simulator is capable of detecting a hidden local structure in a quantum circuit, while simultaneously building experience with the Amazon Braket service and SDK. We find that the TN1 tensor network simulator can efficiently simulate local random quantum circuits, even when the local structure is obfuscated by permuting the qubit indices. Conversely, when running genuinely non-local versions of the quantum circuits, the simulator's performance is significantly degraded.
 
-  * [**Using the Adjoint Gradient Result Type on Amazon Braket**](modules/Continue_Exploring/quantum_sims/Using_The_Adjoint_Gradient_Result_Type.ipynb)
+  * [**Using the 'AdjointGradient' result type on Amazon Braket**](modules/Continue_Exploring/quantum_sims/Using_The_Adjoint_Gradient_Result_Type.ipynb)
 
     This notebook introduces the `AdjointGradient` result type, discusses what a gradient is and how to compute one on a quantum circuit, explains how they can be used to accelerate your workflows, and shows an example of gradients in action on a hybrid quantum algorithm.
 
@@ -96,23 +96,23 @@ The repository is structured as follows:
 
     This tutorial provides a step-by-step walkthrough explaining Grover's quantum algorithm. We show how to build the corresponding quantum circuit with simple modular building blocks, by means of the Amazon Braket SDK. Specifically, we demonstrate how to build custom gates that are not part of the basic gate set provided by the SDK. A custom gate can used as a core quantum gate by registering it as a subroutine.
 
-  * [**Quantum Fourier Transform**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Quantum_Fourier_Transform/Quantum_Fourier_Transform.ipynb)
+  * [**Quantum Fourier transform**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Quantum_Fourier_Transform/Quantum_Fourier_Transform.ipynb)
 
     This tutorial provides a detailed implementation of the Quantum Fourier Transform (QFT) and the inverse QFT, using the Amazon Braket SDK. We provide two different implementations: with and without recursion. The QFT is an important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring, and the quantum phase estimation (QPE) algorithm for estimating the eigenvalues of a unitary operator. The QFT can be performed efficiently on a quantum computer, using only O(n<sup>2</sup>) single-qubit Hadamard gates and two-qubit controlled phase shift gates, where 𝑛 is the number of qubits. We first review the basics of the quantum Fourier transform, and its relationship to the discrete (classical) Fourier transform. We then implement the QFT in code two ways: recursively and non-recursively. This notebook also showcases the Amazon Braket `circuit.subroutine` functionality, which allows one to define custom methods and add them to the Circuit class.
 
-  * [**Quantum Phase Estimation**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Quantum_Phase_Estimation/Quantum_Phase_Estimation.ipynb)
+  * [**Quantum phase estimation**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Quantum_Phase_Estimation/Quantum_Phase_Estimation.ipynb)
 
     This tutorial provides a detailed implementation of the Quantum Phase Estimation (QPE) algorithm, through the Amazon Braket SDK. The QPE algorithm is designed to estimate the eigenvalues of a unitary operator 𝑈; it is a very important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring, and the HHL algorithm (named after the physicists Harrow, Hassidim and Lloyd) for solving linear systems of equations on a quantum computer. Moreover, eigenvalue problems can be found across many disciplines and application areas, including (for example) principal component analysis (PCA) as used in machine learning, or in the solution of differential equations as relevant across mathematics, physics, engineering and chemistry. We first review the basics of the QPE algorithm. We then implement the QPE algorithm in code using the Amazon Braket SDK, and we illustrate the application of the algorithm with simple examples. This notebook also showcases the Amazon Braket `circuit.subroutine` functionality, which allows you to use custom-built gates as if they were any other built-in gates. This tutorial is set up to run on the local simulator or the on-demand simulator. Changing between these devices requires changing only one line of code, as demonstrated below in cell.
 
-  * [**Quantum Amplitude Amplification**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Quantum_Amplitude_Amplification/Quantum_Amplitude_Amplification.ipynb)
+  * [**Quantum amplitude amplification**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Quantum_Amplitude_Amplification/Quantum_Amplitude_Amplification.ipynb)
 
     This tutorial provides a detailed discussion and implementation of the Quantum Amplitude Amplification (QAA) algorithm, using the Amazon Braket SDK. QAA is a routine in quantum computing which generalizes the idea behind Grover's famous search algorithm, with applications across many quantum algorithms. In short, QAA uses an iterative approach to systematically increase the probability of finding one or multiple target states in a given search space. In a quantum computer, QAA can be used to obtain a quadratic speedup over several classical algorithms.
 
-  * [**Randomness Generation**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Randomness/Randomness_Generation.ipynb)
+  * [**Randomness generation**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Randomness/Randomness_Generation.ipynb)
 
     This tutorial provides a detailed implementation of a quantum random number generation (QRNG). Random numbers are a ubiquitous resource in computation and cryptography. For example, in security, random numbers are crucial to creating keys for encryption. QRNGs, which make use of the inherent unpredictability in quantum physics, promise enhanced security compared to standard cryptographic pseudo-random number generators (CPRNGs) based on classical technologies. In the notebook, we program two separate quantum processor units (QPUs) from different suppliers in Amazon Braket to supply two streams of weakly random bits. We then show how to generate physically secure randomness from these two weak sources by means of classical post-processing based on randomness extractors.
 
-  * [**Simon's Algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Simons_Algorithm/Simons_Algorithm.ipynb)
+  * [**Simon's algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Simons_Algorithm/Simons_Algorithm.ipynb)
 
     This tutorial provides a detailed discussion and implementation of Simon's algorithm, which provided the first example of an exponential speedup over the best known classical algorithm by using a quantum computer to solve a particular problem. Originally published in 1994, Simon's algorithm was a precursor to Shor's well-known factoring algorithm, and it served as inspiration for many of the seminal works in quantum computation that followed.
 
@@ -126,11 +126,11 @@ The repository is structured as follows:
 
     This tutorial shows how to (approximately) solve binary combinatorial optimization problems, using the Quantum Approximate Optimization Algorithm (QAOA). The QAOA algorithm belongs to the class of _hybrid quantum algorithms_ (leveraging classical and quantum computers), which are widely believed to be the working horse for the current NISQ (noisy intermediate-scale quantum) era. In this NISQ era, QAOA is also an emerging approach for benchmarking quantum devices. It is a prime candidate for demonstrating a practical quantum speed-up on near-term NISQ device. To validate our approach, we benchmark our results with exact results as obtained from classical QUBO solvers.
 
-  * [**VQE Transverse Ising**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/VQE_Transverse_Ising/VQE_Transverse_Ising_Model.ipynb)
+  * [**VQE transverse Ising**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/VQE_Transverse_Ising/VQE_Transverse_Ising_Model.ipynb)
 
     This tutorial shows how to solve for the ground state of the Transverse Ising Model, which is arguably one of the most prominent, canonical quantum spin systems, using the variational quantum eigenvalue solver (VQE). The VQE algorithm belongs to the class of _hybrid quantum algorithms_ (leveraging classical andquantum computers), which are widely believed to be the working horse for the current NISQ (noisy intermediate-scale quantum) era. To validate our approach, we benchmark our results with exact results as obtained from a Jordan-Wigner transformation.
 
-  * [**VQE Chemistry**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/VQE_Chemistry/VQE_chemistry_braket.ipynb)
+  * [**VQE chemistry**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/VQE_Chemistry/VQE_chemistry_braket.ipynb)
 
     This tutorial shows how to implement the Variational Quantum Eigensolver (VQE) algorithm in Amazon Braket SDK to compute the potential energy surface (PES) for the Hydrogen molecule. Specifically, we illustrate the following features of Amazon Braket SDK: `LocalSimulator` which allows one to simulate quantum circuits on their local machine; construction of the ansatz circuit for VQE in Braket SDK; and computing expectation values of the individual terms in the Hamiltonian in Braket SDK.
 
@@ -160,7 +160,7 @@ The repository is structured as follows:
 
         This notebook introduces embedded simulators in Braket Jobs. An embedded simulator is a local simulator that runs completely within a job instance, i.e., the compute resource that is running your algorithm script. In contrast, [on-demand simulators](https://docs.aws.amazon.com/braket/latest/developerguide/braket-devices.html#braket-simulator-sv1), such as SV1, DM1, or TN1, calculate the results of a quantum circuit on dedicated compute infrastructure on-demand by Amazon Braket. By using embedded simulators, we keep all computations in the same environment. This allows the optimization algorithm to access advanced features supported by the embedded simulator. Furthermore, with the [Bring Your Own Container (BYOC)](https://docs.aws.amazon.com/braket/latest/developerguide/braket-jobs-byoc.html) feature of Jobs, users may choose to use open source simulators or their own proprietary simulation tools.
 
-      * [**Parallelize training for Quantum machine learning**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/hybrid_jobs/5_Parallelize_training_for_QML/Parallelize_training_for_QML.ipynb)
+      * [**Parallelize training for quantum machine learning**](modules/Continue_Exploring/quantum_algorithms_and_protocols/variational/hybrid_jobs/5_Parallelize_training_for_QML/Parallelize_training_for_QML.ipynb)
 
         This notebook shows how to use [SageMaker's distributed data parallel library](https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel.html) in Braket Jobs to accelerate the training of your quantum model. We go through examples to show you how to parallelize trainings across multiple GPUs in an instance, and even multiple GPUs over multiple instances. 
 
@@ -172,36 +172,36 @@ The repository is structured as follows:
 
         This notebook shows how users can run notebooks on different quantum hardware with priority access by using Amazon Braket Hybrid Jobs.
 
-#### <a name="implementations">Implementation Library</a>
+#### <a name="implementations">Implementation library</a>
   The Braket Algorithm Library Notebooks provide ready-to-run example notebooks of algorithm implementations.
 
-  * [**Local Setup Instructions**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/README.md)
+  * [**Local setup instructions**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/README.md)
 
-  * [**Bell's Inequality**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Bells_Inequality.ipynb)
+  * [**Bell's inequality**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Bells_Inequality.ipynb)
   
-  * [**Bernstein-Vazirani Algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Bernstein_Vazirani_Algorithm.ipynb)
+  * [**Bernstein-Vazirani algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Bernstein_Vazirani_Algorithm.ipynb)
 
-  * [**CHSH Inequality**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/CHSH_Inequality.ipynb)
+  * [**CHSH inequality**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/CHSH_Inequality.ipynb)
 
-  * [**Deutsch-Jozsa Algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Deutsch_Jozsa_Algorithm.ipynb)
+  * [**Deutsch-Jozsa algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Deutsch_Jozsa_Algorithm.ipynb)
 
-  * [**Grover's Search Algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Grovers_Search.ipynb)
+  * [**Grover's search algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Grovers_Search.ipynb)
 
-  * [**Quantum Approximate Optimization Algorithm (QAOA)**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Approximate_Optimization_Algorithm.ipynb)
+  * [**Quantum approximate optimization algorithm (QAOA)**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Approximate_Optimization_Algorithm.ipynb)
 
-  * [**Quantum Circuit Born Machine**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Circuit_Born_Machine.ipynb)
+  * [**Quantum circuit born machine**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Circuit_Born_Machine.ipynb)
 
   * [**Quantum Monte Carlo**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Computing_Quantum_Monte_Carlo.ipynb)
 
-  * [**Quantum Fourier Transform**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Fourier_Transform.ipynb)
+  * [**Quantum Fourier transform**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Fourier_Transform.ipynb)
 
-  * [**Quantum Phase Estimation**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Phase_Estimation_Algorithm.ipynb)
+  * [**Quantum phase estimation**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Phase_Estimation_Algorithm.ipynb)
 
-  * [**Quantum Walk**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Walk.ipynb)
+  * [**Quantum walk**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Quantum_Walk.ipynb)
 
-  * [**Shor's Algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Shors_Algorithm.ipynb)
+  * [**Shor's algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Shors_Algorithm.ipynb)
 
-  * [**Simon's Algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Simons_Algorithm.ipynb)
+  * [**Simon's algorithm**](modules/Continue_Exploring/quantum_algorithms_and_protocols/algorithm_implementations/Simons_Algorithm.ipynb)
 
 ---
 ### <a name="frameworks">Quantum frameworks and plugins</a>
@@ -252,7 +252,7 @@ The repository is structured as follows:
   *Currently under development.*
 
 ---
-## <a name="badge">Braket Badge</a>
+## <a name="badge">Braket badge</a>
   *Currently under development.*
 
 ---
@@ -291,13 +291,13 @@ export AWS_PROFILE=YOUR_PROFILE_NAME
 ---
 ## Support
 
-### Issues and Bug Reports
+### Issues and bug reports
 
 If you encounter bugs or face issues while using the examples, please let us know by posting 
 the issue on our [Github issue tracker](https://github.com/aws/amazon-braket-examples/issues/).  
 For other issues or general questions, please ask on the [Quantum Computing Stack Exchange](https://quantumcomputing.stackexchange.com/questions/ask) and add the tag [amazon-braket](https://quantumcomputing.stackexchange.com/questions/tagged/amazon-braket).
 
-### Feedback and Feature Requests
+### Feedback and feature requests
 
 If you have feedback or features that you would like to see on Amazon Braket, we would love to hear from you!  
 [Github issues](https://github.com/aws/amazon-braket-examples/issues/) is our preferred mechanism for collecting feedback and feature requests, allowing other users 
