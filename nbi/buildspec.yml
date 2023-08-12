@@ -26,6 +26,8 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
+      - conda install -n base conda-libmamba-solver
+      - conda config --set solver libmamba
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package
       - conda list
       - conda pack --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
