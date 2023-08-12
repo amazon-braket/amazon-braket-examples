@@ -28,9 +28,6 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
-    - name: Pull codebuild docker image
-      run: |
-        docker pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
     - name: Build conda environment
       run: |
-        ./nbi/codebuild_build.sh -a envs -b nbi/buildspec.yml -l public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0
+        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a envs -b nbi/buildspec.yml
