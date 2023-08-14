@@ -19,7 +19,7 @@ phases:
     commands:
       - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
-      - conda install --force-reinstall --yes conda-pack=0.7.0
+      - conda install conda-pack=0.7.0
   build:
     commands:
       - BRAKET_ENV=Braket
