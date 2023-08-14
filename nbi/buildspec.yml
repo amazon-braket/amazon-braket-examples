@@ -19,14 +19,14 @@ phases:
     commands:
       - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
+      - conda install conda-libmamba-solver
+      - conda config --set solver libmamba
       - conda install -c conda-forge conda-pack=0.7.0
   build:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
-      - conda install -n base conda-libmamba-solver
-      - conda config --set solver libmamba
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package
       - conda list
       - conda pack --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
