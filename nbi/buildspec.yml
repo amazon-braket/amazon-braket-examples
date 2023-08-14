@@ -19,7 +19,6 @@ phases:
     commands:
       - echo "Setting up conda"
       - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
-      - for CHANNEL in conda-forge cf-staging; do conda config --system --append channels $CHANNEL; done
       - conda install --force-reinstall --yes conda-pack=0.7.0
   build:
     commands:
