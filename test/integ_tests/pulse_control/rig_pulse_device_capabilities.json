@@ -8206,6 +8206,7 @@
       "name": "braket.device_schema.pulse.pulse_device_action_properties",
       "version": "1"
     },
+    "nativeGateCalibrationsRef": "https://dsq6c4wdong7p.cloudfront.net/native_gate_calibrations/device:arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3?versionId=.sbF0vCCQLMmN2bPi_YILDyNv7VUJUut",
     "supportedQhpTemplateWaveforms": {
       "constant": {
         "functionName": "constant",
