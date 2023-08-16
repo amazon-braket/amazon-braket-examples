@@ -16,7 +16,7 @@ class _PhaseExtractor(QASMVisitor[dict]):
             frame = self.visit(node.arguments[0], context)
             phase = self.visit(node.arguments[1], context)
             if m := re.search(r"q(\d+)_rf_frame", frame):
-                context |= {int(m.group(1)): phase}
+                context[int(m.group(1))] = phase
 
     def visit_Identifier(self, node: ast.Identifier, context: dict):
         return node.name
