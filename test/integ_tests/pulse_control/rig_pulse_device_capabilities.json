@@ -8506,2879 +8506,3016 @@
     },
     "ports": {
       "q0_ff": {
-        "portId": "q0_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
+          "portId": "q0_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       },
       "q2_ff": {
-        "portId": "q2_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
+          "portId": "q2_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       },
       "q16_ff": {
-        "portId": "q16_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
+          "portId": "q16_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       },
       "q4_ff": {
-        "portId": "q4_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
+          "portId": "q4_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       },
       "q6_ff": {
-        "portId": "q6_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q10_ff": {
-        "portId": "q10_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q12_ff": {
-        "portId": "q12_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q26_ff": {
-        "portId": "q26_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q14_ff": {
-        "portId": "q14_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q114_ff": {
-        "portId": "q114_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q20_ff": {
-        "portId": "q20_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q22_ff": {
-        "portId": "q22_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q36_ff": {
-        "portId": "q36_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q24_ff": {
-        "portId": "q24_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q124_ff": {
-        "portId": "q124_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q30_ff": {
-        "portId": "q30_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q32_ff": {
-        "portId": "q32_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q46_ff": {
-        "portId": "q46_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q34_ff": {
-        "portId": "q34_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q134_ff": {
-        "portId": "q134_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q40_ff": {
-        "portId": "q40_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q42_ff": {
-        "portId": "q42_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q44_ff": {
-        "portId": "q44_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q144_ff": {
-        "portId": "q144_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q100_ff": {
-        "portId": "q100_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q102_ff": {
-        "portId": "q102_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q116_ff": {
-        "portId": "q116_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
+          "portId": "q6_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       },
       "q104_ff": {
-        "portId": "q104_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q110_ff": {
-        "portId": "q110_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q112_ff": {
-        "portId": "q112_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q126_ff": {
-        "portId": "q126_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q120_ff": {
-        "portId": "q120_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q122_ff": {
-        "portId": "q122_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q136_ff": {
-        "portId": "q136_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q130_ff": {
-        "portId": "q130_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q132_ff": {
-        "portId": "q132_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q146_ff": {
-        "portId": "q146_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q140_ff": {
-        "portId": "q140_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q142_ff": {
-        "portId": "q142_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
-      },
-      "q0_rf": {
-        "portId": "q0_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q1_rf": {
-        "portId": "q1_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q2_rf": {
-        "portId": "q2_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q3_rf": {
-        "portId": "q3_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q4_rf": {
-        "portId": "q4_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q5_rf": {
-        "portId": "q5_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q6_rf": {
-        "portId": "q6_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q7_rf": {
-        "portId": "q7_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q10_rf": {
-        "portId": "q10_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q11_rf": {
-        "portId": "q11_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q12_rf": {
-        "portId": "q12_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q13_rf": {
-        "portId": "q13_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q14_rf": {
-        "portId": "q14_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q15_rf": {
-        "portId": "q15_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q16_rf": {
-        "portId": "q16_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q17_rf": {
-        "portId": "q17_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q20_rf": {
-        "portId": "q20_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q21_rf": {
-        "portId": "q21_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q22_rf": {
-        "portId": "q22_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q23_rf": {
-        "portId": "q23_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q24_rf": {
-        "portId": "q24_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q25_rf": {
-        "portId": "q25_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q26_rf": {
-        "portId": "q26_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q27_rf": {
-        "portId": "q27_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q30_rf": {
-        "portId": "q30_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q31_rf": {
-        "portId": "q31_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q32_rf": {
-        "portId": "q32_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q33_rf": {
-        "portId": "q33_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q34_rf": {
-        "portId": "q34_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q35_rf": {
-        "portId": "q35_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q36_rf": {
-        "portId": "q36_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q37_rf": {
-        "portId": "q37_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q40_rf": {
-        "portId": "q40_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q41_rf": {
-        "portId": "q41_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q42_rf": {
-        "portId": "q42_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q43_rf": {
-        "portId": "q43_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q44_rf": {
-        "portId": "q44_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q45_rf": {
-        "portId": "q45_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q46_rf": {
-        "portId": "q46_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q47_rf": {
-        "portId": "q47_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q100_rf": {
-        "portId": "q100_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q101_rf": {
-        "portId": "q101_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q102_rf": {
-        "portId": "q102_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q103_rf": {
-        "portId": "q103_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q104_rf": {
-        "portId": "q104_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q105_rf": {
-        "portId": "q105_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q106_rf": {
-        "portId": "q106_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q107_rf": {
-        "portId": "q107_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q110_rf": {
-        "portId": "q110_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q111_rf": {
-        "portId": "q111_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q112_rf": {
-        "portId": "q112_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q113_rf": {
-        "portId": "q113_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3750000000.0
-        ]
-      },
-      "q114_rf": {
-        "portId": "q114_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q115_rf": {
-        "portId": "q115_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q116_rf": {
-        "portId": "q116_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q117_rf": {
-        "portId": "q117_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q120_rf": {
-        "portId": "q120_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q121_rf": {
-        "portId": "q121_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q122_rf": {
-        "portId": "q122_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q123_rf": {
-        "portId": "q123_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q124_rf": {
-        "portId": "q124_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q125_rf": {
-        "portId": "q125_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q126_rf": {
-        "portId": "q126_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q127_rf": {
-        "portId": "q127_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q130_rf": {
-        "portId": "q130_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q131_rf": {
-        "portId": "q131_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q132_rf": {
-        "portId": "q132_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q133_rf": {
-        "portId": "q133_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q134_rf": {
-        "portId": "q134_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q135_rf": {
-        "portId": "q135_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q136_rf": {
-        "portId": "q136_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q137_rf": {
-        "portId": "q137_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q140_rf": {
-        "portId": "q140_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q141_rf": {
-        "portId": "q141_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q142_rf": {
-        "portId": "q142_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q143_rf": {
-        "portId": "q143_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q144_rf": {
-        "portId": "q144_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q145_rf": {
-        "portId": "q145_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q146_rf": {
-        "portId": "q146_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q147_rf": {
-        "portId": "q147_rf",
-        "direction": "tx",
-        "portType": "rf",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q0_rf_f12": {
-        "portId": "q0_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q2_rf_f12": {
-        "portId": "q2_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q3_rf_f12": {
-        "portId": "q3_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q4_rf_f12": {
-        "portId": "q4_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q6_rf_f12": {
-        "portId": "q6_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q7_rf_f12": {
-        "portId": "q7_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q10_rf_f12": {
-        "portId": "q10_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q13_rf_f12": {
-        "portId": "q13_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q16_rf_f12": {
-        "portId": "q16_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q17_rf_f12": {
-        "portId": "q17_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q20_rf_f12": {
-        "portId": "q20_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q22_rf_f12": {
-        "portId": "q22_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q23_rf_f12": {
-        "portId": "q23_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q24_rf_f12": {
-        "portId": "q24_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q25_rf_f12": {
-        "portId": "q25_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q26_rf_f12": {
-        "portId": "q26_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q32_rf_f12": {
-        "portId": "q32_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q33_rf_f12": {
-        "portId": "q33_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q34_rf_f12": {
-        "portId": "q34_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q35_rf_f12": {
-        "portId": "q35_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q36_rf_f12": {
-        "portId": "q36_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q40_rf_f12": {
-        "portId": "q40_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q41_rf_f12": {
-        "portId": "q41_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3000000000.0
-        ]
-      },
-      "q42_rf_f12": {
-        "portId": "q42_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q43_rf_f12": {
-        "portId": "q43_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q44_rf_f12": {
-        "portId": "q44_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q45_rf_f12": {
-        "portId": "q45_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q100_rf_f12": {
-        "portId": "q100_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q101_rf_f12": {
-        "portId": "q101_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q102_rf_f12": {
-        "portId": "q102_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q103_rf_f12": {
-        "portId": "q103_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q104_rf_f12": {
-        "portId": "q104_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q105_rf_f12": {
-        "portId": "q105_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q106_rf_f12": {
-        "portId": "q106_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q110_rf_f12": {
-        "portId": "q110_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q113_rf_f12": {
-        "portId": "q113_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3750000000.0
-        ]
-      },
-      "q115_rf_f12": {
-        "portId": "q115_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q116_rf_f12": {
-        "portId": "q116_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q120_rf_f12": {
-        "portId": "q120_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q121_rf_f12": {
-        "portId": "q121_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q122_rf_f12": {
-        "portId": "q122_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q126_rf_f12": {
-        "portId": "q126_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q130_rf_f12": {
-        "portId": "q130_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q131_rf_f12": {
-        "portId": "q131_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q132_rf_f12": {
-        "portId": "q132_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q133_rf_f12": {
-        "portId": "q133_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q134_rf_f12": {
-        "portId": "q134_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q136_rf_f12": {
-        "portId": "q136_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q137_rf_f12": {
-        "portId": "q137_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q140_rf_f12": {
-        "portId": "q140_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4500000000.0
-        ]
-      },
-      "q141_rf_f12": {
-        "portId": "q141_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q142_rf_f12": {
-        "portId": "q142_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q143_rf_f12": {
-        "portId": "q143_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q144_rf_f12": {
-        "portId": "q144_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q145_rf_f12": {
-        "portId": "q145_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q146_rf_f12": {
-        "portId": "q146_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          4875000000.0
-        ]
-      },
-      "q147_rf_f12": {
-        "portId": "q147_rf_f12",
-        "direction": "tx",
-        "portType": "rf_f12",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          3375000000.0
-        ]
-      },
-      "q0_ro_rx": {
-        "portId": "q0_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q1_ro_rx": {
-        "portId": "q1_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q2_ro_rx": {
-        "portId": "q2_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q3_ro_rx": {
-        "portId": "q3_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q4_ro_rx": {
-        "portId": "q4_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q5_ro_rx": {
-        "portId": "q5_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q6_ro_rx": {
-        "portId": "q6_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q7_ro_rx": {
-        "portId": "q7_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q10_ro_rx": {
-        "portId": "q10_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q11_ro_rx": {
-        "portId": "q11_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q12_ro_rx": {
-        "portId": "q12_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q13_ro_rx": {
-        "portId": "q13_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q14_ro_rx": {
-        "portId": "q14_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q15_ro_rx": {
-        "portId": "q15_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q16_ro_rx": {
-        "portId": "q16_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q17_ro_rx": {
-        "portId": "q17_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q20_ro_rx": {
-        "portId": "q20_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q21_ro_rx": {
-        "portId": "q21_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q22_ro_rx": {
-        "portId": "q22_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q23_ro_rx": {
-        "portId": "q23_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q24_ro_rx": {
-        "portId": "q24_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q25_ro_rx": {
-        "portId": "q25_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q26_ro_rx": {
-        "portId": "q26_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q27_ro_rx": {
-        "portId": "q27_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q30_ro_rx": {
-        "portId": "q30_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q31_ro_rx": {
-        "portId": "q31_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q32_ro_rx": {
-        "portId": "q32_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q33_ro_rx": {
-        "portId": "q33_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q34_ro_rx": {
-        "portId": "q34_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q35_ro_rx": {
-        "portId": "q35_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q36_ro_rx": {
-        "portId": "q36_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q37_ro_rx": {
-        "portId": "q37_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q40_ro_rx": {
-        "portId": "q40_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q41_ro_rx": {
-        "portId": "q41_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q42_ro_rx": {
-        "portId": "q42_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q43_ro_rx": {
-        "portId": "q43_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q44_ro_rx": {
-        "portId": "q44_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q45_ro_rx": {
-        "portId": "q45_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q46_ro_rx": {
-        "portId": "q46_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q47_ro_rx": {
-        "portId": "q47_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q100_ro_rx": {
-        "portId": "q100_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q101_ro_rx": {
-        "portId": "q101_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q102_ro_rx": {
-        "portId": "q102_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q103_ro_rx": {
-        "portId": "q103_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q104_ro_rx": {
-        "portId": "q104_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q105_ro_rx": {
-        "portId": "q105_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q106_ro_rx": {
-        "portId": "q106_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q107_ro_rx": {
-        "portId": "q107_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q110_ro_rx": {
-        "portId": "q110_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q111_ro_rx": {
-        "portId": "q111_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q112_ro_rx": {
-        "portId": "q112_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q113_ro_rx": {
-        "portId": "q113_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q114_ro_rx": {
-        "portId": "q114_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q115_ro_rx": {
-        "portId": "q115_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q116_ro_rx": {
-        "portId": "q116_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q117_ro_rx": {
-        "portId": "q117_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q120_ro_rx": {
-        "portId": "q120_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q121_ro_rx": {
-        "portId": "q121_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q122_ro_rx": {
-        "portId": "q122_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q123_ro_rx": {
-        "portId": "q123_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q124_ro_rx": {
-        "portId": "q124_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q125_ro_rx": {
-        "portId": "q125_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q126_ro_rx": {
-        "portId": "q126_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q127_ro_rx": {
-        "portId": "q127_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q130_ro_rx": {
-        "portId": "q130_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q131_ro_rx": {
-        "portId": "q131_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q132_ro_rx": {
-        "portId": "q132_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q133_ro_rx": {
-        "portId": "q133_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q134_ro_rx": {
-        "portId": "q134_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q135_ro_rx": {
-        "portId": "q135_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q136_ro_rx": {
-        "portId": "q136_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q137_ro_rx": {
-        "portId": "q137_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q140_ro_rx": {
-        "portId": "q140_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q141_ro_rx": {
-        "portId": "q141_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q142_ro_rx": {
-        "portId": "q142_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q143_ro_rx": {
-        "portId": "q143_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q144_ro_rx": {
-        "portId": "q144_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q145_ro_rx": {
-        "portId": "q145_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q146_ro_rx": {
-        "portId": "q146_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q147_ro_rx": {
-        "portId": "q147_ro_rx",
-        "direction": "rx",
-        "portType": "ro_rx",
-        "dt": 5e-10,
-        "centerFrequencies": []
-      },
-      "q0_ro_tx": {
-        "portId": "q0_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q1_ro_tx": {
-        "portId": "q1_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q2_ro_tx": {
-        "portId": "q2_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q3_ro_tx": {
-        "portId": "q3_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q4_ro_tx": {
-        "portId": "q4_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q5_ro_tx": {
-        "portId": "q5_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q6_ro_tx": {
-        "portId": "q6_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q7_ro_tx": {
-        "portId": "q7_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q10_ro_tx": {
-        "portId": "q10_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q11_ro_tx": {
-        "portId": "q11_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q12_ro_tx": {
-        "portId": "q12_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q13_ro_tx": {
-        "portId": "q13_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q14_ro_tx": {
-        "portId": "q14_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q15_ro_tx": {
-        "portId": "q15_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q16_ro_tx": {
-        "portId": "q16_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q17_ro_tx": {
-        "portId": "q17_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q20_ro_tx": {
-        "portId": "q20_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q21_ro_tx": {
-        "portId": "q21_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q22_ro_tx": {
-        "portId": "q22_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q23_ro_tx": {
-        "portId": "q23_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q24_ro_tx": {
-        "portId": "q24_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q25_ro_tx": {
-        "portId": "q25_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q26_ro_tx": {
-        "portId": "q26_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q27_ro_tx": {
-        "portId": "q27_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q30_ro_tx": {
-        "portId": "q30_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q31_ro_tx": {
-        "portId": "q31_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q32_ro_tx": {
-        "portId": "q32_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q33_ro_tx": {
-        "portId": "q33_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q34_ro_tx": {
-        "portId": "q34_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q35_ro_tx": {
-        "portId": "q35_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q36_ro_tx": {
-        "portId": "q36_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q37_ro_tx": {
-        "portId": "q37_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q40_ro_tx": {
-        "portId": "q40_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q41_ro_tx": {
-        "portId": "q41_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q42_ro_tx": {
-        "portId": "q42_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q43_ro_tx": {
-        "portId": "q43_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q44_ro_tx": {
-        "portId": "q44_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q45_ro_tx": {
-        "portId": "q45_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q46_ro_tx": {
-        "portId": "q46_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q47_ro_tx": {
-        "portId": "q47_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q100_ro_tx": {
-        "portId": "q100_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q101_ro_tx": {
-        "portId": "q101_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q102_ro_tx": {
-        "portId": "q102_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q103_ro_tx": {
-        "portId": "q103_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q104_ro_tx": {
-        "portId": "q104_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q105_ro_tx": {
-        "portId": "q105_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q106_ro_tx": {
-        "portId": "q106_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q107_ro_tx": {
-        "portId": "q107_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q110_ro_tx": {
-        "portId": "q110_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q111_ro_tx": {
-        "portId": "q111_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q112_ro_tx": {
-        "portId": "q112_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q113_ro_tx": {
-        "portId": "q113_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q114_ro_tx": {
-        "portId": "q114_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q115_ro_tx": {
-        "portId": "q115_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q116_ro_tx": {
-        "portId": "q116_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q117_ro_tx": {
-        "portId": "q117_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q120_ro_tx": {
-        "portId": "q120_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q121_ro_tx": {
-        "portId": "q121_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q122_ro_tx": {
-        "portId": "q122_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q123_ro_tx": {
-        "portId": "q123_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q124_ro_tx": {
-        "portId": "q124_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q125_ro_tx": {
-        "portId": "q125_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q126_ro_tx": {
-        "portId": "q126_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q127_ro_tx": {
-        "portId": "q127_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q130_ro_tx": {
-        "portId": "q130_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q131_ro_tx": {
-        "portId": "q131_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q132_ro_tx": {
-        "portId": "q132_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q133_ro_tx": {
-        "portId": "q133_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q134_ro_tx": {
-        "portId": "q134_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q135_ro_tx": {
-        "portId": "q135_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q136_ro_tx": {
-        "portId": "q136_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q137_ro_tx": {
-        "portId": "q137_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q140_ro_tx": {
-        "portId": "q140_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q141_ro_tx": {
-        "portId": "q141_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q142_ro_tx": {
-        "portId": "q142_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q143_ro_tx": {
-        "portId": "q143_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q144_ro_tx": {
-        "portId": "q144_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q145_ro_tx": {
-        "portId": "q145_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q146_ro_tx": {
-        "portId": "q146_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
-      },
-      "q147_ro_tx": {
-        "portId": "q147_ro_tx",
-        "direction": "tx",
-        "portType": "ro_tx",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          7125000000.0
-        ]
+          "portId": "q104_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q10_ff": {
+          "portId": "q10_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q12_ff": {
+          "portId": "q12_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q14_ff": {
+          "portId": "q14_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q20_ff": {
+          "portId": "q20_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q22_ff": {
+          "portId": "q22_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q36_ff": {
+          "portId": "q36_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q24_ff": {
+          "portId": "q24_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q26_ff": {
+          "portId": "q26_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q124_ff": {
+          "portId": "q124_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q30_ff": {
+          "portId": "q30_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q32_ff": {
+          "portId": "q32_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q46_ff": {
+          "portId": "q46_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q34_ff": {
+          "portId": "q34_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q40_ff": {
+          "portId": "q40_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q42_ff": {
+          "portId": "q42_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q44_ff": {
+          "portId": "q44_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q144_ff": {
+          "portId": "q144_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q100_ff": {
+          "portId": "q100_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q102_ff": {
+          "portId": "q102_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       },
       "q106_ff": {
-        "portId": "q106_ff",
-        "direction": "tx",
-        "portType": "ff",
-        "dt": 1e-09,
-        "centerFrequencies": [
-          375000000.0
-        ]
+          "portId": "q106_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q110_ff": {
+          "portId": "q110_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q112_ff": {
+          "portId": "q112_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q126_ff": {
+          "portId": "q126_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q114_ff": {
+          "portId": "q114_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q120_ff": {
+          "portId": "q120_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q122_ff": {
+          "portId": "q122_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q130_ff": {
+          "portId": "q130_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q132_ff": {
+          "portId": "q132_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q134_ff": {
+          "portId": "q134_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q140_ff": {
+          "portId": "q140_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q142_ff": {
+          "portId": "q142_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q146_ff": {
+          "portId": "q146_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
+      },
+      "q0_rf": {
+          "portId": "q0_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q1_rf": {
+          "portId": "q1_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q2_rf": {
+          "portId": "q2_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q3_rf": {
+          "portId": "q3_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q4_rf": {
+          "portId": "q4_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q5_rf": {
+          "portId": "q5_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q6_rf": {
+          "portId": "q6_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q7_rf": {
+          "portId": "q7_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q10_rf": {
+          "portId": "q10_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q11_rf": {
+          "portId": "q11_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q12_rf": {
+          "portId": "q12_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q13_rf": {
+          "portId": "q13_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q14_rf": {
+          "portId": "q14_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q15_rf": {
+          "portId": "q15_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q16_rf": {
+          "portId": "q16_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q17_rf": {
+          "portId": "q17_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q20_rf": {
+          "portId": "q20_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q21_rf": {
+          "portId": "q21_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q22_rf": {
+          "portId": "q22_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q23_rf": {
+          "portId": "q23_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q24_rf": {
+          "portId": "q24_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q25_rf": {
+          "portId": "q25_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q26_rf": {
+          "portId": "q26_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q27_rf": {
+          "portId": "q27_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q30_rf": {
+          "portId": "q30_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q31_rf": {
+          "portId": "q31_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q32_rf": {
+          "portId": "q32_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q33_rf": {
+          "portId": "q33_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q34_rf": {
+          "portId": "q34_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q35_rf": {
+          "portId": "q35_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q36_rf": {
+          "portId": "q36_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q37_rf": {
+          "portId": "q37_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q40_rf": {
+          "portId": "q40_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q41_rf": {
+          "portId": "q41_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q42_rf": {
+          "portId": "q42_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q43_rf": {
+          "portId": "q43_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q44_rf": {
+          "portId": "q44_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q45_rf": {
+          "portId": "q45_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q46_rf": {
+          "portId": "q46_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q47_rf": {
+          "portId": "q47_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q100_rf": {
+          "portId": "q100_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q101_rf": {
+          "portId": "q101_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q102_rf": {
+          "portId": "q102_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q103_rf": {
+          "portId": "q103_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q104_rf": {
+          "portId": "q104_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q105_rf": {
+          "portId": "q105_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q106_rf": {
+          "portId": "q106_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q107_rf": {
+          "portId": "q107_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q110_rf": {
+          "portId": "q110_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q111_rf": {
+          "portId": "q111_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q112_rf": {
+          "portId": "q112_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q113_rf": {
+          "portId": "q113_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q114_rf": {
+          "portId": "q114_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q115_rf": {
+          "portId": "q115_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q116_rf": {
+          "portId": "q116_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q117_rf": {
+          "portId": "q117_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q120_rf": {
+          "portId": "q120_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q121_rf": {
+          "portId": "q121_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q122_rf": {
+          "portId": "q122_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q123_rf": {
+          "portId": "q123_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q124_rf": {
+          "portId": "q124_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q125_rf": {
+          "portId": "q125_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q126_rf": {
+          "portId": "q126_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q127_rf": {
+          "portId": "q127_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q130_rf": {
+          "portId": "q130_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q131_rf": {
+          "portId": "q131_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q132_rf": {
+          "portId": "q132_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q133_rf": {
+          "portId": "q133_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q134_rf": {
+          "portId": "q134_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q135_rf": {
+          "portId": "q135_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q137_rf": {
+          "portId": "q137_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q140_rf": {
+          "portId": "q140_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q141_rf": {
+          "portId": "q141_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q142_rf": {
+          "portId": "q142_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q143_rf": {
+          "portId": "q143_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q144_rf": {
+          "portId": "q144_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q145_rf": {
+          "portId": "q145_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q146_rf": {
+          "portId": "q146_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q147_rf": {
+          "portId": "q147_rf",
+          "direction": "tx",
+          "portType": "rf",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q0_rf_f12": {
+          "portId": "q0_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q1_rf_f12": {
+          "portId": "q1_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q2_rf_f12": {
+          "portId": "q2_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q3_rf_f12": {
+          "portId": "q3_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q4_rf_f12": {
+          "portId": "q4_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q5_rf_f12": {
+          "portId": "q5_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q6_rf_f12": {
+          "portId": "q6_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q7_rf_f12": {
+          "portId": "q7_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q10_rf_f12": {
+          "portId": "q10_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q11_rf_f12": {
+          "portId": "q11_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q12_rf_f12": {
+          "portId": "q12_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q13_rf_f12": {
+          "portId": "q13_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q14_rf_f12": {
+          "portId": "q14_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q15_rf_f12": {
+          "portId": "q15_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q16_rf_f12": {
+          "portId": "q16_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q17_rf_f12": {
+          "portId": "q17_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q20_rf_f12": {
+          "portId": "q20_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q23_rf_f12": {
+          "portId": "q23_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q24_rf_f12": {
+          "portId": "q24_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q26_rf_f12": {
+          "portId": "q26_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q27_rf_f12": {
+          "portId": "q27_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q30_rf_f12": {
+          "portId": "q30_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q31_rf_f12": {
+          "portId": "q31_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q32_rf_f12": {
+          "portId": "q32_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q33_rf_f12": {
+          "portId": "q33_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4125000000.0
+          ]
+      },
+      "q34_rf_f12": {
+          "portId": "q34_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q35_rf_f12": {
+          "portId": "q35_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q36_rf_f12": {
+          "portId": "q36_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q37_rf_f12": {
+          "portId": "q37_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q40_rf_f12": {
+          "portId": "q40_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q41_rf_f12": {
+          "portId": "q41_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q42_rf_f12": {
+          "portId": "q42_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q43_rf_f12": {
+          "portId": "q43_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q44_rf_f12": {
+          "portId": "q44_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              5250000000.0
+          ]
+      },
+      "q45_rf_f12": {
+          "portId": "q45_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q46_rf_f12": {
+          "portId": "q46_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q47_rf_f12": {
+          "portId": "q47_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q100_rf_f12": {
+          "portId": "q100_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q101_rf_f12": {
+          "portId": "q101_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q102_rf_f12": {
+          "portId": "q102_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q103_rf_f12": {
+          "portId": "q103_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q104_rf_f12": {
+          "portId": "q104_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q105_rf_f12": {
+          "portId": "q105_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q106_rf_f12": {
+          "portId": "q106_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q107_rf_f12": {
+          "portId": "q107_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q110_rf_f12": {
+          "portId": "q110_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q111_rf_f12": {
+          "portId": "q111_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q112_rf_f12": {
+          "portId": "q112_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q113_rf_f12": {
+          "portId": "q113_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q114_rf_f12": {
+          "portId": "q114_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q115_rf_f12": {
+          "portId": "q115_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q116_rf_f12": {
+          "portId": "q116_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q117_rf_f12": {
+          "portId": "q117_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q120_rf_f12": {
+          "portId": "q120_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4500000000.0
+          ]
+      },
+      "q121_rf_f12": {
+          "portId": "q121_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q122_rf_f12": {
+          "portId": "q122_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q123_rf_f12": {
+          "portId": "q123_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q124_rf_f12": {
+          "portId": "q124_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q125_rf_f12": {
+          "portId": "q125_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q126_rf_f12": {
+          "portId": "q126_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q127_rf_f12": {
+          "portId": "q127_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q130_rf_f12": {
+          "portId": "q130_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q131_rf_f12": {
+          "portId": "q131_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q132_rf_f12": {
+          "portId": "q132_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q133_rf_f12": {
+          "portId": "q133_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q134_rf_f12": {
+          "portId": "q134_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q135_rf_f12": {
+          "portId": "q135_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q137_rf_f12": {
+          "portId": "q137_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q140_rf_f12": {
+          "portId": "q140_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q141_rf_f12": {
+          "portId": "q141_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q142_rf_f12": {
+          "portId": "q142_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q143_rf_f12": {
+          "portId": "q143_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3750000000.0
+          ]
+      },
+      "q144_rf_f12": {
+          "portId": "q144_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q145_rf_f12": {
+          "portId": "q145_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q146_rf_f12": {
+          "portId": "q146_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              4875000000.0
+          ]
+      },
+      "q147_rf_f12": {
+          "portId": "q147_rf_f12",
+          "direction": "tx",
+          "portType": "rf_f12",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              3375000000.0
+          ]
+      },
+      "q0_ro_rx": {
+          "portId": "q0_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q1_ro_rx": {
+          "portId": "q1_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q2_ro_rx": {
+          "portId": "q2_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q3_ro_rx": {
+          "portId": "q3_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q4_ro_rx": {
+          "portId": "q4_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q5_ro_rx": {
+          "portId": "q5_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q6_ro_rx": {
+          "portId": "q6_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q7_ro_rx": {
+          "portId": "q7_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q10_ro_rx": {
+          "portId": "q10_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q11_ro_rx": {
+          "portId": "q11_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q12_ro_rx": {
+          "portId": "q12_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q13_ro_rx": {
+          "portId": "q13_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q14_ro_rx": {
+          "portId": "q14_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q15_ro_rx": {
+          "portId": "q15_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q16_ro_rx": {
+          "portId": "q16_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q17_ro_rx": {
+          "portId": "q17_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q20_ro_rx": {
+          "portId": "q20_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q21_ro_rx": {
+          "portId": "q21_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q22_ro_rx": {
+          "portId": "q22_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q23_ro_rx": {
+          "portId": "q23_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q24_ro_rx": {
+          "portId": "q24_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q25_ro_rx": {
+          "portId": "q25_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q26_ro_rx": {
+          "portId": "q26_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q27_ro_rx": {
+          "portId": "q27_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q30_ro_rx": {
+          "portId": "q30_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q31_ro_rx": {
+          "portId": "q31_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q32_ro_rx": {
+          "portId": "q32_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q33_ro_rx": {
+          "portId": "q33_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q34_ro_rx": {
+          "portId": "q34_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q35_ro_rx": {
+          "portId": "q35_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q36_ro_rx": {
+          "portId": "q36_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q37_ro_rx": {
+          "portId": "q37_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q40_ro_rx": {
+          "portId": "q40_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q41_ro_rx": {
+          "portId": "q41_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q42_ro_rx": {
+          "portId": "q42_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q43_ro_rx": {
+          "portId": "q43_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q44_ro_rx": {
+          "portId": "q44_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q45_ro_rx": {
+          "portId": "q45_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q46_ro_rx": {
+          "portId": "q46_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q47_ro_rx": {
+          "portId": "q47_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q100_ro_rx": {
+          "portId": "q100_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q101_ro_rx": {
+          "portId": "q101_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q102_ro_rx": {
+          "portId": "q102_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q103_ro_rx": {
+          "portId": "q103_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q104_ro_rx": {
+          "portId": "q104_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q105_ro_rx": {
+          "portId": "q105_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q106_ro_rx": {
+          "portId": "q106_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q107_ro_rx": {
+          "portId": "q107_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q110_ro_rx": {
+          "portId": "q110_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q111_ro_rx": {
+          "portId": "q111_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q112_ro_rx": {
+          "portId": "q112_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q113_ro_rx": {
+          "portId": "q113_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q114_ro_rx": {
+          "portId": "q114_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q115_ro_rx": {
+          "portId": "q115_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q116_ro_rx": {
+          "portId": "q116_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q117_ro_rx": {
+          "portId": "q117_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q120_ro_rx": {
+          "portId": "q120_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q121_ro_rx": {
+          "portId": "q121_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q122_ro_rx": {
+          "portId": "q122_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q123_ro_rx": {
+          "portId": "q123_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q124_ro_rx": {
+          "portId": "q124_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q125_ro_rx": {
+          "portId": "q125_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q126_ro_rx": {
+          "portId": "q126_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q127_ro_rx": {
+          "portId": "q127_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q130_ro_rx": {
+          "portId": "q130_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q131_ro_rx": {
+          "portId": "q131_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q132_ro_rx": {
+          "portId": "q132_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q133_ro_rx": {
+          "portId": "q133_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q134_ro_rx": {
+          "portId": "q134_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q135_ro_rx": {
+          "portId": "q135_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q137_ro_rx": {
+          "portId": "q137_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q140_ro_rx": {
+          "portId": "q140_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q141_ro_rx": {
+          "portId": "q141_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q142_ro_rx": {
+          "portId": "q142_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q143_ro_rx": {
+          "portId": "q143_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q144_ro_rx": {
+          "portId": "q144_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q145_ro_rx": {
+          "portId": "q145_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q146_ro_rx": {
+          "portId": "q146_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q147_ro_rx": {
+          "portId": "q147_ro_rx",
+          "direction": "rx",
+          "portType": "ro_rx",
+          "dt": 5E-10,
+          "centerFrequencies": []
+      },
+      "q0_ro_tx": {
+          "portId": "q0_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q1_ro_tx": {
+          "portId": "q1_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q2_ro_tx": {
+          "portId": "q2_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q3_ro_tx": {
+          "portId": "q3_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q4_ro_tx": {
+          "portId": "q4_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q5_ro_tx": {
+          "portId": "q5_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q6_ro_tx": {
+          "portId": "q6_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q7_ro_tx": {
+          "portId": "q7_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q10_ro_tx": {
+          "portId": "q10_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q11_ro_tx": {
+          "portId": "q11_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q12_ro_tx": {
+          "portId": "q12_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q13_ro_tx": {
+          "portId": "q13_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q14_ro_tx": {
+          "portId": "q14_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q15_ro_tx": {
+          "portId": "q15_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q16_ro_tx": {
+          "portId": "q16_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q17_ro_tx": {
+          "portId": "q17_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q20_ro_tx": {
+          "portId": "q20_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q21_ro_tx": {
+          "portId": "q21_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q22_ro_tx": {
+          "portId": "q22_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q23_ro_tx": {
+          "portId": "q23_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q24_ro_tx": {
+          "portId": "q24_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q25_ro_tx": {
+          "portId": "q25_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q26_ro_tx": {
+          "portId": "q26_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q27_ro_tx": {
+          "portId": "q27_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q30_ro_tx": {
+          "portId": "q30_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q31_ro_tx": {
+          "portId": "q31_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q32_ro_tx": {
+          "portId": "q32_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q33_ro_tx": {
+          "portId": "q33_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q34_ro_tx": {
+          "portId": "q34_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q35_ro_tx": {
+          "portId": "q35_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q36_ro_tx": {
+          "portId": "q36_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q37_ro_tx": {
+          "portId": "q37_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q40_ro_tx": {
+          "portId": "q40_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q41_ro_tx": {
+          "portId": "q41_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q42_ro_tx": {
+          "portId": "q42_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q43_ro_tx": {
+          "portId": "q43_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q44_ro_tx": {
+          "portId": "q44_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q45_ro_tx": {
+          "portId": "q45_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q46_ro_tx": {
+          "portId": "q46_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q47_ro_tx": {
+          "portId": "q47_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q100_ro_tx": {
+          "portId": "q100_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q101_ro_tx": {
+          "portId": "q101_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q102_ro_tx": {
+          "portId": "q102_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q103_ro_tx": {
+          "portId": "q103_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q104_ro_tx": {
+          "portId": "q104_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q105_ro_tx": {
+          "portId": "q105_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q106_ro_tx": {
+          "portId": "q106_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q107_ro_tx": {
+          "portId": "q107_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q110_ro_tx": {
+          "portId": "q110_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q111_ro_tx": {
+          "portId": "q111_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q112_ro_tx": {
+          "portId": "q112_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q113_ro_tx": {
+          "portId": "q113_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q114_ro_tx": {
+          "portId": "q114_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q115_ro_tx": {
+          "portId": "q115_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q116_ro_tx": {
+          "portId": "q116_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q117_ro_tx": {
+          "portId": "q117_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q120_ro_tx": {
+          "portId": "q120_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q121_ro_tx": {
+          "portId": "q121_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q122_ro_tx": {
+          "portId": "q122_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q123_ro_tx": {
+          "portId": "q123_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q124_ro_tx": {
+          "portId": "q124_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q125_ro_tx": {
+          "portId": "q125_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q126_ro_tx": {
+          "portId": "q126_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q127_ro_tx": {
+          "portId": "q127_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q130_ro_tx": {
+          "portId": "q130_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q131_ro_tx": {
+          "portId": "q131_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q132_ro_tx": {
+          "portId": "q132_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q133_ro_tx": {
+          "portId": "q133_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q134_ro_tx": {
+          "portId": "q134_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q135_ro_tx": {
+          "portId": "q135_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q137_ro_tx": {
+          "portId": "q137_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q140_ro_tx": {
+          "portId": "q140_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q141_ro_tx": {
+          "portId": "q141_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q142_ro_tx": {
+          "portId": "q142_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q143_ro_tx": {
+          "portId": "q143_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q144_ro_tx": {
+          "portId": "q144_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q145_ro_tx": {
+          "portId": "q145_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q146_ro_tx": {
+          "portId": "q146_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q147_ro_tx": {
+          "portId": "q147_ro_tx",
+          "direction": "tx",
+          "portType": "ro_tx",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              7125000000.0
+          ]
+      },
+      "q116_ff": {
+          "portId": "q116_ff",
+          "direction": "tx",
+          "portType": "ff",
+          "dt": 1E-9,
+          "centerFrequencies": [
+              375000000.0
+          ]
       }
-    },
+  },
     "supportedFunctions": {
       "shift_phase": {
         "functionName": "shift_phase",
