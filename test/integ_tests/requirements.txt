@@ -1,4 +1,4 @@
-amazon-braket-sdk @ git+https://github.com/aws/amazon-braket-sdk-python.git@ngc_release
+amazon-braket-sdk
 amazon-braket-pennylane-plugin
 cvxpy
 matplotlib
