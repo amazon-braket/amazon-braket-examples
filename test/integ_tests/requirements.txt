@@ -2,6 +2,7 @@ amazon-braket-sdk @ git+https://github.com/aws/amazon-braket-sdk-python.git@ngc_
 amazon-braket-pennylane-plugin
 cvxpy
 matplotlib
+nbconvert
 pandas
 pennylane
 pytest

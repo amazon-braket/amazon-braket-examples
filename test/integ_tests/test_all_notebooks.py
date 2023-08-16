@@ -3,6 +3,7 @@ import os
 import pytest
 
 from testbook import testbook
+from nbconvert import HTMLExporter
 from importlib.machinery import SourceFileLoader
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
@@ -72,6 +73,16 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         tb.execute()
         test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
         test_mocks.post_run(tb)
+
+
+@pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
+def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
+    os.chdir(root_path)
+    os.chdir(notebook_dir)
+
+    html_exporter = HTMLExporter(template_name='classic')
+
+    html_exporter.from_file(notebook_file)
 
 
 def test_record():
