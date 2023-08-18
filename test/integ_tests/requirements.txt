@@ -1,4 +1,4 @@
-amazon-braket-sdk
+amazon-braket-sdk @ git+https://github.com/aws/amazon-braket-sdk-python.git@feature/execute-manager-local-quantum-task
 amazon-braket-pennylane-plugin
 cvxpy
 matplotlib
