@@ -6,8 +6,6 @@ nbconvert
 pandas
 pennylane
 pytest
-pytest-rerunfailures
-pytest-xdist
 qiskit_braket_provider
 testbook
 jupyter
