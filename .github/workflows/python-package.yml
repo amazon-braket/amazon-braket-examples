@@ -33,4 +33,4 @@ jobs:
         pip install -r test/integ_tests/requirements.txt
     - name: Run integ tests
       run: |
-        pytest -ra -v --durations=0 test/integ_tests/
+        pytest -n auto -ra -v --durations=0 test/integ_tests/

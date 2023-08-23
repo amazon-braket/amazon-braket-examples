@@ -26,7 +26,7 @@ from matplotlib import pyplot as plt
 import qaoa.qaoa_utils as qaoa_utils  # isort:skip
 
 
-def init_pl_device(device_arn, num_nodes, shots, max_parallel):
+def init_pl_device(device_arn, num_nodes, shots, max_parallel, parametrize_differentiable):
     return qml.device(
         "braket.aws.qubit",
         device_arn=device_arn,
@@ -37,6 +37,7 @@ def init_pl_device(device_arn, num_nodes, shots, max_parallel):
         parallel=True,
         max_parallel=max_parallel,
         # poll_timeout_seconds=30,
+        parametrize_differentiable=parametrize_differentiable,
     )
 
 
@@ -66,6 +67,7 @@ def main():
     stepsize = float(hyperparams["stepsize"])
     shots = int(hyperparams["shots"])
     pl_interface = hyperparams["interface"]
+    parametrize_differentiable = json.loads(hyperparams["parametrize_differentiable"].lower())
     if "copy_checkpoints_from_job" in hyperparams:
         copy_checkpoints_from_job = hyperparams["copy_checkpoints_from_job"].split("/", 2)[-1]
     else:
@@ -94,7 +96,7 @@ def main():
             qml.Hadamard(wires=i)
         qml.layer(qaoa_layer, p, params[0], params[1])
 
-    dev = init_pl_device(device_arn, num_nodes, shots, max_parallel)
+    dev = init_pl_device(device_arn, num_nodes, shots, max_parallel, parametrize_differentiable)
 
     np.random.seed(seed)
     
