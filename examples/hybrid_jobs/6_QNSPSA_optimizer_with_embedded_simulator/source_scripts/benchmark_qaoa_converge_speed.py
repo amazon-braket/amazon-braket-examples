@@ -58,7 +58,7 @@ def main():
         qaoa.mixer_layer(alpha, mixer_h)
 
     def qaoa_circuit(params, n_qubits, depth):
-        # initalizing all qubits into +X eigenstate.
+        # initializing all qubits into +X eigenstate.
         for w in range(n_qubits):
             qml.Hadamard(wires=w)
         gammas = params[0]
