@@ -1,0 +1,122 @@
+{
+  "braketSchemaHeader": {
+    "name": "braket.task_result.gate_model_task_result",
+    "version": "1"
+  },
+  "measurements": [
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ],
+    [  1,  1,  1 ],
+    [  1,  1,  1 ],
+    [  1,  1,  0 ],
+    [ 0,  0,  0 ],
+    [  0,  0,  0 ]
+  ],
+  "resultTypes": [],
+  "measuredQubits": [
+    0,
+    1,
+    2
+  ],
+  "taskMetadata": {
+    "braketSchemaHeader": {
+      "name": "braket.task_result.task_metadata",
+      "version": "1"
+    },
+    "id": "arn:aws:braket:us-west-2:00000000000:quantum-task/6943633f-584d-4393-b507-262c168bf146",
+    "shots": 1000,
+    "deviceId": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+    "deviceParameters": {
+      "braketSchemaHeader": {
+        "name": "braket.device_schema.simulators.gate_model_simulator_device_parameters",
+        "version": "1"
+      },
+      "paradigmParameters": {
+        "braketSchemaHeader": {
+          "name": "braket.device_schema.gate_model_parameters",
+          "version": "1"
+        },
+        "qubitCount": 15,
+        "disableQubitRewiring": false
+      }
+    },
+    "createdAt": "2022-12-06T00:19:55.943Z",
+    "endedAt": "2022-12-06T00:19:58.057Z",
+    "status": "COMPLETED"
+  },
+  "additionalMetadata": {
+    "action": {
+      "braketSchemaHeader": {
+        "name": "braket.ir.openqasm.program",
+        "version": "1"
+      },
+      "inputs": {},
+      "source": "OPENQASM 3.0;\nbit[15] b;\nqubit[15] q;\nh q[0];\ncnot q[0], q[1];\ncnot q[1], q[2];\ncnot q[2], q[3];\ncnot q[3], q[4];\ncnot q[4], q[5];\ncnot q[5], q[6];\ncnot q[6], q[7];\ncnot q[7], q[8];\ncnot q[8], q[9];\ncnot q[9], q[10];\ncnot q[10], q[11];\ncnot q[11], q[12];\ncnot q[12], q[13];\ncnot q[13], q[14];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];\nb[3] = measure q[3];\nb[4] = measure q[4];\nb[5] = measure q[5];\nb[6] = measure q[6];\nb[7] = measure q[7];\nb[8] = measure q[8];\nb[9] = measure q[9];\nb[10] = measure q[10];\nb[11] = measure q[11];\nb[12] = measure q[12];\nb[13] = measure q[13];\nb[14] = measure q[14];"
+    },
+    "simulatorMetadata": {
+      "braketSchemaHeader": {
+        "name": "braket.task_result.simulator_metadata",
+        "version": "1"
+      },
+      "executionDuration": 15
+    }
+  },
+  "additionalMetadata": {
+    "action": {
+      "source": "Vac | q[0]"
+    },
+    "rigettiMetadata": {
+      "compiledProgram": "DECLARE ro BIT[2];"
+    },
+    "oqcMetadata": {
+      "compiledProgram": "DECLARE ro BIT[2];"
+    },
+    "simulatorMetadata": {
+      "braketSchemaHeader": {
+        "name": "braket.task_result.simulator_metadata",
+        "version": "1"
+      },
+      "executionDuration": 16
+    }
+  }
+}

@@ -17,9 +17,10 @@ import numpy as np
 from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.jobs import save_job_result
+from braket.jobs.metrics import log_metric
 from braket.tracking import Tracker
 
-t = Tracker().start()
+cost_tracker = Tracker().start()
 
 print("Test job started!!!!!")
 
@@ -28,7 +29,7 @@ device = AwsDevice(os.environ["AMZN_BRAKET_DEVICE_ARN"])
 
 counts_list = []
 angle_list = []
-for _ in range(5):
+for i in range(5):
     angle = np.pi * np.random.randn()
     random_circuit = Circuit().rx(0, angle)
 
@@ -39,6 +40,17 @@ for _ in range(5):
     counts_list.append(counts)
     print(counts)
 
-save_job_result({"counts": counts_list, "angles": angle_list, "task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
+    braket_tasks_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
+    log_metric(metric_name="braket_tasks_cost", value=braket_tasks_cost, iteration_number=i)
+
+
+save_job_result(
+    {
+        "counts": counts_list,
+        "angles": angle_list,
+        "task summary": cost_tracker.quantum_tasks_statistics(),
+        "estimated cost": braket_tasks_cost,
+    }
+)
 
 print("Test job completed!!!!!")

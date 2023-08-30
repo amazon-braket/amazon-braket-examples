@@ -1,0 +1,273 @@
+{
+    "braketSchemaHeader": {
+        "name": "braket.task_result.gate_model_task_result",
+        "version": "1"
+    },
+    "resultTypes": [
+        {
+            "type": {
+                "parameters": [
+                    "beta_0",
+                    "beta_1",
+                    "gamma_0_0",
+                    "gamma_0_1",
+                    "gamma_0_10",
+                    "gamma_0_11",
+                    "gamma_0_12",
+                    "gamma_0_13",
+                    "gamma_0_14",
+                    "gamma_0_15",
+                    "gamma_0_16",
+                    "gamma_0_17",
+                    "gamma_0_18",
+                    "gamma_0_19",
+                    "gamma_0_2",
+                    "gamma_0_3",
+                    "gamma_0_4",
+                    "gamma_0_5",
+                    "gamma_0_6",
+                    "gamma_0_7",
+                    "gamma_0_8",
+                    "gamma_0_9",
+                    "gamma_1_0",
+                    "gamma_1_1",
+                    "gamma_1_10",
+                    "gamma_1_11",
+                    "gamma_1_12",
+                    "gamma_1_13",
+                    "gamma_1_14",
+                    "gamma_1_15",
+                    "gamma_1_16",
+                    "gamma_1_17",
+                    "gamma_1_18",
+                    "gamma_1_19",
+                    "gamma_1_2",
+                    "gamma_1_3",
+                    "gamma_1_4",
+                    "gamma_1_5",
+                    "gamma_1_6",
+                    "gamma_1_7",
+                    "gamma_1_8",
+                    "gamma_1_9"
+                ],
+                "observable": "0.72184238922925 * z @ z + 0.8140508324757683 * z @ z + 1.1316303855789045 * z @ z + 1.212950755815159 * z @ z + 1.2472638503572653 * z @ z + 0.014610981342402685 * z @ z + 1.609054442787861 * z @ z + 1.7458351311645386 * z @ z + 0.13872318593469557 * z @ z + 1.8240486034801573 * z @ z + 1.8544613497646445 * z @ z + 1.2417189883760953 * z @ z + 0.8840640043019501 * z @ z + 1.6855900373518278 * z @ z + 1.515286483479389 * z @ z + 0.5811065974871039 * z @ z + 0.8903624754830917 * z @ z + 0.4516487853035913 * z @ z + 1.9304935723733228 * z @ z + 1.8251657578747653 * z @ z",
+                "targets": [
+                    [
+                        0,
+                        1
+                    ],
+                    [
+                        0,
+                        2
+                    ],
+                    [
+                        0,
+                        4
+                    ],
+                    [
+                        0,
+                        5
+                    ],
+                    [
+                        0,
+                        9
+                    ],
+                    [
+                        1,
+                        5
+                    ],
+                    [
+                        2,
+                        4
+                    ],
+                    [
+                        2,
+                        5
+                    ],
+                    [
+                        2,
+                        6
+                    ],
+                    [
+                        2,
+                        7
+                    ],
+                    [
+                        2,
+                        8
+                    ],
+                    [
+                        3,
+                        8
+                    ],
+                    [
+                        3,
+                        9
+                    ],
+                    [
+                        4,
+                        9
+                    ],
+                    [
+                        5,
+                        7
+                    ],
+                    [
+                        5,
+                        8
+                    ],
+                    [
+                        5,
+                        9
+                    ],
+                    [
+                        6,
+                        7
+                    ],
+                    [
+                        6,
+                        8
+                    ],
+                    [
+                        7,
+                        8
+                    ]
+                ],
+                "type": "adjoint_gradient"
+            },
+            "value": {
+                "expectation": 0.7273990867725604,
+                "gradient": {
+                    "beta_0": 0.3396302535207463,
+                    "beta_1": -0.18458956083428824,
+                    "gamma_0_0": -0.32403187414660645,
+                    "gamma_0_1": 0.7006796083160333,
+                    "gamma_0_10": -0.3606918694674275,
+                    "gamma_0_11": -0.2851514711002167,
+                    "gamma_0_12": -0.07865678150855461,
+                    "gamma_0_13": 0.01744573692353673,
+                    "gamma_0_14": -0.1437198532917136,
+                    "gamma_0_15": 0.5796200593014259,
+                    "gamma_0_16": 0.5439279189473833,
+                    "gamma_0_17": -0.456001939985227,
+                    "gamma_0_18": -0.009798714615164721,
+                    "gamma_0_19": 0.3647206900514131,
+                    "gamma_0_2": 0.017199121772949976,
+                    "gamma_0_3": 0.5262575468379269,
+                    "gamma_0_4": 0.12512620992603182,
+                    "gamma_0_5": 0.07036410644506322,
+                    "gamma_0_6": -0.7654686213124614,
+                    "gamma_0_7": -0.21249115977462119,
+                    "gamma_0_8": -0.7145909593703217,
+                    "gamma_0_9": -0.4555370963865344,
+                    "gamma_1_0": -0.3400564225606165,
+                    "gamma_1_1": 0.73177446595633,
+                    "gamma_1_10": -0.3843151048335545,
+                    "gamma_1_11": -0.28901288288164245,
+                    "gamma_1_12": -0.05379543900643449,
+                    "gamma_1_13": -0.07661557903408811,
+                    "gamma_1_14": -0.25688796258446417,
+                    "gamma_1_15": 0.6029392240780072,
+                    "gamma_1_16": 0.4648146614134603,
+                    "gamma_1_17": -0.40573597058950833,
+                    "gamma_1_18": -0.0962297251104394,
+                    "gamma_1_19": 0.38046361788025973,
+                    "gamma_1_2": 0.047816362034294575,
+                    "gamma_1_3": 0.4972950099811569,
+                    "gamma_1_4": 0.2621972985943881,
+                    "gamma_1_5": 0.028533671867965696,
+                    "gamma_1_6": -0.7314287479700746,
+                    "gamma_1_7": -0.1577889755858664,
+                    "gamma_1_8": -0.6869416169476065,
+                    "gamma_1_9": -0.43688159240951563
+                }
+            }
+        }
+    ],
+    "taskMetadata": {
+        "braketSchemaHeader": {
+            "name": "braket.task_result.task_metadata",
+            "version": "1"
+        },
+        "id": "arn:aws:braket:us-west-2:00000000000:quantum-task/82a205d7-7b8c-404a-8a70-213f39ec6c8e",
+        "shots": 0,
+        "deviceId": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+        "deviceParameters": {
+            "braketSchemaHeader": {
+                "name": "braket.device_schema.simulators.gate_model_simulator_device_parameters",
+                "version": "1"
+            },
+            "paradigmParameters": {
+                "braketSchemaHeader": {
+                    "name": "braket.device_schema.gate_model_parameters",
+                    "version": "1"
+                },
+                "qubitCount": 10,
+                "disableQubitRewiring": false
+            }
+        },
+        "createdAt": "2022-12-08T00:25:10.400Z",
+        "endedAt": "2022-12-08T00:25:12.194Z",
+        "status": "COMPLETED"
+    },
+    "additionalMetadata": {
+        "action": {
+            "braketSchemaHeader": {
+                "name": "braket.ir.openqasm.program",
+                "version": "1"
+            },
+            "inputs": {
+                "beta_0": 2.9998367522728278,
+                "gamma_0_0": 2.013726597576148,
+                "gamma_0_1": 2.2709608601481586,
+                "gamma_0_2": 3.156913808426771,
+                "gamma_0_3": 3.3837735702154044,
+                "gamma_0_4": 3.4794969471680424,
+                "gamma_0_5": 0.04076031303357114,
+                "gamma_0_6": 4.488785608517276,
+                "gamma_0_7": 4.870363241431009,
+                "gamma_0_8": 0.38699662611318164,
+                "gamma_0_9": 5.088555677675878,
+                "gamma_0_10": 5.173398237509194,
+                "gamma_0_11": 3.464028423542971,
+                "gamma_0_12": 2.466276885350822,
+                "gamma_0_13": 4.702297262493885,
+                "gamma_0_14": 4.227200757755707,
+                "gamma_0_15": 1.6211153969999357,
+                "gamma_0_16": 2.483847755572332,
+                "gamma_0_17": 1.25996642106308,
+                "gamma_0_18": 5.385505632730758,
+                "gamma_0_19": 5.091672207754449,
+                "beta_1": 1.2333505212537377,
+                "gamma_1_0": 0.5753714227327834,
+                "gamma_1_1": 0.6488696045663177,
+                "gamma_1_2": 0.9020082426212256,
+                "gamma_1_3": 0.9668276794098437,
+                "gamma_1_4": 0.9941782123234574,
+                "gamma_1_5": 0.011646228107325084,
+                "gamma_1_6": 1.2825569096737146,
+                "gamma_1_7": 1.3915830633714634,
+                "gamma_1_8": 0.11057449388985803,
+                "gamma_1_9": 1.453926031191848,
+                "gamma_1_10": 1.4781676459266115,
+                "gamma_1_11": 0.9897584730915051,
+                "gamma_1_12": 0.7046762167641384,
+                "gamma_1_13": 1.3435624623969193,
+                "gamma_1_14": 1.2078156573462195,
+                "gamma_1_15": 0.4631927062534629,
+                "gamma_1_16": 0.7096966483411816,
+                "gamma_1_17": 0.3600035243886598,
+                "gamma_1_18": 1.5387719672419635,
+                "gamma_1_19": 1.4548165008054768
+            },
+            "source": "OPENQASM 3.0;\ninput float gamma_0_7;\ninput float gamma_0_6;\ninput float gamma_1_10;\ninput float beta_1;\ninput float gamma_0_3;\ninput float gamma_0_19;\ninput float gamma_1_1;\ninput float gamma_0_17;\ninput float gamma_0_14;\ninput float gamma_1_6;\ninput float gamma_1_3;\ninput float gamma_0_2;\ninput float gamma_1_0;\ninput float gamma_0_18;\ninput float gamma_1_13;\ninput float gamma_1_2;\ninput float gamma_0_0;\ninput float gamma_1_12;\ninput float gamma_1_11;\ninput float gamma_1_19;\ninput float gamma_1_16;\ninput float gamma_1_17;\ninput float gamma_1_14;\ninput float gamma_1_15;\ninput float gamma_1_18;\ninput float gamma_0_10;\ninput float gamma_0_13;\ninput float gamma_0_12;\ninput float gamma_1_4;\ninput float gamma_0_11;\ninput float gamma_1_8;\ninput float gamma_1_9;\ninput float gamma_0_5;\ninput float gamma_0_4;\ninput float gamma_0_16;\ninput float gamma_1_7;\ninput float gamma_0_8;\ninput float gamma_0_9;\ninput float beta_0;\ninput float gamma_1_5;\ninput float gamma_0_15;\ninput float gamma_0_1;\nqubit[10] q;\nh q[0];\nh q[1];\nh q[2];\nh q[3];\nh q[4];\nh q[5];\nh q[6];\nh q[7];\nh q[8];\nh q[9];\nzz(gamma_0_0) q[0], q[1];\nzz(gamma_0_1) q[0], q[2];\nzz(gamma_0_2) q[0], q[4];\nzz(gamma_0_3) q[0], q[5];\nzz(gamma_0_4) q[0], q[9];\nzz(gamma_0_5) q[1], q[5];\nzz(gamma_0_6) q[2], q[4];\nzz(gamma_0_7) q[2], q[5];\nzz(gamma_0_8) q[2], q[6];\nzz(gamma_0_9) q[2], q[7];\nzz(gamma_0_10) q[2], q[8];\nzz(gamma_0_11) q[3], q[8];\nzz(gamma_0_12) q[3], q[9];\nzz(gamma_0_13) q[4], q[9];\nzz(gamma_0_14) q[5], q[7];\nzz(gamma_0_15) q[5], q[8];\nzz(gamma_0_16) q[5], q[9];\nzz(gamma_0_17) q[6], q[7];\nzz(gamma_0_18) q[6], q[8];\nzz(gamma_0_19) q[7], q[8];\nrx(beta_0) q[0];\nrx(beta_0) q[1];\nrx(beta_0) q[2];\nrx(beta_0) q[3];\nrx(beta_0) q[4];\nrx(beta_0) q[5];\nrx(beta_0) q[6];\nrx(beta_0) q[7];\nrx(beta_0) q[8];\nrx(beta_0) q[9];\nzz(gamma_1_0) q[0], q[1];\nzz(gamma_1_1) q[0], q[2];\nzz(gamma_1_2) q[0], q[4];\nzz(gamma_1_3) q[0], q[5];\nzz(gamma_1_4) q[0], q[9];\nzz(gamma_1_5) q[1], q[5];\nzz(gamma_1_6) q[2], q[4];\nzz(gamma_1_7) q[2], q[5];\nzz(gamma_1_8) q[2], q[6];\nzz(gamma_1_9) q[2], q[7];\nzz(gamma_1_10) q[2], q[8];\nzz(gamma_1_11) q[3], q[8];\nzz(gamma_1_12) q[3], q[9];\nzz(gamma_1_13) q[4], q[9];\nzz(gamma_1_14) q[5], q[7];\nzz(gamma_1_15) q[5], q[8];\nzz(gamma_1_16) q[5], q[9];\nzz(gamma_1_17) q[6], q[7];\nzz(gamma_1_18) q[6], q[8];\nzz(gamma_1_19) q[7], q[8];\nrx(beta_1) q[0];\nrx(beta_1) q[1];\nrx(beta_1) q[2];\nrx(beta_1) q[3];\nrx(beta_1) q[4];\nrx(beta_1) q[5];\nrx(beta_1) q[6];\nrx(beta_1) q[7];\nrx(beta_1) q[8];\nrx(beta_1) q[9];\n#pragma braket result adjoint_gradient expectation(0.72184238922925 * z(q[0]) @ z(q[1]) + 0.8140508324757683 * z(q[0]) @ z(q[2]) + 1.1316303855789045 * z(q[0]) @ z(q[4]) + 1.212950755815159 * z(q[0]) @ z(q[5]) + 1.2472638503572653 * z(q[0]) @ z(q[9]) + 0.014610981342402685 * z(q[1]) @ z(q[5]) + 1.609054442787861 * z(q[2]) @ z(q[4]) + 1.7458351311645386 * z(q[2]) @ z(q[5]) + 0.13872318593469557 * z(q[2]) @ z(q[6]) + 1.8240486034801573 * z(q[2]) @ z(q[7]) + 1.8544613497646445 * z(q[2]) @ z(q[8]) + 1.2417189883760953 * z(q[3]) @ z(q[8]) + 0.8840640043019501 * z(q[3]) @ z(q[9]) + 1.6855900373518278 * z(q[4]) @ z(q[9]) + 1.515286483479389 * z(q[5]) @ z(q[7]) + 0.5811065974871039 * z(q[5]) @ z(q[8]) + 0.8903624754830917 * z(q[5]) @ z(q[9]) + 0.4516487853035913 * z(q[6]) @ z(q[7]) + 1.9304935723733228 * z(q[6]) @ z(q[8]) + 1.8251657578747653 * z(q[7]) @ z(q[8])) all"
+        },
+        "simulatorMetadata": {
+            "braketSchemaHeader": {
+                "name": "braket.task_result.simulator_metadata",
+                "version": "1"
+            },
+            "executionDuration": 47
+        }
+    }
+}
