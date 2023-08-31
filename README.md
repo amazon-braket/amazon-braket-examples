@@ -124,7 +124,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Bring your own containers to Braket Jobs**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
 
-    This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Hybrid Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Hybrid Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket HybridJob using the custom container.
+    This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Hybrid Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Hybrid Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Hybrid Job using the custom container.
     
 ---
 ## <a name="conda">Creating a conda environment</a>
