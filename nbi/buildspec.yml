@@ -1,0 +1,38 @@
+version: 0.2
+env:
+  shell: bash
+  variables: {}
+phases:
+  install:
+    commands:
+      - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
+      - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
+      - export LCC_CONDA_INSTALLER=Anaconda3-2023.03-1-Linux-x86_64.sh
+      - export LCC_CONDA_INSTALLER_URL=$_ANACONDA_ARCHIVE_URL/$LCC_CONDA_INSTALLER
+      - export LCC_CONDA_INSTALLER_SHA256=95102d7c732411f1458a20bdf47e4c1b0b6c8a21a2edfe4052ca370aaae57bab
+      - export LCC_CONDA_INSTALL_DIR=$HOME/Braket/anaconda3
+      - wget --quiet $LCC_CONDA_INSTALLER_URL --output-document $LCC_CONDA_INSTALLER
+      - echo "$LCC_CONDA_INSTALLER_SHA256  $LCC_CONDA_INSTALLER" | sha256sum --status --check -
+      - chmod a+x $LCC_CONDA_INSTALLER
+      - ./$LCC_CONDA_INSTALLER -b -p $LCC_CONDA_INSTALL_DIR
+  pre_build:
+    commands:
+      - echo "Setting up conda"
+      - export PATH=$LCC_CONDA_INSTALL_DIR/bin:$PATH
+      - conda install conda-libmamba-solver
+      - conda config --set solver libmamba
+      - conda install -c conda-forge conda-pack=0.7.0
+  build:
+    commands:
+      - BRAKET_ENV=Braket
+      - mkdir -p envs
+      - conda config --set path_conflict warn
+      - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package
+      - conda list
+      - conda pack --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
+
+artifacts:
+  files:
+    - envs/Braket.tgz
+    - environment.yml
+  name: CONDA_BUILD_RESULTS

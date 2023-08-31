@@ -7,10 +7,8 @@ The repository is structured as follows:
 - [Advanced circuits and algorithms](#advanced)
 - [Hybrid quantum algorithms](#hybrid)
 - [Quantum machine learning and optimization with PennyLane](#pennylane)
-- [Quantum annealing with D-Wave](#annealing)
 - [Amazon Braket features](#braket)
 - [Amazon Braket Hybrid Jobs](#jobs)
-- [Photonic quantum computing with Strawberry Fields](#photonics)
 - [Creating a Conda environment](#conda)
 
 ---
@@ -85,41 +83,6 @@ The repository is structured as follows:
     In this tutorial, we see how PennyLane and Amazon Braket can be combined to solve an important problem in quantum chemistry. The ground state energy of molecular hydrogen is calculated by optimizing a VQE circuit using the local Braket simulator. This tutorial highlights how qubit-wise commuting observables can be measured together in PennyLane and Braket, making optimization more efficient.
 
 ---
-## <a name="annealing">Quantum annealing with D-Wave</a>
-
-  * [**Anatomy of annealing with Ocean**](examples/quantum_annealing/Dwave_Anatomy/Dwave_Anatomy.ipynb)
-
-    This tutorial notebook dives deep into the anatomy of quantum annealing with D-Wave on Amazon Braket. First, we introduce the concept of quantum annealing, as used by D-Wave. We apply annealing to an optimization problem, to find the (approximate) optimum probabilistically. We then discuss the underlying structures of D-Wave QPUs, including the Chimera graph for the 2000Q system and the Pegasus graph for the Advantage system. We explain the problem of finding an embedding of the original problem onto the sparse graph of a device, and discuss the distinction between logical and physical variables. Finally, we solve an example QUBO problem to analyze the sampling process, and we provide a breakdown of the QPU access time.
-
-  * [**Running large problems with QBSolv**](examples/quantum_annealing/Running_large_problems_using_QBSolv.ipynb)
-
-    This tutorial demonstrates how to solve problems with sizes larger than a D-Wave device can support, by using a hybrid solver called QBSolv. QBSolv can decompose large problems into sub-problems, which are solved by the QPU and a classical Tabu solver, or by the classical solver alone. The results of the sub-problems then construct the solution to the problem.
-
-  * [**Maximum Cut**](examples/quantum_annealing/Dwave_MaximumCut.ipynb)
-
-    This tutorial solves a small instance of the famous maximum cut (MaxCut) problem using a D-Wave device on Amazon Braket. The MaxCut problem is one of the most famous NP-hard problems in combinatorial optimization. Given an undirected graph 𝐺(𝑉,𝐸) with a vertex set 𝑉 and an edge set 𝐸, the MaxCut problem seeks to partition 𝑉 into two sets, such that the number of edges between the two sets (considered to be severed by the cut), is as large as possible. Applications can be found in clustering problems for marketing purposes, or for portfolio optimization problems in finance.
-
-  * [**Minimum Vertex**](examples/quantum_annealing/Dwave_MinimumVertexCoverProblem.ipynb)
-
-    This tutorial solves a small instance of the minimum vertex problem while it discusses the BraketSampler and the BraketDWaveSampler. In essence, they are doing the same thing; however, each accepts different parameter names. Specifically, the BraketDWaveSampler allows users familiar with D-Wave to use D-Wave parameter names, such as `answer_mode`, whereas the BraketSampler parameter names are consistent with the rest of the Amazon Braket experience.
-
-  * [**Graph partitioning**](examples/quantum_annealing/Dwave_GraphPartitioning.ipynb)
-
-    This tutorial solves a small instance of a graph partitioning problem using a D-Wave device on Amazon Braket. The derivation for this QUBO problem is nicely explained here: https://github.com/dwave-examples/graph-partitioning.
-
-  * [**Factoring**](examples/quantum_annealing/Dwave_Factoring/Dwave_factoring/Dwave_factoring.ipynb)
-
-    This tutorial shows how to solve a constraint satisfaction problem (CSP) problem, with the example of factoring, using a D-Wave device on Amazon Braket. Particularly, factoring is expressed as a CSP using Boolean logic operations, and it is converted to a binary quadratic model that can be solved by a D-Wave device.
-
-  * [**Structural Imbalance**](examples/quantum_annealing/Dwave_StructuralImbalance/Dwave_StructuralImbalance.ipynb)
-
-    This tutorial solves a structural imbalance problem using a D-Wave device on Amazon Braket. Social networks map relationships between people or organizations onto graphs. The people and organizations are represented as as nodes, and relationships are represented as edges. Signed social networks can map friendly or hostile relationships. These networks are said to be structurally balanced when they can be cleanly divided into two sets, in which each set contains only friends, and all relations between these sets are hostile. The measure of structural imbalance or frustration, when it cannot be cleanly divided, is the minimum number of edges that violate the social rule. Given a social network as a graph, D-Wave devices can partition the graph into two colored sets, and show the frustrated edges.
-
-  * [**Traveling Salesman Problem**](examples/quantum_annealing/Dwave_TravelingSalesmanProblem/Dwave_TravelingSalesmanProblem.ipynb)
-
-    This tutorial solves small instances of the famous traveling salesman problem (TSP) using D-Wave devices on Amazon Braket. TSP is an NP-hard problem in combinatorial optimization. The solution finds the shortest possible route that visits each city exactly once, given a list of cities and the distances between each pair of cities. To solve the problem, cities and distances are mapped to a graph with weighted edges. A solution, when found on that graph, is the Hamiltonian cycle that has the least weight.
-
----
 ## <a name="braket">Amazon Braket features</a>
 This folder contains examples that illustrate the usage of individual features of Amazon Braket
 
@@ -164,34 +127,6 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
     This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Job using the custom container.
     
 ---
-## <a name="jobs">Photonic quantum computing with Strawberry Fields</a>
-This folder contains examples that illustrate the use of Strawberry Fields to run photonic quantum circuits on both Strawberry Field's built-in local simulators and Xanadu's Borealis device. These examples are based on existing tutorials on the [Strawberry Fields website](https://strawberryfields.ai/photonics/demonstrations.html).
-
-* [**Borealis Quickstart**](examples/photonics/Borealis_quickstart.ipynb)
-
-    This notebook provides a demonstration of running a circuit on Xanadu's Borealis device. Through the use of helper functions, you will learn how to generate random [Gaussian Boson Sampling](examples/photonics/2_Gaussian_boson_sampling_and_the_Hafnian.ipynb) (GBS) circuits closely resembling the circuits used in Xanadu's quantum advantage experiment, and submit them to Borealis via the [Amazon Braket Strawberry Fields plugin](https://github.com/aws/amazon-braket-strawberryfields-plugin-python). For more details, see the [Borealis beginner tutorial](examples/photonics/4_Operating_Borealis_beginner_tutorial.ipynb) and other introductory tutorials to Strawberry Fields. 
-
-* [**Introduction to Blackbird**](examples/photonics/0_Introduction_to_Blackbird.ipynb)
-
-    This notebook introduces Blackbird, an open source programming language for expressing photonic quantum circuits. Blackbird is built into, and used by, Strawberry Fields. You will learn how to create simple circuits in Blackbird.
-
-* [**Basic tutorial: quantum teleportation**](examples/photonics/1_Basic_tutorial_quantum_teleportation.ipynb)
-
-    In this notebook, you will learn how to write a continuous-variable program in Strawberry Fields end-to-end by studying the problem of quantum teleportation, and execute the program on a Strawberry Fields built-in local simulator.
-
-* [**Gaussian boson sampling**](examples/photonics/2_Gaussian_boson_sampling_and_the_Hafnian.ipynb)
-
-    This notebook explains the problem of Gaussian boson sampling (GBS), the computational problem that the Borealis quantum computer solves, and explains why it is believed to be difficult to simulate classically. You will construct a small GBS circuit, execute it on a local simulator, and compare the results to theoretically expected values.
-    
-* [**Time-domain multiplexing**](examples/photonics/3_Time_domain_photonic_circuits.ipynb)
-
-    This notebook introduces the concept of time-domain multiplexing (TDM), a technique for creating large entangled quantum systems in a limited size photonic quantum computer by sending the qumodes at different times. You will learn the basic ideas of TDM, construct a small TDM program, and execute it on a built-in local simulator.
-    
-* [**Operating Borealis: beginner tutorial**](examples/photonics/4_Operating_Borealis_beginner_tutorial.ipynb)
-
-    In this example, you will learn how to create and run circuits on Borealis. You will learn how to write a time-domain program for Borealis and specify the gate parameters to customize your own GBS experiment. You will learn how to run GBS circuits on Borealis via the [Amazon Braket Strawberry Fields plugin](https://github.com/aws/amazon-braket-strawberryfields-plugin-python). Finally, you will learn how to do basic analysis to compare the experimental results with theory.
-
----
 ## <a name="conda">Creating a conda environment</a>
 To install the dependencies required for running the notebook examples in this repository you can create a conda environment with below commands.
 
@@ -218,3 +153,18 @@ After you create a profile, use the following command to set the `AWS_PROFILE` s
 ```bash
 export AWS_PROFILE=YOUR_PROFILE_NAME
 ```
+
+---
+## Support
+
+### Issues and Bug Reports
+
+If you encounter bugs or face issues while using the examples, please let us know by posting 
+the issue on our [Github issue tracker](https://github.com/aws/amazon-braket-examples/issues/).  
+For other issues or general questions, please ask on the [Quantum Computing Stack Exchange](https://quantumcomputing.stackexchange.com/questions/ask) and add the tag [amazon-braket](https://quantumcomputing.stackexchange.com/questions/tagged/amazon-braket).
+
+### Feedback and Feature Requests
+
+If you have feedback or features that you would like to see on Amazon Braket, we would love to hear from you!  
+[Github issues](https://github.com/aws/amazon-braket-examples/issues/) is our preferred mechanism for collecting feedback and feature requests, allowing other users 
+to engage in the conversation, and +1 issues to help drive priority. 
