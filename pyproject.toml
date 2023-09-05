@@ -2,7 +2,7 @@
 name = "amazon-braket-examples",
 version = "1.0.0",
 description="The primary repository for Amazon Braket tutorials",
-readme = "README.md"
+readme = "README.md",
 requires-python = ">=3.8.2",
 license = {file = "LICENSE"}
 
