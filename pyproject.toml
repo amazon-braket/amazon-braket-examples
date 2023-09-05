@@ -1,8 +1,2 @@
-[project]
-name = "amazon-braket-examples"
-
 [tool.black]
 line-length = 100
-
-[tool.setuptools]
-py-modules = []
