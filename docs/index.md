@@ -18,17 +18,6 @@ The repository is structured as follows:
 - [Braket badge](#badge)
 - [Creating a Conda environment](#conda)
 
-
----
-## Jupyter Kernel
-```{eval-rst}
-.. replite::
-   :kernel: xeus-python
-   :height: 600px
-
-   print("Hello from xeus-python!")
-```
-
 ---
 ## Alternative exploration sequence
 An arrangement of the Amazon Braket tutorials meant to be reflective of what is encountered in standard courses and textbooks on quantum computing and quantum information science can be found [here](ALTERNATIVE_ORGANIZATION.md). In addition to the notebooks found in this repository, relevant Amazon Braket blogposts are featured as well.
