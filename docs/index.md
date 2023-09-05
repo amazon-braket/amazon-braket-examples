@@ -1,3 +1,12 @@
+```{eval-rst}
+.. jupyterlite::
+   :width: 100%
+   :height: 600px
+   :prompt: Try JupyterLite!
+   :prompt_color: #00aa42
+```
+
+
 # Amazon Braket Examples 
 Welcome to the primary repository for Amazon Braket tutorials. We provide tutorials on quantum computing, using Amazon Braket. We provide examples for quantum circuits and quantum annealing. We cover canonical routines, such as the Quantum Fourier Transform (QFT), as well as hybrid quantum algorithms, such as the Variational Quantum Eigensolver (VQE).
 
