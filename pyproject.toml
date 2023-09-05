@@ -1,2 +1,16 @@
+[project]
+name = "amazon-braket-examples",
+version = "1.0.0",
+description="The primary repository for Amazon Braket tutorials",
+readme = "README.md"
+requires-python = ">=3.8.2",
+license = {file = "LICENSE"}
+
+[project.urls]
+"Source" = "https://github.com/aws/amazon-braket-examples"
+
 [tool.black]
 line-length = 100
+
+[tool.setuptools]
+py-modules = []
