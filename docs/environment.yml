@@ -3,16 +3,12 @@ channels:
   - https://repo.mamba.pm/emscripten-forge
   - https://repo.mamba.pm/conda-forge
 dependencies:
-  - pydantic==1.8.2
   - botocore
   - awscli
   - boto3
   - amazon-braket-default-simulator
-  - amazon-braket-pennylane-plugin
   - amazon-braket-schemas
   - amazon-braket-sdk
-  - amazon-braket-algorithm-library
-  - cvxpy
   - dask
   - ecos
   - jax
@@ -32,3 +28,20 @@ dependencies:
   - qiskit_braket_provider
   - qiskit-terra
   - scipy
+  - pip:
+    - pydantic==1.8.2
+    - amazon-braket-pennylane-plugin==1.20.1
+    - amazon-braket-algorithm-library==1.4.1
+    - cvxpy==1.3.1
+    - ecos==2.0.12
+    - mypy-extensions==0.4.3
+    - PennyLane-Lightning==0.31.0
+    - qiskit-aer==0.12.0
+    - qiskit_braket_provider==0.0.4
+    - qiskit-terra==0.23.3
+    - pyscf
+    - colorama >=0.2.5,<=0.3.7
+    - h5py >=2.8
+    - jaxlib
+    - distributed 2021.10.0.*
+    - s3transfer >=0.2.0,<0.3.0
