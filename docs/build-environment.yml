@@ -1,4 +1,4 @@
-name: amazon-braket-sdk-docs
+name: amazon-braket-examples
 
 channels:
   - conda-forge
