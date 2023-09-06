@@ -37,5 +37,5 @@ dependencies:
     - awscli==1.29.4
     - jaxlib
     - jax==0.4.2
-    - distributed 2022.12.1
+    - distributed==2022.12.1
     - dask==2023.1.1
