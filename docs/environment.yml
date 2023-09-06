@@ -8,7 +8,6 @@ dependencies:
   - keras
   - markupsafe
   - matplotlib
-  - openfermion
   - oqpy
   - numpy
   - pandas
@@ -17,7 +16,7 @@ dependencies:
     - s3transfer >=0.2.0,<0.3.0
     - botocore==1.31.4
     - boto3==1.28.3
-    - pydantic >=1.9,<2.0
+    - pydantic==1.9.0
     - amazon-braket-schemas==1.19.1
     - amazon-braket-default-simulator==1.20.0
     - amazon-braket-pennylane-plugin==1.20.1
@@ -31,10 +30,11 @@ dependencies:
     - qiskit_braket_provider==0.0.4
     - qiskit-terra==0.23.3
     - pyscf
+    - h5py >=2.8
+    - openfermion==1.5.1
     - openfermionpyscf==0.5
     - colorama >=0.2.5,<=0.3.7
     - awscli==1.29.4
-    - h5py >=2.8
     - jaxlib
     - jax==0.4.2
     - distributed 2021.10.0.*
