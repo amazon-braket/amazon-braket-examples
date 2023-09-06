@@ -37,4 +37,4 @@ language = "en"
 napoleon_use_rtype = False
 
 # jupyterlite_bind_ipynb_suffix = False
-jupyterlite_contents = "jupyter_contents"
+jupyterlite_contents = "modules"
