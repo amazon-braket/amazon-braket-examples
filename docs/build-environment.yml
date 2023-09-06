@@ -24,4 +24,3 @@ dependencies:
   - pip:
     - jupyterlite-sphinx >=0.9.1
     - jupyterlite-xeus-python==0.9.4
-    - ..
