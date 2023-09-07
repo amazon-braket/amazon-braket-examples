@@ -9,22 +9,25 @@ dependencies:
   - matplotlib
   - oqpy==0.2.1
   - numpy==1.23
-  - pandas==2.0.0
-  - scipy==1.9.3
+  - pandas
+  - scipy
   - s3transfer
   - botocore==1.31.4
   - boto3==1.28.3
-  - amazon-braket-schemas==1.19.1
-  - amazon-braket-default-simulator==1.20.0
   - amazon-braket-sdk==1.54.2
-  - pennylane==0.31.0
-  - openfermion==1.5.1
+  - pennylane
   - colorama
-  - awscli==1.29.4
+  - awscli
+  - lz4
+  - brotlipy >=0.6.0
+  - msgpack-python <1.0.0
+  - docutils >=0.10,<0.15
   - distributed
   - dask==2023.1.1
   - pip:
-    - pydantic==1.9.0
+    - pydantic==1.9.0 
+    - amazon-braket-schemas==1.19.1
+    - amazon-braket-default-simulator==1.20.0
     - amazon-braket-pennylane-plugin==1.20.1
     - amazon-braket-algorithm-library==1.4.1
     - cvxpy==1.3.1
@@ -32,8 +35,9 @@ dependencies:
     - mypy-extensions==0.4.3
     - PennyLane-Lightning==0.31.0
     - pyscf
+    - h5py >=2.8
     - openfermionpyscf==0.5
-    - h5py 
+    - openfermion==1.5.1
     - jaxlib
     - jax==0.4.2
     - qiskit-aer==0.12.0
