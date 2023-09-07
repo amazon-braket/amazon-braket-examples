@@ -12,19 +12,19 @@ dependencies:
   - pandas
   - scipy
   - s3transfer
-  - botocore==1.31.4
   - boto3==1.28.3
-  - amazon-braket-sdk==1.54.2
-  - colorama >=0.2.5,<=0.3.7
-  - awscli
-  - lz4
-  - brotlipy
-  - msgpack-python
-  - docutils >=0.10,<0.15
-  - distributed
-  - dask
   - pip:
+    - colorama >=0.2.5,<=0.3.7
+    - awscli
+    - botocore==1.31.4
+    - docutils >=0.10,<0.15
+    - distributed
+    - msgpack-python
+    - lz4
+    - dask
+    - brotlipy >=0.6.0
     - pydantic==1.9.0 
+    - amazon-braket-sdk==1.54.2
     - amazon-braket-schemas
     - amazon-braket-default-simulator==1.20.0
     - amazon-braket-pennylane-plugin==1.20.1
