@@ -18,7 +18,7 @@ EXCLUDED_NOTEBOOKS = [
     "Using_The_Adjoint_Gradient_Result_Type.ipynb",
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "Error_Mitigation_on_Amazon_Braket.ipynb",
-    # These notebooks are run from within a job (see Running_notebooks_as_jobs.ipynb)
+    # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
     "0_Getting_started_papermill.ipynb"
 ]
 
