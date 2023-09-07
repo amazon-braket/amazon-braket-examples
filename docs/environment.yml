@@ -28,7 +28,6 @@ dependencies:
   - qiskit-aer
   - qiskit_braket_provider
   - qiskit-terra
-  - pyscf
   - h5py 
   - openfermion
   - openfermionpyscf
@@ -38,3 +37,5 @@ dependencies:
   - jax
   - distributed
   - dask
+  - pip:
+    - pyscf
