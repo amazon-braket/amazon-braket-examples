@@ -4,21 +4,21 @@ channels:
   - https://repo.mamba.pm/conda-forge
 dependencies:
   - jinja2==3.1.2
-  - keras==2.12.0
   - markupsafe
   - matplotlib
   - oqpy==0.2.1
   - numpy==1.23
   - pandas
   - scipy
-  - setuptools
-  - boltons
-  - nest-asyncio
-  - networkx
-  - openpulse
-  - openqasm3
-  - sympy
   - pip:
+    - keras==2.12.0
+    - setuptools
+    - boltons
+    - nest-asyncio
+    - networkx
+    - openpulse
+    - openqasm3
+    - sympy
     - pydantic==1.8.2
     - awscli
     - botocore
