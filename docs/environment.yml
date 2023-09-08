@@ -16,13 +16,13 @@ dependencies:
   - pip:
     - colorama >=0.2.5,<=0.3.7
     - awscli
+    - botocore==1.31.4
     - docutils
-    - botocore
     - distributed
     - msgpack-python
     - lz4
     - dask
-    - brotlipy >=0.6.0
+    - brotlipy==0.7.0
     - pydantic==1.9.0 
     - amazon-braket-sdk==1.54.2
     - amazon-braket-schemas
