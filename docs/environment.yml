@@ -11,7 +11,7 @@ dependencies:
   - pandas
   - scipy
   - pip:
-    - antlr4-python3-runtime==4.13.1
+    - antlr4-python3-runtime==4.9.3
     - keras==2.12.0
     - setuptools
     - boltons
