@@ -16,19 +16,19 @@ dependencies:
   - pip:
     - colorama >=0.2.5,<=0.3.7
     - awscli
-    - docutils==0.14
-    - botocore==1.31.4
-    - boto3==1.28.3
+    - docutils
+    - botocore
+    - boto3
     - distributed
     - msgpack-python
     - lz4
     - dask
     - pydantic==1.9.0 
-    - amazon-braket-sdk==1.54.2
+    - amazon-braket-sdk
     - amazon-braket-schemas
-    - amazon-braket-default-simulator==1.20.0
-    - amazon-braket-pennylane-plugin==1.20.1
-    - amazon-braket-algorithm-library==1.4.1
+    - amazon-braket-default-simulator
+    - amazon-braket-pennylane-plugin
+    - amazon-braket-algorithm-library
     - cvxpy==1.3.1
     - ecos==2.0.12
     - mypy-extensions==0.4.3
