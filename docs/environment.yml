@@ -13,16 +13,16 @@ dependencies:
   - scipy
   - s3transfer
   - boto3==1.28.3
+  - brotlipy==0.7.0
   - pip:
     - colorama >=0.2.5,<=0.3.7
     - awscli
+    - docutils==0.14
     - botocore==1.31.4
-    - docutils
     - distributed
     - msgpack-python
     - lz4
     - dask
-    - brotlipy==0.7.0
     - pydantic==1.9.0 
     - amazon-braket-sdk==1.54.2
     - amazon-braket-schemas
