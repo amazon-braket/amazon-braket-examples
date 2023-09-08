@@ -5,7 +5,7 @@ channels:
 dependencies:
   - jinja2==3.1.2
   - markupsafe
-  - matplotlib==3.7.2
+  - matplotlib==3.6.2
   - oqpy==0.2.1
   - numpy==1.23
   - pandas
