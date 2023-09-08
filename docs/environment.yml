@@ -13,10 +13,10 @@ dependencies:
   - scipy
   - pip:
     # - colorama >=0.2.5,<=0.3.7
-    # - awscli
+    - awscli
     # - docutils
-    # - botocore
-    # - boto3
+    - botocore
+    - boto3
     # - s3transfer
     # - distributed
     # - dask
