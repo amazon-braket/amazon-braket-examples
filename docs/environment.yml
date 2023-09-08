@@ -11,6 +11,13 @@ dependencies:
   - numpy==1.23
   - pandas
   - scipy
+  - setuptools
+  - boltons
+  - nest-asyncio
+  - networkx
+  - openpulse
+  - openqasm3
+  - sympy
   - pip:
     - pydantic==1.8.2
     - awscli
