@@ -12,7 +12,6 @@ dependencies:
   - pandas
   - scipy
   - pip:
-    - pydantic==1.9.0
     - awscli
     - botocore
     - boto3
