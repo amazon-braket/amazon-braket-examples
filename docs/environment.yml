@@ -18,9 +18,9 @@ dependencies:
     - botocore
     - boto3
     # - s3transfer
-    # - distributed
-    # - dask
-    # - pydantic==1.9.0 
+    - distributed
+    - dask
+    - pydantic==1.9.0 
     - amazon-braket-sdk
     - amazon-braket-schemas
     - amazon-braket-default-simulator
