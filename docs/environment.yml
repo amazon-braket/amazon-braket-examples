@@ -11,14 +11,14 @@ dependencies:
   - numpy==1.23
   - pandas
   - scipy
-  - s3transfer
   - brotlipy
   - pip:
     - colorama >=0.2.5,<=0.3.7
     - awscli
-    - docutils >=0.10,<0.15
+    - docutils
     - botocore
     - boto3
+    - s3transfer
     - distributed
     - msgpack-python
     - lz4
