@@ -5,13 +5,14 @@ channels:
 dependencies:
   - jinja2==3.1.2
   - markupsafe
-  - matplotlib
+  - matplotlib==3.7.2
   - oqpy==0.2.1
   - numpy==1.23
   - pandas
   - scipy
   - pip:
-    - antlr4-python3-runtime==4.12.0
+    - urllib3==2.0.4
+    - antlr4-python3-runtime==4.9
     - keras==2.12.0
     - setuptools
     - boltons
