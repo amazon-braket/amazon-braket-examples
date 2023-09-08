@@ -10,6 +10,8 @@ dependencies:
   - numpy==1.23
   - pandas
   - scipy
+  - ecos
+  - cvxpy
   - pip:
     - urllib3==2.0.4
     - antlr4-python3-runtime==4.11.0
