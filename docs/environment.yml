@@ -16,7 +16,7 @@ dependencies:
   - pip:
     - colorama >=0.2.5,<=0.3.7
     - awscli
-    - docutils
+    - docutils >=0.10,<0.15
     - botocore
     - boto3
     - distributed
