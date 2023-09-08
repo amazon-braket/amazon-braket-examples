@@ -28,6 +28,6 @@ dependencies:
     - amazon-braket-algorithm-library
     - mypy-extensions==0.4.3
     - pennylane==0.31.0 
-    - openfermion==1.5.1
+    - openfermionpyscf==0.5
     - jax==0.4.2
     - qiskit_braket_provider==0.0.4
