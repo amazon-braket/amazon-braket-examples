@@ -10,6 +10,7 @@ dependencies:
   - numpy==1.23
   - pandas
   - scipy
+  - mpmath
   - pip:
     - keras==2.12.0
     - setuptools
@@ -18,7 +19,6 @@ dependencies:
     - networkx
     - openpulse
     - openqasm3
-    - mpmath
     - sympy
     - pydantic==1.8.2
     - awscli
