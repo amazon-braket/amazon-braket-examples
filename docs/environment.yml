@@ -27,8 +27,6 @@ dependencies:
     - amazon-braket-pennylane-plugin
     - amazon-braket-algorithm-library
     - mypy-extensions==0.4.3
-    # pennylane-lightning potentially non-pure?
-    - PennyLane-Lightning==0.31.0
     - pennylane==0.31.0 
     - openfermionpyscf==0.5
     - openfermion==1.5.1
