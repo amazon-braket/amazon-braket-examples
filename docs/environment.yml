@@ -8,9 +8,9 @@ dependencies:
   - numpy >=1.17.3,<1.25.0
   - pandas
   - scipy
-  - tornado
   - antlr4-python3-runtime==4.9.2
   - pip:
+    - tornado
     - jinja2==3.1.2
     - oqpy==0.2.1
     - urllib3==2.0.4
