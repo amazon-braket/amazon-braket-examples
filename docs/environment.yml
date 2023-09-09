@@ -3,14 +3,14 @@ channels:
   - https://repo.mamba.pm/emscripten-forge
   - https://repo.mamba.pm/conda-forge
 dependencies:
-  - jinja2==3.1.2
   - markupsafe
   - matplotlib
-  - oqpy==0.2.1
-  - numpy==1.23
+  - numpy
   - pandas
   - scipy
   - pip:
+    - jinja2==3.1.2
+    - oqpy==0.2.1
     - urllib3==2.0.4
     - antlr4-python3-runtime==4.9.2
     - keras==2.12.0
@@ -23,15 +23,15 @@ dependencies:
     - sympy==1.12
     - mpmath==1.3.0
     - pydantic==1.8.2
-    - awscli
-    - botocore
-    - boto3
-    - dask
-    - amazon-braket-sdk
-    - amazon-braket-schemas
-    - amazon-braket-default-simulator
-    - amazon-braket-pennylane-plugin
-    - amazon-braket-algorithm-library
+    - awscli==1.29.4
+    - botocore==1.31.4
+    - boto3==1.28.3
+    - dask==2023.1.1
+    - amazon-braket-sdk==1.54.2
+    - amazon-braket-schemas==1.19.1
+    - amazon-braket-default-simulator==1.20.0
+    - amazon-braket-pennylane-plugin==1.20.1
+    - amazon-braket-algorithm-library==1.4.1
     - mypy-extensions==0.4.3
     - pennylane==0.31.0 
     - jax==0.4.2
