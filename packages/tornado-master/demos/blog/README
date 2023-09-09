@@ -1,0 +1,68 @@
+Running the Tornado Blog example app
+====================================
+
+This demo is a simple blogging engine that uses a database to store posts.
+You must have PostgreSQL or CockroachDB installed to run this demo.
+
+If you have `docker` and `docker-compose` installed, the demo and all
+its prerequisites can be installed with `docker-compose up`.
+
+1. Install a database if needed
+
+   Consult the documentation at either https://www.postgresql.org or
+   https://www.cockroachlabs.com to install one of these databases for
+   your platform.
+
+2. Install Python prerequisites
+
+   This demo requires Python 3.6 or newer, and the packages listed in
+   requirements.txt. Install them with `pip -r requirements.txt`
+
+3. Create a database and user for the blog.
+
+   Connect to the database with `psql -U postgres` (for PostgreSQL) or
+   `cockroach sql` (for CockroachDB).
+
+   Create a database and user, and grant permissions:
+
+   CREATE DATABASE blog;
+   CREATE USER blog WITH PASSWORD 'blog';
+   GRANT ALL ON DATABASE blog TO blog;
+
+   (If using CockroachDB in insecure mode, omit the `WITH PASSWORD 'blog'`)
+
+4. Create the tables in your new database (optional):
+
+   The blog application will create its tables automatically when starting up.
+   It's also possible to create them separately.
+
+   You can use the provided schema.sql file by running this command for PostgreSQL:
+
+   psql -U blog -d blog < schema.sql
+
+   Or this one for CockcroachDB:
+
+   cockroach sql -u blog -d blog < schema.sql
+
+   You can run the above command again later if you want to delete the
+   contents of the blog and start over after testing.
+
+5. Run the blog example
+
+   For PostgreSQL, you can just run
+   ./blog.py
+
+   For CockroachDB, run
+   ./blog.py --db_port=26257
+
+   If you've changed anything from the defaults, use the other `--db_*` flags.
+
+6. Visit your new blog
+
+   Open http://localhost:8888/ in your web browser.
+
+   Currently the first user to connect will automatically be given the
+   ability to create and edit posts.
+
+   Once you've created one blog post, subsequent users will not be
+   prompted to sign in.

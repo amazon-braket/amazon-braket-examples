@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tornado Facebook Stream Demo</title>
+    <link rel="stylesheet" href="{{ static_url("facebook.css") }}" type="text/css">
+  </head>
+  <body>
+    <div id="body">
+      <div style="float:right">
+        <b>{{ escape(current_user["name"]) }}</b> -
+        <a href="/auth/logout">{{ _("Sign out") }}</a>
+      </div>
+      <div style="margin-bottom:1em"><a href="/">{{ _("Refresh stream") }}</a></div>
+      <div id="stream">
+        {% for post in stream["data"] %}
+          {{ modules.Post(post) }}
+        {% end %}
+      </div>
+    </div>
+  </body>
+</html>

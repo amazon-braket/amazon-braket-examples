@@ -1,0 +1,17 @@
+*.pyc
+*.pyo
+*.so
+*.class
+*~
+build/
+/dist/
+MANIFEST
+/tornado.egg-info/
+.tox/
+.vagrant
+/.coverage
+/htmlcov/
+/env/
+# Used in demo apps
+secrets.cfg
+.mypy_cache/
