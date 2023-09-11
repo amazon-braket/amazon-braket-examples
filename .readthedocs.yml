@@ -5,10 +5,26 @@
 version: 2
 
 # Set the OS, Python version and other tools you might need
+# build:
+#   os: ubuntu-22.04
+#   tools:
+#     python: "mambaforge-4.10"
+
 build:
   os: ubuntu-22.04
   tools:
     python: "mambaforge-4.10"
+    # updated and deployed from Aug 1, 2023
+    python: "mambaforge-22.9"
+  jobs:
+    pre_create_environment:
+      # update mamba just in case
+      - mamba update --yes --quiet --name=base mamba
+      - mamba --version
+    post_create_environment:
+      # use conda run executable wrapper to have all env variables
+      - conda run -n ${CONDA_DEFAULT_ENV} mamba --version
+      - conda run -n ${CONDA_DEFAULT_ENV} pip install . --no-deps
 
 conda:
   environment: docs/build-environment.yml
