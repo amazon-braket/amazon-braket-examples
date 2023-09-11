@@ -1,9 +1,0 @@
-Running the Tornado Facebook example
-====================================
-
-To run this example, you must register a Facebook application with a
-Connect URL set to the domain the this demo will be running on
-(i.e. http://localhost:8888/ by default).  The API key and secret
-for this application must be passed on the command line:
-
-    python facebook.py --facebook_api_key=ABC --facebook_secret=XYZ
