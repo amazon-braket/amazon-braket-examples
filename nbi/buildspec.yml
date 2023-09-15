@@ -35,4 +35,5 @@ artifacts:
   files:
     - envs/Braket.tgz
     - environment.yml
+    - requirements.txt
   name: CONDA_BUILD_RESULTS
