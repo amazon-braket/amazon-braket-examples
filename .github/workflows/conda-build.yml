@@ -24,10 +24,10 @@ jobs:
         sudo rm -rf /usr/share/dotnet
         sudo rm -rf /opt/ghc
     - uses: actions/checkout@v2
-    - name: Setup python 3.9
+    - name: Setup python 3.10
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: 3.10
     - name: Build conda environment
       run: |
         ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a envs -b nbi/buildspec.yml
