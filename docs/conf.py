@@ -37,4 +37,4 @@ language = "en"
 napoleon_use_rtype = False
 
 # jupyterlite_bind_ipynb_suffix = False
-jupyterlite_contents = "./contents"
+jupyterlite_contents = "[contents]"
