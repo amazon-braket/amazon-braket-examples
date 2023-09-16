@@ -1,0 +1,13 @@
+# Amazon Braket Hybrid Jobs
+With Hybrid Jobs, you can run algorithms that use both classical and quantum compute resources. These hybrid quantum-classical algorithms can help you optimize the performance of the quantum devices currently available. These algorithms are designed to maximize the benefits and reduce the drawbacks of both types of computational systems and are generally used to find the ground state or global minimum of a particular system.
+
+You can submit Hybrid Jobs to any quantum processing unit (QPU) or quantum simulator. You’ll need to define how the algorithm is implemented by submitting a Python script and perhaps also configuring input data or hyperparameters. This script, along with any input data and hyperparameters, is part of the environment that defines how the Hybrid Job is run. This environment is then placed inside a container, which is accessed by the Hybrid Job once it’s been submitted. To learn more about Hybrid Jobs and how to use them, get started with [Creating your first Hybrid Job](../hybrid_jobs/0_Creating_your_first_Hybrid_Job/) in the [hybrid_jobs](../hybrid_jobs) folder.
+
+## When to use Braket Hybrid Jobs
+Amazon Braket Hybrid Jobs enables you to easily run hybrid quantum-classical algorithms, such as the Variational Quantum Eigensolver (VQE) and the Quantum Approximate Optimization Algorithm (QAOA), that combine classical compute resources with quantum computing devices to optimize the performance of today’s quantum systems. Amazon Braket Hybrid Jobs provides three main benefits:
+
+1. **Convenience**: Amazon Braket Hybrid Jobs simplifies setting up and managing your compute environment and keeping it running while your hybrid algorithm runs. You just need to provide your algorithm script and select a quantum device (either a quantum processing unit or a simulator) on which to run. Amazon Braket waits for the target device to become available, spins up the classical resources, runs the workload in pre-built container environments, returns the results to Amazon Simple Storage Service (Amazon S3), and releases the compute resources.
+
+2. **Metrics**: Amazon Braket Hybrid Jobs provides on-the-fly insights into running algorithms and delivers customizable algorithm metrics in near real-time to Amazon CloudWatch and the Amazon Braket console so you can track the progress of your algorithms.
+
+3. **Performance**: Amazon Braket Hybrid Jobs provides better performance than running hybrid algorithms from your own environment. While your job is running, it has priority access to the selected target QPU: tasks from your job run ahead of other tasks queued on the device. This results in shorter and more predictable runtimes for hybrid algorithms.
