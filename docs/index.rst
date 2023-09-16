@@ -1,6 +1,6 @@
-#############################
-Amazon Braket Python Examples
-#############################
+######################
+Amazon Braket Examples
+######################
 
 .. replite::
    :kernel: xeus-python

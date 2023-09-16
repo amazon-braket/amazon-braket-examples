@@ -18,20 +18,9 @@ The repository is structured as follows:
 - [Braket badge](#badge)
 - [Creating a Conda environment](#conda)
 
-
----
-## Jupyter Kernel
-```{eval-rst}
-.. replite::
-   :kernel: xeus-python
-   :height: 600px
-
-   print("Hello from xeus-python!")
-```
-
 ---
 ## Alternative exploration sequence
-An arrangement of the Amazon Braket tutorials meant to be reflective of what is encountered in standard courses and textbooks on quantum computing and quantum information science can be found [here](ALTERNATIVE_ORGANIZATION.md). In addition to the notebooks found in this repository, relevant Amazon Braket blogposts are featured as well.
+An arrangement of the Amazon Braket tutorials meant to be reflective of what is encountered in standard courses and textbooks on quantum computing and quantum information science can be found [here](./alternative_organization.md). In addition to the notebooks found in this repository, relevant Amazon Braket blogposts are featured as well.
 
 ---
 ## <a name="start">Getting started</a>
@@ -69,13 +58,28 @@ An arrangement of the Amazon Braket tutorials meant to be reflective of what is 
 
     This tutorial series provides a step-by-step walkthrough explaining analog Hamiltonian simulations (AHS) and how to run AHS programs on local simulators and Rydberg-based QPUs via Amazon Braket. AHS is a quantum computing paradigm different from gate-based computing. AHS uses a well-controlled quantum system and tunes its parameters to mimic the dynamics of another quantum system, the one we aim to study. In the gate-based quantum computation, the program is a quantum circuit consisting of a series of quantum gates, each of which acts only a small subset of qubits. In contrast, an AHS program is a sequence of time-dependent Hamiltonians that govern the quantum dynamics of all qubits; during AHS, the effect of the evolution under a Hamiltonian can be understood as a unitary acting simultaneously on all qubits.
 
+    * [**Introduction of analog Hamiltonian simulation**](modules/Continue_Exploring/quantum_hardware/analog_hamiltonian_simulation/00_Introduction_of_Analog_Hamiltonian_Simulation_with_Rydberg_Atoms.ipynb)
+    * [**Introduction to Aquila**](modules/Continue_Exploring/quantum_hardware/analog_hamiltonian_simulation/01_Introduction_to_Aquila.ipynb)
+    * [**Ordered phases in Rydberg systems**](modules/Continue_Exploring/quantum_hardware/analog_hamiltonian_simulation/02_Ordered_phases_in_Rydberg_systems.ipynb)
+    * [**Parallel tasks on Aquila**](modules/Continue_Exploring/quantum_hardware/analog_hamiltonian_simulation/03_Parallel_tasks_on_Aquila.ipynb)
+    * [**Maximum independent sets with analog Hamiltonian simulation**](modules/Continue_Exploring/quantum_hardware/analog_hamiltonian_simulation/04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb)
+    * [**Running analog Hamiltonian simulation with local simulator**](modules/Continue_Exploring/quantum_hardware/analog_hamiltonian_simulation/05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb)
+
+    <br />
+
   * [**Compilation**](modules/Continue_Exploring/quantum_hardware/compilation)
 
     This notebook collection shows how to run your circuits on Braket devices exactly as defined without any modification during the compilation process, a feature known as verbatim compilation. Usually, when you run a circuit on a QPU, behind the scenes, Amazon Braket will do a series of compilation steps to optimize your circuit and map the abstract circuit to the physical qubits on the QPU. However, in many situations, such as for error mitigation or benchmarking experiments, researchers require full control of the qubits and the gates that are being applied, thereby motivating the use of verbatim compilation.
     
     OpenQASM, a popular human-readable and hardware-agnostic quantum circuit description language currently supported as an *Intermediate Representation* (IR) on Amazon Braket, is also introduced. The associated tutorials show how to submit OpenQASM tasks to various devices on Braket and introduce some OpenQASM features available on Braket. In addition, verbatim compilation can be performed with OpenQASM by specifying a verbatim pragma around a box of code.
 
-  * [**Error mitigation**](modules/Continue_Exploring/quantum_hardware/error_mitigation)
+    * [**Getting Started with OpenQASM on Braket**](modules/Continue_Exploring/quantum_hardware/compilation/Getting_Started_with_OpenQASM_on_Braket.ipynb) 
+    * [**Simulating advanced OpenQASM programs with the local simulator**](modules/Continue_Exploring/quantum_hardware/compilation/Simulating_Advanced_OpenQASM_Programs_with_the_Local_Simulator.ipynb)
+    * [**Verbatim compilation**](modules/Continue_Exploring/quantum_hardware/compilation/Verbatim_Compilation.ipynb)
+
+    <br />
+
+  * [**Error mitigation**](modules/Continue_Exploring/quantum_hardware/error_mitigation/Error_Mitigation_on_Amazon_Braket.ipynb)
 
     This tutorial shows how to get started with using IonQ's Aria QPU on Amazon Braket. You’ll learn how Aria's two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for toy problems. 
 
@@ -83,12 +87,25 @@ An arrangement of the Amazon Braket tutorials meant to be reflective of what is 
 
     This tutorial series explains how to use pulse control on various QPUs in Amazon Braket. Pulses are the analog signals that control the qubits in a quantum computer. With certain devices on Amazon Braket, you can access the pulse control feature to submit circuits using pulses.
 
+    * [**Bringup experiments**](modules/Continue_Exploring/quantum_hardware/pulse_control/1_Bringup_experiments.ipynb) 
+    * [**Creating a Bell state with cross-resonance pulses on OQC's Lucy**](modules/Continue_Exploring/quantum_hardware/pulse_control/2_Bell_pair_with_pulses_OQC.ipynb)
+    * [**Creating a Bell state with pulses on Rigetti's Aspen M-3**](modules/Continue_Exploring/quantum_hardware/pulse_control/3_Bell_pair_with_pulses_Rigetti.ipynb)
+    * [**Build single qubit quantum gates**](modules/Continue_Exploring/quantum_hardware/pulse_control/4_Build_single_qubit_gates.ipynb)
+
+    <br />
+
 ---
 ### <a name="simulations">Quantum simulations</a>
 
   * [**Noise simulations**](modules/Continue_Exploring/quantum_sims/noise_simulations)
 
     This notebook collection provides a detailed overview of noise simulation on Amazon Braket. You will learn how to define noise channels, apply noise to new or existing circuits, and run those circuits on the Amazon Braket noise simulators. We also introduce noise models on Amazon Braket, along with details on how to create noise models containing different types of noise and instructions for how to apply the noise to a circuit. We show how to construct a noise model from device calibration data for real quantum processing units (QPUs) and also compare the measurement outcomes of circuits run on a noisy simulator with the same circuits run on QPUs to show that simulating circuits with noise models more closely mimics QPUs.
+
+    * [**Noise models on Amazon Braket**](modules/Continue_Exploring/quantum_sims/noise_simulations/Noise_models_on_Amazon_Braket.ipynb)
+    * [**Noise models on Rigetti**](modules/Continue_Exploring/quantum_sims/noise_simulations/Noise_models_on_Rigetti.ipynb)
+    * [**Simulating noise on Amazon Braket**](modules/Continue_Exploring/quantum_sims/noise_simulations/Simulating_Noise_On_Amazon_Braket.ipynb)
+
+    <br />
 
   * [**Testing the tensor network simulator with local and non-local random quantum circuits**](modules/Continue_Exploring/quantum_sims/TN1_demo_local_vs_non-local_random_circuits.ipynb)
 
@@ -131,7 +148,7 @@ An arrangement of the Amazon Braket tutorials meant to be reflective of what is 
 
     This tutorial provides a detailed discussion and implementation of Simon's algorithm, which provided the first example of an exponential speedup over the best known classical algorithm by using a quantum computer to solve a particular problem. Originally published in 1994, Simon's algorithm was a precursor to Shor's well-known factoring algorithm, and it served as inspiration for many of the seminal works in quantum computation that followed.
 
-  * [**Superdense coding**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Superdense_coding/4_Superdense_coding.ipynb) 
+  * [**Superdense coding**](modules/Continue_Exploring/quantum_algorithms_and_protocols/canonical/Superdense_coding/Superdense_coding.ipynb) 
   
     This tutorial constructs an implementation of the *superdense coding protocol*, by means of the Amazon Braket SDK. Superdense coding is a method of transmitting two classical bits by sending only one qubit. Starting with a pair of entanged qubits, the sender (*aka* Alice) applies a certain quantum gate to their qubit and sends the result to the receiver (*aka* Bob), who is then able to decode the full two-bit message.
 
@@ -234,7 +251,7 @@ An arrangement of the Amazon Braket tutorials meant to be reflective of what is 
 
     This tutorial digs deeper into how quantum circuit training can be applied to a problem of practical relevance in graph optimization. We show how easy it is to train a QAOA circuit in PennyLane to solve the maximum clique problem on a simple example graph. The tutorial then extends to a more difficult 20-node graph and uses the parallel capabilities of the Amazon Braket SV1 simulator to speed up gradient calculations and hence train the quantum circuit faster, using around 1-2 minutes per iteration.
 
-  * [**Hydrogen geometry with VQE**](modules/Continue_Exploring/quantum_frameworks_and_plugins/pennylane/3_Hydrogen_Molecule_geometry_with_VQE)
+  * [**Hydrogen geometry with VQE**](modules/Continue_Exploring/quantum_frameworks_and_plugins/pennylane/3_Hydrogen_Molecule_geometry_with_VQE/3_Hydrogen_Molecule_geometry_with_VQE.ipynb)
 
     This tutorial shows how PennyLane and Amazon Braket can be combined to solve an important problem in quantum chemistry. The ground state energy of molecular hydrogen is calculated by optimizing a VQE circuit using the local Braket simulator. This tutorial highlights how qubit-wise commuting observables can be measured together in PennyLane and Braket, making optimization more efficient.
 
@@ -251,7 +268,7 @@ An arrangement of the Amazon Braket tutorials meant to be reflective of what is 
     This tutorial shows how to compute gradients of free parameters in a quantum circuit using PennyLane and Amazon Braket.
 
 #### <a name="qiskit">Qiskit with the Qiskit-Braket provider</a>
-  * [**How to run Qiskit on Amazon Braket**](examples/pennylane/0_Getting_started/0_Getting_started.ipynb)
+  * [**How to run Qiskit on Amazon Braket**](modules/Continue_Exploring/quantum_frameworks_and_plugins/qiskit/0_Getting_Started.ipynb)
 
     This tutorial shows you how to run your [Qiskit](https://qiskit.org) code across any of the gate-based devices on Amazon Braket with the [Qiskit-Braket provider](https://github.com/qiskit-community/qiskit-braket-provider/blob/main/docs/tutorials/0_tutorial_qiskit-braket-provider_overview.ipynb).
 
