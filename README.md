@@ -15,7 +15,7 @@ The repository is structured as follows:
   - [Advanced Braket features](#advanced)
   - [Applications and industry uses](#applications)
 - [Braket through qBraid](#qbraid)
-- [Braket badge](#badge)
+- [Braket courses](#courses)
 - [Creating a Conda environment](#conda)
 
 ---
@@ -284,7 +284,7 @@ An arrangement of the Amazon Braket tutorials meant to be reflective of what is 
   *Currently under development.*
 
 ---
-## <a name="badge">Braket badge</a>
+## <a name="courses">Braket courses</a>
   *Currently under development.*
 
 ---
