@@ -95,7 +95,7 @@ def test_notebook_output_for_errors(notebook_dir, notebook_file, mock_level):
             if "outputs" in cell:
                 for output in cell["outputs"]:
                     if output["output_type"] == "error":
-                        pytest.fail("Found error output in cell: " + str(cell["outputs"][0]))
+                        pytest.fail("Found error output in cell: " + str(output))
 
 
 def test_record():
