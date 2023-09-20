@@ -27,7 +27,7 @@ Amazon Braket Examples
    :width: 100%
    :height: 600px
 
-.. retrolite:: ./0_Getting_Started.ipynb
+.. retrolite:: 
    :width: 100%
    :height: 600px
    
