@@ -85,6 +85,20 @@ def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
     html_exporter.from_file(notebook_file)
 
 
+@pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
+def test_notebook_output_for_errors(notebook_dir, notebook_file, mock_level):
+    os.chdir(root_path)
+    os.chdir(notebook_dir)
+
+    print(notebook_file)
+    with testbook(notebook_file, timeout=600) as tb:
+        for cell in tb.cells:
+            if "outputs" in cell:
+                for output in cell["outputs"]:
+                    if output["output_type"] == "error":
+                        pytest.fail("Found error output in cell: " + str(cell["outputs"][0]))
+
+
 def test_record():
     # Set the path here to record results.
     notebook_file_search = ""
