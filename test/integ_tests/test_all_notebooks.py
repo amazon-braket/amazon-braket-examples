@@ -90,7 +90,6 @@ def test_notebook_output_for_errors(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
 
-    print(notebook_file)
     with testbook(notebook_file, timeout=600) as tb:
         for cell in tb.cells:
             if "outputs" in cell:
