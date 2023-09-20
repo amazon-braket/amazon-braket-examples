@@ -59,20 +59,10 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     with testbook(notebook_file, timeout=600) as tb:
-        tb.inject(
-            f"""
-            from importlib.machinery import SourceFileLoader
-            mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
-            mock_utils.set_level("{mock_level}")
-            test_mocks = SourceFileLoader("notebook_mocks","{path_to_mocks}").load_module()
-            test_mocks.pre_run_inject(mock_utils)
-            """,
-            run=False,
-            before=0
-        )
-        tb.execute()
-        test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
-        test_mocks.post_run(tb)
+        # We check the existing notebook output for errors before we execute the
+        # notebook because it will change after executing it.
+        check_cells_for_error_output(tb.cells)
+        execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
 
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
@@ -83,19 +73,6 @@ def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
     html_exporter = HTMLExporter(template_name='classic')
 
     html_exporter.from_file(notebook_file)
-
-
-@pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
-def test_notebook_output_for_errors(notebook_dir, notebook_file, mock_level):
-    os.chdir(root_path)
-    os.chdir(notebook_dir)
-
-    with testbook(notebook_file, timeout=600) as tb:
-        for cell in tb.cells:
-            if "outputs" in cell:
-                for output in cell["outputs"]:
-                    if output["output_type"] == "error":
-                        pytest.fail("Found error output in cell: " + str(output))
 
 
 def test_record():
@@ -125,3 +102,31 @@ def test_record():
             before=0
         )
         tb.execute()
+
+
+def check_cells_for_error_output(cells):
+    # We do this check to make sure someone didn't accidentally commit a version of a notebook
+    # that has error output in it.
+    for cell in cells:
+        if "outputs" in cell:
+            for output in cell["outputs"]:
+                if output["output_type"] == "error":
+                    pytest.fail("Found error output in cell: " + str(output))
+
+
+def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
+    # We do this check to make sure that the notebook can be executed (with mocks).
+    tb.inject(
+        f"""
+        from importlib.machinery import SourceFileLoader
+        mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
+        mock_utils.set_level("{mock_level}")
+        test_mocks = SourceFileLoader("notebook_mocks","{path_to_mocks}").load_module()
+        test_mocks.pre_run_inject(mock_utils)
+        """,
+        run=False,
+        before=0
+    )
+    tb.execute()
+    test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
+    test_mocks.post_run(tb)
