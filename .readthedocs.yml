@@ -9,7 +9,6 @@ build:
   os: ubuntu-22.04
   tools:
     python: "mambaforge-4.10"
-    python: "mambaforge-22.9"
   jobs:
     pre_create_environment:
       # update mamba
