@@ -24,7 +24,7 @@ at the end of the notebook execution).
 
 By default, a notebook is run using the `default_mocks/default_mocks.py` which
 uses the `default_data/default_capabilities.json` for returning device details
-and `default_data/default_results.json` for all task results in the notebook.
+and `default_data/default_results.json` for all quantum task results in the notebook.
 This can be changed by adding a path in `test/integ_tests` that is identical
 to the notebook being tested, with a file `<notebook name>_mocks.py` in that
 directory. The file should specify `def pre_run_inject(mock_utils):` and 
@@ -34,7 +34,7 @@ default mocks.
 
 ## Least Mock Testing
 To run the integration tests for these notebooks using mocks to override
-creation of tasks and jobs, just run:
+creation of quantum tasks and hybrid jobs, just run:
 ```
 pytest test/integ_tests -s --mock-level=LEAST test/integ_tests
 ```
@@ -44,7 +44,7 @@ These tests will require valid AWS account credentials to run.
 
 These tests work using the same mechanisms and use the same test data as provided
 by "All Mock Testing", but only override functions in AwsSession that
-create/get/cancel tasks and jobs. These tests take longer to run, but test
+create/get/cancel quantum tasks and hybrid jobs. These tests take longer to run, but test
 integration with braket services more thoroughly. 
 
 ## Recording

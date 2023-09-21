@@ -1,10 +1,13 @@
 amazon-braket-sdk
 amazon-braket-pennylane-plugin
 cvxpy
-matplotlib
+matplotlib==3.6.3
+nbconvert
 pandas
 pennylane
 pytest
+pytest-rerunfailures
+pytest-xdist
 qiskit_braket_provider
 testbook
 jupyter
