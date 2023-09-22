@@ -26,4 +26,4 @@ PennyLane-Lightning==0.31.0
 qiskit-aer==0.12.0
 qiskit_braket_provider==0.0.4
 qiskit-terra==0.23.3
-scipy==1.9.3
+scipy==1.10.0
