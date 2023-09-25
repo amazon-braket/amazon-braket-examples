@@ -11,7 +11,7 @@ phases:
       - export LCC_CONDA_INSTALLER_URL=$_ANACONDA_ARCHIVE_URL/$LCC_CONDA_INSTALLER
       - export LCC_CONDA_INSTALLER_SHA256=589fb34fe73bc303379abbceba50f3131254e85ce4e7cd819ba4276ba29cad16
       - export LCC_CONDA_INSTALL_DIR=$HOME/Braket/anaconda3
-      - aria2c --quiet --file-allocation=none -c -x 10 -s 10 -d $LCC_CONDA_INSTALLER $LCC_CONDA_INSTALLER_UR
+      - wget --quiet $LCC_CONDA_INSTALLER_URL --output-document $LCC_CONDA_INSTALLER
       - echo "$LCC_CONDA_INSTALLER_SHA256  $LCC_CONDA_INSTALLER" | sha256sum --status --check -
       - chmod a+x $LCC_CONDA_INSTALLER
       - ./$LCC_CONDA_INSTALLER -b -p $LCC_CONDA_INSTALL_DIR
