@@ -30,4 +30,4 @@ jobs:
         python-version: 3.8
     - name: Build conda environment
       run: |
-        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a envs -b nbi/buildspec.yml
+        ./nbi/codebuild_build.sh -i amazon/aws-codebuild-local:latest -a envs -b nbi/buildspec.yml
