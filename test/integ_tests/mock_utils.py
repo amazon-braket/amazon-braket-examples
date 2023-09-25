@@ -107,6 +107,11 @@ def mock_default_device_calls(mocker):
         "outputS3Directory" : "Test Directory",
         "shots": 10,
         "deviceArn": "Test Device Arn",
+        "queueInfo": {
+            "queue": "QUANTUM_TASKS_QUEUE",
+            "position": "2",
+            "queuePriority": "Normal",
+        },
         "ResponseMetadata": {
             "HTTPHeaders": {
                 "date": ""
