@@ -1,18 +1,18 @@
 import os
+import time
 from datetime import datetime
 
 import pennylane as qml
-from pennylane import numpy as np
 import spacy_sentence_bert
-from pennylane.templates import AmplitudeEmbedding
-
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 from braket.tracking import Tracker
+from pennylane import numpy as np
+from pennylane.templates import AmplitudeEmbedding
 
 
 def main():
-    t = Tracker().start()
+    cost_tracker = Tracker().start()
     np.random.seed(42)
 
     #################### Set up ####################
@@ -49,10 +49,29 @@ def main():
         )
 
         # log the cost function as a metric
-        log_metric(metric_name="Cost", value=cost, iteration_number=i)
+
+        braket_tasks_cost = float(
+            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
+        )
+
+        timestamp = time.time()
+        log_metric(
+            metric_name="braket_tasks_cost",
+            value=braket_tasks_cost,
+            iteration_number=i,
+            timestamp=timestamp,
+        )
+
+        log_metric(metric_name="Cost", value=cost, iteration_number=i, timestamp=timestamp)
 
     weights = [w.tolist() for w in weights]
-    save_job_result({"weights": weights,"task summary": t.quantum_tasks_statistics(), "estimated cost": t.qpu_tasks_cost() + t.simulator_tasks_cost()})
+    save_job_result(
+        {
+            "weights": weights,
+            "task summary": cost_tracker.quantum_tasks_statistics(),
+            "estimated cost": braket_tasks_cost,
+        }
+    )
 
 
 class CCQC:
@@ -88,8 +107,8 @@ class CCQC:
             s3_destination_folder=None,
         )
 
-        @qml.qnode(dev, interface="autograd")
-        def circuit(*weights, features=np.zeros(2 ** nwires)):
+        @qml.qnode(dev, diff_method="device", interface="autograd")
+        def circuit(*weights, features=np.zeros(2**nwires)):
             AmplitudeEmbedding(features=features, wires=range(nwires), normalize=True, pad_with=0.0)
             w_layer1, w_layer2, rotation = weights
             self._entangle_layer(p1=w_layer1[0], p2=w_layer1[1], rng=1)

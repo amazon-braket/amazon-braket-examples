@@ -1,0 +1,42 @@
+{
+  "braketSchemaHeader": {
+    "name": "braket.task_result.analog_hamiltonian_simulation_task_result",
+    "version": "1"
+  },
+  "taskMetadata": {
+    "braketSchemaHeader": {
+      "name": "braket.task_result.task_metadata",
+      "version": "1"
+    },
+    "id": "rydberg",
+    "shots": 1000,
+    "deviceId": "rydbergLocalSimulator",
+    "deviceParameters": null,
+    "createdAt": null,
+    "endedAt": null,
+    "status": null,
+    "failureReason": null
+  },
+  "measurements": [
+    {
+      "shotMetadata": {
+        "shotStatus": "Success"
+      },
+      "shotResult": {
+        "preSequence": [
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+        ],
+        "postSequence": [
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+        ]
+      }
+    }
+  ],
+  "additionalMetadata": null
+}
