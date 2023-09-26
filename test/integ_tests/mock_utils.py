@@ -79,7 +79,23 @@ def read_file(name, file_path = None):
 def mock_default_device_calls(mocker):
     mocker.set_get_device_result({
         "deviceType" : "QPU",
-        "deviceCapabilities" : read_file("default_capabilities.json")
+        "deviceCapabilities" : read_file("default_capabilities.json"),
+        "deviceQueueInfo": [
+        {
+        "queue": "QUANTUM_TASKS_QUEUE",
+        "queueSize": "13",
+        "queuePriority": "Normal"
+        },
+        {
+        "queue": "QUANTUM_TASKS_QUEUE",
+        "queueSize": "0",
+        "queuePriority": "Priority"
+        },
+        {
+        "queue": "JOBS_QUEUE",
+        "queueSize": "0"
+        }
+    ]
     })
     mocker.set_create_quantum_task_result({
         "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
@@ -91,6 +107,11 @@ def mock_default_device_calls(mocker):
         "outputS3Directory" : "Test Directory",
         "shots": 10,
         "deviceArn": "Test Device Arn",
+        "queueInfo": {
+            "queue": "QUANTUM_TASKS_QUEUE",
+            "position": "2",
+            "queuePriority": "Normal",
+        },
         "ResponseMetadata": {
             "HTTPHeaders": {
                 "date": ""
