@@ -34,7 +34,8 @@ EXCLUDED_NOTEBOOKS = [
     # Temporarily exclude Aquila notebooks
     "01_Introduction_to_Aquila.ipynb",
     "02_Ordered_phases_in_Rydberg_systems.ipynb",
-    "03_Parallel_tasks_on_Aquila.ipynb"
+    "03_Parallel_tasks_on_Aquila.ipynb",
+    "06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb"
 ]
 
 
