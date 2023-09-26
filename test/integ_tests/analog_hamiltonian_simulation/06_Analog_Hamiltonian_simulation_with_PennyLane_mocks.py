@@ -8,7 +8,7 @@ def pre_run_inject(mock_utils):
         "deviceType" : "QPU",
         "deviceCapabilities" : mock_utils.read_file("ahs_device_capabilities.json", __file__)
     })
-    mocker.set_task_result_return(mock_utils.read_file("ahs_results.json", __file__))
+    mocker.set_task_result_return(mock_utils.read_file("ahs_results_06.json", __file__))
 
 
 def post_run(tb):
