@@ -13,7 +13,7 @@ phases:
       - export LCC_MINICONDA_INSTALL_DIR=$HOME/Braket/miniconda3
       - wget --quiet $LCC_MINICONDA_INSTALLER_URL --output-document $LCC_MINICONDA_INSTALLER
       - echo "$LCC_MINICONDA_INSTALLER_SHA256  $LCC_MINICONDA_INSTALLER" | sha256sum --status --check -
-      - chmod a+x $LCC_MINICONDACONDA_INSTALLER
+      - chmod a+x $LCC_MINICONDA_INSTALLER
       - ./$LCC_MINICONDA_INSTALLER -b -p $LCC_MINICONDA_INSTALL_DIR
   pre_build:
     commands:
