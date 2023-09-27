@@ -7,7 +7,7 @@ phases:
     commands:
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
-      - export LCC_MINICONDA_INSTALLER=Miniconda3-py310_23.5.2-0-Linux-x86_64.sh
+      - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDACONDA_INSTALLER
       - export LCC_MINICONDA_INSTALLER_SHA256=ea5e6e8a3d5a0247b9df85382d27220fac8e59b5778fd313c5913879cd9baafc
       - export LCC_MINICONDA_INSTALL_DIR=$HOME/Braket/miniconda3
