@@ -63,6 +63,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
         execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
+        check_cells_for_error_output(tb.cells)
 
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
