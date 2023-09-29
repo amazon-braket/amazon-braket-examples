@@ -63,6 +63,8 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
         execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
+        # Check if there are any errors which didn't stop the testbook execution
+        # This can happen in the presence of `%%time` magics.
         check_cells_for_error_output(tb.cells)
 
 
