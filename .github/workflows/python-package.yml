@@ -27,9 +27,9 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip' # caching pip dependencies
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
         pip install -r test/integ_tests/requirements.txt
     - name: Run integ tests
       run: |
