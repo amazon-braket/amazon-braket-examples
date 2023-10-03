@@ -29,7 +29,7 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
-      - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --experimental jlap
+      - conda env create -q -v --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
 
 artifacts:
