@@ -30,7 +30,7 @@ device = AwsDevice(os.environ["AMZN_BRAKET_DEVICE_ARN"])
 counts_list = []
 angle_list = []
 for i in range(5):
-    angle = np.pi * np.random.randn()
+    angle = np.pi * np.random.rand()
     random_circuit = Circuit().rx(0, angle)
 
     task = device.run(random_circuit, shots=100)
