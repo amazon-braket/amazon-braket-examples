@@ -1,7 +1,8 @@
 
 
-def pre_run_inject_2(mock_utils):
-    pass
+import random
+import numpy as np
+
 
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
@@ -12,11 +13,13 @@ def pre_run_inject(mock_utils):
     effects = []
     for i in range(3):
         effects.append(res1)
-    for i in range(51):
+    for i in range(50):
         effects.append(res2)
     for i in range(20):
         effects.append(res3)
     mocker.set_task_result_side_effect(effects)
+    random.seed(42)
+    np.random.seed(42)
 
 
 def post_run(tb):
