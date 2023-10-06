@@ -10,3 +10,14 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: infra
+
+  - package-ecosystem: "pip"
+    # Files stored in repository root
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    allow:
+      # Allow both direct and indirect updates for all packages
+      - dependency-type: "all"
+    commit-message:
+      prefix: infra
