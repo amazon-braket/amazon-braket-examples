@@ -16,7 +16,6 @@ matplotlib==3.8.0
 mypy-extensions==1.0.0
 openfermion==1.5.1
 openfermionpyscf==0.5
-oqpy==0.3.2
 numpy==1.26.0
 pandas==2.1.1
 pennylane==0.32.0
