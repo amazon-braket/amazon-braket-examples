@@ -1,6 +1,6 @@
-botocore==1.31.53
-awscli==1.29.53
-boto3==1.28.53
+botocore==1.31.61
+awscli==1.29.61
+boto3==1.28.61
 amazon-braket-default-simulator==1.20.0
 amazon-braket-pennylane-plugin==1.20.1
 amazon-braket-schemas==1.19.1
@@ -13,7 +13,7 @@ jinja2==3.1.2
 keras==2.12.0
 markupsafe==2.1.2
 matplotlib==3.8.0
-mypy-extensions==0.4.3
+mypy-extensions==1.0.0
 openfermion==1.5.1
 openfermionpyscf==0.5
 oqpy==0.2.1
