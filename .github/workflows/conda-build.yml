@@ -20,14 +20,12 @@ jobs:
     - name: Maximize build space
       shell: bash
       run: |
-        sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf /opt/ghc
-    - uses: actions/checkout@v2
-    - name: Setup python 3.8
-      uses: actions/setup-python@v2
+        sudo rm -rf /usr/local/lib/android & sudo rm -rf /usr/share/dotnet & sudo rm -rf /opt/ghc
+    - uses: actions/checkout@v4
+    - name: Setup python 3.11
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: 3.11.x
     - name: Build conda environment
       run: |
-        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a envs -b nbi/buildspec.yml
+        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:5.0 -a envs -b nbi/buildspec.yml

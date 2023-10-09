@@ -27,18 +27,18 @@ print("Test job started!!!!!")
 # Use the device declared in the creation script
 device = AwsDevice(os.environ["AMZN_BRAKET_DEVICE_ARN"])
 
-angle = FreeParameter("angle")
-parametrized_circuit = Circuit().rx(0, angle)
+theta = FreeParameter("theta")
+parametrized_circuit = Circuit().rx(0, theta)
 
 counts_list = []
-angle_list = []
+theta_list = []
 for i in range(5):
-    angle_value = np.pi * np.random.randn()
+    theta_value = np.pi * np.random.rand()
     
-    task = device.run(parametrized_circuit, shots=100, inputs={"angle": angle_value})
+    task = device.run(parametrized_circuit, shots=100, inputs={"theta": theta_value})
     counts = task.result().measurement_counts
 
-    angle_list.append(angle_value)
+    theta_list.append(theta_value)
     counts_list.append(counts)
     print(counts)
 
@@ -49,7 +49,7 @@ for i in range(5):
 save_job_result(
     {
         "counts": counts_list,
-        "angles": angle_list,
+        "theta": theta_list,
         "task summary": cost_tracker.quantum_tasks_statistics(),
         "estimated cost": braket_tasks_cost,
     }
