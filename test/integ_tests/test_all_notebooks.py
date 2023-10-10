@@ -14,12 +14,12 @@ EXCLUDED_NOTEBOOKS = [
     # These notebooks have dependency issues
     "VQE_chemistry_braket.ipynb",
     "6_Adjoint_gradient_computation.ipynb",
-    # These notebooks are in flux
-    "Using_The_Adjoint_Gradient_Result_Type.ipynb",
-    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
-    "Error_Mitigation_on_Amazon_Braket.ipynb",
     # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
-    "0_Getting_started_papermill.ipynb"
+    "0_Getting_started_papermill.ipynb",
+    # Some AHS examples are running long especially on Mac. Removing while investigating
+    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
+    "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
+    
 ]
 
 logging.basicConfig(level=logging.INFO)
