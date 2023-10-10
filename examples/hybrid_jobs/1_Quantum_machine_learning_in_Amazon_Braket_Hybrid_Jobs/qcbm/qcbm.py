@@ -109,7 +109,6 @@ class QCBM:
 
         grad = np.zeros(len(params))
         for i in range(len(params)):
-            print(f"updating parameter: {i}")
             grad_pos = compute_kernel(qcbm_probs, res[0][i]) - compute_kernel(qcbm_probs, res[1][i])
             grad_neg = compute_kernel(self.data, res[0][i]) - compute_kernel(self.data, res[1][i])
             grad[i] = grad_pos - grad_neg
