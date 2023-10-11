@@ -21,6 +21,6 @@ pandas==2.1.1
 pennylane==0.32.0
 PennyLane-Lightning==0.32.0
 qiskit-aer==0.12.2
-qiskit_braket_provider==0.0.4
+qiskit-braket-provider==0.0.4
 qiskit-terra==0.25.2.1
 scipy==1.11.3
