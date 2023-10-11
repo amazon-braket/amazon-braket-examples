@@ -26,6 +26,15 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: 3.11.x
-    - name: Build conda environment
-      run: |
-        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:5.0 -a envs -b nbi/buildspec.yml
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+    - name: Run CodeBuild
+      uses: aws-actions/aws-codebuild-run-build@v1
+      with:
+        project-name: my-codebuild-job
+        disable-source-override: true
+        buildspec-override: buildspec.yml
