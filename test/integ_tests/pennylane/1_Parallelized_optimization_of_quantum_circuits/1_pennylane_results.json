@@ -6,71 +6,15 @@
     "resultTypes": [
         {
             "type": {
-          "parameters": [
-            "p_0",
-            "p_1",
-            "p_2",
-            "p_3",
-            "p_4",
-            "p_5",
-            "p_6",
-            "p_7",
-            "p_8",
-            "p_9",
-            "p_10",
-            "p_11",
-            "p_12",
-            "p_13",
-            "p_14",
-            "p_15",
-            "p_16",
-            "p_17",
-            "p_18",
-            "p_19",
-            "p_20",
-            "p_21",
-            "p_22",
-            "p_23",
-            "p_24"
-          ],
-          "observable": "1 * z",
+                "observable": [
+                    "z"
+                ],
                 "targets": [
-            [
-              24
-            ]
-          ],
-          "type": "adjoint_gradient"
-        },
-        "value": {
-          "expectation": 0.007545371366891078,
-          "gradient": {
-            "p_0": -0.0025484828818091707,
-            "p_1": -0.008571094609801398,
-            "p_10": -0.00946649052265179,
-            "p_11": -0.005533649754722089,
-            "p_12": -0.00800368317365205,
-            "p_13": -0.004977501330730938,
-            "p_14": -0.0020839603074074074,
-            "p_15": -0.007641854856907038,
-            "p_16": -0.0031819799382028753,
-            "p_17": -0.0033747382009591364,
-            "p_18": -0.0009645525202649892,
-            "p_19": -0.00044313563966185825,
-            "p_2": -0.002162099191110671,
-            "p_20": -3.101852592386051e-06,
-            "p_21": -0.005555823773444223,
-            "p_22": -0.004790421779134922,
-            "p_23": -0.006269519660850745,
-            "p_24": -0.008875038019289268,
-            "p_3": -0.010162627788031316,
-            "p_4": -0.008714157946486938,
-            "p_5": -0.0012970022777053206,
-            "p_6": -0.0003651874141430116,
-            "p_7": -0.004212480000026627,
-            "p_8": -0.007891209277966065,
-            "p_9": -0.0013734235258112079
-          }
-        }
+                    24
+                ],
+                "type": "expectation"
+            },
+            "value": -0.9999996577749632
         }
     ],
     "taskMetadata": {
@@ -91,12 +35,12 @@
                     "name": "braket.device_schema.gate_model_parameters",
                     "version": "1"
                 },
-          "qubitCount": 25,
+                "qubitCount": 2,
                 "disableQubitRewiring": false
             }
         },
-      "createdAt": "2023-10-11T20:43:25.013Z",
-      "endedAt": "2023-10-11T20:43:29.821Z",
+        "createdAt": "2022-12-06T23:06:45.614Z",
+        "endedAt": "2022-12-06T23:06:47.313Z",
         "status": "COMPLETED"
     },
     "additionalMetadata": {
@@ -105,41 +49,15 @@
                 "name": "braket.ir.openqasm.program",
                 "version": "1"
             },
-        "inputs": {
-          "p_0": 0.3257242829287884,
-          "p_1": 0.8489568656837732,
-          "p_2": 0.2790688261742852,
-          "p_3": 0.9321366122250613,
-          "p_4": 0.8571579087667169,
-          "p_5": 0.1702301498785761,
-          "p_6": 0.04836112790769631,
-          "p_7": 0.5091830424266222,
-          "p_8": 0.8077982061368756,
-          "p_9": 0.18005078086641946,
-          "p_10": 0.8978499664153525,
-          "p_11": 0.6327813616309548,
-          "p_12": 0.8148648521385078,
-          "p_13": 0.5831473695373398,
-          "p_14": 0.26947272338461103,
-          "p_15": 0.7917510148286226,
-          "p_16": 0.39908309641454054,
-          "p_17": 0.42057249737878,
-          "p_18": 0.12714409056561282,
-          "p_19": 0.05866208426688879,
-          "p_20": 0.0004110934063747962,
-          "p_21": 0.6346896356756643,
-          "p_22": 0.5656740574490465,
-          "p_23": 0.6933060255613592,
-          "p_24": 0.8661983256138219
-        },
-        "source": "OPENQASM 3.0;\ninput float p_11;\ninput float p_16;\ninput float p_20;\ninput float p_3;\ninput float p_14;\ninput float p_2;\ninput float p_21;\ninput float p_7;\ninput float p_24;\ninput float p_13;\ninput float p_9;\ninput float p_12;\ninput float p_5;\ninput float p_17;\ninput float p_0;\ninput float p_23;\ninput float p_8;\ninput float p_22;\ninput float p_1;\ninput float p_19;\ninput float p_6;\ninput float p_4;\ninput float p_15;\ninput float p_10;\ninput float p_18;\nqubit[25] q;\nrx(p_0) q[0];\nrx(p_1) q[1];\nrx(p_2) q[2];\nrx(p_3) q[3];\nrx(p_4) q[4];\nrx(p_5) q[5];\nrx(p_6) q[6];\nrx(p_7) q[7];\nrx(p_8) q[8];\nrx(p_9) q[9];\nrx(p_10) q[10];\nrx(p_11) q[11];\nrx(p_12) q[12];\nrx(p_13) q[13];\nrx(p_14) q[14];\nrx(p_15) q[15];\nrx(p_16) q[16];\nrx(p_17) q[17];\nrx(p_18) q[18];\nrx(p_19) q[19];\nrx(p_20) q[20];\nrx(p_21) q[21];\nrx(p_22) q[22];\nrx(p_23) q[23];\nrx(p_24) q[24];\ncnot q[0], q[1];\ncnot q[1], q[2];\ncnot q[2], q[3];\ncnot q[3], q[4];\ncnot q[4], q[5];\ncnot q[5], q[6];\ncnot q[6], q[7];\ncnot q[7], q[8];\ncnot q[8], q[9];\ncnot q[9], q[10];\ncnot q[10], q[11];\ncnot q[11], q[12];\ncnot q[12], q[13];\ncnot q[13], q[14];\ncnot q[14], q[15];\ncnot q[15], q[16];\ncnot q[16], q[17];\ncnot q[17], q[18];\ncnot q[18], q[19];\ncnot q[19], q[20];\ncnot q[20], q[21];\ncnot q[21], q[22];\ncnot q[22], q[23];\ncnot q[23], q[24];\ncnot q[24], q[0];\n#pragma braket result adjoint_gradient expectation(z(q[24])) p_0, p_1, p_2, p_3, p_4, p_5, p_6, p_7, p_8, p_9, p_10, p_11, p_12, p_13, p_14, p_15, p_16, p_17, p_18, p_19, p_20, p_21, p_22, p_23, p_24"
+            "inputs": {},
+            "source": "OPENQASM 3.0;\nqubit[2] q;\nrx(0.0004196185026715787) q[0];\nry(3.1408796525696636) q[1];\ncnot q[0], q[1];\n#pragma braket result expectation z(q[1])"
         },
         "simulatorMetadata": {
             "braketSchemaHeader": {
                 "name": "braket.task_result.simulator_metadata",
                 "version": "1"
             },
-        "executionDuration": 3492
+            "executionDuration": 4
         }
     }
 }
