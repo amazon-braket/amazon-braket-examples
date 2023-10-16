@@ -11,6 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+import sys
 import logging
 import os
 import traceback
@@ -25,14 +26,6 @@ logger = logging.getLogger(__name__)
 test_path = "examples/"
 test_notebooks = []
 
-import platform
-
-
-def _version_lt_3_10():
-    version = platform.python_version()
-    return int(version.split(".")[1]) >= 10
-
-
 # These notebooks would not be tested.
 EXCLUDED_NOTEBOOKS = [
     "bring_your_own_container.ipynb",
@@ -46,7 +39,7 @@ EXCLUDED_NOTEBOOKS = [
 ]
 
 # Python 3.10 required for decorators notebooks
-if _version_lt_3_10():
+if sys.version_info.minor != 10:
     EXCLUDED_NOTEBOOKS += [
         "0_Creating_your_first_Hybrid_Job.ipynb",
         "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
