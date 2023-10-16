@@ -25,6 +25,14 @@ logger = logging.getLogger(__name__)
 test_path = "examples/"
 test_notebooks = []
 
+import platform
+
+
+def _version_lt_3_10():
+    version = platform.python_version()
+    return int(version.split(".")[1]) >= 10
+
+
 # These notebooks would not be tested.
 EXCLUDED_NOTEBOOKS = [
     "bring_your_own_container.ipynb",
@@ -35,14 +43,18 @@ EXCLUDED_NOTEBOOKS = [
     "01_Introduction_to_Aquila.ipynb",
     "02_Ordered_phases_in_Rydberg_systems.ipynb",
     "03_Parallel_tasks_on_Aquila.ipynb",
-    # Python 3.10 required for decorators notebooks
-    "0_Creating_your_first_Hybrid_Job.ipynb",
-    "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
-    "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
-    "0_Getting_started.ipynb",
-    "2_Graph_optimization_with_QAOA.ipynb",
-    "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
 ]
+
+# Python 3.10 required for decorators notebooks
+if _version_lt_3_10():
+    EXCLUDED_NOTEBOOKS += [
+        "0_Creating_your_first_Hybrid_Job.ipynb",
+        "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
+        "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
+        "0_Getting_started.ipynb",
+        "2_Graph_optimization_with_QAOA.ipynb",
+        "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
+    ]
 
 
 for dir_, _, files in os.walk(test_path):
