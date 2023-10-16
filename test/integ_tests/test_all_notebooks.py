@@ -28,7 +28,7 @@ EXCLUDED_NOTEBOOKS += [
     "0_Getting_started.ipynb",
     "2_Graph_optimization_with_QAOA.ipynb",
     "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
-    "8_Creating_Hybrid_Job_Scripts-Creating_your_first_Hybrid_Job.ipynb",
+    "Creating_your_first_Hybrid_Job.ipynb",
 ]
 
 logging.basicConfig(level=logging.INFO)
