@@ -1,5 +1,5 @@
 botocore==1.31.62
-awscli==1.29.62
+awscli==1.29.63
 boto3==1.28.62
 amazon-braket-default-simulator==1.20.0.post0
 amazon-braket-pennylane-plugin==1.20.3.post1
