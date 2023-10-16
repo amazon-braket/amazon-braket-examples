@@ -34,7 +34,14 @@ EXCLUDED_NOTEBOOKS = [
     # Temporarily exclude Aquila notebooks
     "01_Introduction_to_Aquila.ipynb",
     "02_Ordered_phases_in_Rydberg_systems.ipynb",
-    "03_Parallel_tasks_on_Aquila.ipynb"
+    "03_Parallel_tasks_on_Aquila.ipynb",
+    # Python 3.10 required for decorators notebooks
+    "0_Creating_your_first_Hybrid_Job.ipynb",
+    "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
+    "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
+    "0_Getting_started.ipynb",
+    "2_Graph_optimization_with_QAOA.ipynb",
+    "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
 ]
 
 
