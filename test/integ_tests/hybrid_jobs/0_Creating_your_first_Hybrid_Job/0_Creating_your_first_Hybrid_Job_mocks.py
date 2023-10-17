@@ -2,6 +2,7 @@ import os
 import tarfile
 import subprocess
 import unittest.mock as mock
+import sys
 
 
 default_job_results = ""
@@ -56,7 +57,8 @@ def pre_run_inject(mock_utils):
             ],
         ]
     })
-    mocker.set_batch_get_image_result({"images": [{"imageId": {"imageDigest": "my-digest", "imageTag": "-py310-"}}]})
+    tag = f"-py{sys.version_info.major}{sys.version_info.minor}-"
+    mocker.set_batch_get_image_result({"images": [{"imageId": {"imageDigest": "my-digest", "imageTag": tag}}]})
     global default_job_results
     default_job_results = mock_utils.read_file("../job_results.json", __file__)
     with open("results.json", "w") as f:
