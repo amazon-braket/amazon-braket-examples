@@ -56,10 +56,7 @@ def pre_run_inject(mock_utils):
             {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
             {
                 "images": [
-                    {"imageId": {"imageTag": "my-tag"}},
-                    {"imageId": {"imageTag": "my-tag-py3"}},
-                    {"imageId": {"imageTag": f"my-tag-py3{sys.version_info.minor}-latest"}},
-                    {"imageId": {"imageTag": "latest"}},
+                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
                 ]
             },
         ])
