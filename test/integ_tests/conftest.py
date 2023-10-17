@@ -3,7 +3,7 @@ import pytest
 
 def pytest_addoption(parser):
     parser.addoption(
-        '--mock-level', action='store', default='LEAST', help='ALL=mock everything, LEAST=mock least possible'
+        '--mock-level', action='store', default='ALL', help='ALL=mock everything, LEAST=mock least possible'
     )
 
 

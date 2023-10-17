@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import json
 import braket.aws
 
-
 plt.savefig = mock.Mock()
 
 
@@ -73,7 +72,7 @@ class Mocker:
         return self._wrapper.region_name
 
 
-def read_file(name, file_path = None):
+def read_file(name, file_path=None):
     if file_path:
         json_path = os.path.join(os.path.dirname(file_path), name)
     else:
@@ -84,33 +83,33 @@ def read_file(name, file_path = None):
 
 def mock_default_device_calls(mocker):
     mocker.set_get_device_result({
-        "deviceType" : "QPU",
-        "deviceCapabilities" : read_file("default_capabilities.json"),
+        "deviceType": "QPU",
+        "deviceCapabilities": read_file("default_capabilities.json"),
         "deviceQueueInfo": [
-        {
-        "queue": "QUANTUM_TASKS_QUEUE",
-        "queueSize": "13",
-        "queuePriority": "Normal"
-        },
-        {
-        "queue": "QUANTUM_TASKS_QUEUE",
-        "queueSize": "0",
-        "queuePriority": "Priority"
-        },
-        {
-        "queue": "JOBS_QUEUE",
-        "queueSize": "0"
-        }
-    ]
+            {
+                "queue": "QUANTUM_TASKS_QUEUE",
+                "queueSize": "13",
+                "queuePriority": "Normal"
+            },
+            {
+                "queue": "QUANTUM_TASKS_QUEUE",
+                "queueSize": "0",
+                "queuePriority": "Priority"
+            },
+            {
+                "queue": "JOBS_QUEUE",
+                "queueSize": "0"
+            }
+        ]
     })
     mocker.set_create_quantum_task_result({
-        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
     })
     mocker.set_get_quantum_task_result({
-        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-        "status" : "COMPLETED",
-        "outputS3Bucket" : "Test Bucket",
-        "outputS3Directory" : "Test Directory",
+        "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        "status": "COMPLETED",
+        "outputS3Bucket": "Test Bucket",
+        "outputS3Directory": "Test Directory",
         "shots": 10,
         "deviceArn": "Test Device Arn",
         "queueInfo": {
@@ -147,9 +146,9 @@ class SessionWrapper():
         }
         self.boto_client.meta.region_name = "us-west-2"
         self.boto_client.get_authorization_token.return_value = {
-            "authorizationData" : [
+            "authorizationData": [
                 {
-                    "authorizationToken" : "TestToken"
+                    "authorizationToken": "TestToken"
                 }
             ]
         }
@@ -159,8 +158,11 @@ class Boto3SessionAllWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
         boto3.Session = self
+        self._region = None
 
     def __call__(self, *args, **kwargs):
+        if "region_name" in kwargs:
+            self._region = kwargs["region_name"]
         return self
 
     def client(self, *args, **kwargs):
@@ -177,7 +179,7 @@ class Boto3SessionAllWrapper(SessionWrapper):
 
     @property
     def region_name(self):
-        return "us-west-2"
+        return self._region or "us-west-2"
 
 
 class AwsSessionMinWrapper(SessionWrapper):
@@ -283,4 +285,3 @@ class AwsSessionFacade(braket.aws.AwsSession):
 
     def get_job_metrics(self, query_id):
         return AwsSessionFacade._wrapper.boto_client.get_query_results(query_id)["results"]
-

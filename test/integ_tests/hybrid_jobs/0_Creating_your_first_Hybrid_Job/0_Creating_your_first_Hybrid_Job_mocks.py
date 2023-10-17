@@ -1,4 +1,5 @@
 import os
+import sys
 import tarfile
 import subprocess
 import unittest.mock as mock
@@ -57,7 +58,7 @@ def pre_run_inject(mock_utils):
                 "images": [
                     {"imageId": {"imageTag": "my-tag"}},
                     {"imageId": {"imageTag": "my-tag-py3"}},
-                    {"imageId": {"imageTag": "my-tag-py310-latest"}},
+                    {"imageId": {"imageTag": f"my-tag-py3{sys.version_info.minor}-latest"}},
                     {"imageId": {"imageTag": "latest"}},
                 ]
             },
