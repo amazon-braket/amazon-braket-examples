@@ -20,9 +20,17 @@ def pre_run_inject(mock_utils):
             ]
         }
     ])
-    mocker.set_create_job_result({
-        "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
-    })
+    if mocker.mock_level == 'ALL':
+        # All full mocking is done in us-west-2
+        mocker.set_create_job_result({
+            "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
+        })
+    else:
+        # When running on QPU, the job arn is based on the device arn region, even when mocking.
+        mocker.set_create_job_side_effect([
+            { "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"},
+            { "jobArn" : f"arn:aws:braket:us-west-1:000000:job/testJob"}
+        ])
     mocker.set_get_job_result({
         "instanceConfig" : {
             "instanceCount" : 1
@@ -36,6 +44,19 @@ def pre_run_inject(mock_utils):
     mocker.set_log_streams_result({
         "logStreams": []
     })
+    mocker.set_start_query_result({
+        "queryId": "TestId"
+    })
+    mocker.set_get_query_results_result({
+        "status": "Complete",
+        "results": [
+            [
+                {"field": "@message", "value": "iteration_number=0;expval=10;"},
+                {"field": "@timestamp", "value": "0"}
+            ],
+        ]
+    })
+    mocker.set_batch_get_image_result({"images": [{"imageId": {"imageDigest": "my-digest", "imageTag": "-py310-"}}]})
     global default_job_results
     default_job_results = mock_utils.read_file("../job_results.json", __file__)
     with open("results.json", "w") as f:
