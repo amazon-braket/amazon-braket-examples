@@ -158,11 +158,12 @@ class Boto3SessionAllWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
         boto3.Session = self
-        self._region = None
+        self._default_region = "us-west-2"
+        self._region = self._default_region
 
     def __call__(self, *args, **kwargs):
-        if "region_name" in kwargs:
-            self._region = kwargs["region_name"]
+        # handle explicit region_name=None
+        self._region = kwargs.get("region_name", None) or self._default_region
         return self
 
     def client(self, *args, **kwargs):
@@ -179,7 +180,7 @@ class Boto3SessionAllWrapper(SessionWrapper):
 
     @property
     def region_name(self):
-        return self._region or "us-west-2"
+        return self._region
 
 
 class AwsSessionMinWrapper(SessionWrapper):
