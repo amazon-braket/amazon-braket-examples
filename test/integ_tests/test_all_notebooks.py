@@ -22,7 +22,6 @@ EXCLUDED_NOTEBOOKS = [
 ]
 # Python 3.10 required for decorators notebooks
 EXCLUDED_NOTEBOOKS += [
-    "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
     "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
     "0_Getting_started.ipynb",
     "2_Graph_optimization_with_QAOA.ipynb",
