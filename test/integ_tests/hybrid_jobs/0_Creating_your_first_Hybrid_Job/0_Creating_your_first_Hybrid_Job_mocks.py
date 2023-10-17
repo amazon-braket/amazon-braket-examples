@@ -1,8 +1,9 @@
 import os
+import sys
 import tarfile
 import subprocess
 import unittest.mock as mock
-
+from itertools import cycle
 
 default_job_results = ""
 
@@ -12,29 +13,56 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_search_result([
         {
-            "Roles" : [
+            "Roles": [
                 {
                     "RoleName": "AmazonBraketJobsExecutionRole",
-                    "Arn" : "TestRoleARN"
+                    "Arn": "TestRoleARN"
                 }
             ]
         }
     ])
-    mocker.set_create_job_result({
-        "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
-    })
+    mocker.set_create_job_side_effect([
+        {
+            "jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
+        },
+        {
+            "jobArn": f"arn:aws:braket:us-west-1:000000:job/testJob"
+        },
+    ])
     mocker.set_get_job_result({
-        "instanceConfig" : {
-            "instanceCount" : 1
+        "instanceConfig": {
+            "instanceCount": 1
         },
         "jobName": "testJob",
         "status": "COMPLETED",
         "outputDataConfig": {
-            "s3Path" : "s3://amazon-br-invalid-path/test-path/test-results"
+            "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
         }
     })
     mocker.set_log_streams_result({
         "logStreams": []
+    })
+    mocker.set_get_query_results_result({
+        "status": "Complete",
+        "results": [
+            [
+                {"field": "@message", "value": "iteration_number=0;expval=0;"},
+                {"field": "@timestamp", "value": "0"},
+            ],
+        ]
+    })
+    mocker.set_batch_get_image_side_effect(
+        cycle([
+            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
+            {
+                "images": [
+                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
+                ]
+            },
+        ])
+    )
+    mocker.set_start_query_result({
+        "queryId": "TestId"
     })
     global default_job_results
     default_job_results = mock_utils.read_file("../job_results.json", __file__)
