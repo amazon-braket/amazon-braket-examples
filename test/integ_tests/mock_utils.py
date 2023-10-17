@@ -144,7 +144,6 @@ class SessionWrapper():
         self.boto_client.get_caller_identity.return_value = {
             "Account": "TestAccount"
         }
-        self.boto_client.meta.region_name = "us-west-2"
         self.boto_client.get_authorization_token.return_value = {
             "authorizationData": [
                 {
