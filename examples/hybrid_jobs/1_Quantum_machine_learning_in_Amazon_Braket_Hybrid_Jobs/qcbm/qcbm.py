@@ -105,11 +105,10 @@ class QCBM:
             result = [self.device.run(c, shots=self.shots).result() for c in circuits]
 
         res = [result[i].values[0] for i in range(len(circuits))]
-        res = np.array(res).reshape(2, len(params), 2 ** self.n_qubits)
+        res = np.array(res).reshape(2, len(params), 2**self.n_qubits)
 
         grad = np.zeros(len(params))
         for i in range(len(params)):
-            print(f"updating parameter: {i}")
             grad_pos = compute_kernel(qcbm_probs, res[0][i]) - compute_kernel(qcbm_probs, res[1][i])
             grad_neg = compute_kernel(self.data, res[0][i]) - compute_kernel(self.data, res[1][i])
             grad[i] = grad_pos - grad_neg
@@ -131,7 +130,7 @@ def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
     """
     x = np.arange(len(px))
     y = np.arange(len(py))
-    K = sum(np.exp(-np.abs(x[:, None] - y[None, :]) ** 2 / (2 * s ** 2)) for s in sigma_list)
+    K = sum(np.exp(-np.abs(x[:, None] - y[None, :]) ** 2 / (2 * s**2)) for s in sigma_list)
     kernel = px @ K @ py
     return kernel
 
