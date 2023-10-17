@@ -44,6 +44,9 @@ class Mocker:
     def set_create_job_result(self, result):
         self._wrapper.boto_client.create_job.return_value = result
 
+    def set_create_job_side_effect(self, side_effect):
+        self._wrapper.boto_client.create_job.side_effect = side_effect
+
     def set_get_job_result(self, result):
         self._wrapper.boto_client.get_job.return_value = result
 
@@ -61,6 +64,9 @@ class Mocker:
 
     def set_list_objects_v2_result(self, result):
         self._wrapper.boto_client.list_objects_v2.return_value = result
+
+    def set_batch_get_image_side_effect(self, side_effect):
+        self._wrapper.boto_client.batch_get_image.side_effect = side_effect
 
     @property
     def region_name(self):

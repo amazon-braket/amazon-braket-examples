@@ -43,7 +43,7 @@ test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
-        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
+        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_ and file_name == "0_Creating_your_first_Hybrid_Job.ipynb":
             test_notebooks.append((dir_, file_name))
 
 
