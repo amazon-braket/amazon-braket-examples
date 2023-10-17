@@ -19,7 +19,16 @@ EXCLUDED_NOTEBOOKS = [
     # Some AHS examples are running long especially on Mac. Removing while investigating
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
-    
+]
+# Python 3.10 required for decorators notebooks
+EXCLUDED_NOTEBOOKS += [
+    "0_Creating_your_first_Hybrid_Job.ipynb",
+    "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
+    "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
+    "0_Getting_started.ipynb",
+    "2_Graph_optimization_with_QAOA.ipynb",
+    "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
+    "Creating_your_first_Hybrid_Job.ipynb",
 ]
 
 logging.basicConfig(level=logging.INFO)
@@ -45,7 +54,9 @@ def get_mock_paths(notebook_dir, notebook_file):
     mock_dir = os.path.join(*split_notebook_dir[1:])
     path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", mock_dir, mock_file)
     if not os.path.exists(path_to_mocks):
-        path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py")
+        path_to_mocks = os.path.join(
+            path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py"
+        )
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
 
@@ -73,7 +84,7 @@ def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
 
-    html_exporter = HTMLExporter(template_name='classic')
+    html_exporter = HTMLExporter(template_name="classic")
 
     html_exporter.from_file(notebook_file)
 
@@ -102,7 +113,7 @@ def test_record():
             mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
             """,
             run=False,
-            before=0
+            before=0,
         )
         tb.execute()
 
@@ -128,7 +139,7 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
         test_mocks.pre_run_inject(mock_utils)
         """,
         run=False,
-        before=0
+        before=0,
     )
     tb.execute()
     test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
