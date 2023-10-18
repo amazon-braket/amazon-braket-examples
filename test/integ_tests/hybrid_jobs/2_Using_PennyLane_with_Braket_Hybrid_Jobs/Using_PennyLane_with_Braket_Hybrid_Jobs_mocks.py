@@ -1,9 +1,11 @@
 import tarfile
+import unittest.mock as mock
 
 
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
+    mock_utils.mock_default_job_calls(mocker)
     mocker.set_search_result([
         {
             "Roles" : [
@@ -40,7 +42,7 @@ def pre_run_inject(mock_utils):
         "status": "Complete",
         "results": [
             [
-                {"field": "@message", "value": "iteration_number=0;Cost=0;"},
+                {"field": "@message", "value": "iteration_number=0;loss=0;"},
                 {"field": "@timestamp", "value": "0"}
             ],
         ]
@@ -54,6 +56,7 @@ def pre_run_inject(mock_utils):
         f.write(default_job_results)
     with tarfile.open("model.tar.gz", "w:gz") as tar:
         tar.add("results.json")
+    mock.patch('cloudpickle.dumps', return_value='serialized').start()
 
 
 def post_run(tb):
@@ -62,6 +65,8 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
+        os.remove("input-data.adjlist")
+        os.remove("optimal_params.npy")
         """
     )
 
