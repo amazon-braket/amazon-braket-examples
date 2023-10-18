@@ -8,8 +8,6 @@ from braket.jobs_data import PersistedJobData, PersistedJobDataFormat
 
 from braket.jobs.serialization import serialize_values
 
-mock_cloudpickle = patch('cloudpickle.dumps', return_value='serialize')
-
 
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
@@ -86,6 +84,7 @@ def pre_run_inject(mock_utils):
         f.write(persisted_data.json())
     with tarfile.open("model.tar.gz", "w:gz") as tar:
         tar.add("results.json")
+    mock_cloudpickle = patch('cloudpickle.dumps', return_value='serialized')
     mock_cloudpickle.start()
 
 
@@ -95,6 +94,5 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
-        mock_cloudpickle.stop()
         """
     )
