@@ -1,9 +1,7 @@
 import os
-import sys
 import tarfile
 import subprocess
 import unittest.mock as mock
-from itertools import cycle
 
 default_job_results = ""
 
@@ -11,6 +9,7 @@ default_job_results = ""
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
+    mock_utils.mock_default_job_calls(mocker)
     mocker.set_search_result([
         {
             "Roles": [
@@ -51,16 +50,6 @@ def pre_run_inject(mock_utils):
             ],
         ]
     })
-    mocker.set_batch_get_image_side_effect(
-        cycle([
-            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
-            {
-                "images": [
-                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
-                ]
-            },
-        ])
-    )
     mocker.set_start_query_result({
         "queryId": "TestId"
     })
