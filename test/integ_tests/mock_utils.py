@@ -1,4 +1,7 @@
 import os
+import sys
+from itertools import cycle
+
 import boto3
 import unittest.mock as mock
 import braket.tracking
@@ -124,6 +127,19 @@ def mock_default_device_calls(mocker):
         }
     })
     mocker.set_task_result_return(read_file("default_results.json"))
+
+
+def mock_default_job_calls(mocker):
+    mocker.set_batch_get_image_side_effect(
+        cycle([
+            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
+            {
+                "images": [
+                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
+                ]
+            },
+        ])
+    )
 
 
 def set_level(mock_level):

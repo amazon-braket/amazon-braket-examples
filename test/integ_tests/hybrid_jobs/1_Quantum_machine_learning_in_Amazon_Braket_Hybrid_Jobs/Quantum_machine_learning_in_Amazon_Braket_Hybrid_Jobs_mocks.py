@@ -1,6 +1,4 @@
-import sys
 import tarfile
-from itertools import cycle
 from unittest.mock import patch
 
 import numpy as np
@@ -12,6 +10,7 @@ from braket.jobs.serialization import serialize_values
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
+    mock_utils.mock_default_job_calls(mocker)
     mocker.set_search_result([
         {
             "Roles": [
@@ -50,16 +49,6 @@ def pre_run_inject(mock_utils):
             ],
         ]
     })
-    mocker.set_batch_get_image_side_effect(
-        cycle([
-            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
-            {
-                "images": [
-                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
-                ]
-            },
-        ])
-    )
     default_job_results = {
         'params': np.array(
             [
@@ -84,8 +73,8 @@ def pre_run_inject(mock_utils):
         f.write(persisted_data.json())
     with tarfile.open("model.tar.gz", "w:gz") as tar:
         tar.add("results.json")
-    mock_cloudpickle = patch('cloudpickle.dumps', return_value='serialized')
-    mock_cloudpickle.start()
+    # not explicitly stopped as notebooks are run in new kernels
+    patch('cloudpickle.dumps', return_value='serialized').start()
 
 
 def post_run(tb):
