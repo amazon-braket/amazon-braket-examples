@@ -10,16 +10,6 @@ def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
     mock_utils.mock_default_job_calls(mocker)
-    mocker.set_search_result([
-        {
-            "Roles": [
-                {
-                    "RoleName": "AmazonBraketJobsExecutionRole",
-                    "Arn": "TestRoleARN"
-                }
-            ]
-        }
-    ])
     mocker.set_create_job_side_effect([
         {
             "jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
@@ -28,16 +18,6 @@ def pre_run_inject(mock_utils):
             "jobArn": f"arn:aws:braket:us-west-1:000000:job/testJob"
         },
     ])
-    mocker.set_get_job_result({
-        "instanceConfig": {
-            "instanceCount": 1
-        },
-        "jobName": "testJob",
-        "status": "COMPLETED",
-        "outputDataConfig": {
-            "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
-        }
-    })
     mocker.set_log_streams_result({
         "logStreams": []
     })
