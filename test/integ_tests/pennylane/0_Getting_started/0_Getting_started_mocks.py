@@ -12,11 +12,6 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mock_utils.mock_default_job_calls(mocker)
     mocker.set_task_result_return(mock_utils.read_file("../pennylane_results.json", __file__))
-    mocker.set_create_job_result(
-        {
-            "jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
-        }
-    )
     default_job_results = {
         'params': np.array([0.32900000000000007, 2.5835999999999997]),
         'costs': np.array([

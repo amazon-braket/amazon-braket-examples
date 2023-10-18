@@ -24,7 +24,6 @@ EXCLUDED_NOTEBOOKS = [
 EXCLUDED_NOTEBOOKS += [
     # todo: revisit failure for ubuntu build
     "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
-    "2_Graph_optimization_with_QAOA.ipynb",
     "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
     "Creating_your_first_Hybrid_Job.ipynb",
 ]
