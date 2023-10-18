@@ -95,6 +95,6 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
+        mock_cloudpickle.stop()
         """
     )
-    mock_cloudpickle.stop()
