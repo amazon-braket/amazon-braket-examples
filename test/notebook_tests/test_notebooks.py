@@ -11,6 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
+import sys
 import logging
 import os
 import traceback
@@ -37,6 +38,17 @@ EXCLUDED_NOTEBOOKS = [
     "03_Parallel_tasks_on_Aquila.ipynb",
     "06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb"
 ]
+
+# Python 3.10 required for decorators notebooks
+if sys.version_info.minor != 10:
+    EXCLUDED_NOTEBOOKS += [
+        "0_Creating_your_first_Hybrid_Job.ipynb",
+        "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
+        "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
+        "0_Getting_started.ipynb",
+        "2_Graph_optimization_with_QAOA.ipynb",
+        "3_Hydrogen_Molecule_geometry_with_VQE.ipynb",
+    ]
 
 
 for dir_, _, files in os.walk(test_path):
