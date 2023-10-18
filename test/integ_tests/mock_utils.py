@@ -140,6 +140,26 @@ def mock_default_job_calls(mocker):
             },
         ])
     )
+    mocker.set_search_result([
+        {
+            "Roles": [
+                {
+                    "RoleName": "AmazonBraketJobsExecutionRole",
+                    "Arn": "TestRoleARN"
+                }
+            ]
+        }
+    ])
+    mocker.set_get_job_result({
+        "instanceConfig": {
+            "instanceCount": 1
+        },
+        "jobName": "testJob",
+        "status": "COMPLETED",
+        "outputDataConfig": {
+            "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
+        }
+    })
 
 
 def set_level(mock_level):
