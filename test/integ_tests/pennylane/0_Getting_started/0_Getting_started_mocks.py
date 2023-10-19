@@ -21,15 +21,7 @@ def pre_run_inject(mock_utils):
         ]),
         'braket_tasks_cost': 0.375,
     }
-    with open("results.json", "w") as f:
-        serialized_data = serialize_values(default_job_results, PersistedJobDataFormat.PICKLED_V4)
-        persisted_data = PersistedJobData(
-            dataDictionary=serialized_data,
-            dataFormat=PersistedJobDataFormat.PICKLED_V4,
-        )
-        f.write(persisted_data.json())
-    with tarfile.open("model.tar.gz", "w:gz") as tar:
-        tar.add("results.json")
+    mock_utils.mock_job_results(default_job_results)
     patch('cloudpickle.dumps', return_value='serialized').start()
 
 def post_run(tb):
