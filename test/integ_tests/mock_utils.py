@@ -1,4 +1,8 @@
 import os
+import sys
+import tarfile
+from itertools import cycle
+
 import boto3
 import unittest.mock as mock
 import braket.tracking
@@ -6,6 +10,8 @@ import matplotlib.pyplot as plt
 import json
 import braket.aws
 
+from braket.jobs_data import PersistedJobData, PersistedJobDataFormat
+from braket.jobs.serialization import serialize_values
 
 plt.savefig = mock.Mock()
 
@@ -44,6 +50,9 @@ class Mocker:
     def set_create_job_result(self, result):
         self._wrapper.boto_client.create_job.return_value = result
 
+    def set_create_job_side_effect(self, side_effect):
+        self._wrapper.boto_client.create_job.side_effect = side_effect
+
     def set_get_job_result(self, result):
         self._wrapper.boto_client.get_job.return_value = result
 
@@ -62,12 +71,15 @@ class Mocker:
     def set_list_objects_v2_result(self, result):
         self._wrapper.boto_client.list_objects_v2.return_value = result
 
+    def set_batch_get_image_side_effect(self, side_effect):
+        self._wrapper.boto_client.batch_get_image.side_effect = side_effect
+
     @property
     def region_name(self):
         return self._wrapper.region_name
 
 
-def read_file(name, file_path = None):
+def read_file(name, file_path=None):
     if file_path:
         json_path = os.path.join(os.path.dirname(file_path), name)
     else:
@@ -78,33 +90,33 @@ def read_file(name, file_path = None):
 
 def mock_default_device_calls(mocker):
     mocker.set_get_device_result({
-        "deviceType" : "QPU",
-        "deviceCapabilities" : read_file("default_capabilities.json"),
+        "deviceType": "QPU",
+        "deviceCapabilities": read_file("default_capabilities.json"),
         "deviceQueueInfo": [
-        {
-        "queue": "QUANTUM_TASKS_QUEUE",
-        "queueSize": "13",
-        "queuePriority": "Normal"
-        },
-        {
-        "queue": "QUANTUM_TASKS_QUEUE",
-        "queueSize": "0",
-        "queuePriority": "Priority"
-        },
-        {
-        "queue": "JOBS_QUEUE",
-        "queueSize": "0"
-        }
-    ]
+            {
+                "queue": "QUANTUM_TASKS_QUEUE",
+                "queueSize": "13",
+                "queuePriority": "Normal"
+            },
+            {
+                "queue": "QUANTUM_TASKS_QUEUE",
+                "queueSize": "0",
+                "queuePriority": "Priority"
+            },
+            {
+                "queue": "JOBS_QUEUE",
+                "queueSize": "0"
+            }
+        ]
     })
     mocker.set_create_quantum_task_result({
-        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
     })
     mocker.set_get_quantum_task_result({
-        "quantumTaskArn" : "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-        "status" : "COMPLETED",
-        "outputS3Bucket" : "Test Bucket",
-        "outputS3Directory" : "Test Directory",
+        "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        "status": "COMPLETED",
+        "outputS3Bucket": "Test Bucket",
+        "outputS3Directory": "Test Directory",
         "shots": 10,
         "deviceArn": "Test Device Arn",
         "queueInfo": {
@@ -119,6 +131,54 @@ def mock_default_device_calls(mocker):
         }
     })
     mocker.set_task_result_return(read_file("default_results.json"))
+
+
+def mock_default_job_calls(mocker):
+    mocker.set_batch_get_image_side_effect(
+        cycle([
+            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
+            {
+                "images": [
+                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
+                ]
+            },
+        ])
+    )
+    mocker.set_search_result([
+        {
+            "Roles": [
+                {
+                    "RoleName": "AmazonBraketJobsExecutionRole",
+                    "Arn": "TestRoleARN"
+                }
+            ]
+        }
+    ])
+    mocker.set_create_job_result({
+        "jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
+    })
+    mocker.set_get_job_result({
+        "instanceConfig": {
+            "instanceCount": 1
+        },
+        "jobName": "testJob",
+        "status": "COMPLETED",
+        "outputDataConfig": {
+            "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
+        }
+    })
+
+
+def mock_job_results(results):
+    with open("results.json", "w") as f:
+        serialized_data = serialize_values(results, PersistedJobDataFormat.PICKLED_V4)
+        persisted_data = PersistedJobData(
+            dataDictionary=serialized_data,
+            dataFormat=PersistedJobDataFormat.PICKLED_V4,
+        )
+        f.write(persisted_data.json())
+    with tarfile.open("model.tar.gz", "w:gz") as tar:
+        tar.add("results.json")
 
 
 def set_level(mock_level):
@@ -139,11 +199,10 @@ class SessionWrapper():
         self.boto_client.get_caller_identity.return_value = {
             "Account": "TestAccount"
         }
-        self.boto_client.meta.region_name = "us-west-2"
         self.boto_client.get_authorization_token.return_value = {
-            "authorizationData" : [
+            "authorizationData": [
                 {
-                    "authorizationToken" : "TestToken"
+                    "authorizationToken": "TestToken"
                 }
             ]
         }
@@ -153,8 +212,12 @@ class Boto3SessionAllWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
         boto3.Session = self
+        self._default_region = "us-west-2"
+        self._region = self._default_region
 
     def __call__(self, *args, **kwargs):
+        # handle explicit region_name=None
+        self._region = kwargs.get("region_name", None) or self._default_region
         return self
 
     def client(self, *args, **kwargs):
@@ -171,7 +234,7 @@ class Boto3SessionAllWrapper(SessionWrapper):
 
     @property
     def region_name(self):
-        return "us-west-2"
+        return self._region
 
 
 class AwsSessionMinWrapper(SessionWrapper):
@@ -277,4 +340,3 @@ class AwsSessionFacade(braket.aws.AwsSession):
 
     def get_job_metrics(self, query_id):
         return AwsSessionFacade._wrapper.boto_client.get_query_results(query_id)["results"]
-
