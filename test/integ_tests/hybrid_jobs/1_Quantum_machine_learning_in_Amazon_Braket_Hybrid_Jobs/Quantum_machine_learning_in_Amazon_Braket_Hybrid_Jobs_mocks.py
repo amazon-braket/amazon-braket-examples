@@ -52,6 +52,5 @@ def post_run(tb):
         os.remove("model.tar.gz")
         os.remove("results.json")
         os.remove("data.npy")
-        os.remove("final_params.npy")
         """
     )
