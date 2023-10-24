@@ -20,11 +20,6 @@ EXCLUDED_NOTEBOOKS = [
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
 ]
-# Python 3.10 required for decorators notebooks
-EXCLUDED_NOTEBOOKS += [
-    # todo: revisit failure for ubuntu build
-    "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
-]
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -38,7 +33,7 @@ test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
-        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
+        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_ and "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb" in file_name:
             test_notebooks.append((dir_, file_name))
 
 

@@ -49,7 +49,9 @@ def post_run(tb):
     tb.inject(
         """
         import os
-        os.remove("model.tar.gz")
+        os.remove("model.tar.gz") 
         os.remove("results.json")
+        os.remove("data.npy") 
+        os.remove("final_params.npy") 
         """
     )
