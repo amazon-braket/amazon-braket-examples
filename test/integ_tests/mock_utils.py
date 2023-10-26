@@ -1,10 +1,17 @@
 import os
+import sys
+import tarfile
+from itertools import cycle
+
 import boto3
 import unittest.mock as mock
 import braket.tracking
 import matplotlib.pyplot as plt
 import json
 import braket.aws
+
+from braket.jobs_data import PersistedJobData, PersistedJobDataFormat
+from braket.jobs.serialization import serialize_values
 
 plt.savefig = mock.Mock()
 
@@ -124,6 +131,54 @@ def mock_default_device_calls(mocker):
         }
     })
     mocker.set_task_result_return(read_file("default_results.json"))
+
+
+def mock_default_job_calls(mocker):
+    mocker.set_batch_get_image_side_effect(
+        cycle([
+            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
+            {
+                "images": [
+                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
+                ]
+            },
+        ])
+    )
+    mocker.set_search_result([
+        {
+            "Roles": [
+                {
+                    "RoleName": "AmazonBraketJobsExecutionRole",
+                    "Arn": "TestRoleARN"
+                }
+            ]
+        }
+    ])
+    mocker.set_create_job_result({
+        "jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
+    })
+    mocker.set_get_job_result({
+        "instanceConfig": {
+            "instanceCount": 1
+        },
+        "jobName": "testJob",
+        "status": "COMPLETED",
+        "outputDataConfig": {
+            "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
+        }
+    })
+
+
+def mock_job_results(results):
+    with open("results.json", "w") as f:
+        serialized_data = serialize_values(results, PersistedJobDataFormat.PICKLED_V4)
+        persisted_data = PersistedJobData(
+            dataDictionary=serialized_data,
+            dataFormat=PersistedJobDataFormat.PICKLED_V4,
+        )
+        f.write(persisted_data.json())
+    with tarfile.open("model.tar.gz", "w:gz") as tar:
+        tar.add("results.json")
 
 
 def set_level(mock_level):
