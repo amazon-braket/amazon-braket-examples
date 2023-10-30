@@ -1,10 +1,13 @@
 amazon-braket-sdk
 amazon-braket-pennylane-plugin
 cvxpy
+ipython<8.17
 matplotlib
+ml-dtypes==0.2.0
 nbconvert
 pandas
 pennylane
+PennyLane_Lightning<=0.32
 pytest
 pytest-rerunfailures
 pytest-xdist
