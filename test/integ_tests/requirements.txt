@@ -5,6 +5,7 @@ matplotlib
 nbconvert
 pandas
 pennylane
+PennyLane_Lightning>=0.32
 pytest
 pytest-rerunfailures
 pytest-xdist
