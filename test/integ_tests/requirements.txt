@@ -11,3 +11,6 @@ pytest-xdist
 qiskit_braket_provider
 testbook
 jupyter
+jax
+jaxlib
+optax

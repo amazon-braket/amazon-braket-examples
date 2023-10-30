@@ -1,32 +1,16 @@
 import tarfile
+from unittest.mock import patch
+
+import numpy as np
+from braket.jobs_data import PersistedJobData, PersistedJobDataFormat
+
+from braket.jobs.serialization import serialize_values
 
 
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
-    mocker.set_search_result([
-        {
-            "Roles" : [
-                {
-                    "RoleName": "AmazonBraketJobsExecutionRole",
-                    "Arn" : "TestRoleARN"
-                }
-            ]
-        }
-    ])
-    mocker.set_create_job_result({
-        "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
-    })
-    mocker.set_get_job_result({
-        "instanceConfig" : {
-            "instanceCount" : 1
-        },
-        "jobName": "testJob",
-        "status": "COMPLETED",
-        "outputDataConfig": {
-            "s3Path" : "s3://amazon-br-invalid-path/test-path/test-results"
-        }
-    })
+    mock_utils.mock_default_job_calls(mocker)
     mocker.set_log_streams_result({
         "logStreams": []
     })
@@ -42,11 +26,23 @@ def pre_run_inject(mock_utils):
             ],
         ]
     })
-    default_job_results = mock_utils.read_file("../job_results.json", __file__)
-    with open("results.json", "w") as f:
-        f.write(default_job_results)
-    with tarfile.open("model.tar.gz", "w:gz") as tar:
-        tar.add("results.json")
+    default_job_results = {
+        'params': np.array(
+            [
+                0.77996265, 0.52813787, 0.61299074, -0.09124156, 0.17680213,
+                -0.02222335, 0.91524364, -0.31786518, 0.64940861, 0.62663773,
+                0.87611417, -0.0715285, -0.00379581, 1.04400452, 0.20672916,
+                0.94888017, 0.55607485, 1.03805133, 1.08456977, -0.75108754,
+                1.13637642, 0.72634854, 0.93536659, 0.17868376, 0.79434158,
+                0.05315669, 0.81228023, -0.62405866, 0.10342629, -0.8736394
+            ]
+        ),
+        'task summary': {},
+        'estimated cost': 0.0,
+    }
+    mock_utils.mock_job_results(default_job_results)
+    # not explicitly stopped as notebooks are run in new kernels
+    patch('cloudpickle.dumps', return_value='serialized').start()
 
 
 def post_run(tb):
@@ -57,4 +53,3 @@ def post_run(tb):
         os.remove("results.json")
         """
     )
-

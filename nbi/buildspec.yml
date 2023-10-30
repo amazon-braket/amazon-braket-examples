@@ -7,7 +7,7 @@ phases:
     commands:
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
-      - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
+      - export LCC_MINICONDA_INSTALLER=Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDA_INSTALLER
       - export LCC_MINICONDA_INSTALLER_SHA256=634d76df5e489c44ade4085552b97bebc786d49245ed1a830022b0b406de5817
       - export LCC_MINICONDA_INSTALL_DIR=$HOME/Braket/miniconda3
@@ -20,15 +20,16 @@ phases:
       - echo "Setting up conda"
       - export PATH=$LCC_MINICONDA_INSTALL_DIR/bin:$PATH
       - conda config --set default_threads 2
+      - conda config --set channel_priority strict
       - conda install -q conda-libmamba-solver
       - conda config --set solver libmamba
-      - conda install --strict-channel-priority -q -c conda-forge conda-pack=0.7.0
+      - conda install -q -c conda-forge conda-pack=0.7.0
   build:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
-      - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package
+      - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
 
 artifacts:
