@@ -14,21 +14,15 @@ from braket.jobs.serialization import serialize_values
 
 
 def validate_entry_point_with_retry(source_module_path: Path, entry_point: str, index = 0) -> None:
-    importable, _, _method = entry_point.partition(":")
-    sys.path.append(str(source_module_path.parent))
     try:
-        # second argument allows relative imports
-        module = importlib.util.find_spec(importable, source_module_path.stem)
-        assert module is not None
-    # if entry point is nested (ie contains '.'), parent modules are imported
+        global saved_function
+        saved_function(source_module_path, entry_point)
     except (ModuleNotFoundError, AssertionError):
         if index < 3:
             time.sleep(0.5)
-            validate_entry_point_with_retry(source_module_path, importable, index + 1)
+            validate_entry_point_with_retry(source_module_path, entry_point, index + 1)
         else:
-            raise ValueError(f"Entry point module was not found: {importable}")
-    finally:
-        sys.path.pop()
+            raise ValueError(f"Entry point module was not found:")
 
 
 def pre_run_inject(mock_utils):
@@ -67,6 +61,8 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_job_results(default_job_results)
     # not explicitly stopped as notebooks are run in new kernels
     patch('cloudpickle.dumps', return_value='serialized').start()
+    global saved_function
+    saved_function = braket.jobs.quantum_job_creation._validate_entry_point
     braket.jobs.quantum_job_creation._validate_entry_point = validate_entry_point_with_retry
 
 
