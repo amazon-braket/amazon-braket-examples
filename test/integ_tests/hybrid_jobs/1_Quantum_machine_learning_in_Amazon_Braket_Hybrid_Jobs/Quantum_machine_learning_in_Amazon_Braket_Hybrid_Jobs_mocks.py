@@ -1,6 +1,7 @@
 import tarfile
 import sys
 import importlib.util
+import time
 from pathlib import Path
 from unittest.mock import patch
 
@@ -22,6 +23,7 @@ def validate_entry_point_with_retry(source_module_path: Path, entry_point: str, 
     # if entry point is nested (ie contains '.'), parent modules are imported
     except (ModuleNotFoundError, AssertionError):
         if index < 3:
+            time.sleep(500)
             validate_entry_point_with_retry(source_module_path, importable, index + 1)
         else:
             raise ValueError(f"Entry point module was not found: {importable}")
