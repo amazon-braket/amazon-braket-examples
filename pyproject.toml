@@ -1,0 +1,145 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "amazon-braket-examples"
+version = "0.0.1"
+description = 'Example notebooks that show how to apply quantum computing with Amazon Braket.'
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache License 2.0"
+keywords = []
+authors = [{name = "Amazon Web Services"},]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Education",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+  "amazon-braket-sdk",
+  "amazon-braket-pennylane-plugin",
+  "cvxpy",
+  "ipython<8.17",
+  "matplotlib",
+  "ml-dtypes==0.2.0",
+  "nbconvert",
+  "pandas",
+  "pennylane",
+  "PennyLane_Lightning<=0.32",
+  "qiskit_braket_provider",
+  "jupyter",
+  "jax",
+  "jaxlib",
+  "optax",
+]
+
+[project.urls]
+Documentation = "https://github.com/unknown/amazon-braket-examples#readme"
+Issues = "https://github.com/unknown/amazon-braket-examples/issues"
+Source = "https://github.com/unknown/amazon-braket-examples"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-xdist",
+  "testbook",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest -n auto -ra -v --durations=0 test/integ_tests/"
+
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.9", "3.10", "3.11"]
+
+[tool.hatch.envs.lint]
+detached = true
+dependencies = [
+  "black>=23.1.0",
+  "mypy>=1.0.0",
+  "ruff>=0.0.243",
+]
+[tool.hatch.envs.lint.scripts]
+typing = "mypy --install-types --non-interactive {args:examples tests}"
+style = [
+  "ruff {args:.}",
+  "black --check --diff {args:.}",
+]
+fmt = [
+  "black {args:.}",
+  "ruff --fix {args:.}",
+  "style",
+]
+all = [
+  "style",
+  "typing",
+]
+
+[tool.black]
+target-version = ["py39"]
+line-length = 120
+skip-string-normalization = true
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+select = [
+  "A",
+  "ARG",
+  "B",
+  "C",
+  "DTZ",
+  "E",
+  "EM",
+  "F",
+  "FBT",
+  "I",
+  "ICN",
+  "ISC",
+  "N",
+  "PLC",
+  "PLE",
+  "PLR",
+  "PLW",
+  "Q",
+  "RUF",
+  "S",
+  "T",
+  "TID",
+  "UP",
+  "W",
+  "YTT",
+]
+ignore = [
+  # Allow non-abstract empty methods in abstract base classes
+  "B027",
+  # Allow boolean positional values in function calls, like `dict.get(... True)`
+  "FBT003",
+  # Ignore checks for possible passwords
+  "S105", "S106", "S107",
+  # Ignore complexity
+  "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+]
+unfixable = [
+  # Don't touch unused imports
+  "F401",
+]
+
+[tool.ruff.isort]
+known-first-party = ["amazon_braket_examples"]
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = ["PLR2004", "S101", "TID252"]
