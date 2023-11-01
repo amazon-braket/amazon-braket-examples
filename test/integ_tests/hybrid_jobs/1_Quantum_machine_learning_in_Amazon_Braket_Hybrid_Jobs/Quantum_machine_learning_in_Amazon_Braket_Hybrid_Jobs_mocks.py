@@ -17,7 +17,7 @@ def validate_entry_point_with_retry(source_module_path: Path, entry_point: str, 
     try:
         global saved_function
         saved_function(source_module_path, entry_point)
-    except (ModuleNotFoundError, AssertionError):
+    except (ModuleNotFoundError, AssertionError, ValueError):
         if index < 3:
             time.sleep(0.5)
             validate_entry_point_with_retry(source_module_path, entry_point, index + 1)
