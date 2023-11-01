@@ -3,6 +3,7 @@ import os
 import sys
 import importlib.util
 import time
+import logging
 from pathlib import Path
 from unittest.mock import patch
 
@@ -97,8 +98,9 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_job_results(default_job_results)
     # not explicitly stopped as notebooks are run in new kernels
     patch('cloudpickle.dumps', return_value='serialized').start()
+    logging.basicConfig(level=logging.DEBUG)
     print("---------")
-    print(sys.platform)
+    print(f"Platform: {sys.platform}")
     print("---------")
     if sys.platform == "darwin":
         patch("braket.jobs.quantum_job_creation._validate_entry_point").start()
