@@ -13,14 +13,16 @@ from braket.jobs_data import PersistedJobData, PersistedJobDataFormat
 from braket.jobs.serialization import serialize_values
 
 
-def validate_entry_point_with_retry(source_module_path: Path, entry_point: str, index = 0) -> None:
+def function_with_retry(*args, **kwargs) -> None:
+    index = kwargs.pop("index", 0)
     try:
         global saved_function
-        saved_function(source_module_path, entry_point)
+        return saved_function(*args, **kwargs)
     except (ModuleNotFoundError, AssertionError, ValueError):
         if index < 3:
             time.sleep(0.5)
-            validate_entry_point_with_retry(source_module_path, entry_point, index + 1)
+            kwargs.update({"index": index + 1})
+            function_with_retry(*args, **kwargs)
         else:
             raise ValueError(f"Entry point module was not found:")
 
@@ -63,7 +65,7 @@ def pre_run_inject(mock_utils):
     patch('cloudpickle.dumps', return_value='serialized').start()
     global saved_function
     saved_function = braket.jobs.quantum_job_creation._validate_entry_point
-    braket.jobs.quantum_job_creation._validate_entry_point = validate_entry_point_with_retry
+    braket.jobs.quantum_job_creation._validate_entry_point = function_with_retry
 
 
 def post_run(tb):
