@@ -41,12 +41,14 @@ def _validate_entry_point_extra(source_module_path: Path, entry_point: str) -> N
     sys.path.append(str(source_module_path.parent))
     try:
         # second argument allows relative imports
+        logging.basicConfig(level=logging.DEBUG)
         print("-----------------")
         print(importable)
         print(source_module_path)
         print(f"Sys path: {sys.path}")
         print(f"Parent dir contents: {os.listdir(source_module_path.parent)}")
         print(f"Dir contents: {os.listdir(source_module_path)}")
+        print(f"Platform: {sys.platform}")
         module = importlib.util.find_spec(importable, source_module_path.stem)
         assert module is not None
         print(f"Cached: {module.cached}")
@@ -98,17 +100,13 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_job_results(default_job_results)
     # not explicitly stopped as notebooks are run in new kernels
     patch('cloudpickle.dumps', return_value='serialized').start()
-    logging.basicConfig(level=logging.DEBUG)
-    print("---------")
-    print(f"Platform: {sys.platform}")
-    print("---------")
-    if sys.platform == "darwin":
-        patch("braket.jobs.quantum_job_creation._validate_entry_point").start()
+#    if sys.platform == "darwin":
+#        patch("braket.jobs.quantum_job_creation._validate_entry_point").start()
 
     # global saved_function
     # saved_function = braket.jobs.quantum_job_creation.prepare_quantum_job
     # braket.aws.aws_quantum_job.prepare_quantum_job = function_with_retry
-    # braket.jobs.quantum_job_creation._validate_entry_point = _validate_entry_point_extra
+    braket.jobs.quantum_job_creation._validate_entry_point = _validate_entry_point_extra
 
 
 def post_run(tb):
