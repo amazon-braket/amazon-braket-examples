@@ -1,10 +1,7 @@
-import tarfile
+import sys
 from unittest.mock import patch
 
 import numpy as np
-from braket.jobs_data import PersistedJobData, PersistedJobDataFormat
-
-from braket.jobs.serialization import serialize_values
 
 
 def pre_run_inject(mock_utils):
@@ -43,6 +40,13 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_job_results(default_job_results)
     # not explicitly stopped as notebooks are run in new kernels
     patch('cloudpickle.dumps', return_value='serialized').start()
+    if sys.platform == "linux":
+        # we skip validation of this function in linux because of a bug where Ubuntu will sometimes
+        # fail to load up the hybrid jobs entry point. I did a few days of investigation on this,
+        # but it is only reproducible in our notebook tests, in GitHub actions, when hybrid jobs
+        # use decorators in a loop. This is a work-around until we find the root cause, but
+        # it doesn't seem reasonable to keep investigating this until we find easier repro steps.
+        patch("braket.jobs.quantum_job_creation._validate_entry_point").start()
 
 
 def post_run(tb):
@@ -51,5 +55,7 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
+        os.remove("data.npy")
+        os.remove("final_params.npy")
         """
     )
