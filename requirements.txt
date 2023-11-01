@@ -4,7 +4,7 @@ boto3==1.28.68
 amazon-braket-default-simulator==1.20.1
 amazon-braket-pennylane-plugin==1.22.0
 amazon-braket-schemas==1.19.1.post0
-amazon-braket-sdk==1.59.1
+amazon-braket-sdk==1.60.1
 amazon-braket-algorithm-library==1.4.1
 cvxpy==1.4.1
 ipykernel==6.25.2
