@@ -43,6 +43,7 @@ def _validate_entry_point_extra(source_module_path: Path, entry_point: str) -> N
         print("-----------------")
         print(importable)
         print(source_module_path)
+        print(f"Sys path: {sys.path}")
         print(f"Parent dir contents: {os.listdir(source_module_path.parent)}")
         print(f"Dir contents: {os.listdir(source_module_path)}")
         module = importlib.util.find_spec(importable, source_module_path.stem)
