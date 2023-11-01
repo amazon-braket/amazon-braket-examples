@@ -51,7 +51,12 @@ def _validate_entry_point_extra(source_module_path: Path, entry_point: str) -> N
         print(f"Cached: {module.cached}")
         print("-----------------")
     # if entry point is nested (ie contains '.'), parent modules are imported
-    except (ModuleNotFoundError, AssertionError):
+    except (ModuleNotFoundError, AssertionError) as e:
+        print("=================")
+        print(f"Sys path: {sys.path}")
+        print(f"Parent dir contents: {os.listdir(source_module_path.parent)}")
+        print(f"Dir contents: {os.listdir(source_module_path)}")
+        print("=================")
         raise ValueError(f"Entry point module was not found: {importable}")
     finally:
         sys.path.pop()
