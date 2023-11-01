@@ -64,8 +64,8 @@ def pre_run_inject(mock_utils):
     # not explicitly stopped as notebooks are run in new kernels
     patch('cloudpickle.dumps', return_value='serialized').start()
     global saved_function
-    saved_function = braket.jobs.quantum_job_creation._validate_entry_point
-    braket.jobs.quantum_job_creation._validate_entry_point = function_with_retry
+    saved_function = braket.jobs.quantum_job_creation._process_local_source_module
+    braket.jobs.quantum_job_creation._process_local_source_module = function_with_retry
 
 
 def post_run(tb):
