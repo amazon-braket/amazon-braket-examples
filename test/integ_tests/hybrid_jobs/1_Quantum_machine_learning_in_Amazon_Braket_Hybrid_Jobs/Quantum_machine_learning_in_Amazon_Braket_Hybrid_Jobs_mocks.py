@@ -1,4 +1,5 @@
 import tarfile
+import os
 import sys
 import importlib.util
 import time
@@ -26,6 +27,33 @@ def function_with_retry(*args, **kwargs) -> None:
         else:
             raise ValueError(f"Entry point module was not found:")
 
+
+def _validate_entry_point_extra(source_module_path: Path, entry_point: str) -> None:
+    """
+    Confirm that a valid entry point relative to source module is given.
+
+    Args:
+        source_module_path (Path): Path to source module.
+        entry_point (str): Entry point relative to source module.
+    """
+    importable, _, _method = entry_point.partition(":")
+    sys.path.append(str(source_module_path.parent))
+    try:
+        # second argument allows relative imports
+        print("-----------------")
+        print(importable)
+        print(source_module_path)
+        print(f"Parent dir contents: {os.listdir(source_module_path.parent)}")
+        print(f"Dir contents: {os.listdir(source_module_path)}")
+        module = importlib.util.find_spec(importable, source_module_path.stem)
+        assert module is not None
+        print(f"Cached: {module.cached}")
+        print("-----------------")
+    # if entry point is nested (ie contains '.'), parent modules are imported
+    except (ModuleNotFoundError, AssertionError):
+        raise ValueError(f"Entry point module was not found: {importable}")
+    finally:
+        sys.path.pop()
 
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
@@ -63,9 +91,10 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_job_results(default_job_results)
     # not explicitly stopped as notebooks are run in new kernels
     patch('cloudpickle.dumps', return_value='serialized').start()
-    global saved_function
-    saved_function = braket.jobs.quantum_job_creation.prepare_quantum_job
-    braket.aws.aws_quantum_job.prepare_quantum_job = function_with_retry
+    # global saved_function
+    # saved_function = braket.jobs.quantum_job_creation.prepare_quantum_job
+    # braket.aws.aws_quantum_job.prepare_quantum_job = function_with_retry
+    braket.jobs.quantum_job_creation._validate_entry_point = _validate_entry_point_extra
 
 
 def post_run(tb):
