@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-requirements-txt"]
 build-backend = "hatchling.build"
 
 [project]
@@ -24,23 +24,10 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
 ]
-dependencies = [
-  "amazon-braket-sdk",
-  "amazon-braket-pennylane-plugin",
-  "cvxpy",
-  "ipython<8.17",
-  "matplotlib",
-  "ml-dtypes==0.2.0",
-  "nbconvert",
-  "pandas",
-  "pennylane",
-  "PennyLane_Lightning<=0.32",
-  "qiskit_braket_provider",
-  "jupyter",
-  "jax",
-  "jaxlib",
-  "optax",
-]
+dynamic = ["dependencies"]
+
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["requirements.txt"]
 
 [project.urls]
 Documentation = "https://github.com/unknown/amazon-braket-examples#readme"
