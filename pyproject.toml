@@ -26,6 +26,12 @@ classifiers = [
 ]
 dynamic = ["dependencies"]
 
+[envs.default]
+dependencies = [
+  "nbconvert",
+  "jupyter",
+]
+
 [tool.hatch.metadata.hooks.requirements_txt]
 files = ["requirements.txt"]
 
