@@ -26,12 +26,6 @@ classifiers = [
 ]
 dynamic = ["dependencies"]
 
-[envs.default]
-dependencies = [
-  "nbconvert",
-  "jupyter",
-]
-
 [tool.hatch.metadata.hooks.requirements_txt]
 files = ["requirements.txt"]
 
@@ -42,6 +36,8 @@ Source = "https://github.com/unknown/amazon-braket-examples"
 
 [tool.hatch.envs.default]
 dependencies = [
+  "jupyter",
+  "nbconvert",
   "pytest",
   "pytest-rerunfailures",
   "pytest-xdist",
