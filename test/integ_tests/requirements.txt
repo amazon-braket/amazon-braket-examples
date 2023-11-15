@@ -2,7 +2,6 @@ amazon-braket-sdk
 amazon-braket-pennylane-plugin
 cvxpy
 matplotlib
-ml-dtypes==0.2.0
 nbconvert
 pandas
 pennylane
