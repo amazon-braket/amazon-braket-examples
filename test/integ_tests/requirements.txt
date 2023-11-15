@@ -11,7 +11,7 @@ PennyLane_Lightning<=0.32
 pytest
 pytest-rerunfailures
 pytest-xdist
-qiskit_braket_provider
+qiskit_braket_provider==0.0.4
 testbook
 jupyter
 jax
