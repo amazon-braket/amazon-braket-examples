@@ -16,3 +16,4 @@ jupyter
 jax
 jaxlib
 optax
+scipy==1.9.3 # Needed for the latest version of openfermion
