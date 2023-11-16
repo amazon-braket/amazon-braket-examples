@@ -25,4 +25,4 @@ PennyLane-Lightning==0.33.1
 qiskit-aer==0.13.0
 qiskit_braket_provider==0.0.4
 qiskit-terra==0.45.0
-git@github.com:scipy/scipy.git # scipy with bug fix
+scipyp @ git+https://github.com/scipy/scipy@main # scipy with bug fix
