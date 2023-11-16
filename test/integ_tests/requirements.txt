@@ -15,4 +15,4 @@ jupyter
 jax
 jaxlib
 optax
-scipy @ git+https://github.com/scipy/scipy@main # scipy with bug fix
+scipy
