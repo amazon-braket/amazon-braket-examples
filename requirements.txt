@@ -8,7 +8,6 @@ amazon-braket-sdk==1.60.2
 amazon-braket-algorithm-library==1.4.1
 cvxpy==1.4.1
 ipykernel==6.25.2
-ipython<8.17
 jax==0.4.10
 jaxlib==0.4.10
 jinja2==3.1.2
@@ -24,6 +23,6 @@ pandas==2.1.1
 pennylane==0.32.0
 PennyLane-Lightning==0.32.0
 qiskit-aer==0.12.2
-qiskit_braket_provider==0.0.4
+qiskit_braket_provider==0.0.5
 qiskit-terra==0.25.2.1
 scipy==1.11.3
