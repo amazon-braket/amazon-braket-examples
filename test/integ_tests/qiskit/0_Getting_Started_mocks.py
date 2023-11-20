@@ -8,6 +8,10 @@ def pre_run_inject(mock_utils):
 
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
+    mocker.set_get_device_result({
+        "deviceType" : "QPU",
+        "deviceCapabilities" : mock_utils.read_file("rig_pulse_device_capabilities.json", __file__)
+    })
     mocker.set_search_result([
         {
             "devices": [
