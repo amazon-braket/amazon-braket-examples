@@ -31,7 +31,7 @@ phases:
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - conda clean --all
-      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
+      - conda pack --name $BRAKET_ENV --output envs/Braket.tgz --compress-level 9 --n-threads -1
 
 artifacts:
   files:
