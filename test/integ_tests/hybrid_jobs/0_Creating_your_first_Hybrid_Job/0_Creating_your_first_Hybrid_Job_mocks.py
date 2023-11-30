@@ -3,6 +3,8 @@ import tarfile
 import subprocess
 import unittest.mock as mock
 
+from io import StringIO
+
 default_job_results = ""
 
 
