@@ -44,8 +44,10 @@ def pre_run_inject(mock_utils):
     subprocess.run = subprocess_run
     subprocess.check_output = subprocess_check_output
     mock_out = mock.patch('sys.stdout', new_callable=StringIO)
+    subprocess.run(cmd, capture_output=True, text=True)
     subprocess.Popen = subprocess_open
     subprocess.lscpu = subprocess_lscpu
+    mock.patch("subprocess.run(cmd, capture_output=True, text=True)", new_callable=StringIO)
 
     os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
 
