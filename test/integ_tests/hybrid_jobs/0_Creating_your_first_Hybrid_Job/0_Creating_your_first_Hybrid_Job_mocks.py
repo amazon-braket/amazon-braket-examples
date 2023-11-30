@@ -43,11 +43,6 @@ def pre_run_inject(mock_utils):
         tar.add("results.json")
     subprocess.run = subprocess_run
     subprocess.check_output = subprocess_check_output
-    mock_out = mock.patch('sys.stdout', new_callable=StringIO)
-    subprocess.run(cmd, capture_output=True, text=True)
-    subprocess.Popen = subprocess_open
-    subprocess.lscpu = subprocess_lscpu
-    mock.patch("subprocess.run(cmd, capture_output=True, text=True)", new_callable=StringIO)
 
     os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
 
@@ -75,15 +70,3 @@ def subprocess_check_output(*args, **kwargs):
             f.write(default_job_results)
 
     return mock.Mock()
-
-
-def subprocess_open(*args, **kwargs):
-    open_mock = mock.Mock()
-    open_mock.stdout.readline.return_value.decode.return_value = "Successfully Tested"
-    open_mock.poll.return_value = 0
-    return open_mock
-
-def subprocess_lscpu(*args, **kwargs):
-    open_mock = mock.Mock()
-    open_mock.stdout.return_value = ["test", "filler"]
-    return open_mock
