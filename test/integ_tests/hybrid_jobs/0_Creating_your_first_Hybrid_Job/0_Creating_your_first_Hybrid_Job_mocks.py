@@ -41,7 +41,6 @@ def pre_run_inject(mock_utils):
         f.write(default_job_results)
     with tarfile.open("model.tar.gz", "w:gz") as tar:
         tar.add("results.json")
-    subprocess.run = subprocess_run
     subprocess.check_output = subprocess_check_output
 
     os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
@@ -55,10 +54,6 @@ def post_run(tb):
         os.remove("results.json")
         """
     )
-
-
-def subprocess_run(*args, **kwargs):
-    return mock.Mock()
 
 
 def subprocess_check_output(*args, **kwargs):
