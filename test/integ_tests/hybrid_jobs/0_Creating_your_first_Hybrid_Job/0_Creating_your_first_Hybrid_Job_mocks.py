@@ -2,7 +2,6 @@ import os
 import tarfile
 import subprocess
 import unittest.mock as mock
-from unittest.mock import patch 
 
 default_job_results = ""
 
@@ -42,7 +41,7 @@ def pre_run_inject(mock_utils):
         tar.add("results.json")
     subprocess.run = subprocess_run
     subprocess.check_output = subprocess_check_output
-    mock_out = patch('sys.stdout', new_callable=StringIO)
+    mock_out = mock.patch('sys.stdout', new_callable=StringIO)
     subprocess.Popen = subprocess_open
 
     os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
