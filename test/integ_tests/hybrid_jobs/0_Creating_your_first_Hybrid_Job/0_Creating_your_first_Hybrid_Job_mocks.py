@@ -45,6 +45,7 @@ def pre_run_inject(mock_utils):
     subprocess.check_output = subprocess_check_output
     mock_out = mock.patch('sys.stdout', new_callable=StringIO)
     subprocess.Popen = subprocess_open
+    subprocess.lscpu = subprocess_lscpu
 
     os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
 
@@ -76,8 +77,11 @@ def subprocess_check_output(*args, **kwargs):
 
 def subprocess_open(*args, **kwargs):
     open_mock = mock.Mock()
-    readlines = Mock(return_value=[])
-    open_mock.stdout.readlines = readlines
     open_mock.stdout.readline.return_value.decode.return_value = "Successfully Tested"
     open_mock.poll.return_value = 0
+    return open_mock
+
+def subprocess_lscpu(*args, **kwargs):
+    open_mock = mock.Mock()
+    open_mock.stdout.readline.return_value.decode.return_value = ""
     return open_mock
