@@ -15,4 +15,3 @@ jupyter
 jax
 jaxlib
 optax
-scipy
