@@ -49,7 +49,7 @@ def pre_run_inject(mock_utils):
 def post_run(tb):
     tb.inject(
         """
-        import os
+        import ot ads
         os.remove("model.tar.gz")
         os.remove("results.json")
         """
@@ -73,6 +73,8 @@ def subprocess_check_output(*args, **kwargs):
 
 def subprocess_open(*args, **kwargs):
     open_mock = mock.Mock()
+    readlines = Mock(return_value=[])
+    open_mock.stdout.readlines = readlines
     open_mock.stdout.readline.return_value.decode.return_value = "Successfully Tested"
     open_mock.poll.return_value = 0
     return open_mock
