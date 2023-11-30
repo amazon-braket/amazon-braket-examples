@@ -83,5 +83,5 @@ def subprocess_open(*args, **kwargs):
 
 def subprocess_lscpu(*args, **kwargs):
     open_mock = mock.Mock()
-    open_mock.stdout.readline.return_value = ["test", "filler"]
+    open_mock.stdout.return_value = ["test", "filler"]
     return open_mock
