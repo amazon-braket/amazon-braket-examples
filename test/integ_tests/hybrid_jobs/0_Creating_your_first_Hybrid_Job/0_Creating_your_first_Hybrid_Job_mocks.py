@@ -2,7 +2,7 @@ import os
 import tarfile
 import subprocess
 import unittest.mock as mock
-import patch from unittest.mock
+from unittest.mock import patch 
 
 default_job_results = ""
 
