@@ -30,12 +30,12 @@ phases:
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
-      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.txz --compress-level 0 --n-threads -1 
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tbz2 --compress-level 6 --n-threads -1 
       - du -hs envs/Braket.txz
 
 artifacts:
   files:
-    - envs/Braket.txz
+    - envs/Braket.tbz2
     - environment.yml
     - requirements.txt
   name: CONDA_BUILD_RESULTS
