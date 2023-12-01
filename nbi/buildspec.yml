@@ -30,8 +30,6 @@ phases:
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
-      - conda clean --index-cache
-      - pip cache purge
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
       - zstd -9 envs/Braket.tar -T0
       - du -hs envs/Braket.tar.zst
