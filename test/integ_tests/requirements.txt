@@ -10,7 +10,7 @@ pennylane
 PennyLane_Lightning<=0.32
 pytest
 pytest-rerunfailures
-pytest-xdist
+pytest-xdist[psutil]
 qiskit_braket_provider==0.0.4
 testbook
 jupyter
