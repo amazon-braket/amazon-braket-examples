@@ -1,0 +1,39 @@
+name: Code Freeze
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FROZEN: ${{ vars.FROZEN }}
+  UNFROZEN_PREFIX: ${{ vars.UNFROZEN_PREFIX }}
+
+jobs:
+  check-pr-frozen-status:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fetch PR data and check if merge allowed
+      if: env.FROZEN == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_DATA=$(curl -s \
+          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }})
+        BRANCH_NAME=$(echo $PR_DATA | jq .head.ref -r)
+        PR_TITLE=$(echo $PR_DATA | jq .title -r)
+
+        echo $BRANCH_NAME
+        echo $PR_TITLE
+
+        if [[ "$BRANCH_NAME" != $UNFROZEN_PREFIX* ]] && 
+           [[ "$PR_TITLE" != fix:* && "$PR_TITLE" != *"[critical]"* ]]; then
+          echo "Error: You can only merge from branches that start with '$UNFROZEN_PREFIX', or PRs titled with 'fix: ' and containing '[critical]'."
+          exit 1
+        fi
