@@ -31,6 +31,9 @@ files = ["requirements.txt"]
 
 [tool.hatch.build.targets.wheel]
 only-packages = true
+include = [
+  "examples/*",
+]
 
 [project.urls]
 Documentation = "https://github.com/amazon-braket/amazon-braket-examples#readme"
@@ -46,9 +49,6 @@ dependencies = [
   "pytest-xdist",
   "testbook",
 ]
-
-[tool.hatch.envs.default.env-vars]
-HATCH_BUILD_NO_HOOKS=true
 
 [tool.hatch.envs.default.scripts]
 test = "pytest -n auto -ra -v --durations=0 test/integ_tests/"
