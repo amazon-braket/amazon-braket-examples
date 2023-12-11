@@ -39,9 +39,7 @@ def pre_run_inject(mock_utils):
         f.write(default_job_results)
     with tarfile.open("model.tar.gz", "w:gz") as tar:
         tar.add("results.json")
-    subprocess.run = subprocess_run
     subprocess.check_output = subprocess_check_output
-    subprocess.Popen = subprocess_open
 
     os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
 
@@ -56,10 +54,6 @@ def post_run(tb):
     )
 
 
-def subprocess_run(*args, **kwargs):
-    return mock.Mock()
-
-
 def subprocess_check_output(*args, **kwargs):
     cmd = args[0]
     if cmd[0] == "docker" and cmd[1] == "cp" and cmd[3].startswith("braket-job"):
@@ -69,10 +63,3 @@ def subprocess_check_output(*args, **kwargs):
             f.write(default_job_results)
 
     return mock.Mock()
-
-
-def subprocess_open(*args, **kwargs):
-    open_mock = mock.Mock()
-    open_mock.stdout.readline.return_value.decode.return_value = "Successfully Tested"
-    open_mock.poll.return_value = 0
-    return open_mock
