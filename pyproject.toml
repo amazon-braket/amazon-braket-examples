@@ -29,6 +29,12 @@ dynamic = ["dependencies"]
 [tool.hatch.metadata.hooks.requirements_txt]
 files = ["requirements.txt"]
 
+[tool.hatch.build.targets.wheel]
+only-packages = true
+include = [
+  "examples/*",
+]
+
 [project.urls]
 Documentation = "https://github.com/amazon-braket/amazon-braket-examples#readme"
 Issues = "https://github.com/amazon-braket/amazon-braket-examples/issues"
@@ -43,6 +49,7 @@ dependencies = [
   "pytest-xdist",
   "testbook",
 ]
+
 [tool.hatch.envs.default.scripts]
 test = "pytest -n auto -ra -v --durations=0 test/integ_tests/"
 
