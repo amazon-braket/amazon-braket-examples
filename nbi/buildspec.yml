@@ -21,7 +21,6 @@ phases:
       - export PATH=$LCC_MINICONDA_INSTALL_DIR/bin:$PATH
       - conda config --set default_threads 2
       - conda config --set channel_priority strict
-      - conda install -q conda-libmamba-solver
       - conda config --set solver libmamba
       - conda install -q -c conda-forge conda-pack=0.7.0
   build:
