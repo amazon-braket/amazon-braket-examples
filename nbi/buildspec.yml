@@ -27,6 +27,7 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
+      - export PYTHONDONTWRITEBYTECODE=1
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
       - du -h -d 4 /root/Braket/miniconda3/envs/$BRAKET_ENV
