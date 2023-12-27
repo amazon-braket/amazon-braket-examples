@@ -27,10 +27,10 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
-      - export PYTHONDONTWRITEBYTECODE=1
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
-      - du -h -d 4 /root/Braket/miniconda3/envs/$BRAKET_ENV
+      - find . | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
+      - du -h -d 2 /root/Braket/miniconda3/envs/$BRAKET_ENV
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
       - zstd -9 envs/Braket.tar -T0 --auto-threads=logical --rsyncable --sparse
       - du -hs envs/Braket.tar.zst
