@@ -27,6 +27,7 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
+      - export CFLAGS="-Os -g0 -WI, --strip-all"
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
       - conda clean --all
