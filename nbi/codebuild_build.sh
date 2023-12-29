@@ -148,11 +148,6 @@ then
     docker_command+=" -v \"$environment_variable_file_dir:/LocalBuild/envFile/\" -e \"ENV_VAR_FILE=$environment_variable_file_basename\""
 fi
 
-if [ -n "$local_agent_image" ]
-then
-    docker_command+=" -e \"LOCAL_AGENT_IMAGE_NAME=$local_agent_image\""
-fi
-
 if $awsconfig_flag
 then
     if [ -d "$HOME/.aws" ]
