@@ -31,4 +31,4 @@ jobs:
         docker image pull public.ecr.aws/codebuild/local-builds:latest
     - name: Build conda environment
       run: |
-        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/standard:5.0 -a envs -b nbi/buildspec.yml
+        ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:5.0 -a envs -b nbi/buildspec.yml
