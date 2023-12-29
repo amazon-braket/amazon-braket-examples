@@ -1,4 +1,4 @@
---only-binary
+--only-binary=:all:
 
 botocore==1.31.84
 awscli==1.29.84
