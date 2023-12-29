@@ -28,4 +28,5 @@ jobs:
         python-version: 3.11.x
     - name: Build conda environment
       run: |
+        docker image pull public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:5.0
         ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:5.0 -a envs -b nbi/buildspec.yml
