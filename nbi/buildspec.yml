@@ -6,6 +6,7 @@ phases:
   install:
     commands:
       - yum -y install wget
+      - yum -y install binutils
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
       - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
