@@ -8,12 +8,10 @@ phases:
       - yum -y install wget
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
-      - export LCC_MINICONDA_INSTALLER=Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
+      - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDA_INSTALLER
-      - export LCC_MINICONDA_INSTALLER_SHA256=634d76df5e489c44ade4085552b97bebc786d49245ed1a830022b0b406de5817
       - export LCC_MINICONDA_INSTALL_DIR=$HOME/Braket/miniconda3
       - wget --quiet $LCC_MINICONDA_INSTALLER_URL --output-document $LCC_MINICONDA_INSTALLER
-      - echo "$LCC_MINICONDA_INSTALLER_SHA256  $LCC_MINICONDA_INSTALLER" | sha256sum --status --check -
       - chmod a+x $LCC_MINICONDA_INSTALLER
       - ./$LCC_MINICONDA_INSTALLER -b -p $LCC_MINICONDA_INSTALL_DIR
   pre_build:
@@ -22,9 +20,8 @@ phases:
       - export PATH=$LCC_MINICONDA_INSTALL_DIR/bin:$PATH
       - conda config --set default_threads 2
       - conda config --set channel_priority strict
-      - conda install -q conda-libmamba-solver
       - conda config --set solver libmamba
-      - conda install -q -c conda-forge conda-pack=0.7.0
+      - conda install -q -c conda-forge conda-pack=0.7.1
   build:
     commands:
       - BRAKET_ENV=Braket
@@ -32,6 +29,7 @@ phases:
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
+      - du -h -d 4 /root/Braket/miniconda3/envs/$BRAKET_ENV
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
       - zstd -9 envs/Braket.tar -T0 --auto-threads=logical --rsyncable --sparse
       - du -hs envs/Braket.tar.zst
