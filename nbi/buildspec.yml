@@ -31,7 +31,7 @@ phases:
       - pip cache purge
       - du -h -d 2 /root/Braket/miniconda3/envs/$BRAKET_ENV/lib/python3.10/site-packages/pennylane_lightning
       - ls /root/Braket/miniconda3/envs/$BRAKET_ENV/lib/python3.10/site-packages/pennylane_lightning
-      - readelf -f /root/Braket/miniconda3/envs/$BRAKET_ENV/lib/python3.10/site-packages/pennylane_lightning/lightning_qubit_ops.cpython-310-x86_64-linux-gnu.so
+      - nm /root/Braket/miniconda3/envs/$BRAKET_ENV/lib/python3.10/site-packages/pennylane_lightning/lightning_qubit_ops.cpython-310-x86_64-linux-gnu.so
       - du -h /root/Braket/miniconda3/envs/$BRAKET_ENV/lib/python3.10/site-packages/pennylane_lightning/lightning_qubit_ops.cpython-310-x86_64-linux-gnu.so
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
       - zstd -9 envs/Braket.tar -T0 --auto-threads=logical --rsyncable --sparse
