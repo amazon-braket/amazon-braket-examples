@@ -21,7 +21,7 @@ phases:
       - conda config --set default_threads 2
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
-      - conda install -q -c conda-forge conda-pack=0.7.1
+      - conda install -y -q -c conda-forge conda-pack=0.7.1
   build:
     commands:
       - BRAKET_ENV=Braket
