@@ -1,3 +1,5 @@
+--use-feature fast-deps
+
 botocore==1.31.84
 awscli==1.29.84
 boto3==1.28.84
