@@ -59,7 +59,9 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=600, kernel_name='conda_braket') as tb:
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = 'conda_braket' if 'conda_braket' kernelspec.find_kernel_specs().keys() else 'python3'
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
