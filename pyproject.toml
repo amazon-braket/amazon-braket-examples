@@ -51,7 +51,10 @@ dependencies = [
 ]
 
 [tool.hatch.envs.default.scripts]
-test = "pytest -n auto -ra -v --durations=0 test/integ_tests/"
+test = """
+python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
+pytest -n auto -ra -v --durations=0 test/integ_tests/
+"""
 
 
 [[tool.hatch.envs.all.matrix]]
