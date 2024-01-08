@@ -59,7 +59,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=600) as tb:
+    with testbook(notebook_file, timeout=600, kernel_name='conda_braket') as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
