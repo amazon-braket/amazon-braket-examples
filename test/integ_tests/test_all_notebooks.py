@@ -5,6 +5,7 @@ import pytest
 from testbook import testbook
 from nbconvert import HTMLExporter
 from importlib.machinery import SourceFileLoader
+from jupyter_client import kernelspec
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
@@ -59,7 +60,9 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=600) as tb:
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
