@@ -60,9 +60,9 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    # Try to use the conda_braket kernel if on an NBI, otherwise fall back to the default value of python3
-    kernel = 'conda_braket' if os.environ['HOME']=='/home/ec2-user' else 'python3'
-    with testbook(notebook_file, timeout=600, kernel_name='conda_braket') as tb:
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
@@ -99,9 +99,9 @@ def test_record():
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
-    # Try to use the conda_braket kernel if on an NBI, otherwise fall back to the default value of python3
-    kernel = 'conda_braket' if os.environ['HOME']=='/home/ec2-user' else 'python3'
-    with testbook(notebook_file, timeout=600, kernel_name='conda_braket') as tb:
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
