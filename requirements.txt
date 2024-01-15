@@ -1,10 +1,10 @@
-botocore==1.34.14
-awscli==1.32.14
-boto3==1.34.14
+botocore==1.34.19
+awscli==1.32.19
+boto3==1.34.19
 amazon-braket-default-simulator==1.20.1
 amazon-braket-pennylane-plugin==1.23.0
 amazon-braket-schemas==1.19.1.post0
-amazon-braket-sdk==1.65.1
+amazon-braket-sdk==1.66.0
 amazon-braket-algorithm-library==1.4.5
 cvxpy==1.4.1
 ipykernel==6.28.0
@@ -18,9 +18,9 @@ mypy-extensions==1.0.0
 numpy==1.25.2
 openfermion==1.5.1 # later versions pin scipy to a version that is incompatible
 openfermionpyscf==0.5
-optax==0.1.7
+optax==0.1.8
 pandas==2.1.4
-pennylane==0.33.1
+pennylane==0.34.0
 PennyLane-Lightning==0.34.0
 qiskit-aer==0.13.1
 qiskit_braket_provider==0.0.5
