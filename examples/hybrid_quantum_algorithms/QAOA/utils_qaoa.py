@@ -1,13 +1,15 @@
 # IMPORTS
 import numpy as np
 from braket.aws import AwsDevice
-from braket.circuits import Circuit, circuit, Observable, FreeParameter
+from braket.circuits import Circuit
+from braket.circuits.circuit import subroutine
 from braket.devices import LocalSimulator
+from braket.parametric import FreeParameter
 from scipy.optimize import minimize
 
 
 # function to implement ZZ gate using CNOT gates
-@circuit.subroutine(register=True)
+@subroutine(register=True)
 def ZZgate(q1, q2, gamma):
     """
     function that returns a circuit implementing exp(-i \gamma Z_i Z_j) using CNOT gates if ZZ not supported
@@ -23,7 +25,7 @@ def ZZgate(q1, q2, gamma):
 
 
 # function to implement evolution with driver Hamiltonian
-@circuit.subroutine(register=True)
+@subroutine(register=True)
 def driver(beta, n_qubits):
     """
     Returns circuit for driver Hamiltonian U(Hb, beta)
@@ -40,7 +42,7 @@ def driver(beta, n_qubits):
 
 
 # helper function for evolution with cost Hamiltonian
-@circuit.subroutine(register=True)
+@subroutine(register=True)
 def cost_circuit(gamma, n_qubits, ising, device):
     """
     returns circuit for evolution with cost Hamiltonian
@@ -120,9 +122,6 @@ def objective_function(params, qaoa_circuit, ising, device, n_shots, tracker, ve
 
     # get result for this task
     result = task.result()
-
-    # get metadata
-    metadata = result.task_metadata
 
     # convert results (0 and 1) to ising (-1 and 1)
     meas_ising = result.measurements
