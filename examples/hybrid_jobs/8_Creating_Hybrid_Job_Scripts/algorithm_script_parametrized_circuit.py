@@ -15,9 +15,10 @@ import os
 
 import numpy as np
 from braket.aws import AwsDevice
-from braket.circuits import Circuit, FreeParameter
+from braket.circuits import Circuit
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
+from braket.parametric import FreeParameter
 from braket.tracking import Tracker
 
 cost_tracker = Tracker().start()
