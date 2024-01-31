@@ -165,7 +165,10 @@ def mock_default_job_calls(mocker):
         "status": "COMPLETED",
         "outputDataConfig": {
             "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
-        }
+        },
+        "queueInfo": {
+            "position": 1,
+        },
     })
 
 
