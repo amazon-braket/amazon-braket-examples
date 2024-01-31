@@ -46,12 +46,12 @@ dependencies = [
   "nbconvert",
   "pytest",
   "pytest-rerunfailures",
-  "pytest-xdist",
+  "pytest-xdist[psutil]",
   "testbook",
 ]
 
 [tool.hatch.envs.default.scripts]
-test = "pytest -n auto -ra -v --durations=0 test/integ_tests/"
+test = "pytest -n logical -ra -v --durations=0 test/integ_tests/"
 
 
 [[tool.hatch.envs.all.matrix]]
