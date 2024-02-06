@@ -68,7 +68,7 @@
     },
     "performance": {
       "lattice": {
-        "positionErrorAbs": 1E-7,
+        "positionErrorAbs": 1.47e-7,
         "sitePositionError": 0.025e-6,
         "atomPositionError": 0.025e-6,
         "fillingErrorTypical": 0.005,
