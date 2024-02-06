@@ -9,10 +9,11 @@ The repository is structured as follows:
 - [Quantum machine learning and optimization with PennyLane](#pennylane)
 - [Amazon Braket features](#braket)
 - [Amazon Braket Hybrid Jobs](#jobs)
-- [Creating a Conda environment](#conda)
+- [Pulse Control](#pulse)
+- [Qiskit with Braket](#qiskit)
 
 ---
-## <a name="simple">Simple circuits and algorithms</a>
+## <a name="simple">I'm new to quantum</a>
 
   * [**Getting started**](examples/getting_started/0_Getting_started/0_Getting_started.ipynb)
 
@@ -41,6 +42,10 @@ The repository is structured as follows:
 
     This tutorial provides a step-by-step walkthrough explaining Grover's quantum algorithm. We show how to build the corresponding quantum circuit with simple modular building blocks, by means of the Amazon Braket SDK. Specifically, we demonstrate how to build custom gates that are not part of the basic gate set provided by the SDK. A custom gate can used as a core quantum gate by registering it as a subroutine.
 
+  * [**Quantum Amplitude Amplification**](examples/advanced_circuits_algorithms/Quantum_Amplitude_Amplification/Quantum_Amplitude_Amplification.ipynb)
+
+    This tutorial provides a detailed discussion and implementation of the Quantum Amplitude Amplification (QAA) algorithm, using the Amazon Braket SDK. QAA is a routine in quantum computing which generalizes the idea behind Grover's famous search algorithm, with applications across many quantum algorithms. In short, QAA uses an iterative approach to systematically increase the probability of finding one or multiple target states in a given search space. In a quantum computer, QAA can be used to obtain a quadratic speedup over several classical algorithms.
+
   * [**Quantum Fourier Transform**](examples/advanced_circuits_algorithms/Quantum_Fourier_Transform/Quantum_Fourier_Transform.ipynb)
 
     This tutorial provides a detailed implementation of the Quantum Fourier Transform (QFT) and the inverse QFT, using the Amazon Braket SDK. We provide two different implementations: with and without recursion. The QFT is an important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring, and the quantum phase estimation (QPE) algorithm for estimating the eigenvalues of a unitary operator. The QFT can be performed efficiently on a quantum computer, using only O(n<sup>2</sup>) single-qubit Hadamard gates and two-qubit controlled phase shift gates, where 𝑛 is the number of qubits. We first review the basics of the quantum Fourier transform, and its relationship to the discrete (classical) Fourier transform. We then implement the QFT in code two ways: recursively and non-recursively. This notebook also showcases the Amazon Braket `circuit.subroutine` functionality, which allows one to define custom methods and add them to the Circuit class.
@@ -49,9 +54,14 @@ The repository is structured as follows:
 
     This tutorial provides a detailed implementation of the Quantum Phase Estimation (QPE) algorithm, through the Amazon Braket SDK. The QPE algorithm is designed to estimate the eigenvalues of a unitary operator 𝑈; it is a very important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring, and the HHL algorithm (named after the physicists Harrow, Hassidim and Lloyd) for solving linear systems of equations on a quantum computer. Moreover, eigenvalue problems can be found across many disciplines and application areas, including (for example) principal component analysis (PCA) as used in machine learning, or in the solution of differential equations as relevant across mathematics, physics, engineering and chemistry. We first review the basics of the QPE algorithm. We then implement the QPE algorithm in code using the Amazon Braket SDK, and we illustrate the application of the algorithm with simple examples. This notebook also showcases the Amazon Braket `circuit.subroutine` functionality, which allows you to use custom-built gates as if they were any other built-in gates. This tutorial is set up to run on the local simulator or the on-demand simulator. Changing between these devices requires changing only one line of code, as demonstrated below in cell.
 
-  * [**Quantum Amplitude Amplification**](examples/advanced_circuits_algorithms/Quantum_Amplitude_Amplification/Quantum_Amplitude_Amplification.ipynb)
+  * [**Randomness**](examples/advanced_circuits_algorithms/Randomness/Randomness_Generation.ipynb)
 
-    This tutorial provides a detailed discussion and implementation of the Quantum Amplitude Amplification (QAA) algorithm, using the Amazon Braket SDK. QAA is a routine in quantum computing which generalizes the idea behind Grover's famous search algorithm, with applications across many quantum algorithms. In short, QAA uses an iterative approach to systematically increase the probability of finding one or multiple target states in a given search space. In a quantum computer, QAA can be used to obtain a quadratic speedup over several classical algorithms.
+    This tutorial provides a detailed implementation of a Quantum Random Number Generator (QRNG). It shows how to use two separate quantum processor units (QPUs) from different suppliers in Amazon Braket to supply two streams of weakly random bits. We then show how to generate physically secure randomness from these two weak sources by means of classical post-processing based on randomness extractors. 
+
+  * [**Simon's Algorithm**](examples/advanced_circuits_algorithms/Simons_Algorithm/Simons_Algorithm.ipynb)
+
+    This tutorial provides a detailed implementation of Simon’s algorithm, which shows the first example of an exponential speedup over the best known classical algorithm by using a quantum computer to solve a particular problem. Originally published in 1994, Simon’s algorithm was a precursor to Shor’s well-known factoring algorithm, and it served as inspiration for many of the seminal works in quantum computation that followed. 
+
 
 ---
 ##  <a name="hybrid">Hybrid quantum algorithms</a>
@@ -59,6 +69,10 @@ The repository is structured as follows:
   * [**QAOA**](examples/hybrid_quantum_algorithms/QAOA/QAOA_braket.ipynb)
 
     This tutorial shows how to (approximately) solve binary combinatorial optimization problems, using the Quantum Approximate Optimization Algorithm (QAOA). The QAOA algorithm belongs to the class of _hybrid quantum algorithms_ (leveraging classical and quantum computers), which are widely believed to be the working horse for the current NISQ (noisy intermediate-scale quantum) era. In this NISQ era, QAOA is also an emerging approach for benchmarking quantum devices. It is a prime candidate for demonstrating a practical quantum speed-up on near-term NISQ device. To validate our approach, we benchmark our results with exact results as obtained from classical QUBO solvers.
+
+  * [**VQE Chemistry**](examples/hybrid_quantum_algorithms/VQE_Chemistry/VQE_chemistry_braket.ipynb)
+
+    This tutorial shows how to implement the Variational Quantum Eigensolver (VQE) algorithm in Amazon Braket SDK to compute the potential energy surface (PES) for the Hydrogen molecule.
 
   * [**VQE Transverse Ising**](examples/hybrid_quantum_algorithms/VQE_Transverse_Ising/VQE_Transverse_Ising_Model.ipynb)
 
@@ -82,6 +96,18 @@ The repository is structured as follows:
 
     In this tutorial, we see how PennyLane and Amazon Braket can be combined to solve an important problem in quantum chemistry. The ground state energy of molecular hydrogen is calculated by optimizing a VQE circuit using the local Braket simulator. This tutorial highlights how qubit-wise commuting observables can be measured together in PennyLane and Braket, making optimization more efficient.
 
+  * [**Simulation of Noisy Circuits with PennyLane-Braket**](examples/pennylane/4_Simulation_of_noisy_quantum_circuits_on_Amazon_Braket_with_PennyLane/4_Simulation_of_noisy_quantum_circuits_on_Amazon_Braket_with_PennyLane.ipynb)
+
+    In this tutorial, we explore the impact of noise on quantum hybrid algorithms and overview of noise simulation on Amazon Braket with PennyLane. The tutorial shows how to use PennyLane to simulate the noisy circuits, on either the local or Braket on-demand noise simulator, and covers the basic concepts of noise channels, using PennyLane to compute cost functions of noisy circuits and optimize them. 
+
+  * [**Tracking Resource Usage**](examples/pennylane/5_Tracking_resource_usage/5_Tracking_resource_usage.ipynb)
+
+    In this tutorial, we see how to use the PennyLane device tracker feature with Amazon Braket. The PennyLane device resource tracker keeps a record of the usage of a device, such as numbers of circuit evaluations and shots. Amazon Braket extends this information with quantum task IDs and simulator duration to allow further tracking. The device tracker can be combined with additional logic to monitor and limit resource usage on devices.
+
+  * [**Adjoint Gradient Computation**](examples/pennylane/6_Adjoint_gradient_computation/6_Adjoint_gradient_computation.ipynb)
+
+    In this tutorial, we will show you how to compute gradients of free parameters in a quantum circuit using PennyLane and Amazon Braket. Adjoint differentiation is a technique used to compute gradients of parametrized quantum circuits. It can be used when shots=0 and is available on Amazon Braket’s on-demand state vector simulator, SV1. The adjoint differentiation method allows you to compute the gradient of a circuit with P parameters in only 1+1 circuit executions (one forward and one backward pass, similar to backpropagation), as opposed to the parameter-shift or finite-difference methods, both of which require 2P circuit executions for every gradient calculation. The adjoint method can lower the cost of running variational quantum workflows, especially for circuits with a large number of parameters. 
+
 ---
 ## <a name="braket">Amazon Braket features</a>
 This folder contains examples that illustrate the usage of individual features of Amazon Braket
@@ -90,13 +116,37 @@ This folder contains examples that illustrate the usage of individual features o
 
     This tutorial illustrates how Amazon Braket integrates with Amazon EventBridge for event-based processing. In the tutorial, you will learn how to configure Amazon Braket and Amazon Eventbridge to receive text notification about quantum task completions on your phone. Of course, EventBridge also allows you to build full, event-driven applications based on events emitted by Amazon Braket.
 
+* [**Noise Models on Amazon Braket**](examples/braket_features/Noise_models/Noise_models_on_Amazon_Braket.ipynb)
+
+    This tutorial shows how to create noise models containing different types of noise and instructions for how to apply the noise to a circuit. A noise model encapsulates the assumptions on quantum noise channels and how they act on a given circuit. Simulating this noisy circuit gives information about much the noise impacts the results of the quantum computation. By incrementally adjusting the noise model, the impact of noise can be understood on a variety of quantum algorithms.
+
+* [**Noise Models on Rigetti**](examples/braket_features/Noise_models/Noise_models_on_Rigetti.ipynb)
+
+    This tutorial builds on the previous noise model tutorial to show how to construct a noise model from device calibration data for a Rigetti quantum processing unit (QPU). We compare the measurement outcomes of circuits run on a noisy simulator with the same circuits run on a QPU, to show that simulating circuits with noise models more closely mimics the QPU.
+
 * [**Allocating Qubits on QPU Devices**](examples/braket_features/Allocating_Qubits_on_QPU_Devices.ipynb)
 
     This tutorial explains how you can use the Amazon Braket SDK to allocate the qubit selection for your circuits manually, when running on QPUs.
 
+* [**Error Mitigation**](examples/braket_features/Error_Mitigation_on_Amazon_Braket.ipynb)
+
+    This tutorial explains how to get started with using error mitigation on IonQ’s Aria QPU. You’ll learn how Aria’s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems.
+     
 * [**Getting Devices and Checking Device Properties**](examples/braket_features/Getting_Devices_and_Checking_Device_Properties.ipynb)
 
     This example shows how to interact with the Amazon Braket GetDevice API to retrieve Amazon Braket devices (such as simulators and QPUs) programmatically, and how to gain access to their properties.
+
+* [**Getting Started with OpenQASM on Braket**](examples/braket_features/Getting_Started_with_OpenQASM_on_Braket.ipynb)
+
+    This tutorial demonstrates how to submit OpenQASM quantum tasks to various devices on Braket and introduce some OpenQASM features available on Braket. OpenQASM is a popular, open source, human-readable and hardware-agnostic quantum circuit description language. 
+
+* [**IonQ Native Gates**](examples/braket_features/IonQ_Native_Gates.ipynb)
+
+    This tutorial goes into details of IonQ’s native gates and their functionalities, enabling us to realize direct control over the quantum operations on the computer without compiler optimizations or error mitigation. It will discuss the native gates available on IonQ, their mathematical representations, and how they can be used for applications such as the quantum Fourier transform (QFT).
+
+* [**Advanced OpenQASM programs using the Local Simulator**](examples/braket_features/Simulating_Advanced_OpenQASM_Programs_with_the_Local_Simulator.ipynb)
+
+    This notebook serves as a references of OpenQASM features supported by Braket with the LocalSimulator. 
 
 * [**Using the tensor network simulator TN1**](examples/braket_features/Using_the_tensor_network_simulator_TN1.ipynb)
 
@@ -106,11 +156,24 @@ This folder contains examples that illustrate the usage of individual features o
 
     This notebook provides a detailed overview of noise simulation on Amazon Braket. You will learn how to define noise channels, apply noise to new or existing circuits, and run those circuits on the Amazon Braket noise simulators.
 
+* [**TN1 and Hayden-Preskill circuits**](examples/braket_features/TN1_demo_local_vs_non-local_random_circuits.ipynb)
+
+    This tutorial dives into showing the degree to which the tensor network simulator is capable of detecting a hidden local structure in a quantum circuit by working with Hayden-Preskill circuits, which are a class of unstructured, random quantum circuits.
+
+* [**Adjoint Gradient Result Type**](examples/braket_features/Using_The_Adjoint_Gradient_Result_Type.ipynb)
+
+    This tutorial introduces the AdjointGradient result type, discusses what a gradient is and how to compute one on a quantum circuit, explains how they can be used to accelerate your workflows, and shows an example of gradients in action on a hybrid quantum algorithm.
+
+* [**Verbatim Compilation**](examples/braket_features/Verbatim_Compilation.ipynb)
+
+    This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
+
+
 ---
 ## <a name="jobs">Amazon Braket Hybrid Jobs</a>
 This folder contains examples that illustrate the use of Amazon Braket Hybrid Jobs (Braket Jobs for short).
 
-* [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Creating_your_first_Hybrid_Job/Creating_your_first_Hybrid_Job.ipynb)
+* [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Creating_your_first_Hybrid_Job/0_Creating_your_first_Hybrid_Job.ipynb)
 
     This notebook provides a demonstration of running a simple Braket Hybrid Job. You will learn how to create a Braket Hybrid Job using the Braket SDK or the Braket console, how to set the output S3 folder for a hybrid job, and how to retrieve results. You will also learn how to specify the Braket device to run your hybrid job on simulators or QPUs. Finally, you will learn how to use local mode to quickly debug your code.
 
@@ -122,12 +185,67 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
     This notebook shows how to run the QAOA algorithm with PennyLane (similar to a [previous notebook](examples/pennylane/2_Graph_optimization_with_QAOA.ipynb)), but this time using Braket Hybrid Jobs. In the process, you will learn how to select a container image that supports PennyLane, and how to use checkpoints to save and load training progress of a hybrid job.
 
-* [**Bring your own containers to Braket Jobs**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
+* [**Bring your own containers to Braket Hybrid Jobs**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
 
     This notebook demonstrates the use of the Bring-Your-Own-Container (BYOC) functionality of Braket Hybrid Jobs. While Amazon Braket has pre-configured environments which support most use cases of Braket Hybrid Jobs, BYOC enables you to define fully customizable environments using Docker containers. You will learn how to use BYOC, including preparing a Dockerfile, creating a private Amazon Elastic Container Registry (ECR), building the container, and submitting a Braket Hybrid Job using the custom container.
-    
+
+* [**Embedded simulators in Braket Hybrid Jobs**](examples/hybrid_jobs/4_Embedded_simulators_in_Braket_Hybrid_Jobs/Embedded_simulators_in_Braket_Hybrid_Jobs.ipynb)
+
+    This notebook shows how to use embedded simulators in Braket Hybrid Jobs. An embedded simulator is a local simulator that runs completely within a hybrid job instance, i.e., the compute resource that is running your algorithm script. In contrast, on-demand simulators, such as SV1, DM1, or TN1, calculate the results of a quantum circuit on dedicated compute infrastructure on-demand by Amazon Braket. Hybrid workloads usually consist of iterations of quantum circuit executions and variational parameter optimizations. By using embedded simulators, we keep all computations in the same environment. This allows the optimization algorithm to access advanced features supported by the embedded simulator.
+
+* [**Parallelize training for Quantum Machine Learning**](examples/hybrid_jobs/5_Parallelize_training_for_QML/Parallelize_training_for_QML.ipynb)
+
+    This notebook introduces using data parallelism for Quantum Machine Learning (QML) workloads.
+
+* [**QN-SPSA optimizer using an Embedded Simulator**](examples/hybrid_jobs/6_QNSPSA_optimizer_with_embedded_simulator/qnspsa_with_embedded_simulator.ipynb)
+
+    This notebook demonstrates how to implement and benchmark the QN-SPSA optimizer, a novel quantum optimization algorithm.
+
+* [**Running Jupyter notebooks as a Hybrid Job**](examples/hybrid_jobs/7_Running_notebooks_as_hybrid_jobs/Running_notebooks_as_hybrid_jobs.ipynb)
+
+    This tutorial is a step-by-step guide for running a Jupyter notebook as a Hybrid Job.
+
+* [**Creating Hybrid Job Scripts**](examples/hybrid_jobs/8_Creating_Hybrid_Job_Scripts/Creating_your_first_Hybrid_Job.ipynb)
+
+    This notebook shows an alternate way to create a Hybrid Job - without using a @hybrid_job decorator - that may be useful in some circumstances, such as using older versions of Python. 
+
 ---
-## <a name="conda">Creating a conda environment</a>
+## <a name="pulse">Pulse Control</a>
+
+* [**Bringup Experiments**](examples/pulse_control/1_Bringup_experiments.ipynb)
+
+    This tutorial will introduce common pulse sequences and calibrating pulses via Rabi spectroscopy.
+
+* [**Native Gate Calibrations**](examples/pulse_control/2_Native_gate_calibrations.ipynb)
+
+    This tutorial shows how to retrieve the calibrations for any particular native gate of interest and submit a circuit where you will overwrite the provider’s calibrations and use modified ones.
+
+* [**Bell pair with pulses (OQC)**](examples/pulse_control/3_Bell_pair_with_pulses_OQC.ipynb)
+
+    This tutorial shows creating a Bell state with cross-resonance pulses on OQC’s Lucy device.
+
+* [**Bell pair with pulses (Rigetti)**](examples/pulse_control/4_Bell_pair_with_pulses_Rigetti.ipynb)
+
+    This tutorial shows creating a Bell state with cross-resonance pulses on Rigetti's Aspen device.
+
+* [**Build single qubit gates**](examples/pulse_control/5_Build_single_qubit_gates.ipynb)
+
+    This tutorial describes a method to create any single-qubit gate with pulses.
+
+---
+## <a name="qiskit">Qiskit with Braket</a>
+
+* [**Getting started with Qiskit on Braket**](examples/qiskit/0_Getting_Started.ipynb)
+
+    This tutorial shows how you can run your Qiskit code on Amazon Braket computing services.
+
+
+---
+## <a name="search">Still can't find what you're looking for?</a>
+While they may not fit into this repository, Braket provides other libraries, tools, algorithms, experimental features, and more to help with your quantum computing journey. You can, for example, search all of our repositories for the [Bernstein Vazirani](https://github.com/search?q=org%3Aamazon-braket+Bernstein&type=code) algorithm or more [experimental features](https://github.com/search?q=org%3Aamazon-braket+experimental+features&type=code). 
+
+---
+## Creating a conda environment
 To install the dependencies required for running the notebook examples in this repository you can create a conda environment with below commands.
 
 ```bash
