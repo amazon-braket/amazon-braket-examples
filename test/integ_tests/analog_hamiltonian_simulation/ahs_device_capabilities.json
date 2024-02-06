@@ -110,9 +110,9 @@
             {"rampTime": 50e-9, "rabiCorrection": 0.92},
             {"rampTime": 75e-9, "rabiCorrection": 0.97},
             {"rampTime": 100e-9, "rabiCorrection": 1.00},
-          ],
-        },
-      },
+          ]
+        }
+      }
     }
   }
 }
