@@ -44,6 +44,7 @@ Source = "https://github.com/amazon-braket/amazon-braket-examples"
 dependencies = [
   "jupyter",
   "nbconvert",
+  "nbformat",
   "pytest",
   "pytest-rerunfailures",
   "pytest-xdist",

@@ -1,6 +1,7 @@
 import logging
 import os
 import pytest
+import nbformat
 
 from testbook import testbook
 from nbconvert import HTMLExporter
@@ -80,6 +81,13 @@ def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
     html_exporter = HTMLExporter(template_name="classic")
 
     html_exporter.from_file(notebook_file)
+
+
+@pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
+def test_valid_nb_format(notebook_dir, notebook_file, mock_level):
+    with open(os.path.join(notebook_dir, notebook_file), "r") as file:
+        nb_doc = nbformat.reader.read(file)
+        nbformat.validator.validate(nb_doc)
 
 
 def test_record():
