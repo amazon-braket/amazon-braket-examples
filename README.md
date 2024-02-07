@@ -1,9 +1,9 @@
 # Braket Tutorials GitHub
 Welcome to the primary repository for Amazon Braket tutorials. We provide tutorials on quantum computing, using Amazon Braket. We provide examples for quantum circuits and Analog Hamiltonian Simulation. We cover canonical routines, such as the Quantum Fourier Transform (QFT), as well as hybrid quantum algorithms, such as the Variational Quantum Eigensolver (VQE).
 
-The repository is structured as follows:  
+The examples in this repository are structured as follows:
 
-- [Getting Started: Simple circuits and algorithms](#simple)
+- [Getting Started: Simple circuits and algorithms (I'm new to quantum)](#simple)
 - [Advanced circuits and algorithms](#advanced)
 - [Hybrid quantum algorithms](#hybrid)
 - [Quantum machine learning and optimization with PennyLane](#pennylane)
