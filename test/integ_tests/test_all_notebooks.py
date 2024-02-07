@@ -85,6 +85,7 @@ def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_valid_nb_format(notebook_dir, notebook_file, mock_level):
+    os.chdir(root_path)
     with open(os.path.join(notebook_dir, notebook_file), "r") as file:
         nb_doc = nbformat.reader.read(file)
         nbformat.validator.validate(nb_doc)
