@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import pathlib
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -16,13 +17,11 @@ LINK_EXAMPLES_REGEX = re.compile(r"\(\s*(examples.*\.ipynb)\s*\)")
 
 
 def test_readme():
-    root_path = os.getcwd()
-    if "repo_tests" in root_path:
-        root_path = (os.path.join(root_path, "..", ".."))
+    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
 
     examples_path = (os.path.join(root_path, "examples"))
 
-    root_path_len = len(root_path) + len(os.pathsep)
+    root_path_len = len(str(root_path)) + len(os.pathsep)
     all_notebooks = set()
     for dir_, _, files in os.walk(examples_path):
         for file_name in files:
