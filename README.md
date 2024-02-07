@@ -55,7 +55,7 @@ The examples in this repository are structured as follows:
 
     This tutorial provides a detailed implementation of the Quantum Phase Estimation (QPE) algorithm, through the Amazon Braket SDK. The QPE algorithm is designed to estimate the eigenvalues of a unitary operator 𝑈; it is a very important subroutine to many quantum algorithms, most famously Shor's algorithm for factoring, and the HHL algorithm (named after the physicists Harrow, Hassidim and Lloyd) for solving linear systems of equations on a quantum computer. Moreover, eigenvalue problems can be found across many disciplines and application areas, including (for example) principal component analysis (PCA) as used in machine learning, or in the solution of differential equations as relevant across mathematics, physics, engineering and chemistry. We first review the basics of the QPE algorithm. We then implement the QPE algorithm in code using the Amazon Braket SDK, and we illustrate the application of the algorithm with simple examples. This notebook also showcases the Amazon Braket `circuit.subroutine` functionality, which allows you to use custom-built gates as if they were any other built-in gates. This tutorial is set up to run on the local simulator or the on-demand simulator. Changing between these devices requires changing only one line of code, as demonstrated below in cell.
 
-  * [**Randomness**](examples/advanced_circuits_algorithms/Randomness/Randomness_Generation.ipynb)
+  * [**Randomness Generation**](examples/advanced_circuits_algorithms/Randomness/Randomness_Generation.ipynb)
 
     This tutorial provides a detailed implementation of a Quantum Random Number Generator (QRNG). It shows how to use two separate quantum processor units (QPUs) from different suppliers in Amazon Braket to supply two streams of weakly random bits. We then show how to generate physically secure randomness from these two weak sources by means of classical post-processing based on randomness extractors. 
 
@@ -121,7 +121,7 @@ This folder contains examples that illustrate the usage of individual features o
 
     This tutorial shows how to create noise models containing different types of noise and instructions for how to apply the noise to a circuit. A noise model encapsulates the assumptions on quantum noise channels and how they act on a given circuit. Simulating this noisy circuit gives information about much the noise impacts the results of the quantum computation. By incrementally adjusting the noise model, the impact of noise can be understood on a variety of quantum algorithms.
 
-* [**Noise Models on Rigetti**](examples/braket_features/Noise_models/Noise_models_on_Rigetti.ipynb)
+* [**Noise Models on Rigetti's Aspen device**](examples/braket_features/Noise_models/Noise_models_on_Rigetti.ipynb)
 
     This tutorial builds on the previous noise model tutorial to show how to construct a noise model from device calibration data for a Rigetti quantum processing unit (QPU). We compare the measurement outcomes of circuits run on a noisy simulator with the same circuits run on a QPU, to show that simulating circuits with noise models more closely mimics the QPU.
 
@@ -147,7 +147,7 @@ This folder contains examples that illustrate the usage of individual features o
 
 * [**Advanced OpenQASM programs using the Local Simulator**](examples/braket_features/Simulating_Advanced_OpenQASM_Programs_with_the_Local_Simulator.ipynb)
 
-    This notebook serves as a references of OpenQASM features supported by Braket with the LocalSimulator. 
+    This notebook serves as a reference of OpenQASM features supported by Braket with the LocalSimulator.
 
 * [**Using the tensor network simulator TN1**](examples/braket_features/Using_the_tensor_network_simulator_TN1.ipynb)
 
@@ -219,7 +219,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Native Gate Calibrations**](examples/pulse_control/2_Native_gate_calibrations.ipynb)
 
-    This tutorial shows how to retrieve the calibrations for any particular native gate of interest and submit a circuit where you will overwrite the provider’s calibrations and use modified ones.
+    This tutorial shows how to retrieve the calibrations of native gates for Rigetti's Aspen devices and submit a circuit with custom gate calibrations.
 
 * [**Bell pair with pulses (OQC)**](examples/pulse_control/3_Bell_pair_with_pulses_OQC.ipynb)
 
@@ -267,7 +267,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 ---
 ## <a name="qiskit">Qiskit with Braket</a>
 
-* [**Getting started with Qiskit on Braket**](examples/qiskit/0_Getting_Started.ipynb)
+* [**Getting started with Qiskit on Amazon Braket**](examples/qiskit/0_Getting_Started.ipynb)
 
     This tutorial shows how you can run your Qiskit code on Amazon Braket computing services.
 
