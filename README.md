@@ -10,6 +10,7 @@ The repository is structured as follows:
 - [Amazon Braket features](#braket)
 - [Amazon Braket Hybrid Jobs](#jobs)
 - [Pulse Control](#pulse)
+- [Analog Hamiltonian Simulation](#ahs)
 - [Qiskit with Braket](#qiskit)
 
 ---
@@ -183,7 +184,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**QAOA with Amazon Braket Hybrid Jobs and PennyLane**](examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Hybrid_Jobs/Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb)
 
-    This notebook shows how to run the QAOA algorithm with PennyLane (similar to a [previous notebook](examples/pennylane/2_Graph_optimization_with_QAOA.ipynb)), but this time using Braket Hybrid Jobs. In the process, you will learn how to select a container image that supports PennyLane, and how to use checkpoints to save and load training progress of a hybrid job.
+    This notebook shows how to run the QAOA algorithm with PennyLane (similar to a [previous notebook](examples/pennylane/2_Graph_optimization_with_QAOA/2_Graph_optimization_with_QAOA.ipynb)), but this time using Braket Hybrid Jobs. In the process, you will learn how to select a container image that supports PennyLane, and how to use checkpoints to save and load training progress of a hybrid job.
 
 * [**Bring your own containers to Braket Hybrid Jobs**](examples/hybrid_jobs/3_Bring_your_own_container/bring_your_own_container.ipynb)
 
@@ -231,6 +232,37 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 * [**Build single qubit gates**](examples/pulse_control/5_Build_single_qubit_gates.ipynb)
 
     This tutorial describes a method to create any single-qubit gate with pulses.
+
+---
+## <a name="ahs">Analog Hamiltonian Simulation</a>
+
+* [**Intruction to Analog Hamiltonian Simulation**](examples/analog_hamiltonian_simulation/00_Introduction_of_Analog_Hamiltonian_Simulation_with_Rydberg_Atoms.ipynb)
+
+    This tutorial provides an introduction to Analog Hamiltonian Simulation (AHS), a quantum computing paradigm different from gate-based computing. AHS uses a well-controlled quantum system and tunes its parameters to mimic the dynamics of another quantum system, the one we aim to study.
+
+* [**Intruction to Aquila**](examples/analog_hamiltonian_simulation/01_Introduction_to_Aquila.ipynb)
+
+    This tutorial illustrates how to run an AHS program on QuEra’s Aquila, a Rydberg based QPU, via Amazon Braket.
+
+* [**Ordered Phases in Rydberg Systems**](examples/analog_hamiltonian_simulation/02_Ordered_phases_in_Rydberg_systems.ipynb)
+
+    This tutorial shows how to prepare ordered phases in Rydberg systems, focusing on the 1D phase and the 2D checkerboard phase. It uses an adiabatic time-evolution to prepare these many-body ground states.
+
+* [**Parallel Tasks on Aquila**](examples/analog_hamiltonian_simulation/03_Parallel_tasks_on_Aquila.ipynb)
+
+    This tutorial goes through the previously explored checkerboard preparation but now takes advantage of the full area.
+
+* [**Maximum Independent Sets**](examples/analog_hamiltonian_simulation/04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb)
+
+    This tutorial demonstrates how to set up a unit disk graph and solve for its maximum independent set using the Amazon Braket analog Hamiltonian simulation (AHS) local simulator. 
+
+* [**Running on Local Simulator**](examples/analog_hamiltonian_simulation/05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb)
+
+    This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
+
+* [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb)
+
+    This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
 ---
 ## <a name="qiskit">Qiskit with Braket</a>
