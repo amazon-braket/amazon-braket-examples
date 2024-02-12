@@ -274,7 +274,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 ---
 ## <a name="search">Still can't find what you're looking for?</a>
-While they may not fit into this repository, Braket provides other libraries, tools, algorithms, experimental features, and more to help with your quantum computing journey. You can, for example, search all of our repositories for the [Bernstein Vazirani](https://github.com/search?q=org%3Aamazon-braket+Bernstein&type=code) algorithm or more [experimental features](https://github.com/search?q=org%3Aamazon-braket+experimental+features&type=code). 
+Braket provides other libraries, tools, algorithms, experimental features, and more to help with your quantum computing journey. You can, for example, search all of our repositories for the [Bernstein Vazirani](https://github.com/search?q=org%3Aamazon-braket+Bernstein&type=code) algorithm or more [experimental features](https://github.com/search?q=org%3Aamazon-braket+experimental+features&type=code). 
 
 ---
 ## Creating a conda environment
