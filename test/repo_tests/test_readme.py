@@ -1,10 +1,6 @@
-import logging
 import os
 import re
 import pathlib
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 EXCLUDED_DIRS = [
     # These directories contain notebook files that should not be linked to in the README.
