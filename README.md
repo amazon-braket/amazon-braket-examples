@@ -215,7 +215,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Bringup Experiments**](examples/pulse_control/1_Bringup_experiments.ipynb)
 
-    This tutorial will introduce common pulse sequences and calibrating pulses via Rabi spectroscopy.
+    This tutorial introduces common pulse sequences and calibrating pulses via Rabi spectroscopy.
 
 * [**Native Gate Calibrations**](examples/pulse_control/2_Native_gate_calibrations.ipynb)
 
