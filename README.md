@@ -250,7 +250,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Parallel Tasks on Aquila**](examples/analog_hamiltonian_simulation/03_Parallel_tasks_on_Aquila.ipynb)
 
-    This tutorial goes through the previously explored checkerboard preparation but now takes advantage of the full area.
+    This tutorial builds on the previous notebook tutorial to use a checkerboard preparation that takes advantage of the full area.
 
 * [**Maximum Independent Sets**](examples/analog_hamiltonian_simulation/04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb)
 
