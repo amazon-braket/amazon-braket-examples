@@ -208,7 +208,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Creating Hybrid Job Scripts**](examples/hybrid_jobs/8_Creating_Hybrid_Job_Scripts/Creating_your_first_Hybrid_Job.ipynb)
 
-    This notebook shows an alternate way to create a Hybrid Job - without using a @hybrid_job decorator - that may be useful in some circumstances, such as using older versions of Python. 
+    This notebook shows an alternate way to create a Hybrid Job without using a @hybrid_job decorator. The demonstrated method may be useful in some circumstances, such as using older versions of Python.
 
 ---
 ## <a name="pulse">Pulse Control</a>
