@@ -53,7 +53,7 @@ dependencies = [
 [tool.hatch.envs.default.scripts]
 test = """
 python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
-pytest -n auto -ra -v --durations=0 test/integ_tests/
+pytest -n auto -ra -v --durations=0 test/
 """
 
 
