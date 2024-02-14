@@ -113,6 +113,7 @@ The examples in this repository are structured as follows:
 
     In this demo, we explore the underlying physical principles of driving transmon qubits and show how to perform custom pulse gates on OQC's Lucy via the Pennylane-Braket plugin.
 
+
 ---
 ## <a name="braket">Amazon Braket features</a>
 This folder contains examples that illustrate the usage of individual features of Amazon Braket
