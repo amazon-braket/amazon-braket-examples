@@ -109,6 +109,11 @@ The examples in this repository are structured as follows:
 
     In this tutorial, we will show you how to compute gradients of free parameters in a quantum circuit using PennyLane and Amazon Braket. Adjoint differentiation is a technique used to compute gradients of parametrized quantum circuits. It can be used when shots=0 and is available on Amazon Braket’s on-demand state vector simulator, SV1. The adjoint differentiation method allows you to compute the gradient of a circuit with P parameters in only 1+1 circuit executions (one forward and one backward pass, similar to backpropagation), as opposed to the parameter-shift or finite-difference methods, both of which require 2P circuit executions for every gradient calculation. The adjoint method can lower the cost of running variational quantum workflows, especially for circuits with a large number of parameters. 
 
+  * [**Pulse programming on OQC's Lucy in PennyLane**](examples/pennylane/7_Pulse_control_OQC_Lucy/7_Pulse_control_OQC_Lucy.ipynb)
+
+    In this demo, we explore the underlying physical principles of driving transmon qubits and show how to perform custom pulse gates on OQC's Lucy via the Pennylane-Braket plugin.
+
+
 ---
 ## <a name="braket">Amazon Braket features</a>
 This folder contains examples that illustrate the usage of individual features of Amazon Braket
