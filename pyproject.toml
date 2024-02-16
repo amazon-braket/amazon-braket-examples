@@ -59,3 +59,6 @@ pytest -n auto -ra -v --durations=0 test/
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.9", "3.10", "3.11"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
