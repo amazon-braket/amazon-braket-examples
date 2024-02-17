@@ -1,8 +1,6 @@
 # IMPORTS
 import numpy as np
-from braket.aws import AwsDevice
 from braket.circuits import Circuit, Observable, circuit, FreeParameter, QubitSet
-from braket.devices import LocalSimulator
 from scipy.optimize import minimize
 
 

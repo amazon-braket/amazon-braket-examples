@@ -1,5 +1,4 @@
 # general imports
-import math
 import pickle
 from collections import Counter
 from datetime import datetime
@@ -8,9 +7,6 @@ import numpy as np
 
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
-
-# local imports
-from utils_qft import inverse_qft
 
 
 @circuit.subroutine(register=True)
