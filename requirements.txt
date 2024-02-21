@@ -16,7 +16,7 @@ matplotlib==3.8.3
 ml-dtypes==0.3.2
 mypy-extensions==1.0.0
 numpy==1.25.2
-openfermion==1.6.1 # later versions pin scipy to a version that is incompatible
+openfermion==1.6.1
 openfermionpyscf==0.5
 optax==0.1.9
 pandas==2.2.0
