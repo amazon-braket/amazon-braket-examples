@@ -1,7 +1,4 @@
 # IMPORTS
-import warnings
-
-import matplotlib.cbook
 import matplotlib.pyplot as plt
 import networkx as nx
 from pyqubo import Spin, solve_ising

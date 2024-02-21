@@ -1,8 +1,6 @@
 # general imports
 import math
 
-import numpy as np
-
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
 
