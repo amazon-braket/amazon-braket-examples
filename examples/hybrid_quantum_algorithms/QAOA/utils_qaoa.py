@@ -19,7 +19,7 @@ def ZZgate(q1, q2, gamma):
     circ_zz = Circuit()
 
     # construct decomposition of ZZ
-    circ_zz.cnot(q1, q2).rz(q2, gamma).cnot(q1, q2)
+    circ_zz.cnot(q1, q2).rz(q2, np.mod(gamma, 2*np.pi)).cnot(q1, q2)
 
     return circ_zz
 
@@ -35,7 +35,7 @@ def driver(beta, n_qubits):
 
     # apply parametrized rotation around x to every qubit
     for qubit in range(n_qubits):
-        gate = Circuit().rx(qubit, 2 * beta)
+        gate = Circuit().rx(qubit, np.mod(2 * beta, 2*np.pi))
         circ.add(gate)
 
     return circ
@@ -64,7 +64,7 @@ def cost_circuit(gamma, n_qubits, ising, device):
             circ.add(gate)
         # classical simulators and IonQ support ZZ gate
         else:
-            gate = Circuit().zz(qubit_pair[0], qubit_pair[1], angle=2 * gamma * int_strength)
+            gate = Circuit().zz(qubit_pair[0], qubit_pair[1], angle=np.mod(2 * gamma * int_strength, 2*np.pi))
             circ.add(gate)
 
     return circ
