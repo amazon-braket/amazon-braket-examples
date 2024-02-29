@@ -2,14 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import networkx as nx
 from braket.ahs.atom_arrangement import SiteType
-from braket.timings.time_series import TimeSeries
 from braket.ahs.driving_field import DrivingField
 from braket.ahs.shifting_field import ShiftingField
-from braket.ahs.field import Field
-from braket.ahs.pattern import Pattern
-from collections import Counter
 
-from typing import Dict, List, Tuple
 from braket.tasks.analog_hamiltonian_simulation_quantum_task_result import AnalogHamiltonianSimulationQuantumTaskResult
 from braket.ahs.atom_arrangement import AtomArrangement
 

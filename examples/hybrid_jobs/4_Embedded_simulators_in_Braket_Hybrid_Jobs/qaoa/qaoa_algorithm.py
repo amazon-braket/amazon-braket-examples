@@ -2,7 +2,6 @@ import networkx as nx
 import os
 import json
 
-from braket.devices import LocalSimulator
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 
