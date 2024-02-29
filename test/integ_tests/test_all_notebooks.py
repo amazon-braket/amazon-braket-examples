@@ -52,6 +52,11 @@ def get_mock_paths(notebook_dir, notebook_file):
     return path_to_utils, path_to_mocks
 
 
+@pytest.fixture(scope="module")
+def html_exporter():
+    return HTMLExporter(template_name="classic")
+
+
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
@@ -73,11 +78,9 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
 
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
-def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
+def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level, html_exporter):
     os.chdir(root_path)
     os.chdir(notebook_dir)
-
-    html_exporter = HTMLExporter(template_name="classic")
 
     html_exporter.from_file(notebook_file)
 
