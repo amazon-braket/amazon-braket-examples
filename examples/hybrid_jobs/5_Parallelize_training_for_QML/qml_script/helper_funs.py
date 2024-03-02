@@ -1,6 +1,5 @@
 import torch
 import numpy as np
-import os
 import csv
 import pennylane as qml
 
@@ -60,12 +59,14 @@ def get_device(n_wires, device_string):
         device = qml.device(device_name, wires=n_wires)
         print("Using local simulator: ", device.name)
     else:
-        device = qml.device('braket.aws.qubit', 
-                             device_arn=device_string, 
-                             s3_destination_folder=None,
-                             wires=n_wires,
-                             parallel=True,
-                             max_parallel=30)
+        device = qml.device(
+            "braket.aws.qubit",
+            device_arn=device_string,
+            s3_destination_folder=None,
+            wires=n_wires,
+            parallel=True,
+            max_parallel=30
+        )
         print("Using AWS managed device: ", device.name)
         
     return device
