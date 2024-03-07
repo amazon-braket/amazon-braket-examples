@@ -1,0 +1,1767 @@
+{
+  "service": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.device_service_properties",
+      "version": "1"
+    },
+    "executionWindows": [
+      {
+        "executionDay": "Weekdays",
+        "windowStartHour": "10:00:00",
+        "windowEndHour": "13:00:00"
+      }
+    ],
+    "shotsRange": [
+      1,
+      10000
+    ],
+    "deviceCost": {
+      "price": 0.00035,
+      "unit": "shot"
+    },
+    "deviceDocumentation": {
+      "imageUrl": "https://oxfordquantumcircuits.com/wp-content/uploads/2018/09/Logo.png",
+      "summary": "Universal gate-model QPU based on superconducting qubits",
+      "externalDocumentationUrl": "https://oxfordquantumcircuits.com/technology"
+    },
+    "deviceLocation": "Reading, United Kingdom",
+    "updatedAt": "2022-12-07T00:00:08+00:00"
+  },
+  "action": {
+    "braket.ir.jaqcd.program": {
+      "version": [
+        "1.0",
+        "1.1"
+      ],
+      "actionType": "braket.ir.jaqcd.program",
+      "supportedOperations": [
+        "ccnot",
+        "cnot",
+        "cphaseshift",
+        "cswap",
+        "cy",
+        "cz",
+        "h",
+        "i",
+        "phaseshift",
+        "rx",
+        "ry",
+        "rz",
+        "s",
+        "si",
+        "swap",
+        "t",
+        "ti",
+        "v",
+        "vi",
+        "x",
+        "y",
+        "z",
+        "ecr",
+        "start_verbatim_box",
+        "end_verbatim_box"
+      ],
+      "supportedResultTypes": [
+        {
+          "name": "Sample",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 10,
+          "maxShots": 10000
+        },
+        {
+          "name": "Expectation",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 10,
+          "maxShots": 10000
+        },
+        {
+          "name": "Variance",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 10,
+          "maxShots": 10000
+        },
+        {
+          "name": "Probability",
+          "minShots": 10,
+          "maxShots": 10000
+        }
+      ],
+      "disabledQubitRewiringSupported": false
+    },
+    "braket.ir.openqasm.program": {
+      "version": [
+        "1.0"
+      ],
+      "actionType": "braket.ir.openqasm.program",
+      "supportedOperations": [
+        "ccnot",
+        "cnot",
+        "cphaseshift",
+        "cswap",
+        "cy",
+        "cz",
+        "h",
+        "i",
+        "phaseshift",
+        "rx",
+        "ry",
+        "rz",
+        "s",
+        "si",
+        "swap",
+        "t",
+        "ti",
+        "v",
+        "vi",
+        "x",
+        "y",
+        "z",
+        "ecr"
+      ],
+      "supportedPragmas": [
+        "verbatim",
+        "braket_result_type_sample",
+        "braket_result_type_expectation",
+        "braket_result_type_variance",
+        "braket_result_type_probability"
+      ],
+      "forbiddenPragmas": [
+        "braket_unitary_matrix",
+        "braket_result_type_state_vector",
+        "braket_result_type_density_matrix",
+        "braket_result_type_amplitude"
+      ],
+      "maximumQubitArrays": 1,
+      "maximumClassicalArrays": 1,
+      "forbiddenArrayOperations": [
+        "concatenation",
+        "negativeIndex",
+        "range",
+        "rangeWithStep",
+        "slicing",
+        "selection"
+      ],
+      "requiresAllQubitsMeasurement": false,
+      "supportPhysicalQubits": true,
+      "requiresContiguousQubitIndices": false,
+      "supportsPartialVerbatimBox": false,
+      "supportsUnassignedMeasurements": false,
+      "disabledQubitRewiringSupported": false,
+      "supportedResultTypes": [
+        {
+          "name": "Sample",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 10,
+          "maxShots": 10000
+        },
+        {
+          "name": "Expectation",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 10,
+          "maxShots": 10000
+        },
+        {
+          "name": "Variance",
+          "observables": [
+            "x",
+            "y",
+            "z",
+            "h",
+            "i"
+          ],
+          "minShots": 10,
+          "maxShots": 10000
+        },
+        {
+          "name": "Probability",
+          "minShots": 10,
+          "maxShots": 10000
+        }
+      ]
+    }
+  },
+  "deviceParameters": {
+    "title": "OqcDeviceParameters",
+    "description": "This defines the parameters common to all the OQC devices.\n\nAttributes:\n    paradigmParameters: Parameters that are common to gatemodel paradigm\n\nExamples:\n    >>> import json\n    >>> input_json = {\n    ...    \"braketSchemaHeader\": {\n    ...        \"name\": \"braket.device_schema.oqc.oqc_device_parameters\",\n    ...        \"version\": \"1\",\n    ...    },\n    ...    \"paradigmParameters\": {\"braketSchemaHeader\": {\n    ...        \"name\": \"braket.device_schema.gate_model_parameters\",\n    ...        \"version\": \"1\",\n    ...    },\"qubitCount\": 1},\n    ... }\n    >>> OqcDeviceParameters.parse_raw_schema(json.dumps(input_json))",
+    "type": "object",
+    "properties": {
+      "braketSchemaHeader": {
+        "title": "Braketschemaheader",
+        "const": {
+          "name": "braket.device_schema.oqc.oqc_device_parameters",
+          "version": "1"
+        }
+      },
+      "paradigmParameters": {
+        "$ref": "#/definitions/GateModelParameters"
+      }
+    },
+    "required": [
+      "paradigmParameters"
+    ],
+    "definitions": {
+      "GateModelParameters": {
+        "title": "GateModelParameters",
+        "description": "Defines parameters common to all gate model devices.\n\nAttributes:\n    qubitCount: Number of qubits used by the circuit.\n    disableQubitRewiring: Whether to run the circuit with the exact qubits chosen,\n        without any rewiring downstream.\n        If ``True``, no qubit rewiring is allowed; if ``False``, qubit rewiring is allowed.\n\nExamples:\n    >>> import json\n    >>> input_json = {\n    ...    \"braketSchemaHeader\": {\n    ...        \"name\": \"braket.device_schema.gate_model_parameters\",\n    ...        \"version\": \"1\",\n    ...    },\n    ...    \"qubitCount\": 1,\n    ...    \"disableQubitRewiring\": True\n    ... }\n    >>> GateModelParameters.parse_raw_schema(json.dumps(input_json))",
+        "type": "object",
+        "properties": {
+          "braketSchemaHeader": {
+            "title": "Braketschemaheader",
+            "const": {
+              "name": "braket.device_schema.gate_model_parameters",
+              "version": "1"
+            }
+          },
+          "qubitCount": {
+            "title": "Qubitcount",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "disableQubitRewiring": {
+            "title": "Disablequbitrewiring",
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "qubitCount"
+        ]
+      }
+    }
+  },
+  "braketSchemaHeader": {
+    "name": "braket.device_schema.oqc.oqc_device_capabilities",
+    "version": "1"
+  },
+  "paradigm": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.gate_model_qpu_paradigm_properties",
+      "version": "1"
+    },
+    "connectivity": {
+      "fullyConnected": false,
+      "connectivityGraph": {
+        "0": [
+          "1",
+          "7"
+        ],
+        "1": [
+          "2"
+        ],
+        "2": [
+          "3"
+        ],
+        "4": [
+          "3",
+          "5"
+        ],
+        "6": [
+          "5"
+        ],
+        "7": [
+          "6"
+        ]
+      }
+    },
+    "qubitCount": 8,
+    "nativeGateSet": [
+      "ecr",
+      "i",
+      "rz",
+      "v",
+      "x"
+    ]
+  },
+  "provider": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.oqc.oqc_provider_properties",
+      "version": "1"
+    },
+    "properties": {
+      "one_qubit": {
+        "0": {
+          "T1": 20.332293813859128,
+          "T2": 30.847759549865472,
+          "fRB": 0.9992726271409667,
+          "fRO": 0.948,
+          "qubit": 0.0
+        },
+        "1": {
+          "T1": 49.4219780566164,
+          "T2": 51.26117172668915,
+          "fRB": 0.9972448929549043,
+          "fRO": 0.7415,
+          "qubit": 1.0
+        },
+        "2": {
+          "T1": 52.79307902498955,
+          "T2": 39.73666720296961,
+          "fRB": 0.9964219447540965,
+          "fRO": 0.8645,
+          "qubit": 2.0
+        },
+        "3": {
+          "T1": 36.129060334223446,
+          "T2": 60.01746600795253,
+          "fRB": 0.9993451112440128,
+          "fRO": 0.9105,
+          "qubit": 3.0
+        },
+        "4": {
+          "T1": 47.960654006761445,
+          "T2": 47.47886816705227,
+          "fRB": 0.9994921203951096,
+          "fRO": 0.8645,
+          "qubit": 4.0
+        },
+        "5": {
+          "T1": 27.064603747208263,
+          "T2": 38.783665339519075,
+          "fRB": 0.9994352417441938,
+          "fRO": 0.938,
+          "qubit": 5.0
+        },
+        "6": {
+          "T1": 19.98915559006895,
+          "T2": 21.656658159040965,
+          "fRB": 0.9974926436992955,
+          "fRO": 0.905,
+          "qubit": 6.0
+        },
+        "7": {
+          "T1": 45.35432763542417,
+          "T2": 32.540285623446664,
+          "fRB": 0.9994932125562057,
+          "fRO": 0.8745,
+          "qubit": 7.0
+        }
+      },
+      "two_qubit": {
+        "0-1": {
+          "coupling": {
+            "control_qubit": 0.0,
+            "target_qubit": 1.0
+          },
+          "fCX": 0.9497612812119949
+        },
+        "0-7": {
+          "coupling": {
+            "control_qubit": 0.0,
+            "target_qubit": 7.0
+          },
+          "fCX": 0.9526460052165941
+        },
+        "1-2": {
+          "coupling": {
+            "control_qubit": 1.0,
+            "target_qubit": 2.0
+          },
+          "fCX": 0.9596695899037422
+        },
+        "2-3": {
+          "coupling": {
+            "control_qubit": 2.0,
+            "target_qubit": 3.0
+          },
+          "fCX": 0.9492098906250155
+        },
+        "4-3": {
+          "coupling": {
+            "control_qubit": 4.0,
+            "target_qubit": 3.0
+          },
+          "fCX": 0.9594188204098719
+        },
+        "4-5": {
+          "coupling": {
+            "control_qubit": 4.0,
+            "target_qubit": 5.0
+          },
+          "fCX": 0.9749822141718646
+        },
+        "6-5": {
+          "coupling": {
+            "control_qubit": 6.0,
+            "target_qubit": 5.0
+          },
+          "fCX": 0.9489724985259038
+        },
+        "7-6": {
+          "coupling": {
+            "control_qubit": 7.0,
+            "target_qubit": 6.0
+          },
+          "fCX": 0.9460093087131382
+        }
+      }
+    }
+  },
+  "standardized": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.standardized_gate_model_qpu_device_properties",
+      "version": "1"
+    },
+    "oneQubitProperties": {
+      "0": {
+        "T1": {
+          "value": 20.332293813859128,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 30.847759549865472,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9992726271409667
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.948
+          }
+        ]
+      },
+      "1": {
+        "T1": {
+          "value": 49.4219780566164,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 51.26117172668915,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9972448929549043
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.7415
+          }
+        ]
+      },
+      "2": {
+        "T1": {
+          "value": 52.79307902498955,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 39.73666720296961,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9964219447540965
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.8645
+          }
+        ]
+      },
+      "3": {
+        "T1": {
+          "value": 36.129060334223446,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 60.01746600795253,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9993451112440128
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.9105
+          }
+        ]
+      },
+      "4": {
+        "T1": {
+          "value": 47.960654006761445,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 47.47886816705227,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9994921203951096
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.8645
+          }
+        ]
+      },
+      "5": {
+        "T1": {
+          "value": 27.064603747208263,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 38.783665339519075,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9994352417441938
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.938
+          }
+        ]
+      },
+      "6": {
+        "T1": {
+          "value": 19.98915559006895,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 21.656658159040965,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9974926436992955
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.905
+          }
+        ]
+      },
+      "7": {
+        "T1": {
+          "value": 45.35432763542417,
+          "unit": "uS"
+        },
+        "T2": {
+          "value": 32.540285623446664,
+          "unit": "uS"
+        },
+        "oneQubitFidelity": [
+          {
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            },
+            "fidelity": 0.9994932125562057
+          },
+          {
+            "fidelityType": {
+              "name": "READOUT"
+            },
+            "fidelity": 0.8745
+          }
+        ]
+      }
+    },
+    "twoQubitProperties": {
+      "0-1": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 0,
+              "target": 1
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9497612812119949,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "0-7": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 0,
+              "target": 7
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9526460052165941,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "1-2": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 1,
+              "target": 2
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9596695899037422,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "2-3": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 2,
+              "target": 3
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9492098906250155,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "4-3": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 4,
+              "target": 3
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9594188204098719,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "4-5": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 4,
+              "target": 5
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9749822141718646,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "6-5": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 6,
+              "target": 5
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9489724985259038,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      },
+      "7-6": {
+        "twoQubitGateFidelity": [
+          {
+            "direction": {
+              "control": 7,
+              "target": 6
+            },
+            "gateName": "ecr",
+            "fidelity": 0.9460093087131382,
+            "fidelityType": {
+              "name": "RANDOMIZED_BENCHMARKING"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "pulse": {
+    "braketSchemaHeader": {
+      "name": "braket.device_schema.pulse.pulse_device_action_properties",
+      "version": "1"
+    },
+    "supportedQhpTemplateWaveforms": {
+      "gaussian": {
+        "functionName": "gaussian",
+        "arguments": [
+          {
+            "name": "length",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "sigma",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "amplitude",
+            "type": "float",
+            "optional": true
+          },
+          {
+            "name": "zero_at_edges",
+            "type": "bool",
+            "optional": true
+          }
+        ]
+      },
+      "drag_gaussian": {
+        "functionName": "drag_gaussian",
+        "arguments": [
+          {
+            "name": "length",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "sigma",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "beta",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "amplitude",
+            "type": "float",
+            "optional": true
+          },
+          {
+            "name": "zero_at_edges",
+            "type": "bool",
+            "optional": true
+          }
+        ]
+      },
+      "constant": {
+        "functionName": "constant",
+        "arguments": [
+          {
+            "name": "length",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "iq",
+            "type": "complex",
+            "optional": false
+          }
+        ]
+      }
+    },
+    "ports": {
+      "channel_15": {
+        "portId": "channel_15",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          0
+        ]
+      },
+      "channel_16": {
+        "portId": "channel_16",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          0
+        ]
+      },
+      "channel_13": {
+        "portId": "channel_13",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          1
+        ]
+      },
+      "channel_14": {
+        "portId": "channel_14",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          1
+        ]
+      },
+      "channel_11": {
+        "portId": "channel_11",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          2
+        ]
+      },
+      "channel_12": {
+        "portId": "channel_12",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          2
+        ]
+      },
+      "channel_9": {
+        "portId": "channel_9",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          3
+        ]
+      },
+      "channel_10": {
+        "portId": "channel_10",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          3
+        ]
+      },
+      "channel_7": {
+        "portId": "channel_7",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          4
+        ]
+      },
+      "channel_8": {
+        "portId": "channel_8",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          4
+        ]
+      },
+      "channel_5": {
+        "portId": "channel_5",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          5
+        ]
+      },
+      "channel_6": {
+        "portId": "channel_6",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          5
+        ]
+      },
+      "channel_3": {
+        "portId": "channel_3",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          6
+        ]
+      },
+      "channel_4": {
+        "portId": "channel_4",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          6
+        ]
+      },
+      "channel_1": {
+        "portId": "channel_1",
+        "direction": "tx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          7
+        ]
+      },
+      "channel_2": {
+        "portId": "channel_2",
+        "direction": "rx",
+        "portType": "port_type_1",
+        "dt": 5e-10,
+        "qubitMappings": [
+          7
+        ]
+      }
+    },
+    "supportedFunctions": {
+      "new_frame": {
+        "functionName": "new_frame",
+        "arguments": [
+          {
+            "name": "port",
+            "type": "port",
+            "optional": false
+          },
+          {
+            "name": "frequency",
+            "type": "float",
+            "optional": false
+          },
+          {
+            "name": "phase",
+            "type": "float",
+            "optional": true
+          }
+        ]
+      },
+      "shift_phase": {
+        "functionName": "shift_phase",
+        "arguments": [
+          {
+            "name": "frame",
+            "type": "frame",
+            "optional": false
+          },
+          {
+            "name": "phase",
+            "type": "float",
+            "optional": false
+          }
+        ]
+      },
+      "set_phase": {
+        "functionName": "set_phase",
+        "arguments": [
+          {
+            "name": "frame",
+            "type": "frame",
+            "optional": false
+          },
+          {
+            "name": "phase",
+            "type": "float",
+            "optional": false
+          }
+        ]
+      },
+      "shift_frequency": {
+        "functionName": "shift_frequency",
+        "arguments": [
+          {
+            "name": "frame",
+            "type": "frame",
+            "optional": false
+          },
+          {
+            "name": "frequency",
+            "type": "float",
+            "optional": false
+          }
+        ]
+      },
+      "set_frequency": {
+        "functionName": "set_frequency",
+        "arguments": [
+          {
+            "name": "frame",
+            "type": "frame",
+            "optional": false
+          },
+          {
+            "name": "frequency",
+            "type": "float",
+            "optional": false
+          }
+        ]
+      },
+      "play": {
+        "functionName": "play",
+        "arguments": [
+          {
+            "name": "frame",
+            "type": "frame",
+            "optional": false
+          },
+          {
+            "name": "waveform",
+            "type": "waveform",
+            "optional": false
+          }
+        ]
+      },
+      "capture_v0": {
+        "functionName": "capture_v0",
+        "arguments": [
+          {
+            "name": "frame",
+            "type": "frame",
+            "optional": false
+          }
+        ],
+        "returnType": "bit"
+      }
+    },
+    "frames": {
+      "q0_drive": {
+        "frameId": "q0_drive",
+        "portId": "channel_15",
+        "frequency": 4612386015.622402,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0
+        ]
+      },
+      "q0_second_state": {
+        "frameId": "q0_second_state",
+        "portId": "channel_15",
+        "frequency": 4441447279.514469,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0
+        ]
+      },
+      "q0_q1_cross_resonance": {
+        "frameId": "q0_q1_cross_resonance",
+        "portId": "channel_15",
+        "frequency": 4387143990.218688,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0,
+          1
+        ]
+      },
+      "q0_q1_cross_resonance_cancellation": {
+        "frameId": "q0_q1_cross_resonance_cancellation",
+        "portId": "channel_15",
+        "frequency": 4611956071.987613,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0,
+          1
+        ]
+      },
+      "q0_q7_cross_resonance": {
+        "frameId": "q0_q7_cross_resonance",
+        "portId": "channel_15",
+        "frequency": 4328882540.960692,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0,
+          7
+        ]
+      },
+      "q0_q7_cross_resonance_cancellation": {
+        "frameId": "q0_q7_cross_resonance_cancellation",
+        "portId": "channel_15",
+        "frequency": 4611722161.953663,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0,
+          7
+        ]
+      },
+      "r0_measure": {
+        "frameId": "r0_measure",
+        "portId": "channel_16",
+        "frequency": 10036401082.094952,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0
+        ]
+      },
+      "r0_acquire": {
+        "frameId": "r0_acquire",
+        "portId": "channel_16",
+        "frequency": 10036401082.094952,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          0
+        ]
+      },
+      "q1_drive": {
+        "frameId": "q1_drive",
+        "portId": "channel_13",
+        "frequency": 4387143990.218688,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1
+        ]
+      },
+      "q1_second_state": {
+        "frameId": "q1_second_state",
+        "portId": "channel_13",
+        "frequency": 4212593332.1362643,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1
+        ]
+      },
+      "q1_q0_cross_resonance_cancellation": {
+        "frameId": "q1_q0_cross_resonance_cancellation",
+        "portId": "channel_13",
+        "frequency": 4387143990.218688,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1,
+          0
+        ]
+      },
+      "q1_q0_cross_resonance": {
+        "frameId": "q1_q0_cross_resonance",
+        "portId": "channel_13",
+        "frequency": 4611956071.987613,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1,
+          0
+        ]
+      },
+      "q1_q2_cross_resonance": {
+        "frameId": "q1_q2_cross_resonance",
+        "portId": "channel_13",
+        "frequency": 4364933347.454734,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1,
+          2
+        ]
+      },
+      "q1_q2_cross_resonance_cancellation": {
+        "frameId": "q1_q2_cross_resonance_cancellation",
+        "portId": "channel_13",
+        "frequency": 4387345454.985662,
+        "centerFrequency": 4360000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1,
+          2
+        ]
+      },
+      "r1_measure": {
+        "frameId": "r1_measure",
+        "portId": "channel_14",
+        "frequency": 9624889855.38831,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1
+        ]
+      },
+      "r1_acquire": {
+        "frameId": "r1_acquire",
+        "portId": "channel_14",
+        "frequency": 9624889855.38831,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          1
+        ]
+      },
+      "q2_drive": {
+        "frameId": "q2_drive",
+        "portId": "channel_11",
+        "frequency": 4364933347.454734,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2
+        ]
+      },
+      "q2_second_state": {
+        "frameId": "q2_second_state",
+        "portId": "channel_11",
+        "frequency": 4189138579.2937894,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2
+        ]
+      },
+      "q2_q1_cross_resonance_cancellation": {
+        "frameId": "q2_q1_cross_resonance_cancellation",
+        "portId": "channel_11",
+        "frequency": 4364933347.454734,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2,
+          1
+        ]
+      },
+      "q2_q1_cross_resonance": {
+        "frameId": "q2_q1_cross_resonance",
+        "portId": "channel_11",
+        "frequency": 4387345454.985662,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2,
+          1
+        ]
+      },
+      "q2_q3_cross_resonance": {
+        "frameId": "q2_q3_cross_resonance",
+        "portId": "channel_11",
+        "frequency": 4113745506.3420343,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2,
+          3
+        ]
+      },
+      "q2_q3_cross_resonance_cancellation": {
+        "frameId": "q2_q3_cross_resonance_cancellation",
+        "portId": "channel_11",
+        "frequency": 4365055274.381695,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2,
+          3
+        ]
+      },
+      "r2_measure": {
+        "frameId": "r2_measure",
+        "portId": "channel_12",
+        "frequency": 9947058692.7382,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2
+        ]
+      },
+      "r2_acquire": {
+        "frameId": "r2_acquire",
+        "portId": "channel_12",
+        "frequency": 9947058692.7382,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          2
+        ]
+      },
+      "q3_drive": {
+        "frameId": "q3_drive",
+        "portId": "channel_9",
+        "frequency": 4113745506.3420343,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3
+        ]
+      },
+      "q3_second_state": {
+        "frameId": "q3_second_state",
+        "portId": "channel_9",
+        "frequency": 3936161187.248991,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3
+        ]
+      },
+      "q3_q2_cross_resonance_cancellation": {
+        "frameId": "q3_q2_cross_resonance_cancellation",
+        "portId": "channel_9",
+        "frequency": 4113745506.3420343,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3,
+          2
+        ]
+      },
+      "q3_q2_cross_resonance": {
+        "frameId": "q3_q2_cross_resonance",
+        "portId": "channel_9",
+        "frequency": 4365055274.381695,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3,
+          2
+        ]
+      },
+      "q3_q4_cross_resonance": {
+        "frameId": "q3_q4_cross_resonance",
+        "portId": "channel_9",
+        "frequency": 4541276072.022542,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3,
+          4
+        ]
+      },
+      "q3_q4_cross_resonance_cancellation": {
+        "frameId": "q3_q4_cross_resonance_cancellation",
+        "portId": "channel_9",
+        "frequency": 4113745506.3420343,
+        "centerFrequency": 4110000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3,
+          4
+        ]
+      },
+      "r3_measure": {
+        "frameId": "r3_measure",
+        "portId": "channel_10",
+        "frequency": 9428816270.720442,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3
+        ]
+      },
+      "r3_acquire": {
+        "frameId": "r3_acquire",
+        "portId": "channel_10",
+        "frequency": 9428816270.720442,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          3
+        ]
+      },
+      "q4_drive": {
+        "frameId": "q4_drive",
+        "portId": "channel_7",
+        "frequency": 4540689500.425815,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4
+        ]
+      },
+      "q4_second_state": {
+        "frameId": "q4_second_state",
+        "portId": "channel_7",
+        "frequency": 4368376750.8619375,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4
+        ]
+      },
+      "q4_q3_cross_resonance_cancellation": {
+        "frameId": "q4_q3_cross_resonance_cancellation",
+        "portId": "channel_7",
+        "frequency": 4541276072.022542,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4,
+          3
+        ]
+      },
+      "q4_q3_cross_resonance": {
+        "frameId": "q4_q3_cross_resonance",
+        "portId": "channel_7",
+        "frequency": 4113745506.3420343,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4,
+          3
+        ]
+      },
+      "q4_q5_cross_resonance": {
+        "frameId": "q4_q5_cross_resonance",
+        "portId": "channel_7",
+        "frequency": 4472299295.25298,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4,
+          5
+        ]
+      },
+      "q4_q5_cross_resonance_cancellation": {
+        "frameId": "q4_q5_cross_resonance_cancellation",
+        "portId": "channel_7",
+        "frequency": 4541323055.514284,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4,
+          5
+        ]
+      },
+      "r4_measure": {
+        "frameId": "r4_measure",
+        "portId": "channel_8",
+        "frequency": 9751274124.226599,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4
+        ]
+      },
+      "r4_acquire": {
+        "frameId": "r4_acquire",
+        "portId": "channel_8",
+        "frequency": 9751274124.226599,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          4
+        ]
+      },
+      "q5_drive": {
+        "frameId": "q5_drive",
+        "portId": "channel_5",
+        "frequency": 4472299295.25298,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5
+        ]
+      },
+      "q5_second_state": {
+        "frameId": "q5_second_state",
+        "portId": "channel_5",
+        "frequency": 4298954245.813162,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5
+        ]
+      },
+      "q5_q4_cross_resonance_cancellation": {
+        "frameId": "q5_q4_cross_resonance_cancellation",
+        "portId": "channel_5",
+        "frequency": 4472299295.25298,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5,
+          4
+        ]
+      },
+      "q5_q4_cross_resonance": {
+        "frameId": "q5_q4_cross_resonance",
+        "portId": "channel_5",
+        "frequency": 4541323055.514284,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5,
+          4
+        ]
+      },
+      "q5_q6_cross_resonance": {
+        "frameId": "q5_q6_cross_resonance",
+        "portId": "channel_5",
+        "frequency": 4529950804.9553995,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5,
+          6
+        ]
+      },
+      "q5_q6_cross_resonance_cancellation": {
+        "frameId": "q5_q6_cross_resonance_cancellation",
+        "portId": "channel_5",
+        "frequency": 4472299295.25298,
+        "centerFrequency": 4290000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5,
+          6
+        ]
+      },
+      "r5_measure": {
+        "frameId": "r5_measure",
+        "portId": "channel_6",
+        "frequency": 9327185161.958628,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5
+        ]
+      },
+      "r5_acquire": {
+        "frameId": "r5_acquire",
+        "portId": "channel_6",
+        "frequency": 9327185161.958628,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          5
+        ]
+      },
+      "q6_drive": {
+        "frameId": "q6_drive",
+        "portId": "channel_3",
+        "frequency": 4526603905.995322,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6
+        ]
+      },
+      "q6_second_state": {
+        "frameId": "q6_second_state",
+        "portId": "channel_3",
+        "frequency": 4358463283.274984,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6
+        ]
+      },
+      "q6_q5_cross_resonance_cancellation": {
+        "frameId": "q6_q5_cross_resonance_cancellation",
+        "portId": "channel_3",
+        "frequency": 4529950804.9553995,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6,
+          5
+        ]
+      },
+      "q6_q5_cross_resonance": {
+        "frameId": "q6_q5_cross_resonance",
+        "portId": "channel_3",
+        "frequency": 4472299295.25298,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6,
+          5
+        ]
+      },
+      "q6_q7_cross_resonance": {
+        "frameId": "q6_q7_cross_resonance",
+        "portId": "channel_3",
+        "frequency": 4330022169.803616,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6,
+          7
+        ]
+      },
+      "q6_q7_cross_resonance_cancellation": {
+        "frameId": "q6_q7_cross_resonance_cancellation",
+        "portId": "channel_3",
+        "frequency": 4526603905.995322,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6,
+          7
+        ]
+      },
+      "r6_measure": {
+        "frameId": "r6_measure",
+        "portId": "channel_4",
+        "frequency": 9844671427.389328,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6
+        ]
+      },
+      "r6_acquire": {
+        "frameId": "r6_acquire",
+        "portId": "channel_4",
+        "frequency": 9844671427.389328,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          6
+        ]
+      },
+      "q7_drive": {
+        "frameId": "q7_drive",
+        "portId": "channel_1",
+        "frequency": 4328882540.960692,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7
+        ]
+      },
+      "q7_second_state": {
+        "frameId": "q7_second_state",
+        "portId": "channel_1",
+        "frequency": 4154454302.0858574,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7
+        ]
+      },
+      "q7_q0_cross_resonance_cancellation": {
+        "frameId": "q7_q0_cross_resonance_cancellation",
+        "portId": "channel_1",
+        "frequency": 4328882540.960692,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7,
+          0
+        ]
+      },
+      "q7_q0_cross_resonance": {
+        "frameId": "q7_q0_cross_resonance",
+        "portId": "channel_1",
+        "frequency": 4611722161.953663,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7,
+          0
+        ]
+      },
+      "q7_q6_cross_resonance_cancellation": {
+        "frameId": "q7_q6_cross_resonance_cancellation",
+        "portId": "channel_1",
+        "frequency": 4330022169.803616,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7,
+          6
+        ]
+      },
+      "q7_q6_cross_resonance": {
+        "frameId": "q7_q6_cross_resonance",
+        "portId": "channel_1",
+        "frequency": 4526603905.995322,
+        "centerFrequency": 4280000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7,
+          6
+        ]
+      },
+      "r7_measure": {
+        "frameId": "r7_measure",
+        "portId": "channel_2",
+        "frequency": 9522446500.522432,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7
+        ]
+      },
+      "r7_acquire": {
+        "frameId": "r7_acquire",
+        "portId": "channel_2",
+        "frequency": 9522446500.522432,
+        "centerFrequency": 9000000000.0,
+        "phase": 0.0,
+        "qubitMappings": [
+          7
+        ]
+      }
+    },
+    "supportsLocalPulseElements": false,
+    "supportsDynamicFrames": true,
+    "supportsNonNativeGatesWithPulses": true,
+    "validationParameters": {
+      "MAX_SCALE": 1.0,
+      "MAX_AMPLITUDE": 1.0,
+      "PERMITTED_FREQUENCY_DIFFERENCE": 1.0,
+      "MIN_PULSE_LENGTH": 8e-09,
+      "MAX_PULSE_LENGTH": 0.00012
+    }
+  }
+}
