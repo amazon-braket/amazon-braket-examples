@@ -1,8 +1,0 @@
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: start polling for completion
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: task status CREATED
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: task status CREATED
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: task status QUEUED
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: task status RUNNING
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: task status RUNNING
-Task arn:aws:braket:us-west-2:260818742045:quantum-task/24a7dfc6-ff63-4ef8-ad91-786ac9d9952c: task status COMPLETED
-Counter({'00011': 490, '00001': 488, '01001': 8, '10101': 8, '01011': 5, '10111': 1})

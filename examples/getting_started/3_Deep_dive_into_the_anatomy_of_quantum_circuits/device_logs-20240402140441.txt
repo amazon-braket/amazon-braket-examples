@@ -1,0 +1,8 @@
+Task arn:aws:braket:us-west-2:260818742045:quantum-task/d84bd470-c85c-4815-9918-02670b39f0fa: start polling for completion
+Task arn:aws:braket:us-west-2:260818742045:quantum-task/d84bd470-c85c-4815-9918-02670b39f0fa: task status CREATED
+Task is in Normal queue position: 1
+Task arn:aws:braket:us-west-2:260818742045:quantum-task/d84bd470-c85c-4815-9918-02670b39f0fa: task status QUEUED
+Task arn:aws:braket:us-west-2:260818742045:quantum-task/d84bd470-c85c-4815-9918-02670b39f0fa: task status RUNNING
+Task arn:aws:braket:us-west-2:260818742045:quantum-task/d84bd470-c85c-4815-9918-02670b39f0fa: task status RUNNING
+Task arn:aws:braket:us-west-2:260818742045:quantum-task/d84bd470-c85c-4815-9918-02670b39f0fa: task status COMPLETED
+Counter({'00011': 506, '00001': 477, '01011': 5, '01001': 5, '10111': 4, '10101': 3})
