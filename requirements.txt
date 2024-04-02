@@ -1,11 +1,11 @@
-botocore==1.34.72
-awscli==1.32.72
-boto3==1.34.72
+botocore==1.34.75
+awscli==1.32.75
+boto3==1.34.75
 amazon-braket-default-simulator==1.21.2
 amazon-braket-pennylane-plugin==1.24.6
-amazon-braket-schemas==1.21.0
-amazon-braket-sdk==1.75.0
-amazon-braket-algorithm-library==1.4.8
+amazon-braket-schemas==1.21.1
+amazon-braket-sdk==1.76.0
+amazon-braket-algorithm-library==1.4.9
 cvxpy==1.4.2
 ipykernel==6.29.4
 jax==0.4.25
@@ -13,7 +13,7 @@ jaxlib==0.4.25
 jinja2==3.1.3
 markupsafe==2.1.5
 matplotlib==3.8.3
-ml-dtypes==0.3.2
+ml-dtypes==0.4.0
 mypy-extensions==1.0.0
 numpy==1.25.2
 openfermion==1.6.1
@@ -22,7 +22,7 @@ optax==0.2.2
 pandas==2.2.1
 pennylane==0.35.1
 PennyLane-Lightning==0.35.1
-qiskit-aer==0.13.3
+qiskit-aer==0.14.0.1
 qiskit-algorithms==0.3.0
 qiskit_braket_provider==0.2.0
 qiskit==1.0.2
