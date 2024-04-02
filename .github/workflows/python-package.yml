@@ -24,13 +24,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install -r test/integ_tests/requirements.txt
+        pip install hatch
     - name: Run integ tests
       run: |
-        pytest -n auto -ra -v --durations=0 test/integ_tests/
+        hatch run test

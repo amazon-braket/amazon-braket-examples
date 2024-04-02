@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling", "hatch-requirements-txt"]
+build-backend = "hatchling.build"
+
+[project]
+name = "amazon-braket-examples"
+version = "0.0.1"
+description = 'Example notebooks that show how to apply quantum computing with Amazon Braket.'
+readme = "README.md"
+requires-python = ">=3.9"
+license = "apache-2.0"
+keywords = []
+authors = [{name = "Amazon Web Services"},]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Education",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+]
+dynamic = ["dependencies"]
+
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["requirements.txt"]
+
+[tool.hatch.build.targets.wheel]
+only-packages = true
+include = [
+  "examples/*",
+]
+
+[project.urls]
+Documentation = "https://github.com/amazon-braket/amazon-braket-examples#readme"
+Issues = "https://github.com/amazon-braket/amazon-braket-examples/issues"
+Source = "https://github.com/amazon-braket/amazon-braket-examples"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "jupyter",
+  "nbconvert",
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-xdist[psutil]",
+  "testbook",
+]
+
+[tool.hatch.envs.default.scripts]
+test = """
+python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
+pytest -n logical -ra -v --durations=0 test/
+"""
+
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.9", "3.10", "3.11"]
+
+[tool.hatch.metadata]
+allow-direct-references = true

@@ -1,12 +1,7 @@
 import os
 
-# update pennylane version to 0.23 for QNG to be compatible with
-# QAOA use cases.
-os.system("pip install pennylane==0.23.0 -q")
-
 import pennylane as qml
 from pennylane import numpy as np
-import random
 import json
 from source_scripts.utils import get_device, str2bool, train
 from source_scripts.QNSPSA import QNSPSA
