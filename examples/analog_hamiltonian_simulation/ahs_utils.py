@@ -3,7 +3,14 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from braket.ahs.atom_arrangement import SiteType
 from braket.ahs.driving_field import DrivingField
+<<<<<<< HEAD
+from braket.ahs.local_detuning import LocalDetuning
+from braket.ahs.field import Field
+from braket.ahs.pattern import Pattern
+from collections import Counter
+=======
 from braket.ahs.shifting_field import ShiftingField
+>>>>>>> public-main
 
 from braket.tasks.analog_hamiltonian_simulation_quantum_task_result import AnalogHamiltonianSimulationQuantumTaskResult
 from braket.ahs.atom_arrangement import AtomArrangement
@@ -83,28 +90,28 @@ def show_global_drive(drive, axes=None, **plot_ops):
     plt.show()
 
 
-def show_local_shift(shift:ShiftingField):
-    """Plot the shifting field
+def show_local_detuning(local_detuning:LocalDetuning):
+    """Plot local_detuning
         Args:
-            shift (ShiftingField): The shifting field to be plot
+            local_detuning (LocalDetuning): The local detuning to be plotted
     """       
-    data = shift.magnitude.time_series
-    pattern = shift.magnitude.pattern.series
+    data = local_detuning.magnitude.time_series
+    pattern = local_detuning.magnitude.pattern.series
     
     plt.plot(data.times(), data.values(), '.-', label="pattern: " + str(pattern))
     plt.xlabel('time [s]')
-    plt.ylabel('shift [rad/s]')
+    plt.ylabel('detuning [rad/s]')
     plt.legend()
     plt.tight_layout()
     plt.show()
 
     
-def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
-    """Plot the driving and shifting fields
+def show_drive_and_local_detuning(drive: DrivingField, local_detuning: LocalDetuning):
+    """Plot the driving field and local detuning
     
         Args:
             drive (DrivingField): The driving field to be plot
-            shift (ShiftingField): The shifting field to be plot
+            local_detuning (LocalDetuning): The local detuning to be plotted
     """        
     drive_data = {
         'amplitude [rad/s]': drive.amplitude.time_series,
@@ -121,10 +128,10 @@ def show_drive_and_shift(drive: DrivingField, shift: ShiftingField):
         ax.set_ylabel(data_name)
         ax.grid(ls=':')
         
-    shift_data = shift.magnitude.time_series
-    pattern = shift.magnitude.pattern.series   
-    axes[-1].plot(shift_data.times(), shift_data.values(), '.-', label="pattern: " + str(pattern))
-    axes[-1].set_ylabel('shift [rad/s]')
+    local_detuning_data = local_detuning.magnitude.time_series
+    pattern = local_detuning.magnitude.pattern.series   
+    axes[-1].plot(local_detuning_data.times(), local_detuning_data.values(), '.-', label="pattern: " + str(pattern))
+    axes[-1].set_ylabel('detuning [rad/s]')
     axes[-1].set_xlabel('time [s]')
     axes[-1].legend()
     axes[-1].grid()
