@@ -111,6 +111,13 @@
             {"rampTime": 75e-9, "rabiCorrection": 0.97},
             {"rampTime": 100e-9, "rabiCorrection": 1.00}
           ]
+        },
+        "rydbergLocal": {
+          "detuningErrorRms": 0.2,
+          "siteCoefficientErrorRms": 0.1,
+          "errorRateIncoherentBright": 0.2,
+          "errorRateIncoherentDark": 0.1,
+          "crosstalk": 0.2,
         }
       }
     }
