@@ -265,11 +265,11 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
     This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
-* [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Simulating_Lattice_Gauge_Theory_with_Rydberg_Atoms.ipynb)
+* [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb)
 
     This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
-* [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Simulating_Lattice_Gauge_Theory_with_Rydberg_Atoms.ipynb)
+* [**Simulating lattice gauge theory with Rydberg atoms**](examples/analog_hamiltonian_simulation/07_Simulating_Lattice_Gauge_Theory_with_Rydberg_Atoms.ipynb)
 
     This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
