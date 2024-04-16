@@ -117,7 +117,7 @@
           "siteCoefficientErrorRms": 0.1,
           "errorRateIncoherentBright": 0.2,
           "errorRateIncoherentDark": 0.1,
-          "crosstalk": 0.2,
+          "crosstalk": 0.2
         }
       }
     }
