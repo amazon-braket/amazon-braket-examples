@@ -114,6 +114,11 @@
         },
         "rydbergLocal": {
           "detuningErrorRms": 0.2,
+          "siteCoefficientRange": [0.0, 0.2],
+          "numberLocalDetuningSitesMax": 10,
+          "spacingRadialMin": 0.2,
+          "timeResolution": 1e-9,
+          "timeDeltaMin": 1e-8,
           "siteCoefficientErrorRms": 0.1,
           "errorRateIncoherentBright": 0.2,
           "errorRateIncoherentDark": 0.1,
