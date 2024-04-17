@@ -66,7 +66,7 @@
         "timeMax": 0.000004
       },
       "rydbergLocal": {
-        "detuningRange": [0, 2 * 50.0e6],
+        "detuningRange": [0, 50.0e6],
         "detuningSlewRateMax": 0.2,
         "siteCoefficientRange": [0.0, 0.2],
         "numberLocalDetuningSitesMax": 10,
