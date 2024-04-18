@@ -30,7 +30,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install hatch
+        pip install hatch pycparser
     - name: Run integ tests
       run: |
         hatch run test
