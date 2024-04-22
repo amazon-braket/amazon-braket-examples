@@ -44,15 +44,11 @@ def main():
 
         # echo progress
         current_time = datetime.now().strftime("%H:%M:%S")
-        print(
-            current_time + " progress: {} / {}   " "cost: {}".format(i, nsteps, np.round(cost, 3))
-        )
+        print(current_time + " progress: {} / {}   " "cost: {}".format(i, nsteps, np.round(cost, 3)))
 
         # log the cost function as a metric
 
-        braket_tasks_cost = float(
-            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
-        )
+        braket_tasks_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
 
         timestamp = time.time()
         log_metric(

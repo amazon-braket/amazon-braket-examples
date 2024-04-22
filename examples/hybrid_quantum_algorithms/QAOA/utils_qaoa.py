@@ -109,16 +109,14 @@ def objective_function(params, qaoa_circuit, ising, device, n_shots, tracker, ve
 
     # create parameter dict
     params_dict = {str(fp): p for fp, p in zip(qaoa_circuit.parameters, params)}
-    
+
     # classically simulate the circuit
     # set the parameter values using the inputs argument
     # execute the correct device.run call depending on whether the backend is local or cloud based
     if isinstance(device, LocalSimulator):
         task = device.run(qaoa_circuit, shots=n_shots, inputs=params_dict)
     else:
-        task = device.run(
-            qaoa_circuit, shots=n_shots, inputs=params_dict, poll_timeout_seconds=3 * 24 * 60 * 60
-        )
+        task = device.run(qaoa_circuit, shots=n_shots, inputs=params_dict, poll_timeout_seconds=3 * 24 * 60 * 60)
 
     # get result for this task
     result = task.result()
@@ -161,9 +159,7 @@ def objective_function(params, qaoa_circuit, ising, device, n_shots, tracker, ve
 
 
 # The function to execute the training: run classical minimization.
-def train(
-    device, options, p, ising, n_qubits, n_shots, opt_method, tracker, verbose=True
-):
+def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, verbose=True):
     """
     function to run QAOA algorithm for given, fixed circuit depth p
     """
@@ -190,7 +186,7 @@ def train(
     bnds = bnds_gamma + bnds_beta
 
     tracker["params"].append(params0)
-    
+
     gamma_params = [FreeParameter(f"gamma_{i}") for i in range(p)]
     beta_params = [FreeParameter(f"beta_{i}") for i in range(p)]
     params = gamma_params + beta_params

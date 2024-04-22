@@ -20,6 +20,7 @@ def driver(beta, n_qubits):
 
     return circ
 
+
 # helper function for evolution with cost Hamiltonian
 @circuit.subroutine(register=True)
 def cost_circuit(gammas, n_qubits, ising, device):
@@ -34,7 +35,7 @@ def cost_circuit(gammas, n_qubits, ising, device):
     edges = list(zip(idx[0], idx[1]))
 
     # apply ZZ gate for every edge (with corresponding interaction strength)
-    for (ii, qubit_pair) in enumerate(edges):
+    for ii, qubit_pair in enumerate(edges):
         circ.zz(qubit_pair[0], qubit_pair[1], angle=gammas[ii])
 
     return circ
@@ -62,6 +63,7 @@ def circuit(params, device, n_qubits, ising):
         circ.driver(betas[mm], n_qubits)
     return circ
 
+
 def cost_H(ising):
     idx = ising.nonzero()
     edges = list(zip(idx[0], idx[1]))
@@ -71,37 +73,40 @@ def cost_H(ising):
     for qubit_pair in edges[1:]:
         # get interaction strength from Ising matrix
         int_strength = ising[qubit_pair[0], qubit_pair[1]]
-        H.append(2*ising[qubit_pair[0], qubit_pair[1]] * Observable.Z() @ Observable.Z())
+        H.append(2 * ising[qubit_pair[0], qubit_pair[1]] * Observable.Z() @ Observable.Z())
     targets = [QubitSet([edge[0], edge[1]]) for edge in edges]
-    return sum(H, 2*ising[edges[0][0], edges[0][1]] * Observable.Z() @ Observable.Z()), targets
+    return sum(H, 2 * ising[edges[0][0], edges[0][1]] * Observable.Z() @ Observable.Z()), targets
+
 
 def form_inputs_dict(params, ising):
     n_params = len(params)
     params_dict = {}
     idx = ising.nonzero()
     edges = list(zip(idx[0], idx[1]))
-    split = int(n_params/2)
+    split = int(n_params / 2)
     for i in range(split):
         params_dict[f'beta_{i}'] = 2 * params[split + i]
         for j in range(len(edges)):
             params_dict[f'gamma_{i}_{j}'] = 2 * ising[edges[j][0], edges[j][1]] * params[i]
-    
+
     return params_dict
+
 
 def form_jacobian(n_params, gradient, ising):
     # fix jacobian
     jac = [0.0] * n_params
     idx = ising.nonzero()
     edges = list(zip(idx[0], idx[1]))
-    split = int(n_params/2)
+    split = int(n_params / 2)
     for i in range(split):
         # handle betas
         jac[split + i] += 2 * gradient[f'beta_{i}']
         # handle gammas
         for j in range(len(edges)):
             jac[i] += 2 * ising[edges[j][0], edges[j][1]] * gradient[f'gamma_{i}_{j}']
-    
+
     return jac
+
 
 # function that computes cost function for given params
 def objective_function(params, qaoa_circuit, ising, device, tracker, verbose):
@@ -119,18 +124,16 @@ def objective_function(params, qaoa_circuit, ising, device, tracker, verbose):
     # classically simulate the circuit
     # set the parameter values using the inputs argument
     # execute the correct device.run call depending on whether the backend is local or cloud based
-    task = device.run(
-        qaoa_circuit(**params_dict), shots=0, poll_timeout_seconds=3 * 24 * 60 * 60
-    )
+    task = device.run(qaoa_circuit(**params_dict), shots=0, poll_timeout_seconds=3 * 24 * 60 * 60)
 
     # get result for this task
     result = task.result()
     energy = 0.0
     idx = ising.nonzero()
     edges = list(zip(idx[0], idx[1]))
-    for (term, edge) in zip(result.values, edges):
-        energy += 2*ising[edge[0], edge[1]]*term
-    
+    for term, edge in zip(result.values, edges):
+        energy += 2 * ising[edge[0], edge[1]] * term
+
     # get metadata
     metadata = result.task_metadata
 
@@ -153,10 +156,9 @@ def objective_function(params, qaoa_circuit, ising, device, tracker, verbose):
 
     return energy
 
+
 # The function to execute the training: run classical minimization.
-def train(
-    device, options, p, ising, n_qubits, opt_method, tracker, params0, verbose=True
-):
+def train(device, options, p, ising, n_qubits, opt_method, tracker, params0, verbose=True):
     """
     function to run QAOA algorithm for given ising matrix, fixed circuit depth p
     """
@@ -178,15 +180,15 @@ def train(
     bnds = bnds_gamma + bnds_beta
 
     tracker["params"].append(params0)
-     
+
     gamma_params = [[FreeParameter(f"gamma_{i}_{j}") for j in range(len(ising.nonzero()[0]))] for i in range(p)]
     beta_params = [FreeParameter(f"beta_{i}") for i in range(p)]
     params = gamma_params + beta_params
     H, targets = cost_H(ising)
     qaoa_circ = circuit(params, device, n_qubits, ising)
-    for (term, target) in zip(H.summands, targets):
+    for term, target in zip(H.summands, targets):
         qaoa_circ.expectation(observable=term._unscaled(), target=target)
-    
+
     print('Initial energy: ', objective_function(params0, qaoa_circ, ising, device, tracker, False))
     # run classical optimization (example: method='Nelder-Mead')
     result = minimize(
@@ -209,6 +211,7 @@ def train(
 
     return result_energy, result_angle, tracker
 
+
 # function that computes cost function and gradient for given params
 def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, verbose):
     """
@@ -221,13 +224,11 @@ def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, ver
         print("Calling the quantum circuit. Cycle:", tracker["count"])
 
     # create parameter dict
-    params_dict = form_inputs_dict(params, ising) 
+    params_dict = form_inputs_dict(params, ising)
     # classically simulate the circuit
     # set the parameter values using the inputs argument
     # execute the correct device.run call depending on whether the backend is local or cloud based
-    task = device.run(
-        qaoa_circuit, shots=0, inputs=params_dict, poll_timeout_seconds=3 * 24 * 60 * 60
-    )
+    task = device.run(qaoa_circuit, shots=0, inputs=params_dict, poll_timeout_seconds=3 * 24 * 60 * 60)
 
     # get result for this task
     result = task.result()
@@ -238,7 +239,7 @@ def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, ver
 
     tracker["opt_energies"].append(energy)
 
-    # store optimal energy 
+    # store optimal energy
     if energy < tracker["optimal_energy"]:
         tracker.update({"optimal_energy": energy})
 
@@ -257,9 +258,7 @@ def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, ver
 
 
 # The function to execute the training: run classical minimization.
-def train_adjoint(
-    device, options, p, ising, n_qubits, opt_method, tracker, params0, verbose=True
-):
+def train_adjoint(device, options, p, ising, n_qubits, opt_method, tracker, params0, verbose=True):
     """
     function to run QAOA algorithm for given, fixed circuit depth p
     """
@@ -281,21 +280,21 @@ def train_adjoint(
     bnds = bnds_gamma + bnds_beta
 
     tracker["params"].append(params0)
-    
+
     gamma_params = [[FreeParameter(f"gamma_{i}_{j}") for j in range(len(ising.nonzero()[0]))] for i in range(p)]
     beta_params = [FreeParameter(f"beta_{i}") for i in range(p)]
     params = gamma_params + beta_params
     qaoa_circ = circuit(params, device, n_qubits, ising)
-    
+
     H, targets = cost_H(ising)
     qaoa_circ.adjoint_gradient(observable=H, target=targets, parameters=[])
-    
+
     print('Initial energy: ', objective_function_adjoint(params0, qaoa_circ, ising, device, tracker, False)[0])
     # run classical optimization (example: method='Nelder-Mead')
     result = minimize(
         objective_function_adjoint,
         params0,
-        jac=True, # objective function will return both f and its jacobian
+        jac=True,  # objective function will return both f and its jacobian
         args=(qaoa_circ, ising, device, tracker, verbose),
         options=options,
         method=opt_method,

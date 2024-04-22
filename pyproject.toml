@@ -42,6 +42,7 @@ Source = "https://github.com/amazon-braket/amazon-braket-examples"
 
 [tool.hatch.envs.default]
 dependencies = [
+  "black[jupyter]",
   "jupyter",
   "nbconvert",
   "pytest",
@@ -56,9 +57,29 @@ python -m ipykernel install --user --name "conda_braket" --display-name "conda_b
 pytest -n logical -ra -v --durations=0 test/
 """
 
+[tool.hatch.envs.lint]
+detached = true
+dependencies = [
+  "black[jupyter]>=23.1.0",
+]
+
+[tool.hatch.envs.lint.scripts]
+style = [
+  "black --check --diff {args:.}",
+]
+fmt = [
+  "black {args:.}",
+  "style",
+]
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.9", "3.10", "3.11"]
+
+
+[tool.black]
+target-version = ["py39"]
+line-length = 120
+skip-string-normalization = true
 
 [tool.hatch.metadata]
 allow-direct-references = true

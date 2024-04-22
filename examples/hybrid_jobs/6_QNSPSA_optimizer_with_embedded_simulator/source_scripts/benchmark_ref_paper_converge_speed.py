@@ -22,14 +22,9 @@ def sample_gates(n_qubits, n_layers, seed):
 
 def ansatz_template(params, num_of_wires, sampled_gates, H):
     if num_of_wires < 2:
-        raise ValueError(
-            "Number of wires is smaller than 2. "
-            "The ansatz works on at least two qubits."
-        )
+        raise ValueError("Number of wires is smaller than 2. " "The ansatz works on at least two qubits.")
     if num_of_wires != len(sampled_gates):
-        raise ValueError(
-            "The length of list wires needs to match" "the length of sampled_gates"
-        )
+        raise ValueError("The length of list wires needs to match" "the length of sampled_gates")
     m = len(sampled_gates[0])
     for k in range(m - 1):
         for i in range(num_of_wires):

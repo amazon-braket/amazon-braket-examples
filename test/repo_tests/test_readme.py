@@ -6,7 +6,7 @@ EXCLUDED_DIRS = [
     # These directories contain notebook files that should not be linked to in the README.
     ".ipynb_checkpoints",
     "7_Running_notebooks_as_hybrid_jobs/result",
-    "7_Running_notebooks_as_hybrid_jobs/src"
+    "7_Running_notebooks_as_hybrid_jobs/src",
 ]
 
 LINK_EXAMPLES_REGEX = re.compile(r"\(\s*(examples.*\.ipynb)\s*\)")
@@ -15,7 +15,7 @@ LINK_EXAMPLES_REGEX = re.compile(r"\(\s*(examples.*\.ipynb)\s*\)")
 def test_readme():
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
 
-    examples_path = (os.path.join(root_path, "examples"))
+    examples_path = os.path.join(root_path, "examples")
 
     root_path_len = len(str(root_path)) + len(os.pathsep)
     all_notebooks = set()

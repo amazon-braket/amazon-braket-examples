@@ -80,13 +80,13 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
         # Alterantive 1: Implement C-(U^{2^k})
         if control_unitary:
             # Define the matrix U^{2^k}
-            Uexp = np.linalg.matrix_power(unitary, 2 ** power)
+            Uexp = np.linalg.matrix_power(unitary, 2**power)
 
             # Apply the controlled unitary C-(U^{2^k})
             qpe_circ.controlled_unitary(qubit, query_qubits, Uexp)
         # Alterantive 2: One can instead apply controlled-unitary (2**power) times to get C-U^{2^power}
         else:
-            for _ in range(2 ** power):
+            for _ in range(2**power):
                 qpe_circ.controlled_unitary(qubit, query_qubits, unitary)
 
     # Apply inverse qft to the precision_qubits
@@ -156,9 +156,7 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
     # Aggregate the results (i.e., ignore/trace out the query register qubits):
 
     # First get bitstrings with corresponding counts for precision qubits only
-    bitstrings_precision_register = [
-        substring(key, precision_qubits) for key in measurement_counts.keys()
-    ]
+    bitstrings_precision_register = [substring(key, precision_qubits) for key in measurement_counts.keys()]
     # Then keep only the unique strings
     bitstrings_precision_register_set = set(bitstrings_precision_register)
     # Cast as a list for later use
@@ -255,12 +253,10 @@ def run_qpe(
 
     # bitstrings
     format_bitstring = "{0:0" + str(num_qubits) + "b}"
-    bitstring_keys = [format_bitstring.format(ii) for ii in range(2 ** num_qubits)]
+    bitstring_keys = [format_bitstring.format(ii) for ii in range(2**num_qubits)]
 
     # QPE postprocessing
-    phases_decimal, precision_results_dic = get_qpe_phases(
-        measurement_counts, precision_qubits, items_to_keep
-    )
+    phases_decimal, precision_results_dic = get_qpe_phases(measurement_counts, precision_qubits, items_to_keep)
     eigenvalues = [np.exp(2 * np.pi * 1j * phase) for phase in phases_decimal]
 
     # aggregate results
