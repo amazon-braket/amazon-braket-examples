@@ -5,13 +5,9 @@ import braket.aws
 recording = True
 
 
-class BraketClientWrapper():
+class BraketClientWrapper:
     def __init__(self, braket_client):
-        self.__class__ = type(
-            braket_client.__class__.__name__,
-            (self.__class__, braket_client.__class__),
-            {}
-        )
+        self.__class__ = type(braket_client.__class__.__name__, (self.__class__, braket_client.__class__), {})
         self.__dict__ = braket_client.__dict__
         self.braket_client = braket_client
         self.num_get_device_calls = 0
@@ -70,7 +66,7 @@ real_retrieve_s3_object_body = braket.aws.aws_session.AwsSession.retrieve_s3_obj
 num_s3_results = 0
 
 
-class AwsSessionWrapper():
+class AwsSessionWrapper:
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
         global num_s3_results
         if recording:

@@ -4,16 +4,18 @@ from braket.pulse.waveforms import ArbitraryWaveform, Waveform
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def draw_waveform(waveform: Waveform, dt: float):
     """Plot the waveform dicretized by dt."""
     if isinstance(waveform, ArbitraryWaveform):
-        plt.plot(np.arange(0, len(waveform.amplitudes))*dt*1e9, [amp.real for amp in waveform.amplitudes])
+        plt.plot(np.arange(0, len(waveform.amplitudes)) * dt * 1e9, [amp.real for amp in waveform.amplitudes])
     else:
-        y=waveform.sample(dt)
-        plt.plot(np.arange(0, len(y))*dt*1e9, y)
+        y = waveform.sample(dt)
+        plt.plot(np.arange(0, len(y)) * dt * 1e9, y)
 
     plt.xlabel('Time (ns)')
     plt.ylabel('Amplitude (a. u.)')
+
 
 def draw(pulse_sequence: PulseSequence):
     """Plot each frame of the pulse sequence in a single figure."""
@@ -70,9 +72,7 @@ def draw_multiple_frames(pulse_sequence: PulseSequence):
 
         plt.subplot(1, 3, 2)
         plt.title(frame_id)
-        plt.plot(
-            data.frequencies[frame_id].times(), data.frequencies[frame_id].values()
-        )
+        plt.plot(data.frequencies[frame_id].times(), data.frequencies[frame_id].values())
         plt.xlabel("Time (s)")
         plt.ylabel("Frequency (Hz)")
 

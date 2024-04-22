@@ -6,6 +6,7 @@ from utils_circuit import adjoint, get_unitary
 Circuit.get_unitary = get_unitary
 Circuit.adjoint = adjoint
 
+
 # helper function to apply XZX to given qubit
 @circuit.subroutine(register=True)
 def minus_R_B(qubit):
@@ -117,9 +118,7 @@ def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
 
     # Verify that flag_qubit is one of the qubits on which A acts, or one of the user defined qubits
     if flag_qubit not in qubits:
-        raise ValueError(
-            "flag_qubit {flag_qubit} is not in targets of A".format(flag_qubit=repr(flag_qubit))
-        )
+        raise ValueError("flag_qubit {flag_qubit} is not in targets of A".format(flag_qubit=repr(flag_qubit)))
 
     # Instantiate the circuit
     circ = Circuit()

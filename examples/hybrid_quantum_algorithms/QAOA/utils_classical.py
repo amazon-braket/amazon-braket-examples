@@ -107,9 +107,7 @@ def plot_colored_graph(J, N, colors, pos):
     for weight in unique_weights:
         # form a filtered list with just the weight you want to draw
         weighted_edges = [
-            (node1, node2)
-            for (node1, node2, edge_attr) in graph.edges(data=True)
-            if edge_attr["weight"] == weight
+            (node1, node2) for (node1, node2, edge_attr) in graph.edges(data=True) if edge_attr["weight"] == weight
         ]
         # multiplying by [num_nodes/sum(all_weights)] makes the graphs edges look cleaner
         # width = weight

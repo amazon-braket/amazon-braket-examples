@@ -44,17 +44,9 @@ waveform = GaussianWaveform(100e-9, 25e-9, 0.1, True)
 
 N_steps = int(hyperparams.get("N_steps", 25))
 N_shots = int(hyperparams.get("N_shots", 100))
-span = (
-    75e6
-    if not ("frequency_start" in hyperparams and "frequency_stop" in hyperparams)
-    else None
-)
-frequency_start = float(
-    hyperparams.get("frequency_start", drive_frame.frequency - span / 2)
-)
-frequency_stop = float(
-    hyperparams.get("frequency_stop", drive_frame.frequency + span / 2)
-)
+span = 75e6 if not ("frequency_start" in hyperparams and "frequency_stop" in hyperparams) else None
+frequency_start = float(hyperparams.get("frequency_start", drive_frame.frequency - span / 2))
+frequency_stop = float(hyperparams.get("frequency_stop", drive_frame.frequency + span / 2))
 
 frequency_free_parameter = FreeParameter("frequency")
 pulse_sequence = (
@@ -78,12 +70,8 @@ for i, frequency in enumerate(frequencies):
     population_zero = counts["0"] / N_shots
     populations.append(population_zero)
 
-    braket_tasks_cost = float(
-        cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
-    )
-    log_metric(
-        metric_name="braket_tasks_cost", value=braket_tasks_cost, iteration_number=i
-    )
+    braket_tasks_cost = float(cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost())
+    log_metric(metric_name="braket_tasks_cost", value=braket_tasks_cost, iteration_number=i)
 
 # Save the variables of interest so that we can access later
 save_job_result(

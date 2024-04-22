@@ -35,7 +35,7 @@ counts_list = []
 theta_list = []
 for i in range(5):
     theta_value = np.pi * np.random.rand()
-    
+
     task = device.run(parametrized_circuit, shots=100, inputs={"theta": theta_value})
     counts = task.result().measurement_counts
 

@@ -96,9 +96,7 @@ class QNSPSA:
                 function output before the step.
         """
         params_next = (
-            self.__step_core_first_order(cost, params)
-            if self.disable_metric_tensor
-            else self.__step_core(cost, params)
+            self.__step_core_first_order(cost, params) if self.disable_metric_tensor else self.__step_core(cost, params)
         )
 
         if not self.blocking:
@@ -215,16 +213,11 @@ class QNSPSA:
     def __get_tensor_moving_avg(self, metric_tensor):
         if self.metric_tensor is None:
             self.metric_tensor = np.identity(metric_tensor.shape[0])
-        return (
-            self.k / (self.k + 1) * self.metric_tensor
-            + 1 / (self.k + 1) * metric_tensor
-        )
+        return self.k / (self.k + 1) * self.metric_tensor + 1 / (self.k + 1) * metric_tensor
 
     def __regularize_tensor(self, metric_tensor):
         tensor_reg = np.real(sqrtm(np.matmul(metric_tensor, metric_tensor)))
-        return (tensor_reg + self.reg * np.identity(metric_tensor.shape[0])) / (
-            1 + self.reg
-        )
+        return (tensor_reg + self.reg * np.identity(metric_tensor.shape[0])) / (1 + self.reg)
 
     def __apply_blocking(self, cost, params_curr, params_next):
         cost.construct([params_curr], {})
@@ -232,18 +225,12 @@ class QNSPSA:
         cost.construct([params_next], {})
         tape_loss_next = cost.tape.copy(copy_operations=True)
 
-        loss_curr, loss_next = qml.execute(
-            [tape_loss_curr, tape_loss_next], cost.device, None
-        )
+        loss_curr, loss_next = qml.execute([tape_loss_curr, tape_loss_next], cost.device, None)
         # self.k has been updated earlier
         ind = (self.k - 2) % self.history_length
         self.last_n_steps[ind] = loss_curr
 
-        tol = (
-            2 * self.last_n_steps.std()
-            if self.k > self.history_length
-            else 2 * self.last_n_steps[: self.k - 1].std()
-        )
+        tol = 2 * self.last_n_steps.std() if self.k > self.history_length else 2 * self.last_n_steps[: self.k - 1].std()
 
         if loss_curr + tol < loss_next:
             params_next = params_curr

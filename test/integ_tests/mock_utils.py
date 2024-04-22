@@ -89,87 +89,67 @@ def read_file(name, file_path=None):
 
 
 def mock_default_device_calls(mocker):
-    mocker.set_get_device_result({
-        "deviceType": "QPU",
-        "deviceCapabilities": read_file("default_capabilities.json"),
-        "deviceQueueInfo": [
-            {
-                "queue": "QUANTUM_TASKS_QUEUE",
-                "queueSize": "13",
-                "queuePriority": "Normal"
-            },
-            {
-                "queue": "QUANTUM_TASKS_QUEUE",
-                "queueSize": "0",
-                "queuePriority": "Priority"
-            },
-            {
-                "queue": "JOBS_QUEUE",
-                "queueSize": "0"
-            }
-        ]
-    })
-    mocker.set_create_quantum_task_result({
-        "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-    })
-    mocker.set_get_quantum_task_result({
-        "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-        "status": "COMPLETED",
-        "outputS3Bucket": "Test Bucket",
-        "outputS3Directory": "Test Directory",
-        "shots": 10,
-        "deviceArn": "Test Device Arn",
-        "queueInfo": {
-            "queue": "QUANTUM_TASKS_QUEUE",
-            "position": "2",
-            "queuePriority": "Normal",
-        },
-        "ResponseMetadata": {
-            "HTTPHeaders": {
-                "date": ""
-            }
+    mocker.set_get_device_result(
+        {
+            "deviceType": "QPU",
+            "deviceCapabilities": read_file("default_capabilities.json"),
+            "deviceQueueInfo": [
+                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "13", "queuePriority": "Normal"},
+                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
+                {"queue": "JOBS_QUEUE", "queueSize": "0"},
+            ],
         }
-    })
+    )
+    mocker.set_create_quantum_task_result(
+        {
+            "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        }
+    )
+    mocker.set_get_quantum_task_result(
+        {
+            "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+            "status": "COMPLETED",
+            "outputS3Bucket": "Test Bucket",
+            "outputS3Directory": "Test Directory",
+            "shots": 10,
+            "deviceArn": "Test Device Arn",
+            "queueInfo": {
+                "queue": "QUANTUM_TASKS_QUEUE",
+                "position": "2",
+                "queuePriority": "Normal",
+            },
+            "ResponseMetadata": {"HTTPHeaders": {"date": ""}},
+        }
+    )
     mocker.set_task_result_return(read_file("default_results.json"))
 
 
 def mock_default_job_calls(mocker):
     mocker.set_batch_get_image_side_effect(
-        cycle([
-            {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
-            {
-                "images": [
-                    {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
-                ]
-            },
-        ])
-    )
-    mocker.set_search_result([
-        {
-            "Roles": [
+        cycle(
+            [
+                {"images": [{"imageId": {"imageDigest": "my-digest"}}]},
                 {
-                    "RoleName": "AmazonBraketJobsExecutionRole",
-                    "Arn": "TestRoleARN"
-                }
+                    "images": [
+                        {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
+                    ]
+                },
             ]
+        )
+    )
+    mocker.set_search_result([{"Roles": [{"RoleName": "AmazonBraketJobsExecutionRole", "Arn": "TestRoleARN"}]}])
+    mocker.set_create_job_result({"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"})
+    mocker.set_get_job_result(
+        {
+            "instanceConfig": {"instanceCount": 1},
+            "jobName": "testJob",
+            "status": "COMPLETED",
+            "outputDataConfig": {"s3Path": "s3://amazon-br-invalid-path/test-path/test-results"},
+            "queueInfo": {
+                "position": 1,
+            },
         }
-    ])
-    mocker.set_create_job_result({
-        "jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
-    })
-    mocker.set_get_job_result({
-        "instanceConfig": {
-            "instanceCount": 1
-        },
-        "jobName": "testJob",
-        "status": "COMPLETED",
-        "outputDataConfig": {
-            "s3Path": "s3://amazon-br-invalid-path/test-path/test-results"
-        },
-        "queueInfo": {
-            "position": 1,
-        },
-    })
+    )
 
 
 def mock_job_results(results):
@@ -188,7 +168,7 @@ def set_level(mock_level):
     Mocker.mock_level = mock_level
 
 
-class SessionWrapper():
+class SessionWrapper:
     def __init__(self):
         self.boto_client = mock.Mock()
         self.task_result_mock = mock.Mock()
@@ -196,18 +176,10 @@ class SessionWrapper():
 
         return_mock = mock.Mock()
         return_mock.read.return_value.decode = self.task_result_mock
-        self.resource_mock.Object.return_value.get.return_value = {
-            "Body": return_mock
-        }
-        self.boto_client.get_caller_identity.return_value = {
-            "Account": "TestAccount"
-        }
+        self.resource_mock.Object.return_value.get.return_value = {"Body": return_mock}
+        self.boto_client.get_caller_identity.return_value = {"Account": "TestAccount"}
         self.boto_client.get_authorization_token.return_value = {
-            "authorizationData": [
-                {
-                    "authorizationToken": "TestToken"
-                }
-            ]
+            "authorizationData": [{"authorizationToken": "TestToken"}]
         }
 
 
@@ -244,6 +216,7 @@ class AwsSessionMinWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
         import braket.jobs.metrics_data.cwl_insights_metrics_fetcher as md
+
         AwsSessionFacade._wrapper = self
         AwsSessionFacade.real_get_device = braket.aws.aws_session.AwsSession.get_device
         braket.aws.aws_session.AwsSession.get_device = AwsSessionFacade.get_device
@@ -266,9 +239,7 @@ class AwsSessionMinWrapper(SessionWrapper):
     @staticmethod
     def parse_device_config():
         mock_device_config_str = os.getenv("MOCK_DEVICE_CONFIG")
-        AwsSessionFacade.mock_device_config = (
-            json.loads(mock_device_config_str) if mock_device_config_str else {}
-        )
+        AwsSessionFacade.mock_device_config = json.loads(mock_device_config_str) if mock_device_config_str else {}
         unsupported_device_config_str = os.getenv("UNSUPPORTED_DEVICE_CONFIG")
         AwsSessionFacade.unsupported_device_config = (
             set(json.loads(unsupported_device_config_str)) if unsupported_device_config_str else {}
@@ -294,20 +265,17 @@ class AwsSessionFacade(braket.aws.AwsSession):
             device_arn = boto3_kwargs["deviceArn"]
             device_name = device_arn.split("/")[-1]
             if device_name in AwsSessionFacade.unsupported_device_config:
-                return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
-                    "quantumTaskArn"]
+                return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)["quantumTaskArn"]
             if device_name in AwsSessionFacade.mock_device_config:
                 device_sub = AwsSessionFacade.mock_device_config[device_name]
                 if device_sub == "MOCK":
-                    return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
-                        "quantumTaskArn"]
+                    return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)["quantumTaskArn"]
                 else:
                     boto3_kwargs["deviceArn"] = device_sub
             task_arn = AwsSessionFacade.real_create_quantum_task(self, **boto3_kwargs)
             AwsSessionFacade.created_task_arns.add(task_arn)
             return task_arn
-        return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
-            "quantumTaskArn"]
+        return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)["quantumTaskArn"]
 
     def get_quantum_task(self, arn):
         if arn in AwsSessionFacade.created_task_arns:
@@ -334,7 +302,7 @@ class AwsSessionFacade(braket.aws.AwsSession):
         return
 
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
-        location = s3_object_key[:s3_object_key.rindex("/")]
+        location = s3_object_key[: s3_object_key.rindex("/")]
         if location in AwsSessionFacade.created_task_locations:
             return AwsSessionFacade.real_retrieve_s3_object_body(self, s3_bucket, s3_object_key)
         if AwsSessionFacade._wrapper.task_result_mock.side_effect is not None:
