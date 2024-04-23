@@ -23,7 +23,7 @@ jobs:
 
     steps:
     - name: Check disk space
-      run: df . -h
+      run: df -h .
     - name: Free disk space
       run: |
         sudo docker rmi $(docker image ls -aq) >/dev/null 2>&1 || true
@@ -32,7 +32,7 @@ jobs:
           /usr/local/share/powershell /usr/share/swift /usr/local/.ghcup \
           /usr/lib/jvm || true
     - name: Check disk space after clean up
-      run: df . -h
+      run: df -h .
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
