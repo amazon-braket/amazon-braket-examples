@@ -4,7 +4,7 @@ import pytest
 
 from testbook import testbook
 from nbconvert import HTMLExporter
-from importlib.machinery import SourceFileLoader
+from importlib.machinery import SourceFileLoader, Loader
 from jupyter_client import kernelspec
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
@@ -107,8 +107,8 @@ def test_record():
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         tb.inject(
             f"""
-            from importlib.machinery import SourceFileLoader
-            mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").exec_module()
+            from importlib.machinery import SourceFileLoader, Loader
+            mock_utils = Loader.exec_module(SourceFileLoader("notebook_mocks","{path_to_mocks}").name)
             """,
             run=False,
             before=0,
@@ -130,10 +130,10 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
     # We do this check to make sure that the notebook can be executed (with mocks).
     tb.inject(
         f"""
-        from importlib.machinery import SourceFileLoader
-        mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").exec_module()
+        from importlib.machinery import SourceFileLoader, Loader
+        mock_utils = Loader.exec_module(SourceFileLoader("notebook_mocks","{path_to_mocks}").name)
         mock_utils.set_level("{mock_level}")
-        test_mocks = SourceFileLoader("notebook_mocks","{path_to_mocks}").exec_module()
+        test_mocks = Loader.exec_module(SourceFileLoader("notebook_mocks","{path_to_mocks}").name)
         test_mocks.pre_run_inject(mock_utils)
         """,
         run=False,
