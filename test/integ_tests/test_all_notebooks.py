@@ -5,6 +5,7 @@ import pytest
 from testbook import testbook
 from nbconvert import HTMLExporter
 from importlib.machinery import SourceFileLoader
+import importlib.util
 from jupyter_client import kernelspec
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
@@ -108,7 +109,11 @@ def test_record():
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
-            mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
+            import importlib.util
+            loader = SourceFileLoader("notebook_mock_utils","{path_to_utils}")
+            spec = importlib.util.spec_from_loader(loader.name, loader)
+            mock_utils = importlib.util.module_from_spec(spec)
+            loader.exec_module(mock_utils)
             """,
             run=False,
             before=0,
@@ -131,14 +136,22 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
     tb.inject(
         f"""
         from importlib.machinery import SourceFileLoader
-        mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
+        import importlib.util
+        loader = SourceFileLoader("notebook_mock_utils","{path_to_utils}")
+        spec = importlib.util.spec_from_loader(loader.name, loader)
+        mock_utils = importlib.util.module_from_spec(spec)
+        loader.exec_module(mock_utils)
         mock_utils.set_level("{mock_level}")
-        test_mocks = SourceFileLoader("notebook_mocks","{path_to_mocks}").load_module()
+        loader = SourceFileLoader("notebook_mocks","{path_to_mocks}")
+        test_mocks = importlib.util.module_from_spec(spec)
+        loader.exec_module(test_mocks)
         test_mocks.pre_run_inject(mock_utils)
         """,
         run=False,
         before=0,
     )
     tb.execute()
-    test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
+    loader = SourceFileLoader("notebook_mocks","{path_to_mocks}")
+    test_mocks = importlib.util.module_from_spec(spec)
+    loader.exec_module(test_mocks)
     test_mocks.post_run(tb)
