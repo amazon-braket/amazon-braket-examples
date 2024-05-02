@@ -1,8 +1,8 @@
-botocore==1.34.89
-awscli==1.32.89
-boto3==1.34.89
-amazon-braket-default-simulator==1.23.0
-amazon-braket-pennylane-plugin==1.25.0
+botocore==1.34.93
+awscli==1.32.93
+boto3==1.34.93
+amazon-braket-default-simulator==1.23.1
+amazon-braket-pennylane-plugin==1.26.0
 amazon-braket-schemas==1.21.4
 amazon-braket-sdk==1.78.0
 amazon-braket-algorithm-library==1.4.11
