@@ -10,7 +10,7 @@ cvxpy==1.4.3
 ipykernel==6.29.4
 jax==0.4.26
 jaxlib==0.4.26
-jinja2==3.1.3
+jinja2==3.1.4
 markupsafe==2.1.5
 matplotlib==3.8.4
 ml-dtypes==0.4.0
