@@ -29,7 +29,6 @@ phases:
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
-      - conda list -n Braket | grep libstd
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
       - zstd -16 envs/Braket.tar -T0 --auto-threads=logical --rsyncable --sparse
       - du -hs envs/Braket.tar.zst
