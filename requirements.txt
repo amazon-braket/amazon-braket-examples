@@ -24,6 +24,6 @@ pennylane==0.35.1
 PennyLane-Lightning==0.35.1
 qiskit-aer==0.14.0.1
 qiskit-algorithms==0.3.0
-qiskit_braket_provider==0.2.0
+qiskit-braket-provider==0.4.0
 qiskit==1.0.2
 scipy==1.13.0
