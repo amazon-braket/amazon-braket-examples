@@ -1,8 +1,8 @@
-botocore==1.34.89
-awscli==1.32.89
-boto3==1.34.89
-amazon-braket-default-simulator==1.23.0
-amazon-braket-pennylane-plugin==1.25.0
+botocore==1.34.93
+awscli==1.32.93
+boto3==1.34.93
+amazon-braket-default-simulator==1.23.1
+amazon-braket-pennylane-plugin==1.26.0
 amazon-braket-schemas==1.21.4
 amazon-braket-sdk==1.78.0
 amazon-braket-algorithm-library==1.4.11
@@ -10,7 +10,7 @@ cvxpy==1.4.3
 ipykernel==6.29.4
 jax==0.4.26
 jaxlib==0.4.26
-jinja2==3.1.3
+jinja2==3.1.4
 markupsafe==2.1.5
 matplotlib==3.8.4
 ml-dtypes==0.4.0
