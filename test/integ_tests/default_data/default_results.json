@@ -17076,6 +17076,9 @@
     "oqcMetadata": {
       "compiledProgram": "DECLARE ro BIT[2];"
     },
+    "iqmMetadata": {
+      "compiledProgram": "DECLARE ro BIT[2];"
+    },
     "ionqMetadata": {
       "sharpenedProbabilities": {"00": 0.5, "11": 0.5}
     },
