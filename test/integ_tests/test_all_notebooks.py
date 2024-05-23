@@ -29,7 +29,7 @@ if os.environ.get("AWS_REGION") == "eu-north-1":
         "7_Running_notebooks_as_hybrid_jobs-Running_notebooks_as_hybrid_jobs.ipynb",
         "2_Graph_optimization_with_QAOA-2_Graph_optimization_with_QAOA",
         "Using_The_Adjoint_Gradient_Result_Type.ipynb",
-        "qiskit-0_Getting_Started.ipynb",
+        "0_Getting_Started.ipynb",
         "0_Creating_your_first_Hybrid_Job-0_Creating_your_first_Hybrid_Job.ipynb",
     ]
     EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
