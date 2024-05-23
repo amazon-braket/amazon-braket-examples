@@ -174,6 +174,10 @@ This folder contains examples that illustrate the usage of individual features o
 
     This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
+* [**IQM Garnet Native Gates](examples/braket_features/IQM_Garnet_Native_Gates.ipynb)
+
+    This tutorial explores the functionality of the native gates of IQM Garnet.
+
 
 ---
 ## <a name="jobs">Amazon Braket Hybrid Jobs</a>
