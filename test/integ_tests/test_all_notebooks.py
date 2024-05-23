@@ -22,7 +22,7 @@ EXCLUDED_NOTEBOOKS = [
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
 ]
 
-if os.environ.get("AWS_REGION") == "eu-north-1":
+if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
     EXTRA_EXCLUDES = [
         "1_Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs-Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb".
         "2_Using_PennyLane_with_Braket_Hybrid_Jobs-Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
