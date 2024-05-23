@@ -24,7 +24,7 @@ EXCLUDED_NOTEBOOKS = [
 
 if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
     EXTRA_EXCLUDES = [
-        "1_Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb".
+        "1_Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
         "2_Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
         "7_Running_notebooks_as_hybrid_jobs.ipynb",
         "2_Graph_optimization_with_QAOA.ipynb",
