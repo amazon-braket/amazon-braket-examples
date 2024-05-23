@@ -174,6 +174,10 @@ This folder contains examples that illustrate the usage of individual features o
 
     This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
+* [**IQM Garnet Native Gates](examples/braket_features/IQM_Garnet_Native_Gates.ipynb)
+
+    This tutorial explores the functionality of the native gates of IQM Garnet.
+
 
 ---
 ## <a name="jobs">Amazon Braket Hybrid Jobs</a>
@@ -269,6 +273,14 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
     This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
+* [**Simulating lattice gauge theory with Rydberg atoms**](examples/analog_hamiltonian_simulation/07_Simulating_Lattice_Gauge_Theory_with_Rydberg_Atoms.ipynb)
+
+    This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
+
+* [**Maximum weight independent set**](examples/analog_hamiltonian_simulation/08_Maximum_Weight_Independent_Set.ipynb)
+
+  This tutorial generalizes the approach to solve the maximum weight independent set (MWIS) problem.
+  
 ---
 ## <a name="qiskit">Qiskit with Braket</a>
 
