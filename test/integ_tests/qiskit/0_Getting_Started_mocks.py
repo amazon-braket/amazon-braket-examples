@@ -42,6 +42,20 @@ def pre_run_inject(mock_utils):
                     "deviceType": "QPU",
                     "deviceStatus": "ONLINE",
                     "providerName": "Test Provider"
+                },
+                {
+                    "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
+                    "deviceName": "SV1",
+                    "deviceType": "SIMULATOR",
+                    "deviceStatus": "ONLINE",
+                    "providerName": "Test Provider"
+                },
+                {
+                    "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
+                    "deviceName": "DM1",
+                    "deviceType": "SIMULATOR",
+                    "deviceStatus": "ONLINE",
+                    "providerName": "Test Provider"
                 }
             ]
         }
