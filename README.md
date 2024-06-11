@@ -280,6 +280,10 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 * [**Maximum weight independent set**](examples/analog_hamiltonian_simulation/08_Maximum_Weight_Independent_Set.ipynb)
 
   This tutorial generalizes the approach to solve the maximum weight independent set (MWIS) problem.
+
+* [**Noisy quantum dynamics**](examples/analog_hamiltonian_simulation/09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb)
+
+  This tutorial shows how to run noise simulation on Braket’s Rydberg atom devices
   
 ---
 ## <a name="qiskit">Qiskit with Braket</a>
