@@ -275,7 +275,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 * [**Simulating lattice gauge theory with Rydberg atoms**](examples/analog_hamiltonian_simulation/07_Simulating_Lattice_Gauge_Theory_with_Rydberg_Atoms.ipynb)
 
-    This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
+    This tutorial shows how to prepare a specific initial state, using local detuning, to simulate the dynamics of a lattice gauge theory.
 
 * [**Maximum weight independent set**](examples/analog_hamiltonian_simulation/08_Maximum_Weight_Independent_Set.ipynb)
 
