@@ -225,11 +225,11 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
     This tutorial shows how to retrieve the calibrations of native gates for Rigetti's Aspen devices and submit a circuit with custom gate calibrations.
 
-* [**Bell pair with pulses (Rigetti)**](examples/pulse_control/4_Bell_pair_with_pulses_Rigetti.ipynb)
+* [**Bell pair with pulses (Rigetti)**](examples/pulse_control/3_Bell_pair_with_pulses_Rigetti.ipynb)
 
     This tutorial shows creating a Bell state with cross-resonance pulses on Rigetti's Aspen device.
 
-* [**Build single qubit gates**](examples/pulse_control/5_Build_single_qubit_gates.ipynb)
+* [**Build single qubit gates**](examples/pulse_control/4_Build_single_qubit_gates.ipynb)
 
     This tutorial describes a method to create any single-qubit gate with pulses.
 
