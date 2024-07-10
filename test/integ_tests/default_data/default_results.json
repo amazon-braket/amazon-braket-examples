@@ -17073,9 +17073,6 @@
     "rigettiMetadata": {
       "compiledProgram": "DECLARE ro BIT[2];"
     },
-    "oqcMetadata": {
-      "compiledProgram": "DECLARE ro BIT[2];"
-    },
     "iqmMetadata": {
       "compiledProgram": "DECLARE ro BIT[2];"
     },
