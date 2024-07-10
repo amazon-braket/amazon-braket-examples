@@ -5,4 +5,4 @@ dependencies:
   - libstdcxx-ng
   - python=3.10
   - pip:
-      - -r requirements.txt
+      - --prefer-binary -r requirements.txt
