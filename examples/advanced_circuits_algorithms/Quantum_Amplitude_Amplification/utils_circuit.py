@@ -1,5 +1,5 @@
 import numpy as np
-from braket.circuits import Circuit, circuit
+from braket.circuits import Circuit
 
 
 def get_unitary(self):

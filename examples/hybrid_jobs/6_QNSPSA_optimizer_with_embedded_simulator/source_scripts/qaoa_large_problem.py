@@ -1,7 +1,6 @@
 import os
 import pennylane as qml
 from pennylane import numpy as np
-import random
 import json
 
 from source_scripts.utils import get_device, str2bool, train

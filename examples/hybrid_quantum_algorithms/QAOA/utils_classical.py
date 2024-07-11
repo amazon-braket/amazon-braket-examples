@@ -1,12 +1,7 @@
 # IMPORTS
-import warnings
-
-import matplotlib.cbook
 import matplotlib.pyplot as plt
 import networkx as nx
 from pyqubo import Spin, solve_ising
-
-warnings.filterwarnings("ignore", category=matplotlib.cbook.mplDeprecation)
 
 
 def build_classical_ising(J, N):

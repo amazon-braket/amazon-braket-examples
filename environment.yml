@@ -1,8 +1,8 @@
 name: Braket
 channels:
   - conda-forge
-  - defaults
 dependencies:
+  - libstdcxx-ng
   - python=3.10
   - pip:
       - -r requirements.txt

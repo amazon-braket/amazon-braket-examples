@@ -64,15 +64,69 @@
         "timeDeltaMin": 5E-8,
         "timeMin": 0.0,
         "timeMax": 0.000004
+      },
+      "rydbergLocal": {
+        "detuningRange": [0, 50.0e6],
+        "detuningSlewRateMax": 0.2,
+        "siteCoefficientRange": [0.0, 0.2],
+        "numberLocalDetuningSitesMax": 10,
+        "spacingRadialMin": 0.2,
+        "timeResolution": 1e-9,
+        "timeDeltaMin": 1e-8
       }
     },
     "performance": {
       "lattice": {
-        "positionErrorAbs": 1E-7
+        "positionErrorAbs": 1.47e-7,
+        "sitePositionError": 0.025e-6,
+        "atomPositionError": 0.025e-6,
+        "fillingErrorTypical": 0.005,
+        "fillingErrorWorst": 0.01,
+        "vacancyErrorTypical": 0.005,
+        "vacancyErrorWorst": 0.005,
+        "atomLossProbabilityTypical": 0.01,
+        "atomLossProbabilityWorst": 0.01,
+        "atomCaptureProbabilityTypical": 0.01,
+        "atomCaptureProbabilityWorst": 0.01,
+        "atomDetectionErrorFalsePositiveTypical": 0.01,
+        "atomDetectionErrorFalsePositiveWorst": 0.01,
+        "atomDetectionErrorFalseNegativeTypical": 0.01,
+        "atomDetectionErrorFalseNegativeWorst": 0.01
       },
       "rydberg": {
         "rydbergGlobal": {
-          "rabiFrequencyErrorRel": 0.02
+          "rabiFrequencyErrorRel": 0.02,
+          "rabiFrequencyGlobalErrorRel": 0.01,
+          "rabiFrequencyInhomogeneityRel": 0.01,
+          "groundDetectionError": 0.01,
+          "rydbergDetectionError": 0.1,
+          "groundPrepError": 0.01,
+          "rydbergPrepErrorBest": 0.05,
+          "rydbergPrepErrorWorst": 0.05,
+          "T1Single": 100e-6,
+          "T1Ensemble": 100e-6,
+          "T2StarSingle": 5e-6,
+          "T2StarEnsemble": 5e-6,
+          "T2EchoSingle": 5e-6,
+          "T2EchoEnsemble": 5e-6,
+          "T2RabiSingle": 5e-6,
+          "T2RabiEnsemble": 5e-6,
+          "T2BlockadedRabiSingle": 5e-6,
+          "T2BlockadedRabiEnsemble": 5e-6,
+          "detuningError": 1e6,
+          "detuningInhomogeneity": 1e6,
+          "rabiAmplitudeRampCorrection": [
+            {"rampTime": 50e-9, "rabiCorrection": 0.92},
+            {"rampTime": 75e-9, "rabiCorrection": 0.97},
+            {"rampTime": 100e-9, "rabiCorrection": 1.00}
+          ]
+        },
+        "rydbergLocal": {
+          "detuningErrorRms": 0.2,
+          "siteCoefficientErrorRms": 0.1,
+          "errorRateIncoherentBright": 0.2,
+          "errorRateIncoherentDark": 0.1,
+          "crosstalk": 0.2
         }
       }
     }

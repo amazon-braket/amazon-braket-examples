@@ -5,6 +5,7 @@ import pytest
 from testbook import testbook
 from nbconvert import HTMLExporter
 from importlib.machinery import SourceFileLoader
+from jupyter_client import kernelspec
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
@@ -14,13 +15,24 @@ EXCLUDED_NOTEBOOKS = [
     # These notebooks have dependency issues
     "VQE_chemistry_braket.ipynb",
     "6_Adjoint_gradient_computation.ipynb",
-    # These notebooks are in flux
-    "Using_The_Adjoint_Gradient_Result_Type.ipynb",
-    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
-    "Error_Mitigation_on_Amazon_Braket.ipynb",
     # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
-    "0_Getting_started_papermill.ipynb"
+    "0_Getting_started_papermill.ipynb",
+    # Some AHS examples are running long especially on Mac. Removing while investigating
+    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
+    "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
 ]
+
+if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
+    EXTRA_EXCLUDES = [
+        "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
+        "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
+        "Running_notebooks_as_hybrid_jobs.ipynb",
+        "2_Graph_optimization_with_QAOA.ipynb",
+        "Using_The_Adjoint_Gradient_Result_Type.ipynb",
+        "0_Getting_Started.ipynb",
+        "0_Creating_your_first_Hybrid_Job.ipynb",
+    ]
+    EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -45,9 +57,16 @@ def get_mock_paths(notebook_dir, notebook_file):
     mock_dir = os.path.join(*split_notebook_dir[1:])
     path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", mock_dir, mock_file)
     if not os.path.exists(path_to_mocks):
-        path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py")
+        path_to_mocks = os.path.join(
+            path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py"
+        )
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
+
+
+@pytest.fixture(scope="module")
+def html_exporter():
+    return HTMLExporter(template_name="classic")
 
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
@@ -58,19 +77,22 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    with testbook(notebook_file, timeout=600) as tb:
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
         execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
+        # Check if there are any errors which didn't stop the testbook execution
+        # This can happen in the presence of `%%time` magics.
+        check_cells_for_error_output(tb.cells)
 
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
-def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level):
+def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level, html_exporter):
     os.chdir(root_path)
     os.chdir(notebook_dir)
-
-    html_exporter = HTMLExporter(template_name='classic')
 
     html_exporter.from_file(notebook_file)
 
@@ -92,14 +114,16 @@ def test_record():
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
-    with testbook(notebook_file, timeout=600) as tb:
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
             mock_utils = SourceFileLoader("notebook_mock_utils","{path_to_utils}").load_module()
             """,
             run=False,
-            before=0
+            before=0,
         )
         tb.execute()
 
@@ -125,7 +149,7 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
         test_mocks.pre_run_inject(mock_utils)
         """,
         run=False,
-        before=0
+        before=0,
     )
     tb.execute()
     test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
