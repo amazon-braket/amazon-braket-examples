@@ -32,11 +32,6 @@ experiment_configuration = {
         "readout_frame": f"q{qubit}_ro_rx_frame",
         "spectroscopy_wf": GaussianWaveform(100e-9, 25e-9, 0.1, True),
     },
-    "arn:aws:braket:eu-west-2::device/qpu/oqc/Lucy": {
-        "drive_frame": f"q{qubit}_drive",
-        "readout_frame": f"r{qubit}_measure",
-        "spectroscopy_wf": ConstantWaveform(25e-9, 0.03),
-    },
 }
 drive_frame = device.frames[experiment_configuration[device_arn]["drive_frame"]]
 readout_frame = device.frames[experiment_configuration[device_arn]["readout_frame"]]
