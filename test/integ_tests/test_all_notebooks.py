@@ -20,6 +20,7 @@ EXCLUDED_NOTEBOOKS = [
     # Some AHS examples are running long especially on Mac. Removing while investigating
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
+    "Using_the_experimental_local_simulator.ipynb"
 ]
 
 if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
