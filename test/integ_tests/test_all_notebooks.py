@@ -20,7 +20,7 @@ EXCLUDED_NOTEBOOKS = [
     # Some AHS examples are running long especially on Mac. Removing while investigating
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
-    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb"
+    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb",
     "Using_the_experimental_local_simulator.ipynb"
 ]
 
