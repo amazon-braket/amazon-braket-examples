@@ -32,6 +32,11 @@ experiment_configuration = {
         "readout_frame": f"q{qubit}_ro_rx_frame",
         "spectroscopy_wf": GaussianWaveform(100e-9, 25e-9, 0.1, True),
     },
+    "arn:aws:braket:us-west-1::device/qpu/rigetti/Ankaa-2": {
+        "drive_frame": f"q{qubit}_rf_frame",
+        "readout_frame": f"q{qubit}_ro_rx_frame",
+        "spectroscopy_wf": GaussianWaveform(100e-9, 25e-9, 0.1, True),
+    },
 }
 drive_frame = device.frames[experiment_configuration[device_arn]["drive_frame"]]
 readout_frame = device.frames[experiment_configuration[device_arn]["readout_frame"]]
