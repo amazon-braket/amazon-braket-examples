@@ -21,7 +21,21 @@ EXCLUDED_NOTEBOOKS = [
     # Some AHS examples are running long especially on Mac. Removing while investigating
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
+    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb",
+    "Using_the_experimental_local_simulator.ipynb"
 ]
+
+if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
+    EXTRA_EXCLUDES = [
+        "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
+        "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
+        "Running_notebooks_as_hybrid_jobs.ipynb",
+        "2_Graph_optimization_with_QAOA.ipynb",
+        "Using_The_Adjoint_Gradient_Result_Type.ipynb",
+        "0_Getting_Started.ipynb",
+        "0_Creating_your_first_Hybrid_Job.ipynb",
+    ]
+    EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
