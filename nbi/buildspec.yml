@@ -22,13 +22,14 @@ phases:
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
       - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.7.1
+      - conda init bash
   build:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
-      - conda activate $BRAKET_ENV
+      - source activate base && conda activate $BRAKET_ENV
       - python -c "import braket.simulator_v2"
       - pip cache purge
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
