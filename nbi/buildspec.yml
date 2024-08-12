@@ -22,7 +22,6 @@ phases:
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
       - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.7.1
-      - conda init bash
   build:
     commands:
       - BRAKET_ENV=Braket
