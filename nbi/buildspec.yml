@@ -28,7 +28,9 @@ phases:
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
+      - export JULIA_HOME=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV/julia_env/pyjuliapkg/install/bin
       - export PYTHON_JULIAPKG_PROJECT=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV/julia_env
+      - export JULIA_PKGDIR=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV/.julia
       - export CONDA_JL_HOME=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV
       - export JULIA_CONDAPKG_ENV=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV
       - export JULIA_CONDAPKG_BACKEND=Current
