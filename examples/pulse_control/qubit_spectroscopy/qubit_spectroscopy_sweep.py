@@ -33,8 +33,8 @@ experiment_configuration = {
         "spectroscopy_wf": GaussianWaveform(100e-9, 25e-9, 0.1, True),
     },
     "arn:aws:braket:us-west-1::device/qpu/rigetti/Ankaa-2": {
-        "drive_frame": f"q{qubit}_rf_frame",
-        "readout_frame": f"q{qubit}_ro_rx_frame",
+        "drive_frame": f"Transmon_{qubit}_charge_tx",
+        "readout_frame": f"Transmon_{qubit}_readout_tx",
         "spectroscopy_wf": GaussianWaveform(100e-9, 25e-9, 0.1, True),
     },
 }
