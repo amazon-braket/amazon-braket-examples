@@ -9,13 +9,13 @@ amazon-braket-algorithm-library==1.4.13
 cvxpy==1.5.3
 ipykernel==6.29.5
 jax==0.4.30 # Jax 0.4.31 requires Python >=3.10
-jaxlib==0.4.30 # Jax 0.4.31 requires Python >=3.10
+jaxlib==0.4.30 # Jaxlib 0.4.31 requires Python >=3.10
 jinja2==3.1.4
 markupsafe==2.1.5
 matplotlib==3.9.2
 ml-dtypes==0.4.0
 mypy-extensions==1.0.0
-numpy==2.1.0
+numpy==2.0.1 # Numpy 2.1.0 requires Python >=3.10
 openfermion==1.6.1
 openfermionpyscf==0.5
 optax==0.2.3
