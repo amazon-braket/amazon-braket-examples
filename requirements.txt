@@ -18,7 +18,7 @@ mypy-extensions==1.0.0
 numpy==2.0.1 # Numpy 2.1.0 requires Python >=3.10
 openfermion==1.6.1
 openfermionpyscf==0.5
-optax==0.2.3
+optax==0.2.2
 pandas==2.2.2
 pennylane==0.35.1
 PennyLane-Lightning==0.35.1
