@@ -21,9 +21,6 @@ EXCLUDED_NOTEBOOKS = [
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
     "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb",
-    # Some pulse examples use hardcoded names that may not exist depending on the calibration data
-    "2_Native_gate_calibrations.ipynb",
-    "3_Bell_pair_with_pulses_Rigetti.ipynb",
     "Using_the_experimental_local_simulator.ipynb",
 ]
 
