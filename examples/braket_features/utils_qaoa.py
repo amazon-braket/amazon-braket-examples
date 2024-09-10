@@ -1,6 +1,6 @@
 # IMPORTS
 import numpy as np
-from braket.circuits import Circuit, Observable, circuit, FreeParameter, QubitSet
+from braket.circuits import Circuit, circuit, FreeParameter, observables, QubitSet
 from scipy.optimize import minimize
 
 
@@ -62,18 +62,17 @@ def circuit(params, device, n_qubits, ising):
         circ.driver(betas[mm], n_qubits)
     return circ
 
-def cost_H(ising):
+def cost_h(ising):
     idx = ising.nonzero()
     edges = list(zip(idx[0], idx[1]))
 
-    H = []
+    h = []
     # apply ZZ gate for every edge (with corresponding interaction strength)
-    for qubit_pair in edges[1:]:
+    for start, end in edges[1:]:
         # get interaction strength from Ising matrix
-        int_strength = ising[qubit_pair[0], qubit_pair[1]]
-        H.append(2*ising[qubit_pair[0], qubit_pair[1]] * Observable.Z() @ Observable.Z())
-    targets = [QubitSet([edge[0], edge[1]]) for edge in edges]
-    return sum(H, 2*ising[edges[0][0], edges[0][1]] * Observable.Z() @ Observable.Z()), targets
+        h.append(2 * ising[start, end] * observables.Z(start) @ observables.Z(end))
+    start, end = edges[0]
+    return sum(h, 2 * ising[start, end] * observables.Z(start) @ observables.Z(end))
 
 def form_inputs_dict(params, ising):
     n_params = len(params)
@@ -182,10 +181,11 @@ def train(
     gamma_params = [[FreeParameter(f"gamma_{i}_{j}") for j in range(len(ising.nonzero()[0]))] for i in range(p)]
     beta_params = [FreeParameter(f"beta_{i}") for i in range(p)]
     params = gamma_params + beta_params
-    H, targets = cost_H(ising)
     qaoa_circ = circuit(params, device, n_qubits, ising)
-    for (term, target) in zip(H.summands, targets):
-        qaoa_circ.expectation(observable=term._unscaled(), target=target)
+
+    h = cost_h(ising)
+    for term in h.summands:
+        qaoa_circ.expectation(observable=term._unscaled())
     
     print('Initial energy: ', objective_function(params0, qaoa_circ, ising, device, tracker, False))
     # run classical optimization (example: method='Nelder-Mead')
@@ -287,8 +287,8 @@ def train_adjoint(
     params = gamma_params + beta_params
     qaoa_circ = circuit(params, device, n_qubits, ising)
     
-    H, targets = cost_H(ising)
-    qaoa_circ.adjoint_gradient(observable=H, target=targets, parameters=[])
+    h = cost_h(ising)
+    qaoa_circ.adjoint_gradient(observable=h, parameters=[])
     
     print('Initial energy: ', objective_function_adjoint(params0, qaoa_circ, ising, device, tracker, False)[0])
     # run classical optimization (example: method='Nelder-Mead')
