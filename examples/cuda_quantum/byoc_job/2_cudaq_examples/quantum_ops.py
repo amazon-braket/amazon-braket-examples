@@ -1,0 +1,18 @@
+import cudaq
+
+
+@cudaq.kernel
+def kernel():
+    # A single qubit initialized to the ground / zero state.
+    qubit = cudaq.qubit()
+
+    # Apply the Pauli x gate to the qubit.
+    x(qubit)
+
+    # Measurement operator.
+    mz(qubit)
+
+
+# Sample the qubit for 1000 shots to gather statistics.
+result = cudaq.sample(kernel)
+print(result.most_probable())
