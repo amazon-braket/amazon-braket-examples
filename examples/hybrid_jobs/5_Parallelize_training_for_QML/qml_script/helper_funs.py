@@ -57,7 +57,7 @@ def get_device(n_wires, device_string):
     device_prefix = device_string.split(":")[0]
 
     if device_prefix == "local":
-        prefix, device_name = device_string.split("/")
+        _prefix, device_name = device_string.split("/")
         device = qml.device(device_name, wires=n_wires)
         print("Using local simulator: ", device.name)
     else:

@@ -35,7 +35,7 @@ def main():
 
     ########## Set up graph ##########
     g = nx.gnm_random_graph(n_nodes, n_edges, seed=seed)
-    positions = nx.spring_layout(g, seed=seed)
+    nx.spring_layout(g, seed=seed)
 
     cost_h, mixer_h = qml.qaoa.max_clique(g, constrained=False)
     print("number of observables: ", len(cost_h._ops))

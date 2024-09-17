@@ -135,7 +135,6 @@ def objective_function(params, qaoa_circuit, ising, device, tracker, verbose):
         energy += 2 * ising[edge[0], edge[1]] * term
 
     # get metadata
-    metadata = result.task_metadata
 
     tracker["opt_energies"].append(energy)
 
@@ -240,7 +239,6 @@ def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, ver
     gradient = result.values[0]
     energy = gradient["expectation"]
     # get metadata
-    metadata = result.task_metadata
 
     tracker["opt_energies"].append(energy)
 

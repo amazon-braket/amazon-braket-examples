@@ -29,7 +29,7 @@ def show_register(
     filled_sites = [site.coordinate for site in register if site.site_type == SiteType.FILLED]
     empty_sites = [site.coordinate for site in register if site.site_type == SiteType.VACANT]
 
-    fig = plt.figure(figsize=(7, 7))
+    plt.figure(figsize=(7, 7))
     if filled_sites:
         plt.plot(
             np.array(filled_sites)[:, 0], np.array(filled_sites)[:, 1], "r.", ms=15, label="filled"
@@ -79,7 +79,7 @@ def show_global_drive(drive, axes=None, **plot_ops):
     }
 
     if axes is None:
-        fig, axes = plt.subplots(3, 1, figsize=(7, 7), sharex=True)
+        _fig, axes = plt.subplots(3, 1, figsize=(7, 7), sharex=True)
 
     for ax, data_name in zip(axes, data.keys()):
         if data_name == "phase [rad]":
@@ -124,7 +124,7 @@ def show_drive_and_local_detuning(drive: DrivingField, local_detuning: LocalDetu
         "phase [rad]": drive.phase.time_series,
     }
 
-    fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
+    _fig, axes = plt.subplots(4, 1, figsize=(7, 7), sharex=True)
     for ax, data_name in zip(axes, drive_data.keys()):
         if data_name == "phase [rad]":
             ax.step(
@@ -215,7 +215,7 @@ def plot_avg_density_2D(
 
     # construct plot
     if custom_axes is None:
-        fig, ax = plt.subplots()
+        _fig, ax = plt.subplots()
     else:
         ax = custom_axes
 

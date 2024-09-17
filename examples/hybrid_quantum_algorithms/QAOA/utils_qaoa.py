@@ -186,7 +186,7 @@ def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, ver
     # set bounds for search space
     bnds_gamma = [(0, 2 * np.pi) for _ in range(int(len(params0) / 2))]
     bnds_beta = [(0, np.pi) for _ in range(int(len(params0) / 2))]
-    bnds = bnds_gamma + bnds_beta
+    bnds_gamma + bnds_beta
 
     tracker["params"].append(params0)
 

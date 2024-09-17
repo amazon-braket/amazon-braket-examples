@@ -93,7 +93,7 @@ def main():
         print(f"Trace {j}:")
         opt = opt_choice[optimizer_name](stepsize=lr)
 
-        params, loss_per_trace = train(
+        _params, loss_per_trace = train(
             opt,
             max_iter,
             params_init,
