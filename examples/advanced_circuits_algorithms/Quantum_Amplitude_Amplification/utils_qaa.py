@@ -1,10 +1,12 @@
 import numpy as np
-from braket.circuits import Circuit, circuit
 from utils_circuit import adjoint, get_unitary
+
+from braket.circuits import Circuit, circuit
 
 # monkey patch to Circuit class
 Circuit.get_unitary = get_unitary
 Circuit.adjoint = adjoint
+
 
 # helper function to apply XZX to given qubit
 @circuit.subroutine(register=True)
@@ -57,7 +59,6 @@ def minus_R_zero(qubits, use_explicit_unitary=False):
 
         # For more qubits, we use Toffoli (or CCNOT) gates to check that all the qubits are in |1> (since we applied X)
         else:
-
             # Dynamically add ancilla qubits, starting on the next unused qubit in the circuit
             # TODO: if this subroutine is being applied to a subset of qubits in a circuit, these ancilla
             # registers might already be used. We could pass in circ as an argument and add ancillas outside of
@@ -110,9 +111,7 @@ def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
         # If qubits are passed, make sure it's the right number to remap from A.
         if len(qubits) != len(A.qubits):
             raise ValueError(
-                "Number of desired target qubits differs from number of targets in A".format(
-                    flag_qubit=repr(flag_qubit)
-                )
+                "Number of desired target qubits differs from number of targets in A".format()
             )
 
     # Verify that flag_qubit is one of the qubits on which A acts, or one of the user defined qubits

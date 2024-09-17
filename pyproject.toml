@@ -56,9 +56,32 @@ python -m ipykernel install --user --name "conda_braket" --display-name "conda_b
 pytest --dist worksteal -n logical -ra -v --durations=0 test/
 """
 
+[tool.hatch.envs.lint]
+detached = true
+dependencies = [
+  "ruff",
+]
+
+[tool.hatch.envs.lint.scripts]
+style = [
+  "ruff check {args:.}",
+]
+fmt = [
+  "ruff format {args:.}",
+  "style",
+]
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.9", "3.10", "3.11"]
 
 [tool.hatch.metadata]
 allow-direct-references = true
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+lint.isort = { known-first-party = [
+  "braket",
+] }
+lint.extend-select = ["I"]
+lint.preview = true

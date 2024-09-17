@@ -1,13 +1,15 @@
-import pennylane as qml
-from pennylane import numpy as np
-import random
+import functools
 import json
 import os
-from source_scripts.utils import get_device, str2bool, train
-from source_scripts.QNSPSA import QNSPSA
-from braket.jobs import save_job_result
+import random
 import time
-import functools
+
+import pennylane as qml
+from pennylane import numpy as np
+from source_scripts.QNSPSA import QNSPSA
+from source_scripts.utils import get_device, train
+
+from braket.jobs import save_job_result
 
 
 def sample_gates(n_qubits, n_layers, seed):
@@ -23,13 +25,10 @@ def sample_gates(n_qubits, n_layers, seed):
 def ansatz_template(params, num_of_wires, sampled_gates, H):
     if num_of_wires < 2:
         raise ValueError(
-            "Number of wires is smaller than 2. "
-            "The ansatz works on at least two qubits."
+            "Number of wires is smaller than 2. " "The ansatz works on at least two qubits."
         )
     if num_of_wires != len(sampled_gates):
-        raise ValueError(
-            "The length of list wires needs to match" "the length of sampled_gates"
-        )
+        raise ValueError("The length of list wires needs to match" "the length of sampled_gates")
     m = len(sampled_gates[0])
     for k in range(m - 1):
         for i in range(num_of_wires):

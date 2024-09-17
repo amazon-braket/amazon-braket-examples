@@ -147,7 +147,7 @@ def solve_classical_ising(J, N, pos):
     """
 
     # define and build classical Ising
-    model, linear, quad, offset = build_classical_ising(J, N)
+    model, linear, quad, _offset = build_classical_ising(J, N)
 
     # Solve classical Ising model
     solution = solve_ising(linear, quad)

@@ -4,11 +4,12 @@ from datetime import datetime
 
 import pennylane as qml
 import spacy_sentence_bert
+from pennylane import numpy as np
+from pennylane.templates import AmplitudeEmbedding
+
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 from braket.tracking import Tracker
-from pennylane import numpy as np
-from pennylane.templates import AmplitudeEmbedding
 
 
 def main():

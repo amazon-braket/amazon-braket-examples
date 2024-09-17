@@ -5,11 +5,9 @@ from datetime import datetime
 
 import numpy as np
 
+# local imports
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
-
-# local imports
-from utils_qft import inverse_qft
 
 
 @circuit.subroutine(register=True)
@@ -80,13 +78,13 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
         # Alterantive 1: Implement C-(U^{2^k})
         if control_unitary:
             # Define the matrix U^{2^k}
-            Uexp = np.linalg.matrix_power(unitary, 2 ** power)
+            Uexp = np.linalg.matrix_power(unitary, 2**power)
 
             # Apply the controlled unitary C-(U^{2^k})
             qpe_circ.controlled_unitary(qubit, query_qubits, Uexp)
         # Alterantive 2: One can instead apply controlled-unitary (2**power) times to get C-U^{2^power}
         else:
-            for _ in range(2 ** power):
+            for _ in range(2**power):
                 qpe_circ.controlled_unitary(qubit, query_qubits, unitary)
 
     # Apply inverse qft to the precision_qubits
@@ -255,7 +253,7 @@ def run_qpe(
 
     # bitstrings
     format_bitstring = "{0:0" + str(num_qubits) + "b}"
-    bitstring_keys = [format_bitstring.format(ii) for ii in range(2 ** num_qubits)]
+    bitstring_keys = [format_bitstring.format(ii) for ii in range(2**num_qubits)]
 
     # QPE postprocessing
     phases_decimal, precision_results_dic = get_qpe_phases(
