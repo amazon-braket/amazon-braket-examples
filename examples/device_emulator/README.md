@@ -1,0 +1,1 @@
+Here we list the notebooks for the device emualtors for IQM and Aquila devices. The notebook has different dependencies, which will be installed in each notebook. No julia is needed for AHS device emulator for the two examples for Aquila.
