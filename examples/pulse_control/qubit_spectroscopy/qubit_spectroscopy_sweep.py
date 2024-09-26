@@ -27,7 +27,7 @@ with open(hp_file, "r") as f:
 qubit = hyperparams.get("qubit", None)
 assert qubit is not None
 experiment_configuration = {
-    "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3": {
+    "arn:aws:braket:us-west-1::device/qpu/rigetti/Ankaa 2": {
         "drive_frame": f"q{qubit}_rf_frame",
         "readout_frame": f"q{qubit}_ro_rx_frame",
         "spectroscopy_wf": GaussianWaveform(100e-9, 25e-9, 0.1, True),
