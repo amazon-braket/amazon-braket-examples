@@ -250,11 +250,11 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 ## <a name="ahs">Analog Hamiltonian Simulation</a>
 
-- [**Intruction to Analog Hamiltonian Simulation**](examples/analog_hamiltonian_simulation/00_Introduction_of_Analog_Hamiltonian_Simulation_with_Rydberg_Atoms.ipynb)
+- [**Instruction to Analog Hamiltonian Simulation**](examples/analog_hamiltonian_simulation/00_Introduction_of_Analog_Hamiltonian_Simulation_with_Rydberg_Atoms.ipynb)
 
   This tutorial provides an introduction to Analog Hamiltonian Simulation (AHS), a quantum computing paradigm different from gate-based computing. AHS uses a well-controlled quantum system and tunes its parameters to mimic the dynamics of another quantum system, the one we aim to study.
 
-- [**Intruction to Aquila**](examples/analog_hamiltonian_simulation/01_Introduction_to_Aquila.ipynb)
+- [**Instruction to Aquila**](examples/analog_hamiltonian_simulation/01_Introduction_to_Aquila.ipynb)
 
   This tutorial illustrates how to run an AHS program on QuEra’s Aquila, a Rydberg based QPU, via Amazon Braket.
 
