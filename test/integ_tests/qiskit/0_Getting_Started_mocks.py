@@ -38,7 +38,7 @@ def pre_run_inject(mock_utils):
                 },
                 {
                     "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
-                    "deviceName": "Ankaa 2",
+                    "deviceName": "Ankaa-2",
                     "deviceType": "QPU",
                     "deviceStatus": "ONLINE",
                     "providerName": "Test Provider"

@@ -59,7 +59,7 @@
             5236931123.13734
         ],
         "task summary": {
-            "arn:aws:braket:us-west-1::device/qpu/rigetti/Ankaa 2": {
+            "arn:aws:braket:us-west-1::device/qpu/rigetti/Ankaa-2": {
                 "shots": 2500,
                 "tasks": {
                     "COMPLETED": 25
