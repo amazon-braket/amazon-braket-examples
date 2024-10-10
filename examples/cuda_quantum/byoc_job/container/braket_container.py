@@ -108,10 +108,6 @@ def download_s3_file(s3_uri: str, local_path: str) -> str:
     local_s3_file = os.path.join(local_path, os.path.basename(s3_key))
     if not os.path.exists(local_s3_file):
         s3_client.download_file(s3_bucket, s3_key, local_s3_file)
-        # with open(local_s3_file, "wb") as file:
-        #     s3_client.download_fileobj(s3_bucket, s3_key, file)
-        #     file.flush()
-        # hello3
     return local_s3_file
 
 
@@ -318,37 +314,15 @@ def run_customer_code() -> None:
     with a non-zero exit code, this function will log a failure and
     exit.
     """
-    # Debug, resolve race condition
+    # Add wait time to resolve race condition
     import time
     rank = int(os.getenv('OMPI_COMM_WORLD_NODE_RANK', "0"))
     time.sleep(rank)
-    # Debug, end
     
     s3_uri, entry_point, compression_type = get_code_setup_parameters()
     local_s3_file = download_customer_code(s3_uri)
     unpack_code_and_add_to_path(local_s3_file, compression_type)
 
-    # debug
-    # import cloudpickle
-    # print("cloudpickle version: ", cloudpickle.__version__)
-    # print("**** content in  " , EXTRACTED_CUSTOMER_CODE_PATH, "****")
-    # def print_all_files_and_python_file_content_recursively(folder_path):
-    #     folder = Path(folder_path)
-    #     all_files = list(folder.rglob('*'))  # This recursively lists all files and directories
-    #     python_files = [f for f in all_files if f.suffix == '.py' and f.is_file()]  # Filter only .py files
-        
-    #     print("List of all files in the folder and subfolders:")
-    #     for file in all_files:
-    #         if file.is_file():  # Ensure it's a file (not a directory)
-    #             print(file.relative_to(folder))  # Print relative path from the root folder
-        
-    #     for py_file in python_files:
-    #         print(f"\n--- Content of {py_file.relative_to(folder)} ---\n")
-    #         with open(py_file, 'r') as file:
-    #             print(file.read())
-    # print_all_files_and_python_file_content_recursively(EXTRACTED_CUSTOMER_CODE_PATH)
-    # debug
-    
     install_additional_requirements()
     customer_executable = extract_customer_code(entry_point)
     customer_process = kick_off_customer_script(customer_executable)
