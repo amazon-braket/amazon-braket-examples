@@ -3,9 +3,9 @@ awscli==1.34.0
 boto3==1.35.0
 amazon-braket-default-simulator==1.26.0
 amazon-braket-pennylane-plugin==1.28.0
-amazon-braket-schemas==1.22.0
-amazon-braket-sdk==1.87.0
-amazon-braket-algorithm-library==1.4.13
+amazon-braket-schemas==1.22.1
+amazon-braket-sdk==1.88.0
+amazon-braket-algorithm-library==1.5.0
 cvxpy==1.5.3
 ipykernel==6.29.5
 jax==0.4.29 # Jax 0.4.31 requires Python >=3.10 and 0.4.3 breaks openfermion https://github.com/quantumlib/OpenFermion/issues/893

@@ -170,7 +170,11 @@
     "qubitCount": 30,
     "nativeGateSet": [
       "ccnot",
-      "cy"
+      "cy",
+      "rx",
+      "rz",
+      "cz",
+      "iswap"
     ],
     "connectivity": {
       "fullyConnected": false,
@@ -183,6 +187,106 @@
     }
   },
   "deviceParameters": {},
+  "standardized": {
+    "braketSchemaHeader":{
+      "name":"braket.device_schema.standardized_gate_model_qpu_device_properties",
+      "version":"1"
+    },
+    "oneQubitProperties":{
+      "0":{
+        "T1":{
+          "value":8.645474408067754e-06,
+          "standardError":null,
+          "unit":"S"
+        },
+        "T2":{
+          "value":1.2710111632672265e-05,
+          "standardError":null,
+          "unit":"S"
+        },
+        "oneQubitFidelity":[
+          {
+            "fidelityType":{
+              "name":"RANDOMIZED_BENCHMARKING",
+              "description":null
+            },
+            "fidelity":0.998913376867117,
+            "standardError":2.7016428586132974e-05
+          },
+          {
+            "fidelityType":{
+              "name":"SIMULTANEOUS_RANDOMIZED_BENCHMARKING",
+              "description":null
+            },
+            "fidelity":0.9975435377199546,
+            "standardError":0.00015343141167926104
+          },
+          {
+            "fidelityType":{
+              "name":"READOUT",
+              "description":null
+            },
+            "fidelity":0.9339999999999999,
+            "standardError":null
+          }
+        ]
+      },
+      "1":{
+        "T1":{
+          "value":1.3882920379569291e-05,
+          "standardError":null,
+          "unit":"S"
+        },
+        "T2":{
+          "value":6.747630168122081e-06,
+          "standardError":null,
+          "unit":"S"
+        },
+        "oneQubitFidelity":[
+          {
+            "fidelityType":{
+              "name":"RANDOMIZED_BENCHMARKING",
+              "description":null
+            },
+            "fidelity":0.9986572269551187,
+            "standardError":0.00014421109291307328
+          },
+          {
+            "fidelityType":{
+              "name":"SIMULTANEOUS_RANDOMIZED_BENCHMARKING",
+              "description":null
+            },
+            "fidelity":0.9953885567898049,
+            "standardError":0.00043361019086930177
+          },
+          {
+            "fidelityType":{
+              "name":"READOUT",
+              "description":null
+            },
+            "fidelity":0.944,
+            "standardError":null
+          }
+        ]
+      }
+    },
+    "twoQubitProperties":{
+      "0-1":{
+        "twoQubitGateFidelity":[
+          {
+            "direction":null,
+            "gateName":"ISWAP",
+            "fidelity":0.9773180863130815,
+            "standardError":0.00408287380553746,
+            "fidelityType":{
+              "name":"INTERLEAVED_RANDOMIZED_BENCHMARKING",
+              "description":null
+            }
+          }
+        ]
+      }
+    }
+  },
   "provider": {
     "specs": {
       "1Q": {
@@ -204,7 +308,9 @@
           "fCZ": 0.8446295075190559,
           "fCZ_std_err": 0.009150823348255658,
           "fXY": 0.82638351218334,
-          "fXY_std_err": 0.01638730580261261
+          "fXY_std_err": 0.01638730580261261,
+          "fISWAP": 0.9773180863130815,
+          "fISWAP_std_err": 0.00408287380553746
         },
         "10-11": {
           "fCPHASE": 0.8710661743452028,
@@ -212,7 +318,9 @@
           "fCZ": 0.8446295075190559,
           "fCZ_std_err": 0.009150823348255658,
           "fXY": 0.82638351218334,
-          "fXY_std_err": 0.01638730580261261
+          "fXY_std_err": 0.01638730580261261,
+          "fISWAP": 0.955113709939358,
+          "fISWAP_std_err": 0.006800196783194216
         },
         "10-17": {
           "fCPHASE": 0.8710661743452028,
@@ -220,7 +328,9 @@
           "fCZ": 0.8446295075190559,
           "fCZ_std_err": 0.009150823348255658,
           "fXY": 0.82638351218334,
-          "fXY_std_err": 0.01638730580261261
+          "fXY_std_err": 0.01638730580261261,
+          "fISWAP": 0.9571311463268808,
+          "fISWAP_std_err": 0.012095424346427125
         }
       }
     }
