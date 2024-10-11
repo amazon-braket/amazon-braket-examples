@@ -233,8 +233,6 @@ def extract_customer_code(entry_point: str) -> Callable:
     if entry_point.find(":") >= 0:
         str_module, _, str_method = entry_point.partition(":")
         customer_module = importlib.import_module(str_module)
-        print("**** customer_module ****")
-        print(dir(customer_module)) 
         customer_code = getattr(customer_module, str_method)
     else:
         def customer_code():
