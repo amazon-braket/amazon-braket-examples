@@ -135,8 +135,8 @@ class CCQC:
             label (List): A list of labels.
         """
         result = 0
-        for d, l in zip(data, label):
-            result += self.cost(*w, data=d, label=l)
+        for d, label in zip(data, label):
+            result += self.cost(*w, data=d, label=label)
         return result / len(data)
 
     def cost(self, *w, data=None, label=None):
