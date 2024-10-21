@@ -6,6 +6,8 @@ from datetime import datetime
 import numpy as np
 
 # local imports
+from utils_qft import inverse_qft  # noqa: F401
+
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
 
