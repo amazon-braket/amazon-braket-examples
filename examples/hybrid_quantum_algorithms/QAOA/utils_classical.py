@@ -152,7 +152,7 @@ def solve_classical_ising(J, N, pos):
     # Solve classical Ising model
     solution = solve_ising(linear, quad)
 
-    # print calssical solution
+    # print classical solution
     print("Classical solution:", solution)
 
     # get corresponding energy
