@@ -65,10 +65,6 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
     """
     qpe_circ = Circuit()
 
-    # Get number of qubits
-    len(precision_qubits)
-    len(query_qubits)
-
     # Apply Hadamard across precision register
     qpe_circ.h(precision_qubits)
 
