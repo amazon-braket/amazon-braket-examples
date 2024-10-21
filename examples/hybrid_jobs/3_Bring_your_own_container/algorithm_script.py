@@ -4,11 +4,12 @@ from datetime import datetime
 
 import pennylane as qml
 import spacy_sentence_bert
+from pennylane import numpy as np
+from pennylane.templates import AmplitudeEmbedding
+
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 from braket.tracking import Tracker
-from pennylane import numpy as np
-from pennylane.templates import AmplitudeEmbedding
 
 
 def main():
@@ -134,8 +135,8 @@ class CCQC:
             label (List): A list of labels.
         """
         result = 0
-        for d, l in zip(data, label):
-            result += self.cost(*w, data=d, label=l)
+        for d, label in zip(data, label):
+            result += self.cost(*w, data=d, label=label)
         return result / len(data)
 
     def cost(self, *w, data=None, label=None):
