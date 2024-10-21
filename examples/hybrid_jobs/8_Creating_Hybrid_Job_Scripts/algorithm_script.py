@@ -14,6 +14,7 @@
 import os
 
 import numpy as np
+
 from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.jobs import save_job_result

@@ -1,8 +1,6 @@
-import os
-import numpy as np
 import pennylane as qml
-from pennylane.templates import AngleEmbedding
 import torch
+from pennylane.templates import AngleEmbedding
 
 
 class QuantumCircuit:
@@ -15,8 +13,7 @@ class QuantumCircuit:
         self.nwires = len(qc_dev.wires)
 
     def q_circuit(self):
-        """Quantum circuit
-        """
+        """Quantum circuit"""
         nwires = self.nwires
         qc_dev = self.qc_dev
 
@@ -32,9 +29,9 @@ class QuantumCircuit:
 
     def initialize_weights(self):
         """Initialize the weights in CCQC quantum circuit."""
-        w_layer1 = torch.randn((2, self.nwires, 3), dtype=torch.float64) 
-        w_layer2 = torch.randn((2, self.nwires, 3), dtype=torch.float64) 
-        rotation = torch.randn((3,), dtype=torch.float64) 
+        w_layer1 = torch.randn((2, self.nwires, 3), dtype=torch.float64)
+        w_layer2 = torch.randn((2, self.nwires, 3), dtype=torch.float64)
+        rotation = torch.randn((3,), dtype=torch.float64)
         weights = [w_layer1, w_layer2, rotation]
         return weights
 
@@ -54,4 +51,4 @@ class QuantumCircuit:
         for _, params in zip(wirelist, p2):
             wire2 = (wire1 - rng) % self.nwires
             qml.CRot.compute_decomposition(params[0], params[1], params[2], wires=[wire1, wire2])
-            wire1 = wire2        
+            wire1 = wire2

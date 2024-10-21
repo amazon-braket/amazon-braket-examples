@@ -7,6 +7,8 @@ import os
 import pathlib
 from typing import Any, Dict, TypeVar
 
+import papermill as pm
+
 logging.basicConfig(level="INFO", format="%(message)s")
 
 
@@ -27,8 +29,6 @@ if not entry_point.endswith("run_notebook"):
         python = sys.executable
         subprocess.check_call([python, "-m", "pip", "install", *missing])
 
-
-import papermill as pm
 
 PathLike = TypeVar("PathLike", str, pathlib.Path, None)
 
