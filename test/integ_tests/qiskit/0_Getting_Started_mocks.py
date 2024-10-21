@@ -16,29 +16,29 @@ def pre_run_inject(mock_utils):
                     "deviceName": "SV1",
                     "deviceType": "SIMULATOR",
                     "deviceStatus": "ONLINE",
-                    "providerName": "Test Provider"
+                    "providerName": "Test Provider",
                 },
                 {
                     "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
                     "deviceName": "dm1",
                     "deviceType": "SIMULATOR",
                     "deviceStatus": "ONLINE",
-                    "providerName": "Test Provider"
+                    "providerName": "Test Provider",
                 },
                 {
                     "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
                     "deviceName": "TN1",
                     "deviceType": "SIMULATOR",
                     "deviceStatus": "ONLINE",
-                    "providerName": "Test Provider"
+                    "providerName": "Test Provider",
                 },
                 {
                     "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
                     "deviceName": "Ankaa-2",
                     "deviceType": "QPU",
                     "deviceStatus": "ONLINE",
-                    "providerName": "Test Provider"
-                }
+                    "providerName": "Test Provider",
+                },
             ]
         }
     )
