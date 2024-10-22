@@ -1,5 +1,6 @@
-import pennylane as qml
 import os
+
+import pennylane as qml
 from pennylane import numpy as np
 
 
@@ -8,7 +9,7 @@ def get_device(n_wires, shots):
     device_prefix = device_string.split(":")[0]
 
     if device_prefix == "local":
-        prefix, device_name = device_string.split("/")
+        _prefix, device_name = device_string.split("/")
         if shots == 0:
             shots = None
         device = qml.device(device_name, wires=n_wires, shots=shots)

@@ -1,6 +1,6 @@
 import os
-import tarfile
 import subprocess
+import tarfile
 import unittest.mock as mock
 
 default_job_results = ""
@@ -10,21 +10,19 @@ def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
     mock_utils.mock_default_job_calls(mocker)
-    mocker.set_log_streams_result({
-        "logStreams": []
-    })
-    mocker.set_get_query_results_result({
-        "status": "Complete",
-        "results": [
-            [
-                {"field": "@message", "value": "iteration_number=0;expval=0;"},
-                {"field": "@timestamp", "value": "0"},
+    mocker.set_log_streams_result({"logStreams": []})
+    mocker.set_get_query_results_result(
+        {
+            "status": "Complete",
+            "results": [
+                [
+                    {"field": "@message", "value": "iteration_number=0;expval=0;"},
+                    {"field": "@timestamp", "value": "0"},
+                ],
             ],
-        ]
-    })
-    mocker.set_start_query_result({
-        "queryId": "TestId"
-    })
+        }
+    )
+    mocker.set_start_query_result({"queryId": "TestId"})
     global default_job_results
     default_job_results = mock_utils.read_file("../job_results.json", __file__)
     with open("results.json", "w") as f:
@@ -35,7 +33,9 @@ def pre_run_inject(mock_utils):
     subprocess.check_output = subprocess_check_output
     subprocess.Popen = subprocess_open
 
-    os.environ["AMZN_BRAKET_DEVICE_ARN"] = f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
+    os.environ["AMZN_BRAKET_DEVICE_ARN"] = (
+        f"arn:aws:braket:{mocker.region_name}::device/qpu/arn/TestARN"
+    )
 
 
 def post_run(tb):

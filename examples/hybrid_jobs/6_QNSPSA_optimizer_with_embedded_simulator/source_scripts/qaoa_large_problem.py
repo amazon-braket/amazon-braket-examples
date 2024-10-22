@@ -1,14 +1,15 @@
+import json
 import os
+import time
+
+import networkx as nx
 import pennylane as qml
 from pennylane import numpy as np
-import json
-
-from source_scripts.utils import get_device, str2bool, train
-from source_scripts.QNSPSA import QNSPSA
-from braket.jobs import save_job_result
-import time
-import networkx as nx
 from pennylane import qaoa
+from source_scripts.QNSPSA import QNSPSA
+from source_scripts.utils import get_device, str2bool, train
+
+from braket.jobs import save_job_result
 
 
 def main():
@@ -74,7 +75,7 @@ def main():
         resamplings=1,
         blocking=True,
     )
-    params, loss_recording = train(
+    _params, loss_recording = train(
         opt_qnspsa,
         max_iter,
         params_init,
@@ -88,7 +89,6 @@ def main():
 
 
 if __name__ == "__main__":
-
     try:
         main()
         print("Training Successful!!")

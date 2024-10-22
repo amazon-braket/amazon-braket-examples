@@ -1,0 +1,29 @@
+# This workflow will run the linter checks from a new hatch environment.
+
+
+name: Check code format
+
+on:
+  pull_request:
+    branches:
+      - main
+      - feature/**
+
+permissions:
+  contents: read
+
+jobs:
+  check-code-format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+    - name: Set up Python
+      uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5.1.0
+      with:
+        python-version: '3.9' # Minimum supported Python version
+    - name: Install dependencies
+      run: |
+        pip install hatch
+    - name: Run code format checks
+      run: |
+        hatch run lint:style

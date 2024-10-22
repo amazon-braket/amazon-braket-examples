@@ -1,4 +1,5 @@
 import numpy as np
+
 from braket.circuits import Circuit
 
 
@@ -13,11 +14,10 @@ def get_unitary(self):
 
     # Define the unitary matrix. Start with the identity matrix.
     # Reshape the unitary into a tensor with the right number of indices (given by num_qubits)
-    unitary = np.reshape(np.eye(2 ** num_qubits, 2 ** num_qubits), [2] * 2 * num_qubits)
+    unitary = np.reshape(np.eye(2**num_qubits, 2**num_qubits), [2] * 2 * num_qubits)
 
     # Iterate over the moments in the circuit
     for key in self.moments:
-
         # Get the matrix corresponding to the gate
         matrix = self.moments[key].operator.to_matrix()
         # Get the target indices for the gate
@@ -51,7 +51,7 @@ def get_unitary(self):
         unitary = np.transpose(unitary, inverse_permutation)
 
     # Reshape to a 2^N x 2^N matrix (for N=num_qubits)and return
-    unitary = np.reshape(unitary, (2 ** num_qubits, 2 ** num_qubits))
+    unitary = np.reshape(unitary, (2**num_qubits, 2**num_qubits))
     return unitary
 
 
