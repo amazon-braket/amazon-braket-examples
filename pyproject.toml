@@ -83,6 +83,6 @@ line-length = 100
 lint.isort = { known-first-party = [
   "braket",
 ] }
-lint.extend-select = ["I"]
+lint.extend-select = ["I", "PERF"]
 lint.preview = true
 lint.ignore = ["E722"]
