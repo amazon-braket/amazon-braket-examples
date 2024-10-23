@@ -9,8 +9,7 @@ def read_csv_raw(fname):
     data = []
     with open(fname) as csvfile:
         readCSV = csv.reader(csvfile)
-        for row in readCSV:
-            data.append([r for r in row])
+        data = [[r for r in row] for row in readCSV]
 
     return data
 
