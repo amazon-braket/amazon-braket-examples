@@ -14,16 +14,16 @@ import contextlib
 import errno
 import importlib
 import inspect
-import os
 import json
+import multiprocessing
+import os
 import runpy
 import shutil
 import subprocess
 import sys
-import multiprocessing
 from pathlib import Path
+from typing import Callable, Tuple
 from urllib.parse import urlparse
-from typing import Tuple, Callable
 
 import boto3
 
@@ -48,7 +48,7 @@ def _log_failure(*args, display=True):
         args: variable list of text to write to the file.
     """
     Path(ERROR_LOG_PATH).mkdir(parents=True, exist_ok=True)
-    with open(ERROR_LOG_FILE, 'a') as error_log:
+    with open(ERROR_LOG_FILE, "a") as error_log:
         for text in args:
             error_log.write(text)
             if display:
@@ -165,9 +165,7 @@ def try_bind_hyperparameters_to_customer_method(customer_method: Callable):
     annotations = inspect.getfullargspec(customer_method).annotations
     function_args = {}
     for param in hyperparameters:
-        function_args[param] = annotations.get(param, str)(
-            hyperparameters[param]
-        )
+        function_args[param] = annotations.get(param, str)(hyperparameters[param])
     return function_args
 
 
@@ -184,12 +182,12 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
     Returns:
         str, str, str: the code setup parameters as described above.
     """
-    s3_uri = os.getenv('AMZN_BRAKET_SCRIPT_S3_URI')
-    entry_point = os.getenv('AMZN_BRAKET_SCRIPT_ENTRY_POINT')
-    compression_type = os.getenv('AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE')
+    s3_uri = os.getenv("AMZN_BRAKET_SCRIPT_S3_URI")
+    entry_point = os.getenv("AMZN_BRAKET_SCRIPT_ENTRY_POINT")
+    compression_type = os.getenv("AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE")
     if s3_uri and entry_point:
         return s3_uri, entry_point, compression_type
-    hyperparameters_env = os.getenv('SM_HPS')
+    hyperparameters_env = os.getenv("SM_HPS")
     if hyperparameters_env:
         try:
             hyperparameters = json.loads(hyperparameters_env)
@@ -198,8 +196,10 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
             if not entry_point:
                 entry_point = hyperparameters.get("AMZN_BRAKET_SCRIPT_ENTRY_POINT")
             if not compression_type:
-                compression_type = hyperparameters.get("AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE")
-        except Exception as e:
+                compression_type = hyperparameters.get(
+                    "AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE"
+                )
+        except Exception:
             log_failure_and_exit("Hyperparameters not specified in env")
     if not s3_uri:
         log_failure_and_exit("No customer script specified")
@@ -219,7 +219,7 @@ def install_additional_requirements() -> None:
                 requirements_file_path = os.path.join(root, "requirements.txt")
                 subprocess.run(
                     ["python", "-m", "pip", "install", "-r", requirements_file_path],
-                    cwd=EXTRACTED_CUSTOMER_CODE_PATH
+                    cwd=EXTRACTED_CUSTOMER_CODE_PATH,
                 )
         print("Additional Requirements Check Finished")
     except Exception as e:
@@ -235,9 +235,11 @@ def extract_customer_code(entry_point: str) -> Callable:
         customer_module = importlib.import_module(str_module)
         customer_code = getattr(customer_module, str_method)
     else:
+
         def customer_code():
             # equivalent to `python -m entry_point`
             return runpy.run_module(entry_point, run_name="__main__")
+
     return customer_code
 
 
@@ -259,12 +261,11 @@ def wrap_customer_code(customer_method: Callable) -> Callable:
         except Exception as e:
             exception_type = type(e).__name__
             exception_string = (
-                exception_type
-                if not str(e)
-                else f"{exception_type}: {e}"
+                exception_type if not str(e) else f"{exception_type}: {e}"
             )
             _log_failure(exception_string, display=False)
             raise e
+
     return wrapped_customer_code
 
 
@@ -314,9 +315,10 @@ def run_customer_code() -> None:
     """
     # Add wait time to resolve race condition
     import time
-    rank = int(os.getenv('OMPI_COMM_WORLD_NODE_RANK', "0"))
+
+    rank = int(os.getenv("OMPI_COMM_WORLD_NODE_RANK", "0"))
     time.sleep(rank)
-    
+
     s3_uri, entry_point, compression_type = get_code_setup_parameters()
     local_s3_file = download_customer_code(s3_uri)
     unpack_code_and_add_to_path(local_s3_file, compression_type)
