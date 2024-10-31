@@ -1,8 +1,9 @@
-from braket.pulse import PulseSequence
-
-from openqasm3.visitor import QASMVisitor
-import openqasm3.ast as ast
 import re
+
+import openqasm3.ast as ast
+from openqasm3.visitor import QASMVisitor
+
+from braket.pulse import PulseSequence
 
 
 class _PhaseExtractor(QASMVisitor[dict]):
@@ -37,7 +38,5 @@ def extract_phases(pulse_sequence: PulseSequence):
     """
     phases = {"null": None}
     _PhaseExtractor().visit(pulse_sequence._program.to_ast(), phases)
-    phases.pop(
-        "null"
-    )  # {"null": None} is needed to avoid wrong test outcome in openqasm
+    phases.pop("null")  # {"null": None} is needed to avoid wrong test outcome in openqasm
     return phases

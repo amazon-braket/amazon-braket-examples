@@ -1,11 +1,11 @@
 import logging
 import os
-import pytest
-
-from testbook import testbook
-from nbconvert import HTMLExporter
 from importlib.machinery import SourceFileLoader
+
+import pytest
 from jupyter_client import kernelspec
+from nbconvert import HTMLExporter
+from testbook import testbook
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
@@ -33,7 +33,10 @@ EXCLUDED_NOTEBOOKS = [
     "2_parallel_simulations.ipynb",
 ]
 
-if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
+if (
+    os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1"
+    or os.environ.get("AWS_REGION") == "eu-north-1"
+):
     EXTRA_EXCLUDES = [
         "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
         "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
@@ -89,7 +92,9 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
-    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    kernel = (
+        "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs().keys() else "python3"
+    )
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
@@ -123,10 +128,12 @@ def test_record():
         pytest.skip(f"Notebook not found: '{notebook_file_search}'")
     os.chdir(root_path)
     os.chdir(notebook_dir)
-    path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
+    path_to_utils, _path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
-    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    kernel = (
+        "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs().keys() else "python3"
+    )
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         tb.inject(
             f"""

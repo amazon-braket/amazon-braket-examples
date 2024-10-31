@@ -1,8 +1,7 @@
 import os
-import tarfile
 import subprocess
+import tarfile
 import unittest.mock as mock
-
 
 default_job_results = ""
 
@@ -10,32 +9,21 @@ default_job_results = ""
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
-    mocker.set_search_result([
+    mocker.set_search_result(
+        [{"Roles": [{"RoleName": "AmazonBraketJobsExecutionRole", "Arn": "TestRoleARN"}]}]
+    )
+    mocker.set_create_job_result(
+        {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"}
+    )
+    mocker.set_get_job_result(
         {
-            "Roles" : [
-                {
-                    "RoleName": "AmazonBraketJobsExecutionRole",
-                    "Arn" : "TestRoleARN"
-                }
-            ]
+            "instanceConfig": {"instanceCount": 1},
+            "jobName": "testJob",
+            "status": "COMPLETED",
+            "outputDataConfig": {"s3Path": "s3://amazon-br-invalid-path/test-path/test-results"},
         }
-    ])
-    mocker.set_create_job_result({
-        "jobArn" : f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"
-    })
-    mocker.set_get_job_result({
-        "instanceConfig" : {
-            "instanceCount" : 1
-        },
-        "jobName": "testJob",
-        "status": "COMPLETED",
-        "outputDataConfig": {
-            "s3Path" : "s3://amazon-br-invalid-path/test-path/test-results"
-        }
-    })
-    mocker.set_log_streams_result({
-        "logStreams": []
-    })
+    )
+    mocker.set_log_streams_result({"logStreams": []})
     global default_job_results
     default_job_results = mock_utils.read_file("../job_results.json", __file__)
     with open("results.json", "w") as f:
