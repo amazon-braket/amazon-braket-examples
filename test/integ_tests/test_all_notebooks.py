@@ -27,6 +27,10 @@ EXCLUDED_NOTEBOOKS = [
     "3_Bell_pair_with_pulses_Rigetti.ipynb",
     "4_Build_single_qubit_gates.ipynb",
     "Using_the_experimental_local_simulator.ipynb",
+    # CUDA-Q jobs
+    "0_hello_cudaq_jobs.ipynb",
+    "1_simulation_with_GPUs.ipynb",
+    "2_parallel_simulations.ipynb",
 ]
 
 if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
