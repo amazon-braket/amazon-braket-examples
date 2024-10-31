@@ -300,6 +300,22 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 ---
 
+## <a name="cudaq">CUDA-Q</a>
+
+- [**Hello CUDA-Q Jobs**](examples/cuda_quantum/byoc_job/0_hello_cudaq_jobs.ipynb)
+
+  This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Job container to run CUDA-Q jobs and running your first local job and AWS jobs with CUDA-Q. 
+
+- [**Simulating quantum programs on GPUs**](examples/cuda_quantum/byoc_job/1_simulation_with_GPUs.ipynb)
+
+  This tutorial shows you how to perform simulations with CUDA-Q GPU backend in GPU instances with Braket Jobs. 
+
+- [**Parallel simulations on multiple GPUs**](examples/cuda_quantum/byoc_job/2_parallel_simulations.ipynb)
+
+  This tutorial shows you how to parallelize the simulations of observables and circuit batch over multiple GPUs on Braket Jobs.
+
+---
+
 ## <a name="search">Still can't find what you're looking for?</a>
 
 Braket provides other libraries, tools, algorithms, experimental features, and more to help with your quantum computing journey. You can, for example, search all of our repositories for the [Bernstein Vazirani](https://github.com/search?q=org%3Aamazon-braket+Bernstein&type=code) algorithm or more [experimental features](https://github.com/search?q=org%3Aamazon-braket+experimental+features&type=code).
