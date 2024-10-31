@@ -85,7 +85,6 @@ def html_exporter():
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
-    print(notebook_dir, notebook_file)
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
 
