@@ -302,15 +302,15 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 ## <a name="cudaq">CUDA-Q</a>
 
-- [**Hello CUDA-Q Jobs**](examples/nvidia-cuda-q/0_hello_cudaq_jobs.ipynb)
+- [**Hello CUDA-Q Jobs**](examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb)
 
   This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Job container to run CUDA-Q jobs and running your first local job and AWS jobs with CUDA-Q. 
 
-- [**Simulating quantum programs on GPUs**](examples/nvidia-cuda-q/1_simulation_with_GPUs.ipynb)
+- [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb)
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU backend in GPU instances with Braket Jobs. 
 
-- [**Parallel simulations on multiple GPUs**](examples/nvidia-cuda-q/2_parallel_simulations.ipynb)
+- [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batch over multiple GPUs on Braket Jobs.
 
