@@ -1,2 +1,2 @@
-pennylane-catalyst
-autoqasm
+# Add additional Python dependencies to the file. The following line demonstrates the format for adding an additional dependency. If you uncomment this line, the additional dependency with the specific version (AutoQASM version 0.1.2, in this example) will be installed in the container image.
+# autoqasm==0.1.2
