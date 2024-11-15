@@ -308,7 +308,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 - [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb)
 
-  This tutorial shows you how to perform simulations with CUDA-Q GPU backend in GPU instances with Braket Jobs. 
+  This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
 - [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb)
 
