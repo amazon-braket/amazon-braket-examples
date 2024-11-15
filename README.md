@@ -304,7 +304,7 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 - [**Hello CUDA-Q Jobs**](examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb)
 
-  This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Job container to run CUDA-Q jobs and running your first local job and AWS jobs with CUDA-Q. 
+  This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
 
 - [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb)
 
