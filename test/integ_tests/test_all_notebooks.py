@@ -57,7 +57,7 @@ test_notebooks = []
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
         if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
-            test_notebooks.append((dir_, file_name))
+            test_notebooks.append((dir_, file_name))  # noqa: PERF401
 
 
 def get_mock_paths(notebook_dir, notebook_file):
