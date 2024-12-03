@@ -52,7 +52,7 @@ script_dir=$(dirname "$0")
 
 # download cudaq wheel files
 wget -O container/cudaq_wheel.zip https://github.com/bettinaheim/cuda-quantum/releases/download/11272024/wheelhouse.zip
-unzip -f container/cudaq_wheel.zip -d container/cudaq_wheel
+unzip container/cudaq_wheel.zip -d container/cudaq_wheel
 
 # build docker image
 docker build --build-arg SCRIPT_PATH="$script_dir" \
