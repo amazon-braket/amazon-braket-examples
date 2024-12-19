@@ -6,11 +6,8 @@ ARG SCRIPT_PATH
 ARG CUDAQ_PATH=/opt/conda/lib/python3.10/site-packages
 ENV MPI_PATH=/opt/amazon/openmpi
 
-RUN python3 -m pip install cudaq
+RUN python3 -m pip install --no-cache --upgrade -r requirements-cuda.txt
 RUN bash "${CUDAQ_PATH}/distributed_interfaces/activate_custom_mpi.sh"
-
-# install additional python dependencies
-RUN python3 -m pip install --no-cache --upgrade -r requirements.txt
 
 # Setup our entry point
 COPY "${SCRIPT_PATH}/braket_container.py" /opt/ml/code/braket_container.py

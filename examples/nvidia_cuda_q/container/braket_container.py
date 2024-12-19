@@ -196,9 +196,7 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
             if not entry_point:
                 entry_point = hyperparameters.get("AMZN_BRAKET_SCRIPT_ENTRY_POINT")
             if not compression_type:
-                compression_type = hyperparameters.get(
-                    "AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE"
-                )
+                compression_type = hyperparameters.get("AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE")
         except Exception:
             log_failure_and_exit("Hyperparameters not specified in env")
     if not s3_uri:
@@ -210,13 +208,16 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
 
 def install_additional_requirements() -> None:
     """
-    Search for requirements from requirements.txt and install them.
+    Search for requirements from requirements-cuda.txt and install them.
+
+    The file requirements-cuda.txt contain the NBI requirements and the additional
+    CUDA-Q required libraries.
     """
     try:
         print("Checking for Additional Requirements")
         for root, _, files in os.walk(EXTRACTED_CUSTOMER_CODE_PATH):
-            if "requirements.txt" in files:
-                requirements_file_path = os.path.join(root, "requirements.txt")
+            if "requirements-cuda.txt" in files:
+                requirements_file_path = os.path.join(root, "requirements-cuda.txt")
                 subprocess.run(
                     ["python", "-m", "pip", "install", "-r", requirements_file_path],
                     cwd=EXTRACTED_CUSTOMER_CODE_PATH,
@@ -260,9 +261,7 @@ def wrap_customer_code(customer_method: Callable) -> Callable:
                 return customer_method(**kwargs)
         except Exception as e:
             exception_type = type(e).__name__
-            exception_string = (
-                exception_type if not str(e) else f"{exception_type}: {e}"
-            )
+            exception_string = exception_type if not str(e) else f"{exception_type}: {e}"
             _log_failure(exception_string, display=False)
             raise e
 
