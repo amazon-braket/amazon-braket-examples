@@ -29,6 +29,7 @@ phases:
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
+      - conda init
       - conda activate $BRAKET_ENV
       - python -c 'from matplotlib.font_manager import _load_fontmanager; _load_fontmanager()'
       - conda deactivate $BRAKET_ENV
