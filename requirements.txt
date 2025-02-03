@@ -2,18 +2,18 @@ botocore==1.36.6
 awscli==1.37.6
 boto3==1.36.6
 amazon-braket-default-simulator==1.26.2
-amazon-braket-pennylane-plugin==1.31.2 # pin until we support higher glibc version
+amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.23.0
 amazon-braket-sdk==1.88.3
 amazon-braket-algorithm-library==1.5.1
 cvxpy==1.6.0
 ipykernel==6.29.5
-jax==0.5.0 # Jax 0.4.31 requires Python >=3.10 and 0.4.3 breaks openfermion https://github.com/quantumlib/OpenFermion/issues/893
-jaxlib==0.5.0 # Jaxlib 0.4.31 requires Python >=3.10
+jax==0.4.29 # Jax 0.4.31 requires Python >=3.10 and 0.4.3 breaks openfermion https://github.com/quantumlib/OpenFermion/issues/893
+jaxlib==0.4.29 # Jaxlib 0.4.31 requires Python >=3.10
 jinja2==3.1.5
 markupsafe==3.0.2
 matplotlib==3.10.0
-mistune==3.1.0 # pin until https://github.com/lepture/mistune/issues/403 is resolved
+mistune==3.0.2 # pin until https://github.com/lepture/mistune/issues/403 is resolved
 ml-dtypes==0.5.1
 mypy-extensions==1.0.0
 numpy==1.26.4 # Numpy 2.1.0 requires Python >=3.10, cirq-core 1.4.0 depends on numpy~=1.22
@@ -21,12 +21,12 @@ openfermion==1.6.1
 openfermionpyscf==0.5
 optax==0.2.4
 pandas==2.2.3
-pennylane==0.40.0 # pin until we support higher glibc version
-PennyLane-Lightning==0.40.0 # pin until we support higher glibc version
+pennylane==0.35.1 # pin until we support higher glibc version
+PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
 qiskit-aer==0.16.0
 qiskit-algorithms==0.3.1
 qiskit-braket-provider==0.4.1
 qiskit==1.2.0
-scipy==1.15.1 # Scipy 1.14.0 requires Python >=3.10
-scs<3.2.8 # Pinned for GLIBC 2.26 compatability
-sympy<1.14 # Sympy 1.13 produces different results for Simon's algorithm
+scipy==1.13.1 # Scipy 1.14.0 requires Python >=3.10
+scs<3.2.6 # Pinned for GLIBC 2.26 compatability
+sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
