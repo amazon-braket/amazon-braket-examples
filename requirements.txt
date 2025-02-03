@@ -1,9 +1,9 @@
 botocore==1.36.6
 awscli==1.37.6
 boto3==1.36.6
-amazon-braket-default-simulator==1.26.2
+amazon-braket-default-simulator==1.26.3
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
-amazon-braket-schemas==1.23.0
+amazon-braket-schemas==1.23.1
 amazon-braket-sdk==1.88.3
 amazon-braket-algorithm-library==1.5.1
 cvxpy==1.6.0
@@ -12,7 +12,7 @@ jax==0.4.29 # Jax 0.4.31 requires Python >=3.10 and 0.4.3 breaks openfermion htt
 jaxlib==0.4.29 # Jaxlib 0.4.31 requires Python >=3.10
 jinja2==3.1.5
 markupsafe==3.0.2
-matplotlib==3.10.0
+matplotlib==3.9.3
 mistune==3.0.2 # pin until https://github.com/lepture/mistune/issues/403 is resolved
 ml-dtypes==0.5.1
 mypy-extensions==1.0.0
