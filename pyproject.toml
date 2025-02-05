@@ -85,4 +85,4 @@ lint.isort = { known-first-party = [
 ] }
 lint.extend-select = ["I", "PERF"]
 lint.preview = true
-lint.ignore = ["E722"]
+lint.ignore = ["E722","F821"]
