@@ -193,7 +193,7 @@ class Boto3SessionAllWrapper(SessionWrapper):
     def __init__(self):
         super().__init__()
         boto3.Session = self
-        self._default_region = "us-west-2"
+        self._default_region = "us-west-1"
         self._region = self._default_region
 
     def __call__(self, *args, **kwargs):
