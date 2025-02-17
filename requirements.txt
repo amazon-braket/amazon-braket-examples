@@ -1,6 +1,6 @@
-botocore==1.36.17
-awscli==1.37.17
-boto3==1.36.17
+botocore==1.36.21
+awscli==1.37.21
+boto3==1.36.21
 amazon-braket-default-simulator==1.26.4
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.23.1
@@ -17,7 +17,7 @@ mistune==3.0.2 # pin until https://github.com/lepture/mistune/issues/403 is reso
 ml-dtypes==0.5.1
 mypy-extensions==1.0.0
 numpy==1.26.4 # Numpy 2.1.0 requires Python >=3.10, cirq-core 1.4.0 depends on numpy~=1.22
-openfermion==1.6.1
+openfermion==1.7.0
 openfermionpyscf==0.5
 optax==0.2.4
 pandas==2.2.3
