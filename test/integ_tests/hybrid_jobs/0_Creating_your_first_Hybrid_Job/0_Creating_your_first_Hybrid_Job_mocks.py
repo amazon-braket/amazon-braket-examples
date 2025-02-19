@@ -13,7 +13,7 @@ def pre_run_inject(mock_utils):
     mocker.set_create_job_side_effect(
         [
             {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"},
-            {"jobArn": "arn:aws:braket:us-west-1:000000:job/testJob"},
+            {"jobArn": "arn:aws:braket:us-west-2:000000:job/testJob"},
         ]
     )
     mocker.set_log_streams_result({"logStreams": []})
