@@ -4,7 +4,7 @@ ARG SCRIPT_PATH
 
 # install cudaq
 ENV MPI_PATH=/usr/local
-RUN pip install cudaq mpi4py
+RUN pip install cudaq mpi4py==3.1.6
 RUN bash /usr/local/lib/python3.10/site-packages/distributed_interfaces/activate_custom_mpi.sh
 
 # install additional python dependencies
