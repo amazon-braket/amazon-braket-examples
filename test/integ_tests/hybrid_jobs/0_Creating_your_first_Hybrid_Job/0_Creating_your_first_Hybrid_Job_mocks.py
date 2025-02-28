@@ -11,10 +11,7 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mock_utils.mock_default_job_calls(mocker)
     mocker.set_create_job_side_effect(
-        [
-            {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"},
-            {"jobArn": "arn:aws:braket:us-west-2:000000:job/testJob"},
-        ]
+            lambda **kwargs: {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"}
     )
     mocker.set_log_streams_result({"logStreams": []})
     mocker.set_get_query_results_result(
