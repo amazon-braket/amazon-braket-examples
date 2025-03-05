@@ -312,7 +312,11 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 
 - [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb)
 
-  This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using Braket Hybrid Jobs.
+  This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
+
+- [**Distributed state vector simulations on multiple GPUs (advanced)**](examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb)
+
+  This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
 ---
 
