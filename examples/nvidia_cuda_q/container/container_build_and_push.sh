@@ -8,6 +8,7 @@
 
 image=$1
 region=$2
+dockerfile=$3
 
 if [ "$image" == "" ]
 then
@@ -26,6 +27,9 @@ fi
 # Get the region defined in the current configuration (default to us-west-2 if none defined)
 # region=$(aws configure get region)
 region=${region:-us-west-2}
+
+# Get the specified dockerfile (default to Dockerfile if none specified)
+dockerfile=${dockerfile:-Dockerfile}
 
 
 fullname="${account}.dkr.ecr.${region}.amazonaws.com/${image}:latest"
@@ -51,7 +55,7 @@ docker login -u AWS -p $(aws ecr get-login-password --region us-west-2) 29228298
 script_dir=$(dirname "$0")
 
 docker build --build-arg SCRIPT_PATH="$script_dir" \
--t ${image} -f "${script_dir}/Dockerfile" . --platform linux/amd64 --progress=plain \
+-t ${image} -f "${script_dir}/${dockerfile}" . --platform linux/amd64 --progress=plain \
 
 docker tag ${image} ${fullname}
 

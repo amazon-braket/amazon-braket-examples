@@ -1,16 +1,15 @@
 FROM 292282985366.dkr.ecr.us-west-2.amazonaws.com/amazon-braket-base-jobs:latest
 
 ARG SCRIPT_PATH
+ARG CUDAQ_PATH=/usr/local/lib/python3.10/site-packages
 
-# install cudaq
-ENV MPI_PATH=/usr/local
-RUN pip install cudaq mpi4py==3.1.6
-RUN bash /usr/local/lib/python3.10/site-packages/distributed_interfaces/activate_custom_mpi.sh
+ENV MPI_PATH=/usr/local \
+    SAGEMAKER_PROGRAM=braket_container.py
 
-# install additional python dependencies
+# install Python dependencies including cudaq
 COPY "${SCRIPT_PATH}/requirements.txt" .
-RUN pip install --no-cache --upgrade -r requirements.txt
+RUN pip install --no-cache --upgrade -r requirements.txt && \
+    bash "${CUDAQ_PATH}/distributed_interfaces/activate_custom_mpi.sh"
 
-# setup the entry point
+# setup the entry point  
 COPY "${SCRIPT_PATH}/braket_container.py" /opt/ml/code/braket_container.py
-ENV SAGEMAKER_PROGRAM=braket_container.py
