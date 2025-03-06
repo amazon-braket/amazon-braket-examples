@@ -13,6 +13,7 @@ The examples in this repository are structured as follows:
 - [Pulse Control](#pulse)
 - [Analog Hamiltonian Simulation](#ahs)
 - [Qiskit with Braket](#qiskit)
+- [CUDA-Q](#cudaq)
 
 ---
 
