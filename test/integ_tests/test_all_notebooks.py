@@ -31,6 +31,7 @@ EXCLUDED_NOTEBOOKS = [
     "0_hello_cudaq_jobs.ipynb",
     "1_simulation_with_GPUs.ipynb",
     "2_parallel_simulations.ipynb",
+    "3_distributed_statevector_simulations.ipynb",
     # Notebooks that require devices to be online
     "Randomness_Generation.ipynb",
     "Allocating_Qubits_on_QPU_Devices.ipynb",
