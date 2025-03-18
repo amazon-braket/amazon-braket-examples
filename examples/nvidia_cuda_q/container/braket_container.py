@@ -196,9 +196,7 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
             if not entry_point:
                 entry_point = hyperparameters.get("AMZN_BRAKET_SCRIPT_ENTRY_POINT")
             if not compression_type:
-                compression_type = hyperparameters.get(
-                    "AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE"
-                )
+                compression_type = hyperparameters.get("AMZN_BRAKET_SCRIPT_COMPRESSION_TYPE")
         except Exception:
             log_failure_and_exit("Hyperparameters not specified in env")
     if not s3_uri:
@@ -260,9 +258,7 @@ def wrap_customer_code(customer_method: Callable) -> Callable:
                 return customer_method(**kwargs)
         except Exception as e:
             exception_type = type(e).__name__
-            exception_string = (
-                exception_type if not str(e) else f"{exception_type}: {e}"
-            )
+            exception_string = exception_type if not str(e) else f"{exception_type}: {e}"
             _log_failure(exception_string, display=False)
             raise e
 
