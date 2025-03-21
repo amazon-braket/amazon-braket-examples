@@ -198,7 +198,7 @@ class Boto3SessionAllWrapper(SessionWrapper):
 
     def __call__(self, *args, **kwargs):
         # handle explicit region_name=None
-        self._region = kwargs.get("region_name", None) or self._default_region
+        self._region = kwargs.get("region_name") or self._default_region
         return self
 
     def client(self, *args, **kwargs):
