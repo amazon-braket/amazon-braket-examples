@@ -1,13 +1,13 @@
 import numpy as np
 import pennylane as qml
 import torch
-import torch.nn as nn
 from qml_script.quantum_circuit import QuantumCircuit
+from torch import nn
 
 
 class DressedQNN(nn.Module):
     def __init__(self, qc_dev):
-        super(DressedQNN, self).__init__()
+        super().__init__()
         nwires = len(qc_dev.wires)
         q_circuit = QuantumCircuit(qc_dev)
         weights = q_circuit.initialize_weights()

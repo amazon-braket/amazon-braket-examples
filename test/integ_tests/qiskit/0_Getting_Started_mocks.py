@@ -12,9 +12,10 @@ def pre_run_inject(mock_utils):
         {
             "deviceType": "QPU",
             "deviceCapabilities": mock_utils.read_file(
-                "rig_pulse_device_capabilities.json", __file__
+                "rig_pulse_device_capabilities.json",
+                __file__,
             ),
-        }
+        },
     )
     mocker.set_search_result(
         [
@@ -48,9 +49,9 @@ def pre_run_inject(mock_utils):
                         "deviceStatus": "ONLINE",
                         "providerName": "Test Provider",
                     },
-                ]
-            }
-        ]
+                ],
+            },
+        ],
     )
 
 

@@ -81,7 +81,11 @@ def get_mock_paths(notebook_dir, notebook_file):
     path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", mock_dir, mock_file)
     if not os.path.exists(path_to_mocks):
         path_to_mocks = os.path.join(
-            path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py"
+            path_to_root,
+            "test",
+            "integ_tests",
+            "default_mocks",
+            "default_mocks.py",
         )
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
@@ -101,9 +105,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
-    kernel = (
-        "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs().keys() else "python3"
-    )
+    kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
@@ -140,9 +142,7 @@ def test_record():
     path_to_utils, _path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
-    kernel = (
-        "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs().keys() else "python3"
-    )
+    kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         tb.inject(
             f"""

@@ -14,8 +14,7 @@ from braket.circuits import Circuit, circuit
 
 @circuit.subroutine(register=True)
 def controlled_unitary(control, target_qubits, unitary):
-    """
-    Construct a circuit object corresponding to the controlled unitary
+    """Construct a circuit object corresponding to the controlled unitary
 
     Args:
         control: The qubit on which to control the gate
@@ -23,8 +22,8 @@ def controlled_unitary(control, target_qubits, unitary):
         target_qubits: List of qubits on which the unitary U acts
 
         unitary: matrix representation of the unitary we wish to implement in a controlled way
-    """
 
+    """
     # Define projectors onto the computational basis
     p0 = np.array([[1.0, 0.0], [0.0, 0.0]])
 
@@ -48,8 +47,7 @@ def controlled_unitary(control, target_qubits, unitary):
 
 @circuit.subroutine(register=True)
 def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
-    """
-    Function to implement the QPE algorithm using two registers for precision (read-out) and query.
+    """Function to implement the QPE algorithm using two registers for precision (read-out) and query.
     Register qubits need not be contiguous.
 
     Args:
@@ -62,6 +60,7 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
         control_unitary: Optional boolean flag for controlled unitaries,
                          with C-(U^{2^k}) by default (default is True),
                          or C-U controlled-unitary (2**power) times
+
     """
     qpe_circ = Circuit()
 
@@ -93,8 +92,7 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
 
 # helper function to remove query bits from bitstrings
 def substring(key, precision_qubits):
-    """
-    Helper function to get substring from keys for dedicated string positions as given by precision_qubits.
+    """Helper function to get substring from keys for dedicated string positions as given by precision_qubits.
     This function is necessary to allow for arbitrary qubit mappings in the precision and query registers
     (i.e., so that the register qubits need not be contiguous.)
 
@@ -103,6 +101,7 @@ def substring(key, precision_qubits):
 
         precision_qubits: List of qubits corresponding to precision_qubits.
                           Currently assumed to be a list of integers corresponding to the indices of the qubits.
+
     """
     short_key = ""
     for idx in precision_qubits:
@@ -114,13 +113,12 @@ def substring(key, precision_qubits):
 # helper function to convert binary fractional to decimal
 # reference: https://www.geeksforgeeks.org/convert-binary-fraction-decimal/
 def binaryToDecimal(binary):
-    """
-    Helper function to convert binary string (example: '01001') to decimal
+    """Helper function to convert binary string (example: '01001') to decimal
 
     Args:
         binary: string which to convert to decimal fraction
-    """
 
+    """
     length = len(binary)
     fracDecimal = 0
 
@@ -137,8 +135,7 @@ def binaryToDecimal(binary):
 
 # helper function for postprocessing based on measurement shots
 def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
-    """
-    Get QPE phase estimate from measurement_counts for given number of precision qubits
+    """Get QPE phase estimate from measurement_counts for given number of precision qubits
 
     Args:
         measurement_counts: measurement results from a device run
@@ -147,14 +144,12 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
                           Currently assumed to be a list of integers corresponding to the indices of the qubits.
 
         items_to_keep: number of items to return (topmost measurement counts for precision register)
-    """
 
+    """
     # Aggregate the results (i.e., ignore/trace out the query register qubits):
 
     # First get bitstrings with corresponding counts for precision qubits only
-    bitstrings_precision_register = [
-        substring(key, precision_qubits) for key in measurement_counts.keys()
-    ]
+    bitstrings_precision_register = [substring(key, precision_qubits) for key in measurement_counts]
     # Then keep only the unique strings
     bitstrings_precision_register_set = set(bitstrings_precision_register)
     # Cast as a list for later use
@@ -162,10 +157,10 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
 
     # Now create a new dict to collect measurement results on the precision_qubits.
     # Keys are given by the measurement count substrings on the register qubits. Initialize the counts to zero.
-    precision_results_dic = {key: 0 for key in bitstrings_precision_register_list}
+    precision_results_dic = dict.fromkeys(bitstrings_precision_register_list, 0)
 
     # Loop over all measurement outcomes
-    for key in measurement_counts.keys():
+    for key in measurement_counts:
         # Save the measurement count for this outcome
         counts = measurement_counts[key]
         # Generate the corresponding shortened key (supported only on the precision_qubits register)
@@ -198,8 +193,7 @@ def run_qpe(
     shots=1000,
     save_to_pck=False,
 ):
-    """
-    Function to run QPE algorithm end-to-end and return measurement counts.
+    """Function to run QPE algorithm end-to-end and return measurement counts.
 
     Args:
         precision_qubits: list of qubits defining the precision register
@@ -217,8 +211,8 @@ def run_qpe(
         shots: (optional) number of measurement shots (default is 1000)
 
         save_to_pck: (optional) save results to pickle file if True (default is False)
-    """
 
+    """
     # get size of precision register and total number of qubits
     len(precision_qubits)
     num_qubits = len(precision_qubits) + len(query_qubits)
@@ -255,7 +249,9 @@ def run_qpe(
 
     # QPE postprocessing
     phases_decimal, precision_results_dic = get_qpe_phases(
-        measurement_counts, precision_qubits, items_to_keep
+        measurement_counts,
+        precision_qubits,
+        items_to_keep,
     )
     eigenvalues = [np.exp(2 * np.pi * 1j * phase) for phase in phases_decimal]
 

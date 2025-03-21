@@ -15,7 +15,7 @@ def pre_run_inject(mock_utils):
             "deviceStatus": "ONLINE",
             "deviceType": "SIMULATOR",
             "providerName": "Amazon Braket",
-        }
+        },
     )
 
 

@@ -10,7 +10,9 @@ recording = True
 class BraketClientWrapper:
     def __init__(self, braket_client):
         self.__class__ = type(
-            braket_client.__class__.__name__, (self.__class__, braket_client.__class__), {}
+            braket_client.__class__.__name__,
+            (self.__class__, braket_client.__class__),
+            {},
         )
         self.__dict__ = braket_client.__dict__
         self.braket_client = braket_client
@@ -61,12 +63,8 @@ class Recorder(boto3.Session):
 
     def client(self, *args, **kwargs):
         boto_client = super().client(*args, **kwargs)
-        if (
-            args
-            and args[0] == "braket"
-            or kwargs
-            and "service_name" in kwargs
-            and kwargs["service_name"] == "braket"
+        if (args and args[0] == "braket") or (
+            kwargs and "service_name" in kwargs and kwargs["service_name"] == "braket"
         ):
             return BraketClientWrapper(boto_client)
         return boto_client

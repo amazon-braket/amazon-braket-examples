@@ -1,7 +1,7 @@
 import os
 import subprocess
 import tarfile
-import unittest.mock as mock
+from unittest import mock
 
 default_job_results = ""
 
@@ -11,7 +11,7 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mock_utils.mock_default_job_calls(mocker)
     mocker.set_create_job_result(
-        {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"}
+        {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"},
     )
     mocker.set_log_streams_result({"logStreams": []})
     mocker.set_get_query_results_result(
@@ -23,7 +23,7 @@ def pre_run_inject(mock_utils):
                     {"field": "@timestamp", "value": "0"},
                 ],
             ],
-        }
+        },
     )
     mocker.set_start_query_result({"queryId": "TestId"})
     global default_job_results
@@ -45,7 +45,7 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
-        """
+        """,
     )
 
 

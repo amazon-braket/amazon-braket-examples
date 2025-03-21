@@ -76,7 +76,7 @@ save_job_result(
         "frequencies": frequencies.tolist(),
         "task summary": cost_tracker.quantum_tasks_statistics(),
         "estimated cost": braket_tasks_cost,
-    }
+    },
 )
 
 print("Test job completed!")

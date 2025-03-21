@@ -7,7 +7,6 @@ import numpy as np
 import smdistributed.dataparallel.torch.distributed as dist
 import torch
 import torch.nn.functional as F
-import torch.optim as optim
 
 # Dataset
 from qml_script.helper_funs import get_device, sonar_dataset
@@ -15,6 +14,7 @@ from qml_script.helper_funs import get_device, sonar_dataset
 # Network definition
 from qml_script.model import DressedQNN
 from smdistributed.dataparallel.torch.parallel.distributed import DistributedDataParallel as DDP
+from torch import optim
 from torch.optim.lr_scheduler import StepLR
 
 from braket.jobs import save_job_result
@@ -27,7 +27,7 @@ def main():
     hp_file = os.environ["AMZN_BRAKET_HP_FILE"]
     qc_dev_string = os.environ["AMZN_BRAKET_DEVICE_ARN"]
 
-    ########## Hyperparameters ##########
+    # Hyperparameters ##########
     with open(hp_file, "r") as f:
         hyperparams = json.load(f)
     print("hyperparams: ", hyperparams)
@@ -43,7 +43,7 @@ def main():
     torch.manual_seed(seed)
     np.random.seed(seed)
 
-    ########## DP setup ##########
+    # DP setup ##########
     dist.init_process_group()
     dp_info = {
         "world_size": dist.get_world_size(),
@@ -54,12 +54,14 @@ def main():
     batch_size = max(batch_size, 1)
     print("dp_info: ", dp_info)
 
-    ########## Dataset ##########
+    # Dataset ##########
     train_dataset = sonar_dataset(ndata, input_dir)
 
     # Create sampler for distributed training
     train_sampler = torch.utils.data.distributed.DistributedSampler(
-        train_dataset, num_replicas=dp_info["world_size"], rank=dp_info["rank"]
+        train_dataset,
+        num_replicas=dp_info["world_size"],
+        rank=dp_info["rank"],
     )
     train_loader = torch.utils.data.DataLoader(
         train_dataset,
@@ -70,14 +72,11 @@ def main():
         sampler=train_sampler,
     )
 
-    ########## quantum model ##########
+    # quantum model ##########
     qc_dev = get_device(nwires, qc_dev_string)
     qc_dev_name = qc_dev.short_name
 
-    if qc_dev_name == "lightning.gpu":
-        device = torch.device("cuda")
-    else:
-        device = torch.device("cpu")
+    device = torch.device("cuda") if qc_dev_name == "lightning.gpu" else torch.device("cpu")
 
     model = DressedQNN(qc_dev).to(device)
     model = DDP(model)
@@ -87,7 +86,7 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=lr)
     scheduler = StepLR(optimizer, step_size=1, gamma=gamma)
 
-    ########## Optimization ##########
+    # Optimization ##########
     for epoch in range(1, epochs + 1):
         loss_before = train(dp_info, model, device, train_loader, optimizer, epoch)
         scheduler.step()
@@ -126,7 +125,7 @@ def train(dp_info, model, device, train_loader, optimizer, epoch):
                     len(train_loader.dataset),
                     100.0 * batch_idx / len(train_loader),
                     loss.item(),
-                )
+                ),
             )
 
     return loss

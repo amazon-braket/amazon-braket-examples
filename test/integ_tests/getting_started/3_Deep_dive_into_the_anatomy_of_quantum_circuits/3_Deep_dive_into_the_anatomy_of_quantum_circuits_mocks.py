@@ -7,7 +7,7 @@ def pre_run_inject(mock_utils):
     mocker.set_cancel_quantum_task_result(
         {
             "cancellationStatus": "CANCELLING",
-        }
+        },
     )
 
 

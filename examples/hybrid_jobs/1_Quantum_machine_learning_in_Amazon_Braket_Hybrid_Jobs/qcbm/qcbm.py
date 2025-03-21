@@ -28,6 +28,7 @@ class QCBM:
             n_qubits (int): Number of qubits
             n_layers (int): Number of layers
             data (np.ndarray): Target probabilities
+
         """
         self.device = device
         self.n_qubits = n_qubits
@@ -55,13 +56,14 @@ class QCBM:
 
         Returns:
             circ (braket.circuit): Circuit with parameters fixed to `params`.
+
         """
         try:
             params = params.reshape(self.n_layers, self.n_qubits, 3)
         except:
             print(
                 "Length of initial parameters was not correct. Expected: "
-                + f"{self.n_layers*self.n_qubits*3} but got {len(params)}."
+                + f"{self.n_layers * self.n_qubits * 3} but got {len(params)}.",
             )
         circ = Circuit()
         self.rotation_layer(circ, params[0])
@@ -91,11 +93,13 @@ class QCBM:
 
         Returns:
             grad (np.ndarray): Gradient vector
+
         """
         qcbm_probs = self.probabilities(params)
         shift = np.ones_like(params) * np.pi / 2
         shifted_params = np.stack([params + np.diag(shift), params - np.diag(shift)]).reshape(
-            2 * len(params), len(params)
+            2 * len(params),
+            len(params),
         )
         circuits = [self.create_circuit(p) for p in shifted_params]
 
@@ -127,6 +131,7 @@ def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
 
     Returns:
         kernel (float): Value of the Gaussian RBF function for kernel(px, py).
+
     """
     x = np.arange(len(px))
     y = np.arange(len(py))
@@ -158,8 +163,8 @@ def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
 
     Returns:
         mmd (float): Value of the MMD loss
-    """
 
+    """
     mmd_xx = compute_kernel(px, px, sigma_list)
     mmd_yy = compute_kernel(py, py, sigma_list)
     mmd_xy = compute_kernel(px, py, sigma_list)

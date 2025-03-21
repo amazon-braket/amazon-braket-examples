@@ -5,9 +5,9 @@ from pennylane.templates import AngleEmbedding
 
 class QuantumCircuit:
     def __init__(self, qc_dev):
-        """
-        Args:
-            qc_dev (qml.device): a pennylane device.
+        """Args:
+        qc_dev (qml.device): a pennylane device.
+
         """
         self.qc_dev = qc_dev
         self.nwires = len(qc_dev.wires)
@@ -36,8 +36,7 @@ class QuantumCircuit:
         return weights
 
     def _entangle_layer(self, p1, p2, rng):
-        """
-        The entanglement block of quantum circuit for CCQC.
+        """The entanglement block of quantum circuit for CCQC.
         See figure 4 of https://arxiv.org/abs/1804.00633
         Args:
             p1 (np.ndarray): The parameters of rotation gates.
