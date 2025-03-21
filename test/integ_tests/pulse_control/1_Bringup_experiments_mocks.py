@@ -5,9 +5,10 @@ def pre_run_inject(mock_utils):
         {
             "deviceType": "QPU",
             "deviceCapabilities": mock_utils.read_file(
-                "rig_pulse_device_capabilities.json", __file__
+                "rig_pulse_device_capabilities.json",
+                __file__,
             ),
-        }
+        },
     )
     res1 = mock_utils.read_file("1_1_pulse_results.json", __file__)
     res2 = mock_utils.read_file("1_2_pulse_results.json", __file__)

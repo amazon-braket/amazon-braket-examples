@@ -2,8 +2,8 @@ import json
 import os
 import sys
 import tarfile
-import unittest.mock as mock
 from itertools import cycle
+from unittest import mock
 
 import boto3
 import matplotlib.pyplot as plt
@@ -100,12 +100,12 @@ def mock_default_device_calls(mocker):
                 {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
                 {"queue": "JOBS_QUEUE", "queueSize": "0"},
             ],
-        }
+        },
     )
     mocker.set_create_quantum_task_result(
         {
             "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
-        }
+        },
     )
     mocker.set_get_quantum_task_result(
         {
@@ -121,7 +121,7 @@ def mock_default_device_calls(mocker):
                 "queuePriority": "Normal",
             },
             "ResponseMetadata": {"HTTPHeaders": {"date": ""}},
-        }
+        },
     )
     mocker.set_task_result_return(read_file("default_results.json"))
 
@@ -134,16 +134,16 @@ def mock_default_job_calls(mocker):
                 {
                     "images": [
                         {"imageId": {"imageTag": f"-py3{sys.version_info.minor}-"}},
-                    ]
+                    ],
                 },
-            ]
-        )
+            ],
+        ),
     )
     mocker.set_search_result(
-        [{"Roles": [{"RoleName": "AmazonBraketJobsExecutionRole", "Arn": "TestRoleARN"}]}]
+        [{"Roles": [{"RoleName": "AmazonBraketJobsExecutionRole", "Arn": "TestRoleARN"}]}],
     )
     mocker.set_create_job_result(
-        {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"}
+        {"jobArn": f"arn:aws:braket:{mocker.region_name}:000000:job/testJob"},
     )
     mocker.set_get_job_result(
         {
@@ -154,7 +154,7 @@ def mock_default_job_calls(mocker):
             "queueInfo": {
                 "position": 1,
             },
-        }
+        },
     )
 
 
@@ -185,7 +185,7 @@ class SessionWrapper:
         self.resource_mock.Object.return_value.get.return_value = {"Body": return_mock}
         self.boto_client.get_caller_identity.return_value = {"Account": "TestAccount"}
         self.boto_client.get_authorization_token.return_value = {
-            "authorizationData": [{"authorizationToken": "TestToken"}]
+            "authorizationData": [{"authorizationToken": "TestToken"}],
         }
 
 
@@ -290,8 +290,7 @@ class AwsSessionFacade(braket.aws.AwsSession):
                     return AwsSessionFacade._wrapper.boto_client.create_quantum_task(boto3_kwargs)[
                         "quantumTaskArn"
                     ]
-                else:
-                    boto3_kwargs["deviceArn"] = device_sub
+                boto3_kwargs["deviceArn"] = device_sub
             task_arn = AwsSessionFacade.real_create_quantum_task(self, **boto3_kwargs)
             AwsSessionFacade.created_task_arns.add(task_arn)
             return task_arn

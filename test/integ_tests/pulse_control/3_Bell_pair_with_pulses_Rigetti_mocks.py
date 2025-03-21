@@ -6,9 +6,10 @@ def pre_run_inject(mock_utils):
             "deviceType": "QPU",
             "providerName": "Rigetti",
             "deviceCapabilities": mock_utils.read_file(
-                "rig_pulse_device_capabilities.json", __file__
+                "rig_pulse_device_capabilities.json",
+                __file__,
             ),
-        }
+        },
     )
     mocker.set_task_result_return(mock_utils.read_file("pulse_results.json", __file__))
 

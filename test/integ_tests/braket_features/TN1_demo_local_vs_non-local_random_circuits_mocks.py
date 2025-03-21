@@ -11,7 +11,7 @@ def pre_run_inject(mock_utils):
             "deviceArn": "Test Device Arn",
             "failureReason": "Test",
             "ResponseMetadata": {"HTTPHeaders": {"date": ""}},
-        }
+        },
     )
 
 

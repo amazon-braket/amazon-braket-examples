@@ -29,6 +29,7 @@ class QNSPSA:
         disable_metric_tensor (boolean): When set to be True, the optimizer is
             reduced to be a (1st-order) SPSA optimizer.
         seed (int): Seed for the random sampling.
+
     """
 
     def __init__(
@@ -53,7 +54,6 @@ class QNSPSA:
         self.history_length = history_length
         self.disable_metric_tensor = disable_metric_tensor
         random.seed(seed)
-        return
 
     def step(self, cost, params):
         """Update trainable arguments with one step of the optimizer.
@@ -69,6 +69,7 @@ class QNSPSA:
 
         Returns:
             np.array: The new variable values after step-wise update.
+
         """
         if self.blocking:
             warnings.warn(
@@ -95,6 +96,7 @@ class QNSPSA:
         Returns:
             tuple[np.array, float]: the updated parameter and the objective
                 function output before the step.
+
         """
         params_next = (
             self.__step_core_first_order(cost, params)

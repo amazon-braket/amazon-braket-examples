@@ -4,12 +4,11 @@ from braket.circuits import Circuit
 
 
 def get_unitary(self):
-    """
-    Function to get the unitary matrix corresponding to an entire circuit.
+    """Function to get the unitary matrix corresponding to an entire circuit.
     Acts on self and returns the corresponding unitary
     """
     num_qubits = int(
-        max(self.qubits) + 1
+        max(self.qubits) + 1,
     )  # Coincides with self.qubit_count when qubit indexing is contiguous.
 
     # Define the unitary matrix. Start with the identity matrix.
@@ -59,7 +58,6 @@ def adjoint(self):
     """Generates a circuit object corresponding to the adjoint of a given circuit, in which the order
     of gates is reversed, and each gate is the adjoint (i.e., conjugate transpose) of the original.
     """
-
     adjoint_circ = Circuit()
 
     # Loop through the instructions (gates) in the circuit:
