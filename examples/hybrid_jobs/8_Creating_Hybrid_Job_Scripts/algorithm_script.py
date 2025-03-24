@@ -51,7 +51,7 @@ save_job_result(
         "angles": angle_list,
         "task summary": cost_tracker.quantum_tasks_statistics(),
         "estimated cost": braket_tasks_cost,
-    }
+    },
 )
 
 print("Test job completed!!!!!")

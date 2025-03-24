@@ -22,7 +22,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import Callable, Tuple
+from typing import Callable
 from urllib.parse import urlparse
 
 import boto3
@@ -40,12 +40,12 @@ print("Boto3 Version: ", boto3.__version__)
 
 
 def _log_failure(*args, display=True):
-    """
-    Log failures to a file so that it can be parsed by the backend service and included in
+    """Log failures to a file so that it can be parsed by the backend service and included in
     failure messages for a job.
 
     Args:
         args: variable list of text to write to the file.
+
     """
     Path(ERROR_LOG_PATH).mkdir(parents=True, exist_ok=True)
     with open(ERROR_LOG_FILE, "a") as error_log:
@@ -56,20 +56,19 @@ def _log_failure(*args, display=True):
 
 
 def log_failure_and_exit(*args):
-    """
-    Log failures to a file so that it can be parsed by the backend service and included in
+    """Log failures to a file so that it can be parsed by the backend service and included in
     failure messages for a job. Exists with code 0.
 
     Args:
         args: variable list of text to write to the file.
+
     """
     _log_failure(*args)
     sys.exit(0)
 
 
 def create_paths():
-    """
-    These paths are created early on so that the rest of the code can assume that the directories
+    """These paths are created early on so that the rest of the code can assume that the directories
     are available when needed.
     """
     Path(CUSTOMER_CODE_PATH).mkdir(parents=True, exist_ok=True)
@@ -79,8 +78,7 @@ def create_paths():
 
 
 def create_symlink():
-    """
-    The ML paths are inserted by the backend service by default. To prevent confusion we link
+    """The ML paths are inserted by the backend service by default. To prevent confusion we link
     the Braket paths to it (to unify them), and use the Braket paths from now on.
     """
     try:
@@ -92,14 +90,14 @@ def create_symlink():
 
 
 def download_s3_file(s3_uri: str, local_path: str) -> str:
-    """
-    Downloads a file to a local path.
+    """Downloads a file to a local path.
 
     Args:
         s3_uri (str): the S3 URI to get the file from.
         local_path (str) : the local path to download to
     Returns:
         str: the path to the file containing the downloaded path.
+
     """
     s3_client = boto3.client("s3")
     parsed_url = urlparse(s3_uri, allow_fragments=False)
@@ -112,14 +110,15 @@ def download_s3_file(s3_uri: str, local_path: str) -> str:
 
 
 def download_customer_code(s3_uri: str) -> str:
-    """
-    Downloads the customer code to the original customer path. The code is assumed to be a single
+    """Downloads the customer code to the original customer path. The code is assumed to be a single
     file in S3. The file may be a compressed archive containing all the customer code.
 
     Args:
         s3_uri (str): the S3 URI to get the code from.
+
     Returns:
         str: the path to the file containing the code.
+
     """
     try:
         return download_s3_file(s3_uri, ORIGINAL_CUSTOMER_CODE_PATH)
@@ -128,13 +127,13 @@ def download_customer_code(s3_uri: str) -> str:
 
 
 def unpack_code_and_add_to_path(local_s3_file: str, compression_type: str):
-    """
-    Unpack the customer code, if necessary. Add the customer code to the system path.
+    """Unpack the customer code, if necessary. Add the customer code to the system path.
 
     Args:
         local_s3_file (str): the file representing the customer code.
         compression_type (str): if the customer code is stored in an archive, this value will
             represent the compression type of the archive.
+
     """
     if compression_type and compression_type.strip().lower() in ["gzip", "zip"]:
         try:
@@ -142,7 +141,7 @@ def unpack_code_and_add_to_path(local_s3_file: str, compression_type: str):
         except Exception as e:
             log_failure_and_exit(
                 f"Got an exception while trying to unpack archive: {local_s3_file} of type: "
-                f"{compression_type}.\nException: {e}"
+                f"{compression_type}.\nException: {e}",
             )
     else:
         shutil.copy(local_s3_file, EXTRACTED_CUSTOMER_CODE_PATH)
@@ -152,7 +151,7 @@ def unpack_code_and_add_to_path(local_s3_file: str, compression_type: str):
 def try_bind_hyperparameters_to_customer_method(customer_method: Callable):
     hp_file = os.getenv("AMZN_BRAKET_HP_FILE")
     if hp_file is None:
-        return
+        return None
 
     with open(hp_file) as f:
         hyperparameters = json.load(f)
@@ -160,7 +159,7 @@ def try_bind_hyperparameters_to_customer_method(customer_method: Callable):
     try:
         inspect.signature(customer_method).bind(**hyperparameters)
     except TypeError:
-        return
+        return None
 
     annotations = inspect.getfullargspec(customer_method).annotations
     function_args = {}
@@ -169,9 +168,8 @@ def try_bind_hyperparameters_to_customer_method(customer_method: Callable):
     return function_args
 
 
-def get_code_setup_parameters() -> Tuple[str, str, str]:
-    """
-    Returns the code setup parameters:
+def get_code_setup_parameters() -> tuple[str, str, str]:
+    """Returns the code setup parameters:
         s3_uri: the S3 location where the code is stored.
         entry_point: the entrypoint into the code.
         compression_type: the compression used to archive the code (optional)
@@ -181,6 +179,7 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
 
     Returns:
         str, str, str: the code setup parameters as described above.
+
     """
     s3_uri = os.getenv("AMZN_BRAKET_SCRIPT_S3_URI")
     entry_point = os.getenv("AMZN_BRAKET_SCRIPT_ENTRY_POINT")
@@ -207,9 +206,7 @@ def get_code_setup_parameters() -> Tuple[str, str, str]:
 
 
 def install_additional_requirements() -> None:
-    """
-    Search for requirements from requirements.txt and install them.
-    """
+    """Search for requirements from requirements.txt and install them."""
     try:
         print("Checking for Additional Requirements")
         for root, _, files in os.walk(EXTRACTED_CUSTOMER_CODE_PATH):
@@ -218,6 +215,7 @@ def install_additional_requirements() -> None:
                 subprocess.run(
                     ["python", "-m", "pip", "install", "-r", requirements_file_path],
                     cwd=EXTRACTED_CUSTOMER_CODE_PATH,
+                    check=False,
                 )
         print("Additional Requirements Check Finished")
     except Exception as e:
@@ -225,9 +223,7 @@ def install_additional_requirements() -> None:
 
 
 def extract_customer_code(entry_point: str) -> Callable:
-    """
-    Converts entry point to a runnable function.
-    """
+    """Converts entry point to a runnable function."""
     if entry_point.find(":") >= 0:
         str_module, _, str_method = entry_point.partition(":")
         customer_module = importlib.import_module(str_module)
@@ -266,14 +262,14 @@ def wrap_customer_code(customer_method: Callable) -> Callable:
 
 
 def kick_off_customer_script(customer_code: Callable) -> multiprocessing.Process:
-    """
-    Runs the customer script as a separate process.
+    """Runs the customer script as a separate process.
 
     Args:
         customer_code (Callable): The customer method to be run.
 
     Returns:
         Process: the process handle to the running process.
+
     """
     print("Running Code As Process")
     wrapped_customer_code = wrap_customer_code(customer_code)
@@ -289,11 +285,11 @@ def kick_off_customer_script(customer_code: Callable) -> multiprocessing.Process
 
 
 def join_customer_script(customer_code_process: multiprocessing.Process):
-    """
-    Joins the process running the customer code.
+    """Joins the process running the customer code.
 
     Args:
         customer_code_process (Process): the process running the customer code.
+
     """
     try:
         customer_code_process.join()
@@ -304,8 +300,7 @@ def join_customer_script(customer_code_process: multiprocessing.Process):
 
 
 def run_customer_code() -> None:
-    """
-    Downloads and runs the customer code. If the customer code exists
+    """Downloads and runs the customer code. If the customer code exists
     with a non-zero exit code, this function will log a failure and
     exit.
     """
@@ -327,9 +322,7 @@ def run_customer_code() -> None:
 
 
 def setup_and_run():
-    """
-    This method sets up the Braket container, then downloads and runs the customer code.
-    """
+    """This method sets up the Braket container, then downloads and runs the customer code."""
     print("Beginning Setup")
     create_symlink()
     create_paths()

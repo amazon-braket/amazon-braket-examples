@@ -1,7 +1,7 @@
 import os
 import subprocess
 import tarfile
-import unittest.mock as mock
+from unittest import mock
 
 default_job_results = ""
 
@@ -20,7 +20,7 @@ def pre_run_inject(mock_utils):
                     {"field": "@timestamp", "value": "0"},
                 ],
             ],
-        }
+        },
     )
     mocker.set_start_query_result({"queryId": "TestId"})
     global default_job_results
@@ -44,7 +44,7 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
-        """
+        """,
     )
 
 

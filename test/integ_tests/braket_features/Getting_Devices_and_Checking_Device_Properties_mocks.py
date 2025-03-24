@@ -4,7 +4,7 @@ def pre_run_inject(mock_utils):
         {
             "deviceType": "QPU",
             "deviceCapabilities": mock_utils.read_file("default_capabilities.json"),
-        }
+        },
     )
     mocker.set_search_result(
         [
@@ -16,10 +16,10 @@ def pre_run_inject(mock_utils):
                         "deviceType": "ONLINE",
                         "deviceStatus": "AVAILABLE",
                         "providerName": "Test Provider",
-                    }
-                ]
-            }
-        ]
+                    },
+                ],
+            },
+        ],
     )
 
 

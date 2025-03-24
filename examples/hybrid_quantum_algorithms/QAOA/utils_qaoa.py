@@ -12,10 +12,7 @@ from braket.parametric import FreeParameter
 # function to implement ZZ gate using CNOT gates
 @subroutine(register=True)
 def ZZgate(q1, q2, gamma):
-    """
-    function that returns a circuit implementing exp(-i \gamma Z_i Z_j) using CNOT gates if ZZ not supported
-    """
-
+    r"""Function that returns a circuit implementing exp(-i \gamma Z_i Z_j) using CNOT gates if ZZ not supported"""
     # get a circuit
     circ_zz = Circuit()
 
@@ -28,9 +25,7 @@ def ZZgate(q1, q2, gamma):
 # function to implement evolution with driver Hamiltonian
 @subroutine(register=True)
 def driver(beta, n_qubits):
-    """
-    Returns circuit for driver Hamiltonian U(Hb, beta)
-    """
+    """Returns circuit for driver Hamiltonian U(Hb, beta)"""
     # instantiate circuit object
     circ = Circuit()
 
@@ -45,9 +40,7 @@ def driver(beta, n_qubits):
 # helper function for evolution with cost Hamiltonian
 @subroutine(register=True)
 def cost_circuit(gamma, n_qubits, ising, device):
-    """
-    returns circuit for evolution with cost Hamiltonian
-    """
+    """Returns circuit for evolution with cost Hamiltonian"""
     # instantiate circuit object
     circ = Circuit()
 
@@ -73,15 +66,12 @@ def cost_circuit(gamma, n_qubits, ising, device):
 
 # function to build the QAOA circuit with depth p
 def circuit(params, device, n_qubits, ising):
-    """
-    function to return full QAOA circuit; depends on device as ZZ implementation depends on gate set of backend
-    """
-
+    """Function to return full QAOA circuit; depends on device as ZZ implementation depends on gate set of backend"""
     # initialize qaoa circuit with first Hadamard layer: for minimization start in |->
     circ = Circuit()
-    X_on_all = Circuit().x(range(0, n_qubits))
+    X_on_all = Circuit().x(range(n_qubits))
     circ.add(X_on_all)
-    H_on_all = Circuit().h(range(0, n_qubits))
+    H_on_all = Circuit().h(range(n_qubits))
     circ.add(H_on_all)
 
     # setup two parameter families
@@ -99,11 +89,9 @@ def circuit(params, device, n_qubits, ising):
 
 # function that computes cost function for given params
 def objective_function(params, qaoa_circuit, ising, device, n_shots, tracker, verbose):
-    """
-    objective function takes a list of variational parameters as input,
+    """Objective function takes a list of variational parameters as input,
     and returns the cost associated with those parameters
     """
-
     if verbose:
         print("==================================" * 2)
         print("Calling the quantum circuit. Cycle:", tracker["count"])
@@ -118,7 +106,10 @@ def objective_function(params, qaoa_circuit, ising, device, n_shots, tracker, ve
         task = device.run(qaoa_circuit, shots=n_shots, inputs=params_dict)
     else:
         task = device.run(
-            qaoa_circuit, shots=n_shots, inputs=params_dict, poll_timeout_seconds=3 * 24 * 60 * 60
+            qaoa_circuit,
+            shots=n_shots,
+            inputs=params_dict,
+            poll_timeout_seconds=3 * 24 * 60 * 60,
         )
 
     # get result for this task
@@ -163,9 +154,7 @@ def objective_function(params, qaoa_circuit, ising, device, n_shots, tracker, ve
 
 # The function to execute the training: run classical minimization.
 def train(device, options, p, ising, n_qubits, n_shots, opt_method, tracker, verbose=True):
-    """
-    function to run QAOA algorithm for given, fixed circuit depth p
-    """
+    """Function to run QAOA algorithm for given, fixed circuit depth p"""
     print("Starting the training.")
 
     print("==================================" * 2)

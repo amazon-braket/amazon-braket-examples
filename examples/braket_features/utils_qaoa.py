@@ -8,9 +8,7 @@ from braket.circuits import Circuit, FreeParameter, circuit, observables
 # function to implement evolution with driver Hamiltonian
 @circuit.subroutine(register=True)
 def driver(beta, n_qubits):
-    """
-    Returns circuit for driver Hamiltonian U(Hb, beta)
-    """
+    """Returns circuit for driver Hamiltonian U(Hb, beta)"""
     # instantiate circuit object
     circ = Circuit()
 
@@ -25,9 +23,7 @@ def driver(beta, n_qubits):
 # helper function for evolution with cost Hamiltonian
 @circuit.subroutine(register=True)
 def cost_circuit(gammas, n_qubits, ising, device):
-    """
-    returns circuit for evolution with cost Hamiltonian
-    """
+    """Returns circuit for evolution with cost Hamiltonian"""
     # instantiate circuit object
     circ = Circuit()
 
@@ -44,13 +40,10 @@ def cost_circuit(gammas, n_qubits, ising, device):
 
 # function to build the QAOA circuit with depth p
 def circuit(params, device, n_qubits, ising):
-    """
-    function to return full QAOA circuit; depends on device as ZZ implementation depends on gate set of backend
-    """
-
+    """Function to return full QAOA circuit; depends on device as ZZ implementation depends on gate set of backend"""
     # initialize qaoa circuit with first Hadamard layer: for minimization start in |->
     circ = Circuit()
-    H_on_all = Circuit().h(range(0, n_qubits))
+    H_on_all = Circuit().h(range(n_qubits))
     circ.add(H_on_all)
 
     # setup two parameter families
@@ -110,11 +103,9 @@ def form_jacobian(n_params, gradient, ising):
 
 # function that computes cost function for given params
 def objective_function(params, qaoa_circuit, ising, device, tracker, verbose):
-    """
-    objective function takes a list of variational parameters as input,
+    """Objective function takes a list of variational parameters as input,
     and returns the cost associated with those parameters
     """
-
     if verbose:
         print("==================================" * 2)
         print("Calling the quantum circuit. Cycle:", tracker["count"])
@@ -158,9 +149,7 @@ def objective_function(params, qaoa_circuit, ising, device, tracker, verbose):
 
 # The function to execute the training: run classical minimization.
 def train(device, options, p, ising, n_qubits, opt_method, tracker, params0, verbose=True):
-    """
-    function to run QAOA algorithm for given ising matrix, fixed circuit depth p
-    """
+    """Function to run QAOA algorithm for given ising matrix, fixed circuit depth p"""
     print("Starting the training.")
 
     print("==================================" * 2)
@@ -216,11 +205,9 @@ def train(device, options, p, ising, n_qubits, opt_method, tracker, params0, ver
 
 # function that computes cost function and gradient for given params
 def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, verbose):
-    """
-    objective function takes a list of variational parameters as input,
+    """Objective function takes a list of variational parameters as input,
     and returns the cost associated with those parameters
     """
-
     if verbose:
         print("==================================" * 2)
         print("Calling the quantum circuit. Cycle:", tracker["count"])
@@ -231,7 +218,10 @@ def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, ver
     # set the parameter values using the inputs argument
     # execute the correct device.run call depending on whether the backend is local or cloud based
     task = device.run(
-        qaoa_circuit, shots=0, inputs=params_dict, poll_timeout_seconds=3 * 24 * 60 * 60
+        qaoa_circuit,
+        shots=0,
+        inputs=params_dict,
+        poll_timeout_seconds=3 * 24 * 60 * 60,
     )
 
     # get result for this task
@@ -262,9 +252,7 @@ def objective_function_adjoint(params, qaoa_circuit, ising, device, tracker, ver
 
 # The function to execute the training: run classical minimization.
 def train_adjoint(device, options, p, ising, n_qubits, opt_method, tracker, params0, verbose=True):
-    """
-    function to run QAOA algorithm for given, fixed circuit depth p
-    """
+    """Function to run QAOA algorithm for given, fixed circuit depth p"""
     print("Starting the training.")
 
     print("==================================" * 2)

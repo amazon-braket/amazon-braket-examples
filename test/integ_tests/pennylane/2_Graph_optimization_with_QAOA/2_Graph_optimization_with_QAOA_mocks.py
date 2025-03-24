@@ -16,7 +16,7 @@ def pre_run_inject(mock_utils):
                     {"field": "@timestamp", "value": "0"},
                 ],
             ],
-        }
+        },
     )
     default_job_results = {
         "braket_tasks_cost": 0.0,
@@ -31,5 +31,5 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
-        """
+        """,
     )

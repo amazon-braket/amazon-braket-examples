@@ -3,12 +3,12 @@ from braket.circuits import Circuit, circuit
 
 @circuit.subroutine(register=True)
 def simons_oracle(secret_s: str):
-    """
-    Quantum circuit implementing a particular oracle for Simon's problem. Details of this implementation are
+    """Quantum circuit implementing a particular oracle for Simon's problem. Details of this implementation are
     explained in the Simons Algorithm demo notebook.
 
     Args:
         secret_s (str): secret string we wish to find
+
     """
     # Find the index of the first 1 in s, to be used as the flag bit
     flag_bit = secret_s.find("1")
