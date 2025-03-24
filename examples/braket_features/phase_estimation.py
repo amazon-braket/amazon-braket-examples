@@ -12,6 +12,7 @@ def phase_estimation_circuit(n_qubits: int, phase: float) -> Circuit:
 
     Returns:
         Circuit: Circuit for phase estimation.
+
     """
     n_precision_qubits = n_qubits - 1
 
@@ -41,6 +42,7 @@ def _custom_control_phase(control: int, target: int, angle: float) -> Circuit:
 
     Returns:
         Circuit: Circuit for control phase shift.
+
     """
     circuit = Circuit()
     circuit.rz(control, angle / 2).cnot(control, target)
@@ -56,6 +58,7 @@ def _inverse_quantum_fourier_transform_circuit(n_qubits: int) -> Circuit:
 
     Returns:
         Circuit: inverse QFT circuit.
+
     """
     qft_circ = Circuit()
     qubits = list(range(n_qubits))

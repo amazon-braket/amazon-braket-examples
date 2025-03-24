@@ -18,7 +18,7 @@ def pre_run_inject(mock_utils):
                     {"field": "@timestamp", "value": "0"},
                 ],
             ],
-        }
+        },
     )
     default_job_results = {
         "params": np.array(
@@ -53,7 +53,7 @@ def pre_run_inject(mock_utils):
                 -0.62405866,
                 0.10342629,
                 -0.8736394,
-            ]
+            ],
         ),
         "task summary": {},
         "estimated cost": 0.0,
@@ -71,5 +71,5 @@ def post_run(tb):
         os.remove("results.json")
         os.remove("data.npy")
         os.remove("final_params.npy")
-        """
+        """,
     )

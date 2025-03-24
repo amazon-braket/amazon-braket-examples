@@ -15,19 +15,19 @@ def read_csv_raw(fname):
 
 
 class Dataset(torch.utils.data.Dataset):
-    "Characterizes a dataset for PyTorch"
+    """Characterizes a dataset for PyTorch"""
 
     def __init__(self, data, label):
-        "Initialization"
+        """Initialization"""
         self.data = data
         self.label = label
 
     def __len__(self):
-        "Denotes the total number of samples"
+        """Denotes the total number of samples"""
         return len(self.label)
 
     def __getitem__(self, index):
-        "Generates one sample of data"
+        """Generates one sample of data"""
         # Load data and get label
         x = self.data[index]
         y = self.label[index]

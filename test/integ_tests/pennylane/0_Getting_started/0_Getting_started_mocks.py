@@ -32,7 +32,7 @@ def pre_run_inject(mock_utils):
                 -0.558,
                 -0.69,
                 -0.748,
-            ]
+            ],
         ),
         "braket_tasks_cost": 0.375,
     }
@@ -46,5 +46,5 @@ def post_run(tb):
         import os
         os.remove("model.tar.gz")
         os.remove("results.json")
-        """
+        """,
     )

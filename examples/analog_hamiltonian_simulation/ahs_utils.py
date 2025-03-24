@@ -32,11 +32,19 @@ def show_register(
     plt.figure(figsize=(7, 7))
     if filled_sites:
         plt.plot(
-            np.array(filled_sites)[:, 0], np.array(filled_sites)[:, 1], "r.", ms=15, label="filled"
+            np.array(filled_sites)[:, 0],
+            np.array(filled_sites)[:, 1],
+            "r.",
+            ms=15,
+            label="filled",
         )
     if empty_sites:
         plt.plot(
-            np.array(empty_sites)[:, 0], np.array(empty_sites)[:, 1], "k.", ms=5, label="empty"
+            np.array(empty_sites)[:, 0],
+            np.array(empty_sites)[:, 1],
+            "k.",
+            ms=5,
+            label="empty",
         )
     plt.legend(bbox_to_anchor=(1.1, 1.05))
 
@@ -58,7 +66,7 @@ def show_register(
     if blockade_radius > 0 and what_to_draw == "circle":
         for site in filled_sites:
             plt.gca().add_patch(
-                plt.Circle((site[0], site[1]), blockade_radius / 2, color="b", alpha=0.3)
+                plt.Circle((site[0], site[1]), blockade_radius / 2, color="b", alpha=0.3),
             )
         plt.gca().set_aspect(1)
     plt.show()
@@ -71,7 +79,6 @@ def show_global_drive(drive, axes=None, **plot_ops):
         axes: matplotlib axis to draw on
         **plot_ops: options passed to matplitlib.pyplot.plot
     """
-
     data = {
         "amplitude [rad/s]": drive.amplitude.time_series,
         "detuning [rad/s]": drive.detuning.time_series,
@@ -84,7 +91,11 @@ def show_global_drive(drive, axes=None, **plot_ops):
     for ax, data_name in zip(axes, data.keys()):
         if data_name == "phase [rad]":
             ax.step(
-                data[data_name].times(), data[data_name].values(), ".-", where="post", **plot_ops
+                data[data_name].times(),
+                data[data_name].values(),
+                ".-",
+                where="post",
+                **plot_ops,
             )
         else:
             ax.plot(data[data_name].times(), data[data_name].values(), ".-", **plot_ops)
@@ -117,6 +128,7 @@ def show_drive_and_local_detuning(drive: DrivingField, local_detuning: LocalDetu
     Args:
         drive (DrivingField): The driving field to be plot
         local_detuning (LocalDetuning): The local detuning to be plotted
+
     """
     drive_data = {
         "amplitude [rad/s]": drive.amplitude.time_series,
@@ -128,7 +140,10 @@ def show_drive_and_local_detuning(drive: DrivingField, local_detuning: LocalDetu
     for ax, data_name in zip(axes, drive_data.keys()):
         if data_name == "phase [rad]":
             ax.step(
-                drive_data[data_name].times(), drive_data[data_name].values(), ".-", where="post"
+                drive_data[data_name].times(),
+                drive_data[data_name].values(),
+                ".-",
+                where="post",
             )
         else:
             ax.plot(drive_data[data_name].times(), drive_data[data_name].values(), ".-")
@@ -157,6 +172,7 @@ def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult)
     Args:
         result (AnalogHamiltonianSimulationQuantumTaskResult): The result
             from which the aggregated state counts are obtained
+
     """
     avg_density = result.get_avg_density()
 
@@ -167,7 +183,12 @@ def show_final_avg_density(result: AnalogHamiltonianSimulationQuantumTaskResult)
 
 
 def plot_avg_density_2D(
-    densities, register, with_labels=True, batch_index=None, batch_mapping=None, custom_axes=None
+    densities,
+    register,
+    with_labels=True,
+    batch_index=None,
+    batch_mapping=None,
+    custom_axes=None,
 ):
     # get atom coordinates
     atom_coords = list(zip(register.coordinate_list(0), register.coordinate_list(1)))
@@ -193,16 +214,15 @@ def plot_avg_density_2D(
 
         else:
             raise Exception("batch_mapping required to index into")
+    elif batch_mapping is not None:
+        plot_avg_of_avgs = True
+        # just need the coordinates for first batch_mapping
+        subcoordinates = np.array(atom_coords)[batch_mapping[0, 0]]
+        pos = {i: coord for i, coord in enumerate(subcoordinates)}
     else:
-        if batch_mapping is not None:
-            plot_avg_of_avgs = True
-            # just need the coordinates for first batch_mapping
-            subcoordinates = np.array(atom_coords)[batch_mapping[(0, 0)]]
-            pos = {i: coord for i, coord in enumerate(subcoordinates)}
-        else:
-            # If both not provided do standard FOV
-            # handle 1D case
-            pos = {i: coord for i, coord in enumerate(atom_coords)}
+        # If both not provided do standard FOV
+        # handle 1D case
+        pos = {i: coord for i, coord in enumerate(atom_coords)}
 
     # get colors
     vmin = 0
@@ -233,7 +253,7 @@ def plot_avg_density_2D(
         ax=custom_axes if custom_axes is not None else ax,
     )
 
-    ## Set axes
+    # Set axes
     ax.set_axis_on()
     ax.tick_params(
         left=True,
@@ -246,7 +266,7 @@ def plot_avg_density_2D(
         # labelright=True,
         direction="in",
     )
-    ## Set colorbar
+    # Set colorbar
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
     sm.set_array([])
 
@@ -256,9 +276,6 @@ def plot_avg_density_2D(
     plt.xlabel("x [μm]")
     plt.ylabel("y [μm]")
 
-    if plot_avg_of_avgs:
-        cbar_label = "Averaged Rydberg Density"
-    else:
-        cbar_label = "Rydberg Density"
+    cbar_label = "Averaged Rydberg Density" if plot_avg_of_avgs else "Rydberg Density"
 
     plt.colorbar(sm, ax=ax, label=cbar_label)

@@ -11,10 +11,10 @@ from braket.jobs.metrics import log_metric
 
 
 def main():
-    ########## Read environment variables ##########
+    # Read environment variables ##########
     hp_file = os.environ["AMZN_BRAKET_HP_FILE"]
 
-    ########## Hyperparameters ##########
+    # Hyperparameters ##########
     with open(hp_file, "r") as f:
         hyperparams = json.load(f)
     print("hyperparams: ", hyperparams)
@@ -30,10 +30,10 @@ def main():
     stepsize = float(hyperparams["stepsize"])
     diff_method = hyperparams["diff_method"]
 
-    ########## Device ##########
+    # Device ##########
     device = get_device(n_nodes)
 
-    ########## Set up graph ##########
+    # Set up graph ##########
     g = nx.gnm_random_graph(n_nodes, n_edges, seed=seed)
     nx.spring_layout(g, seed=seed)
 
@@ -54,7 +54,7 @@ def main():
         circuit(params)
         return qml.expval(cost_h)
 
-    ########## Optimization ###########
+    # Optimization ###########
     print("start optimizing...")
     np.random.seed(seed)
     params = np.random.uniform(size=[2, n_layers])
