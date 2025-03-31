@@ -1,6 +1,6 @@
-botocore==1.37.18
-awscli==1.38.18
-boto3==1.37.18
+botocore==1.37.24
+awscli==1.38.23
+boto3==1.37.24
 amazon-braket-default-simulator==1.26.4
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.23.3
