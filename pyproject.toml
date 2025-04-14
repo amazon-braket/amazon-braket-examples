@@ -85,7 +85,7 @@ lint.isort = { known-first-party = [
 ] }
 lint.extend-select = ["I", "PERF", "UP", "SIM"]
 lint.preview = true
-lint.ignore = ["E722","F821", "UP015", "SIM115"]
+lint.ignore = ["E303","E722","F821", "UP015", "SIM115","W391"]
 lint.per-file-ignores."test/**/*.py" = [
   "D",       # don't care about documentation in tests
   "FBT",     # don"t care about booleans as positional arguments in tests
