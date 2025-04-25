@@ -1,11 +1,14 @@
 import logging
 import os
+import re
 from importlib.machinery import SourceFileLoader
 
 import pytest
 from jupyter_client import kernelspec
 from nbconvert import HTMLExporter
 from testbook import testbook
+
+UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
@@ -33,7 +36,6 @@ EXCLUDED_NOTEBOOKS = [
     "2_parallel_simulations.ipynb",
     "3_distributed_statevector_simulations.ipynb",
     # Notebooks that require devices to be online
-    "Randomness_Generation.ipynb",
     "Allocating_Qubits_on_QPU_Devices.ipynb",
     "Getting_Started_with_OpenQASM_on_Braket.ipynb",
     "0_Getting_Started.ipynb",
@@ -178,6 +180,54 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
         run=False,
         before=0,
     )
+
+    # Uncomment all test sections in the notebook
+    for i, cell in enumerate(tb.cells):
+        if cell.get("cell_type") == "code" and "source" in cell:
+            source = cell["source"]
+            if UNCOMMENT_NOTEBOOK_TAG in source:
+                # Uncomment the test section
+                modified_source = uncomment_test_section(source)
+                tb.cells[i]["source"] = modified_source
+
+    # Execute the notebook with the uncommented test sections
     tb.execute()
     test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
     test_mocks.post_run(tb)
+
+
+def uncomment_test_section(source):
+    """Uncomment sections marked with tag"""
+    descriptive_comment = re.compile(r"^\s*##\s")
+    regular_comment = re.compile(r"^\s*#\s?")
+
+    lines = source.splitlines()
+    result = []
+    uncomment_mode = False
+
+    for line in lines:
+        stripped_line = line.strip()
+
+        if stripped_line == UNCOMMENT_NOTEBOOK_TAG:
+            uncomment_mode = True
+            result.append(line)
+            continue
+
+        if uncomment_mode:
+            if descriptive_comment.match(stripped_line):
+                # Handle descriptive comments (##)
+                result.append(f"# {stripped_line[3:].lstrip()}")
+            elif regular_comment.match(stripped_line):
+                # Handle regular comments (#)
+                result.append(regular_comment.sub("", line))
+            elif stripped_line:
+                # Non-empty, non-comment line
+                uncomment_mode = False
+                result.append(line)
+            else:
+                # Blank line
+                result.append(line)
+        else:
+            result.append(line)
+
+    return "\n".join(result)
