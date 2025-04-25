@@ -80,7 +80,7 @@ Re-running the notebook will use the generated files made during recording.
 
 In the example notebooks, some code cells are presented as commented out to prevent accidental execution of costly or long-running operations, particularly those that run on a QPU. However, commented code can become prone to errors over time due to lack of regular testing.
 
-To improve test coverage, we introduce a special flag: `# UNCOMMENT_TO_RUN`. As a developer, you can include this flag within a cell to mark the beginning of a block that should be uncommented during integration testing. The integration test framework will detect the # UNCOMMENT_TO_RUN marker and automatically uncomment all subsequent lines until it encounters a line that is not commented.
+To improve test coverage, we introduce a special flag: `## UNCOMMENT_TO_RUN`. As a developer, you can include this flag within a cell to mark the beginning of a block that should be uncommented during integration testing. The integration test framework will detect the `## UNCOMMENT_TO_RUN` marker and automatically uncomment all subsequent lines until it encounters a line that is not commented.
 
 To ensure this process works correctly:
 - Use a single `#` for code comments that should be uncommented during testing.
