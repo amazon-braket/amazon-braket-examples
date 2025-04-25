@@ -8,6 +8,8 @@ from jupyter_client import kernelspec
 from nbconvert import HTMLExporter
 from testbook import testbook
 
+UNCOMMENT_NOTEBOOK_TAG = "# UNCOMMENT_TO_RUN"
+
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
     # These notebooks have cells that have syntax errors
@@ -183,7 +185,7 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
     for i, cell in enumerate(tb.cells):
         if cell.get("cell_type") == "code" and "source" in cell:
             source = cell["source"]
-            if "# UNCOMMENT_TO_RUN" in source:
+            if UNCOMMENT_NOTEBOOK_TAG in source:
                 # Uncomment the test section
                 modified_source = uncomment_test_section(source)
                 tb.cells[i]["source"] = modified_source
@@ -195,7 +197,7 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
 
 
 def uncomment_test_section(source):
-    """Uncomment sections marked with # UNCOMMENT_TO_RUN."""
+    """Uncomment sections marked with tag"""
     descriptive_comment = re.compile(r"^\s*##\s")
     regular_comment = re.compile(r"^\s*#\s?")
 
@@ -206,7 +208,7 @@ def uncomment_test_section(source):
     for line in lines:
         stripped_line = line.strip()
 
-        if stripped_line == "# UNCOMMENT_FOR_TEST":
+        if stripped_line == UNCOMMENT_NOTEBOOK_TAG:
             uncomment_mode = True
             result.append(line)
             continue
