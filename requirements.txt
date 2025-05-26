@@ -1,7 +1,7 @@
-botocore==1.38.18
-awscli==1.40.17
-boto3==1.38.18
-amazon-braket-default-simulator==1.26.4
+botocore==1.38.23
+awscli==1.40.22
+boto3==1.38.23
+amazon-braket-default-simulator==1.26.5
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.24.0
 amazon-braket-sdk==1.91.2
@@ -26,7 +26,7 @@ PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
 qiskit-aer==0.17.0
 qiskit-algorithms==0.3.1
 qiskit-braket-provider==0.4.5
-qiskit==1.4.2
+qiskit==2.0.1
 scipy==1.13.1 # Scipy 1.14.0 requires Python >=3.10
 scs<3.2.6 # Pinned for GLIBC 2.26 compatability
 sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
