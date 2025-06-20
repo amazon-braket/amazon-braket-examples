@@ -23,6 +23,7 @@ optax==0.2.4
 pandas==2.3.0
 pennylane==0.35.1 # pin until we support higher glibc version
 PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
+pyzmq<27.0 # pinned for build compatibility
 qiskit-aer==0.17.1
 qiskit-algorithms==0.3.1
 qiskit-braket-provider==0.4.5
