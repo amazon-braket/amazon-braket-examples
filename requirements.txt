@@ -1,12 +1,12 @@
-botocore==1.38.32
-awscli==1.40.31
-boto3==1.38.32
+botocore==1.38.36
+awscli==1.40.35
+boto3==1.38.36
 amazon-braket-default-simulator==1.26.5
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.24.0
-amazon-braket-sdk==1.91.2
+amazon-braket-sdk==1.93.0
 amazon-braket-algorithm-library==1.5.1
-cvxpy==1.6.5
+cvxpy==1.6.6
 ipykernel==6.29.5
 jax==0.4.29 # Jax 0.4.31 requires Python >=3.10 and 0.4.3 breaks openfermion https://github.com/quantumlib/OpenFermion/issues/893
 jaxlib==0.4.29 # Jaxlib 0.4.31 requires Python >=3.10
@@ -23,6 +23,7 @@ optax==0.2.4
 pandas==2.3.0
 pennylane==0.35.1 # pin until we support higher glibc version
 PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
+pyzmq<27.0 # pinned for build compatibility
 qiskit-aer==0.17.1
 qiskit-algorithms==0.3.1
 qiskit-braket-provider==0.4.5
