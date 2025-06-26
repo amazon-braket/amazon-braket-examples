@@ -31,3 +31,4 @@ qiskit==1.4.3
 scipy==1.13.1 # Scipy 1.14.0 requires Python >=3.10
 scs<3.2.6 # Pinned for GLIBC 2.26 compatability
 sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
+# 
