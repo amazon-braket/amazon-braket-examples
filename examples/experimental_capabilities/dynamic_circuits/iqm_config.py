@@ -5,8 +5,6 @@ from braket.circuits import Circuit
 from braket.circuits.circuit import subroutine
 from braket.devices.devices import Devices
 
-tags = {}
-
 qd = AwsDevice(Devices.IQM.Garnet)
 
 global _keys

@@ -5,7 +5,6 @@ from braket.circuits.circuit import subroutine
 from braket.devices import LocalSimulator
 
 qd = LocalSimulator("braket_dm")
-tags = {}
 
 global _keys 
 
