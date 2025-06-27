@@ -14,7 +14,7 @@ The examples in this repository are structured as follows:
 - [Analog Hamiltonian Simulation](#ahs)
 - [Qiskit with Braket](#qiskit)
 - [CUDA-Q](#cudaq)
-- [Experimental Capabilities](#experimental)
+- [Experimental Capabilities](#experimental-dynamic)
 ---
 
 ## <a name="simple">I'm new to quantum</a>

@@ -5,20 +5,19 @@ from braket.circuits.circuit import subroutine
 from braket.devices import LocalSimulator
 
 qd = LocalSimulator("braket_dm")
-tags = {}
 
 global _keys 
 
 @subroutine(register=True)
 def hi(target) -> Circuit:
-    """ single qubit identity gate """
+    """ single qubit hadamard gate """
     circ = Circuit()
     circ.h(target)
     return circ
 
 @subroutine(register=True)
 def cc_x(targets : list[int], reset : bool = True) -> Circuit:
-    """ classically conditioned X-gate """
+    """ classically conditioned X-gate with or without active reset """
     circ = Circuit()
     if reset:
         K0, K1 = np.array([[1,0],[0,0]]), np.array([[0,1],[0,0]])
@@ -36,7 +35,7 @@ def cc_x(targets : list[int], reset : bool = True) -> Circuit:
 
 @subroutine(register=True)
 def cc_z(targets : list[int], reset : bool = True) -> Circuit:
-    """ classically conditioned Z-gate """
+    """ classically conditioned Z-gate with or without active reset """
     circ = Circuit()
     if reset:
         K0, K1 = np.array([[1,0],[0,0]]), np.array([[0,1],[0,0]])
