@@ -67,7 +67,7 @@ def cnot(control, target) -> Circuit:
 
 @subroutine(register=True)
 def cc_x(targets : list[int], reset : bool = True) -> Circuit:
-    """ classically conditioned X-gate from one to many """
+    """ classically conditioned X-gate from one to many with optional reset """
     global _keys
     circ = Circuit().measure_ff(targets[0], _keys)
 
@@ -81,7 +81,7 @@ def cc_x(targets : list[int], reset : bool = True) -> Circuit:
 
 @subroutine(register=True)
 def cc_z(targets : list[int], reset : bool = True) -> Circuit:
-    """ classically conditioned Z-gate from one to many """
+    """ classically conditioned Z-gate from one to many with optional reset """
     global _keys
 
     circ = Circuit().measure_ff(targets[0], _keys)
