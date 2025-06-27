@@ -42,6 +42,8 @@ EXCLUDED_NOTEBOOKS = [
     "Noise_models_on_Rigetti.ipynb",
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
     "Verbatim_Compilation.ipynb",
+    # Simulator TN1 notebook, remove when TN1 issues are fixed
+    "Using_the_tensor_network_simulator_TN1.ipynb",
 ]
 
 if (
