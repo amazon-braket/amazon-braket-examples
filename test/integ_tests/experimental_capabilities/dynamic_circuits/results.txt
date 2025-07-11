@@ -1,0 +1,22 @@
+results_0_0 - iqm 1q active
+results_0_1 - iqm 2q + active
+results_0_2 - iqm 2q no active reset
+results_0_3 - local 1q active
+results_0_4 - local 2q no active
+
+results_1_0:4 - X-teleportation experiment
+results_1_5 - parity experiment
+results_1_6 - remote CNOT experiment
+
+results_2_0 - general
+results_2_1 - parity only
+results_2_2 - parity correction
+results_2_3 - EM exp; raw
+results_2_4 - EM exp; PEC i
+results_2_5 - EM exp; PEC x
+
+results_3_0:10 - amplitude damping
+results_3_11 - Z measurements
+results_3_12 - X measurements
+
+results_4_0 - Qiskit result

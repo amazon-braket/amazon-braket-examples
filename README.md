@@ -14,7 +14,7 @@ The examples in this repository are structured as follows:
 - [Analog Hamiltonian Simulation](#ahs)
 - [Qiskit with Braket](#qiskit)
 - [CUDA-Q](#cudaq)
-
+- [Experimental Capabilities](#experimental-dynamic)
 ---
 
 ## <a name="simple">I'm new to quantum</a>
@@ -318,6 +318,34 @@ This folder contains examples that illustrate the use of Amazon Braket Hybrid Jo
 - [**Distributed state vector simulations on multiple GPUs (advanced)**](examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb)
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
+
+---
+
+## <a name="experimental-dynamic">Experimental Capabilities - Dynamic Circuits</a>
+
+- [**Introduction to Dynamic Circuits on IQM**](examples/experimental_capabilities/dynamic_circuits/0_Intro_to_Dynamic_Circuits_on_IQM.ipynb)
+
+  This tutorial introduces experimental support for dynamic circuits on IQM Garnet, including support for mid-circuit measurements and feedforward control, as well as recommended practices and capabilities of the service. 
+
+- [**Dynamic Circuit Constructions**](examples/experimental_capabilities/dynamic_circuits/1_Dynamic_Circuit_Constructions.ipynb)
+
+  This tutorial introduces basic tools and primitives for building more sophisticated dynamic quantum circuits. These include teleportation tools, PARITY gates, and a gate teleportation protocol for realizing remote CNOT applications. 
+
+- [**Handling Noise with Dynamic Circuits**](examples/experimental_capabilities/dynamic_circuits/2_Handling_Noise_with_Dynamic_Circuits.ipynb)
+
+  This tutorial shows how you can harness and mitigate errors with dynamic circuits. The tutorial includes an entanglement stabilization with Bell states and dynamic circuits example, as well as a readout error mitigation example for mid-circuit measurements. 
+
+- [**Open Quantum Systems with Dynamic Circuits**](examples/experimental_capabilities/dynamic_circuits/3_OQS_with_Dynamic_Circuits.ipynb)
+
+  This tutorial shows how dynamic circuits can be used for creating and applying open quantum system operators, including an ampltiude damping example, as well as a mixed state preparation for ensemble state optimization. 
+
+- [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb)
+
+  This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
+
+- [**Dynamic Circuits with OpenQASM 3.0 on Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/5_Dynamic_Circuits_with_OpenQASM_3.0.ipynb)
+
+  This tutorial shows how we can specify experimental dynamic circuit instructions using OpenQASM 3.0 on Amazon Braket. 
 
 ---
 
