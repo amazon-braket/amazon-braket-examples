@@ -18,6 +18,8 @@ phases:
     commands:
       - echo "Setting up conda"
       - export PATH=$LCC_MINICONDA_INSTALL_DIR/bin:$PATH
+      - conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+      - conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
       - conda config --set default_threads 2
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
