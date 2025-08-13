@@ -133,6 +133,14 @@ This folder contains examples that illustrate the usage of individual features o
 
   This tutorial builds on the previous noise model tutorial to show how to construct a noise model from device calibration data for a Rigetti quantum processing unit (QPU). We compare the measurement outcomes of circuits run on a noisy simulator with the same circuits run on a QPU, to show that simulating circuits with noise models more closely mimics the QPU.
 
+- [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb)
+
+  Amazon Braket's program sets feature enables efficient batch processing of quantum computations by allowing multiple quantum circuits to be executed together. The feature provides various ways to combine circuits, parameters, and observables through methods like `CircuitBinding`, `product()`, and `zip()`, making it particularly useful for variational algorithms and parameter sweeps. Program sets can significantly reduce overhead and costs compared to running individual quantum tasks, while maintaining the same computational results.
+
+- [**Expectation value calculations with Amazon Braket program sets**](examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb)
+
+  Amazon Braket's ProgramSet makes is easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
+
 - [**Allocating Qubits on QPU Devices**](examples/braket_features/Allocating_Qubits_on_QPU_Devices.ipynb)
 
   This tutorial explains how you can use the Amazon Braket SDK to allocate the qubit selection for your circuits manually, when running on QPUs.
