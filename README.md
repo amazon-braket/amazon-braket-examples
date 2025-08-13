@@ -139,7 +139,7 @@ This folder contains examples that illustrate the usage of individual features o
 
 - [**Expectation value calculations with Amazon Braket program sets**](examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb)
 
-  Amazon Braket's ProgramSet makes is easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
+  Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
 - [**Allocating Qubits on QPU Devices**](examples/braket_features/Allocating_Qubits_on_QPU_Devices.ipynb)
 
