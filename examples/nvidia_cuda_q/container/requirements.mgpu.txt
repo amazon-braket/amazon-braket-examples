@@ -1,2 +1,0 @@
-# Add additional Python dependencies to the file.
-cudaq
