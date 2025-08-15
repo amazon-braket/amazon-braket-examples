@@ -1,0 +1,1 @@
+{"braketSchemaHeader":{"name":"braket.ir.openqasm.program","version":"1"},"source":"OPENQASM 3.0;\nbit[2] b;\nqubit[2] q;\nh q[0];\ncnot q[0], q[1];\nb[0] = measure q[0];\nb[1] = measure q[1];","inputs":{"theta":[0.12,2.1]}}

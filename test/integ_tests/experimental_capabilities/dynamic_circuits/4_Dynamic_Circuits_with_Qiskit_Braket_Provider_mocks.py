@@ -10,8 +10,16 @@ def pre_run_inject(mock_utils):
             ),
         },
     )
-    effects = [mock_utils.read_file("results/results_4_0.json", __file__)]
-    mocker.set_task_result_side_effect(effects)
+    files = [
+        "results/results_4_0.json",
+        "results/results_4_1.json",
+        "results/results_4_2.json",
+        "results/results_4_3.json",
+        "results/results_4_4.json",
+    ]
+    mocker.set_task_result_side_effect(
+        [mock_utils.read_file(file, __file__) for file in files]
+    )
 
 
 def post_run(tb):
