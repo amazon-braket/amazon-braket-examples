@@ -1,0 +1,1 @@
+{"braketSchemaHeader": {"name": "braket.ir.openqasm.program", "version": "1"}, "source": "OPENQASM 3.0;\nbit[1] b;\n#pragma braket verbatim\nbox{\nprx(3.141592653589793, 0.0) $2;\nmeasure_ff(0) $2;\ncc_prx(3.141592653589793, 0.0, 0) $2;\n}\nb[0] = measure $2;", "inputs": {}}
