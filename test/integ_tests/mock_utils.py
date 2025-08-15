@@ -314,7 +314,6 @@ class SessionWrapper:
 
     def _handle_program_set_s3_request(self, s3_object_key):
         """Handle S3 requests for program set files by reading from local test data."""
-        # Use the configured program set mock path
         base_path = self._program_set_mock_path
         
         # Extract the relative path from the S3 key
@@ -473,7 +472,6 @@ class AwsSessionFacade(braket.aws.AwsSession):
         if location in AwsSessionFacade.created_task_locations:
             return AwsSessionFacade.real_retrieve_s3_object_body(self, s3_bucket, s3_object_key)
         
-        # Check if this is a program set result request by looking for specific patterns
         if AwsSessionFacade._is_program_set_s3_request(s3_object_key):
             return AwsSessionFacade._handle_program_set_s3_request(s3_object_key)
         
