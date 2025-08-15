@@ -515,4 +515,3 @@ class AwsSessionFacade(braket.aws.AwsSession):
         with open(local_path, "r") as f:
             content = f.read()
         return content
-
