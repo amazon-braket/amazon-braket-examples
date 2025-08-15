@@ -1,1 +1,2 @@
 {"braketSchemaHeader": {"name": "braket.task_result.program_set_task_result", "version": "1"}, "taskMetadata": "metadata.json", "programResults": ["programs/0/results.json"], "s3Location": ["amazon-braket-eu-north-1-537332306153", "tasks/82aeedb8-c3e0-4f6a-8ace-7876b785b80c"]}
+
