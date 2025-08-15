@@ -131,6 +131,50 @@ def mock_default_device_calls(mocker):
     mocker.set_task_result_return(read_file("default_results.json"))
 
 
+def mock_default_device_program_set_calls(mocker):
+    """Set up default device calls with program set support."""
+    # Set up device with program set capabilities
+    mocker.set_get_device_result(
+        {
+            "deviceType": "QPU",
+            "deviceCapabilities": read_file("default_capabilities_with_programset.json"),
+            "deviceQueueInfo": [
+                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "13", "queuePriority": "Normal"},
+                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
+                {"queue": "JOBS_QUEUE", "queueSize": "0"},
+            ],
+        },
+    )
+    
+    # Set up standard quantum task mocking
+    mocker.set_create_quantum_task_result(
+        {
+            "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+        },
+    )
+    mocker.set_get_quantum_task_result(
+        {
+            "quantumTaskArn": "arn:aws:braket:us-west-2:000000:quantum-task/TestARN",
+            "status": "COMPLETED",
+            "outputS3Bucket": "Test Bucket",
+            "outputS3Directory": "Test Directory",
+            "shots": 10,
+            "deviceArn": "Test Device Arn",
+            "queueInfo": {
+                "queue": "QUANTUM_TASKS_QUEUE",
+                "position": "2",
+                "queuePriority": "Normal",
+            },
+            "ResponseMetadata": {"HTTPHeaders": {"date": ""}},
+        },
+    )
+    
+    # Set up program set mocking using default test data
+    default_data_dir = os.path.join(os.path.dirname(__file__), "default_data")
+    program_set_data_path = os.path.join(default_data_dir, "default_program_set_results")
+    mock_program_set_calls(mocker, base_path=program_set_data_path)
+
+
 def mock_default_job_calls(mocker):
     mocker.set_batch_get_image_side_effect(
         cycle(
