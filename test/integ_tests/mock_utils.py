@@ -280,20 +280,8 @@ class SessionWrapper:
             # Extract the part after "programs/"
             programs_part = s3_object_key.split("/programs/", 1)[1]
             local_path = os.path.join(base_path, "programs", programs_part)
-        elif s3_object_key.endswith("/results.json"):
+        else: # s3_object_key.endswith("/results.json")
             local_path = os.path.join(base_path, "results.json")
-        else:
-            # Fallback - try to map directly
-            if "/tasks/" in s3_object_key:
-                relative_path = s3_object_key.split("/tasks/", 1)[1]
-                parts = relative_path.split("/", 1)
-                if len(parts) > 1:
-                    relative_path = parts[1]
-                    local_path = os.path.join(base_path, relative_path)
-                else:
-                    local_path = os.path.join(base_path, "results.json")
-            else:
-                local_path = os.path.join(base_path, s3_object_key)
         
         with open(local_path, "r") as f:
             content = f.read()
@@ -479,20 +467,8 @@ class AwsSessionFacade(braket.aws.AwsSession):
             # Extract the part after "programs/"
             programs_part = s3_object_key.split("/programs/", 1)[1]
             local_path = os.path.join(base_path, "programs", programs_part)
-        elif s3_object_key.endswith("/results.json"):
+        else: # s3_object_key.endswith("/results.json")
             local_path = os.path.join(base_path, "results.json")
-        else:
-            # Fallback - try to map directly
-            if "/tasks/" in s3_object_key:
-                relative_path = s3_object_key.split("/tasks/", 1)[1]
-                parts = relative_path.split("/", 1)
-                if len(parts) > 1:
-                    relative_path = parts[1]
-                    local_path = os.path.join(base_path, relative_path)
-                else:
-                    local_path = os.path.join(base_path, "results.json")
-            else:
-                local_path = os.path.join(base_path, s3_object_key)
         
         with open(local_path, "r") as f:
             content = f.read()
