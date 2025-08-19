@@ -44,6 +44,8 @@ EXCLUDED_NOTEBOOKS = [
     "Verbatim_Compilation.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
+    # Dynamic circuits with QBP
+    "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
 ]
 
 if (
