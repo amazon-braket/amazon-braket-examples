@@ -4,7 +4,7 @@ boto3==1.40.12
 amazon-braket-default-simulator==1.28.0
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.25.0
-amazon-braket-sdk==1.98.0
+amazon-braket-sdk==1.99.0
 amazon-braket-algorithm-library==1.5.4
 cvxpy==1.7.1
 ipykernel==6.30.1
