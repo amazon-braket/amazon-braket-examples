@@ -9,8 +9,8 @@ amazon-braket-algorithm-library==1.5.4
 autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
 cvxpy==1.7.1
 ipykernel==6.30.1
-jax==0.4.31
-jaxlib==0.4.31
+jax==0.4.34
+jaxlib==0.4.34
 jinja2==3.1.6
 markupsafe==3.0.2
 matplotlib==3.9.3
