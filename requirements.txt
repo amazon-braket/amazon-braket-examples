@@ -29,7 +29,7 @@ qiskit-aer==0.17.1
 qiskit-algorithms==0.3.1
 qiskit-braket-provider==0.5.0
 qiskit==1.4.4
-scipy==1.13.1 # Scipy 1.14.0 requires Python >=3.10
+scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
 scs<3.2.6 # Pinned for GLIBC 2.26 compatability
 sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
 # 
