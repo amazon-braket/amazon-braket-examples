@@ -1,11 +1,11 @@
-botocore==1.40.17
-awscli==1.42.17
-boto3==1.40.17
-amazon-braket-default-simulator==1.29.0
+botocore==1.40.25
+awscli==1.42.25
+boto3==1.40.25
+amazon-braket-default-simulator==1.30.0
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.26.0
-amazon-braket-sdk==1.101.0
-amazon-braket-algorithm-library==1.6.0
+amazon-braket-sdk==1.102.0
+amazon-braket-algorithm-library==1.6.1
 autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
 cvxpy==1.7.2
 ipykernel==6.30.1
@@ -26,7 +26,7 @@ pennylane==0.35.1 # pin until we support higher glibc version
 PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
 pyzmq<27.0 # pinned for build compatibility
 qiskit-aer==0.17.1
-qiskit-algorithms==0.3.1
+qiskit-algorithms==0.4.0
 qiskit-braket-provider==0.6.0
 qiskit==1.4.4
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
