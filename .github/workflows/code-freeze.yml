@@ -20,22 +20,13 @@ jobs:
     - name: Fetch PR data and check if merge allowed
       if: env.FROZEN == 'true'
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PR_TITLE: ${{ github.event.pull_request.title }}
+        BRANCH_NAME: ${{ github.event.pull_request.head.ref }}
       run: |
-        PR_DATA=$(curl -s \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }})
-        BRANCH_NAME=$(echo $PR_DATA | jq .head.ref -r)
-        PR_TITLE=$(echo $PR_DATA | jq .title -r)
-
-        echo $BRANCH_NAME
-        echo $PR_TITLE
-
         # if it's not a critical fix
-        if ! [[ "$PR_TITLE" == fix\(critical\):* ]]; then
+        if ! [[ "$PR_TITLE" == fix(critical):* ]]; then
           # and there's an unfrozen prefix
-          if ! [[ -z $UNFROZEN_PREFIX ]]; then
+          if [[ -n "${UNFROZEN_PREFIX:-}" ]]; then
             # check if the branch matches unfrozen prefix
             if [[ "$BRANCH_NAME" != $UNFROZEN_PREFIX* ]]; then
               echo "Error: You can only merge from branches that start with '$UNFROZEN_PREFIX', or PRs titled with prefix 'fix(critical): '."
