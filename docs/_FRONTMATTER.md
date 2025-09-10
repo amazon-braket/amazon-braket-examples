@@ -1,5 +1,5 @@
 
-# Braket Example Repository
+# Braket Examples
 
 Welcome to the primary repository for Amazon Braket examples and tutorials! Here you can see examples of how to *build*, *test*, and *run* quantum circuits and programs using Amazon Braket with simulators and quantum hardware. 
 
@@ -30,8 +30,8 @@ Welcome to the primary repository for Amazon Braket examples and tutorials! Here
 
 **Supported tools**
 - [CUDA-Q](#cudaq)                                   
-- [Pennylane with Braket](#pennylane)                
-- [Qiskit with Braket](#qiskit)                      
+- [PennyLane](#pennylane)                
+- [Qiskit](#qiskit)                      
 
 **Index**  
 - [Search the notebooks!](#index)             
@@ -44,3 +44,4 @@ Welcome to the primary repository for Amazon Braket examples and tutorials! Here
 
 >[!NOTE]
 > Amazon Braket provides [managed Jupyter notebook instances](https://aws.amazon.com/braket/) which can be run on the cloud and accessed anywhere! To run the examples locally, the dependences can be installed [following the instructions](#dependencies) below. 
+ 
