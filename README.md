@@ -570,6 +570,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | shots      |  [GSPS](#GSPS)| <br>
  | simons     |  [Simon](#Simon)<a name="index_Simon"></a>| <br>
  | simulators |  [RQCS](#RQCS), [AOQLS](#AOQLS), [ExpLS](#ExpLS), [TNSim](#TNSim)<a name="index_TNSim"></a>, [TNHP](#TNHP)<a name="index_TNHP"></a>, [SN](#SN)| <br>
+ | subroutine |  [Grover](#Grover), [QAA](#QAA), [QFT](#QFT), [QPE](#QPE), [AOQLS](#AOQLS), [IonNG](#IonNG)| <br>
  | superdense |  [SC](#SC)| <br>
  | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [TNSim](#TNSim), [TNHP](#TNHP), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
  | teleportation |  [SC](#SC), [DCC](#DCC)| <br>

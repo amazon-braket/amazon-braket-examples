@@ -27,6 +27,7 @@
     "s3": [],
     "qaoa":[],
     "qpe":[],
+    "subroutine":[],
     "qaa":[],
     "simons":[],
     "qiskit":[],
