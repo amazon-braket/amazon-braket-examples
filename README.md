@@ -42,7 +42,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 
 >[!NOTE]
-> Amazon Braket provides [managed Jupyter notebook instances](https://aws.amazon.com/braket/) which can be run on the cloud and accessed anywhere! To run the examples locally, the dependences can be installed [following the instructions](#dependencies) below. 
+> Amazon Braket provides [managed Jupyter notebook instances](https://aws.amazon.com/braket/) which can be run and maintained remotely. To run the examples locally, the dependences can be installed [following the instructions](#dependencies) below. 
  
 ---
 
