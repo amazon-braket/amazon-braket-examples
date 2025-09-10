@@ -10,20 +10,21 @@
  | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
  | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
- | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC)| <br>
+ | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [ULEm](#ULEm)<a name="index_ULEm"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
  | compilation |  [VC](#VC)<a name="index_VC"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
- | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>, [HCQJ](#HCQJ), [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
+ | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>, [HCQJ](#HCQJ)| <br>
  | cost       |  [TRU](#TRU)<a name="index_TRU"></a>| <br>
- | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSMG](#PSMG)<a name="index_PSMG"></a>, [DSVSG](#DSVSG)| <br>
+ | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSMG](#PSMG)<a name="index_PSMG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
- | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC)| <br>
+ | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [ULEm](#ULEm)| <br>
  | dynamic circuits |  [DCOQ](#DCOQ)<a name="index_DCOQ"></a>| <br>
+ | emulator   |  [ULEm](#ULEm)| <br>
  | gates      |  [IQMNG](#IQMNG)<a name="index_IQMNG"></a>, [BSQG](#BSQG)<a name="index_BSQG"></a>| <br>
  | gpus       |  [PTQML](#PTQML)<a name="index_PTQML"></a>, [SQPG](#SQPG), [PSMG](#PSMG), [DSVSG](#DSVSG)| <br>
  | graph      |  [MIS](#MIS), [MWIS](#MWIS)| <br>
- | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSMG](#PSMG)| <br>
+ | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSMG](#PSMG), [GSPS](#GSPS)<a name="index_GSPS"></a>| <br>
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ)<a name="index_EMIQ"></a>, [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
  | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
@@ -32,8 +33,8 @@
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ExpLS](#ExpLS)<a name="index_ExpLS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SP](#SP)| <br>
  | model      |  [VQETFIM](#VQETFIM)| <br>
  | moments    |  [DDQC](#DDQC)<a name="index_DDQC"></a>| <br>
- | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG)| <br>
- | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP)| <br>
+ | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [ULEm](#ULEm)| <br>
+ | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [ULEm](#ULEm)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
  | openqasm   |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ](#DCOQ)| <br>
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
@@ -42,6 +43,7 @@
  | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SP](#SP)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
  | pragma     |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)| <br>
+ | program sets |  [GSPS](#GSPS)| <br>
  | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SP](#SP)| <br>
  | qaa        |  [QAA](#QAA)<a name="index_QAA"></a>| <br>
  | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP)| <br>
@@ -50,14 +52,15 @@
  | qpe        |  [QPE](#QPE)<a name="index_QPE"></a>| <br>
  | reset      |  [GSDCI](#GSDCI), [DCC](#DCC), [HNDC](#HNDC)| <br>
  | result type |  [AGRT](#AGRT)| <br>
- | results    |  [DDQC](#DDQC), [GSOQ](#GSOQ), [AGRT](#AGRT), [QFT](#QFT)<a name="index_QFT"></a>| <br>
- | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL)| <br>
+ | results    |  [DDQC](#DDQC), [GSOQ](#GSOQ), [AGRT](#AGRT), [QFT](#QFT)<a name="index_QFT"></a>, [GSPS](#GSPS), [ULEm](#ULEm)| <br>
+ | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [ULEm](#ULEm)| <br>
  | rydberg    |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | s3         |  [GNQT](#GNQT)<a name="index_GNQT"></a>, [CHJS](#CHJS)| <br>
+ | shots      |  [GSPS](#GSPS)| <br>
  | simons     |  [Simon](#Simon)<a name="index_Simon"></a>| <br>
  | simulators |  [RQCS](#RQCS), [AOQLS](#AOQLS), [ExpLS](#ExpLS), [TNSim](#TNSim)<a name="index_TNSim"></a>, [TNHP](#TNHP)<a name="index_TNHP"></a>, [SN](#SN)| <br>
  | superdense |  [SC](#SC)| <br>
  | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [TNSim](#TNSim), [TNHP](#TNHP), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
  | teleportation |  [SC](#SC), [DCC](#DCC)| <br>
- | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC)| <br>
+ | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [ULEm](#ULEm)| <br>
  | vqe        |  [VQEChem](#VQEChem), [VQETFIM](#VQETFIM), [HGV](#HGV), [AGC](#AGC), [Qis](#Qis)| <br>
