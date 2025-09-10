@@ -50,7 +50,7 @@ def main():
             key      = entries[notebook]["index_key"]
             main_body+= f"-  [**{notebook}**]({location}) [({key})](#index_{key})\n\n"
             if key not in assigned_key:
-                main_body+= f"<a name=\"{key}\"></a>\n\n"
+                main_body = main_body[:-2] + f"<a name=\"{key}\"></a>\n\n"
                 assigned_key.add(key)
             main_body+= f"{text}\n\n"
     
