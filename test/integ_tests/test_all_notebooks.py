@@ -42,8 +42,11 @@ EXCLUDED_NOTEBOOKS = [
     "Noise_models_on_Rigetti.ipynb",
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
     "Verbatim_Compilation.ipynb",
+    "01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
+    # Dynamic circuits with QBP
+    "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
 ]
 
 if (
