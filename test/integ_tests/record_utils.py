@@ -1,16 +1,18 @@
-import boto3
 import json
+
+import boto3
+
 import braket.aws
 
 recording = True
 
 
-class BraketClientWrapper():
+class BraketClientWrapper:
     def __init__(self, braket_client):
         self.__class__ = type(
             braket_client.__class__.__name__,
             (self.__class__, braket_client.__class__),
-            {}
+            {},
         )
         self.__dict__ = braket_client.__dict__
         self.braket_client = braket_client
@@ -40,9 +42,9 @@ class BraketClientWrapper():
         self.num_create_task_calls += 1
         return result
 
-    def get_quantum_task(self, quantumTaskArn):
+    def get_quantum_task(self, quantumTaskArn, **kwargs):
         if recording:
-            result = self.braket_client.get_quantum_task(quantumTaskArn=quantumTaskArn)
+            result = self.braket_client.get_quantum_task(quantumTaskArn=quantumTaskArn, additionalAttributeNames=["QueueInfo"])
             with open(f"get_task_results_{self.num_get_task_calls}.json", "w") as f:
                 json.dump(result, f, indent=2, default=str)
             if result["status"] in braket.aws.aws_quantum_task.AwsQuantumTask.TERMINAL_STATES:
@@ -61,7 +63,9 @@ class Recorder(boto3.Session):
 
     def client(self, *args, **kwargs):
         boto_client = super().client(*args, **kwargs)
-        if args and args[0] == "braket" or kwargs and "service_name" in kwargs and kwargs["service_name"] == "braket":
+        if (args and args[0] == "braket") or (
+            kwargs and "service_name" in kwargs and kwargs["service_name"] == "braket"
+        ):
             return BraketClientWrapper(boto_client)
         return boto_client
 
@@ -70,7 +74,7 @@ real_retrieve_s3_object_body = braket.aws.aws_session.AwsSession.retrieve_s3_obj
 num_s3_results = 0
 
 
-class AwsSessionWrapper():
+class AwsSessionWrapper:
     def retrieve_s3_object_body(self, s3_bucket, s3_object_key):
         global num_s3_results
         if recording:
@@ -85,7 +89,9 @@ class AwsSessionWrapper():
 
 
 boto3.Session = Recorder
-braket.aws.aws_session.AwsSession.retrieve_s3_object_body = AwsSessionWrapper.retrieve_s3_object_body
+braket.aws.aws_session.AwsSession.retrieve_s3_object_body = (
+    AwsSessionWrapper.retrieve_s3_object_body
+)
 
 
 def record():

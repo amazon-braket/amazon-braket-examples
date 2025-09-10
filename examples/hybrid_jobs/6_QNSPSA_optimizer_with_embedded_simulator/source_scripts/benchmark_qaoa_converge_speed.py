@@ -1,15 +1,16 @@
+import functools
+import json
 import os
+import time
 
+import networkx as nx
 import pennylane as qml
 from pennylane import numpy as np
-import json
-from source_scripts.utils import get_device, str2bool, train
-from source_scripts.QNSPSA import QNSPSA
-from braket.jobs import save_job_result
-import time
-import networkx as nx
 from pennylane import qaoa
-import functools
+from source_scripts.QNSPSA import QNSPSA
+from source_scripts.utils import get_device, str2bool, train
+
+from braket.jobs import save_job_result
 
 
 def main():
@@ -92,7 +93,7 @@ def main():
         print(f"Trace {j}:")
         opt = opt_choice[optimizer_name](stepsize=lr)
 
-        params, loss_per_trace = train(
+        _params, loss_per_trace = train(
             opt,
             max_iter,
             params_init,

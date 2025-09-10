@@ -1,13 +1,13 @@
-from braket.pulse import PulseSequence
-
-from openqasm3.visitor import QASMVisitor
-import openqasm3.ast as ast
 import re
+
+from openqasm3 import ast
+from openqasm3.visitor import QASMVisitor
+
+from braket.pulse import PulseSequence
 
 
 class _PhaseExtractor(QASMVisitor[dict]):
-    """
-    Tree Walkers that inspects the pulse sequence and extracts the phase value for
+    """Tree Walkers that inspects the pulse sequence and extracts the phase value for
     all the the shift_phase instructions on an RF frame.
     """
 
@@ -27,17 +27,12 @@ class _PhaseExtractor(QASMVisitor[dict]):
     def visit_UnaryExpression(self, node: ast.UnaryExpression, context: dict) -> bool:
         if node.op == ast.UnaryOperator["-"]:
             return -1 * self.visit(node.expression, context)
-        else:
-            raise NotImplementedError
+        raise NotImplementedError
 
 
 def extract_phases(pulse_sequence: PulseSequence):
-    """
-    Extract the hardcoded phases from the pulse program.
-    """
+    """Extract the hardcoded phases from the pulse program."""
     phases = {"null": None}
     _PhaseExtractor().visit(pulse_sequence._program.to_ast(), phases)
-    phases.pop(
-        "null"
-    )  # {"null": None} is needed to avoid wrong test outcome in openqasm
+    phases.pop("null")  # {"null": None} is needed to avoid wrong test outcome in openqasm
     return phases

@@ -5,7 +5,9 @@ import json
 import logging
 import os
 import pathlib
-from typing import Any, Dict, TypeVar
+from typing import Any, TypeVar
+
+import papermill as pm
 
 logging.basicConfig(level="INFO", format="%(message)s")
 
@@ -28,8 +30,6 @@ if not entry_point.endswith("run_notebook"):
         subprocess.check_call([python, "-m", "pip", "install", *missing])
 
 
-import papermill as pm
-
 PathLike = TypeVar("PathLike", str, pathlib.Path, None)
 
 
@@ -41,17 +41,19 @@ def convert_to_value(value: str) -> Any:
 
     Returns:
         Any: The Python object of the correct type.
+
     """
     with contextlib.suppress(ValueError):  # suppress error message
         return ast.literal_eval(value)
     return value
 
 
-def load_jobs_hyperparams() -> Dict[str, str]:
+def load_jobs_hyperparams() -> dict[str, str]:
     """Return the Braket Jobs hyperparameters file as a dictionary.
 
     Returns:
         Dict[str, str]: Hyperparameters as a dictionary.
+
     """
     with open(os.environ["AMZN_BRAKET_HP_FILE"]) as f:
         braket_hyperparams = json.load(f)
@@ -59,7 +61,7 @@ def load_jobs_hyperparams() -> Dict[str, str]:
     return braket_hyperparams
 
 
-def convert_jobs_hyperparams_to_pm_params(braket_hyperparams: Dict[str, str]) -> Dict[str, Any]:
+def convert_jobs_hyperparams_to_pm_params(braket_hyperparams: dict[str, str]) -> dict[str, Any]:
     """Converts Braket Jobs hyperparameters to Papermill parameters.
 
     Args:
@@ -67,6 +69,7 @@ def convert_jobs_hyperparams_to_pm_params(braket_hyperparams: Dict[str, str]) ->
 
     Returns:
         Dict[str, Any]: Papermill parameters.
+
     """
     papermill_params = {key: convert_to_value(value) for key, value in braket_hyperparams.items()}
 
@@ -85,6 +88,7 @@ def get_notebook_name(input_dir: PathLike) -> str:
 
     Returns:
         str: Notebook name.
+
     """
     notebooks = list(glob.glob(f"{input_dir}/input/*.ipynb"))
     if len(notebooks) > 1:

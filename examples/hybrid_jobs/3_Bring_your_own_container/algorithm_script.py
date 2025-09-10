@@ -4,18 +4,19 @@ from datetime import datetime
 
 import pennylane as qml
 import spacy_sentence_bert
+from pennylane import numpy as np
+from pennylane.templates import AmplitudeEmbedding
+
 from braket.jobs import save_job_result
 from braket.jobs.metrics import log_metric
 from braket.tracking import Tracker
-from pennylane import numpy as np
-from pennylane.templates import AmplitudeEmbedding
 
 
 def main():
     cost_tracker = Tracker().start()
     np.random.seed(42)
 
-    #################### Set up ####################
+    # Set up ####################
     # Set up the problem
     print("=" * 23 + "  Initializing  " + "=" * 23)
     nlp = spacy_sentence_bert.load_model("xx_distiluse_base_multilingual_cased_v2")
@@ -31,7 +32,7 @@ def main():
     label = [1, -1, 1, -1]
     print("Done.")
 
-    ###################### QML ######################
+    # QML ######################
     # Initialize and train the quantum model
     print("=" * 25 + "  Training  " + "=" * 25)
     qml_model = CCQC(nwires=9)
@@ -44,14 +45,12 @@ def main():
 
         # echo progress
         current_time = datetime.now().strftime("%H:%M:%S")
-        print(
-            current_time + " progress: {} / {}   " "cost: {}".format(i, nsteps, np.round(cost, 3))
-        )
+        print(current_time + f" progress: {i} / {nsteps}   cost: {np.round(cost, 3)}")
 
         # log the cost function as a metric
 
         braket_tasks_cost = float(
-            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost()
+            cost_tracker.simulator_tasks_cost() + cost_tracker.qpu_tasks_cost(),
         )
 
         timestamp = time.time()
@@ -70,7 +69,7 @@ def main():
             "weights": weights,
             "task summary": cost_tracker.quantum_tasks_statistics(),
             "estimated cost": braket_tasks_cost,
-        }
+        },
     )
 
 
@@ -80,10 +79,10 @@ class CCQC:
     """
 
     def __init__(self, nwires, device=None):
-        """
-        Args:
-            nwires (int): Number of qubits.
-            device (str): arn of a Braket QPU or simulator.
+        """Args:
+        nwires (int): Number of qubits.
+        device (str): arn of a Braket QPU or simulator.
+
         """
         self.nwires = nwires
         if device is None:
@@ -134,16 +133,18 @@ class CCQC:
             label (List): A list of labels.
         """
         result = 0
-        for d, l in zip(data, label):
-            result += self.cost(*w, data=d, label=l)
+        for d, label in zip(data, label):
+            result += self.cost(*w, data=d, label=label)
         return result / len(data)
 
     def cost(self, *w, data=None, label=None):
         """Compute the cost from a data point, a pair of data and label.
+
         Args:
             w (List[np.ndarray]): The weights of the quantum model.
             data (List): A data point.
             label (int): A label.
+
         """
         cost = -label * self.score(*w, data=data)
         return self._ReLU(cost, margin=0.2)
@@ -151,9 +152,11 @@ class CCQC:
     def score(self, *w, data=None):
         """Compute the score of a data point, defined by the measuremnt
         in Z basis at the first qubit.
+
         Args:
             w (List[np.ndarray]): The weights of the quantum model.
             data (List): A data point.
+
         """
         circuit = self.q_circuit()
         return circuit(*w, features=data)
@@ -161,17 +164,18 @@ class CCQC:
     def predict(self, *w, data=None):
         """Compute the prediction for a data point. Predict +1 if score is > 0,
         and -1 if the score is <0.
+
         Args:
             w (List[np.ndarray]): The weights of the quantum model.
             data (List): A data point.
+
         """
         score = self.score(*w, data=data)
         prediction = 1 if score >= 0 else -1
         return prediction
 
     def _entangle_layer(self, p1, p2, rng):
-        """
-        The entanglement block of quantum circuit for CCQC.
+        """The entanglement block of quantum circuit for CCQC.
         See figure 4 of https://arxiv.org/abs/1804.00633
         Args:
             p1 (np.ndarray): The parameters of rotation gates.
@@ -189,8 +193,10 @@ class CCQC:
 
     def _ReLU(self, x, margin=0.0):
         """Modified rectified linear unit for the purpose of this exercise.
+
         Args:
             x (float): Data.
             margin (float): The margin of the ReLU function.
+
         """
         return max(x + margin, 0)

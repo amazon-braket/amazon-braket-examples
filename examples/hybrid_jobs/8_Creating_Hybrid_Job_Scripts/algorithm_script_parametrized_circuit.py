@@ -14,6 +14,7 @@
 import os
 
 import numpy as np
+
 from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.jobs import save_job_result
@@ -35,7 +36,7 @@ counts_list = []
 theta_list = []
 for i in range(5):
     theta_value = np.pi * np.random.rand()
-    
+
     task = device.run(parametrized_circuit, shots=100, inputs={"theta": theta_value})
     counts = task.result().measurement_counts
 
@@ -53,7 +54,7 @@ save_job_result(
         "theta": theta_list,
         "task summary": cost_tracker.quantum_tasks_statistics(),
         "estimated cost": braket_tasks_cost,
-    }
+    },
 )
 
 print("Test job completed!!!!!")

@@ -7,31 +7,29 @@ from braket.circuits import Circuit, circuit
 
 # QFT subroutine without swaps
 def qft_no_swap(qubits):
-    """
-    Subroutine of the QFT excluding the final SWAP gates, applied to the qubits argument.
+    """Subroutine of the QFT excluding the final SWAP gates, applied to the qubits argument.
     Returns the a circuit object.
 
     Args:
         qubits (int): The list of qubits on which to apply the QFT
-    """
 
+    """
     # On a single qubit, the QFT is just a Hadamard.
     if len(qubits) == 1:
         return Circuit().h(qubits)
 
     # For more than one qubit, we define the QFT recursively (as shown on the right half of the image above):
-    else:
-        qftcirc = Circuit()
+    qftcirc = Circuit()
 
-        # First add a Hadamard gate
-        qftcirc.h(qubits[0])
+    # First add a Hadamard gate
+    qftcirc.h(qubits[0])
 
-        # Then apply the controlled rotations, with weights (angles) defined by the distance to the control qubit.
-        for k, qubit in enumerate(qubits[1:]):
-            qftcirc.cphaseshift(qubit, qubits[0], 2 * math.pi / (2 ** (k + 2)))
+    # Then apply the controlled rotations, with weights (angles) defined by the distance to the control qubit.
+    for k, qubit in enumerate(qubits[1:]):
+        qftcirc.cphaseshift(qubit, qubits[0], 2 * math.pi / (2 ** (k + 2)))
 
-        # Now apply the above gates recursively to the rest of the qubits
-        qftcirc.add(qft_no_swap(qubits[1:]))
+    # Now apply the above gates recursively to the rest of the qubits
+    qftcirc.add(qft_no_swap(qubits[1:]))
 
     return qftcirc
 
@@ -39,12 +37,12 @@ def qft_no_swap(qubits):
 # To complete the full QFT, add swap gates to reverse the order of the qubits
 @circuit.subroutine(register=True)
 def qft_recursive(qubits):
-    """
-    Construct a circuit object corresponding to the Quantum Fourier Transform (QFT)
+    """Construct a circuit object corresponding to the Quantum Fourier Transform (QFT)
     algorithm, applied to the argument qubits.
 
     Args:
         qubits (int): The list of qubits on which to apply the QFT
+
     """
     qftcirc = Circuit()
 
@@ -60,12 +58,12 @@ def qft_recursive(qubits):
 
 # Non-recursive definition of the QFT
 def qft(qubits):
-    """
-    Construct a circuit object corresponding to the Quantum Fourier Transform (QFT)
+    """Construct a circuit object corresponding to the Quantum Fourier Transform (QFT)
     algorithm, applied to the argument qubits.  Does not use recursion to generate the QFT.
 
     Args:
         qubits (int): The list of qubits on which to apply the QFT
+
     """
     qftcirc = Circuit()
 
@@ -92,12 +90,12 @@ def qft(qubits):
 # inverse QFT
 @circuit.subroutine(register=True)
 def inverse_qft(qubits):
-    """
-    Construct a circuit object corresponding to the inverse Quantum Fourier Transform (QFT)
+    """Construct a circuit object corresponding to the inverse Quantum Fourier Transform (QFT)
     algorithm, applied to the argument qubits.  Does not use recursion to generate the circuit.
 
     Args:
         qubits (int): The list of qubits on which to apply the inverse QFT
+
     """
     # Instantiate circuit object
     qftcirc = Circuit()
@@ -111,7 +109,6 @@ def inverse_qft(qubits):
 
     # Start on the last qubit and work to the first.
     for k in reversed(range(num_qubits)):
-
         # Apply the controlled rotations, with weights (angles) defined by the distance to the control qubit.
         # These angles are the negative of the angle used in the QFT.
         # Start on the last qubit and iterate until the qubit after k.

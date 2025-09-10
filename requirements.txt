@@ -1,36 +1,38 @@
-botocore==1.34.113
-awscli==1.32.113
-boto3==1.34.113
-amazon-braket-default-simulator==1.26.0
-amazon-braket-simulator-v2==0.2.2
-amazon-braket-pennylane-plugin==1.27.3
-amazon-braket-schemas==1.22.0
-amazon-braket-sdk==1.84.0
-amazon-braket-algorithm-library==1.4.11
-cvxpy==1.5.1
-ipykernel==6.29.4
-jax==0.4.28
-jaxlib==0.4.28
-jinja2==3.1.4
+botocore==1.40.25
+awscli==1.42.25
+boto3==1.40.25
+amazon-braket-default-simulator==1.30.0
+amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
+amazon-braket-schemas==1.26.0
+amazon-braket-sdk==1.102.0
+amazon-braket-algorithm-library==1.6.1
+autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
+cvxpy==1.7.2
+ipykernel==6.30.1
+jax==0.6.2
+jaxlib==0.6.2 # Jaxlib 0.7.x requires Python >=3.11
+jinja2==3.1.6
 juliacall==0.9.20
 juliapkg==0.1.13
-markupsafe==2.1.5
-matplotlib==3.9.0
-ml-dtypes==0.4.0
-mypy-extensions==1.0.0
-numpy==1.26.4
+markupsafe==3.0.2
+matplotlib==3.9.3
+mistune==3.0.2 # pin until https://github.com/lepture/mistune/issues/403 is resolved
+ml-dtypes==0.5.1 # pinned for build compatibility
+mypy-extensions==1.1.0
+numpy==1.26.4 # Numpy 2.1.0 requires Python >=3.10, cirq-core 1.4.0 depends on numpy~=1.22
 openfermion==1.6.1
 openfermionpyscf==0.5
-optax==0.2.2
-pandas==2.2.2
-pennylane==0.35.1
-PennyLane-Lightning==0.35.1
-qiskit-aer==0.14.2
-qiskit-algorithms==0.3.0
-qiskit-braket-provider==0.4.1
-qiskit-ionq==0.5.4
-qiskit==1.1.2
-scipy==1.13.1
+optax==0.2.5
+pandas==2.3.2
+pennylane==0.35.1 # pin until we support higher glibc version
+PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
+pyzmq<27.0 # pinned for build compatibility
+qiskit-aer==0.17.1
+qiskit-algorithms==0.4.0
+qiskit-braket-provider==0.6.0
+qiskit==1.4.4
+scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
 scs<3.2.6 # Pinned for GLIBC 2.26 compatability
 semver==3.0.2
 sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
+# 

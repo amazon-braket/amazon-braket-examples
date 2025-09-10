@@ -1,11 +1,14 @@
 import logging
 import os
-import pytest
-
-from testbook import testbook
-from nbconvert import HTMLExporter
+import re
 from importlib.machinery import SourceFileLoader
+
+import pytest
 from jupyter_client import kernelspec
+from nbconvert import HTMLExporter
+from testbook import testbook
+
+UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
@@ -21,10 +24,35 @@ EXCLUDED_NOTEBOOKS = [
     "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
     "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb",
-    "Using_the_experimental_local_simulator.ipynb"
+    # Some pulse examples does not converge due to device quality
+    "1_Bringup_experiments.ipynb",
+    "2_Native_gate_calibrations.ipynb",
+    "3_Bell_pair_with_pulses_Rigetti.ipynb",
+    "4_Build_single_qubit_gates.ipynb",
+    "Using_the_experimental_local_simulator.ipynb",
+    # CUDA-Q jobs
+    "0_hello_cudaq_jobs.ipynb",
+    "1_simulation_with_GPUs.ipynb",
+    "2_parallel_simulations.ipynb",
+    "3_distributed_statevector_simulations.ipynb",
+    # Notebooks that require devices to be online
+    "Allocating_Qubits_on_QPU_Devices.ipynb",
+    "Getting_Started_with_OpenQASM_on_Braket.ipynb",
+    "0_Getting_Started.ipynb",
+    "Noise_models_on_Rigetti.ipynb",
+    "2_Running_quantum_circuits_on_QPU_devices.ipynb",
+    "Verbatim_Compilation.ipynb",
+    "01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
+    # Simulator TN1 notebook, remove when TN1 issues are fixed
+    "TN1_demo_local_vs_non-local_random_circuits.ipynb",
+    # Dynamic circuits with QBP
+    "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
 ]
 
-if os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1" or os.environ.get("AWS_REGION") == "eu-north-1":
+if (
+    os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1"
+    or os.environ.get("AWS_REGION") == "eu-north-1"
+):
     EXTRA_EXCLUDES = [
         "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
         "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
@@ -49,7 +77,7 @@ test_notebooks = []
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
         if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
-            test_notebooks.append((dir_, file_name))
+            test_notebooks.append((dir_, file_name))  # noqa: PERF401
 
 
 def get_mock_paths(notebook_dir, notebook_file):
@@ -60,7 +88,11 @@ def get_mock_paths(notebook_dir, notebook_file):
     path_to_mocks = os.path.join(path_to_root, "test", "integ_tests", mock_dir, mock_file)
     if not os.path.exists(path_to_mocks):
         path_to_mocks = os.path.join(
-            path_to_root, "test", "integ_tests", "default_mocks", "default_mocks.py"
+            path_to_root,
+            "test",
+            "integ_tests",
+            "default_mocks",
+            "default_mocks.py",
         )
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
@@ -80,7 +112,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
-    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
@@ -114,10 +146,10 @@ def test_record():
         pytest.skip(f"Notebook not found: '{notebook_file_search}'")
     os.chdir(root_path)
     os.chdir(notebook_dir)
-    path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
+    path_to_utils, _path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
-    kernel = 'conda_braket' if 'conda_braket' in kernelspec.find_kernel_specs().keys() else 'python3'
+    kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
     with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
         tb.inject(
             f"""
@@ -153,6 +185,54 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
         run=False,
         before=0,
     )
+
+    # Uncomment all test sections in the notebook
+    for i, cell in enumerate(tb.cells):
+        if cell.get("cell_type") == "code" and "source" in cell:
+            source = cell["source"]
+            if UNCOMMENT_NOTEBOOK_TAG in source:
+                # Uncomment the test section
+                modified_source = uncomment_test_section(source)
+                tb.cells[i]["source"] = modified_source
+
+    # Execute the notebook with the uncommented test sections
     tb.execute()
     test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
     test_mocks.post_run(tb)
+
+
+def uncomment_test_section(source):
+    """Uncomment sections marked with tag"""
+    descriptive_comment = re.compile(r"^\s*##\s")
+    regular_comment = re.compile(r"^\s*#\s?")
+
+    lines = source.splitlines()
+    result = []
+    uncomment_mode = False
+
+    for line in lines:
+        stripped_line = line.strip()
+
+        if stripped_line == UNCOMMENT_NOTEBOOK_TAG:
+            uncomment_mode = True
+            result.append(line)
+            continue
+
+        if uncomment_mode:
+            if descriptive_comment.match(stripped_line):
+                # Handle descriptive comments (##)
+                result.append(f"# {stripped_line[3:].lstrip()}")
+            elif regular_comment.match(stripped_line):
+                # Handle regular comments (#)
+                result.append(regular_comment.sub("", line))
+            elif stripped_line:
+                # Non-empty, non-comment line
+                uncomment_mode = False
+                result.append(line)
+            else:
+                # Blank line
+                result.append(line)
+        else:
+            result.append(line)
+
+    return "\n".join(result)
