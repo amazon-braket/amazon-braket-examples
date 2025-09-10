@@ -1,27 +1,27 @@
 
 # Braket Examples
 
-Welcome to the primary repository for Amazon Braket examples and tutorials. Here you can see examples of how to *build*, *test*, and *run* quantum circuits and programs using Amazon Braket with simulators and quantum hardware. Introductory examples on a variety of topics are included, as well as more canonical quantum algorithms. You also can find information on utilizing particular devices or using Amazon Braket with other supported tools. 
+Welcome to the primary repository for Amazon Braket examples and tutorials. Learn how to *build*, *test*, and *run* quantum circuits and programs using Amazon Braket with simulators and quantum hardware. Introductory examples on a variety of topics are included, as well as more canonical quantum algorithms. You also can find information on utilizing particular devices or using Amazon Braket with other supported tools. 
 
 > [!TIP]
-> For those who are just getting started with Braket, see the [Getting Started](#new) examples and the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/). The [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) also contains detailed examples and preimplemented algorithms. 
+> For those who are just getting started with Amazon Braket, see the [Getting Started](#new) examples and the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/) learning plan. The [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) also contains detailed examples and preimplemented algorithms. 
 
 **Build**
 - [Getting Started](#new)
-- [Amazon Braket features](#braket)                  
+- [Using Amazon Braket features](#braket)                  
 - [Advanced circuits and algorithms](#advanced)      
-- [Hybrid quantum algorithms](#hybrid)   
+- [Building hybrid quantum algorithms](#hybrid)   
 
 **Test**
 - [Using simulators](#simulators)             
-- [Noise on Braket](#noise)                          
-- [Amazon Braket Hybrid Jobs](#jobs)                 
+- [Modeling noise on Amazon Braket](#noise)                          
+- [Utilizing Amazon Braket hybrid jobs](#jobs)                 
 
 **Run**
 - [Using quantum devices](#qhps)                     
-- [Pulse control](#pulse)                            
+- [Controlling pulse sequences](#pulse)                            
 - [Analog Hamiltonian Simulation](#ahs)              
-- [Experimental capabilities](#experimental-dynamic) 
+- [Accessing experimental capabilities](#experimental-dynamic) 
 
 **Providers**
 - [IonQ](#ionq)

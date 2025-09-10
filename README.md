@@ -1,27 +1,27 @@
 
 # Braket Examples
 
-Welcome to the primary repository for Amazon Braket examples and tutorials. Here you can see examples of how to *build*, *test*, and *run* quantum circuits and programs using Amazon Braket with simulators and quantum hardware. Introductory examples on a variety of topics are included, as well as more canonical quantum algorithms. You also can find information on utilizing particular devices or using Amazon Braket with other supported tools. 
+Welcome to the primary repository for Amazon Braket examples and tutorials. Learn how to *build*, *test*, and *run* quantum circuits and programs using Amazon Braket with simulators and quantum hardware. Introductory examples on a variety of topics are included, as well as more canonical quantum algorithms. You also can find information on utilizing particular devices or using Amazon Braket with other supported tools. 
 
 > [!TIP]
-> For those who are just getting started with Braket, see the [Getting Started](#new) examples and the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/). The [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) also contains detailed examples and preimplemented algorithms. 
+> For those who are just getting started with Amazon Braket, see the [Getting Started](#new) examples and the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/) learning plan. The [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) also contains detailed examples and preimplemented algorithms. 
 
 **Build**
 - [Getting Started](#new)
-- [Amazon Braket features](#braket)                  
+- [Using Amazon Braket features](#braket)                  
 - [Advanced circuits and algorithms](#advanced)      
-- [Hybrid quantum algorithms](#hybrid)   
+- [Building hybrid quantum algorithms](#hybrid)   
 
 **Test**
 - [Using simulators](#simulators)             
-- [Noise on Braket](#noise)                          
-- [Amazon Braket Hybrid Jobs](#jobs)                 
+- [Modeling noise on Amazon Braket](#noise)                          
+- [Utilizing Amazon Braket hybrid jobs](#jobs)                 
 
 **Run**
 - [Using quantum devices](#qhps)                     
-- [Pulse control](#pulse)                            
+- [Controlling pulse sequences](#pulse)                            
 - [Analog Hamiltonian Simulation](#ahs)              
-- [Experimental capabilities](#experimental-dynamic) 
+- [Accessing experimental capabilities](#experimental-dynamic) 
 
 **Providers**
 - [IonQ](#ionq)
@@ -67,7 +67,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="braket">Amazon Braket features</a>
+## <a name="braket">Using Amazon Braket features</a>
 
 -  [**Deep Dive into the anatomy of quantum circuits**](examples/getting_started/3_Deep_dive_into_the_anatomy_of_quantum_circuits/3_Deep_dive_into_the_anatomy_of_quantum_circuits.ipynb) [(DDQC)](#index_DDQC)<a name="DDQC"></a>
 
@@ -187,7 +187,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="noise">Noise on Braket</a>
+## <a name="noise">Modeling noise on Amazon Braket</a>
 
 -  [**Simulating noise on Amazon Braket**](examples/braket_features/Simulating_Noise_On_Amazon_Braket.ipynb) [(SN)](#index_SN)<a name="SN"></a>
 
@@ -224,7 +224,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="jobs">Amazon Braket hybrid jobs</a>
+## <a name="jobs">Utilizing Amazon Braket hybrid jobs</a>
 
 -  [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Creating_your_first_Hybrid_Job/0_Creating_your_first_Hybrid_Job.ipynb) [(GSHJ)](#index_GSHJ)<a name="GSHJ"></a>
 
@@ -265,7 +265,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="qhps">Using quantum device </a>
+## <a name="qhps">Using quantum devices</a>
 
 -  [**Running quantum circuits on QPU devices**](examples/getting_started/2_Running_quantum_circuits_on_QPU_devices/2_Running_quantum_circuits_on_QPU_devices.ipynb) [(RQCQ)](#index_RQCQ)
 
@@ -294,7 +294,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="pulse">Pulse control</a>
+## <a name="pulse">Controlling pulse sequences</a>
 
 -  [**Bringup Experiments**](examples/pulse_control/1_Bringup_experiments.ipynb) [(BE)](#index_BE)<a name="BE"></a>
 
@@ -356,7 +356,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="experimental-dynamic">Experimental Capabilities</a>
+## <a name="experimental-dynamic">Accessing experimental capabilities</a>
 
 -  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)<a name="DCQis"></a>
 
@@ -458,7 +458,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="pennylane">Pennylane with Braket</a>
+## <a name="pennylane">Pennylane</a>
 
 -  [**QAOA with Amazon Braket Hybrid Jobs and PennyLane**](examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Hybrid_Jobs/Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb) [(QHJP)](#index_QHJP)
 

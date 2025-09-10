@@ -22,7 +22,7 @@
 
 ---
 
-## <a name="braket">Amazon Braket features</a>
+## <a name="braket">Using Amazon Braket features</a>
 
 -  [**Deep Dive into the anatomy of quantum circuits**](examples/getting_started/3_Deep_dive_into_the_anatomy_of_quantum_circuits/3_Deep_dive_into_the_anatomy_of_quantum_circuits.ipynb) [(DDQC)](#index_DDQC)<a name="DDQC"></a>
 
@@ -142,7 +142,7 @@
 
 ---
 
-## <a name="noise">Noise on Braket</a>
+## <a name="noise">Modeling noise on Amazon Braket</a>
 
 -  [**Simulating noise on Amazon Braket**](examples/braket_features/Simulating_Noise_On_Amazon_Braket.ipynb) [(SN)](#index_SN)<a name="SN"></a>
 
@@ -179,7 +179,7 @@
 
 ---
 
-## <a name="jobs">Amazon Braket hybrid jobs</a>
+## <a name="jobs">Utilizing Amazon Braket hybrid jobs</a>
 
 -  [**Getting started with Amazon Braket Hybrid Jobs**](examples/hybrid_jobs/0_Creating_your_first_Hybrid_Job/0_Creating_your_first_Hybrid_Job.ipynb) [(GSHJ)](#index_GSHJ)<a name="GSHJ"></a>
 
@@ -220,7 +220,7 @@
 
 ---
 
-## <a name="qhps">Using quantum device </a>
+## <a name="qhps">Using quantum devices</a>
 
 -  [**Running quantum circuits on QPU devices**](examples/getting_started/2_Running_quantum_circuits_on_QPU_devices/2_Running_quantum_circuits_on_QPU_devices.ipynb) [(RQCQ)](#index_RQCQ)
 
@@ -249,7 +249,7 @@
 
 ---
 
-## <a name="pulse">Pulse control</a>
+## <a name="pulse">Controlling pulse sequences</a>
 
 -  [**Bringup Experiments**](examples/pulse_control/1_Bringup_experiments.ipynb) [(BE)](#index_BE)<a name="BE"></a>
 
@@ -311,7 +311,7 @@
 
 ---
 
-## <a name="experimental-dynamic">Experimental Capabilities</a>
+## <a name="experimental-dynamic">Accessing experimental capabilities</a>
 
 -  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)<a name="DCQis"></a>
 
@@ -413,7 +413,7 @@
 
 ---
 
-## <a name="pennylane">Pennylane with Braket</a>
+## <a name="pennylane">Pennylane</a>
 
 -  [**QAOA with Amazon Braket Hybrid Jobs and PennyLane**](examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Hybrid_Jobs/Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb) [(QHJP)](#index_QHJP)
 
