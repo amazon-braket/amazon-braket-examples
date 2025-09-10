@@ -44,9 +44,13 @@
 
   This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
--  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPS)](#index_GSPS)<a name="GSPS"></a>
+-  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPrS)](#index_GSPrS)<a name="GSPrS"></a>
 
   Amazon Braket's program sets feature enables efficient batch processing of quantum computations by allowing multiple quantum circuits to be executed together. The feature provides various ways to combine circuits, parameters, and observables through methods like `CircuitBinding`, `product()`, and `zip()`, making it particularly useful for variational algorithms and parameter sweeps. Program sets can significantly reduce overhead and costs compared to running individual quantum tasks, while maintaining the same computational results.
+
+-  [**Expectation value calculations with Amazon Braket program sets**](examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb) [(EVPrS)](#index_EVPrS)<a name="EVPrS"></a>
+
+Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
 
 ---
@@ -127,7 +131,7 @@
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSMG)](#index_PSMG)<a name="PSMG"></a>
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -135,7 +139,7 @@
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(ULEm)](#index_ULEm)<a name="ULEm"></a>
+-  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(LEmu)](#index_LEmu)<a name="LEmu"></a>
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
 
@@ -172,7 +176,7 @@
 
   This tutorial shows how you can harness and mitigate errors with dynamic circuits. The tutorial includes an entanglement stabilization with Bell states and dynamic circuits example, as well as a readout error mitigation example for mid-circuit measurements. 
 
--  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(ULEm)](#index_ULEm)
+-  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(LEmu)](#index_LEmu)
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
 
@@ -296,7 +300,7 @@
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
--  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SP)](#index_SP)<a name="SP"></a>
+-  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SPL)](#index_SPL)<a name="SPL"></a>
 
   This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
@@ -333,7 +337,7 @@
 
   This tutorial shows how dynamic circuits can be used for creating and applying open quantum system operators, including an ampltiude damping example, as well as a mixed state preparation for ensemble state optimization. 
 
--  [**Dynamic Circuits with OpenQASM 3.0 on Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/5_Dynamic_Circuits_with_OpenQASM_3.0.ipynb) [(DCOQ)](#index_DCOQ)<a name="DCOQ"></a>
+-  [**Dynamic Circuits with OpenQASM 3.0 on Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/5_Dynamic_Circuits_with_OpenQASM_3.0.ipynb) [(DCOQ3)](#index_DCOQ3)<a name="DCOQ3"></a>
 
   This tutorial shows how we can specify experimental dynamic circuit instructions using OpenQASM 3.0 on Amazon Braket. 
 
@@ -402,7 +406,7 @@
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSMG)](#index_PSMG)
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -447,7 +451,7 @@
 
   In this tutorial, we will show you how to compute gradients of free parameters in a quantum circuit using PennyLane and Amazon Braket. Adjoint differentiation is a technique used to compute gradients of parametrized quantum circuits. It can be used when shots=0 and is available on Amazon Braket’s on-demand state vector simulator, SV1. The adjoint differentiation method allows you to compute the gradient of a circuit with P parameters in only 1+1 circuit executions (one forward and one backward pass, similar to backpropagation), as opposed to the parameter-shift or finite-difference methods, both of which require 2P circuit executions for every gradient calculation. The adjoint method can lower the cost of running variational quantum workflows, especially for circuits with a large number of parameters.
 
--  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SP)](#index_SP)
+-  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SPL)](#index_SPL)
 
   This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 

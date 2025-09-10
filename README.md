@@ -89,9 +89,13 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
--  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPS)](#index_GSPS)<a name="GSPS"></a>
+-  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPrS)](#index_GSPrS)<a name="GSPrS"></a>
 
   Amazon Braket's program sets feature enables efficient batch processing of quantum computations by allowing multiple quantum circuits to be executed together. The feature provides various ways to combine circuits, parameters, and observables through methods like `CircuitBinding`, `product()`, and `zip()`, making it particularly useful for variational algorithms and parameter sweeps. Program sets can significantly reduce overhead and costs compared to running individual quantum tasks, while maintaining the same computational results.
+
+-  [**Expectation value calculations with Amazon Braket program sets**](examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb) [(EVPrS)](#index_EVPrS)<a name="EVPrS"></a>
+
+Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
 
 ---
@@ -172,7 +176,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSMG)](#index_PSMG)<a name="PSMG"></a>
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -180,7 +184,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(ULEm)](#index_ULEm)<a name="ULEm"></a>
+-  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(LEmu)](#index_LEmu)<a name="LEmu"></a>
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
 
@@ -217,7 +221,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how you can harness and mitigate errors with dynamic circuits. The tutorial includes an entanglement stabilization with Bell states and dynamic circuits example, as well as a readout error mitigation example for mid-circuit measurements. 
 
--  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(ULEm)](#index_ULEm)
+-  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(LEmu)](#index_LEmu)
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
 
@@ -341,7 +345,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
--  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SP)](#index_SP)<a name="SP"></a>
+-  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SPL)](#index_SPL)<a name="SPL"></a>
 
   This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
@@ -378,7 +382,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how dynamic circuits can be used for creating and applying open quantum system operators, including an ampltiude damping example, as well as a mixed state preparation for ensemble state optimization. 
 
--  [**Dynamic Circuits with OpenQASM 3.0 on Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/5_Dynamic_Circuits_with_OpenQASM_3.0.ipynb) [(DCOQ)](#index_DCOQ)<a name="DCOQ"></a>
+-  [**Dynamic Circuits with OpenQASM 3.0 on Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/5_Dynamic_Circuits_with_OpenQASM_3.0.ipynb) [(DCOQ3)](#index_DCOQ3)<a name="DCOQ3"></a>
 
   This tutorial shows how we can specify experimental dynamic circuit instructions using OpenQASM 3.0 on Amazon Braket. 
 
@@ -447,7 +451,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSMG)](#index_PSMG)
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -492,7 +496,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   In this tutorial, we will show you how to compute gradients of free parameters in a quantum circuit using PennyLane and Amazon Braket. Adjoint differentiation is a technique used to compute gradients of parametrized quantum circuits. It can be used when shots=0 and is available on Amazon Braket’s on-demand state vector simulator, SV1. The adjoint differentiation method allows you to compute the gradient of a circuit with P parameters in only 1+1 circuit executions (one forward and one backward pass, similar to backpropagation), as opposed to the parameter-shift or finite-difference methods, both of which require 2P circuit executions for every gradient calculation. The adjoint method can lower the cost of running variational quantum workflows, especially for circuits with a large number of parameters.
 
--  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SP)](#index_SP)
+-  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SPL)](#index_SPL)
 
   This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
 
@@ -514,48 +518,50 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | -- | -- | 
  | adjoint gradient |  [AGRT](#AGRT)<a name="index_AGRT"></a>, [AGC](#AGC)<a name="index_AGC"></a>| <br>
  | advanced   |  [Grover](#Grover)<a name="index_Grover"></a>| <br>
- | ahs        |  [NQD](#NQD)<a name="index_NQD"></a>, [GSAHS](#GSAHS)<a name="index_GSAHS"></a>, [GSA](#GSA)<a name="index_GSA"></a>, [OPRS](#OPRS)<a name="index_OPRS"></a>, [PTA](#PTA)<a name="index_PTA"></a>, [MIS](#MIS)<a name="index_MIS"></a>, [RLS](#RLS)<a name="index_RLS"></a>, [SP](#SP)<a name="index_SP"></a>, [SLGRA](#SLGRA)<a name="index_SLGRA"></a>, [MWIS](#MWIS)<a name="index_MWIS"></a>| <br>
+ | ahs        |  [NQD](#NQD)<a name="index_NQD"></a>, [GSAHS](#GSAHS)<a name="index_GSAHS"></a>, [GSA](#GSA)<a name="index_GSA"></a>, [OPRS](#OPRS)<a name="index_OPRS"></a>, [PTA](#PTA)<a name="index_PTA"></a>, [MIS](#MIS)<a name="index_MIS"></a>, [RLS](#RLS)<a name="index_RLS"></a>, [SPL](#SPL)<a name="index_SPL"></a>, [SLGRA](#SLGRA)<a name="index_SLGRA"></a>, [MWIS](#MWIS)<a name="index_MWIS"></a>| <br>
  | alice      |  [SC](#SC)<a name="index_SC"></a>, [DCC](#DCC)<a name="index_DCC"></a>| <br>
  | allocation |  [AQQD](#AQQD)<a name="index_AQQD"></a>| <br>
  | arn        |  [GSHJ](#GSHJ)<a name="index_GSHJ"></a>| <br>
- | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
+ | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
  | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
- | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [ULEm](#ULEm)<a name="index_ULEm"></a>| <br>
+ | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
  | compilation |  [VC](#VC)<a name="index_VC"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>, [HCQJ](#HCQJ)| <br>
- | cost       |  [TRU](#TRU)<a name="index_TRU"></a>| <br>
- | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSMG](#PSMG)<a name="index_PSMG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
+ | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
+ | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
- | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [ULEm](#ULEm)| <br>
- | dynamic circuits |  [DCOQ](#DCOQ)<a name="index_DCOQ"></a>| <br>
- | emulator   |  [ULEm](#ULEm)| <br>
+ | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
+ | dynamic circuits |  [DCOQ3](#DCOQ3)<a name="index_DCOQ3"></a>| <br>
+ | emulator   |  [LEmu](#LEmu)| <br>
+ | estimators |  [EVPrS](#EVPrS)| <br>
  | gates      |  [IQMNG](#IQMNG)<a name="index_IQMNG"></a>, [BSQG](#BSQG)<a name="index_BSQG"></a>| <br>
- | gpus       |  [PTQML](#PTQML)<a name="index_PTQML"></a>, [SQPG](#SQPG), [PSMG](#PSMG), [DSVSG](#DSVSG)| <br>
+ | gpus       |  [PTQML](#PTQML)<a name="index_PTQML"></a>, [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | graph      |  [MIS](#MIS), [MWIS](#MWIS)| <br>
- | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSMG](#PSMG), [GSPS](#GSPS)<a name="index_GSPS"></a>| <br>
+ | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS)| <br>
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ)<a name="index_EMIQ"></a>, [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
  | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
- | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSMG](#PSMG), [DSVSG](#DSVSG)| <br>
+ | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | kraus      |  [GSOQ](#GSOQ), [SN](#SN)<a name="index_SN"></a>, [SNCP](#SNCP)<a name="index_SNCP"></a>| <br>
- | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ExpLS](#ExpLS)<a name="index_ExpLS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SP](#SP)| <br>
+ | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ExpLS](#ExpLS)<a name="index_ExpLS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
  | model      |  [VQETFIM](#VQETFIM)| <br>
  | moments    |  [DDQC](#DDQC)<a name="index_DDQC"></a>| <br>
- | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [ULEm](#ULEm)| <br>
- | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [ULEm](#ULEm)| <br>
+ | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu)| <br>
+ | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [LEmu](#LEmu)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
- | openqasm   |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ](#DCOQ)| <br>
+ | openqasm   |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
- | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSMG](#PSMG), [DSVSG](#DSVSG)| <br>
+ | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG)| <br>
- | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SP](#SP)| <br>
+ | pauli operators |  [EVPrS](#EVPrS)| <br>
+ | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SPL](#SPL)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
  | pragma     |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)| <br>
- | program sets |  [GSPS](#GSPS)| <br>
- | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SP](#SP)| <br>
+ | program sets |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
+ | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SPL](#SPL)| <br>
  | qaa        |  [QAA](#QAA)<a name="index_QAA"></a>| <br>
  | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP)| <br>
  | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>| <br>
@@ -563,18 +569,18 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | qpe        |  [QPE](#QPE)<a name="index_QPE"></a>| <br>
  | reset      |  [GSDCI](#GSDCI), [DCC](#DCC), [HNDC](#HNDC)| <br>
  | result type |  [AGRT](#AGRT)| <br>
- | results    |  [DDQC](#DDQC), [GSOQ](#GSOQ), [AGRT](#AGRT), [QFT](#QFT)<a name="index_QFT"></a>, [GSPS](#GSPS), [ULEm](#ULEm)| <br>
- | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [ULEm](#ULEm)| <br>
- | rydberg    |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SP](#SP), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
+ | results    |  [DDQC](#DDQC), [GSOQ](#GSOQ), [AGRT](#AGRT), [QFT](#QFT)<a name="index_QFT"></a>, [GSPrS](#GSPrS), [LEmu](#LEmu)| <br>
+ | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [LEmu](#LEmu)| <br>
+ | rydberg    |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | s3         |  [GNQT](#GNQT)<a name="index_GNQT"></a>, [CHJS](#CHJS)| <br>
- | shots      |  [GSPS](#GSPS)| <br>
+ | shots      |  [GSPrS](#GSPrS)| <br>
  | simons     |  [Simon](#Simon)<a name="index_Simon"></a>| <br>
  | simulators |  [RQCS](#RQCS), [AOQLS](#AOQLS), [ExpLS](#ExpLS), [TNSim](#TNSim)<a name="index_TNSim"></a>, [TNHP](#TNHP)<a name="index_TNHP"></a>, [SN](#SN)| <br>
  | subroutine |  [Grover](#Grover), [QAA](#QAA), [QFT](#QFT), [QPE](#QPE), [AOQLS](#AOQLS), [IonNG](#IonNG)| <br>
  | superdense |  [SC](#SC)| <br>
  | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [TNSim](#TNSim), [TNHP](#TNHP), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
  | teleportation |  [SC](#SC), [DCC](#DCC)| <br>
- | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [ULEm](#ULEm)| <br>
+ | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [LEmu](#LEmu)| <br>
  | vqe        |  [VQEChem](#VQEChem), [VQETFIM](#VQETFIM), [HGV](#HGV), [AGC](#AGC), [Qis](#Qis)| <br>
 
 ---

@@ -399,7 +399,7 @@
         "content": "  This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process."
     },
     "Simulation with PennyLane": {
-        "index_key": "SP",
+        "index_key": "SPL",
         "index_terms" : [], 
         "categories": ["ahs","pennylane"],
         "location": "examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb",
@@ -448,7 +448,7 @@
         "content": "  This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. "
     },
     "Parallel simulations on multiple GPUs": {
-        "index_key": "PSMG",
+        "index_key": "PSG",
         "index_terms" : ["parallel","gpus"], 
         "categories": ["cudaq","simulators"],
         "location": "examples/nvidia_cuda_q/2_parallel_simulations.ipynb",
@@ -490,24 +490,31 @@
         "content": "  This tutorial shows how dynamic circuits can be used for creating and applying open quantum system operators, including an ampltiude damping example, as well as a mixed state preparation for ensemble state optimization. "
     },
     "Dynamic Circuits with OpenQASM 3.0 on Amazon Braket": {
-        "index_key": "DCOQ",
+        "index_key": "DCOQ3",
         "index_terms" : ["dynamic circuits"], 
         "categories": ["experimental-dynamic"],
         "location": "examples/experimental_capabilities/dynamic_circuits/5_Dynamic_Circuits_with_OpenQASM_3.0.ipynb",
         "content": "  This tutorial shows how we can specify experimental dynamic circuit instructions using OpenQASM 3.0 on Amazon Braket. "
     },
     "Getting started with Amazon Braket program sets": {
-        "index_key": "GSPS",
+        "index_key": "GSPrS",
         "index_terms" : ["program sets", "shots"],
         "categories" : ["braket"], 
         "location" : "examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb",
         "content"  : "  Amazon Braket's program sets feature enables efficient batch processing of quantum computations by allowing multiple quantum circuits to be executed together. The feature provides various ways to combine circuits, parameters, and observables through methods like `CircuitBinding`, `product()`, and `zip()`, making it particularly useful for variational algorithms and parameter sweeps. Program sets can significantly reduce overhead and costs compared to running individual quantum tasks, while maintaining the same computational results."
     },
     "Using the local emulator": {
-        "index_key": "ULEm",
+        "index_key": "LEmu",
         "index_terms" : ["noise", "emulator"],
         "categories"  : ["noise", "simulators"],
         "location": "examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
         "content" : "  This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally."
+    },
+    "Expectation value calculations with Amazon Braket program sets": {
+        "index_key" : "EVPrS",
+        "index_terms": ["program sets", "estimators"],
+        "categories" : ["braket"],
+        "location"   : "examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb",
+        "content"    : "Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
     }
 }

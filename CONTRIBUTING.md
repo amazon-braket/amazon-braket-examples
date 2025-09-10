@@ -56,8 +56,8 @@ When you make a contribution please ensure that you
 1. Only have Open Source licensed dependencies in your example.
 1. Ensure that your example runs without issues on both a recent Braket Notebook Instance (create a new Braket Notebook Instance or restart one from Amazon Braket [in the console](https://docs.aws.amazon.com/braket/latest/developerguide/braket-get-started-create-notebook.html)) and locally, using our most [recently released Amazon Braket SDK version](https://github.com/amazon-braket/amazon-braket-sdk-python/blob/main/README.md#installing-the-amazon-braket-python-sdk). Run the entire notebook by clicking `Cells > Run All`, either in the console or locally, and confirm that every cell completes without error.
 1. Ensure that you are using HTML elements to source images in the notebooks, and that sourced images are saved in the appropriate example folder.
-1. Please check that all tests pass (see [TESTING.md](TESTING.md) for more information). 
 1. Please follow the directions in [INSTRUCTIONS.md](docs/INSTRUCTIONS.md) to update the README. 
+1. Please check that all tests pass (see [TESTING.md](TESTING.md) for more information). 
 
 
 ### Send a Pull Request
