@@ -1,7 +1,7 @@
 
-# Braket Examples
+# Braket Example Repository
 
-Welcome to the primary repository for Amazon Braket examples and tutorials. Here you can see examples of how to build, test, and run quantum circuits using Amazon Braket. 
+Welcome to the primary repository for Amazon Braket examples and tutorials! Here you can see examples of how to *build*, *test*, and *run* quantum circuits and programs using Amazon Braket with simulators and quantum hardware. 
 
 **Getting started** 
 - [I'm new to quantum](#new)       
@@ -29,9 +29,9 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 - [Rigetti](#rigetti)
 
 **Supported tools**
-- [Qiskit with Braket](#qiskit)                      
 - [CUDA-Q](#cudaq)                                   
 - [Pennylane with Braket](#pennylane)                
+- [Qiskit with Braket](#qiskit)                      
 
 **Index**  
 - [Search the notebooks!](#index)             
@@ -40,11 +40,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 - [Local installations, feature requests, and more!](#support)
 
 > [!TIP]
-> For those who are just getting started with Braket, we also recommend the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/). For further examples, implemented algorithms, please see the [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) repository. 
-
+> For those who are just getting started with Braket, see the [Getting Started](#new) folder and the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/). The [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) also contains detailed examples and preimplemented algorithms. 
 
 >[!NOTE]
-> Amazon Braket provides managed jupyter notebook instances which can be run on the cloud and accessed anywhere! To run these locally, the dependences can be installed [following the instructions](#dependencies) below. 
+> Amazon Braket provides [managed Jupyter notebook instances](https://aws.amazon.com/braket/) which can be run on the cloud and accessed anywhere! To run the examples locally, the dependences can be installed [following the instructions](#dependencies) below. 
 
 ---
 
@@ -551,21 +550,6 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 
 ---
 
-## <a name="qiskit">Qiskit</a>
-
--  [**Getting started with Qiskit on Amazon Braket**](examples/qiskit/0_Getting_Started.ipynb) [(Qis)](#index_Qis)
-
-<a name="Qis"></a>
-
-  This tutorial shows how you can run your Qiskit code on Amazon Braket computing services.
-
--  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)
-
-  This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
-
-
----
-
 ## <a name="cudaq">CUDA-Q</a>
 
 -  [**Hello CUDA-Q Jobs**](examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb) [(HCQJ)](#index_HCQJ)
@@ -638,6 +622,21 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Here
 -  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SP)](#index_SP)
 
   This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
+
+
+---
+
+## <a name="qiskit">Qiskit</a>
+
+-  [**Getting started with Qiskit on Amazon Braket**](examples/qiskit/0_Getting_Started.ipynb) [(Qis)](#index_Qis)
+
+<a name="Qis"></a>
+
+  This tutorial shows how you can run your Qiskit code on Amazon Braket computing services.
+
+-  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)
+
+  This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
 
 ## <a name="index">Index</a> 
  |  Terms  | Notebooks  | 

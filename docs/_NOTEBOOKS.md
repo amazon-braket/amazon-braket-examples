@@ -504,21 +504,6 @@
 
 ---
 
-## <a name="qiskit">Qiskit</a>
-
--  [**Getting started with Qiskit on Amazon Braket**](examples/qiskit/0_Getting_Started.ipynb) [(Qis)](#index_Qis)
-
-<a name="Qis"></a>
-
-  This tutorial shows how you can run your Qiskit code on Amazon Braket computing services.
-
--  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)
-
-  This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
-
-
----
-
 ## <a name="cudaq">CUDA-Q</a>
 
 -  [**Hello CUDA-Q Jobs**](examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb) [(HCQJ)](#index_HCQJ)
@@ -591,4 +576,19 @@
 -  [**Simulation with PennyLane**](examples/analog_hamiltonian_simulation/06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb) [(SP)](#index_SP)
 
   This tutorial shows how to run analog Hamiltonian simulation (AHS) on Braket’s Rydberg atom devices leveraging quantum machine learning techniques from PennyLane.
+
+
+---
+
+## <a name="qiskit">Qiskit</a>
+
+-  [**Getting started with Qiskit on Amazon Braket**](examples/qiskit/0_Getting_Started.ipynb) [(Qis)](#index_Qis)
+
+<a name="Qis"></a>
+
+  This tutorial shows how you can run your Qiskit code on Amazon Braket computing services.
+
+-  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)
+
+  This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
 

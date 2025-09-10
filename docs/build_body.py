@@ -18,9 +18,9 @@ categories = {
     "iqm"       : "IQM",
     "quera"     : "QuEra",
     "rigetti"   : "Rigetti",
-    "qiskit"    : "Qiskit",
     "cudaq"     : "CUDA-Q",
-    "pennylane" : "Pennylane with Braket"
+    "pennylane" : "Pennylane with Braket",
+    "qiskit"    : "Qiskit",
 }
 
 def main():

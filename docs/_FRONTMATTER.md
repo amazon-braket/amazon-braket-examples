@@ -29,9 +29,9 @@ Welcome to the primary repository for Amazon Braket examples and tutorials! Here
 - [Rigetti](#rigetti)
 
 **Supported tools**
-- [Qiskit with Braket](#qiskit)                      
 - [CUDA-Q](#cudaq)                                   
 - [Pennylane with Braket](#pennylane)                
+- [Qiskit with Braket](#qiskit)                      
 
 **Index**  
 - [Search the notebooks!](#index)             
@@ -40,7 +40,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials! Here
 - [Local installations, feature requests, and more!](#support)
 
 > [!TIP]
-> For those who are just getting started with Braket, we also recommend the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/). For further examples and implemented algorithms, please see the [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) repository. 
+> For those who are just getting started with Braket, see the [Getting Started](#new) folder and the [Amazon Skill Builder](https://aws.amazon.com/blogs/quantum-computing/introducing-the-amazon-braket-learning-plan-and-digital-badge/). The [Amazon Braket Algorithm Library](https://github.com/amazon-braket/amazon-braket-algorithm-library/tree/main) also contains detailed examples and preimplemented algorithms. 
 
 >[!NOTE]
-> Amazon Braket provides managed jupyter notebook instances which can be run on the cloud and accessed anywhere! To run these locally, the dependences can be installed [following the instructions](#dependencies) below. 
+> Amazon Braket provides [managed Jupyter notebook instances](https://aws.amazon.com/braket/) which can be run on the cloud and accessed anywhere! To run the examples locally, the dependences can be installed [following the instructions](#dependencies) below. 
