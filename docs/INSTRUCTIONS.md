@@ -36,4 +36,4 @@ If you feel a common index term has been omitted, add it to [index_terms.json](i
 - I don't like how the notebook is abbreviated 
     - Change it!! Or it will not be accepted. 
 - My notebook comes up too many times! 
-    - Consider shortening text and `buzzwords`. 
+    - Consider shortening text and removing `buzzwords`. 
