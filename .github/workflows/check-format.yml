@@ -26,4 +26,4 @@ jobs:
         pip install hatch
     - name: Run code format checks
       run: |
-        hatch run -- lint:style
+        hatch run lint:style

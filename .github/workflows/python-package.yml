@@ -35,4 +35,4 @@ jobs:
         pip install hatch
     - name: Run integ tests
       run: |
-        hatch run test -- -p no:cacheprovider
+        hatch run test -p no:cacheprovider
