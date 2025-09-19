@@ -1,7 +1,7 @@
 
 ## Instructions for Updating README
 
-You need to update the README if:
+You need to update the README if **any** of the following apply:
 - You want to update the README with new information
 - You have added new examples
 - You want to add specific index terms 
@@ -11,7 +11,7 @@ The basic process is to update the ENTRIES.json, verify, and rebuild. This is de
 
 ### Building the README
 
-From the main directory, simply execute `./docs/build_readme.py`, and commit the updated README file. 
+From the main directory, simply execute `./docs/build_readme.sh`, and commit the updated README file. 
 
 ### Adding New Notebooks 
 
