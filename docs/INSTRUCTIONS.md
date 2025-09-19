@@ -1,7 +1,7 @@
 
 ## Instructions for Updating README
 
-You need to update the README if:
+You need to update the README if **any** of the following apply:
 - You want to update the README with new information
 - You have added new examples
 - You want to add specific index terms 
