@@ -66,7 +66,7 @@ def main():
     build the index 
 
     below we use the following variables:
-        - index_keys/key - the shorthand form of the notebook title 
+        - index_abbrv/key - the shorthand form of the notebook title 
         - loc/locations - where the notebook is 
         - terms - keywords or index terms 
     """
@@ -74,7 +74,7 @@ def main():
     with open("docs/entries.json", 'r') as fp:
         entries : dict = json.load(fp)
 
-    loc_to_key = {v["location"]:v["index_key"] for v in entries.values()}
+    loc_to_key = {v["location"]:v["index_abbrv"] for v in entries.values()}
     print("...extracting notebook content...")
     notebook_locations, notebook_contents = [],[]
     for properties in entries.values():
@@ -85,7 +85,7 @@ def main():
     # Group terms into categories
     print("...finding terms in notebooks")
     terms_to_loc : dict[str,list] = find_terms_in_notebooks(notebook_locations, notebook_contents)
-    # check if there were addition index terms 
+    # check if there were additional index terms specified in the entries 
     for properties in entries.values():
         for index_term in properties["index_terms"]:
             if index_term in terms_to_loc:

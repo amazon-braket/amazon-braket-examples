@@ -47,11 +47,13 @@ def main():
         for notebook in category_to_notebooks[category]:
             location = entries[notebook]["location"]
             text     = entries[notebook]["content"]
-            key      = entries[notebook]["index_key"]
+            key      = entries[notebook]["index_abbrv"]
             main_body+= f"-  [**{notebook}**]({location}) [({key})](#index_{key})\n\n"
             if key not in assigned_key:
                 main_body = main_body[:-2] + f"<a name=\"{key}\"></a>\n\n"
                 assigned_key.add(key)
+            if not text[:2] == "  ":
+                raise ValueError("Please format your notebook entry with two leading spaces.")
             main_body+= f"{text}\n\n"
     
 
