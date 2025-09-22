@@ -4,10 +4,10 @@ boto3==1.40.35
 amazon-braket-default-simulator==1.31.0
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.26.0
-amazon-braket-sdk==1.102.3
+amazon-braket-sdk==1.102.4
 amazon-braket-algorithm-library==1.6.2
 autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
-cvxpy==1.7.2
+cvxpy==1.7.3
 ipykernel==6.30.1
 jax==0.6.2
 jaxlib==0.6.2 # Jaxlib 0.7.x requires Python >=3.11
