@@ -23,7 +23,7 @@ jobs:
         python-version: "3.x"
     - name: Install dependencies
       run: |
-        pip install hatch
+        pip install hatch "click<8.3.0"
     - name: Run code format checks
       run: |
         hatch run lint:style

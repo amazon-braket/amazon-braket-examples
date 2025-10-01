@@ -1,5 +1,13 @@
 # Testing
 
+We use a series of tests for the example notebooks. For formatting, you can run `hatch run lint:style`. Additionally, you should run the integration tests as below. There also are build tests for python 3.9, 3.10, and 3.11, so if you are using any of these you have a greater chance of success.  
+
+Finally, you can also run the repository tests to test that all examples are present. 
+
+```
+pytest test/repo_tests
+```
+
 ## All Mock Testing
 To run the integration tests for these notebooks using mocks to override
 calls to AWS, just run:
