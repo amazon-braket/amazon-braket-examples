@@ -1,10 +1,10 @@
-botocore==1.40.40
-awscli==1.42.40
-boto3==1.40.40
-amazon-braket-default-simulator==1.31.2
+botocore==1.40.45
+awscli==1.42.45
+boto3==1.40.45
+amazon-braket-default-simulator==1.31.3
 amazon-braket-pennylane-plugin==1.28.0 # pin until we support higher glibc version
 amazon-braket-schemas==1.26.0
-amazon-braket-sdk==1.102.4
+amazon-braket-sdk==1.102.5
 amazon-braket-algorithm-library==1.6.2
 autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
 cvxpy==1.7.3
@@ -21,7 +21,7 @@ numpy==1.26.4 # Numpy 2.1.0 requires Python >=3.10, cirq-core 1.4.0 depends on n
 openfermion==1.6.1
 openfermionpyscf==0.5
 optax==0.2.6
-pandas==2.3.2
+pandas==2.3.3
 pennylane==0.35.1 # pin until we support higher glibc version
 PennyLane-Lightning==0.35.1 # pin until we support higher glibc version
 pyzmq<27.0 # pinned for build compatibility
