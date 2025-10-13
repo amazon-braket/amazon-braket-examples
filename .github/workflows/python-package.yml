@@ -32,7 +32,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install hatch "click<8.3.0"
+        pip install hatch
     - name: Run integ tests
       run: |
         hatch run test -p no:cacheprovider
