@@ -23,7 +23,6 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13",
 ]
 dynamic = ["dependencies"]
 
@@ -73,7 +72,7 @@ fmt = [
 ]
 
 [[tool.hatch.envs.all.matrix]]
-python = ["3.10", "3.11", "3.12", "3.13"]
+python = ["3.10", "3.11", "3.12"]
 
 [tool.hatch.metadata]
 allow-direct-references = true

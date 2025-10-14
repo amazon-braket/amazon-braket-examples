@@ -18,7 +18,7 @@ matplotlib==3.9.3
 mistune==3.0.2 # pin until https://github.com/lepture/mistune/issues/403 is resolved
 ml-dtypes==0.5.1 # pinned for build compatibility
 mypy-extensions==1.1.0
-numpy==2.1.0
+numpy==1.26.4 # Numpy 2.1.0 requires Python >=3.10, cirq-core 1.4.0 depends on numpy~=1.22
 openfermion==1.6.1
 openfermionpyscf==0.5
 optax==0.2.6
