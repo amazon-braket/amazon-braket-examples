@@ -17073,8 +17073,11 @@
     "rigettiMetadata": {
       "compiledProgram": "DECLARE ro BIT[2];"
     },
-    "oqcMetadata": {
+    "iqmMetadata": {
       "compiledProgram": "DECLARE ro BIT[2];"
+    },
+    "ionqMetadata": {
+      "sharpenedProbabilities": {"00": 0.5, "11": 0.5}
     },
     "simulatorMetadata": {
       "braketSchemaHeader": {

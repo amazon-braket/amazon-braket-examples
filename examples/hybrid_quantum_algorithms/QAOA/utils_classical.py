@@ -1,19 +1,11 @@
 # IMPORTS
-import warnings
-
-import matplotlib.cbook
 import matplotlib.pyplot as plt
 import networkx as nx
 from pyqubo import Spin, solve_ising
 
-warnings.filterwarnings("ignore", category=matplotlib.cbook.mplDeprecation)
-
 
 def build_classical_ising(J, N):
-    """
-    function to build classical Ising Hamiltonian
-    """
-
+    """Function to build classical Ising Hamiltonian"""
     # define classical spin (Ising) variables
     spins = []
     for ii in range(N):
@@ -35,12 +27,10 @@ def build_classical_ising(J, N):
 
 
 def get_classical_energy_min(J, solution):
-    """
-    function to return min energy for given classical solution of
+    """Function to return min energy for given classical solution of
     Ising Hamiltonian with two-body terms for weighted graph
     NO SINGLE BIT TERMS, NO CONSTANT OFFSET
     """
-
     N = J.shape[0]
     # calculate energy and maxcut (UNWEIGHTED graph)
     energy_min = 0
@@ -55,10 +45,7 @@ def get_classical_energy_min(J, solution):
 
 # helper function to plot graph
 def plot_colored_graph_simple(graph, colors, pos):
-    """
-    plot colored graph for given colored solution
-    """
-
+    """Plot colored graph for given colored solution"""
     # define color scheme
     colorlist = [
         "#e41a1c",
@@ -89,14 +76,12 @@ def plot_colored_graph_simple(graph, colors, pos):
 
 # helper function to plot graph
 def plot_colored_graph(J, N, colors, pos):
-    """
-    plot colored graph for given colored solution
-    """
+    """Plot colored graph for given colored solution"""
     # define graph
     graph = nx.Graph()
     all_weights = []
 
-    for ii in range(0, N):
+    for ii in range(N):
         for jj in range(ii + 1, N):
             if J[ii][jj] != 0:
                 graph.add_edge(str(ii), str(jj), weight=J[ii][jj])
@@ -147,17 +132,14 @@ def plot_colored_graph(J, N, colors, pos):
 
 
 def solve_classical_ising(J, N, pos):
-    """
-    function to solve classical optimization problem defined by graph
-    """
-
+    """Function to solve classical optimization problem defined by graph"""
     # define and build classical Ising
-    model, linear, quad, offset = build_classical_ising(J, N)
+    _model, linear, quad, _offset = build_classical_ising(J, N)
 
     # Solve classical Ising model
     solution = solve_ising(linear, quad)
 
-    # print calssical solution
+    # print classical solution
     print("Classical solution:", solution)
 
     # get corresponding energy

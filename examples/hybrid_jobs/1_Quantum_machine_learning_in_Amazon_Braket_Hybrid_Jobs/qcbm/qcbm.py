@@ -28,6 +28,7 @@ class QCBM:
             n_qubits (int): Number of qubits
             n_layers (int): Number of layers
             data (np.ndarray): Target probabilities
+
         """
         self.device = device
         self.n_qubits = n_qubits
@@ -55,13 +56,14 @@ class QCBM:
 
         Returns:
             circ (braket.circuit): Circuit with parameters fixed to `params`.
+
         """
         try:
             params = params.reshape(self.n_layers, self.n_qubits, 3)
         except:
             print(
                 "Length of initial parameters was not correct. Expected: "
-                + f"{self.n_layers*self.n_qubits*3} but got {len(params)}."
+                + f"{self.n_layers * self.n_qubits * 3} but got {len(params)}.",
             )
         circ = Circuit()
         self.rotation_layer(circ, params[0])
@@ -91,11 +93,13 @@ class QCBM:
 
         Returns:
             grad (np.ndarray): Gradient vector
+
         """
         qcbm_probs = self.probabilities(params)
         shift = np.ones_like(params) * np.pi / 2
         shifted_params = np.stack([params + np.diag(shift), params - np.diag(shift)]).reshape(
-            2 * len(params), len(params)
+            2 * len(params),
+            len(params),
         )
         circuits = [self.create_circuit(p) for p in shifted_params]
 
@@ -105,11 +109,10 @@ class QCBM:
             result = [self.device.run(c, shots=self.shots).result() for c in circuits]
 
         res = [result[i].values[0] for i in range(len(circuits))]
-        res = np.array(res).reshape(2, len(params), 2 ** self.n_qubits)
+        res = np.array(res).reshape(2, len(params), 2**self.n_qubits)
 
         grad = np.zeros(len(params))
         for i in range(len(params)):
-            print(f"updating parameter: {i}")
             grad_pos = compute_kernel(qcbm_probs, res[0][i]) - compute_kernel(qcbm_probs, res[1][i])
             grad_neg = compute_kernel(self.data, res[0][i]) - compute_kernel(self.data, res[1][i])
             grad[i] = grad_pos - grad_neg
@@ -128,10 +131,11 @@ def compute_kernel(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
 
     Returns:
         kernel (float): Value of the Gaussian RBF function for kernel(px, py).
+
     """
     x = np.arange(len(px))
     y = np.arange(len(py))
-    K = sum(np.exp(-np.abs(x[:, None] - y[None, :]) ** 2 / (2 * s ** 2)) for s in sigma_list)
+    K = sum(np.exp(-(np.abs(x[:, None] - y[None, :]) ** 2) / (2 * s**2)) for s in sigma_list)
     kernel = px @ K @ py
     return kernel
 
@@ -159,8 +163,8 @@ def mmd_loss(px: np.ndarray, py: np.ndarray, sigma_list=[0.1, 1]):
 
     Returns:
         mmd (float): Value of the MMD loss
-    """
 
+    """
     mmd_xx = compute_kernel(px, px, sigma_list)
     mmd_yy = compute_kernel(py, py, sigma_list)
     mmd_xy = compute_kernel(px, py, sigma_list)

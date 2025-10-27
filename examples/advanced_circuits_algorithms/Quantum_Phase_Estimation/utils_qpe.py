@@ -1,22 +1,20 @@
 # general imports
-import math
 import pickle
 from collections import Counter
 from datetime import datetime
 
 import numpy as np
 
+# local imports
+from utils_qft import inverse_qft  # noqa: F401
+
 # AWS imports: Import Braket SDK modules
 from braket.circuits import Circuit, circuit
-
-# local imports
-from utils_qft import inverse_qft
 
 
 @circuit.subroutine(register=True)
 def controlled_unitary(control, target_qubits, unitary):
-    """
-    Construct a circuit object corresponding to the controlled unitary
+    """Construct a circuit object corresponding to the controlled unitary
 
     Args:
         control: The qubit on which to control the gate
@@ -24,8 +22,8 @@ def controlled_unitary(control, target_qubits, unitary):
         target_qubits: List of qubits on which the unitary U acts
 
         unitary: matrix representation of the unitary we wish to implement in a controlled way
-    """
 
+    """
     # Define projectors onto the computational basis
     p0 = np.array([[1.0, 0.0], [0.0, 0.0]])
 
@@ -49,8 +47,7 @@ def controlled_unitary(control, target_qubits, unitary):
 
 @circuit.subroutine(register=True)
 def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
-    """
-    Function to implement the QPE algorithm using two registers for precision (read-out) and query.
+    """Function to implement the QPE algorithm using two registers for precision (read-out) and query.
     Register qubits need not be contiguous.
 
     Args:
@@ -63,12 +60,9 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
         control_unitary: Optional boolean flag for controlled unitaries,
                          with C-(U^{2^k}) by default (default is True),
                          or C-U controlled-unitary (2**power) times
+
     """
     qpe_circ = Circuit()
-
-    # Get number of qubits
-    num_precision_qubits = len(precision_qubits)
-    num_query_qubits = len(query_qubits)
 
     # Apply Hadamard across precision register
     qpe_circ.h(precision_qubits)
@@ -81,13 +75,13 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
         # Alterantive 1: Implement C-(U^{2^k})
         if control_unitary:
             # Define the matrix U^{2^k}
-            Uexp = np.linalg.matrix_power(unitary, 2 ** power)
+            Uexp = np.linalg.matrix_power(unitary, 2**power)
 
             # Apply the controlled unitary C-(U^{2^k})
             qpe_circ.controlled_unitary(qubit, query_qubits, Uexp)
         # Alterantive 2: One can instead apply controlled-unitary (2**power) times to get C-U^{2^power}
         else:
-            for _ in range(2 ** power):
+            for _ in range(2**power):
                 qpe_circ.controlled_unitary(qubit, query_qubits, unitary)
 
     # Apply inverse qft to the precision_qubits
@@ -98,8 +92,7 @@ def qpe(precision_qubits, query_qubits, unitary, control_unitary=True):
 
 # helper function to remove query bits from bitstrings
 def substring(key, precision_qubits):
-    """
-    Helper function to get substring from keys for dedicated string positions as given by precision_qubits.
+    """Helper function to get substring from keys for dedicated string positions as given by precision_qubits.
     This function is necessary to allow for arbitrary qubit mappings in the precision and query registers
     (i.e., so that the register qubits need not be contiguous.)
 
@@ -108,6 +101,7 @@ def substring(key, precision_qubits):
 
         precision_qubits: List of qubits corresponding to precision_qubits.
                           Currently assumed to be a list of integers corresponding to the indices of the qubits.
+
     """
     short_key = ""
     for idx in precision_qubits:
@@ -119,13 +113,12 @@ def substring(key, precision_qubits):
 # helper function to convert binary fractional to decimal
 # reference: https://www.geeksforgeeks.org/convert-binary-fraction-decimal/
 def binaryToDecimal(binary):
-    """
-    Helper function to convert binary string (example: '01001') to decimal
+    """Helper function to convert binary string (example: '01001') to decimal
 
     Args:
         binary: string which to convert to decimal fraction
-    """
 
+    """
     length = len(binary)
     fracDecimal = 0
 
@@ -142,8 +135,7 @@ def binaryToDecimal(binary):
 
 # helper function for postprocessing based on measurement shots
 def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
-    """
-    Get QPE phase estimate from measurement_counts for given number of precision qubits
+    """Get QPE phase estimate from measurement_counts for given number of precision qubits
 
     Args:
         measurement_counts: measurement results from a device run
@@ -152,14 +144,12 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
                           Currently assumed to be a list of integers corresponding to the indices of the qubits.
 
         items_to_keep: number of items to return (topmost measurement counts for precision register)
-    """
 
+    """
     # Aggregate the results (i.e., ignore/trace out the query register qubits):
 
     # First get bitstrings with corresponding counts for precision qubits only
-    bitstrings_precision_register = [
-        substring(key, precision_qubits) for key in measurement_counts.keys()
-    ]
+    bitstrings_precision_register = [substring(key, precision_qubits) for key in measurement_counts]
     # Then keep only the unique strings
     bitstrings_precision_register_set = set(bitstrings_precision_register)
     # Cast as a list for later use
@@ -167,10 +157,10 @@ def get_qpe_phases(measurement_counts, precision_qubits, items_to_keep=1):
 
     # Now create a new dict to collect measurement results on the precision_qubits.
     # Keys are given by the measurement count substrings on the register qubits. Initialize the counts to zero.
-    precision_results_dic = {key: 0 for key in bitstrings_precision_register_list}
+    precision_results_dic = dict.fromkeys(bitstrings_precision_register_list, 0)
 
     # Loop over all measurement outcomes
-    for key in measurement_counts.keys():
+    for key in measurement_counts:
         # Save the measurement count for this outcome
         counts = measurement_counts[key]
         # Generate the corresponding shortened key (supported only on the precision_qubits register)
@@ -203,8 +193,7 @@ def run_qpe(
     shots=1000,
     save_to_pck=False,
 ):
-    """
-    Function to run QPE algorithm end-to-end and return measurement counts.
+    """Function to run QPE algorithm end-to-end and return measurement counts.
 
     Args:
         precision_qubits: list of qubits defining the precision register
@@ -222,10 +211,10 @@ def run_qpe(
         shots: (optional) number of measurement shots (default is 1000)
 
         save_to_pck: (optional) save results to pickle file if True (default is False)
-    """
 
+    """
     # get size of precision register and total number of qubits
-    number_precision_qubits = len(precision_qubits)
+    len(precision_qubits)
     num_qubits = len(precision_qubits) + len(query_qubits)
 
     # Define the circuit. Start by copying the query_circuit, then add the QPE:
@@ -256,11 +245,13 @@ def run_qpe(
 
     # bitstrings
     format_bitstring = "{0:0" + str(num_qubits) + "b}"
-    bitstring_keys = [format_bitstring.format(ii) for ii in range(2 ** num_qubits)]
+    bitstring_keys = [format_bitstring.format(ii) for ii in range(2**num_qubits)]
 
     # QPE postprocessing
     phases_decimal, precision_results_dic = get_qpe_phases(
-        measurement_counts, precision_qubits, items_to_keep
+        measurement_counts,
+        precision_qubits,
+        items_to_keep,
     )
     eigenvalues = [np.exp(2 * np.pi * 1j * phase) for phase in phases_decimal]
 
