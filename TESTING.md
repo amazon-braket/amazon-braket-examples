@@ -1,5 +1,13 @@
 # Testing
 
+We use a series of tests for the example notebooks. For formatting, you can run `hatch run lint:style`. Additionally, you should run the integration tests as below. There also are build tests for python 3.9, 3.10, and 3.11, so if you are using any of these you have a greater chance of success.  
+
+Finally, you can also run the repository tests to test that all examples are present. 
+
+```
+pytest test/repo_tests
+```
+
 ## All Mock Testing
 To run the integration tests for these notebooks using mocks to override
 calls to AWS, just run:
@@ -24,7 +32,7 @@ at the end of the notebook execution).
 
 By default, a notebook is run using the `default_mocks/default_mocks.py` which
 uses the `default_data/default_capabilities.json` for returning device details
-and `default_data/default_results.json` for all task results in the notebook.
+and `default_data/default_results.json` for all quantum task results in the notebook.
 This can be changed by adding a path in `test/integ_tests` that is identical
 to the notebook being tested, with a file `<notebook name>_mocks.py` in that
 directory. The file should specify `def pre_run_inject(mock_utils):` and 
@@ -34,7 +42,7 @@ default mocks.
 
 ## Least Mock Testing
 To run the integration tests for these notebooks using mocks to override
-creation of tasks and jobs, just run:
+creation of quantum tasks and hybrid jobs, just run:
 ```
 pytest test/integ_tests -s --mock-level=LEAST test/integ_tests
 ```
@@ -44,7 +52,7 @@ These tests will require valid AWS account credentials to run.
 
 These tests work using the same mechanisms and use the same test data as provided
 by "All Mock Testing", but only override functions in AwsSession that
-create/get/cancel tasks and jobs. These tests take longer to run, but test
+create/get/cancel quantum tasks and hybrid jobs. These tests take longer to run, but test
 integration with braket services more thoroughly. 
 
 ## Recording
@@ -75,3 +83,16 @@ Simply append the following line to the code cell specified in the Recording sec
 record_utils.playback()
 ```
 Re-running the notebook will use the generated files made during recording.
+
+## Testing commented code
+
+In the example notebooks, some code cells are presented as commented out to prevent accidental execution of costly or long-running operations, particularly those that run on a QPU. However, commented code can become prone to errors over time due to lack of regular testing.
+
+To improve test coverage, we introduce a special flag: `## UNCOMMENT_TO_RUN`. As a developer, you can include this flag within a cell to mark the beginning of a block that should be uncommented during integration testing. The integration test framework will detect the `## UNCOMMENT_TO_RUN` marker and automatically uncomment all subsequent lines until it encounters a line that is not commented.
+
+To ensure this process works correctly:
+- Use a single `#` for code comments that should be uncommented during testing.
+- Use double `##` for non-code, descriptive comments that should remain commented (and not be treated as executable code).
+
+Following this convention allows the integration test system to selectively and safely test example notebooks without risking unintended costly runs in normal usage.
+

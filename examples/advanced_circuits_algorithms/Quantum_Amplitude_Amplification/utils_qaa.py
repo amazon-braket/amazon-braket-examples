@@ -1,19 +1,21 @@
 import numpy as np
-from braket.circuits import Circuit, circuit
 from utils_circuit import adjoint, get_unitary
+
+from braket.circuits import Circuit, circuit
 
 # monkey patch to Circuit class
 Circuit.get_unitary = get_unitary
 Circuit.adjoint = adjoint
 
+
 # helper function to apply XZX to given qubit
 @circuit.subroutine(register=True)
 def minus_R_B(qubit):
-    """
-    Function to apply a minus sign to |B>|0>. This is achieved by applying XZX to the ancilla qubit.
+    """Function to apply a minus sign to |B>|0>. This is achieved by applying XZX to the ancilla qubit.
 
     Args:
         qubit: the ancilla qubit on which we apply XZX.
+
     """
     # instantiate circuit object
     circ = Circuit()
@@ -27,15 +29,14 @@ def minus_R_B(qubit):
 # Helper function to apply rotation -R0
 @circuit.subroutine(register=True)
 def minus_R_zero(qubits, use_explicit_unitary=False):
-    """
-    Function to implement transformation: |0,0,...0> -> -|0,0,...0>, all others unchanged.
+    """Function to implement transformation: |0,0,...0> -> -|0,0,...0>, all others unchanged.
 
     Args:
         qubits: list of qubits on which to apply the gates
         use_explicit_unitary (default False): Flag to specify that we could instead implement
         the desired gate using a custom gate defined by the unitary diag(-1,1,...,1).
-    """
 
+    """
     circ = Circuit()
 
     # If the use_explicit_matrix flag is True, we just apply the unitary defined by |0,0,...0> -> -|0,0,...0>
@@ -57,7 +58,6 @@ def minus_R_zero(qubits, use_explicit_unitary=False):
 
         # For more qubits, we use Toffoli (or CCNOT) gates to check that all the qubits are in |1> (since we applied X)
         else:
-
             # Dynamically add ancilla qubits, starting on the next unused qubit in the circuit
             # TODO: if this subroutine is being applied to a subset of qubits in a circuit, these ancilla
             # registers might already be used. We could pass in circ as an argument and add ancillas outside of
@@ -91,8 +91,7 @@ def minus_R_zero(qubits, use_explicit_unitary=False):
 
 @circuit.subroutine(register=True)
 def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
-    """
-    Function to implement the Grover iterator Q=A R_0 A* R_B.
+    """Function to implement the Grover iterator Q=A R_0 A* R_B.
 
     Args:
         A: Circuit defining the unitary A
@@ -102,24 +101,19 @@ def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
                 If qubits is different from A.qubits, A is applied to qubits instead.
         use_explicit_unitary: Flag to specify that we should implement R_0 using using a custom
                               gate defined by the unitary diag(-1,1,...,1). Default is False.
+
     """
     # If no qubits are passed, apply the gates to the targets of A
     if qubits is None:
         qubits = A.qubits
-    else:
-        # If qubits are passed, make sure it's the right number to remap from A.
-        if len(qubits) != len(A.qubits):
-            raise ValueError(
-                "Number of desired target qubits differs from number of targets in A".format(
-                    flag_qubit=repr(flag_qubit)
-                )
-            )
+    elif len(qubits) != len(A.qubits):
+        raise ValueError(
+            "Number of desired target qubits differs from number of targets in A".format(),
+        )
 
     # Verify that flag_qubit is one of the qubits on which A acts, or one of the user defined qubits
     if flag_qubit not in qubits:
-        raise ValueError(
-            "flag_qubit {flag_qubit} is not in targets of A".format(flag_qubit=repr(flag_qubit))
-        )
+        raise ValueError(f"flag_qubit {flag_qubit!r} is not in targets of A")
 
     # Instantiate the circuit
     circ = Circuit()
@@ -141,8 +135,7 @@ def grover_iterator(A, flag_qubit, qubits=None, use_explicit_unitary=False):
 
 @circuit.subroutine(register=True)
 def qaa(A, flag_qubit, num_iterations, qubits=None, use_explicit_unitary=False):
-    """
-    Function to implement the Quantum Amplitude Amplification Q^m, where Q=A R_0 A* R_B, m=num_iterations.
+    """Function to implement the Quantum Amplitude Amplification Q^m, where Q=A R_0 A* R_B, m=num_iterations.
 
     Args:
         A: Circuit defining the unitary A
@@ -153,6 +146,7 @@ def qaa(A, flag_qubit, num_iterations, qubits=None, use_explicit_unitary=False):
                 If qubits is different from A.qubits, A is applied to qubits instead.
         use_explicit_unitary: Flag to specify that we should implement R_0 using using a custom
                               gate defined by the unitary diag(-1,1,...,1). Default is False.
+
     """
     # Instantiate the circuit
     circ = Circuit()

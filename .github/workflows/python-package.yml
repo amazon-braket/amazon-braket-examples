@@ -12,25 +12,34 @@ on:
       - main
       - feature/**
 
+
+permissions:
+  contents: read
+
 jobs:
   build:
-
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Check disk space
+      run: df -h .
+    - uses: actions/checkout@v5
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install -r test/integ_tests/requirements.txt
+        pip install hatch
+    - name: Install BLAS/LAPACK libraries on Ubuntu
+      if: ${{ runner.os == 'Linux' }}
+      run: sudo apt-get update && sudo apt-get install -y libopenblas-dev liblapack-dev
     - name: Run integ tests
       run: |
-        pytest -n auto -ra -v --durations=0 test/integ_tests/
+        hatch run test -p no:cacheprovider

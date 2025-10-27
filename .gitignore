@@ -139,3 +139,10 @@ dmypy.json
 # Data intermediates
 *.pck
 examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Jobs/input-data.adjlist
+
+# Notebook artifacts
+*/3_Deep_dive_into_the_anatomy_of_quantum_circuits/device_logs-*.txt
+examples/hybrid_jobs/4_Embedded_simulators_in_Braket_Hybrid_Jobs/embedded-simulation-*
+examples/hybrid_jobs/8_Creating_Hybrid_Job_Scripts/braket-job-default-*
+examples/**/model.tar.gz
+examples/**results.json

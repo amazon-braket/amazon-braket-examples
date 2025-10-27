@@ -1,20 +1,16 @@
+import functools
+import json
 import os
+import time
 
-# update pennylane version to 0.23 for QNG to be compatible with
-# QAOA use cases.
-os.system("pip install pennylane==0.23.0 -q")
-
+import networkx as nx
 import pennylane as qml
 from pennylane import numpy as np
-import random
-import json
-from source_scripts.utils import get_device, str2bool, train
-from source_scripts.QNSPSA import QNSPSA
-from braket.jobs import save_job_result
-import time
-import networkx as nx
 from pennylane import qaoa
-import functools
+from source_scripts.QNSPSA import QNSPSA
+from source_scripts.utils import get_device, str2bool, train
+
+from braket.jobs import save_job_result
 
 
 def main():
@@ -97,7 +93,7 @@ def main():
         print(f"Trace {j}:")
         opt = opt_choice[optimizer_name](stepsize=lr)
 
-        params, loss_per_trace = train(
+        _params, loss_per_trace = train(
             opt,
             max_iter,
             params_init,

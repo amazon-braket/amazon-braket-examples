@@ -1,0 +1,29 @@
+# Set update schedule for GitHub Actions
+
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
+    commit-message:
+      prefix: infra
+
+  - package-ecosystem: "pip"
+    # Files stored in repository root
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: infra
+    groups:
+       # Specify a name for the group, which will be used in pull request titles
+       # and branch names
+       dev-dependencies:
+          # Define patterns to include dependencies in the group (based on
+          # dependency name)
+          patterns:
+            - "*"       # A wildcard that matches all dependencies in the package
+                        # ecosystem. Note: using "*" may open a large pull request

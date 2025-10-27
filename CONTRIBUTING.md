@@ -21,7 +21,7 @@ information to effectively respond to your bug report or contribution.
 
 We welcome you to use the GitHub issue tracker to report bugs.
 
-When filing an issue, please check [existing open](https://github.com/aws/amazon-braket-examples/issues) and [recently closed](https://github.com/aws/amazon-braket-examples/issues?q=is%3Aissue+is%3Aclosed) issues to make sure somebody else hasn't already
+When filing an issue, please check [existing open](https://github.com/amazon-braket/amazon-braket-examples/issues) and [recently closed](https://github.com/amazon-braket/amazon-braket-examples/issues?q=is%3Aissue+is%3Aclosed) issues to make sure somebody else hasn't already
 reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
 
 * A reproducible test case or series of steps.
@@ -51,11 +51,15 @@ Before sending us a pull request, please ensure that:
 
 ### Making your changes
 When you make a contribution please ensure that you
-1. Follow the existing flow of a notebook ([example](https://github.com/aws/amazon-braket-examples/blob/main/examples/getting_started/1_Running_quantum_circuits_on_simulators.ipynb)).
+1. Follow the existing flow of a notebook ([example](https://github.com/amazon-braket/amazon-braket-examples/blob/main/examples/getting_started/1_Running_quantum_circuits_on_simulators.ipynb)).
 1. Do not duplicate existing information but refer to other examples as relevant.
 1. Only have Open Source licensed dependencies in your example.
-1. Ensure that your example runs without issues on both a recent Braket Notebook Instance (create a new Braket Notebook Instance or restart one from Amazon Braket [in the console](https://docs.aws.amazon.com/braket/latest/developerguide/braket-get-started-create-notebook.html)) and locally, using our most [recently released Amazon Braket SDK version](https://github.com/aws/amazon-braket-sdk-python/blob/main/README.md#installing-the-amazon-braket-python-sdk). Run the entire notebook by clicking `Cells > Run All`, either in the console or locally, and confirm that every cell completes without error.
+1. Ensure that your example runs without issues on both a recent Braket Notebook Instance (create a new Braket Notebook Instance or restart one from Amazon Braket [in the console](https://docs.aws.amazon.com/braket/latest/developerguide/braket-get-started-create-notebook.html)) and locally, using our most [recently released Amazon Braket SDK version](https://github.com/amazon-braket/amazon-braket-sdk-python/blob/main/README.md#installing-the-amazon-braket-python-sdk). Run the entire notebook by clicking `Cells > Run All`, either in the console or locally, and confirm that every cell completes without error.
 1. Ensure that you are using HTML elements to source images in the notebooks, and that sourced images are saved in the appropriate example folder.
+1. Please follow the directions in [INSTRUCTIONS.md](docs/INSTRUCTIONS.md) to update the README. 
+1. Please check that all tests pass (see [TESTING.md](TESTING.md) for more information). 
+
+
 ### Send a Pull Request
 
 GitHub provides additional documentation on [Creating a Pull Request](https://help.github.com/articles/creating-a-pull-request/).
@@ -78,6 +82,6 @@ If you discover a potential security issue in this project we ask that you notif
 
 ## Licensing
 
-See the [LICENSE](https://github.com/aws/amazon-braket-examples/blob/main/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+See the [LICENSE](https://github.com/amazon-braket/amazon-braket-examples/blob/main/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
 
 We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.
