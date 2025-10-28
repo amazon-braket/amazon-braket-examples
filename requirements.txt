@@ -4,12 +4,12 @@ amazon-braket-schemas==1.26.1
 amazon-braket-sdk==1.103.0
 amazon-braket-algorithm-library==1.6.2
 autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
-awscli==1.42.56
-boto3==1.40.56
-botocore==1.40.56
+awscli==1.42.59
+boto3==1.40.59
+botocore==1.40.59
 cvxpy==1.7.3
 h5py==3.14.0 # pinned for build compatibility
-ipykernel==7.0.1
+ipykernel==7.1.0
 jax==0.6.2
 jaxlib==0.6.2 # Jaxlib 0.7.x requires Python >=3.11
 jinja2==3.1.6
