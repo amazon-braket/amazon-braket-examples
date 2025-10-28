@@ -21,8 +21,8 @@ The two quantum circuit diagrams represent the vacuum reference (1) and Matchgat
 
 We explore both aforementioned approaches of QC-AFQMC in this repo, allowing you to make a comparison and have a better understanding of the pros and cons of each method. Our implementations are primarily based on Ref.[1,4]. The notebooks are organized as follows:
 
-* Vacuum_reference.ipynb - This notebook contains a general introduction to QC-AFQMC, the motivation and how it compares to the classical AFQMC. For the quantum component, we explore the vacuum reference circuit approach to evaluate the overlap and local energy of walkers.
-* Matchgate_shadow.ipynb - This notebook investigates the shadow tomography approach to evaluate the overlap and local energy on classical computers.
+* 1_vacuum_reference.ipynb - This notebook contains a general introduction to QC-AFQMC, the motivation and how it compares to the classical AFQMC. For the quantum component, we explore the vacuum reference circuit approach to evaluate the overlap and local energy of walkers.
+* 2_matchgate_shadow.ipynb - This notebook investigates the shadow tomography approach to evaluate the overlap and local energy on classical computers.
 
 
 ## References
