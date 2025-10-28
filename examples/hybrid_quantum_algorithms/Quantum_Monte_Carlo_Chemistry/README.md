@@ -27,7 +27,7 @@ We explore both aforementioned approaches of QC-AFQMC in this repo, allowing you
 
 ## References
 
-1. Xu, Xiaosi, and Ying Li. "Quantum-assisted Monte Carlo algorithms for fermions." [arXiv:2205.14903 (2022)](https://arxiv.org/abs/2205.14903).
+1. Xu, Xiaosi, and Ying Li. "Quantum-assisted Monte Carlo algorithms for fermions." [Quantum 7 (2023): 1072](https://quantum-journal.org/papers/q-2023-08-03-1072/).
 2. Huggins, William J., et al. "Unbiasing fermionic quantum Monte Carlo with a quantum computer." [Nature 603.7901 (2022): 416-420](https://www.nature.com/articles/s41586-021-04351-z).
 3. Wan, Kianna, et al. "Matchgate Shadows for Fermionic Quantum Simulation." [Communications in Mathematical Physics 404.2 (2023): 629-700](https://link.springer.com/article/10.1007/s00220-023-04844-0).
 4. Huang, Benchen, et al. "Evaluating a quantum classical quantum Monte Carlo algorithm with Matchgate shadows." [Physical Review Research 6.4 (2024): 043063](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.6.043063)
