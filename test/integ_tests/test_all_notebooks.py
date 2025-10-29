@@ -48,7 +48,7 @@ EXCLUDED_NOTEBOOKS = [
     # Dynamic circuits with QBP
     "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
     # Investigating local simulator performance on small circuits
-    "02_Expectation_value_calculations_with_program_sets",
+    "02_Expectation_value_calculations_with_program_sets.ipynb",
 ]
 
 if (
