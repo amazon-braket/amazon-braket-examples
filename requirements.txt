@@ -7,6 +7,9 @@ awscli==1.42.59
 boto3==1.40.59
 botocore==1.40.59
 cvxpy==1.7.3
+cudaq==0.12.0.post1
+cudaq-qec==0.4.0.post1
+cudaq-solvers==0.4.0
 h5py==3.14.0 # pinned for build compatibility
 ipykernel==7.1.0
 jax==0.6.2
@@ -22,7 +25,7 @@ openfermion==1.7.1
 openfermionpyscf==0.5
 optax==0.2.6
 pandas==2.3.3
-pennylane==0.42.3
+pennylane==0.42.3 # pinned until Python >=3.11 upgrade
 pennylane-lightning==0.42.0
 pennylane-jax==0.42.0
 pyzmq<27.0 # pinned for build compatibility
@@ -33,6 +36,3 @@ qiskit==2.2.2
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
 scs<3.2.6 # Pinned for GLIBC 2.26 compatability
 sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
-cudaq==0.12.0.post1
-cudaq-qec==0.4.0.post1
-cudaq-solvers==0.4.0
