@@ -27,7 +27,6 @@ optax==0.2.6
 pandas==2.3.3
 pennylane==0.42.3 # pinned until Python >=3.11 upgrade
 pennylane-lightning==0.42.0
-pennylane-jax==0.42.0
 pyzmq<27.0 # pinned for build compatibility
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
