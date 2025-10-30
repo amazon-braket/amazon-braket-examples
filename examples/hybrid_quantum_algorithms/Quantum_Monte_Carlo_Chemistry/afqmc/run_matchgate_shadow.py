@@ -2,6 +2,7 @@ import os, time
 import numpy as np
 import pennylane as qml
 from pyscf import fci, gto
+from afqmc.utils.shadow import random_signed_permutation
 from afqmc.utils.shadow import calculate_classical_shadow
 from afqmc.utils.matchgate import gaussian_givens_decomposition
 from afqmc.utils.chemical_preparation import chemistry_preparation
@@ -22,11 +23,10 @@ def run(
     Args:
         num_shadows (int): number of shadow circuits
         shots (int): number of shots for measurement
-        num_walkers (int): Number of walkers.
-        num_steps (int): Number of (imaginary) time steps
-        dtau (float): Increment of each time step
-        quantum_evaluations_every_n_steps (int): How often to evaluate the energy using quantum
-        max_pool (int): Max workers.
+        num_walkers (int): number of walkers.
+        num_steps (int): number of (imaginary) time steps
+        dtau (float): increment of each time step
+        max_pool (int): max parallelization of walkers
     """
     # perform HF calculations, where the geometry information and basis set are defined
     mol = gto.M(atom="H 0. 0. 0.; H 0. 0. 0.75", basis="sto-3g")
@@ -49,11 +49,17 @@ def run(
     def hydrogen_shadow_circuit(Q):
         qml.Hadamard(wires=0)
         qml.CNOT(wires=[0, 1])
+        
         qml.DoubleExcitation(0.12, wires=[0, 1, 2, 3])
         gaussian_givens_decomposition(Q)
         return qml.counts()
     
-    shadow = calculate_classical_shadow(hydrogen_shadow_circuit, num_shadows, num_qubits)
+    Q_list = []
+    for _ in range(shadow_size):
+        Q_list.append(random_signed_permutation(2*num_qubits))
+        
+    outcomes = calculate_classical_shadow(hydrogen_shadow_circuit, Q_list)
+    shadow = (outcomes, Q_list)
     print("The classical shadows are successfully collected.")
     
     Angstrom_to_Bohr = 1.88973

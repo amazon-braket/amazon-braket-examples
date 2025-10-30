@@ -1,39 +1,32 @@
-import copy, os, itertools, random, math
+import random
 import numpy as np
 import pennylane as qml
-from numba import jit, njit, guvectorize
-from scipy.linalg import det, expm, qr
-from typing import cast, Iterable, Sequence, Callable, List, Tuple
+
 
 '''
-This file contains functions to sample classical shadows for performing shadow tomography;
-Only matchgate shadow is supported for the moment.
+This file contains functions to sample classical shadows for performing shadow tomography
 '''
 
-def calculate_classical_shadow(circuit_template, shadow_size, num_qubits):
+def calculate_classical_shadow(circuit_template, Q_list):
     """
     Given a circuit template, creates a collection of snapshots consisting of a bit string and the corresponding
-    unitary operation.
+    unitary operation. 
+    *Note that although this function could fit for a real QPU on Braket, it's recommended for simulator use only.
     Args:
-        circuit_template (function): A Pennylane QNode.
-        shadow_size (int): The number of snapshots in the shadow.
-        num_qubits (int): The number of qubits in the circuit.
+        circuit_template (function): a Pennylane QNode.
+        shadow_size (int): number of snapshots in the shadow.
+        num_qubits (int): number of qubits in the circuit.
     Returns:
         outcomes: measurement statistics, written as a list of lists containing sublists, with the first element
                   being the covariance matrix C, and the second element is the number of shots;
         Q_list: random orthogonal
     """
-    # sample random orthogonal matrix from M_n here, it would be straight-forward to generalize;
-    Q_list = []
-    for _ in range(shadow_size):
-        Q_list.append(random_signed_permutation(2*num_qubits))
-    
+    shadow_size = len(Q_list)
     output = []
     for ns in range(shadow_size):
-        # for each snapshot, add a random Clifford circuit
         output.append(circuit_template(Q_list[ns]))
         
-    # the data structure has to be changed for better efficiency during postprocessing
+    # the data structure might be changed for better efficiency during postprocessing
     outcomes = []
     for i in output:
         shadow_outcome = []
@@ -41,7 +34,7 @@ def calculate_classical_shadow(circuit_template, shadow_size, num_qubits):
             shadow_outcome.append([construct_covariance(j), i.get(j)])
         outcomes.append(shadow_outcome)
         
-    return outcomes, Q_list
+    return outcomes
 
 
 def construct_covariance(b_str: str):
