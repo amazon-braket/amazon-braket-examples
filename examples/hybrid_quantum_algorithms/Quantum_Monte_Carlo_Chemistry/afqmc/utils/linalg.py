@@ -1,7 +1,6 @@
 import numpy as np
-from numba import jit, njit, guvectorize
-from typing import Union, Tuple
-from scipy.linalg import det, expm, qr
+from numba import njit, guvectorize
+from scipy.linalg import det, qr
 
 def reortho(A: np.ndarray):
     """Reorthogonalise a MxN matrix A.

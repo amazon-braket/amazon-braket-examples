@@ -1,10 +1,4 @@
-import sys
 import numpy as np
-from dataclasses import dataclass
-from typing import Callable, List, Tuple
-from afqmc.estimators.greens_function import gab, gab_mod
-from afqmc.utils.chemical_preparation import ChemicalProperties
-
 
 def local_energy_generic(h1e: np.ndarray, eri: np.ndarray, nuclear_repulsion: int, G):
     r"""Calculate local for generic two-body hamiltonian.
@@ -26,7 +20,6 @@ def local_energy_generic(h1e: np.ndarray, eri: np.ndarray, nuclear_repulsion: in
     e2 = euu + edd + eud + edu
     
     return e1, e2, e1+e2+nuclear_repulsion
-
 
 
 def local_energy_generic_cholesky(trial, G):

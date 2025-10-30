@@ -1,11 +1,8 @@
-import copy, os
+import copy
 import numpy as np
 import pennylane as qml
-from dataclasses import dataclass
-from typing import Callable, List, Tuple
-from itertools import product, combinations
-from afqmc.utils.linalg import reortho
-from afqmc.utils.chemical_preparation import chemistry_preparation, ChemicalProperties
+from typing import List
+from afqmc.utils.chemical_preparation import ChemicalProperties
 from afqmc.utils.quantum import amplitude_estimate, pauli_expect, pauli_estimate
 
 

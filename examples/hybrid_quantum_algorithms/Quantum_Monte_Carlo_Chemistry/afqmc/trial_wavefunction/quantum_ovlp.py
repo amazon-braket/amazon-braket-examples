@@ -5,15 +5,12 @@ import copy
 import numpy as np
 import pennylane as qml
 from scipy.special import comb
-from dataclasses import dataclass
-from typing import Callable, List, Tuple
-from itertools import product, combinations
+from typing import List
+from itertools import product
 from openfermion.ops import general_basis_change
-from afqmc.utils.linalg import reortho
 from afqmc.estimators.ci import get_hmatel, get_one_body_matel
-from afqmc.utils.chemical_preparation import (R_basis_change, chemistry_preparation,
-                                              rotated_hamiltonian_preparation, ChemicalProperties)
-from afqmc.utils.quantum import amplitude_estimate, pauli_expect, pauli_estimate
+from afqmc.utils.chemical_preparation import R_basis_change, rotated_hamiltonian_preparation, ChemicalProperties
+from afqmc.utils.quantum import amplitude_estimate, pauli_expect
 from afqmc.utils.matchgate import ovlp_reconstruction
 
 

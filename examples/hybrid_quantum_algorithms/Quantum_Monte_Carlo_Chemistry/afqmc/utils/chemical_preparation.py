@@ -1,12 +1,9 @@
-import copy, os
 import numpy as np
-from itertools import product
-from typing import List, Tuple
+from typing import List
 from dataclasses import dataclass
 from pyscf.scf.hf import RHF
-from pyscf.scf.uhf import UHF
 from pyscf.gto.mole import Mole
-from pyscf import fci, gto, scf, mcscf, ao2mo
+from pyscf import mcscf, ao2mo
 from scipy.linalg import null_space
 from openfermion.circuits.low_rank import low_rank_two_body_decomposition
 from openfermion.ops import general_basis_change

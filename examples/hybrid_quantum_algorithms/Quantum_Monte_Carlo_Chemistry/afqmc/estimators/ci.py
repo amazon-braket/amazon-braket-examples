@@ -1,13 +1,7 @@
 # This file conducts the calculations using Slater-Condon rule, assuming a RHF starting point.
 # Functions defined in this file is adapted from: github.com/pauxy-qmc/pauxy.
-
-import math
 import numpy as np
-import scipy
-import scipy.linalg
 import scipy.sparse.linalg
-from itertools import combinations, product
-from afqmc.utils.chemical_preparation import ChemicalProperties
 
 
 def get_hmatel(h1e, eri, di, dj):

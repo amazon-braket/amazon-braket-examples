@@ -1,10 +1,7 @@
-import copy, os, time
+import os
 import numpy as np
-import pennylane as qml
 import multiprocessing as mp
-from dataclasses import dataclass
-from scipy.linalg import det, expm, qr
-from typing import Callable, List, Tuple
+from scipy.linalg import expm
 from afqmc.utils.linalg import reortho
 from afqmc.trial_wavefunction.quantum_ovlp import QTrial
 

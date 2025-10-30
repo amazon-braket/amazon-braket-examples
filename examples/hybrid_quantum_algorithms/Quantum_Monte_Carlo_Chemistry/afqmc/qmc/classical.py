@@ -1,14 +1,10 @@
-import copy, os
+import os
 import numpy as np
 import multiprocessing as mp
-from typing import List, Tuple
-from dataclasses import dataclass
-from scipy.linalg import det, expm, qr
+from scipy.linalg import expm
 from afqmc.utils.linalg import reortho
-from afqmc.estimators.greens_function import gab, gab_mod
 from afqmc.trial_wavefunction.single_slater import SingleSlater
 from afqmc.utils.chemical_preparation import ChemicalProperties
-from afqmc.estimators.local_energy import local_energy_generic_cholesky
 
 
 def classical_afqmc(

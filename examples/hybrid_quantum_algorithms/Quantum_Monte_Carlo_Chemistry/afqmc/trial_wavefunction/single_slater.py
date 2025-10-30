@@ -1,9 +1,6 @@
-import copy, os, time, scipy
+import copy
 import numpy as np
-from dataclasses import dataclass
-from typing import Callable, List, Tuple
-from itertools import product, combinations
-from afqmc.estimators.greens_function import gab, gab_mod
+from afqmc.estimators.greens_function import gab
 from afqmc.utils.chemical_preparation import ChemicalProperties
 from afqmc.estimators.local_energy import local_energy_generic_cholesky
 

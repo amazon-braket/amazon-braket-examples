@@ -1,4 +1,3 @@
-import copy, os
 import numpy as np
 import pennylane as qml
 from typing import Callable, List, Tuple

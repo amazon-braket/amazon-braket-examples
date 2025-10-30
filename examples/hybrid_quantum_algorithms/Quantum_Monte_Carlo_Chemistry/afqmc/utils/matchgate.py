@@ -1,15 +1,10 @@
-import copy, os, itertools, math
 import numpy as np
 import pennylane as qml
-from numba import jit, njit
-from scipy.special import comb
-from scipy.linalg import det, expm, qr
-from typing import cast, Iterable, Sequence, Callable, List, Tuple
+from numba import jit
+from typing import cast, Tuple
 from openfermion.linalg.givens_rotations import (
     givens_rotate,
     givens_matrix_elements,
-    givens_decomposition_square,
-    fermionic_gaussian_decomposition,
 )
 from afqmc.utils.shadow import construct_covariance
 from afqmc.utils.linalg import reortho, pfaffian_LTL, fit_poly
@@ -17,7 +12,7 @@ from afqmc.utils.linalg import reortho, pfaffian_LTL, fit_poly
 '''
 This file contains functions to compute overlap integrals from matchgate shadows
 '''
-def ovlp_reconstruction(b_lists, Q_list, comb_coeffs, phi_state, num_fit=8):
+def ovlp_reconstruction(b_lists, Q_list, comb_coeffs, phi_state):
     """Reconstruct overlap approximation as an average over all shadows.
     Args:
         b_lists:
@@ -53,6 +48,7 @@ def ovlp_reconstruction(b_lists, Q_list, comb_coeffs, phi_state, num_fit=8):
     M2s = np.delete(M2s, [2*i for i in range(num_particles)], 2)
     
     # next create all matrices necessary to interpolate and stack them
+    num_fit = dim + 1
     z_list = np.linspace(0., 1., num_fit)
     M = m_pf_generator(M1, M2s, z_list)
     
@@ -72,66 +68,6 @@ def ovlp_reconstruction(b_lists, Q_list, comb_coeffs, phi_state, num_fit=8):
     
     ovlp_mean = np.average(ovlp_list, weights=denom_list, axis=0)
     return 2 * prefactor * ovlp_mean
-
-
-
-def ovlp_reconstruction_robust(b_lists, Q_list, comb_coeffs, comb_coeffs_robust, phi_state, num_fit=8):
-    """Reconstruct overlap approximation as an average over all shadows.
-    Args:
-        shadow (tuple): A shadow tuple obtained from `calculate_classical_shadow`.
-        phi_state (np.ndarray): walker state
-        comb_coeffs:
-        num_fit:
-    Returns:
-        ovlp (np.complex128): overlap integral reconstructed from matchgate shadows.
-    """
-    num_qubits, num_particles = phi_state.shape
-    dim = int(num_qubits - num_particles//2)
-    prefactor = 1.j**(num_particles//2) / (2**(num_qubits - num_particles//2))
-    
-    # create necessary quantities for postprocessing
-    C_0 = construct_covariance('0'*num_qubits)
-    W = construct_W(num_qubits, num_particles)
-    Q_tilde = construct_Q_tilde(phi_state)
-    
-    M1 = np.delete(C_0, [2*i for i in range(num_particles)], 0)
-    M1 = np.delete(M1, [2*i for i in range(num_particles)], 1)
-    
-    # first create all the M1, M2s from b_lists and Q_list
-    M2s = []
-    for b_list, Q in zip(b_lists, Q_list):
-        Q = Q.astype('complex128')
-        for b_state in b_list:
-            COMP = ma_mul(Q, Q_tilde, W, b_state[0])
-            M2s.append(COMP)
-            
-    M2s = np.stack(M2s, axis=0)
-    M2s = np.delete(M2s, [2*i for i in range(num_particles)], 1)
-    M2s = np.delete(M2s, [2*i for i in range(num_particles)], 2)
-    
-    # next create all matrices necessary to interpolate and stack them
-    z_list = np.linspace(0., 1., num_fit)
-    M = m_pf_generator(M1, M2s, z_list)
-    
-    # then perform the vectorized pfaffian calculations, len should be 20*\sum_{shadow} outcome
-    pfaffian_list = pfaffian_LTL(M)
-    
-    b_flattened = [i for j in b_lists for i in j]
-    z_list = z_list.astype('complex128')
-    
-    # generate the coeffs by fitting the data
-    ovlp_list = np.zeros(len(b_flattened), dtype=np.complex128)
-    ovlp_robust_list = np.zeros(len(b_flattened), dtype=np.complex128)
-    denom_list = np.zeros(len(b_flattened))
-    for i, b_state in enumerate(b_flattened):
-        pf_coeffs = fit_poly(z_list, pfaffian_list[i*num_fit:(i+1)*num_fit], deg=dim)
-        ovlp_list[i] = pf_coeffs @ comb_coeffs
-        ovlp_robust_list[i] = pf_coeffs @ comb_coeffs_robust
-        denom_list[i] = b_state[1]
-    
-    ovlp_mean = np.average(ovlp_list, weights=denom_list, axis=0)
-    ovlp_robust_mean = np.average(ovlp_robust_list, weights=denom_list, axis=0)
-    return 2*prefactor*ovlp_mean, 2*prefactor*ovlp_robust_mean
 
     
 """

@@ -1,7 +1,4 @@
-import random
 import numpy as np
-import pennylane as qml
-
 
 '''
 This file contains functions to sample classical shadows for performing shadow tomography
