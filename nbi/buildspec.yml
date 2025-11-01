@@ -30,6 +30,10 @@ phases:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
+      - echo "Debugging - Testing PyPI access from base environment"
+      - pip index versions cudaq || echo "cudaq not available from base"
+      - pip index versions cudaq-qec || echo "cudaq-qec not available from base"
+      - pip index versions cudaq-solvers || echo "cudaq-solvers not available from base"
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
