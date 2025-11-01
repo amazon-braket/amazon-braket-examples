@@ -8,6 +8,9 @@ awscli==1.42.59
 boto3==1.40.59
 botocore==1.40.59
 cvxpy==1.7.3
+cudaq==0.12.0.post1
+cudaq-qec==0.4.0.post1
+cudaq-solvers==0.4.0
 h5py==3.14.0 # pinned for build compatibility
 ipykernel==7.1.0
 jax==0.6.2
