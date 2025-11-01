@@ -25,6 +25,8 @@ phases:
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
       - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.7.1
+      - conda install -y -q --freeze-installed "pip>=24.0"
+      - pip --version
   build:
     commands:
       - BRAKET_ENV=Braket
@@ -35,6 +37,8 @@ phases:
       - pip index versions cudaq-qec || echo "cudaq-qec not available from base"
       - pip index versions cudaq-solvers || echo "cudaq-solvers not available from base"
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
+      - echo "Checking pip version in Braket environment"
+      - conda run -n $BRAKET_ENV pip --version
       - pip cache purge
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
       - zstd -22 --ultra envs/Braket.tar -T0 --auto-threads=logical --rsyncable --sparse
