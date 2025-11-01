@@ -33,12 +33,12 @@ phases:
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
-      - echo "Debugging: Checking pip in Braket environment:"
+      - echo "Debugging - Checking pip in Braket environment"
       - conda run -n $BRAKET_ENV pip --version
       - conda run -n $BRAKET_ENV pip install --upgrade 'pip>=24.0'
-      - echo "Debugging: Pip version after upgrade:"
+      - echo "Debugging - Pip version after upgrade"
       - conda run -n $BRAKET_ENV pip --version
-      - echo "Debugging: Testing cudaq package availability:"
+      - echo "Debugging - Testing cudaq package availability"
       - conda run -n $BRAKET_ENV pip index versions cudaq || echo "cudaq not found"
       - conda run -n $BRAKET_ENV pip index versions cudaq-qec || echo "cudaq-qec not found"
       - pip cache purge
