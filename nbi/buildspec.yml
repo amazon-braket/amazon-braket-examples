@@ -26,6 +26,7 @@ phases:
       - conda config --set solver libmamba
       - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.7.1
       - conda install -y -q --freeze-installed "pip>=24.0"
+      - pip --version
   build:
     commands:
       - BRAKET_ENV=Braket
