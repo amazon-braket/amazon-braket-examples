@@ -3,7 +3,6 @@ amazon-braket-pennylane-plugin==1.33.5
 amazon-braket-schemas==1.26.1
 amazon-braket-sdk==1.103.0
 amazon-braket-algorithm-library==1.6.2
-autoray<0.8 # pin until we support PennyLane 0.42.3 or higher
 awscli==1.42.59
 boto3==1.40.59
 botocore==1.40.59
