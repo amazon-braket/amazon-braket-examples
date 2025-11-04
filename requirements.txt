@@ -8,6 +8,8 @@ awscli==1.42.64
 boto3==1.40.64
 botocore==1.40.64
 cudaq==0.12.0.post1; sys_platform == "linux"
+cudaq-qec==0.4.0.post1; sys_platform == "linux"
+cudaq-solvers==0.4.0; sys_platform == "linux"
 cvxpy==1.7.3
 h5py==3.14.0 # pinned for build compatibility
 ipykernel==7.1.0
