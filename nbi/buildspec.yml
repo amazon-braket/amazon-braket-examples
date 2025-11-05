@@ -9,7 +9,7 @@ phases:
       - yum -y install wget || apt-get -y install wget
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
-      - export export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
+      - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDA_INSTALLER
       - export LCC_MINICONDA_INSTALL_DIR=$HOME/Braket/miniconda3
       - wget --quiet $LCC_MINICONDA_INSTALLER_URL --output-document $LCC_MINICONDA_INSTALLER
