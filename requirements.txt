@@ -34,4 +34,4 @@ qiskit-braket-provider==0.8.0
 qiskit==2.2.3
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
 scs<3.2.9
-sympy<1.13 # Sympy 1.13 produces different results for Simon's algorithm
+sympy==1.14
