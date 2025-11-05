@@ -35,8 +35,6 @@ phases:
       - pip cache purge
       - conda clean --all --yes --force-pkgs-dirs
       - find $LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV -type d -name "__pycache__" -exec rm -rf {} +
-      - find $LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV -type f -name "*.pyc" -delete
-      - find $LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV -type f -name "*.pyo" -delete
       - rm -rf $LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV/share/man
       - rm -rf $LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV/share/doc
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst --compress-level 19 --n-threads -1
