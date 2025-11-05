@@ -35,7 +35,6 @@ phases:
       - pip cache purge
       - conda clean --all --yes --quiet
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
-      - echo "COMPRESS_OUTPUT is set to: '$COMPRESS_OUTPUT'"
       - |
         if [ "$COMPRESS_OUTPUT" = "true" ]; then
           echo "Using high compression (level -22 --ultra)"
