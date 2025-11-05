@@ -35,10 +35,10 @@ phases:
       - conda env create -q --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
       - conda clean --all --yes --quiet
-      - >-
-          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst
-            --compress-level $COMPRESS_LEVEL --n-threads -1
-            --exclude "share/man/*" --exclude "share/doc/*"
+      - echo "Using compression level $COMPRESS_LEVEL"
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst
+          --compress-level $COMPRESS_LEVEL --n-threads -1
+          --exclude "share/man/*" --exclude "share/doc/*"
       - du -hs envs/Braket.tar.zst
 
 artifacts:
