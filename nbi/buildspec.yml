@@ -22,20 +22,22 @@ phases:
       - export PATH=$LCC_MINICONDA_INSTALL_DIR/bin:$PATH
       - conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
       - conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-      - conda config --set default_threads 2
+      - export CONDA_THREADS=$(nproc)
+      - conda config --set default_threads $CONDA_THREADS
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
-      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.7.1
+      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1
   build:
     commands:
       - BRAKET_ENV=Braket
       - mkdir -p envs
       - conda config --set path_conflict warn
-      - conda env create --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
+      - conda env create -q --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
       - conda clean --all --yes --quiet
-      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar --compress-level 1 --n-threads -1
-      - zstd -22 --ultra envs/Braket.tar -T0 --auto-threads=logical --rsyncable --sparse
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
+          --compress-level 19 --n-threads -1
+          --exclude "share/man/*" --exclude "share/doc/*"
       - du -hs envs/Braket.tar.zst
 
 artifacts:
