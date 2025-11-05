@@ -37,14 +37,14 @@ phases:
       - conda clean --all --yes --quiet
       - |
         if [ "$COMPRESS_OUTPUT" = "true" ]; then
-          echo "Using high compression (level -22 --ultra)"
-          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
-            --compress-level 19 --n-threads -1
+          echo "Using high compression (--compress-level 19)"
+          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst \
+            --compress-level 19 --n-threads -1 \
             --exclude "share/man/*" --exclude "share/doc/*"
         else
-          echo "Using minimal compression (level -0)"
-          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
-            --compress-level 1 --n-threads -1
+          echo "Using minimal compression (--compress-level 1)"
+          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst \
+            --compress-level 1 --n-threads -1 \
             --exclude "share/man/*" --exclude "share/doc/*"
         fi
       - du -hs envs/Braket.tar.zst
