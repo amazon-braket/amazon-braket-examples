@@ -30,7 +30,7 @@ pennylane-lightning==0.42.0
 pyzmq<27.0 # pinned for build compatibility
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
-qiskit-braket-provider==0.7.0
+qiskit-braket-provider==0.8.0
 qiskit==2.2.3
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
 scs<3.2.6 # Pinned for GLIBC 2.26 compatability
