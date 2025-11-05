@@ -10,7 +10,6 @@ cudaq==0.12.0.post1; sys_platform == "linux"
 cudaq-qec==0.4.0.post1; sys_platform == "linux"
 cudaq-solvers==0.4.0; sys_platform == "linux"
 cvxpy==1.7.3
-h5py==3.14.0 # pinned for build compatibility
 ipykernel==7.1.0
 jax==0.6.2
 jaxlib==0.6.2 # Jaxlib 0.7.x requires Python >=3.11
@@ -25,7 +24,6 @@ optax==0.2.6
 pandas==2.3.3
 pennylane==0.42.3 # pinned until Python >=3.11 upgrade
 pennylane-lightning==0.42.0
-pyzmq<27.0 # pinned for build compatibility
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
 qiskit-braket-provider==0.8.0
