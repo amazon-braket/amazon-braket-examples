@@ -35,13 +35,8 @@ jobs:
         docker image pull public.ecr.aws/codebuild/amazonlinux-x86_64-standard:5.0
         docker image pull public.ecr.aws/codebuild/local-builds:latest
     - name: Build conda environment
-      env:
-        # To save time, skip compression when running for pull requests.
-        COMPRESS_OUTPUT: ${{ github.event_name == 'push' }}
       run: |
         # Create environment file for CodeBuild
-        cat > build.env << EOF
-        COMPRESS_OUTPUT=$COMPRESS_OUTPUT
-        EOF
-        
+        # Override compression level for pull requests (faster builds), otherwise use buildspec.yml default
+        [ "${{ github.event_name }}" == "pull_request" ] && echo "COMPRESS_LEVEL=1" > build.env || touch build.env
         ./nbi/codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux-x86_64-standard:5.0 -a envs -b nbi/buildspec.yml -e build.env

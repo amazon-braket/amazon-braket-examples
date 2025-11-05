@@ -2,7 +2,7 @@ version: 0.2
 env:
   shell: bash
   variables:
-    COMPRESS_OUTPUT: "true"
+    COMPRESS_LEVEL: "19"
 phases:
   install:
     commands:
@@ -35,18 +35,10 @@ phases:
       - conda env create -q --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
       - pip cache purge
       - conda clean --all --yes --quiet
-      - |
-        if [ "$COMPRESS_OUTPUT" = "true" ]; then
-          echo "Using high compression (--compress-level 19)"
-          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst \
-            --compress-level 19 --n-threads -1 \
-            --exclude "share/man/*" --exclude "share/doc/*"
-        else
-          echo "Using minimal compression (--compress-level 1)"
-          conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst \
-            --compress-level 1 --n-threads -1 \
-            --exclude "share/man/*" --exclude "share/doc/*"
-        fi
+      - echo "Using compression level $COMPRESS_LEVEL"
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst \
+          --compress-level $COMPRESS_LEVEL --n-threads -1 \
+          --exclude "share/man/*" --exclude "share/doc/*"
       - du -hs envs/Braket.tar.zst
 
 artifacts:
