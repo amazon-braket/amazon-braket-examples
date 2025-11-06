@@ -10,7 +10,7 @@ phases:
       - yum -y install wget || apt-get -y install wget
       - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
-      - export LCC_MINICONDA_INSTALLER=Miniconda3-py313_25.9.1-1-Linux-x86_64.sh
+      - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDA_INSTALLER
       - export LCC_MINICONDA_INSTALL_DIR=$HOME/Braket/miniconda3
       - wget --quiet $LCC_MINICONDA_INSTALLER_URL --output-document $LCC_MINICONDA_INSTALLER
@@ -36,7 +36,9 @@ phases:
       - pip cache purge
       - conda clean --all --yes --quiet
       - echo "Using compression level $COMPRESS_LEVEL"
-      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst --compress-level $COMPRESS_LEVEL --n-threads -1 --exclude "share/man/*" --exclude "share/doc/*"
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
+          --compress-level $COMPRESS_LEVEL --n-threads -1
+          --exclude "share/man/*" --exclude "share/doc/*"
       - du -hs envs/Braket.tar.zst
 
 artifacts:
