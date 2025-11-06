@@ -3,12 +3,12 @@ amazon-braket-pennylane-plugin==1.33.5
 amazon-braket-schemas==1.26.1
 amazon-braket-sdk==1.104.1
 amazon-braket-algorithm-library==1.6.2
-awscli==1.42.64
-boto3==1.40.64
-botocore==1.40.64
-cudaq==0.12.0.post1; sys_platform == "linux"
-cudaq-qec==0.4.0.post1; sys_platform == "linux"
-cudaq-solvers==0.4.0; sys_platform == "linux"
+awscli==1.42.67
+boto3==1.40.67
+botocore==1.40.67
+cudaq==0.12.0.post1; sys_platform=="linux"
+cudaq-qec==0.4.0.post1; sys_platform=="linux"
+cudaq-solvers==0.4.0; sys_platform=="linux"
 cvxpy==1.7.3
 ipykernel==7.1.0
 jax==0.6.2
