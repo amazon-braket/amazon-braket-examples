@@ -97,6 +97,9 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
+-  [**Introduction to Amazon Braket spending limits**](examples/braket_features/Spending_Limits_Introduction.ipynb) [(SL)](#index_SL)<a name="SL"></a>
+
+Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold.
 
 ---
 
