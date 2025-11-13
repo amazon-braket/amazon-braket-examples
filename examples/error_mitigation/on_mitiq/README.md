@@ -1,0 +1,1 @@
+mitiq is licensed under the GNU GPLv3. As such, users must install the distributions themselves to run these notebooks. Usage of the specific mitiq_tools.py 
