@@ -24,7 +24,7 @@ categories = {
 }
 
 def main():
-    with open("docs/entries.json", 'r') as fp:
+    with open("docs/ENTRIES.json", 'r') as fp:
         # first, check that all categories are used 
         entries : dict = json.load(fp)
 

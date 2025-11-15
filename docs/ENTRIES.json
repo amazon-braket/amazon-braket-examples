@@ -515,6 +515,6 @@
         "index_terms": ["program sets", "estimators"],
         "categories" : ["braket"],
         "location"   : "examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb",
-        "content"    : "Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
+        "content"    : "  Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
     }
 }
