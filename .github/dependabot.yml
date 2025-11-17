@@ -18,7 +18,7 @@ updates:
       interval: "weekly"
     ignore:
       - dependency-name: "numpy"
-        versions: [ ">=2.0.0" ]  # Jobs containers are still on Numpy 1.26.4; Numpy 2.3.x requires Python >=3.11
+        versions: [ ">=2.0.0" ]  # Jobs containers are still on Python 3.10 and numpy==1.26.4
     commit-message:
       prefix: infra
     groups:
