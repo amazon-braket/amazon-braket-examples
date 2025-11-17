@@ -47,6 +47,9 @@ EXCLUDED_NOTEBOOKS = [
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
     # Dynamic circuits with QBP
     "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
+    # QC-AFQMC
+    "1_vacuum_reference.ipynb",
+    "2_matchgate_shadow.ipynb",
 ]
 
 if (
