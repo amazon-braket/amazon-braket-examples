@@ -1,4 +1,4 @@
-# Quantum Classical-Auxilary field Quantum Monte Carlo
+# Quantum Classical-Auxiliary Field Quantum Monte Carlo
 
 ## Introduction
 
@@ -6,8 +6,8 @@ This repository contains open-source code and tutorials for performing hybrid qu
 
 In recent years, this algorithm has attracted attention from both academia and industry, and several variants have been proposed [1-6]. Broadly speaking, these variants differ in how the overlap amplitude $\langle\Psi_T|\phi\rangle$ is evaluated, where $|\Psi_T\rangle, |\phi\rangle$ represent the quantum trial state and classical walker state, respectively. 
 
-* Ref.[1] employs a Hadamard-test type circuits, namely vacuum reference circuits, to evaluate the overlap. This implementation requires iterative communication between the quantum and classical hardware, as the overlap (and local energy) of the walker states are needed every timestep. This approach has a relatively low scaling in both the quantum $\sim O(N^4)$ and classical resources $\sim O(N^3)$, but a rather large prefactor in the number of circuits to be executed and therefore less suitable for near-term quantum hardware.
-* Ref.[2-4] employ shadow tomography and don't require iterative communication between the quantum and classical hardware. In addition, this approach exhibits an intrinsic noise robustness, meaning no error mitigation required for obtaining "good" results. This makes the second approach more suitable for near-term quantum hardware.
+* Ref.[1] employs Hadamard-test type circuits, namely vacuum reference circuits, to evaluate the overlap. This implementation requires iterative communication between the quantum and classical hardware, as the overlap (and local energy) of the walker states are needed every timestep. This approach has a relatively low scaling in both the quantum $\sim O(N^4)$ and classical resources $\sim O(N^3)$, but a rather large prefactor in the number of circuits to be executed and is therefore less suitable for near-term quantum hardware.
+* Ref.[2-4] employ shadow tomography and don't require iterative communication between the quantum and classical hardware. In addition, this approach exhibits intrinsic noise robustness, meaning no error mitigation is required for obtaining "good" results. This makes the second approach more suitable for near-term quantum hardware.
 
 
 A schematic workflow of the QC-AFQMC algorithm is depicted below.
