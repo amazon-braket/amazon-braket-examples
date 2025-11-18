@@ -12,13 +12,17 @@ on:
       - main
       - feature/**
 
+
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        python-version: ["3.10", "3.11"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
     - name: Check disk space
@@ -33,6 +37,9 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install hatch
+    - name: Install BLAS/LAPACK libraries on Ubuntu
+      if: ${{ runner.os == 'Linux' }}
+      run: sudo apt-get update && sudo apt-get install -y libopenblas-dev liblapack-dev
     - name: Run integ tests
       run: |
         hatch run test -p no:cacheprovider
