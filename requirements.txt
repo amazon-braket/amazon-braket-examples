@@ -3,9 +3,9 @@ amazon-braket-pennylane-plugin==1.33.6
 amazon-braket-schemas==1.27.0
 amazon-braket-sdk==1.105.0
 amazon-braket-algorithm-library==1.6.2
-awscli==1.42.69
-boto3==1.40.69
-botocore==1.40.69
+awscli==1.42.75
+boto3==1.40.75
+botocore==1.40.75
 cudaq==0.12.0.post1; sys_platform=="linux"
 cudaq-qec==0.4.0.post1; sys_platform=="linux"
 cudaq-solvers==0.4.0; sys_platform=="linux"
@@ -27,6 +27,6 @@ pennylane==0.42.3 # PennyLane 0.43.x requires Python >=3.11
 pennylane-lightning==0.42.0
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
-qiskit-braket-provider==0.8.0
+qiskit-braket-provider==0.8.1
 qiskit==2.2.3
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
