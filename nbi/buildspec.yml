@@ -7,7 +7,6 @@ phases:
     commands:
       - sudo rm -rf /usr/local/lib/android & sudo rm -rf /usr/share/dotnet & sudo rm -rf /opt/ghc
       - yum -y install wget || apt-get -y install wget
-      - _ANACONDA_ARCHIVE_URL=https://repo.anaconda.com/archive
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
       - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDA_INSTALLER
@@ -32,12 +31,31 @@ phases:
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create -q --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
+      
       - pip cache purge
       - conda clean --all --yes --quiet
+      
+      - _ENV_PATH=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV
+      - find $_ENV_PATH -name "*.pyc" -delete
+      - find $_ENV_PATH -name "*.pyo" -delete
+      - find $_ENV_PATH -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+      
+      - |
+        find $_ENV_PATH/lib/python*/site-packages -type d -name "tests" -o -name "test" | \
+        grep -v "amazon_braket_examples" | \
+        grep -v "amazon_braket_algorithm_library" | \
+        xargs rm -rf 2>/dev/null || true
+      
+      - rm -rf $_ENV_PATH/share/info
+      
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
-          --compress-level 19 --n-threads -1
-          --exclude "share/man/*" --exclude "share/doc/*"
+          --compress-level 3 --n-threads -1
+          --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
+          --exclude "share/man/*" --exclude "share/doc/*" --exclude "share/info/*"
+      
+      - echo "Archive size:"
       - du -hs envs/Braket.tar.zst
+      - echo "Braket test directories preserved"
 
 artifacts:
   files:
