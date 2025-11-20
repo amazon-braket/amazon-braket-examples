@@ -516,5 +516,12 @@
         "categories" : ["braket"],
         "location"   : "examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb",
         "content"    : "  Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
-    }
+    },
+    "Introduction to Amazon Braket spending limits": {
+        "index_abbrv" : "IntroSL",
+        "index_terms": [],
+        "categories" : ["braket"],
+        "location"   : "examples/braket_features/Spending_Limits_Introduction.ipynb",
+        "content"    : "  Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold."
+    }    
 }
