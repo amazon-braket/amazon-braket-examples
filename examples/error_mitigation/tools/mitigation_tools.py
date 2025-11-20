@@ -7,20 +7,23 @@ import random
 def readout_permutation_generator():
     pass
 
-def readout_twirling(
-        num_qubit : int,
-        as_parametric : bool = False
-        ) -> list[Circuit]:
-    pass
-
-
 @subroutine(register=True)
 def rxz(qubit : int, theta1 : float,theta2 : float) -> Circuit:
     """ apply Double angle parameterizable gate"""
     return Circuit().rx(qubit, theta1).rz(qubit, theta2)
 
 
+def gen_pauli_circ(x : str, i : int ):
+    return Circuit().__getattribute__(x)(i)
+
 Id,X,Z,Y = (0., 0.), (np.pi,0.), (0., np.pi), (np.pi, np.pi)
+
+PAULI_TO_PARAM = {
+    "I":Id,
+    "X":X,
+    "Y":Y,
+    "Z":Z,
+}
 
 CNOT_twirling_gates = [
     (Id, Id, Id, Id),
@@ -65,10 +68,46 @@ twirling_gates = {
 }
 
 def apply_readout_twirl(
-        circ : Circuit, 
-        as_parameters : bool = False, 
-        instances : int = 10):
-    pass
+        circ: Circuit,
+        num_samples: int = 5,
+        ) -> tuple[Circuit, list[dict[str,float]], list[dict[int,bool]]] | tuple[list[Circuit], list[str]]:
+    """Apply readout twirling to all qubits in circuit.
+    
+    Args:
+        circ: Input circuit
+        num_samples: Number of twirling samples
+    
+    Returns:
+        If discrete: (list[Circuit], list[dict]) - list of twirled circuits and flip maps
+    """
+    # Get all qubits used in circuit
+    qubits = set()
+    for ins in circ.instructions:
+        qubits.update(int(q) for q in ins.target)
+    qubits = sorted(qubits)
+    bit_array_masks = []
+    
+    circuits = []
+    for _ in range(num_samples):
+        twirled_circ = circ.copy()
+        flip_map = ['0'] * len(qubits)
+        for n,q in enumerate(qubits):
+            pauli = random.choice(['i','x','y','z'])
+            twirled_circ.add(gen_pauli_circ(pauli, q))
+            if pauli in ["x","y"]:
+                flip_map[n] = "1"
+        
+        circuits.append(twirled_circ)
+        bit_array_masks.append(''.join(flip_map))
+    
+    return circuits, bit_array_masks
+
+circs, maps = apply_readout_twirl(Circuit().x(0).h(1).h(3),5)
+
+for c in circs:
+    print(c)
+print(maps)
+
 
 def apply_two_qubit_twirl(circ : Circuit, num_samples : int = 5) -> tuple[Circuit, list[dict[str,float]]]:
     """ twirl 2Q gates and returns list of parameters 

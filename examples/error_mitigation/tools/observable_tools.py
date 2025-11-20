@@ -2,6 +2,21 @@ from braket.circuits.observables import Observable, TensorProduct, Sum, X, Y, Z,
 from braket.quantum_information import PauliString
 import numpy as np
 
+_PAULI_OBSERVABLES = {"X": X, "Y": Y, "Z": Z, "I":I}
+
+PAULI_PHASE_PRODUCT = {
+    "X":{"Y":+1j,"Z":-1j},
+    "Y":{"X":-1j,"Z":+1j},
+    "Z":{"X":+1j,"Y":-1j}
+}
+
+PAULI_PRODUCT = {
+    "X":{"Y":"Z","Z":"Y"},
+    "Y":{"X":"Z","Z":"X"},
+    "Z":{"X":"Y","Y":"X"}
+}
+
+
 
 def _fast_walsh_hadamard(diag_entries):
     """Fast Walsh-Hadamard transform on diagonal entries."""
@@ -17,18 +32,6 @@ def _fast_walsh_hadamard(diag_entries):
                 v[j + h] = x - y
         h *= 2
     return v / len(v)
-
-PAULI_PHASE_PRODUCT = {
-    "X":{"Y":+1j,"Z":-1j},
-    "Y":{"X":-1j,"Z":+1j},
-    "Z":{"X":+1j,"Y":-1j}
-}
-
-PAULI_PRODUCT = {
-    "X":{"Y":"Z","Z":"Y"},
-    "Y":{"X":"Z","Z":"X"},
-    "Z":{"X":"Y","Y":"X"}
-}
 
 def _pauli_mul(a : str,b : str):
     """ perform pauli multiplication """
@@ -188,3 +191,20 @@ def pauli_grouping(paulis: list[str] | list[tuple[float, str]]) -> tuple[list[st
         groups.append(group)
     
     return signatures, groups
+
+def tensor_from_string(
+        pstr : str,
+        include_trivial: bool = False) -> TensorProduct:
+        """Returns the observable corresponding to the unsigned part of the Pauli string.
+
+        For example, for a Pauli string -XYZ, the corresponding observable is X ⊗ Y ⊗ Z.
+
+        Args:
+            include_trivial (bool): Whether to include explicit identity factors in the observable.
+                Default: False.
+
+        Returns:
+            TensorProduct: The tensor product of the unsigned factors in the Pauli string.
+        """
+        return TensorProduct(
+            [_PAULI_OBSERVABLES[p](n) for n,p in enumerate(pstr) if p != "I" or include_trivial])
