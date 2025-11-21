@@ -3,9 +3,8 @@ from braket.circuits.circuit import subroutine
 from braket.parametric import FreeParameter
 import numpy as np 
 import random
-
-def readout_permutation_generator():
-    pass
+from braket.program_sets import ProgramSet
+from braket.devices import Device
 
 @subroutine(register=True)
 def rxz(qubit : int, theta1 : float,theta2 : float) -> Circuit:
@@ -67,10 +66,34 @@ twirling_gates = {
     "CNot": CNOT_twirling_gates,
 }
 
+def _readout_pass(circ : Circuit) -> tuple[Circuit, str]:
+    """Apply readout twirling to a single circuit.
+    
+    Args:
+        circ: Input circuit
+    
+    Returns:
+        (Circuit, str) - list of twirled circuits and flip maps
+    """
+    qubits = set()
+    for ins in circ.instructions:
+        qubits.update(int(q) for q in ins.target)
+    qubits = sorted(qubits)
+    
+    twirled_circ = circ.copy()
+    flip_map = ['0'] * len(qubits)
+    for n,q in enumerate(qubits):
+        pauli = random.choice(['i','x','y','z'])
+        twirled_circ.add(gen_pauli_circ(pauli, q))
+        if pauli in ["x","y"]:
+            flip_map[n] = "1"
+    return twirled_circ, "".join(flip_map)
+
+
 def apply_readout_twirl(
-        circ: Circuit,
+        circ: Circuit | list[Circuit] | np.ndarray,
         num_samples: int = 5,
-        ) -> tuple[Circuit, list[dict[str,float]], list[dict[int,bool]]] | tuple[list[Circuit], list[str]]:
+        ) -> tuple[np.ndarray[Circuit], np.ndarray[str]]:
     """Apply readout twirling to all qubits in circuit.
     
     Args:
@@ -81,32 +104,73 @@ def apply_readout_twirl(
         If discrete: (list[Circuit], list[dict]) - list of twirled circuits and flip maps
     """
     # Get all qubits used in circuit
-    qubits = set()
-    for ins in circ.instructions:
-        qubits.update(int(q) for q in ins.target)
-    qubits = sorted(qubits)
-    bit_array_masks = []
-    
-    circuits = []
-    for _ in range(num_samples):
-        twirled_circ = circ.copy()
-        flip_map = ['0'] * len(qubits)
-        for n,q in enumerate(qubits):
-            pauli = random.choice(['i','x','y','z'])
-            twirled_circ.add(gen_pauli_circ(pauli, q))
-            if pauli in ["x","y"]:
-                flip_map[n] = "1"
-        
-        circuits.append(twirled_circ)
-        bit_array_masks.append(''.join(flip_map))
-    
-    return circuits, bit_array_masks
+    match circ:
+        case Circuit():
+            return zip(*[_readout_pass(circ) for i in range(num_samples)])
+        case np.ndarray():
+            circuits,bitmasks = np.empty_like(circ), np.empty_like(circ)
+            for index,circuit in np.ndenumerate(circ):
+                c,b = _readout_pass(circuit)
+                circuits[index] = c
+                bitmasks[index] = b
+            return circuits, bitmasks
+        case list():
+            return zip(_readout_pass(circ) for i in range(num_samples))
+        case _:
+            raise TypeError(f"Unsupported format {type(circ)} to apply readout error.")
 
-circs, maps = apply_readout_twirl(Circuit().x(0).h(1).h(3),5)
 
-for c in circs:
-    print(c)
-print(maps)
+# a,b = apply_readout_twirl(Circuit().h(0), 5)
+# for i in a:
+#     print(i)
+# print(b)
+
+def _spell_check(i : int, shape : tuple) -> tuple:
+    if shape is None:
+        return i
+    total = ()
+    for n in shape[::-1]:
+        total = (i % n,) + total
+        i = i // n
+    return total
+
+
+
+def get_twirled_readout_dist(qubits : list, 
+                         n_twirls : int = 5, 
+                         shots : int = 1000,
+                         device : Device = None,
+                         ) -> np.ndarray:
+    """ get confusion matrix through twirling and PRogramSsets"""
+    circuit = Circuit()
+    for i in qubits:
+        circuit.i(i)
+    variants, masks = apply_readout_twirl(circuit, n_twirls)
+    if hasattr(device, "_noise_model") and device._noise_model: # TODO: REMOVE PLEASE WITH EMULATORS
+        variants = [device._noise_model.apply(v.measure(qubits)) for v in variants]
+    pset = ProgramSet(variants, shots_per_executable= shots // n_twirls)
+    results = device.run(pset).result()
+
+    base = {}
+    for item, mask in zip(results, masks):
+        for k, v in item.entries[0].counts.items():
+            kp = ''.join(str(int(a) ^ int(b)) for a, b in zip(k, mask))
+            base[kp] = base.get(kp, 0) + v
+    base = {k: v / shots for k, v in base.items()}
+    return base 
+
+
+def process_readout_twirl(
+        counts : dict, 
+        index : int, 
+        bit_masks : list | np.ndarray
+        ):
+    i = _spell_check(index, getattr(bit_masks, "shape", None))
+    bit_mask = bit_masks[i] 
+
+    def _bit_addition(k,j):
+        return ''.join(str(int(a) ^ int(b)) for a, b in zip(k, bit_mask))
+    return {_bit_addition(k,bit_mask):v for k,v in counts.items()}
 
 
 def apply_two_qubit_twirl(circ : Circuit, num_samples : int = 5) -> tuple[Circuit, list[dict[str,float]]]:

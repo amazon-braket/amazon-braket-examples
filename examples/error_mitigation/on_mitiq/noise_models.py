@@ -1,7 +1,6 @@
 from braket.circuits.observables import Z
 from braket.devices import LocalSimulator
 from braket.circuits import Circuit
-from mitiq.zne import zne, ExpFactory, construct_circuits
 
 from braket.circuits import Circuit, Gate, Observable
 from braket.circuits.gates import CNot, Ry, Rx, Rz, CZ
@@ -9,7 +8,7 @@ from braket.circuits.noise_model import GateCriteria, NoiseModel, ObservableCrit
 from braket.circuits.noises import AmplitudeDamping, BitFlip, Depolarizing, PauliChannel, PhaseFlip
 from braket.circuits.noises import TwoQubitDepolarizing
 from braket.registers import Qubit, QubitSetInput
-from braket.emulation.local_emulator import LocalEmulator
+# from braket.emulation.local_emulator import LocalEmulator
 import numpy as np
 
 rng = np.random.default_rng(seed=49)
@@ -31,6 +30,16 @@ _depol_noise_model.add_noise(TwoQubitDepolarizing(0.05), GateCriteria([CNot, CZ]
 
 qd_depol = LocalSimulator("braket_dm", noise_model= _depol_noise_model)
 
+_noise_model_total = NoiseModel()
+_noise_model_total.add_noise(Depolarizing(0.001), GateCriteria([Ry,Rx, Rz]))
+_noise_model_total.add_noise(TwoQubitDepolarizing(0.05), GateCriteria([CNot, CZ]))
+for i in range(10):
+    pass
+    _noise_model_total.add_noise(BitFlip(max(0,rng.normal(0.05/2, 0.025/2))), MeasureCriteria(i))
+    # _noise_model_total.add_noise(AmplitudeDamping(max(0,rng.normal(0.01, 0.0025))), MeasureCriteria(i))
+
+qd_total = LocalSimulator("braket_dm", noise_model=_noise_model_total)
 
 if __name__ == "__main__":
     print(_readout_asymm)
+    print(_noise_model_total)

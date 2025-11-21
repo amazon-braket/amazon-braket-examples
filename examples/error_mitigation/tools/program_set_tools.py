@@ -92,7 +92,6 @@ def process_program_sets(
         observables : list[Observable | None],
         output_type : str = "expectation",
         measurement_filter : Callable | None = None,
-        shape : tuple | None = None, 
         ):
     """ process a list of program sets """
     results = []
@@ -100,9 +99,13 @@ def process_program_sets(
     index = 0
     for pset in pset_results:
         for entry in pset: 
-            data = entry[0].probabilities
+            print('pre and post processed results')
+            print(entry[0].probabilities)
             if measurement_filter: 
-                data = measurement_filter(data, index)
+                data = measurement_filter(entry[0].counts, index)
+            else:
+                data = entry[0].probabilities
+            print(data)
             if output_type == "bitstrings" or observables[index % n_bases] is None:
                 results.append(data)
             else:
@@ -161,6 +164,7 @@ def run_with_program_sets(
 
     if hasattr(device, "_noise_model"): # HACKY PLS REMOVE K THX
         circuits_flat = [device._noise_model.apply(c) for c in circuits_flat]
+        print(circuits_flat[0])
     if isinstance(measurement_bases, np.ndarray):
         bases_shape = measurement_bases.shape
         measurement_bases = measurement_bases.flatten().tolist()
@@ -171,6 +175,7 @@ def run_with_program_sets(
         parameters = parameters.flatten().tolist()
     else:
         params_shape = (len(parameters),)
+    total_shape = circuits_shape + params_shape + bases_shape
 
     if isinstance(observables_per_basis, np.ndarray):
         observables_per_basis = observables_per_basis.flatten().tolist()    
@@ -196,11 +201,10 @@ def run_with_program_sets(
         measurement_filter= measurement_filter,
             )
     # Reshape to match original dimensions
-    result_shape = circuits_shape + params_shape + bases_shape
-    return np.reshape(result, result_shape)
+    return np.reshape(result, total_shape)
 
 
-def print_program_set(program_set, result=None):
+def print_program_set(program_set, result = None):
     """Prints the program set and its result 
     
     From ``braket_features/program_sets/01_Getting_Started_with_Program_Sets.ipynb``

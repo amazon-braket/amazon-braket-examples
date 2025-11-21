@@ -2,14 +2,9 @@
 
 from braket.circuits import Circuit
 from mitiq.executor import Executor
-from braket.emulation.local_emulator import LocalEmulator
-from braket.aws import AwsDevice
 from braket.devices import Device
 from braket.circuits.circuit import subroutine
-from braket.parametric import FreeParameter
 import numpy as np
-import random
-from mitiq.calibration import Calibrator, ZNE_SETTINGS
 from braket.program_sets import ProgramSet
 from mitiq import MeasurementResult
 from braket.tasks import ProgramSetQuantumTaskResult, GateModelQuantumTaskResult
@@ -17,6 +12,7 @@ from braket.circuits.compiler_directives import EndVerbatimBox, StartVerbatimBox
 from functools import partial
 from mitiq.rem import mitigate_measurements
 from typing import Callable
+from tools.mitigation_tools import process_readout_twirl
 
 def _braket_result_to_mitiq_meas_result(
         result :GateModelQuantumTaskResult | ProgramSetQuantumTaskResult,
@@ -104,9 +100,30 @@ def braket_executor(
         partial(_execute_via_programs,shots=shots, verbatim=verbatim))
 
 
-def braket_rem_mitigatior(inverse_confusion_matrix : np.ndarray = None) -> Callable:
-    pass
 
+def _spell_check(i : int, shape : tuple) -> tuple:
+    total = ()
+    for n in shape[::-1]:
+        total = (i % n,) + total
+        i = i // n
+    return total
+
+
+def braket_rem_twirl_mitigator(
+        inverse_confusion_matrix : np.ndarray = None,
+        bit_masks : np.ndarray = None,
+        ) -> Callable:
+    """ return a function to modify a count with a inverse confusion matrix """
+    
+    def to_run(counts : dict, index : int) -> dict:
+        return mitigate_measurements(
+            MeasurementResult.from_counts(
+                process_readout_twirl(counts, index, bit_masks)
+                ),
+            inverse_confusion_matrix=inverse_confusion_matrix
+            ).prob_distribution()
+
+    return to_run
 
 
 
