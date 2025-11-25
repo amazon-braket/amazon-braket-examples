@@ -13,7 +13,7 @@ def rxz(qubit : int, theta1 : float,theta2 : float) -> Circuit:
 
 
 def gen_pauli_circ(x : str, i : int ):
-    return Circuit().__getattribute__(x)(i)
+    return Circuit().__getattribute__(x.lower())(i)
 
 Id,X,Z,Y = (0., 0.), (np.pi,0.), (0., np.pi), (np.pi, np.pi)
 
@@ -83,10 +83,10 @@ def _readout_pass(circ : Circuit) -> tuple[Circuit, str]:
     twirled_circ = circ.copy()
     flip_map = ['0'] * len(qubits)
     for n,q in enumerate(qubits):
-        pauli = random.choice(['i','x','y','z'])
+        pauli = random.choice(['I','X','Y','Z'])
         twirled_circ.add(gen_pauli_circ(pauli, q))
-        if pauli in ["x","y"]:
-            flip_map[n] = "1"
+        # if pauli in ["x","y"]:
+        flip_map[n] = pauli
     return twirled_circ, "".join(flip_map)
 
 
@@ -101,7 +101,7 @@ def apply_readout_twirl(
         num_samples: Number of twirling samples
     
     Returns:
-        If discrete: (list[Circuit], list[dict]) - list of twirled circuits and flip maps
+        (list[Circuit], list[dict]) - list of twirled circuits and the Pauli twirls maps
     """
     # Get all qubits used in circuit
     match circ:
@@ -119,11 +119,6 @@ def apply_readout_twirl(
         case _:
             raise TypeError(f"Unsupported format {type(circ)} to apply readout error.")
 
-
-# a,b = apply_readout_twirl(Circuit().h(0), 5)
-# for i in a:
-#     print(i)
-# print(b)
 
 def _spell_check(i : int, shape : tuple) -> tuple:
     if shape is None:
@@ -153,6 +148,7 @@ def get_twirled_readout_dist(qubits : list,
 
     base = {}
     for item, mask in zip(results, masks):
+        mask = "".join("1" if m in ["X","Y"] else "0" for m in mask)
         for k, v in item.entries[0].counts.items():
             kp = ''.join(str(int(a) ^ int(b)) for a, b in zip(k, mask))
             base[kp] = base.get(kp, 0) + v

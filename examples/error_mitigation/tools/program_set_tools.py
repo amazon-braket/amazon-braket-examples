@@ -20,17 +20,50 @@ PROGRAM_SET_LIMIT = 100
 SUPPORTED_OBSERVABLES = (Observable, TensorProduct, Sum, list)
 from tools.observable_tools import tensor_from_string
 
+STANDARD_CONVERSION = {
+    "X": lambda i : Circuit().h(i), #.measure(i), 
+    "Y": lambda i : Circuit().si(i).h(i), #.measure(i),
+    "Z": lambda i : Circuit(), #.measure(i),
+    "I": lambda i : Circuit(), #.measure(i),
+}
+
+def standard_bases(
+        pstr : str,
+        conversion : dict) -> Circuit:
+    """ retrun standard measurement basis """
+    c = Circuit()
+    for i,p in enumerate(pstr):
+        c+= conversion[p](i)
+    c+= Circuit().measure(range(len(pstr)))
+    return c
+
 def _zip_to_pset(
         obj_list : list[tuple[Circuit,list[float],Observable]], 
-        shots_per_executable : int = None):
+        shots_per_executable : int = None,
+        conversion : dict[str,Callable] = None,
+        device : Device = None):
     """ zip an object list to a ProgramSet """
-    inputs = dict(
-        zip(
-            ["circuits","input_sets","observables"],
-            zip(*obj_list)
-        )
-    )
-    return ProgramSet.zip(**inputs, shots_per_executable=shots_per_executable)
+    # # 
+    # inputs = dict(
+    #     zip(
+    #         ["circuits","input_sets","observables"],
+    #         zip(*obj_list)
+    #     )
+    # )    
+    # return ProgramSet.zip(**inputs, shots_per_executable=shots_per_executable)
+    if conversion is None:
+        conversion = STANDARD_CONVERSION
+
+    circuits = [
+        c.make_bound_circuit(p) + standard_bases(o,conversion) for c,p,o in zip(*zip(*obj_list))
+    ]
+
+    ## HACKY PLS REMOVE
+    if hasattr(device, "_noise_model") and device._noise_model:
+        circuits = [device._noise_model.apply(c) for c in circuits]
+    # print(circuits[0])
+    return ProgramSet(circuits
+        , shots_per_executable=shots_per_executable)
 
 def distribute_to_program_sets(
         circs : list[Circuit] ,
@@ -39,6 +72,7 @@ def distribute_to_program_sets(
         programs : list[Circuit | CircuitBinding] | None = None,
         shots_per_executable : int | list = 100,  
         verbose : bool = False, 
+        device : Device = None,
         ) -> list[ProgramSet]:
     """ convert (circuits, observables, parameters) to valid program sets based on program set limits 
 
@@ -55,21 +89,22 @@ def distribute_to_program_sets(
     n_para = len(parameters) if parameters else 1 
     n_obs = len(observables)
     
-    if verbose:
-        if n_circ * n_para * n_obs > PROGRAM_SET_LIMIT: 
-            print(f"-- {n_circ * n_para * n_obs} tasks required: splitting up into multiple program sets. ")
-        else:
-            print(f"-- able to include {n_circ * n_para * n_obs} tasks in a single program set ")
+    if n_circ * n_para * n_obs > PROGRAM_SET_LIMIT: 
+        print(f"-- {n_circ * n_para * n_obs} tasks required: splitting up into multiple program sets. ")
+    else:
+        print(f"-- able to include {n_circ * n_para * n_obs} tasks in a single program set ")
     temp = []
     psets = programs if programs else [] 
-    for item in product(circs, parameters, observables):
+    for t, item in enumerate(product(circs, parameters, observables),1):
         item = dc(item)
-        if len(temp) == PROGRAM_SET_LIMIT:
-            psets.append(_zip_to_pset(temp, shots_per_executable=shots_per_executable))
-            temp = []
         temp.append(item)
-    if len(temp) > 0:
-        psets.append(_zip_to_pset(temp, shots_per_executable=shots_per_executable))
+        if len(temp) == PROGRAM_SET_LIMIT or t==n_circ * n_para * n_obs:
+            psets.append(
+                _zip_to_pset(
+                    temp, 
+                    shots_per_executable=shots_per_executable,
+                    device = device))
+            temp = []
     return psets
 
 def probs_to_ev(probabilities : dict, pauli_string : str | dict | PauliString) -> float:
@@ -99,13 +134,10 @@ def process_program_sets(
     index = 0
     for pset in pset_results:
         for entry in pset: 
-            print('pre and post processed results')
-            print(entry[0].probabilities)
             if measurement_filter: 
                 data = measurement_filter(entry[0].counts, index)
             else:
                 data = entry[0].probabilities
-            print(data)
             if output_type == "bitstrings" or observables[index % n_bases] is None:
                 results.append(data)
             else:
@@ -125,8 +157,9 @@ def run_with_program_sets(
         shots_per_executable : int | list = 100,  
         measurement_filter : Callable | None = None,
         verbose : bool = False, 
+        calculate_variances : bool = False,
         ) -> np.ndarray:
-    """ distribute and execute via program sets 
+    """ distribute and execute (circuits * bases * parameters) via program sets 
     
     Args:
         circuits (Circuit):
@@ -141,6 +174,8 @@ def run_with_program_sets(
 
     Returns:
         np.ndarray : array of dimension (circuits.shape) + (params.shape) + (bases.shape)
+            - Optionally, may have 1 more dimension with variances. 
+
         
     Examples:
         >>> meas_basis = [
@@ -154,7 +189,7 @@ def run_with_program_sets(
     """
     if device is None:
         device = LocalSimulator()
-    # flatten numpy arrays while preserving shape 
+    # flatten arrays while remembering the shape 
     if isinstance(circuits, np.ndarray):
         circuits_shape = circuits.shape
         circuits_flat = circuits.flatten().tolist()
@@ -162,9 +197,6 @@ def run_with_program_sets(
         circuits_shape = (len(circuits),)
         circuits_flat = circuits
 
-    if hasattr(device, "_noise_model"): # HACKY PLS REMOVE K THX
-        circuits_flat = [device._noise_model.apply(c) for c in circuits_flat]
-        print(circuits_flat[0])
     if isinstance(measurement_bases, np.ndarray):
         bases_shape = measurement_bases.shape
         measurement_bases = measurement_bases.flatten().tolist()
@@ -181,17 +213,16 @@ def run_with_program_sets(
         observables_per_basis = observables_per_basis.flatten().tolist()    
     assert len(observables_per_basis) == len(measurement_bases)
 
-    measurement_bases = [tensor_from_string(b) for b in measurement_bases]
-
     psets = distribute_to_program_sets(
         circs = circuits_flat,
         observables= measurement_bases,
         parameters = parameters,
         shots_per_executable=shots_per_executable,
-        verbose = verbose
+        verbose = verbose,
+        device = device,
     )
     pset_results = []
-    for pset in psets: # potential for catching errors later here
+    for pset in psets: # potential for catching errors in failed PSETs here
         pset_results.append(device.run(  # noqa: PERF401
             pset, shots=pset.total_executables * pset.shots_per_executable).result()) 
     
@@ -200,8 +231,7 @@ def run_with_program_sets(
         observables= observables_per_basis, 
         measurement_filter= measurement_filter,
             )
-    # Reshape to match original dimensions
-    return np.reshape(result, total_shape)
+    return np.reshape(result, total_shape) # reshape to original dimension
 
 
 def print_program_set(program_set, result = None):

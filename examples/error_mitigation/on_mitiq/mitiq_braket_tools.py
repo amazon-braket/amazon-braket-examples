@@ -11,8 +11,7 @@ from braket.tasks import ProgramSetQuantumTaskResult, GateModelQuantumTaskResult
 from braket.circuits.compiler_directives import EndVerbatimBox, StartVerbatimBox
 from functools import partial
 from mitiq.rem import mitigate_measurements
-from typing import Callable
-from tools.mitigation_tools import process_readout_twirl
+from collections.abc import Callable
 
 def _braket_result_to_mitiq_meas_result(
         result :GateModelQuantumTaskResult | ProgramSetQuantumTaskResult,
@@ -98,6 +97,19 @@ def braket_executor(
             max_batch_size=max_programs)
     return Executor(
         partial(_execute_via_programs,shots=shots, verbatim=verbatim))
+
+
+def process_readout_twirl(
+        counts : dict, 
+        index : int, 
+        bit_masks : list | np.ndarray
+        ):
+    i = _spell_check(index, getattr(bit_masks, "shape", None))
+    bit_mask = bit_masks[i] 
+
+    def _bit_addition(k,j):
+        return ''.join(str(int(a) ^ int(b)) for a, b in zip(k, bit_mask))
+    return {_bit_addition(k,bit_mask):v for k,v in counts.items()}
 
 
 
