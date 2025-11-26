@@ -24,7 +24,7 @@ phases:
       - conda config --set default_threads $CONDA_THREADS
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
-      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1
+      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1 squashfs-tools
   build:
     commands:
       - BRAKET_ENV=Braket
