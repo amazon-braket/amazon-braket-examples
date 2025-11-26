@@ -6,7 +6,7 @@ phases:
   install:
     commands:
       - sudo rm -rf /usr/local/lib/android & sudo rm -rf /usr/share/dotnet & sudo rm -rf /opt/ghc
-      - yum -y install wget squashfs-tools || apt-get -y install wget squashfs-tools
+      - yum -y install wget || apt-get -y install wget
       - _MINICONDA_ARCHIVE_URL=https://repo.anaconda.com/miniconda
       - export LCC_MINICONDA_INSTALLER=Miniconda3-latest-Linux-x86_64.sh
       - export LCC_MINICONDA_INSTALLER_URL=$_MINICONDA_ARCHIVE_URL/$LCC_MINICONDA_INSTALLER
@@ -24,6 +24,7 @@ phases:
       - conda config --set default_threads $CONDA_THREADS
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
+      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1
   build:
     commands:
       - BRAKET_ENV=Braket
@@ -38,20 +39,15 @@ phases:
         grep -v "amazon_braket" | \
         grep -v "braket" | \
         xargs rm -rf 2>/dev/null || true
-      - echo "Creating SquashFS image..."
-      - |
-        mksquashfs $_ENV_PATH envs/Braket.sqfs \
-          -comp zstd \
-          -Xcompression-level 19 \
-          -b 1M \
-          -no-xattrs \
-          -no-exports \
-          -e "*.pyc" "*.pyo" "__pycache__" \
-          "share/man" "share/doc" "share/info" \
-          "*.a" "*.la" \
-          -processors $(nproc) \
-          -progress
-      - echo "SquashFS image created successfully"
+      - echo "Creating SquashFS image with conda-pack..."
+      - conda pack --name $BRAKET_ENV --output envs/Braket.sqfs
+          --format squashfs
+          --n-threads -1
+          --compress-level 9
+          --ignore-missing-files
+          --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
+          --exclude "share/man/*" --exclude "share/doc/*" --exclude "share/info/*"
+      - echo "SquashFS image size:"
       - du -hs envs/Braket.sqfs
       - ls -lh envs/Braket.sqfs
 
