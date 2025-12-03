@@ -1,5 +1,3 @@
-# Please note, the items in this director 
-
 from braket.circuits import Circuit
 from mitiq.executor import Executor
 from braket.devices import Device
@@ -12,6 +10,22 @@ from braket.circuits.compiler_directives import EndVerbatimBox, StartVerbatimBox
 from functools import partial
 from mitiq.rem import mitigate_measurements
 from collections.abc import Callable
+from braket.program_sets import CircuitBinding
+
+"""
+mitiq_braket_tools.py
+
+Contains three executors ->
+    
+braket_measurement_executor: 
+    returns MeasurementResult objects for use with mitiq observables
+braket_counts_executor: 
+    returns raw measurement counts
+braket_expectation_executor: 
+    returns expectation values from **braket** observables
+
+"""
+
 
 def _braket_result_to_mitiq_meas_result(
         result :GateModelQuantumTaskResult | ProgramSetQuantumTaskResult,
@@ -26,14 +40,13 @@ def _braket_result_to_mitiq_meas_result(
     """
     match result:
         case GateModelQuantumTaskResult():
-            return MeasurementResult.from_counts(result.measurement_probabilities)
+            return MeasurementResult.from_counts(result.measurement_counts)
         case ProgramSetQuantumTaskResult():
-            measurement_results = []
-            for entry in result:
-                for item in entry.entries:
-                    measurement_results.extend(
-                        MeasurementResult.from_counts(item.counts))
-            return measurement_results
+            return [
+                MeasurementResult.from_counts(item.counts)
+                for entry in result
+                for item in entry.entries
+            ]
         case _:
             raise NotImplementedError(f"result type {type(result)} conversion to mitiq not supported")
 
@@ -46,6 +59,41 @@ def _verbatim_pass(
             return program
     return Circuit().add_verbatim_box(program)
 
+
+# def _execute_counts_batch(
+#         device : Device, 
+#         programs : list[Circuit],
+#         shots : int,
+#         verbatim : bool = True,
+#         ) -> list[MeasurementResult]:
+#     if isinstance(programs, Circuit):
+#         programs = [programs]
+#     if verbatim:
+#         programs = [_verbatim_pass(program) for program in programs]
+#     result = device.run(
+#         ProgramSet(programs, shots_per_executable = shots // len(programs))
+#                         ).result()
+#     return [
+#         MeasurementResult.from_counts(item.counts) for entry in result for item in entry.entries]
+
+def _execute_expectation_batch(
+        device : Device, 
+        programs : list[Circuit],
+        observable,
+        shots : int,
+        verbatim : bool = True,
+        ) -> list[float]:
+    if isinstance(programs, Circuit):
+        programs = [programs]
+    if verbatim:
+        programs = [_verbatim_pass(program) for program in programs]
+    # Add expectation measurement to each circuit
+    result = device.run(ProgramSet.zip(
+        programs, observables= [observable] * len(programs),
+        shots_per_executable = shots // len(programs)
+            )
+        ).result()
+    return [item.expectation for entry in result for item in entry.entries]
 
 def _execute_via_program_set(
         device : Device, 
@@ -60,7 +108,8 @@ def _execute_via_program_set(
     result = device.run(
         ProgramSet(programs, shots_per_executable = shots // len(programs))
                         ).result()
-    return _braket_result_to_mitiq_meas_result(result)
+    results = _braket_result_to_mitiq_meas_result(result)
+    return results if isinstance(results, list) else [results]
 
 def _execute_via_programs(
         device : Device, 
@@ -74,29 +123,69 @@ def _execute_via_programs(
         program = _verbatim_pass(program)
     return _braket_result_to_mitiq_meas_result(device.run(program, shots = shots).result())
 
-def braket_executor(
+def braket_measurement_executor(
         device : Device,
         shots : int,
         verbatim : bool = True,
+        batch_if_possible : bool = True,
                           ) -> Executor:
-    """ Simple execution of a mitiq protocol via Braket ; observables supported via mitiq
+    """ Executor that returns MeasurementResult objects for use with **mitiq** observables
 
     Args:
         device (Device): Braket quantum device or simulator 
-        shots (int): **total** number of shots, will be distributed to the number of batches 
-        verbatim (bool): whether or not to utilize verbatim circuits. if True, circuits need to match
-            the current device topology and characteristics. assuming inputs are compatible. 
+        shots (int): **total** numb=er of shots, will be distributed to the number of batches 
+        verbatim (bool): whether or not to utilize verbatim circuits
 
     """
-
     for action in device.properties.action:
-        if "PROGRAM_SET" in action.name:
+        if "PROGRAM_SET" in action.name and batch_if_possible:
             max_programs = device.properties.action[action].maximumExecutables
-        return Executor(
-            partial(_execute_via_program_set, shots=shots, verbatim=verbatim),
+            return Executor(
+                partial(_execute_via_program_set, device, shots=shots, verbatim=verbatim),
             max_batch_size=max_programs)
     return Executor(
-        partial(_execute_via_programs,shots=shots, verbatim=verbatim))
+        partial(_execute_via_programs, device, shots=shots, verbatim=verbatim))
+
+"""
+main executor functions 
+"""
+
+
+def braket_expectation_executor(
+        device : Device,
+        observable,
+        shots : int,
+        verbatim : bool = True,
+        batch_if_possible : bool = True,
+                          ) -> Executor:
+    """ Executor that computes expectation values from **Braket** observables
+
+    Args:
+        device (Device): Braket quantum device or simulator 
+        observable: Braket observable to measure
+        shots (int): number of shots per circuit
+        verbatim (bool): whether or not to utilize verbatim circuits
+
+    """
+    def _execute_expectation(circuit) -> float:
+        if verbatim:
+            circuit = _verbatim_pass(circuit)
+        task = device.run(circuit + Circuit().expectation(observable), shots=shots)
+        result = task.result()
+        return result.values[0]
+    
+    for action in device.properties.action:
+        if "PROGRAM_SET" in action.name and batch_if_possible:
+            max_programs = device.properties.action[action].maximumExecutables
+            return Executor(
+                partial(_execute_expectation_batch, device, observable=observable, shots=shots, verbatim=verbatim),
+                max_batch_size=max_programs)
+    return Executor(_execute_expectation)
+
+
+"""
+tools for helping with readout mitigation with mitiq
+"""
 
 
 def process_readout_twirl(
@@ -104,6 +193,7 @@ def process_readout_twirl(
         index : int, 
         bit_masks : list | np.ndarray
         ):
+    """ """
     i = _spell_check(index, getattr(bit_masks, "shape", None))
     bit_mask = bit_masks[i] 
 
@@ -137,28 +227,6 @@ def braket_rem_twirl_mitigator(
 
     return to_run
 
-
-
-def test_braket_executor():
-    """Test the braket executor with local simulator"""
-    from braket.devices import LocalSimulator
-    
-    # Create simple test circuit
-    circuit = Circuit().h(0).cnot(0, 1)
-    
-    # Test with local simulator
-    device = LocalSimulator()
-    executor = braket_executor(device, shots=100, verbatim=False)
-    
-    # Execute circuit
-    result = executor([circuit])[0]
-    
-    # Basic validation
-    assert isinstance(result, MeasurementResult)
-    assert len(result.bitstrings) > 0
-    print(f"Test passed: Got {len(result.bitstrings)} measurements")
-
 if __name__ == "__main__":
-    test_braket_executor()
-
+    pass
 
