@@ -211,6 +211,7 @@ def _spell_check(i : int, shape : tuple) -> tuple:
     return total
 
 
+
 def braket_rem_twirl_mitigator(
         inverse_confusion_matrix : np.ndarray = None,
         bit_masks : np.ndarray = None,
