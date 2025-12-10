@@ -9,7 +9,7 @@ botocore==1.42.4
 cudaq==0.12.0.post1; sys_platform=="linux"
 cudaq-qec==0.4.0.post1; sys_platform=="linux"
 cudaq-solvers==0.4.0; sys_platform=="linux"
-cvxpy==1.7.5
+cvxpy==1.7.3
 ipykernel==7.1.0
 jax==0.6.2
 jaxlib==0.6.2 # Jaxlib 0.7.x requires Python >=3.11
