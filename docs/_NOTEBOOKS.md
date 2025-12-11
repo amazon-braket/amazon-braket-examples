@@ -472,3 +472,7 @@
 
   This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
 
+-  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
+
+  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for native gate compilation.
+

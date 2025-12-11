@@ -523,5 +523,12 @@
         "categories" : ["braket"],
         "location"   : "examples/braket_features/Spending_Limits_Introduction.ipynb",
         "content"    : "  Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold."
-    }    
+    },
+    "Compiling Braket circuits with the Qiskit-Braket provider": {
+        "index_abbrv" : "CBQBP",
+        "index_terms": ["qiskit", "compilation"],
+        "categories" : ["qiskit"],
+        "location"   : "examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb",
+        "content"    : "  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for native gate compilation."
+    }
 }
