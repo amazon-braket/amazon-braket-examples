@@ -34,7 +34,9 @@ def dprint(circuit : Circuit, max_width : int = 110) -> str:
             if len(line) <= start:
                 continue
             
-            section = line[0:c0] + line[start:end+1]
+            section = line[0:c0] + line[start:end+1] 
+            if end !=breaks[-1]:
+                section += ' ||'
             result.append(section.rstrip())
     
     return print('\n'.join(result))
