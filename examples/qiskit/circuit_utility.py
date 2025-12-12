@@ -6,7 +6,7 @@ def dprint(circuit : Circuit, max_width=100) -> str:
     circuit_str = str(circuit)
     lines = circuit_str.strip().split('\n')
     if not lines or len(lines[0]) <= max_width:
-        return circuit_str
+        print(circuit_str)
     
     # Find column positions from header row
     header = lines[0]
