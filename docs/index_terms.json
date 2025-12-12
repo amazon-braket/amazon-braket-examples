@@ -8,6 +8,7 @@
     "container":[],
     "chemistry":["hydrogen","chemistry","molecular"],
     "cuda":[],
+    "compilation":["transpile","compile","transpiler"],
     "calibration":[],
     "moments":[],
     "connectivity":[],
