@@ -1,10 +1,10 @@
 from braket.circuits import Circuit
 
 
-def dprint(circuit : Circuit, max_width=120) -> str:
+def dprint(circuit : Circuit, max_width : int = 110) -> str:
     """Split Circuit string at logical column boundaries and depths for better display.
     
-    Default appears to be 120, though may differ on some browsers. 
+    Default appears to be 100-120, we take 110 conservatively. 
     """
     circuit_str = str(circuit)
     lines = circuit_str.strip().split('\n')
