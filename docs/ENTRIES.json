@@ -529,6 +529,6 @@
         "index_terms": ["qiskit", "compilation"],
         "categories" : ["qiskit"],
         "location"   : "examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb",
-        "content"    : "  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for native gate compilation."
+        "content"    : "  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation."
     }
 }

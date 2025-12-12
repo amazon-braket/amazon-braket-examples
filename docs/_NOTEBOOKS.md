@@ -474,5 +474,5 @@
 
 -  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
 
-  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for native gate compilation.
+  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation.
 
