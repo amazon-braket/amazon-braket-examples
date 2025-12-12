@@ -1,13 +1,15 @@
 from braket.circuits import Circuit
 
 
-def dprint(circuit : Circuit, max_width=100) -> str:
-    """Split Circuit string at logical column boundaries and depths for better display."""
+def dprint(circuit : Circuit, max_width=120) -> str:
+    """Split Circuit string at logical column boundaries and depths for better display.
+    
+    Default appears to be 120, though may differ on some browsers. 
+    """
     circuit_str = str(circuit)
     lines = circuit_str.strip().split('\n')
     if not lines or len(lines[0]) <= max_width:
-        print(circuit_str)
-    
+        return print(circuit_str)
     # Find column positions from header row
     header = lines[0]
     cols = [i for i, c in enumerate(header) if c == '│']
@@ -35,4 +37,4 @@ def dprint(circuit : Circuit, max_width=100) -> str:
             section = line[0:c0] + line[start:end+1]
             result.append(section.rstrip())
     
-    print('\n'.join(result))
+    return print('\n'.join(result))
