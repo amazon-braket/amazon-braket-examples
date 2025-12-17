@@ -5,7 +5,7 @@ import json
 import logging
 import os
 import pathlib
-from typing import Any, TypeVar
+from typing import Any
 
 import papermill as pm
 
@@ -30,7 +30,7 @@ if not entry_point.endswith("run_notebook"):
         subprocess.check_call([python, "-m", "pip", "install", *missing])
 
 
-PathLike = TypeVar("PathLike", str, pathlib.Path, None)
+type PathLike = str | pathlib.Path | None
 
 
 def convert_to_value(value: str) -> Any:
@@ -79,7 +79,7 @@ def convert_jobs_hyperparams_to_pm_params(braket_hyperparams: dict[str, str]) ->
     return papermill_params
 
 
-def get_notebook_name(input_dir: PathLike) -> str:
+def get_notebook_name[T: PathLike](input_dir: T) -> str:
     """Returns the notebook name from an input path.
 
     Args:
