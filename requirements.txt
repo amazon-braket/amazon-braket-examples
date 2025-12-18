@@ -12,8 +12,8 @@ cudaq-solvers==0.5.0; sys_platform=="linux"
 cupy-cuda13x==13.6.0; sys_platform=="linux"
 cvxpy==1.7.5
 ipykernel==7.1.0
-jax==0.6.2  # JAX >0.6.2 not compatible with PennyLane
-jaxlib==0.6.2
+jax==0.6.2; sys_platform=="linux"  # JAX >0.6.2 not compatible with PennyLane
+jaxlib==0.6.2; sys_platform=="linux"
 jinja2==3.1.6
 markupsafe==3.0.3
 matplotlib==3.10.8
