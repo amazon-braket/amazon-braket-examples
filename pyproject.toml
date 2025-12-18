@@ -7,7 +7,7 @@ name = "amazon-braket-examples"
 version = "0.0.1"
 description = 'Example notebooks that show how to apply quantum computing with Amazon Braket.'
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 license = "apache-2.0"
 keywords = []
 authors = [{name = "Amazon Web Services"},]
