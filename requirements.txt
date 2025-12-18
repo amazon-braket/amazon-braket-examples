@@ -12,8 +12,8 @@ cudaq-solvers==0.5.0; sys_platform=="linux"
 cupy-cuda13x==13.6.0; sys_platform=="linux"
 cvxpy==1.7.5
 ipykernel==7.1.0
-jax==0.6.2; sys_platform=="linux"  # JAX >0.6.2 not compatible with PennyLane
-jaxlib==0.6.2; sys_platform=="linux"
+jax==0.6.2; # JAX >0.6.2 not compatible with PennyLane
+jaxlib==0.6.2
 jinja2==3.1.6
 markupsafe==3.0.3
 matplotlib==3.10.8
@@ -23,9 +23,9 @@ openfermion==1.7.1
 openfermionpyscf==0.5
 optax==0.2.6
 pandas==2.3.3
-pennylane==0.43.1
+pennylane==0.42.0
 pennylane-lightning==0.43.0
-qiskit-aer==0.17.2; sys_platform=="linux"
+qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
 qiskit-braket-provider==0.9.0
 qiskit==2.2.3
