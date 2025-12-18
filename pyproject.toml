@@ -78,7 +78,7 @@ python = ["3.11", "3.12", "3.13"]
 allow-direct-references = true
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py311"
 line-length = 100
 lint.isort = { known-first-party = [
   "braket",
