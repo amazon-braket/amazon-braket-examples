@@ -1,11 +1,11 @@
 amazon-braket-default-simulator==1.32.0
 amazon-braket-pennylane-plugin==1.33.6
 amazon-braket-schemas==1.27.0
-amazon-braket-sdk==1.106.0
+amazon-braket-sdk==1.106.5
 amazon-braket-algorithm-library==1.6.3
-awscli==1.43.12
-boto3==1.42.6
-botocore==1.42.6
+awscli==1.43.15
+boto3==1.42.9
+botocore==1.42.9
 cudaq==0.12.0.post1; sys_platform=="linux"
 cudaq-qec==0.4.0.post1; sys_platform=="linux"
 cudaq-solvers==0.4.0; sys_platform=="linux"
@@ -15,7 +15,7 @@ jax==0.6.2
 jaxlib==0.6.2 # Jaxlib 0.7.x requires Python >=3.11
 jinja2==3.1.6
 markupsafe==3.0.3
-matplotlib==3.10.7
+matplotlib==3.10.8
 mypy-extensions==1.1.0
 numpy==1.26.4; python_version<"3.11" # Jobs containers are still on Python 3.10 and numpy==1.26.4
 numpy==2.2.6; python_version>="3.11"
