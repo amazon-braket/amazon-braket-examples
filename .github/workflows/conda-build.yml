@@ -26,10 +26,10 @@ jobs:
       run: |
         sudo rm -rf /usr/local/lib/android & sudo rm -rf /usr/share/dotnet & sudo rm -rf /opt/ghc
     - uses: actions/checkout@v6
-    - name: Setup python 3.11
+    - name: Setup python 3.12
       uses: actions/setup-python@v6
       with:
-        python-version: 3.11.x
+        python-version: 3.12.x
     - name: Pull Docker image
       run: |
         docker image pull public.ecr.aws/codebuild/amazonlinux-x86_64-standard:5.0
