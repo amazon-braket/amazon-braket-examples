@@ -74,7 +74,7 @@ def main():
 
     # quantum model ##########
     qc_dev = get_device(nwires, qc_dev_string)
-    qc_dev_name = qc_dev.short_name
+    qc_dev_name = qc_dev.name
 
     device = torch.device("cuda") if qc_dev_name == "lightning.gpu" else torch.device("cpu")
 
