@@ -1,11 +1,11 @@
 amazon-braket-default-simulator==1.32.0
 amazon-braket-pennylane-plugin==1.33.6
 amazon-braket-schemas==1.27.0
-amazon-braket-sdk==1.106.5
+amazon-braket-sdk==1.107.0
 amazon-braket-algorithm-library==1.6.3
-awscli==1.43.15
-boto3==1.42.9
-botocore==1.42.9
+awscli==1.44.4
+boto3==1.42.14
+botocore==1.42.14
 cudaq==0.12.0.post1; sys_platform=="linux"
 cudaq-qec==0.4.0.post1; sys_platform=="linux"
 cudaq-solvers==0.4.0; sys_platform=="linux"
