@@ -1,1 +1,0 @@
-mitiq is licensed under the GNU GPLv3, and mitiq itself is not distributed or installed by default with amazon-braket-examples. 
