@@ -27,6 +27,6 @@ pennylane==0.42.3 # PennyLane 0.43.x requires Python >=3.11
 pennylane-lightning==0.42.0
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
-qiskit-braket-provider==0.9.0
+qiskit-braket-provider==0.10.0
 qiskit==2.2.3
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
