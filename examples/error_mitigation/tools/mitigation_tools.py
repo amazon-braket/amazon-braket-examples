@@ -1,70 +1,19 @@
+import random
+from collections import defaultdict
+from collections.abc import Callable
+from typing import Any
+from braket.circuits.gates import ISwap, X, Y, Z, I
+
+import numpy as np
+
 from braket.circuits import Circuit
 from braket.circuits.circuit import subroutine
-from braket.parametric import FreeParameter
-import numpy as np 
-import random
-from braket.program_sets import ProgramSet
 from braket.devices import Device
-
-@subroutine(register=True)
-def rxz(qubit : int, theta1 : float,theta2 : float) -> Circuit:
-    """ apply Double angle parameterizable gate"""
-    return Circuit().rx(qubit, theta1).rz(qubit, theta2)
+from braket.program_sets import ProgramSet
 
 
 def gen_pauli_circ(x : str, i : int ):
     return Circuit().__getattribute__(x.lower())(i)
-
-Id,X,Z,Y = (0., 0.), (np.pi,0.), (0., np.pi), (np.pi, np.pi)
-
-PAULI_TO_PARAM = {
-    "I":Id,
-    "X":X,
-    "Y":Y,
-    "Z":Z,
-}
-
-CNOT_twirling_gates = [
-    (Id, Id, Id, Id),
-    (Id, X, Id, X),
-    (Id, Y, Z, Y),
-    (Id, Z, Z, Z),
-    (Y, Id, Y, X),
-    (Y, X, Y, Id),
-    (Y, Y, X, Z),
-    (Y, Z, X, Y),
-    (X, Id, X, X),
-    (X, X, X, Id),
-    (X, Y, Y, Z),
-    (X, Z, Y, Y),
-    (Z, Id, Z, Id),
-    (Z, X, Z, X),
-    (Z, Y, Id, Y),
-    (Z, Z, Id, Z),
-]
-CZ_twirling_gates = [
-    (Id, Id, Id, Id),
-    (Id, X, Z, X),
-    (Id, Y, Z, Y),
-    (Id, Z, Id, Z),
-    (X, Id, X, Z),
-    (X, X, Y, Y),
-    (X, Y, Y, X),
-    (X, Z, X, Id),
-    (Y, Id, Y, Z),
-    (Y, X, X, Y),
-    (Y, Y, X, X),
-    (Y, Z, Y, Id),
-    (Z, Id, Z, Id),
-    (Z, X, Id, X),
-    (Z, Y, Id, Y),
-    (Z, Z, Z, Z),
-]
-
-twirling_gates = {
-    "CZ": CZ_twirling_gates,
-    "CNot": CNOT_twirling_gates,
-}
 
 def _readout_pass(circ : Circuit) -> tuple[Circuit, str]:
     """Apply readout twirling to a single circuit.
@@ -92,7 +41,7 @@ def _readout_pass(circ : Circuit) -> tuple[Circuit, str]:
 
 def apply_readout_twirl(
         circ: Circuit | list[Circuit] | np.ndarray,
-        num_samples: int = 5,
+        num_samples: int = None,
         ) -> tuple[np.ndarray[Circuit], np.ndarray[str]]:
     """Apply readout twirling to all qubits in circuit.
     
@@ -119,8 +68,7 @@ def apply_readout_twirl(
         case _:
             raise TypeError(f"Unsupported format {type(circ)} to apply readout error.")
 
-
-def _spell_check(i : int, shape : tuple) -> tuple:
+def _index_check(i : int, shape : tuple) -> tuple:
     if shape is None:
         return i
     total = ()
@@ -129,23 +77,29 @@ def _spell_check(i : int, shape : tuple) -> tuple:
         i = i // n
     return total
 
-
+def iden(x):
+    return x
 
 def get_twirled_readout_dist(qubits : list, 
-                         n_twirls : int = 5, 
+                         n_twirls : int = 5,
                          shots : int = 1000,
                          device : Device = None,
+                         processor : Callable = None, 
                          ) -> np.ndarray:
-    """ get confusion matrix through twirling and PRogramSsets"""
+    """ get readout distribution through twirling and ProgramSets
+    
+    qubits : bool = qubits"""
     circuit = Circuit()
     for i in qubits:
         circuit.i(i)
-    variants, masks = apply_readout_twirl(circuit, n_twirls)
-    if hasattr(device, "_noise_model") and device._noise_model: # TODO: REMOVE PLEASE WITH EMULATORS
-        variants = [device._noise_model.apply(v.measure(qubits)) for v in variants]
-    pset = ProgramSet(variants, shots_per_executable= shots // n_twirls)
-    results = device.run(pset).result()
 
+    if processor is None:
+        processor = iden
+    variants, masks = apply_readout_twirl(circuit, n_twirls)
+    pset = ProgramSet(
+        [processor(v) for v in variants], 
+        shots_per_executable= shots // n_twirls)
+    results = device.run(pset, shots = shots).result()
     base = {}
     for item, mask in zip(results, masks):
         mask = "".join("1" if m in ["X","Y"] else "0" for m in mask)
@@ -153,7 +107,57 @@ def get_twirled_readout_dist(qubits : list,
             kp = ''.join(str(int(a) ^ int(b)) for a, b in zip(k, mask))
             base[kp] = base.get(kp, 0) + v
     base = {k: v / shots for k, v in base.items()}
+    print('BASE: ',base)
     return base 
+
+def _bit_addition(b1,b2,nq):
+    return '{:0{}b}'.format(int(b1,2)^int(b2,2),nq)
+
+def bit_mul_distribution(dist_a : dict, dist_b : dict, nq : int):
+    new = defaultdict(float)
+    for k_a,v_a in dist_a.items():
+        for k_b,v_b in dist_b.items():
+            new[_bit_addition(k_a,k_b, nq)]+= v_a * v_b 
+    return new 
+
+def build_inverse_quasi_distribution(reference,
+                                     second_order : bool = False) -> tuple[dict[str:float],list]:
+    """ from a reference data, build the inverse quasi distribtuion
+
+    First order starts from tensored inversion of single qubit flips 
+    """
+    nq = len(next(iter(reference.keys())))
+    shots = sum(reference.values())
+    q = defaultdict(float)
+    q['0'*nq] = 1
+    reference = {k:v/shots for k,v in reference.items()}
+    # 
+    quasi_factors = []
+    marginals = np.zeros(nq)
+    for k,v in reference.items():
+        for n in range(nq):
+            marginals[n] += v*(0)**(k[n]=="1") 
+    for n,p0 in enumerate(marginals):
+        temp = defaultdict(float)
+        gamma = 1/(2*p0-1)
+        for k,v in q.items():
+            kp = k[:n] + "1" + k[n+1:]
+            temp[k]+= v*p0*gamma
+            temp[kp]-= v*(1-p0)*gamma
+            q = temp
+        quasi_factors.append(gamma) # -> first order correction 
+
+    if not second_order:
+        return q, quasi_factors
+    p_q = bit_mul_distribution(q,reference, nq)
+    qp = defaultdict(float)
+    gamma = 1/(2*p_q['0'*nq]-1)
+    assert gamma > 0, f"error threshold exceeded: {reference}, {qp}"
+    quasi_factors.append(gamma)
+    print(f'effective shot overhead: {quasi_factors}')
+    for k,v in p_q.items():
+        qp[k] = v*gamma * (-1)**(k != '0'*nq)
+    return bit_mul_distribution(qp,q,nq), quasi_factors
 
 
 def process_readout_twirl(
@@ -161,58 +165,165 @@ def process_readout_twirl(
         index : int, 
         bit_masks : list | np.ndarray
         ):
-    i = _spell_check(index, getattr(bit_masks, "shape", None))
+    """ apply corrections to a readout twirl """
+    i = _index_check(index, getattr(bit_masks, "shape", None))
     bit_mask = bit_masks[i] 
 
     def _bit_addition(k,j):
         return ''.join(str(int(a) ^ int(b)) for a, b in zip(k, bit_mask))
     return {_bit_addition(k,bit_mask):v for k,v in counts.items()}
 
+def generate_bit_mask(twirls : np.ndarray, pauli_bases : list) -> np.ndarray:
+    """ from observable and twirl, generate bit mask """
+    bit_masks = np.zeros(twirls.shape + (1, len(pauli_bases)), dtype=object)
+    for n,i in np.ndenumerate(twirls):
+        for m,b in enumerate(pauli_bases):
+            new = []
+            for twirl,base in zip(b, i):
+                if base == "I":
+                    base == "Z"
+                if twirl == base or twirl=="I" or base == "I":
+                    new.append("0")
+                else:
+                    new.append("1")
+            bit_masks[n + (0,m)] = "".join(new)
+    return bit_masks
 
-def apply_two_qubit_twirl(circ : Circuit, num_samples : int = 5) -> tuple[Circuit, list[dict[str,float]]]:
-    """ twirl 2Q gates and returns list of parameters 
-    
-    Args:
-        circ (Circuit): input braket circuit
-        num_samples (int): number of parameter sets to generate
 
-    Returns:
-        Circuit: parameterized quantum circuit
-        list[dict]: list of parameter dictionaries for Braket
-    
-    """
-    twirled_circuit = Circuit()
-    param_sets = [{} for _ in range(num_samples)]
-    gate_count = 0
-    
+ISWAP_TWIRLS = [
+    ['i','i','i','i'],
+    ['i','x','y','z'],
+    ['i','y','x','z'],
+    ['i','z','z','i'],
+    ['x','i','z','y'],
+    ['x','x','x','x'],
+    ['x','y','y','x'],
+    ['x','z','i','y'],
+    ['y','i','z','x'],
+    ['y','x','x','y'],
+    ['y','y','y','y'],
+    ['y','z','i','x'],
+    ['z','i','i','z'],
+    ['z','x','y','i'],
+    ['z','y','x','i'],
+    ['z','z','z','z'],
+]
+
+def twirl_iswap(circ, repetitions : int = 1) -> list[Circuit]:
+    """ apply twirling operation for ISwap gates """
+    circuits = [Circuit() for _ in range(repetitions)]
     for ins in circ.instructions:
-        if ins.operator.qubit_count == 2:
-            q0, q1 = int(ins.target[0]), int(ins.target[1])
-            twirls = twirling_gates[ins.operator.name]
-            
-            # Add parameterized gates before and after the 2Q gate
-            twirled_circuit.add(
-                rxz(q0, FreeParameter(f'i_{gate_count}_q{q0}_x'), FreeParameter(f'i_{gate_count}_q{q0}_z')))
-            twirled_circuit.add(
-                rxz(q1, FreeParameter(f'i_{gate_count}_q{q1}_x'), FreeParameter(f'i_{gate_count}_q{q1}_z')))
-            twirled_circuit.add_instruction(ins)
-            twirled_circuit.add(
-                rxz(q0, FreeParameter(f'o_{gate_count}_q{q0}_x'), FreeParameter(f'o_{gate_count}_q{q0}_z')))
-            twirled_circuit.add(
-                rxz(q1, FreeParameter(f'o_{gate_count}_q{q1}_x'), FreeParameter(f'o_{gate_count}_q{q1}_z')))
-            
-            # Generate random twirling parameters for each sample
-            for i in range(num_samples):
-                twirl = random.choice(twirls)
-                param_sets[i].update({
-                    f'i_{gate_count}_q{q0}_x': twirl[0][0], f'i_{gate_count}_q{q0}_z': twirl[0][1],
-                    f'i_{gate_count}_q{q1}_x': twirl[1][0], f'i_{gate_count}_q{q1}_z': twirl[1][1],
-                    f'o_{gate_count}_q{q0}_x': twirl[2][0], f'o_{gate_count}_q{q0}_z': twirl[2][1],
-                    f'o_{gate_count}_q{q1}_x': twirl[3][0], f'o_{gate_count}_q{q1}_z': twirl[3][1]
-                })
-            gate_count += 1
+        if isinstance(ins.operator, ISwap):
+            for i in range(repetitions):
+                twirl = random.choice(ISWAP_TWIRLS)
+                circuits[i]+= gen_pauli_circ(twirl[0],ins.target[0])
+                circuits[i]+= gen_pauli_circ(twirl[1],ins.target[1])
+                circuits[i].add_instruction(ins)
+                circuits[i]+= gen_pauli_circ(twirl[2],ins.target[0])
+                circuits[i]+= gen_pauli_circ(twirl[3],ins.target[1])
         else:
-            twirled_circuit.add_instruction(ins)
-    
-    return twirled_circuit, param_sets
-    
+            for i in range(repetitions):
+                circuits[i].add_instruction(ins)
+    return circuits
+
+
+class SparseReadoutMitigation:
+    """ class for applying readout error mitigation to sparse observables
+
+    This happens by 
+    - 1. Creating a reduced probability distribution over targeted qubist
+    - 2. Then, apply the appropriate inverse 
+
+    Arguments:
+
+    """
+    def __init__(self, 
+            readout_distributon : dict,
+            correction_method : Callable = None,
+            inversion_method : Callable = None, 
+            ):
+        
+        self.inverses = {}
+        self.dist = readout_distributon
+        if correction_method is None:
+            inversion_method = self._standard_inversion
+            correction_method = self._standard_correction
+        self._inversion_method = inversion_method
+        self._apply_correction = correction_method
+        self.sq_error = None
+        self._gamma = {}
+
+    def _standard_inversion(self, index : tuple[int], **kwargs) -> dict:
+        """ given a list of qubits, create a marginal distribution, and get quasi dist """
+        if len(index) == 0:
+            return self.dist
+
+        temp = defaultdict(lambda : 0)
+        for k,v in self.dist.items():
+            temp["".join(k[n] for n in index)]+= v
+
+        quasi, gamma  = build_inverse_quasi_distribution(temp, False)
+        self._gamma[index] = gamma
+        return quasi
+
+
+    def _standard_correction(self, data : dict, inverse : Any):
+        """ apply a given inverse to a distribution """
+        tally = sum(list(data.values()))
+        data = {k: v/tally for k,v in data.items()}
+        return bit_mul_distribution(data, inverse, len(list(data.keys())[0]))
+        
+
+    def get_inverse(self, index : tuple):
+        """ creates an inverse confusion matrix for a given qubit """
+        
+        if index not in self.inverses:
+            self.inverses[index] = self._inversion_method(index)
+        return self.inverses[index]
+
+    def process_single(self, result : dict, index : int, pauli_string : str,
+                 bit_masks : np.ndarray) -> float:
+        """ """
+        non_trivial = [n for n,k in enumerate(pauli_string) if k!="I"]
+        temp = process_readout_twirl(result, index, bit_masks)
+        temp = self.invert_marginal(temp, non_trivial)
+        return sum([v*(-1)**k.count("1") for k,v in temp.items()])
+
+    def process_multiple(self, results : list[dict], indices : int, pauli_string : str,
+                 bit_masks : np.ndarray) -> float:
+        """ """
+        non_trivial = [n for n,k in enumerate(pauli_string) if k!="I"] 
+        total = defaultdict(lambda : 0) 
+        for result, index in zip(results, indices):
+            temp = process_readout_twirl(result, index, bit_masks)
+            for k,v in temp.items():
+                total[k]+= v
+        inverted = self.invert_marginal(total, non_trivial)
+        return sum([v*(-1)**k.count("1") for k,v in inverted.items()])
+
+
+    def invert_marginal(self, dist : dict, qubits : list[int]):
+        """ given a list of qubits, create a marginal distribution, save inverse, continue 
+        
+        Note, we ALWAYS sort qubits, to prevent any sort of weird reordering. 
+        
+        """
+        key = tuple(sorted(qubits))
+        inverse = self.get_inverse(key)
+        data = defaultdict(lambda : 0)
+        for k,v in dist.items():
+            data["".join(k[n] for n in key)]+= v
+        return self._apply_correction(data, inverse)
+ 
+
+
+if __name__ == "__main__":
+    test = {"00": .9, "01": .05, "10": .03, "11": .02}
+    a, b = build_inverse_quasi_distribution(test)
+    print(a,b)
+
+    test_iswap = Circuit().iswap(3,4)
+
+    circs = twirl_iswap(test_iswap, 5)
+    for c in circs:
+        print(c, c.to_unitary())

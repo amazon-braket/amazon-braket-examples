@@ -90,6 +90,5 @@ class TestMitigationTools(unittest.TestCase):
             assert len(result.measurement_counts) > 0
             assert sum(result.measurement_counts.values()) == 100
 
-
 if __name__ == "__main__":
     unittest.main()

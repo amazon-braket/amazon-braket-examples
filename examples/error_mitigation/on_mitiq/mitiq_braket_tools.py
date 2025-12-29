@@ -1,16 +1,11 @@
 from braket.circuits import Circuit
 from mitiq.executor import Executor
 from braket.devices import Device
-from braket.circuits.circuit import subroutine
-import numpy as np
 from braket.program_sets import ProgramSet
 from mitiq import MeasurementResult
 from braket.tasks import ProgramSetQuantumTaskResult, GateModelQuantumTaskResult
-from braket.circuits.compiler_directives import EndVerbatimBox, StartVerbatimBox
+from braket.circuits.compiler_directives import StartVerbatimBox
 from functools import partial
-from mitiq.rem import mitigate_measurements
-from collections.abc import Callable
-from braket.program_sets import CircuitBinding
 
 """
 mitiq_braket_tools.py
@@ -19,8 +14,6 @@ Contains three executors ->
     
 braket_measurement_executor: 
     returns MeasurementResult objects for use with mitiq observables
-braket_counts_executor: 
-    returns raw measurement counts
 braket_expectation_executor: 
     returns expectation values from **braket** observables
 
@@ -58,23 +51,6 @@ def _verbatim_pass(
         if isinstance(ins, StartVerbatimBox):
             return program
     return Circuit().add_verbatim_box(program)
-
-
-# def _execute_counts_batch(
-#         device : Device, 
-#         programs : list[Circuit],
-#         shots : int,
-#         verbatim : bool = True,
-#         ) -> list[MeasurementResult]:
-#     if isinstance(programs, Circuit):
-#         programs = [programs]
-#     if verbatim:
-#         programs = [_verbatim_pass(program) for program in programs]
-#     result = device.run(
-#         ProgramSet(programs, shots_per_executable = shots // len(programs))
-#                         ).result()
-#     return [
-#         MeasurementResult.from_counts(item.counts) for entry in result for item in entry.entries]
 
 def _execute_expectation_batch(
         device : Device, 
@@ -133,7 +109,7 @@ def braket_measurement_executor(
 
     Args:
         device (Device): Braket quantum device or simulator 
-        shots (int): **total** numb=er of shots, will be distributed to the number of batches 
+        shots (int): **total** number of shots, will be distributed to the number of batches 
         verbatim (bool): whether or not to utilize verbatim circuits
 
     """
@@ -145,11 +121,6 @@ def braket_measurement_executor(
             max_batch_size=max_programs)
     return Executor(
         partial(_execute_via_programs, device, shots=shots, verbatim=verbatim))
-
-"""
-main executor functions 
-"""
-
 
 def braket_expectation_executor(
         device : Device,
@@ -181,53 +152,4 @@ def braket_expectation_executor(
                 partial(_execute_expectation_batch, device, observable=observable, shots=shots, verbatim=verbatim),
                 max_batch_size=max_programs)
     return Executor(_execute_expectation)
-
-
-"""
-tools for helping with readout mitigation with mitiq
-"""
-
-
-def process_readout_twirl(
-        counts : dict, 
-        index : int, 
-        bit_masks : list | np.ndarray
-        ):
-    """ """
-    i = _spell_check(index, getattr(bit_masks, "shape", None))
-    bit_mask = bit_masks[i] 
-
-    def _bit_addition(k,j):
-        return ''.join(str(int(a) ^ int(b)) for a, b in zip(k, bit_mask))
-    return {_bit_addition(k,bit_mask):v for k,v in counts.items()}
-
-
-
-def _spell_check(i : int, shape : tuple) -> tuple:
-    total = ()
-    for n in shape[::-1]:
-        total = (i % n,) + total
-        i = i // n
-    return total
-
-
-
-def braket_rem_twirl_mitigator(
-        inverse_confusion_matrix : np.ndarray = None,
-        bit_masks : np.ndarray = None,
-        ) -> Callable:
-    """ return a function to modify a count with a inverse confusion matrix """
-    
-    def to_run(counts : dict, index : int) -> dict:
-        return mitigate_measurements(
-            MeasurementResult.from_counts(
-                process_readout_twirl(counts, index, bit_masks)
-                ),
-            inverse_confusion_matrix=inverse_confusion_matrix
-            ).prob_distribution()
-
-    return to_run
-
-if __name__ == "__main__":
-    pass
 

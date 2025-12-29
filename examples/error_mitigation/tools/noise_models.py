@@ -58,6 +58,7 @@ _noise_model_ad_2q.add_noise(AmplitudeDamping(0.05),GateCriteria([CZ,CNot]) )
 qd_amp = LocalSimulator("braket_dm", noise_model=_noise_model_ad_2q)
 
 if __name__ == "__main__":
+    from braket.program_sets import ProgramSet
     print(_readout_asymm)
     print(_noise_model_total)
     print(_noise_model_ad_2q)
@@ -66,5 +67,8 @@ if __name__ == "__main__":
     _noise_model_total.apply(c)
     _noise_model_ad_2q.apply(c)
 
+    test = Circuit().x(0).x(1).measure(range(2))
 
+    print(qd_readout.run(test, shots = 1000).result().measurement_counts)
+    print(qd_readout.run(ProgramSet([test]), shots = 1000).result()[0].entries[0].probabilities)
 

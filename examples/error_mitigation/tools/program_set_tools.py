@@ -16,9 +16,9 @@ from itertools import product, repeat
 from braket.circuits.observables import Sum
 from braket.circuits.serialization import IRType
 from copy import deepcopy as dc
+from math import pi 
+
 PROGRAM_SET_LIMIT = 100
-SUPPORTED_OBSERVABLES = (Observable, TensorProduct, Sum, list)
-from tools.observable_tools import tensor_from_string
 
 STANDARD_CONVERSION = {
     "X": lambda i : Circuit().h(i), #.measure(i), 
@@ -27,64 +27,50 @@ STANDARD_CONVERSION = {
     "I": lambda i : Circuit(), #.measure(i),
 }
 
+ANKAA_CONVERSION = {
+    "X" : lambda i : Circuit().rz(i,pi/2).rx(i,np.pi/2), #.measure(i),
+    "Y": lambda i : Circuit().rx(i,pi/2), #.measure(i),
+    "Z": lambda i : Circuit(), #.measure(i),
+    "I": lambda i : Circuit(), #.measure(i),
+}
+
 def standard_bases(
         pstr : str,
         conversion : dict) -> Circuit:
-    """ retrun standard measurement basis """
+    """ return standard measurement basis """
     c = Circuit()
     for i,p in enumerate(pstr):
         c+= conversion[p](i)
-    c+= Circuit().measure(range(len(pstr)))
     return c
 
 def _zip_to_pset(
         obj_list : list[tuple[Circuit,list[float],Observable]], 
         shots_per_executable : int = None,
         conversion : dict[str,Callable] = None,
-        device : Device = None):
+        verbatim : bool = False):
     """ zip an object list to a ProgramSet """
-    # # 
-    # inputs = dict(
-    #     zip(
-    #         ["circuits","input_sets","observables"],
-    #         zip(*obj_list)
-    #     )
-    # )    
-    # return ProgramSet.zip(**inputs, shots_per_executable=shots_per_executable)
     if conversion is None:
         conversion = STANDARD_CONVERSION
-
     circuits = [
         c.make_bound_circuit(p) + standard_bases(o,conversion) for c,p,o in zip(*zip(*obj_list))
     ]
-
-    ## HACKY PLS REMOVE
-    if hasattr(device, "_noise_model") and device._noise_model:
-        circuits = [device._noise_model.apply(c) for c in circuits]
-    # print(circuits[0])
+    if verbatim:
+        circuits = [Circuit().add_verbatim_box(c) for c in circuits]
     return ProgramSet(circuits
         , shots_per_executable=shots_per_executable)
 
 def distribute_to_program_sets(
-        circs : list[Circuit] ,
-        parameters : list[dict],
-        observables : list[Observable],
+        circs : np.ndarray[Circuit] ,
+        parameters : np.ndarray[dict],
+        observables : np.ndarray[str],
         programs : list[Circuit | CircuitBinding] | None = None,
         shots_per_executable : int | list = 100,  
-        verbose : bool = False, 
-        device : Device = None,
+        conversion : dict[str,Callable] = None,
+        verbatim : bool = False,
         ) -> list[ProgramSet]:
-    """ convert (circuits, observables, parameters) to valid program sets based on program set limits 
-
-    """
-    # Handle numpy arrays
-    if isinstance(circs, np.ndarray):
-        circs = circs.flatten().tolist()
-
-
-    if isinstance(observables, np.ndarray):
-        observables = observables.flatten().tolist()
+    """ convert circuits + parameters + observables to valid program sets based on program set limits 
     
+    """
     n_circ = len(circs)
     n_para = len(parameters) if parameters else 1 
     n_obs = len(observables)
@@ -103,26 +89,23 @@ def distribute_to_program_sets(
                 _zip_to_pset(
                     temp, 
                     shots_per_executable=shots_per_executable,
-                    device = device))
+                    conversion = conversion,
+                    verbatim = verbatim))
             temp = []
     return psets
 
-def probs_to_ev(probabilities : dict, pauli_string : str | dict | PauliString) -> float:
+def _probs_to_ev(probabilities : dict, pauli_string : str ) -> float:
     """ process the measurement outcome for a pauli observable """
     match pauli_string:
         case str():
             non_trivial = [n for n,k in enumerate(pauli_string) if k!="I"]
-        case dict():
-            non_trivial =  dict.keys()
-        case PauliString():
-            non_trivial = PauliString._nontrivial
         case _:
             raise NotImplementedError(f"unsupported {type(pauli_string)} format for conversion")
     return sum(
         [v*(-1)**sum([k[n]=="1" for n in non_trivial])  for k,v in probabilities.items() ]
     )
 
-def process_program_sets(
+def _process_program_sets(
         pset_results : list[ProgramSetQuantumTaskResult], 
         observables : list[Observable | None],
         output_type : str = "expectation",
@@ -134,16 +117,17 @@ def process_program_sets(
     index = 0
     for pset in pset_results:
         for entry in pset: 
-            if measurement_filter: 
-                data = measurement_filter(entry[0].counts, index)
+            if measurement_filter:
+                data = measurement_filter(entry[0].counts, index = index)
             else:
                 data = entry[0].probabilities
             if output_type == "bitstrings" or observables[index % n_bases] is None:
                 results.append(data)
             else:
-                results.append(sum(
-                    [c * probs_to_ev(data,p) for (c,p) in observables[index % n_bases]])
-                    )
+                temp = 0
+                for (c,p) in observables[index % n_bases]:
+                    temp += c * _probs_to_ev(data,p)
+                results.append(temp)
             index+=1
     return results
 
@@ -156,8 +140,8 @@ def run_with_program_sets(
         device : Device | None = None, 
         shots_per_executable : int | list = 100,  
         measurement_filter : Callable | None = None,
-        verbose : bool = False, 
-        calculate_variances : bool = False,
+        conversion : dict[str,Callable] = None,
+        verbatim : bool = False,
         ) -> np.ndarray:
     """ distribute and execute (circuits * bases * parameters) via program sets 
     
@@ -218,85 +202,19 @@ def run_with_program_sets(
         observables= measurement_bases,
         parameters = parameters,
         shots_per_executable=shots_per_executable,
-        verbose = verbose,
-        device = device,
+        conversion=conversion,
+        verbatim = verbatim,
     )
     pset_results = []
-    for pset in psets: # potential for catching errors in failed PSETs here
+    print('running program sets....')
+    for n,pset in enumerate(psets): # potential for catching errors in failed PSETs here
+        print(f'-- running program set {n+1}/{len(psets)}')
         pset_results.append(device.run(  # noqa: PERF401
             pset, shots=pset.total_executables * pset.shots_per_executable).result()) 
     
-    result = process_program_sets(
+    result = _process_program_sets(
         pset_results=pset_results,
         observables= observables_per_basis, 
         measurement_filter= measurement_filter,
             )
     return np.reshape(result, total_shape) # reshape to original dimension
-
-
-def print_program_set(program_set, result = None):
-    """Prints the program set and its result 
-    
-    From ``braket_features/program_sets/01_Getting_Started_with_Program_Sets.ipynb``
-    
-    Args:
-        program_set: ProgramSet
-        result: ProgramSetQuantumTaskResult
-    
-    """
-    if result is not None:
-        assert len(program_set) == len(result), "program_set and result must have the same length"
-        print_result = True
-    else:
-        result = repeat((None,))
-        print_result = False
-    
-    for i, (program, program_result) in enumerate(zip(program_set, result)):
-        if isinstance(program, Circuit):
-            circuit = program
-            input_sets = None
-            observables = None
-        elif isinstance(program, CircuitBinding):
-            circuit = program.circuit
-            input_sets = program.input_sets
-            observables = program.observables
-            
-        if isinstance(observables, Sum):
-            sum_observable = True
-            observable_list = observables.summands
-        else:
-            sum_observable = False
-            observable_list = observables
-            
-        
-        print(f"circuit {i}")
-        print(circuit)
-        
-        if not print_result:
-            program_result = repeat((None,))
-        for j, (execution_result, (input_set, observable)) in enumerate(
-            zip(
-                program_result,
-                product(
-                    input_sets.as_list() if input_sets else (None,), 
-                    observable_list if observable_list else (None,),
-                )
-            )
-        ):
-            print(f"execution {j}") 
-            if input_set:
-                print("\tinput_set:", input_set)
-            # if observable is not None:
-                # print("\tobservable:", observable.to_ir(ir_type=IRType("OPENQASM")))
-            if print_result: 
-                print("\tresult: ", execution_result.counts, end='')
-                if observable is not None:
-                    print(", expectation:", execution_result.expectation, end='')
-                print()
-        if sum_observable:
-            print("sum observable:", observables.to_ir(ir_type=IRType("OPENQASM")))
-            if print_result:
-                print("\tresult: expectation:", program_result.expectation(), end='')
-            print()
-        print('-'*80)
-    print(f"Total executions: {program_set.total_executables}")
