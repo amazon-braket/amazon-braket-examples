@@ -4,14 +4,18 @@ def jackknife(data : np.ndarray, func=np.mean, axis=0):
     """Compute jackknife estimate and standard error along a particular axis """
     n = data.shape[axis]
     estimates = [func(np.delete(data, i, axis=axis)) for i in range(n)]
-    return np.mean(estimates), np.std(estimates) * np.sqrt(n-1)
+    return np.mean(estimates), np.std(estimates) * np.sqrt(n-1), np.array(estimates)
 
 
-def jackknife_bias_corrected(data, func=np.mean, axis=0):
+def jackknife_bias_corrected(data, func=np.mean, axis=0, estimates = False):
     full_est = func(data)
-    jack_est, jack_err = jackknife(data, func, axis)
+    jack_est, jack_err, estimates = jackknife(data, func, axis)
     bias = (data.shape[axis] - 1) * (jack_est - full_est)
+
+    if estimates:
+        return full_est - bias, jack_err, estimates - bias
     return full_est - bias, jack_err
+
 
 
 def perform_regression(xs, ys, variances = None, rcond : float = 0.01, error : bool = True) -> float:
