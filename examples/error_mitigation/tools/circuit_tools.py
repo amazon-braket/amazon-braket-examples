@@ -69,7 +69,7 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
                 final = trial
             limits[idx] -= steps[idx]
             steps[idx] /= 2
-        except Exception as e:
+        except Exception:
             limits[idx] += steps[idx]
             steps[idx] /= 2
         # print(limits,steps, score(*limits), fail)
@@ -185,8 +185,8 @@ def fidelity_estimation(circ : Circuit, device : Device, gate : str):
     return predicted_fidelity, (len(active_ins), total_gates)
 
 if __name__ == "__main__":
-    from braket.devices import Devices
     from braket.aws import AwsDevice
+    from braket.devices import Devices
 
     ankaa = AwsDevice(Devices.Rigetti.Ankaa3)
 

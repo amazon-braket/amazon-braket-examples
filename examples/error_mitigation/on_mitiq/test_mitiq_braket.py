@@ -1,20 +1,28 @@
+import os
+import sys
+import unittest
+
+from mitiq import Observable, PauliString
 from mitiq_braket_tools import (
     # braket_counts_executor,
     braket_expectation_executor,
     braket_measurement_executor,
 )
-from braket.devices import LocalSimulator
-from braket.circuits.observables import Z
-from mitiq import PauliString, Observable
-from braket.circuits import Circuit
-import unittest
+from noise_models import qd_readout, qd_readout_2
+
 from braket.aws import AwsDevice
-from noise_models import qd_readout_2, qd_readout
-import sys
-import os
+from braket.circuits import Circuit
+from braket.circuits.observables import Z
+from braket.devices import LocalSimulator
+
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir))) # parent  
-from tools.mitigation_tools import apply_readout_twirl, get_twirled_readout_dist, build_inverse_quasi_distribution, bit_mul_distribution
-from tools.mitigation_tools import SparseEstimation
+from tools.mitigation_tools import (
+    SparseEstimation,
+    apply_readout_twirl,
+    bit_mul_distribution,
+    build_inverse_quasi_distribution,
+    get_twirled_readout_dist,
+)
 
 
 class TestExecutors(unittest.TestCase):
@@ -88,7 +96,7 @@ class TestMeasurement(unittest.TestCase):
         # print('second order correction')
 
     def test_sparse_readout(self):
-        import numpy as np 
+        import numpy as np
         device = qd_readout
         dist = get_twirled_readout_dist([0,1],
                                          n_twirls = 10, 

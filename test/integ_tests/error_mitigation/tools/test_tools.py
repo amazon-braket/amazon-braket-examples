@@ -3,16 +3,23 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'examples', 'error_mitigation')))
 
-from tools.observable_tools import matrix_to_pauli, _pauli_mul, pauli_grouping, qubit_wise_commuting, tensor_from_string
-from tools.mitigation_tools import process_readout_twirl, twirl_iswap, build_inverse_quasi_distribution, SparseReadoutMitigation
-from tools.stat_tools import jackknife, jackknife_bias_corrected, perform_regression
-from tools.circuit_tools import find_linear_chain, multiply_gates, strip_verbatim, convert_paulis
-from tools.program_set_tools import  distribute_to_program_sets, _probs_to_ev, STANDARD_CONVERSION, run_with_program_sets
-from braket.circuits import Circuit
-from braket.circuits.observables import X, Y, Z, I
-from braket.devices import LocalSimulator
-import unittest 
+import unittest
+
 import numpy as np
+from tools.circuit_tools import convert_paulis, find_linear_chain, multiply_gates, strip_verbatim
+from tools.mitigation_tools import (
+    SparseReadoutMitigation,
+    build_inverse_quasi_distribution,
+    process_readout_twirl,
+    twirl_iswap,
+)
+from tools.observable_tools import _pauli_mul, matrix_to_pauli, pauli_grouping, qubit_wise_commuting
+from tools.program_set_tools import run_with_program_sets
+from tools.stat_tools import jackknife, jackknife_bias_corrected, perform_regression
+
+from braket.circuits import Circuit
+from braket.circuits.observables import X, Z
+
 
 class TestObservables(unittest.TestCase):
     def test_matrix_to_pauli(self):
@@ -227,4 +234,3 @@ class TestProgramSetTools(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-    from braket.circuits.noise_model import NoiseModel
