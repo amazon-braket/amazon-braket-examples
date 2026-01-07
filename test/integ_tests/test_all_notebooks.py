@@ -49,6 +49,15 @@ EXCLUDED_NOTEBOOKS = [
     "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
 ]
 
+MITIQ_NOTEBOOKS = [
+    "0_Getting_started_with_mitiq_on_Braket.ipynb",
+    "1_Readout_mitigation_with_mitiq.ipynb",
+    "2_Zero_noise_extrapolation_with_mitiq.ipynb",
+    "3_Twirling_with_program_sets.ipynb",
+    "4_Error_mitigation_workflow_with_mitiq.ipynb",
+]
+EXCLUDED_NOTEBOOKS.extend(MITIQ_NOTEBOOKS)
+
 if (
     os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1"
     or os.environ.get("AWS_REGION") == "eu-north-1"
@@ -97,11 +106,9 @@ def get_mock_paths(notebook_dir, notebook_file):
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
 
-
 @pytest.fixture(scope="module")
 def html_exporter():
     return HTMLExporter(template_name="classic")
-
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
@@ -236,3 +243,34 @@ def uncomment_test_section(source):
             result.append(line)
 
     return "\n".join(result)
+
+
+root_path = os.getcwd()
+examples_path = "examples"
+mitiq_notebooks = []
+
+for dir_, _, files in os.walk(examples_path):
+    for file_name in files:
+        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
+            mitiq_notebooks.append((dir_, file_name))  # noqa: PERF401
+
+
+@pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
+def test_mitiq_notebooks(notebook_dir, notebook_file, mock_level):
+    pytest.importorskip("mitiq", reason="not supported by default")
+    if notebook_file not in MITIQ_NOTEBOOKS:
+        pytest.skip()
+
+    os.chdir(root_path)
+    os.chdir(notebook_dir)
+    path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
+    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
+    kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
+    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
+        # We check the existing notebook output for errors before we execute the
+        # notebook because it will change after executing it.
+        check_cells_for_error_output(tb.cells)
+        execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
+        # Check if there are any errors which didn't stop the testbook execution
+        # This can happen in the presence of `%%time` magics.
+        check_cells_for_error_output(tb.cells)
