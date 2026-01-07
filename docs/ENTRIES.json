@@ -36,7 +36,7 @@
     },
     "Getting Started with OpenQASM on Braket": {
         "index_abbrv": "GSOQ",
-        "index_terms" : [], 
+        "index_terms" : ["rigetti"], 
         "categories": ["braket"],
         "location": "examples/braket_features/Getting_Started_with_OpenQASM_on_Braket.ipynb",
         "content": "  This tutorial demonstrates how to submit OpenQASM quantum tasks to various devices on Braket and introduce some OpenQASM features available on Braket. OpenQASM is a popular, open source, human-readable and hardware-agnostic quantum circuit description language."
@@ -162,7 +162,7 @@
     },
     "Error Mitigation on IonQ": {
         "index_abbrv": "EMIQ",
-        "index_terms" : [], 
+        "index_terms" : ["error mitigation"], 
         "categories": ["noise","ionq"],
         "location": "examples/braket_features/Error_Mitigation_on_Amazon_Braket.ipynb",
         "content": "  This tutorial explains how to get started with using error mitigation on IonQ\u2019s Aria QPU. You\u2019ll learn how Aria\u2019s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems."
@@ -515,6 +515,48 @@
         "index_terms": ["program sets", "estimators"],
         "categories" : ["braket"],
         "location"   : "examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb",
-        "content"    : "Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
+        "content"    : "  Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
+    },
+    "Getting started with mitiq on Braket": {
+        "index_abbrv" : "GSm",
+        "index_terms": ["mitiq", "error mitigation"],
+        "categories" : ["noise"],
+        "location"   : "examples/error_mitigation/on_mitiq/0_Getting_started_with_mitiq_on_Braket.ipynb",
+        "content"    : "  This tutorial introduces the mitiq library and how you can utilize it with Amazon Braket."
+    },
+    "Readout mitigation with mitiq": {
+        "index_abbrv" : "REMm",
+        "index_terms": ["mitiq", "error mitigation"],
+        "categories" : ["noise"],
+        "location"   : "examples/error_mitigation/on_mitiq/1_Readout_mitigation_with_mitiq.ipynb",
+        "content"    : "  This tutorial shows how to use mitiq's readout error mitigation capabilities with Amazon Braket."
+    },
+    "Zero noise extrapolation with mitiq": {
+        "index_abbrv" : "ZNEm",
+        "index_terms": ["mitiq", "error mitigation"],
+        "categories" : ["noise"],
+        "location"   : "examples/error_mitigation/on_mitiq/2_Zero_noise_extrapolation_with_mitiq.ipynb",
+        "content"    : "  This tutorial shows how to use mitiq's zero noise extrapolation capabilities with Amazon Braket."
+    },
+    "Twirling with program sets": {
+        "index_abbrv" : "TPS",
+        "index_terms": ["mitiq", "error mitigation", "twirling"],
+        "categories" : ["noise"],
+        "location"   : "examples/error_mitigation/on_mitiq/3_Twirling_with_program_sets.ipynb",
+        "content"    : "  This tutorial shows how to use mitiq's Pauli twirling capabilities with Amazon Braket."
+    },
+    "Error mitigation workflow with mitiq": {
+        "index_abbrv" : "EMWm",
+        "index_terms": ["mitiq", "error mitigation", "zne", "rem", "twirling"],
+        "categories" : ["noise"],
+        "location"   : "examples/error_mitigation/on_mitiq/4_Error_mitigation_workflow_with_mitiq.ipynb",
+        "content"    : "  This tutorial shows how to perform an error mitigation workflow using mitiq with Amazon Braket."
+    },
+    "Advanced QPU error mitigation workflow": {
+        "index_abbrv" : "AQEMW",
+        "index_terms": ["rigetti", "error mitigation", "zne", "rem", "twirling"],
+        "categories" : ["noise"],
+        "location"   : "examples/error_mitigation/supplemental/Advanced_QPU_workflow.ipynb",
+        "content"    : "  This tutorial introduces the mitiq library"
     }
 }

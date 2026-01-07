@@ -50,7 +50,7 @@
 
 -  [**Expectation value calculations with Amazon Braket program sets**](examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb) [(EVPrS)](#index_EVPrS)<a name="EVPrS"></a>
 
-Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
+  Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
 
 ---
@@ -179,6 +179,30 @@ Amazon Braket program sets make it easier to implement an intelligent shot alloc
 -  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(LEmu)](#index_LEmu)
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
+
+-  [**Getting started with mitiq on Braket**](examples/error_mitigation/on_mitiq/0_Getting_started_with_mitiq_on_Braket.ipynb) [(GSm)](#index_GSm)<a name="GSm"></a>
+
+  This tutorial introduces the mitiq library and how you can utilize it with Amazon Braket.
+
+-  [**Readout mitigation with mitiq**](examples/error_mitigation/on_mitiq/1_Readout_mitigation_with_mitiq.ipynb) [(REMm)](#index_REMm)<a name="REMm"></a>
+
+  This tutorial shows how to use mitiq's readout error mitigation capabilities with Amazon Braket.
+
+-  [**Zero noise extrapolation with mitiq**](examples/error_mitigation/on_mitiq/2_Zero_noise_extrapolation_with_mitiq.ipynb) [(ZNEm)](#index_ZNEm)<a name="ZNEm"></a>
+
+  This tutorial shows how to use mitiq's zero noise extrapolation capabilities with Amazon Braket.
+
+-  [**Twirling with program sets**](examples/error_mitigation/on_mitiq/3_Twirling_with_program_sets.ipynb) [(TPS)](#index_TPS)<a name="TPS"></a>
+
+  This tutorial shows how to use mitiq's Pauli twirling capabilities with Amazon Braket.
+
+-  [**Error mitigation workflow with mitiq**](examples/error_mitigation/on_mitiq/4_Error_mitigation_workflow_with_mitiq.ipynb) [(EMWm)](#index_EMWm)<a name="EMWm"></a>
+
+  This tutorial shows how to perform an error mitigation workflow using mitiq with Amazon Braket.
+
+-  [**Advanced QPU error mitigation workflow**](examples/error_mitigation/supplemental/Advanced_QPU_workflow.ipynb) [(AQEMW)](#index_AQEMW)<a name="AQEMW"></a>
+
+  This tutorial introduces the mitiq library
 
 
 ---
