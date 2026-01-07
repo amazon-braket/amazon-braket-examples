@@ -37,11 +37,13 @@ def perform_regression_with_resampling(xs,ys,variances):
     print(extrapolates)
     return np.median(extrapolates)
 
-def perform_regression(xs, ys, variances = None, rcond : float = 0.03, error : bool = True) -> float:
+def perform_regression(xs : np.ndarray, ys : np.ndarray, variances : np.ndarray | None = None, rcond : float = 0.03, error : bool = True) -> float:
     """ perform a logarithmic (or linear) regression of the data and return estimate with potentially error """
     try:
         sgn = -1 if ys[0] < 0 else +1
         # non-monotonic, default to a linear extrapolation 
+        if variances is None:
+            raise ValueError("No variances provided - reverting to OLS")
         sigma = np.sqrt(variances)
         for k in range(len(ys)-1):
             if sgn*ys[k] + sigma[k] < sgn*ys[k+1]-sigma[k+1]:
@@ -57,8 +59,8 @@ def perform_regression(xs, ys, variances = None, rcond : float = 0.03, error : b
         return sgn * ans
     except ValueError as e:
         print(f'escaping...{e}')
-        var = np.array(variances)
-        coeff, cov = np.polyfit(xs, ys, 1, w=1/np.sqrt(var), rcond=rcond, cov = True)
+        weights = 1/np.sqrt(variances) if variances is not None else None
+        coeff, cov = np.polyfit(xs, ys, 1, w=weights, rcond=rcond, cov = True)
         if error:
             return coeff[1], np.sqrt(cov[1, 1])
         return coeff[1]

@@ -164,8 +164,11 @@ def process_readout_twirl(
     """ apply corrections to a readout twirl """
     if isinstance(index, int):
         index = _index_check(index, getattr(bit_masks, "shape", None))
-    assert len(index) == len(bit_masks.shape), "Need to supply a proper bit mask index"
-    bit_mask = bit_masks[index] 
+    if isinstance(bit_masks, np.ndarray):
+        assert len(index) == len(bit_masks.shape), "Need to supply a proper bit mask index"
+        bit_mask = bit_masks[index]
+    else:
+        bit_mask = bit_masks[index] if isinstance(index, int) else bit_masks[index[0]] 
     def _bit_addition(k : str,j : str):
         assert len(k)==len(j)
         return ''.join(["0" if a==b else "1" for a,b in zip(k,j)])
