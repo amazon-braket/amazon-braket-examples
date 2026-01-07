@@ -2,12 +2,11 @@ import random
 from collections import defaultdict
 from collections.abc import Callable
 from typing import Any
-from braket.circuits.gates import ISwap, X, Y, Z, I
 
 import numpy as np
 
 from braket.circuits import Circuit
-from braket.circuits.circuit import subroutine
+from braket.circuits.gates import ISwap
 from braket.devices import Device
 from braket.program_sets import ProgramSet
 

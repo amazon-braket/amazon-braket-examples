@@ -1,19 +1,20 @@
-from braket.circuits.observables import Z
-from braket.devices import LocalSimulator
-from braket.circuits import Circuit
-
-from braket.circuits import Circuit, Gate, Observable
-from braket.circuits.gates import CNot, Ry, Rx, Rz, CZ
-from braket.circuits.noise_model import GateCriteria, NoiseModel, ObservableCriteria, MeasureCriteria
-from braket.circuits.noises import AmplitudeDamping, BitFlip, Depolarizing, PauliChannel, PhaseFlip, Kraus
-from braket.circuits.noises import TwoQubitDepolarizing
-from braket.circuits.compiler_directives import Barrier
-from braket.registers import Qubit, QubitSetInput
 # from braket.emulation.local_emulator import LocalEmulator
 import numpy as np
 
-from braket.circuits.circuit import subroutine
-
+from braket.circuits import Circuit
+from braket.circuits.gates import CZ, CNot, Rx, Ry, Rz
+from braket.circuits.noise_model import (
+    GateCriteria,
+    MeasureCriteria,
+    NoiseModel,
+)
+from braket.circuits.noises import (
+    AmplitudeDamping,
+    BitFlip,
+    Depolarizing,
+    TwoQubitDepolarizing,
+)
+from braket.devices import LocalSimulator
 
 rng = np.random.default_rng(seed=49)
 

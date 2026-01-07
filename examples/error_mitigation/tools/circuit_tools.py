@@ -1,10 +1,10 @@
-from qiskit_braket_provider import to_braket, to_qiskit
-from braket.circuits import Circuit, Gate
-from braket.device_schema import  DeviceCapabilities
-from braket.devices import Device
 import numpy as np
-from braket.circuits import QubitSet
 from qiskit import transpile
+from qiskit_braket_provider import to_braket, to_qiskit
+
+from braket.circuits import Circuit, QubitSet
+from braket.devices import Device
+
 
 def _vf2_callback(**kwargs):
     """

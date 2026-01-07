@@ -1,12 +1,10 @@
-from stat_tools import  perform_regression_ols
-import numpy as np
-
-import os
-import sys
-import numpy as np
 import matplotlib.pyplot as plt
-
-from stat_tools import perform_regression, perform_regression_with_resampling
+import numpy as np
+from stat_tools import (
+    perform_regression,
+    perform_regression_ols,
+    perform_regression_with_resampling,
+)
 
 """
 

@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def jackknife(data : np.ndarray, func=np.mean, axis=0):
     """Compute jackknife estimate and standard error along a particular axis """
     n = data.shape[axis]

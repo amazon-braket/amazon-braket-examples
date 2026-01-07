@@ -1,21 +1,16 @@
+from collections.abc import Callable
+from copy import deepcopy as dc
+from itertools import product
+from math import pi
+
+import numpy as np
+
 from braket.circuits import Circuit
 from braket.circuits.observable import Observable
-from braket.circuits.observables import I,Z,X,Y, Sum, TensorProduct, StandardObservable, Hermitian
-from braket.program_sets import ProgramSet, CircuitBinding
-from braket.parametric import Parameterizable
-from braket.tasks import ProgramSetQuantumTaskResult
 from braket.devices import Device, LocalSimulator
-import numpy as np
-from itertools import product
-import warnings
-from braket.quantum_information import PauliString
-from tools.observable_tools import pauli_grouping
-from collections.abc import Callable
-from itertools import product, repeat
-from braket.circuits.observables import Sum
-from braket.circuits.serialization import IRType
-from copy import deepcopy as dc
-from math import pi 
+from braket.parametric import Parameterizable
+from braket.program_sets import CircuitBinding, ProgramSet
+from braket.tasks import ProgramSetQuantumTaskResult
 
 PROGRAM_SET_LIMIT = 100
 

@@ -1,6 +1,6 @@
-from braket.circuits.observables import Observable, TensorProduct, Sum, X, Y, Z, I, Hermitian
-from braket.quantum_information import PauliString
 import numpy as np
+
+from braket.circuits.observables import Hermitian, I, Sum, TensorProduct, X, Y, Z
 
 _PAULI_OBSERVABLES = {"X": X, "Y": Y, "Z": Z, "I":I}
 
