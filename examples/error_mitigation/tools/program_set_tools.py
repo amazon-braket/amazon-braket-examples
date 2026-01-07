@@ -10,7 +10,6 @@ from itertools import product
 import warnings
 from braket.quantum_information import PauliString
 from tools.observable_tools import pauli_grouping
-from tools.observable_tools import matrix_to_pauli, sum_to_pauli
 from collections.abc import Callable
 from itertools import product, repeat
 from braket.circuits.observables import Sum
@@ -34,14 +33,27 @@ ANKAA_CONVERSION = {
     "I": lambda i : Circuit(), #.measure(i),
 }
 
-def standard_bases(
-        pstr : str,
-        conversion : dict) -> Circuit:
-    """ return standard measurement basis """
-    c = Circuit()
-    for i,p in enumerate(pstr):
-        c+= conversion[p](i)
-    return c
+def _convert_circuit(
+        circuit : Circuit, 
+        parameter : dict, 
+        pstr : str, 
+        conversion = None,
+        verbatim : bool = False) -> Circuit:
+    """ """
+    qubits = sorted(circuit.qubits)
+    if qubits is None:
+        qubits = range(len(pstr))
+
+    basis = Circuit()
+    for q,p in zip(qubits,pstr):
+        if p=="I":
+            continue
+        basis+= conversion[p](q)
+
+    circ = circuit.make_bound_circuit(parameter) + basis
+    if verbatim:
+        circ = Circuit().add_verbatim_box(circ)
+    return circ.measure(qubits)
 
 def _zip_to_pset(
         obj_list : list[tuple[Circuit,list[float],Observable]], 
@@ -52,10 +64,8 @@ def _zip_to_pset(
     if conversion is None:
         conversion = STANDARD_CONVERSION
     circuits = [
-        c.make_bound_circuit(p) + standard_bases(o,conversion) for c,p,o in zip(*zip(*obj_list))
+        _convert_circuit(c,p,o,conversion=conversion, verbatim = verbatim) for c,p,o in zip(*zip(*obj_list))
     ]
-    if verbatim:
-        circuits = [Circuit().add_verbatim_box(c) for c in circuits]
     return ProgramSet(circuits
         , shots_per_executable=shots_per_executable)
 
@@ -141,6 +151,7 @@ def run_with_program_sets(
         shots_per_executable : int | list = 100,  
         measurement_filter : Callable | None = None,
         conversion : dict[str,Callable] = None,
+        return_program_sets : bool = False, 
         verbatim : bool = False,
         ) -> np.ndarray:
     """ distribute and execute (circuits * bases * parameters) via program sets 
@@ -217,4 +228,6 @@ def run_with_program_sets(
         observables= observables_per_basis, 
         measurement_filter= measurement_filter,
             )
+    if return_program_sets:
+        return np.reshape(result, total_shape), psets
     return np.reshape(result, total_shape) # reshape to original dimension

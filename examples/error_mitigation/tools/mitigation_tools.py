@@ -24,10 +24,7 @@ def _readout_pass(circ : Circuit) -> tuple[Circuit, str]:
     Returns:
         (Circuit, str) - list of twirled circuits and flip maps
     """
-    qubits = set()
-    for ins in circ.instructions:
-        qubits.update(int(q) for q in ins.target)
-    qubits = sorted(qubits)
+    qubits = sorted([int(q) for q in circ.qubits])
     
     twirled_circ = circ.copy()
     flip_map = ['0'] * len(qubits)
@@ -162,16 +159,18 @@ def build_inverse_quasi_distribution(reference,
 
 def process_readout_twirl(
         counts : dict, 
-        index : int, 
+        index : int | tuple, 
         bit_masks : list | np.ndarray
         ):
     """ apply corrections to a readout twirl """
-    i = _index_check(index, getattr(bit_masks, "shape", None))
-    bit_mask = bit_masks[i] 
-
-    def _bit_addition(k,j):
-        return ''.join(str(int(a) ^ int(b)) for a, b in zip(k, bit_mask))
-    return {_bit_addition(k,bit_mask):v for k,v in counts.items()}
+    if isinstance(index, int):
+        index = _index_check(index, getattr(bit_masks, "shape", None))
+    assert len(index) == len(bit_masks.shape), "Need to supply a proper bit mask index"
+    bit_mask = bit_masks[index] 
+    def _bit_addition(k : str,j : str):
+        assert len(k)==len(j)
+        return ''.join(["0" if a==b else "1" for a,b in zip(k,j)])
+    return {_bit_addition(key,bit_mask):v for key,v in counts.items()}
 
 def generate_bit_mask(twirls : np.ndarray, pauli_bases : list) -> np.ndarray:
     """ from observable and twirl, generate bit mask """
@@ -288,19 +287,6 @@ class SparseReadoutMitigation:
         temp = process_readout_twirl(result, index, bit_masks)
         temp = self.invert_marginal(temp, non_trivial)
         return sum([v*(-1)**k.count("1") for k,v in temp.items()])
-
-    def process_multiple(self, results : list[dict], indices : int, pauli_string : str,
-                 bit_masks : np.ndarray) -> float:
-        """ """
-        non_trivial = [n for n,k in enumerate(pauli_string) if k!="I"] 
-        total = defaultdict(lambda : 0) 
-        for result, index in zip(results, indices):
-            temp = process_readout_twirl(result, index, bit_masks)
-            for k,v in temp.items():
-                total[k]+= v
-        inverted = self.invert_marginal(total, non_trivial)
-        return sum([v*(-1)**k.count("1") for k,v in inverted.items()])
-
 
     def invert_marginal(self, dist : dict, qubits : list[int]):
         """ given a list of qubits, create a marginal distribution, save inverse, continue 

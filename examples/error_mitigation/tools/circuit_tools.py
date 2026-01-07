@@ -5,7 +5,6 @@ from braket.devices import Device
 import numpy as np
 from braket.circuits import QubitSet
 from qiskit import transpile
-from braket.circuits.observables import I,X,Y,Z
 
 def _vf2_callback(**kwargs):
     """
@@ -20,34 +19,39 @@ def _vf2_callback(**kwargs):
 def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
     """ find a layout with the VF2 pass by tapering the layout """
 
-    def score(a,b):
+    def score(a,b,c):
         """ custom score function prioritizing first arg """
-        return 1.0*a + 0.25*b
+        return 1.0*a + 1.0*b + 1.0*c
     
-    limit_2q = 0.1
-    limit_ro = 0.25
-    step_2q = 0.05
-    step_ro = 0.125
-    current = 'ro'
+    limits = [0.1, 0.25, 0.05]
+    steps = [l/2 for l in limits]
     trials = 0
-    best = (1, 1)
+    best = [1,1,1]
     final = None
-    min_step = 0.001
+    min_step = 0.0001
     
     props = device.properties.standardized
-    num_qubits = len(ansatz.qubits)
-
     ansatz_q = to_qiskit(ansatz, False)
 
-    while trials < 50 and (step_2q > min_step and step_ro > min_step):
+
+    while trials < 75 and any([s > min_step for s in steps]):
+        idx = trials % 3
         qubits = set()
         layout = []
         for pair, vals in props.twoQubitProperties.items():
             infidelity = 1 - vals.twoQubitGateFidelity[0].dict()['fidelity']
             pair = [int(k) for k in pair.split('-')]
             ro_i = 1 - props.oneQubitProperties[str(pair[0])].oneQubitFidelity[2].fidelity
-            ro_j = 1 - props.oneQubitProperties[str(pair[1])].oneQubitFidelity[2].fidelity
-            if infidelity < limit_2q and ro_i < limit_ro and ro_j < limit_ro:
+            ro_j = 1 - props.oneQubitProperties[str(pair[1])].oneQubitFidelity[2].fidelity 
+            
+            g_i =  1-props.oneQubitProperties[str(pair[0])].oneQubitFidelity[1].fidelity
+            g_j =  1-props.oneQubitProperties[str(pair[1])].oneQubitFidelity[1].fidelity
+            if all([
+                infidelity < limits[0], 
+                ro_i < limits[1],
+                ro_j < limits[1],
+                g_i < limits[2],
+                g_j < limits[2]]):
                 layout.append(pair)
             qubits.add(pair[0])
             qubits.add(pair[1])
@@ -55,42 +59,32 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
         maps = {k:n for n,k in enumerate(qubits)}
         new_layout = [[maps[i],maps[j]] for (i,j) in layout] + [[maps[j],maps[i]] for (i,j) in layout]
 
-
         try:
             trial = transpile(ansatz_q, 
                             coupling_map=new_layout, 
                             optimization_level=2, 
                             callback=_vf2_callback)
-
-            active_qubits = set()
-            if current == 'ro':
-                limit_ro -= step_ro
-                step_ro /= 2
-            else:
-                limit_2q -= step_2q
-                step_2q /= 2
-                
-            if score(limit_2q, limit_ro) < score(best[0], best[1]):
-                best = (limit_2q, limit_ro)
+            if score(*limits) < score(*best):
+                best = limits.copy()
                 final = trial
-                
+            limits[idx] -= steps[idx]
+            steps[idx] /= 2
         except Exception as e:
-            # Failure: increase current parameter and halve step
-            if current == 'ro':
-                limit_ro += step_ro
-                step_ro /= 2
-            else:
-                limit_2q += step_2q
-                step_2q /= 2
-        
-        # Alternate between parameters
-        current = '2q' if current == 'ro' else 'ro'
+            limits[idx] += steps[idx]
+            steps[idx] /= 2
+        # print(limits,steps, score(*limits), fail)
         trials += 1
 
+    if final is None:
+        raise RuntimeError("Failed to find valid circuit layout within constraints")
+    
     final = to_braket(final, braket_device=device, optimization_level=0)
 
-    print(f'limit_2q: {best[0]}')
-    print(f'limit_ro: {best[1]}')
+    print(f'= limit(2q): {best[0]}')
+    print(f'= limit(ro): {best[1]}')
+    print(f'= limit(1q): {best[2]}')
+    print(f' - num steps: {trials}')
+    print(f' - steps: {steps}')
     return final
 
 
@@ -120,16 +114,17 @@ def find_linear_chain(circ : Circuit) -> list:
     return chain
 
 
-def multiply_gate(circuit : Circuit, gate : str, repetitions : int = 1) -> Circuit:
+def multiply_gates(circuit : Circuit, gates : list[str], repetitions : int = 1) -> Circuit:
     """ multiply a gate by the number of repetitions -> does not really preserve a circuit"""
     new = Circuit()
     for ins in circuit.instructions:
-        if ins.operator.name == gate:
+        if ins.operator.name in gates:
             for _ in range(repetitions):
                 new.add_instruction(ins)
         else:
             new.add_instruction(ins)
     return new
+
 
 def strip_verbatim(circuit : Circuit) -> Circuit:
     """ strip verbatim from a circuit """
@@ -216,7 +211,7 @@ if __name__ == "__main__":
             circ.iswap(i,i+1)
         return circ
 
-    ansatz = test_circuit(num_qubits=10)
+    ansatz = test_circuit(num_qubits=30)
 
     native_ansatz = restricted_circuit_layout(ansatz, ankaa)
     print(native_ansatz)
