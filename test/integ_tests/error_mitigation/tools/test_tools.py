@@ -58,15 +58,15 @@ class TestObservables(unittest.TestCase):
     def test_pauli_grouping(self):
         """Test Pauli grouping functionality."""
         paulis = [(1.0, "XX"), (0.5, "ZZ"), (0.3, "XY")]
-        signatures, groups = pauli_grouping(paulis)
+        signatures, _ = pauli_grouping(paulis)
         assert len(signatures) == 3  # XX and XY anticommute, so separate groups
         
     def test_qubit_wise_commuting(self):
         """Test qubit-wise commutation check."""
-        assert qubit_wise_commuting("XX", "XY") == False
-        assert qubit_wise_commuting("XX", "XX") == True
-        assert qubit_wise_commuting("XI", "XZ") == True
-        assert qubit_wise_commuting("XI", "IX") == True
+        assert not qubit_wise_commuting("XX", "XY")
+        assert qubit_wise_commuting("XX", "XX")
+        assert qubit_wise_commuting("XI", "XZ")
+        assert qubit_wise_commuting("XI", "IX")
 
 
 class TestMitigationTools(unittest.TestCase):
@@ -115,13 +115,11 @@ class TestMitigationTools(unittest.TestCase):
         dist = {"0000":1}
         sro = SparseReadoutMitigation(dist)
         res = {"1000":1.0}
-        index = 0
         bitflip = ["0101"]
         zs = ["ZIII","IZII","IIZI","IIIZ"]
         ans = [-1,-1,+1,-1]
         for z,a in zip(zs,ans):
             test = sro.process_single(res,0, z, bitflip)
-            print(test)
             assert test == a 
 
 

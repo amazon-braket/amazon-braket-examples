@@ -24,7 +24,7 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
         return 1.0*a + 1.0*b + 1.0*c
     
     limits = [0.1, 0.25, 0.05]
-    steps = [l/2 for l in limits]
+    steps = [lim/2 for lim in limits]
     trials = 0
     best = [1,1,1]
     final = None
