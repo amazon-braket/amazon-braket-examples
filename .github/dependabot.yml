@@ -16,6 +16,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "numpy"
+        versions: [ ">=2.0.0" ]  # Jobs containers are still on Python 3.10 and numpy==1.26.4
     commit-message:
       prefix: infra
     groups:

@@ -52,6 +52,10 @@
 
   Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
+-  [**Introduction to Amazon Braket spending limits**](examples/braket_features/Spending_Limits_Introduction.ipynb) [(IntroSL)](#index_IntroSL)<a name="IntroSL"></a>
+
+  Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold.
+
 
 ---
 
@@ -491,4 +495,8 @@
 -  [**Dynamic Circuits on Qiskit with Amazon Braket**](examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb) [(DCQis)](#index_DCQis)
 
   This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
+
+-  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
+
+  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation.
 

@@ -97,6 +97,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates.
 
+-  [**Introduction to Amazon Braket spending limits**](examples/braket_features/Spending_Limits_Introduction.ipynb) [(IntroSL)](#index_IntroSL)<a name="IntroSL"></a>
+
+  Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold.
+
 
 ---
 
@@ -537,6 +541,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
 
+-  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
+
+  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for compilation using Qiskit.
+
 ## <a name="index">Index</a> 
  |  Terms  | Notebooks  | 
  | -- | -- | 
@@ -551,10 +559,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
- | compilation |  [VC](#VC)<a name="index_VC"></a>| <br>
+ | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
- | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>, [HCQJ](#HCQJ)| <br>
- | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
+ | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
+ | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
  | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
  | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
@@ -569,7 +577,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ), [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
  | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
- | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
+ | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL)| <br>
  | kraus      |  [GSOQ](#GSOQ), [SN](#SN)<a name="index_SN"></a>, [SNCP](#SNCP)<a name="index_SNCP"></a>| <br>
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ExpLS](#ExpLS)<a name="index_ExpLS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
  | mitiq      |  [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [TPS](#TPS), [EMWm](#EMWm)| <br>
@@ -590,7 +598,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SPL](#SPL)| <br>
  | qaa        |  [QAA](#QAA)<a name="index_QAA"></a>| <br>
  | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP)| <br>
- | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [AQEMW](#AQEMW)| <br>
+ | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [CBQBP](#CBQBP)| <br>
  | qml        |  [QMLHJ](#QMLHJ)| <br>
  | qpe        |  [QPE](#QPE)<a name="index_QPE"></a>| <br>
  | rem        |  [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>

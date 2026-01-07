@@ -1,4 +1,5 @@
 #!/bin/zsh
+set -e
 python3 docs/build_body.py
 python3 docs/build_index.py
 cat docs/_FRONTMATTER.md \
