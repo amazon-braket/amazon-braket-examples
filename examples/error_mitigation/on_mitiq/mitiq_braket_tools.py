@@ -1,11 +1,15 @@
-from braket.circuits import Circuit
+from functools import partial
+
+import mitiq
+from mitiq import MeasurementResult
 from mitiq.executor import Executor
+
+from braket.aws import AwsDevice
+from braket.circuits import Circuit
+from braket.circuits.compiler_directives import StartVerbatimBox
 from braket.devices import Device
 from braket.program_sets import ProgramSet
-from mitiq import MeasurementResult
-from braket.tasks import ProgramSetQuantumTaskResult, GateModelQuantumTaskResult
-from braket.circuits.compiler_directives import StartVerbatimBox
-from functools import partial
+from braket.tasks import GateModelQuantumTaskResult, ProgramSetQuantumTaskResult
 
 """
 mitiq_braket_tools.py
@@ -88,7 +92,7 @@ def _execute_via_program_set(
     return results if isinstance(results, list) else [results]
 
 def _execute_via_programs(
-        device : Device, 
+        device : Device | AwsDevice,
         program : Circuit,
         shots : int,
         verbatim : bool = True
@@ -100,7 +104,7 @@ def _execute_via_programs(
     return _braket_result_to_mitiq_meas_result(device.run(program, shots = shots).result())
 
 def braket_measurement_executor(
-        device : Device,
+        device : Device | AwsDevice,
         shots : int,
         verbatim : bool = True,
         batch_if_possible : bool = True,
@@ -113,6 +117,8 @@ def braket_measurement_executor(
         verbatim (bool): whether or not to utilize verbatim circuits
 
     """
+    if hasattr(device, "aws_session"):
+        device.aws_session.add_braket_user_agent = f"mitiq-braket-tools/mitiq-{mitiq.__version__}"
     for action in device.properties.action:
         if "PROGRAM_SET" in action.name and batch_if_possible:
             max_programs = device.properties.action[action].maximumExecutables
@@ -123,7 +129,7 @@ def braket_measurement_executor(
         partial(_execute_via_programs, device, shots=shots, verbatim=verbatim))
 
 def braket_expectation_executor(
-        device : Device,
+        device : Device | AwsDevice,
         observable,
         shots : int,
         verbatim : bool = True,
@@ -145,6 +151,9 @@ def braket_expectation_executor(
         result = task.result()
         return result.values[0]
     
+    if hasattr(device, "aws_session"):
+        device.aws_session.add_braket_user_agent = f"mitiq-braket-tools/mitiq-{mitiq.__version__}"
+
     for action in device.properties.action:
         if "PROGRAM_SET" in action.name and batch_if_possible:
             max_programs = device.properties.action[action].maximumExecutables
