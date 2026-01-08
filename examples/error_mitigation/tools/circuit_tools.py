@@ -1,3 +1,5 @@
+from warnings import warn
+
 import numpy as np
 from qiskit import transpile
 from qiskit_braket_provider import to_braket, to_qiskit
@@ -76,7 +78,8 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
         trials += 1
 
     if final is None:
-        raise RuntimeError("Failed to find valid circuit layout within constraints")
+        warn("could not find valid layout, returning original")
+        return ansatz
     
     final = to_braket(final, braket_device=device, optimization_level=0)
 

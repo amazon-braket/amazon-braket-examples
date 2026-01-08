@@ -121,7 +121,9 @@ def _process_program_sets(
     n_bases = len(observables)
     index = 0
     for pset in pset_results:
+        print(pset)
         for entry in pset: 
+            print(entry)
             if measurement_filter:
                 data = measurement_filter(entry[0].counts, index = index)
             else:
@@ -217,7 +219,6 @@ def run_with_program_sets(
         print(f'-- running program set {n+1}/{len(psets)}')
         pset_results.append(device.run(  # noqa: PERF401
             pset, shots=pset.total_executables * pset.shots_per_executable).result()) 
-    
     result = _process_program_sets(
         pset_results=pset_results,
         observables= observables_per_basis, 

@@ -1,8 +1,13 @@
+import os
+import sys
+from collections.abc import Callable
 from functools import partial
 
 import mitiq
+import numpy as np
 from mitiq import MeasurementResult
 from mitiq.executor import Executor
+from mitiq.rem import mitigate_measurements
 
 from braket.aws import AwsDevice
 from braket.circuits import Circuit
@@ -10,6 +15,10 @@ from braket.circuits.compiler_directives import StartVerbatimBox
 from braket.devices import Device
 from braket.program_sets import ProgramSet
 from braket.tasks import GateModelQuantumTaskResult, ProgramSetQuantumTaskResult
+
+sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir))) # parent  
+
+from tools.mitigation_tools import process_readout_twirl
 
 """
 mitiq_braket_tools.py
@@ -20,9 +29,7 @@ braket_measurement_executor:
     returns MeasurementResult objects for use with mitiq observables
 braket_expectation_executor: 
     returns expectation values from **braket** observables
-
 """
-
 
 def _braket_result_to_mitiq_meas_result(
         result :GateModelQuantumTaskResult | ProgramSetQuantumTaskResult,
@@ -161,4 +168,21 @@ def braket_expectation_executor(
                 partial(_execute_expectation_batch, device, observable=observable, shots=shots, verbatim=verbatim),
                 max_batch_size=max_programs)
     return Executor(_execute_expectation)
+
+def braket_rem_twirl_mitigator(
+        inverse_confusion_matrix : np.ndarray = None,
+        bit_masks : np.ndarray = None,
+        ) -> Callable:
+    """ return a function to modify a count with a inverse confusion matrix """
+    
+    def to_run(counts : dict, index : int) -> dict:
+        return mitigate_measurements(
+            MeasurementResult.from_counts(
+                process_readout_twirl(counts, index, bit_masks)
+                ),
+            inverse_confusion_matrix=inverse_confusion_matrix
+            ).prob_distribution()
+
+    return to_run
+
 

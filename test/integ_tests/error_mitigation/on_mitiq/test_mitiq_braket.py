@@ -2,29 +2,32 @@ import os
 import sys
 import unittest
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'examples', 'error_mitigation','on_mitiq')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'examples', 'error_mitigation')))
+
+import pytest
 from mitiq import Observable, PauliString
 from mitiq_braket_tools import (
     # braket_counts_executor,
     braket_expectation_executor,
     braket_measurement_executor,
 )
-from noise_models import qd_readout, qd_readout_2
+from tools.mitigation_tools import (
+    SparseReadoutMitigation,
+    apply_readout_twirl,
+    bit_mul_distribution,
+    build_inverse_quasi_distribution,
+    get_twirled_readout_dist,
+)
+from tools.noise_models import qd_readout, qd_readout_2
 
 from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.circuits.observables import Z
 from braket.devices import LocalSimulator
 
-sys.path.append(os.path.abspath(os.path.join(os.getcwd(), os.pardir))) # parent  
-from tools.mitigation_tools import (
-    SparseEstimation,
-    apply_readout_twirl,
-    bit_mul_distribution,
-    build_inverse_quasi_distribution,
-    get_twirled_readout_dist,
-)
 
-
+@pytest.mark.mitiq
 class TestExecutors(unittest.TestCase):
     @unittest.skip('api')
     def test_braket_executors(self):
@@ -70,6 +73,7 @@ class TestExecutors(unittest.TestCase):
         assert not meas_executor.can_batch
         assert not exp_executor.can_batch
 
+@pytest.mark.mitiq
 class TestMeasurement(unittest.TestCase):
 
     @unittest.skip('api')
@@ -102,7 +106,7 @@ class TestMeasurement(unittest.TestCase):
                                          n_twirls = 10, 
                                          shots = 100000, 
                                          device = device)
-        sparse = SparseEstimation(dist)    
+        sparse = SparseReadoutMitigation(dist)    
         circ = Circuit().x(0).x(1)
         circs, paulis = apply_readout_twirl(circ, 5)
 
@@ -114,9 +118,7 @@ class TestMeasurement(unittest.TestCase):
             results.append(res)
             print(res, paulis[n], )
             print(sparse.process_single(res,n,"ZI", paulis))
-        print('total estimate: ')
-        print(sparse.process_multiple(results, range(5),"ZI",paulis))
-        print(sparse.inverses)
+    
 
 if __name__ == "__main__":
     unittest.main()
