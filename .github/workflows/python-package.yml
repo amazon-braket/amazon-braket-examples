@@ -43,3 +43,4 @@ jobs:
     - name: Run integ tests
       run: |
         hatch run test -p no:cacheprovider
+        hatch run test-mitiq:test

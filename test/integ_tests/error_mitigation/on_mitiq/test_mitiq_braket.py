@@ -72,7 +72,7 @@ class TestExecutors(unittest.TestCase):
         assert not meas_executor.can_batch
         assert not exp_executor.can_batch
 
-@pytest.mark.optional
+@pytest.mark.mitiq
 class TestMeasurement(unittest.TestCase):
 
     @unittest.skip('api')
