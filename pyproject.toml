@@ -95,3 +95,27 @@ lint.per-file-ignores."test/**/*.py" = [
   "S101",    # asserts allowed in tests...
   "S603",    # `subprocess` call: check for execution of untrusted input
 ]
+
+[tool.hatch.envs.test-mitiq]
+detached = true
+dependencies = [
+  "jupyter",
+  "nbconvert",
+  "pytest",
+  "pytest-rerunfailures",
+  "pytest-xdist[psutil]",
+  "testbook",
+]
+
+[tool.hatch.envs.test-mitiq.scripts]
+test = """
+pip install -r extra/requirements-mitiq.txt
+python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
+pytest --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/error_mitigation/ {args}
+"""
+
+[tool.pytest.ini_options]
+addopts = "-m 'not mitiq'"
+markers = [
+    "mitiq: tests that require mitiq",
+]
