@@ -115,6 +115,7 @@ pytest --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/error_m
 """
 
 [tool.pytest.ini_options]
+addopts = "-m 'not mitiq'"
 markers = [
     "mitiq: tests that require mitiq",
 ]

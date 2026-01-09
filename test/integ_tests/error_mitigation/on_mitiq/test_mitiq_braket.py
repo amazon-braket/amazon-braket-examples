@@ -6,19 +6,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'examples', 'error_mitigation')))
 
 import pytest
-from mitiq import Observable, PauliString
-from mitiq_braket_tools import (
-    # braket_counts_executor,
-    braket_expectation_executor,
-    braket_measurement_executor,
-)
-from tools.mitigation_tools import (
-    SparseReadoutMitigation,
-    apply_readout_twirl,
-    bit_mul_distribution,
-    build_inverse_quasi_distribution,
-    get_twirled_readout_dist,
-)
 from tools.noise_models import qd_readout, qd_readout_2
 
 from braket.aws import AwsDevice
@@ -29,8 +16,15 @@ from braket.devices import LocalSimulator
 
 @pytest.mark.mitiq
 class TestExecutors(unittest.TestCase):
+    
     @unittest.skip('api')
     def test_braket_executors(self):
+        from mitiq import Observable, PauliString
+        from mitiq_braket_tools import (
+            braket_expectation_executor,
+            braket_measurement_executor,
+        )
+
         """Test all braket executors"""
 
         # Create simple test circuit
@@ -55,6 +49,11 @@ class TestExecutors(unittest.TestCase):
 
     @unittest.skip('api')
     def test_batch(self):
+        from mitiq_braket_tools import (
+            braket_expectation_executor,
+            braket_measurement_executor,
+            )
+
         device = LocalSimulator() 
         print(device.properties.action)
         # counts_executor = braket_counts_executor(device, shots=100, verbatim=False)
@@ -73,12 +72,19 @@ class TestExecutors(unittest.TestCase):
         assert not meas_executor.can_batch
         assert not exp_executor.can_batch
 
-@pytest.mark.mitiq
+@pytest.mark.optional
 class TestMeasurement(unittest.TestCase):
 
     @unittest.skip('api')
     def test_rem_inverse(self):
         device = qd_readout_2
+        from tools.mitigation_tools import (
+            bit_mul_distribution,
+            build_inverse_quasi_distribution,
+            get_twirled_readout_dist,
+        )
+
+
         ref_dist = get_twirled_readout_dist([1,2,3],
                                          n_twirls = 10, 
                                          shots = 10000, 
@@ -89,7 +95,7 @@ class TestMeasurement(unittest.TestCase):
                                          device = device)
 
         print(ref_dist)
-        quasi1, factors1 = build_inverse_quasi_distribution(ref_dist, second_order=False)
+        quasi1, _ = build_inverse_quasi_distribution(ref_dist, second_order=False)
         # quasi2, factors2 = build_inverse_quasi_distribution(ref_dist, second_order=True)
         print('first order correction: ')
         print(quasi1)
@@ -101,6 +107,11 @@ class TestMeasurement(unittest.TestCase):
 
     def test_sparse_readout(self):
         import numpy as np
+        from tools.mitigation_tools import (
+            SparseReadoutMitigation,
+            apply_readout_twirl,
+            get_twirled_readout_dist,
+        )
         device = qd_readout
         dist = get_twirled_readout_dist([0,1],
                                          n_twirls = 10, 

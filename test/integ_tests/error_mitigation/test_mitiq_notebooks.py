@@ -16,11 +16,8 @@ EXCLUDED_NOTEBOOKS = []
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if "integ_tests" in os.getcwd():
-    os.chdir(os.path.join("..", "..", ".."))
-
 root_path = os.getcwd()
-examples_path = "examples/error_mitigation/on_mitiq"
+examples_path = "on_mitiq"
 test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):

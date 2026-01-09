@@ -243,14 +243,3 @@ def uncomment_test_section(source):
             result.append(line)
 
     return "\n".join(result)
-
-
-root_path = os.getcwd()
-examples_path = "examples"
-mitiq_notebooks = []
-
-for dir_, _, files in os.walk(examples_path):
-    for file_name in files:
-        if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
-            mitiq_notebooks.append((dir_, file_name))  # noqa: PERF401
-
