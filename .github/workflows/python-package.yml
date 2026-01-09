@@ -43,4 +43,6 @@ jobs:
     - name: Run integ tests
       run: |
         hatch run test -p no:cacheprovider
+    - name: Run optional tests
+      run: |
         hatch run test-mitiq:test
