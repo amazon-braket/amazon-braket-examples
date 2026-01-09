@@ -7,5 +7,6 @@ botocore==1.42.17
 cirq-ionq
 matplotlib==3.10.8
 matplotlib-venn==1.1.2
-mitiq==0.48.0
+mitiq==0.48.1; python_version>"3.10"
+mitiq==0.47.0; python_version=="3.10"
 qiskit-braket-provider==0.10.0
