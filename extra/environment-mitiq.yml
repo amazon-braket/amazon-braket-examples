@@ -1,4 +1,4 @@
-name: Braket-Mitiq
+name: mitiq-examples
 channels:
   - conda-forge
 dependencies:

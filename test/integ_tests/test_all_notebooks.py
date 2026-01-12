@@ -243,3 +243,12 @@ def uncomment_test_section(source):
             result.append(line)
 
     return "\n".join(result)
+
+
+def test_not_imported():
+    """ verify that certain libaries have not been imported """
+    extra_libraries = ["mitiq"]
+    import importlib
+    for library in extra_libraries:
+        with pytest.raises(ImportError):
+            importlib.import_module(library)
