@@ -121,9 +121,7 @@ def _process_program_sets(
     n_bases = len(observables)
     index = 0
     for pset in pset_results:
-        print(pset)
         for entry in pset: 
-            print(entry)
             if measurement_filter:
                 data = measurement_filter(entry[0].counts, index = index)
             else:
