@@ -54,7 +54,7 @@ dependencies = [
 [tool.hatch.envs.default.scripts]
 test = """
 python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
-pytest --dist worksteal -n logical -ra -v --durations=0 test/
+pytest --dist worksteal -n logical -ra -v --durations=0 -m 'not mitiq' test/
 """
 
 [tool.hatch.envs.lint]
@@ -115,7 +115,6 @@ pytest --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/error_m
 """
 
 [tool.pytest.ini_options]
-addopts = "-m 'not mitiq'"
 markers = [
     "mitiq: tests that require mitiq",
 ]

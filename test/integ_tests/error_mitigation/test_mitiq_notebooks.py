@@ -17,7 +17,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 root_path = os.getcwd()
-examples_path = "on_mitiq"
+examples_path = "examples/error_mitigation/on_mitiq"
+# should be executed from the main directory
 test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):

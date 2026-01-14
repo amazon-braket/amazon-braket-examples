@@ -17,7 +17,6 @@ from braket.devices import LocalSimulator
 @pytest.mark.mitiq
 class TestExecutors(unittest.TestCase):
     
-    @unittest.skip('api')
     def test_braket_executors(self):
         from mitiq import Observable, PauliString
         from mitiq_braket_tools import (
@@ -31,21 +30,16 @@ class TestExecutors(unittest.TestCase):
         circuit = Circuit().h(0).cnot(0, 1)
         device = LocalSimulator()
         
-        # # Test counts executor
-        # counts_executor = braket_counts_executor(device, shots=100, verbatim=False)
-        # counts_result = counts_executor.evaluate(circuit)
-        # print(f"Counts executor: {counts_result}")
-        
         # Test measurement executor
-        meas_executor = braket_measurement_executor(device, shots=100, verbatim=False)
+        meas_executor = braket_measurement_executor(device, shots=10000, verbatim=False)
         meas_result = meas_executor.evaluate(circuit, observable=Observable(PauliString("ZZ")))
         print(f"Measurement executor: {meas_result}")
         
         # Test expectation executor
-        exp_executor = braket_expectation_executor(device, Z(0) @ Z(1), shots=100, verbatim=False)
+        exp_executor = braket_expectation_executor(device, Z(0) @ Z(1), shots=10000, verbatim=False)
         exp_result = exp_executor.evaluate(circuit)
         print(f"Expectation executor: {exp_result}")
-
+        assert abs(exp_result[0] - meas_result[0]) < 0.03
 
     @unittest.skip('api')
     def test_batch(self):
@@ -65,7 +59,6 @@ class TestExecutors(unittest.TestCase):
 
         new_device = AwsDevice("arn:aws:braket:us-east-1::device/qpu/ionq/Forte-1")
         # Create a copy of actions without PROGRAM_SET support
-            
         meas_executor = braket_measurement_executor(new_device, shots=100, verbatim=False)
         exp_executor = braket_expectation_executor(new_device, Z(0) @ Z(1), shots=100, verbatim=False)
         # assert counts_executor.can_batch
@@ -74,8 +67,6 @@ class TestExecutors(unittest.TestCase):
 
 @pytest.mark.mitiq
 class TestMeasurement(unittest.TestCase):
-
-    @unittest.skip('api')
     def test_rem_inverse(self):
         device = qd_readout_2
         from tools.mitigation_tools import (
