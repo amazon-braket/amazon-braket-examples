@@ -1,12 +1,12 @@
-amazon-braket-default-simulator==1.32.1
+amazon-braket-default-simulator==1.33.0
 amazon-braket-pennylane-plugin==1.33.6
-amazon-braket-schemas==1.27.0
-amazon-braket-sdk==1.107.0
+amazon-braket-schemas==1.28.0
+amazon-braket-sdk==1.108.1
 amazon-braket-algorithm-library==1.6.3
-awscli==1.44.7
-boto3==1.42.17
-botocore==1.42.17
-cudaq==0.12.0.post1; sys_platform=="linux"
+awscli==1.44.20
+boto3==1.42.30
+botocore==1.42.30
+cudaq==0.13.0; sys_platform=="linux"
 cudaq-qec==0.4.0.post1; sys_platform=="linux"
 cudaq-solvers==0.4.0; sys_platform=="linux"
 cvxpy==1.7.5
@@ -28,5 +28,5 @@ pennylane-lightning==0.42.0
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
 qiskit-braket-provider==0.10.0
-qiskit==2.2.3
+qiskit==2.3.0
 scipy==1.15.3 # Scipy 1.16.x requires Python >=3.11
