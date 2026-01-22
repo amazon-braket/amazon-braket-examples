@@ -246,7 +246,11 @@ def uncomment_test_section(source):
 
 
 def test_not_imported():
-    """ verify that certain libaries have not been imported """
+    """ verify that certain libaries have not been imported 
+    
+    Excluded libraries: 
+        mitiq - see `/examples/error_mitigation/on_mitiq/NOTICE.md` for details
+    """
     extra_libraries = ["mitiq"]
     import importlib
     for library in extra_libraries:
