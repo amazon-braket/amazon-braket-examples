@@ -107,13 +107,20 @@ dependencies = [
   "testbook",
 ]
 
+
 [tool.hatch.envs.test-mitiq.scripts]
 test = """
-pip install -r extra/requirements-mitiq.txt
+pip install -r extra/requirements-mitiq.txt --force-reinstall
 python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
-pytest --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/error_mitigation/ {args}
+pytest -m mitiq --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/error_mitigation/ {args}
 """
 
+# TODO: combine installs to single line; numpy version clash until mitiq updates to >=2.x
+test-dry-run= """ 
+pip install -r requirements.txt --force-reinstall
+pip install -r extra/requirements-mitiq.txt --dry-run
+"""
+ 
 [tool.pytest.ini_options]
 markers = [
     "mitiq: tests that require mitiq",
