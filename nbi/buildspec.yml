@@ -40,6 +40,7 @@ phases:
         find $_ENV_PATH/lib/python*/site-packages -type d \( -name "tests" -o -name "test" \) | \
         grep -v "amazon_braket" | \
         grep -v "braket" | \
+        grep -v "numpy" | \
         xargs rm -rf 2>/dev/null || true
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
           --compress-level 3 --n-threads -1
