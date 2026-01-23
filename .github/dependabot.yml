@@ -16,7 +16,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-
+    ignore:
+      - dependency-name: "pandas"
+        versions: [ ">=3.0.0" ]  # pandas >=3.0.0 not compatible with JAX 0.6.2
     commit-message:
       prefix: infra
     groups:
