@@ -22,7 +22,7 @@ numpy==2.2.6
 openfermion==1.7.1
 openfermionpyscf==0.5
 optax==0.2.6
-pandas==3.0.0
+pandas==2.3.3 # pandas >=3.0.0 not compatible with JAX 0.6.2
 pennylane==0.44.0
 pennylane-lightning==0.44.0
 qiskit-aer==0.17.2
