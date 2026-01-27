@@ -1,8 +1,9 @@
 from warnings import warn
 
 import numpy as np
-from qiskit import transpile
-from qiskit_braket_provider import to_braket, to_qiskit
+from qiskit.transpiler import CouplingMap, PassManager
+from qiskit.transpiler.passes import VF2Layout
+from qiskit_braket_provider import to_qiskit
 
 from braket.circuits import Circuit, QubitSet
 from braket.devices import Device
@@ -58,20 +59,18 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
             qubits.add(pair[0])
             qubits.add(pair[1])
 
-        maps = {k:n for n,k in enumerate(qubits)}
-        new_layout = [[maps[i],maps[j]] for (i,j) in layout] + [[maps[j],maps[i]] for (i,j) in layout]
+        coupling_map = CouplingMap(layout)
 
-        try:
-            trial = transpile(ansatz_q, 
-                            coupling_map=new_layout, 
-                            optimization_level=2, 
-                            callback=_vf2_callback)
+        pm = PassManager([VF2Layout(coupling_map, max_trials=1,time_limit=5)])
+        pm.run(ansatz_q)
+
+        if pm.property_set["VF2Layout_stop_reason"].name == "SOLUTION_FOUND":
             if score(*limits) < score(*best):
                 best = limits.copy()
-                final = trial
+                final = {k._index:v for k,v in pm.property_set["layout"].get_virtual_bits().items()}
             limits[idx] -= steps[idx]
             steps[idx] /= 2
-        except Exception:
+        else:
             limits[idx] += steps[idx]
             steps[idx] /= 2
         # print(limits,steps, score(*limits), fail)
@@ -81,7 +80,10 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
         warn("could not find valid layout, returning original")
         return ansatz
     
-    final = to_braket(final, braket_device=device, optimization_level=0)
+    final = Circuit().add_circuit(ansatz, target_mapping = final)
+    print(final)
+    # final = to_braket(final, braket_device=device, optimization_level=0)
+
 
     print(f'= limit(2q): {best[0]}')
     print(f'= limit(ro): {best[1]}')
@@ -204,20 +206,13 @@ if __name__ == "__main__":
             circ.rz(i,0.0001,)
         for i in range(1,num_qubits-1,2):
             circ.iswap(i,i+1)
-        for i in range(num_qubits):
-            circ.rz(i,0.0001,)
-        for i in range(0,num_qubits-1,2):
-            circ.iswap(i,i+1)
-        for i in range(num_qubits):
-            circ.rz(i,0.0001,)
-        for i in range(1,num_qubits-1,2):
-            circ.iswap(i,i+1)
         return circ
 
-    ansatz = test_circuit(num_qubits=30)
+
+    ansatz = test_circuit(num_qubits=10)
 
     native_ansatz = restricted_circuit_layout(ansatz, ankaa)
-    print(native_ansatz)
+    # print(native_ansatz)
 
     chain = find_linear_chain(native_ansatz)
     print(chain)
