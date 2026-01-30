@@ -62,7 +62,7 @@ def generate_index_section(terms_to_loc, loc_to_key):
         markdown = markdown[:-2] + "| <br>\n"    
     return markdown
 
-def main(dry_run : bool = False):
+def main(dry_run: bool = False):
     """
     build the index 
 
@@ -74,7 +74,7 @@ def main(dry_run : bool = False):
 
     assert os.path.isdir("docs"), "running script from the wrong directory! "
 
-    with open("docs/ENTRIES.json", 'r') as fp:
+    with open("docs/ENTRIES.json", "r") as fp:
         entries : dict = json.load(fp)
 
     loc_to_key = {v["location"]:v["index_abbrv"] for v in entries.values()}
@@ -102,7 +102,7 @@ def main(dry_run : bool = False):
 
     # Update INDEX
     if not dry_run:
-        with open(index_path, 'w') as f:
+        with open(index_path, "w") as f:
             f.write(index_section)
         print("docs/_INDEX.md updated!")
 
