@@ -40,3 +40,37 @@ def test_readme():
     assert (
         missing_in_readme == set()
     ), "There are some new notebooks that haven't been added to the README summary: "
+
+def test_readme_matches_entries():
+    import json
+    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
+    
+    with open(os.path.join(root_path, "docs/ENTRIES.json"), "r") as f:
+        entries = json.load(f)
+    
+    with open(os.path.join(root_path, "README.md"), "r") as f:
+        readme = f.read()
+    
+    readme_links = set(re.findall(LINK_EXAMPLES_REGEX, readme))
+    entries_links = {entry["location"] for entry in entries.values()}
+    
+    missing_in_entries = readme_links - entries_links
+    extra_in_entries = entries_links - readme_links
+    
+    assert missing_in_entries == set(), f"README links not in ENTRIES.json: {missing_in_entries}"
+    assert extra_in_entries == set(), f"ENTRIES.json links not in README: {extra_in_entries}"
+
+def test_readme_build_successful():
+    import sys
+    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
+    original_cwd = os.getcwd()
+
+    os.chdir(root_path)
+    sys.path.insert(0, str(root_path / "docs"))
+    import build_body
+    import build_index
+    build_body.main(dry_run=True)
+    build_index.main(dry_run=True)
+
+
+
