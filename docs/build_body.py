@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import os
 
 categories = {
     "new"       : "I'm new to quantum",
@@ -23,7 +24,10 @@ categories = {
     "qiskit"    : "Qiskit",
 }
 
-def main():
+def main(dry_run: bool = False):
+    if not os.path.isdir("docs"):
+        raise RuntimeError("running script from the wrong directory")
+
     with open("docs/ENTRIES.json", 'r') as fp:
         # first, check that all categories are used 
         entries : dict = json.load(fp)
@@ -57,9 +61,10 @@ def main():
             main_body+= f"{text}\n\n"
     
 
-    with open("docs/_NOTEBOOKS.md",'w') as fp:
-        fp.write(main_body)
-    print("docs/_NOTEBOOK.md updated!")
+    if not dry_run:
+        with open("docs/_NOTEBOOKS.md",'w') as fp:
+            fp.write(main_body)
+        print("docs/_NOTEBOOK.md updated!")
 
 if __name__ == "__main__":
     main()
