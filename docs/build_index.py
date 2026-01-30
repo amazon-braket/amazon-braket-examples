@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import os
 from collections import defaultdict
 
 
@@ -61,7 +62,7 @@ def generate_index_section(terms_to_loc, loc_to_key):
         markdown = markdown[:-2] + "| <br>\n"    
     return markdown
 
-def main():
+def main(dry_run: bool = False):
     """
     build the index 
 
@@ -70,8 +71,10 @@ def main():
         - loc/locations - where the notebook is 
         - terms - keywords or index terms 
     """
-
-    with open("docs/entries.json", 'r') as fp:
+    if not os.path.isdir("docs"):
+        raise RuntimeError("running script from the wrong directory")
+    
+    with open("docs/ENTRIES.json", "r") as fp:
         entries : dict = json.load(fp)
 
     loc_to_key = {v["location"]:v["index_abbrv"] for v in entries.values()}
@@ -98,10 +101,10 @@ def main():
     index_section = generate_index_section(terms_to_loc, loc_to_key)
 
     # Update INDEX
-    with open(index_path, 'w') as f:
-        f.write(index_section)
-    
-    print("docs/_INDEX.md updated!")
+    if not dry_run:
+        with open(index_path, "w") as f:
+            f.write(index_section)
+        print("docs/_INDEX.md updated!")
 
 if __name__ == "__main__":
     main()
