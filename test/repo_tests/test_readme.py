@@ -67,13 +67,15 @@ def test_readme_build_successful():
     import sys
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
     original_cwd = os.getcwd()
-
-    os.chdir(root_path)
-    sys.path.insert(0, str(root_path / "docs"))
-    import build_body
-    import build_index
-    build_body.main(dry_run=True)
-    build_index.main(dry_run=True)
-
-
+    
+    try:
+        os.chdir(root_path)
+        sys.path.insert(0, str(root_path / "docs"))
+        import build_body
+        import build_index
+        build_body.main(dry_run=True)
+        build_index.main(dry_run=True)
+    finally:
+        os.chdir(original_cwd)
+        sys.path.pop(0)
 
