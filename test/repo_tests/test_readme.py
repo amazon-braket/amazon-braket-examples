@@ -1,6 +1,19 @@
+import json
 import os
 import pathlib
 import re
+import sys
+
+root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
+os.chdir(root_path)
+sys.path.insert(0, str(root_path / "docs"))
+
+import build_body
+import build_index
+
+original_cwd = os.getcwd()
+examples_path = os.path.join(root_path, "examples")
+
 
 EXCLUDED_DIRS = [
     # These directories contain notebook files that should not be linked to in the README.
@@ -14,10 +27,6 @@ LINK_EXAMPLES_REGEX = re.compile(r"\(\s*(examples.*\.ipynb)\s*\)")
 
 def test_readme():
     """ Each entry in the README should have an actual file in the repository """
-    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
-
-    examples_path = os.path.join(root_path, "examples")
-
     root_path_len = len(str(root_path)) + len(os.pathsep)
     all_notebooks = set()
     for dir_, _, files in os.walk(examples_path):
@@ -43,10 +52,7 @@ def test_readme():
     ), "There are some new notebooks that haven't been added to the README summary: "
 
 def test_readme_matches_entries():
-    """ Each entry in the README should come from an ENTRIES.json entry. """
-    import json
-    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
-    
+    """ Each entry in the README should come from an ENTRIES.json entry. """    
     with open(os.path.join(root_path, "docs/ENTRIES.json"), "r") as f:
         entries = json.load(f)
     
@@ -64,15 +70,7 @@ def test_readme_matches_entries():
 
 def test_readme_build_successful():
     """ Doc build should run successful as a dry_run """
-    import sys
-    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
-    original_cwd = os.getcwd()
-    
     try:
-        os.chdir(root_path)
-        sys.path.insert(0, str(root_path / "docs"))
-        import build_body
-        import build_index
         build_body.main(dry_run=True)
         build_index.main(dry_run=True)
     finally:
