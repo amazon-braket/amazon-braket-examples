@@ -17,8 +17,8 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
-      - dependency-name: "numpy"
-        versions: [ ">=2.0.0" ]  # Jobs containers are still on Python 3.10 and numpy==1.26.4
+      - dependency-name: "pandas"
+        versions: [ ">=3.0.0" ]  # pandas >=3.0.0 not compatible with JAX 0.6.2
     commit-message:
       prefix: infra
     groups:
