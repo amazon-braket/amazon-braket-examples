@@ -40,9 +40,6 @@ jobs:
     - name: Install BLAS/LAPACK libraries on Ubuntu
       if: ${{ runner.os == 'Linux' }}
       run: sudo apt-get update && sudo apt-get install -y libopenblas-dev liblapack-dev
-    - name: Run repo tests
-      run: |
-        hatch run test_repo -p no:cacheprovider
     - name: Run integ tests
       run: |
-        hatch run test_integ -p no:cacheprovider
+        hatch run test -p no:cacheprovider
