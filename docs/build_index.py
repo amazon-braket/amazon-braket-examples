@@ -71,9 +71,9 @@ def main(dry_run: bool = False):
         - loc/locations - where the notebook is 
         - terms - keywords or index terms 
     """
-
-    assert os.path.isdir("docs"), "running script from the wrong directory! "
-
+    if not os.path.isdir("docs"):
+        raise RuntimeError("running script from the wrong directory")
+    
     with open("docs/ENTRIES.json", "r") as fp:
         entries : dict = json.load(fp)
 
