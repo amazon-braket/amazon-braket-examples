@@ -110,12 +110,18 @@ def get_mock_paths(notebook_dir, notebook_file):
 def html_exporter():
     return HTMLExporter(template_name="classic")
 
+@pytest.fixture(autouse=True)
+def restore_cwd():
+    """ after each test, move back to root_path - amazon-braket-examples/"""
+    yield
+    os.chdir(root_path)
+
+
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
 
-    os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
@@ -132,7 +138,6 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level, html_exporter):
-    os.chdir(root_path)
     os.chdir(notebook_dir)
 
     html_exporter.from_file(notebook_file)
@@ -151,7 +156,6 @@ def test_record():
                 break
     if not notebook_file or not notebook_dir:
         pytest.skip(f"Notebook not found: '{notebook_file_search}'")
-    os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, _path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
