@@ -106,6 +106,12 @@ def get_mock_paths(notebook_dir, notebook_file):
 def html_exporter():
     return HTMLExporter(template_name="classic")
 
+@pytest.fixture(autouse=True)
+def restore_cwd():
+    original_cwd = os.getcwd()
+    yield
+    os.chdir(original_cwd)
+
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
