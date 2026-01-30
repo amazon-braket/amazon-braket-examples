@@ -24,7 +24,7 @@ categories = {
     "qiskit"    : "Qiskit",
 }
 
-def main(dry_run : bool = False):
+def main(dry_run: bool = False):
     assert os.path.isdir("docs"), "running script from the wrong directory! "
 
     with open("docs/ENTRIES.json", 'r') as fp:
