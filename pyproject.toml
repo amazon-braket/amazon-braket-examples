@@ -53,8 +53,8 @@ dependencies = [
 [tool.hatch.envs.default.scripts]
 test = """
 python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
-pytest --dist worksteal -n logical -ra -v --durations=0 test/repo_tests/
-pytest worksteal -n logical -ra -v --durations=0 test/integ_tests/
+pytest -ra -v --durations=0 test/repo_tests/
+pytest --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/
 """
 
 [tool.hatch.envs.lint]
