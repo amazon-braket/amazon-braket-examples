@@ -13,6 +13,7 @@ LINK_EXAMPLES_REGEX = re.compile(r"\(\s*(examples.*\.ipynb)\s*\)")
 
 
 def test_readme():
+    """ Each entry in the README should have an actual file in the repository """
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
 
     examples_path = os.path.join(root_path, "examples")
@@ -42,6 +43,7 @@ def test_readme():
     ), "There are some new notebooks that haven't been added to the README summary: "
 
 def test_readme_matches_entries():
+    """ Each entry in the README should come from an ENTRIES.json entry. """
     import json
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
     
@@ -61,6 +63,7 @@ def test_readme_matches_entries():
     assert extra_in_entries == set(), f"ENTRIES.json links not in README: {extra_in_entries}"
 
 def test_readme_build_successful():
+    """ Doc build should run successful as a dry_run """
     import sys
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
     original_cwd = os.getcwd()
