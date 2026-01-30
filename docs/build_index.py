@@ -74,7 +74,7 @@ def main(dry_run : bool = False):
 
     assert os.path.isdir("docs"), "running script from the wrong directory! "
 
-    with open("docs/entries.json", 'r') as fp:
+    with open("docs/ENTRIES.json", 'r') as fp:
         entries : dict = json.load(fp)
 
     loc_to_key = {v["location"]:v["index_abbrv"] for v in entries.values()}
