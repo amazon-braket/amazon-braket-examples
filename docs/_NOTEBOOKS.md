@@ -44,6 +44,10 @@
 
   This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
+-  [**Using the Barrier Statement on Amazon Braket**](examples/braket_features/Using_Barrier_Statement_on_Braket.ipynb) [(Barrier)](#index_Barrier)<a name="Barrier"></a>
+
+  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You will learn how barriers work, when to use them for preserving circuit structure, and how to apply them with both OpenQASM programs and the Braket SDK. The tutorial includes practical examples running on Rigetti and IQM Garnet QPUs, comparing circuits with and without barriers, and demonstrates mirror benchmarking as a real-world use case for measuring device fidelity.
+
 -  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPrS)](#index_GSPrS)<a name="GSPrS"></a>
 
   Amazon Braket's program sets feature enables efficient batch processing of quantum computations by allowing multiple quantum circuits to be executed together. The feature provides various ways to combine circuits, parameters, and observables through methods like `CircuitBinding`, `product()`, and `zip()`, making it particularly useful for variational algorithms and parameter sweeps. Program sets can significantly reduce overhead and costs compared to running individual quantum tasks, while maintaining the same computational results.
