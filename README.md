@@ -89,9 +89,9 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
--  [**Using the OpenQASM 3 Barrier Statement**](examples/braket_features/Using_Barrier_Statement_on_Braket.ipynb) [(Barrier)](#index_Barrier)<a name="Barrier"></a>
+-  [**Using the Barrier Statement on Amazon Braket**](examples/braket_features/Using_Barrier_Statement_on_Braket.ipynb) [(Barrier)](#index_Barrier)<a name="Barrier"></a>
 
-  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You'll learn when and why to use barriers, how they preserve circuit structure for benchmarking, and see real hardware comparisons on Rigetti Ankaa-3 and IQM Garnet showing how barriers prevent gate optimization.
+  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You will learn how barriers work, when to use them for preserving circuit structure, and how to apply them with both OpenQASM programs and the Braket SDK. The tutorial includes practical examples running on Rigetti and IQM Garnet QPUs, comparing circuits with and without barriers, and demonstrates mirror benchmarking as a real-world use case for measuring device fidelity.
 
 -  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPrS)](#index_GSPrS)<a name="GSPrS"></a>
 
@@ -523,7 +523,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
 
-  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for compilation using Qiskit.
+  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation.
 
 ## <a name="index">Index</a> 
  |  Terms  | Notebooks  | 
@@ -537,7 +537,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | barrier    |  [Barrier](#Barrier)<a name="index_Barrier"></a>| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
- | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
+ | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [Barrier](#Barrier), [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
  | benchmarking |  [Barrier](#Barrier)| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
@@ -557,7 +557,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS)| <br>
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ)<a name="index_EMIQ"></a>, [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
- | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Grover](#Grover), [Barrier](#Barrier), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
+ | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Barrier](#Barrier), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
  | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL)| <br>
  | kraus      |  [GSOQ](#GSOQ), [SN](#SN)<a name="index_SN"></a>, [SNCP](#SNCP)<a name="index_SNCP"></a>| <br>
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ExpLS](#ExpLS)<a name="index_ExpLS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
@@ -570,7 +570,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
  | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG)| <br>
- | pauli operators |  [EVPrS](#EVPrS)| <br>
+ | pauli operators |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
  | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SPL](#SPL)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
  | pragma     |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)| <br>
