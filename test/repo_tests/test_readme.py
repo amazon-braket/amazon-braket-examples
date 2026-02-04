@@ -72,8 +72,8 @@ def test_readme_build_successful():
     try:
         os.chdir(root_path)
         sys.path.insert(0, str(root_path / "docs"))
-        build_body = import_module("build_body")
-        build_index = import_module("build_index")
+        build_body = import_module("_build_body")
+        build_index = import_module("_build_index")
         build_body.main(dry_run=True)
         build_index.main(dry_run=True)
     finally:
