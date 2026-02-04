@@ -43,6 +43,8 @@ phases:
         grep -v "numpy" | \
         xargs rm -rf 2>/dev/null || true
       - echo "Creating SquashFS image with conda-pack..."
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
+          --compress-level 3 --n-threads -1
       - conda pack --name $BRAKET_ENV --output envs/Braket.sqfs
           --format squashfs
           --n-threads -1
@@ -50,8 +52,6 @@ phases:
           --ignore-missing-files
           --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
           --exclude "share/man/*" --exclude "share/doc/*" --exclude "share/info/*"
-      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
-          --compress-level 3 --n-threads -1
       - echo "SquashFS image size:"
       - du -hs envs/Braket.sqfs
       - ls -lh envs/Braket.sqfs
