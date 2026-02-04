@@ -65,7 +65,7 @@ def test_readme_matches_entries():
     assert extra_in_entries == set(), f"ENTRIES.json links not in README: {extra_in_entries}"
 
 def test_readme_build_successful():
-    """ Doc build should run successful as a dry_run; and should match current README.md """
+    """ test that README build should run successful as a dry_run """
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
     original_cwd = os.getcwd()
     
