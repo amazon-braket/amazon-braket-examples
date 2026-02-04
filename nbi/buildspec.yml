@@ -4,6 +4,8 @@ env:
   variables: {}
 phases:
   install:
+    runtime-versions:
+      python: 3.12
     commands:
       - sudo rm -rf /usr/local/lib/android & sudo rm -rf /usr/share/dotnet & sudo rm -rf /opt/ghc
       - yum -y install wget || apt-get -y install wget
@@ -38,6 +40,7 @@ phases:
         find $_ENV_PATH/lib/python*/site-packages -type d \( -name "tests" -o -name "test" \) | \
         grep -v "amazon_braket" | \
         grep -v "braket" | \
+        grep -v "numpy" | \
         xargs rm -rf 2>/dev/null || true
       - echo "Creating SquashFS image with conda-pack..."
       - conda pack --name $BRAKET_ENV --output envs/Braket.sqfs

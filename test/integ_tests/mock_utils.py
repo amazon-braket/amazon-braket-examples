@@ -37,6 +37,9 @@ class Mocker:
     def set_get_quantum_task_result(self, result):
         self._wrapper.boto_client.get_quantum_task.return_value = result
 
+    def set_get_quantum_task_side_effect(self, side_effect):
+        self._wrapper.boto_client.get_quantum_task.side_effect = side_effect
+
     def set_cancel_quantum_task_result(self, result):
         self._wrapper.boto_client.cancel_quantum_task.return_value = result
 
