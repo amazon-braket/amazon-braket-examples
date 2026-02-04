@@ -47,13 +47,18 @@ phases:
           --ignore-missing-files
           --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
           --exclude "share/man/*" --exclude "share/doc/*" --exclude "share/info/*"
+      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
+          --compress-level 3 --n-threads -1
       - echo "SquashFS image size:"
       - du -hs envs/Braket.sqfs
       - ls -lh envs/Braket.sqfs
+      - echo "Archive size:"
+      - du -hs envs/Braket.tar.zst
 
 artifacts:
   files:
     - envs/Braket.sqfs
+    - envs/Braket.tar.zst
     - environment.yml
     - requirements.txt
   name: CONDA_BUILD_RESULTS
