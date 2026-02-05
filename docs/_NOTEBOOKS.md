@@ -131,15 +131,15 @@
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/2_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/3_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/4_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -402,19 +402,23 @@
 
 ## <a name="cudaq">CUDA-Q</a>
 
--  [**Hello CUDA-Q Jobs**](examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
+-  [**Getting started with CUDA-Q on Amazon Braket**](examples/nvidia_cuda_q/1_Hybrid_jobs_with_CUDA-Q.ipynb) [(GSCQ)](#index_GSCQ)<a name="GSCQ"></a>
 
-  This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
+  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to access the comprehensive application library provided by CUDA-Q, and you will also learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
+-  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/1_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
+
+  This tutorial shows you how to run CUDA-Q programs inside Amazon Braket Hybrid Jobs. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
+
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/2_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/3_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/4_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
