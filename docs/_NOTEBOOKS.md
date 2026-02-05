@@ -46,7 +46,7 @@
 
 -  [**Using the Barrier Statement on Amazon Braket**](examples/braket_features/Using_Barrier_Statement_on_Braket.ipynb) [(Barrier)](#index_Barrier)<a name="Barrier"></a>
 
-  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You will learn how barriers work, when to use them for preserving circuit structure, and how to apply them with both OpenQASM programs and the Braket SDK. The tutorial includes practical examples running on Rigetti and IQM Garnet QPUs, comparing circuits with and without barriers, and demonstrates mirror benchmarking as a real-world use case for measuring device fidelity.
+  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You will learn how barriers work, when to use them for preserving circuit structure, and how to apply them with both OpenQASM programs and the Braket SDK. The tutorial includes practical examples running on Rigetti and IQM QPUs, comparing circuits with and without barriers, and demonstrates mirror benchmarking as a real-world use case for measuring device fidelity.
 
 -  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPrS)](#index_GSPrS)<a name="GSPrS"></a>
 
