@@ -31,6 +31,7 @@ EXCLUDED_NOTEBOOKS = [
     "4_Build_single_qubit_gates.ipynb",
     "Using_the_experimental_local_simulator.ipynb",
     # CUDA-Q hybrid job notebooks
+    "0_Getting_started_with_CUDA-Q.ipynb",
     "1_Hybrid_jobs_with_CUDA-Q.ipynb",
     "2_Simulation_with_GPUs.ipynb",
     "3_Multiple_GPU_simulations.ipynb",

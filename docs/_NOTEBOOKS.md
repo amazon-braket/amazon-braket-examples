@@ -402,7 +402,7 @@
 
 ## <a name="cudaq">CUDA-Q</a>
 
--  [**Getting started with CUDA-Q on Amazon Braket**](examples/nvidia_cuda_q/1_Hybrid_jobs_with_CUDA-Q.ipynb) [(GSCQ)](#index_GSCQ)<a name="GSCQ"></a>
+-  [**Getting started with CUDA-Q on Amazon Braket**](examples/nvidia_cuda_q/0_Getting_started_with_CUDA-Q.ipynb) [(GSCQ)](#index_GSCQ)<a name="GSCQ"></a>
 
   This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to access the comprehensive application library provided by CUDA-Q, and you will also learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
 
