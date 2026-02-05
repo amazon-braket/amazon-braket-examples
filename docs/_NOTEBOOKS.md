@@ -131,15 +131,15 @@
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/2_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/3_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/4_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -404,21 +404,29 @@
 
 -  [**Getting started with CUDA-Q on Amazon Braket**](examples/nvidia_cuda_q/0_Getting_started_with_CUDA-Q.ipynb) [(GSCQ)](#index_GSCQ)<a name="GSCQ"></a>
 
-  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to access the comprehensive application library provided by CUDA-Q, and you will also learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
+  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
 
--  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/1_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
+-  [**Using the CUDA-Q Applications library**](examples/nvidia_cuda_q/1_CUDA-Q_Applications_library.ipynb) [(CQAPP)](#index_CQAPP)<a name="CQAPP"></a>
+
+  This tutorial introduces the CUDA-Q Applications library. You will learn how to access and explore the applications library provided by CUDA-Q. 
+
+-  [**Using the CUDA-Q Academic library**](examples/nvidia_cuda_q/2_CUDA-Q_Academic_library.ipynb) [(CQACA)](#index_CQACA)<a name="CQACA"></a>
+
+  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the academic library provided by CUDA-Q. 
+
+-  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/3_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
 
   This tutorial shows you how to run CUDA-Q programs inside Amazon Braket Hybrid Jobs. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/2_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/3_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/4_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 

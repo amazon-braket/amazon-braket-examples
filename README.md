@@ -176,15 +176,15 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/2_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/3_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/4_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -449,21 +449,29 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Getting started with CUDA-Q on Amazon Braket**](examples/nvidia_cuda_q/0_Getting_started_with_CUDA-Q.ipynb) [(GSCQ)](#index_GSCQ)<a name="GSCQ"></a>
 
-  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to access the comprehensive application library provided by CUDA-Q, and you will also learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
+  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
 
--  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/1_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
+-  [**Using the CUDA-Q Applications library**](examples/nvidia_cuda_q/1_CUDA-Q_Applications_library.ipynb) [(CQAPP)](#index_CQAPP)<a name="CQAPP"></a>
+
+  This tutorial introduces the CUDA-Q Applications library. You will learn how to access and explore the applications library provided by CUDA-Q. 
+
+-  [**Using the CUDA-Q Academic library**](examples/nvidia_cuda_q/2_CUDA-Q_Academic_library.ipynb) [(CQACA)](#index_CQACA)<a name="CQACA"></a>
+
+  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the academic library provided by CUDA-Q. 
+
+-  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/3_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
 
   This tutorial shows you how to run CUDA-Q programs inside Amazon Braket Hybrid Jobs. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/2_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/3_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/4_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -536,14 +544,14 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | arn        |  [GSHJ](#GSHJ)<a name="index_GSHJ"></a>| <br>
  | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
- | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
+ | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [GSCQ](#GSCQ)<a name="index_GSCQ"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
  | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
  | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
- | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
+ | cuda       |  [GSCQ](#GSCQ), [CQAPP](#CQAPP)<a name="index_CQAPP"></a>, [CQACA](#CQACA)<a name="index_CQACA"></a>, [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
  | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
  | dynamic circuits |  [DCOQ3](#DCOQ3)<a name="index_DCOQ3"></a>| <br>

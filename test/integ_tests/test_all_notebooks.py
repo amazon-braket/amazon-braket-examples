@@ -32,10 +32,10 @@ EXCLUDED_NOTEBOOKS = [
     "Using_the_experimental_local_simulator.ipynb",
     # CUDA-Q hybrid job notebooks
     "0_Getting_started_with_CUDA-Q.ipynb",
-    "1_Hybrid_jobs_with_CUDA-Q.ipynb",
-    "2_Simulation_with_GPUs.ipynb",
-    "3_Multiple_GPU_simulations.ipynb",
-    "4_Distributed_state_vector_simulations.ipynb",
+    "3_Hybrid_jobs_with_CUDA-Q.ipynb",
+    "4_Simulation_with_GPUs.ipynb",
+    "5_Multiple_GPU_simulations.ipynb",
+    "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
     "Allocating_Qubits_on_QPU_Devices.ipynb",
     "Getting_Started_with_OpenQASM_on_Braket.ipynb",
