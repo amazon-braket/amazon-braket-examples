@@ -50,8 +50,6 @@ phases:
           --n-threads -1
           --compress-level 9
           --ignore-missing-files
-          --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
-          --exclude "share/man/*" --exclude "share/doc/*" --exclude "share/info/*"
       - echo "SquashFS image size:"
       - du -hs envs/Braket.sqfs
       - ls -lh envs/Braket.sqfs
