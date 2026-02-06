@@ -105,6 +105,7 @@ def main(dry_run: bool = False):
         with open(index_path, "w") as f:
             f.write(index_section)
         print("docs/_INDEX.md updated!")
+    return index_section
 
 if __name__ == "__main__":
     main()

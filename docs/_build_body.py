@@ -65,6 +65,7 @@ def main(dry_run: bool = False):
         with open("docs/_NOTEBOOKS.md",'w') as fp:
             fp.write(main_body)
         print("docs/_NOTEBOOK.md updated!")
+    return main_body
 
 if __name__ == "__main__":
     main()
