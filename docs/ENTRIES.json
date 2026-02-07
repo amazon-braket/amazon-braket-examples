@@ -62,6 +62,13 @@
         "location": "examples/braket_features/Verbatim_Compilation.ipynb",
         "content": "  This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits."
     },
+    "Using the Barrier Statement on Amazon Braket": {
+        "index_abbrv": "Barrier",
+        "index_terms": ["barrier", "benchmarking", "compilation", "openqasm", "iqm", "rigetti"],
+        "categories": ["braket"],
+        "location": "examples/braket_features/Using_Barrier_Statement_on_Braket.ipynb",
+        "content": "  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You will learn how barriers work, when to use them for preserving circuit structure, and how to apply them with both OpenQASM programs and the Braket SDK. The tutorial includes practical examples running on Rigetti and IQM Garnet QPUs, comparing circuits with and without barriers, and demonstrates mirror benchmarking as a real-world use case for measuring device fidelity."
+    },
     "Grover": {
         "index_abbrv": "Grover",
         "index_terms" : ["advanced"],
