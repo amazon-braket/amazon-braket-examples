@@ -43,3 +43,7 @@ jobs:
     - name: Run integ tests
       run: |
         hatch run test -p no:cacheprovider
+    - name: Run optional tests
+      if: ${{ matrix.python-version != '3.10' && matrix.python-version != '3.13' }}
+      run: |
+        hatch run test-mitiq:test
