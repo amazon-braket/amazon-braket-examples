@@ -2,7 +2,7 @@
 import numpy as np
 
 from braket.circuits import Circuit
-from braket.circuits.gates import CZ, CNot, Rx, Ry, Rz
+from braket.circuits.gates import CZ, CNot, Rx, Ry, Rz, X, Y, Z
 from braket.circuits.noise_model import (
     GateCriteria,
     MeasureCriteria,
@@ -30,16 +30,16 @@ qd_readout = LocalSimulator("braket_dm", noise_model= _readout_noise_model)
 qd_readout_2 = LocalSimulator("braket_dm", noise_model = _readout_asymm)
 
 _depol_noise_model = NoiseModel()
-_depol_noise_model.add_noise(Depolarizing(0.001), GateCriteria([Ry,Rx, Rz]))
+_depol_noise_model.add_noise(Depolarizing(0.001), GateCriteria([X, Y, Z, Ry, Rx, Rz]))
 _depol_noise_model.add_noise(TwoQubitDepolarizing(0.05), GateCriteria([CNot, CZ]))
 
 qd_depol = LocalSimulator("braket_dm", noise_model= _depol_noise_model)
 
 _noise_model_total = NoiseModel()
-_noise_model_total.add_noise(Depolarizing(0.001), GateCriteria([Ry,Rx, Rz]))
+_noise_model_total.add_noise(Depolarizing(0.001), GateCriteria([Ry, Rx, Rz, X, Y, Z]))
 _noise_model_total.add_noise(AmplitudeDamping(0.001), GateCriteria([Ry,Rx, Rz]))
 
-_noise_model_total.add_noise(TwoQubitDepolarizing(0.03), GateCriteria([CNot, CZ]))
+_noise_model_total.add_noise(TwoQubitDepolarizing(0.02), GateCriteria([CNot, CZ]))
 _noise_model_total.add_noise(AmplitudeDamping(0.02), GateCriteria([CNot, CZ]))
 for i in range(10):
     _noise_model_total.add_noise(BitFlip(max(0,rng.normal(0.05/2, 0.025/2))), MeasureCriteria(i))
