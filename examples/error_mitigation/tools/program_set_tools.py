@@ -65,7 +65,7 @@ def _zip_to_pset(
         , shots_per_executable=shots_per_executable)
 
 def distribute_to_program_sets(
-        circs : np.ndarray[Circuit] ,
+        circs : np.ndarray[Circuit],
         parameters : np.ndarray[dict],
         observables : np.ndarray[str],
         programs : list[Circuit | CircuitBinding] | None = None,
@@ -152,15 +152,19 @@ def run_with_program_sets(
     """ distribute and execute (circuits * bases * parameters) via program sets 
     
     Args:
-        circuits (Circuit):
-        measurement_bases (list): list of Observable bases to measure in
-        basis_observable (list): list of (optional) list of Observables to average over per basis
-            if None, 
+        circuits (Circuit): target circuit or list of circuits to run
+        measurement_bases (list): list of observable bases to measure in
+        basis_observable (list): list of (optional) list of observables to average over per basis
+            if None, will return the probability distributions 
         parameters (list) : variations to be executed over 
+
+    Keyword arguments:
         device (Device) : device to run simulations on; default to local simulator 
-        shots_per_executable (int) : shots to run - assume same per executable 
+        shots_per_executable (int) : shots to run per executable - assume same per executable 
         measurement_filter (Callable) : optional function to process raw measurements 
-        verbose
+        conversion : conversion map from Paulis to native gates
+        return_program_sets (bool) : if true, will also return the program sets
+        verbatim (bool) : if true, will run in verbatim mode
 
     Returns:
         np.ndarray : array of dimension (circuits.shape) + (params.shape) + (bases.shape)

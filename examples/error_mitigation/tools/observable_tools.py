@@ -17,45 +17,6 @@ PAULI_PRODUCT = {
 }
 
 
-
-def _fast_walsh_hadamard(diag_entries):
-    """Fast Walsh-Hadamard transform on diagonal entries."""
-    v = np.array(diag_entries, dtype=complex)
-    n = len(v)
-    h = 1
-    while h < n:
-        for i in range(0, n, h * 2):
-            for j in range(i, i + h):
-                x = v[j]
-                y = v[j + h]
-                v[j] = x + y
-                v[j + h] = x - y
-        h *= 2
-    return v / len(v)
-
-def _pauli_mul(a : str,b : str):
-    """ perform pauli multiplication """
-    return "".join([
-        "I" if ai==bi 
-        else ai if bi=="I" 
-        else bi if ai=="I"
-        else PAULI_PRODUCT[ai][bi] for ai,bi in zip(a,b)
-        ]), np.prod([
-            1 if ai==bi or ai=="I" or bi=="I"
-            else PAULI_PHASE_PRODUCT[ai][bi] for ai,bi in zip(a,b)])
-
-def _coeff_to_pauli(entries : list, 
-                   num_qubits : int, 
-                   threshold = 1e-12,
-                   ):
-    paulis = []
-    for n,c in enumerate(entries):
-        if abs(c)>threshold:
-            paulis.append((c,"".join(
-                ["I" if k=="0" else "Z" for k in "{:0{}b}".format(n,num_qubits)]
-            )))
-    return paulis
-
 def matrix_to_pauli(obs : Hermitian | np.ndarray, tol : float = 1e-12) -> list[tuple[complex,str]]:
     """Decompose a Hermitian observable or matrix into a sum of Pauli terms.
     
@@ -97,6 +58,45 @@ def matrix_to_pauli(obs : Hermitian | np.ndarray, tol : float = 1e-12) -> list[t
             else:
                 terms.append((c * phase, pauli))
     return terms
+
+def _fast_walsh_hadamard(diag_entries):
+    """Fast Walsh-Hadamard transform on diagonal entries."""
+    v = np.array(diag_entries, dtype=complex)
+    n = len(v)
+    h = 1
+    while h < n:
+        for i in range(0, n, h * 2):
+            for j in range(i, i + h):
+                x = v[j]
+                y = v[j + h]
+                v[j] = x + y
+                v[j + h] = x - y
+        h *= 2
+    return v / len(v)
+
+def _pauli_mul(a : str,b : str):
+    """ perform pauli multiplication """
+    return "".join([
+        "I" if ai==bi 
+        else ai if bi=="I" 
+        else bi if ai=="I"
+        else PAULI_PRODUCT[ai][bi] for ai,bi in zip(a,b)
+        ]), np.prod([
+            1 if ai==bi or ai=="I" or bi=="I"
+            else PAULI_PHASE_PRODUCT[ai][bi] for ai,bi in zip(a,b)])
+
+def _coeff_to_pauli(entries : list, 
+                   num_qubits : int, 
+                   threshold = 1e-12,
+                   ):
+    paulis = []
+    for n,c in enumerate(entries):
+        if abs(c)>threshold:
+            paulis.append((c,"".join(
+                ["I" if k=="0" else "Z" for k in "{:0{}b}".format(n,num_qubits)]
+            )))
+    return paulis
+
 
 def pauli_from_observable( 
         observable: TensorProduct | I | X | Y | Z,

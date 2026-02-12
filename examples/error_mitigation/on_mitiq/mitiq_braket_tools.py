@@ -31,7 +31,6 @@ braket_expectation_executor:
     returns expectation values from **braket** observables
 braket_rem_twirl_mitigator:
     assistant to help apply an inverse confusion matrix with a readout twirl 
-
 """
 
 

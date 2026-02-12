@@ -26,17 +26,6 @@ def perform_regression_ols(xs, ys, variances = None, rcond : float = 0.01, error
         return coeff[1], np.sqrt(cov[1, 1])
     return coeff[1]
 
-def perform_regression_with_resampling(xs,ys,variances):
-    errors = np.sqrt(variances)
-    trials = 50
-    extrapolates = []
-    for _ in range(trials):
-        y_temp = np.random.normal(ys,errors)
-        print('resampled: ',ys,y_temp)
-        extrapolates.append(perform_regression(xs,y_temp,variances,error = False))
-    print(extrapolates)
-    return np.median(extrapolates)
-
 def perform_regression(xs : np.ndarray, ys : np.ndarray, variances : np.ndarray | None = None, rcond : float = 0.03, error : bool = True) -> float:
     """ perform a logarithmic (or linear) regression of the data and return estimate with potentially error """
     try:
@@ -65,9 +54,3 @@ def perform_regression(xs : np.ndarray, ys : np.ndarray, variances : np.ndarray 
             return coeff[1], np.sqrt(cov[1, 1])
         return coeff[1]
 
-if __name__ == "__main__":
-    test = np.random.normal(0,1,100)
-    mean, sig = jackknife_bias_corrected(test, axis=0)
-    original = sig*10
-    print(mean,sig)
-    print(original)

@@ -10,6 +10,24 @@ from braket.circuits.gates import ISwap
 from braket.devices import Device
 from braket.program_sets import ProgramSet
 
+ISWAP_TWIRLS = [
+    ['i','i','i','i'],
+    ['i','x','y','z'],
+    ['i','y','x','z'],
+    ['i','z','z','i'],
+    ['x','i','z','y'],
+    ['x','x','x','x'],
+    ['x','y','y','x'],
+    ['x','z','i','y'],
+    ['y','i','z','x'],
+    ['y','x','x','y'],
+    ['y','y','y','y'],
+    ['y','z','i','x'],
+    ['z','i','i','z'],
+    ['z','x','y','i'],
+    ['z','y','x','i'],
+    ['z','z','z','z'],
+]
 
 def gen_pauli_circ(x : str, i : int ):
     return Circuit().__getattribute__(x.lower())(i)
@@ -116,11 +134,12 @@ def bit_mul_distribution(dist_a : dict, dist_b : dict, nq : int):
             new[_bit_addition(k_a,k_b, nq)]+= v_a * v_b 
     return new 
 
-def build_inverse_quasi_distribution(reference,
-                                     second_order : bool = False) -> tuple[dict[str:float],list]:
-    """ from a reference data, build the inverse quasi distribtuion
+def build_inverse_quasi_distribution(
+        reference : dict,
+        second_order : bool = False) -> tuple[dict[str:float],list]:
+    """ from a reference dict, build the inverse quasi distribtuion
 
-    First order starts from tensored inversion of single qubit flips 
+    First order approximation starts from tensored inversion of single qubit flips 
     """
     nq = len(next(iter(reference.keys())))
     shots = sum(reference.values())
@@ -191,25 +210,6 @@ def generate_bit_mask(twirls : np.ndarray, pauli_bases : list) -> np.ndarray:
     return bit_masks
 
 
-ISWAP_TWIRLS = [
-    ['i','i','i','i'],
-    ['i','x','y','z'],
-    ['i','y','x','z'],
-    ['i','z','z','i'],
-    ['x','i','z','y'],
-    ['x','x','x','x'],
-    ['x','y','y','x'],
-    ['x','z','i','y'],
-    ['y','i','z','x'],
-    ['y','x','x','y'],
-    ['y','y','y','y'],
-    ['y','z','i','x'],
-    ['z','i','i','z'],
-    ['z','x','y','i'],
-    ['z','y','x','i'],
-    ['z','z','z','z'],
-]
-
 def twirl_iswap(circ, repetitions : int = 1) -> list[Circuit]:
     """ apply twirling operation for ISwap gates """
     circuits = [Circuit() for _ in range(repetitions)]
@@ -232,8 +232,9 @@ class SparseReadoutMitigation:
     """ class for applying readout error mitigation to sparse observables
 
     This happens by 
-    - 1. Creating a reduced probability distribution over targeted qubist
-    - 2. Then, apply the appropriate inverse 
+    - 1. Creating a reduced probability distribution over targeted qubits
+    - 2. Apply the appropriate inverse 
+    - 3. Calculate the expectation value
 
     Arguments:
 
@@ -302,16 +303,3 @@ class SparseReadoutMitigation:
         for k,v in dist.items():
             data["".join(k[n] for n in key)]+= v
         return self._apply_correction(data, inverse)
- 
-
-
-if __name__ == "__main__":
-    test = {"00": .9, "01": .05, "10": .03, "11": .02}
-    a, b = build_inverse_quasi_distribution(test)
-    print(a,b)
-
-    test_iswap = Circuit().iswap(3,4)
-
-    circs = twirl_iswap(test_iswap, 5)
-    for c in circs:
-        print(c, c.to_unitary())

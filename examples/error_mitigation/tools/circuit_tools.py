@@ -106,7 +106,7 @@ def find_linear_chain(circ : Circuit) -> list:
 
 
 def multiply_gates(circuit : Circuit, gates : list[str], repetitions : int = 1) -> Circuit:
-    """ multiply a gate by the number of repetitions -> does not really preserve a circuit"""
+    """ multiply a gate by the number of repetitions -> generally, not an identity preserving operation """
     new = Circuit()
     for ins in circuit.instructions:
         if ins.operator.name in gates:
@@ -118,7 +118,7 @@ def multiply_gates(circuit : Circuit, gates : list[str], repetitions : int = 1) 
 
 
 def strip_verbatim(circuit : Circuit) -> Circuit:
-    """ strip verbatim from a circuit """
+    """ strip verbatim instructions from a circuit """
     new = Circuit()
     for ins in circuit.instructions:
         if "Verbatim" not in ins.operator.name:
@@ -176,6 +176,7 @@ def fidelity_estimation(circ : Circuit, device : Device, gate : str):
     return predicted_fidelity, (len(active_ins), total_gates)
 
 if __name__ == "__main__":
+    """ simple test script on Ankaa3 """
     from braket.aws import AwsDevice
     from braket.devices import Devices
 
@@ -196,9 +197,7 @@ if __name__ == "__main__":
 
 
     ansatz = test_circuit(num_qubits=10)
-
     native_ansatz = restricted_circuit_layout(ansatz, ankaa)
-
     chain = find_linear_chain(native_ansatz)
     print(chain)
 
