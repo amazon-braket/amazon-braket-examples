@@ -1,4 +1,3 @@
-# from braket.emulation.local_emulator import LocalEmulator
 import numpy as np
 
 from braket.circuits import Circuit

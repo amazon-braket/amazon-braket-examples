@@ -9,16 +9,6 @@ from braket.circuits import Circuit, QubitSet
 from braket.devices import Device
 
 
-def _vf2_callback(**kwargs):
-    """
-    callback for successful VF2 layout pass
-    """
-    pass_name = kwargs['pass_'].__class__.__name__
-    if pass_name == "VF2Layout":
-        stop_reason = kwargs['pass_'].property_set["VF2Layout_stop_reason"]
-        if not stop_reason.name == "SOLUTION_FOUND":
-            raise Exception
-
 def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
     """ find a layout with the VF2 pass by tapering the layout """
 
@@ -73,7 +63,6 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
         else:
             limits[idx] += steps[idx]
             steps[idx] /= 2
-        # print(limits,steps, score(*limits), fail)
         trials += 1
 
     if final is None:
@@ -81,9 +70,6 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
         return ansatz
     
     final = Circuit().add_circuit(ansatz, target_mapping = final)
-    print(final)
-    # final = to_braket(final, braket_device=device, optimization_level=0)
-
 
     print(f'= limit(2q): {best[0]}')
     print(f'= limit(ro): {best[1]}')
@@ -212,7 +198,6 @@ if __name__ == "__main__":
     ansatz = test_circuit(num_qubits=10)
 
     native_ansatz = restricted_circuit_layout(ansatz, ankaa)
-    # print(native_ansatz)
 
     chain = find_linear_chain(native_ansatz)
     print(chain)
