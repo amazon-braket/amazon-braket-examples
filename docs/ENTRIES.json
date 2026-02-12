@@ -517,12 +517,12 @@
         "location"   : "examples/braket_features/program_sets/02_Expectation_value_calculations_with_program_sets.ipynb",
         "content"    : "  Amazon Braket program sets make it easier to implement an intelligent shot allocation strategy, which is particularly beneficial for algorithms like the Variational Quantum Eigensolver (VQE). This approach maintains the same total shot budget while significantly improving statistical accuracy in expectation value estimates."
     },
-    "Getting started with mitiq on Braket": {
+    "Getting started with Mitiq on Braket": {
         "index_abbrv" : "GSm",
         "index_terms": ["mitiq", "error mitigation"],
         "categories" : ["noise"],
         "location"   : "examples/error_mitigation/on_mitiq/0_Getting_started_with_mitiq_on_Braket.ipynb",
-        "content"    : "  This tutorial introduces the mitiq library and how you can utilize it with Amazon Braket."
+        "content"    : "  This tutorial introduces the Mitiq library and how you can utilize it with Amazon Braket."
     },
     "Readout mitigation with mitiq": {
         "index_abbrv" : "REMm",
