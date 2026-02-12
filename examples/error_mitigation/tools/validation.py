@@ -31,7 +31,7 @@ for i in range(num_ys):
 # Estimate variances from noise
 
 # Perform regression with and without variance weighting
-labels = ['exp_v1', 'lin', 'exp_v0', 'exp_re']
+labels = ['exp_v1', 'lin']
 ests = [estimates, estimates_ols,]
 for est, lab in zip(ests, labels):
     print(f"{lab}: {1/num_ys*np.sum(np.square(np.array(est)-true_y0))}")        
