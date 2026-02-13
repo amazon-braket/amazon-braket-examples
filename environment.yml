@@ -5,4 +5,4 @@ dependencies:
   - libstdcxx-ng
   - python=3.12
   - pip:
-      - --no-cache-dir -r requirements.txt
+      - -r requirements.txt

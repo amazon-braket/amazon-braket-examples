@@ -30,6 +30,7 @@ phases:
   build:
     commands:
       - BRAKET_ENV=Braket
+      - export PIP_NO_CACHE_DIR=1
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create -q --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
