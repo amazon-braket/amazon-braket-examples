@@ -34,7 +34,6 @@ phases:
       - mkdir -p envs
       - conda config --set path_conflict warn
       - conda env create -q --name $BRAKET_ENV -f environment.yml --no-default-package --solver libmamba
-      - pip cache purge
       - conda clean --all --yes --quiet
       - _ENV_PATH=$LCC_MINICONDA_INSTALL_DIR/envs/$BRAKET_ENV
       - |
