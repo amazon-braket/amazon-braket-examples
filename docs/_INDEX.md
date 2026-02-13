@@ -9,14 +9,14 @@
  | arn        |  [GSHJ](#GSHJ)<a name="index_GSHJ"></a>| <br>
  | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
- | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
+ | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [GSCQ](#GSCQ)<a name="index_GSCQ"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
  | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
  | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
- | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
+ | cuda       |  [GSCQ](#GSCQ), [CQAPP](#CQAPP)<a name="index_CQAPP"></a>, [CQACA](#CQACA)<a name="index_CQACA"></a>, [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
  | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
  | dynamic circuits |  [DCOQ3](#DCOQ3)<a name="index_DCOQ3"></a>| <br>
@@ -41,7 +41,7 @@
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
  | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG)| <br>
- | pauli operators |  [EVPrS](#EVPrS)| <br>
+ | pauli operators |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
  | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SPL](#SPL)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
  | pragma     |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)| <br>
