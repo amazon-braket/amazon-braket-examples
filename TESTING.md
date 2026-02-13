@@ -96,3 +96,18 @@ To ensure this process works correctly:
 
 Following this convention allows the integration test system to selectively and safely test example notebooks without risking unintended costly runs in normal usage.
 
+## Troubleshooting testing
+
+The tests may fail due to version conflicts. If necessary, update your repository to the latest, run 
+``` 
+hatch env prune 
+hatch env create default
+```
+
+## Testing `mitiq` examples
+
+The mitiq examples exist in their own hatch environment. To run them, use:
+```
+hatch env create mitiq-test 
+hatch run test-mitiq:test
+```
