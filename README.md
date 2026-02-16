@@ -229,9 +229,9 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
 
--  [**Getting started with mitiq on Braket**](examples/error_mitigation/on_mitiq/0_Getting_started_with_mitiq_on_Braket.ipynb) [(GSm)](#index_GSm)<a name="GSm"></a>
+-  [**Getting started with Mitiq on Braket**](examples/error_mitigation/on_mitiq/0_Getting_started_with_mitiq_on_Braket.ipynb) [(GSm)](#index_GSm)<a name="GSm"></a>
 
-  This tutorial introduces the mitiq library and how you can utilize it with Amazon Braket.
+  This tutorial introduces the Mitiq library and how you can utilize it with Amazon Braket.
 
 -  [**Readout mitigation with mitiq**](examples/error_mitigation/on_mitiq/1_Readout_mitigation_with_mitiq.ipynb) [(REMm)](#index_REMm)<a name="REMm"></a>
 
@@ -589,13 +589,8 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | openqasm   |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
  | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
-<<<<<<< HEAD
  | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG), [EMWm](#EMWm)| <br>
- | pauli operators |  [EVPrS](#EVPrS)| <br>
-=======
- | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG)| <br>
  | pauli operators |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
->>>>>>> origin/main
  | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SPL](#SPL)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
  | pragma     |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)| <br>
