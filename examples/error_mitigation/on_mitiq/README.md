@@ -1,9 +1,12 @@
+# Error mitigation with Amazon Braket and Mitiq
+
 ## Installing and using Mitiq 
 
-*[Mitiq](https://mitiq.readthedocs.io/en/stable/)* is licensed under the ***[GNU GPLv3](https://github.com/unitaryfoundation/mitiq/blob/main/LICENSE)*** license, and Mitiq is <u>**not**</u> distributed or installed by default using standard installation scripts. 
-
-To install, run `pip install mitiq`, follow the local installation script in the relevant notebooks, or run 
+In this directory we include several examples for using [Mitiq](https://mitiq.readthedocs.io/en/stable/), an open source library for error mitigation, alongside Amazon Braket. To install, follow the local installation script in the relevant notebooks, or run 
 `pip install -r requirements.txt` followed by `pip install -r /extra/requirements-mitiq.txt` from the head folder. 
+
+>[!IMPORTANT]
+*[Mitiq](https://mitiq.readthedocs.io/en/stable/)* is licensed under the GNU GPLv3 license, and Mitiq is <u>**not**</u> distributed or installed by default using standard installation scripts. 
 
 ### Contributing
 
@@ -29,4 +32,5 @@ def test_some_random_method():
     ...
 ```
 
-Finally, do not put Mitiq as a top-level import in any testing file - this will fail the main testing environment. 
+>[!WARNING]
+> Do not put Mitiq as a top-level import in any testing file - this will fail the main testing environment. 
