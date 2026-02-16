@@ -1,8 +1,0 @@
-name: mitiq-examples
-channels:
-  - conda-forge
-dependencies:
-  - libstdcxx-ng
-  - python=3.12
-  - pip:
-      - -r requirements-mitiq.txt
