@@ -44,7 +44,7 @@ def braket_measurement_executor(
 
     Args:
         device (Device): Braket quantum device or simulator
-        shots (int): **total** number of shots, will be distributed to the number of batches
+        shots (int): **total** number of shots, distributed to the number of executables
         verbatim (bool): whether or not to utilize verbatim circuits
 
     """
@@ -72,7 +72,7 @@ def braket_expectation_executor(
     Args:
         device (Device): Braket quantum device or simulator
         observable: Braket observable to measure
-        shots (int): number of shots per circuit
+        shots (int): **total** number of shots, distributed to the number of executables
         verbatim (bool): whether or not to utilize verbatim circuits
 
     """
@@ -170,7 +170,7 @@ def _execute_expectation_batch(
         ProgramSet.zip(
             programs,
             observables=[observable] * len(programs),
-            shots_per_executable=shots // len(programs),
+            shots_per_executable = shots // len(programs),
         )
     ).result()
     return [item.expectation for entry in result for item in entry.entries]
