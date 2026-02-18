@@ -13,7 +13,7 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
     """ find a layout with the VF2 pass by tapering the layout """
 
     def score(a,b,c):
-        """ custom score function prioritizing first arg """
+        """ simple score function """
         return 1.0*a + 1.0*b + 1.0*c
     
     limits = [0.1, 0.25, 0.05]
@@ -127,7 +127,7 @@ def strip_verbatim(circuit : Circuit) -> Circuit:
 
 
 def convert_paulis(circ : Circuit) -> Circuit:
-    """ convert Paulis to """
+    """ convert Paulis to rx and rz gates """
     new = Circuit()
     for ins in circ.instructions:
         match ins.operator.name:
@@ -144,8 +144,14 @@ def convert_paulis(circ : Circuit) -> Circuit:
                 new.add_instruction(ins)
     return new
 
-def fidelity_estimation(circ : Circuit, device : Device, gate : str):
-    """ estimate the fidelity of a circuit based on a device properties and a specific gate """
+def fidelity_estimation(circ : Circuit, device : Device, gate : str) -> tuple[float, tuple[int,int]]:
+    """ estimate the fidelity of a circuit based on a device properties and a specific gate 
+    
+    Returns:
+        fidelity : predicted fidelity of the circuit
+        (active 2q, total 2q) : tuple of the number of active 2q gates and the total number
+
+    """
     props = device.properties.standardized
     active_qubits = QubitSet()
     active_ins = []
@@ -174,33 +180,3 @@ def fidelity_estimation(circ : Circuit, device : Device, gate : str):
         predicted_fidelity*= fidelities[ins]
 
     return predicted_fidelity, (len(active_ins), total_gates)
-
-if __name__ == "__main__":
-    """ simple test script on Ankaa3 """
-    from braket.aws import AwsDevice
-    from braket.devices import Devices
-
-    ankaa = AwsDevice(Devices.Rigetti.Ankaa3)
-
-    def test_circuit(
-            num_qubits : int):
-        circ = Circuit()
-        for i in range(num_qubits):
-            circ.rz(i,0.0001,)
-        for i in range(0,num_qubits-1,2):
-            circ.iswap(i,i+1)
-        for i in range(num_qubits):
-            circ.rz(i,0.0001,)
-        for i in range(1,num_qubits-1,2):
-            circ.iswap(i,i+1)
-        return circ
-
-
-    ansatz = test_circuit(num_qubits=10)
-    native_ansatz = restricted_circuit_layout(ansatz, ankaa)
-    chain = find_linear_chain(native_ansatz)
-    print(chain)
-
-    fid, ins = fidelity_estimation(native_ansatz,ankaa, "ISwap")
-    print(fid,ins)
-
