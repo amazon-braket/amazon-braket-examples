@@ -9,7 +9,7 @@ from braket.circuits import Circuit
 from braket.circuits.observable import Observable
 from braket.devices import Device, LocalSimulator
 from braket.parametric import Parameterizable
-from braket.program_sets import CircuitBinding, ProgramSet
+from braket.program_sets import ProgramSet
 from braket.tasks import ProgramSetQuantumTaskResult
 
 PROGRAM_SET_LIMIT = 100

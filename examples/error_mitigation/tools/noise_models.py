@@ -1,6 +1,5 @@
 import numpy as np
 
-from braket.circuits import Circuit
 from braket.circuits.gates import CZ, CNot, Rx, Ry, Rz, X, Y, Z
 from braket.circuits.noise_model import (
     GateCriteria,

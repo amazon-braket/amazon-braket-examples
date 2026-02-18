@@ -1,7 +1,7 @@
 import networkx as nx
 import numpy as np
 
-from braket.circuits.observables import Hermitian, I, Sum, TensorProduct, X, Y, Z
+from braket.circuits.observables import Hermitian, I, TensorProduct, X, Y, Z
 
 _PAULI_OBSERVABLES = {"X": X, "Y": Y, "Z": Z, "I":I}
 
