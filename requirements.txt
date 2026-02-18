@@ -1,17 +1,16 @@
-amazon-braket-default-simulator==1.33.0
-amazon-braket-pennylane-plugin==1.33.7
-amazon-braket-schemas==1.28.0
-amazon-braket-sdk==1.110.1
-amazon-braket-algorithm-library==1.6.3
-awscli==1.44.26
-boto3==1.42.36
-botocore==1.42.36
+amazon-braket-default-simulator==1.34.0
+amazon-braket-pennylane-plugin==1.34.0
+amazon-braket-schemas==1.29.0
+amazon-braket-sdk==1.112.1
+amazon-braket-algorithm-library==1.7.1
+awscli==1.44.41
+boto3==1.42.51
+botocore==1.42.51
 cudaq==0.13.0; sys_platform=="linux"
 cudaq-qec==0.5.0; sys_platform=="linux"
 cudaq-solvers==0.5.0; sys_platform=="linux"
-cupy-cuda13x==13.6.0; sys_platform=="linux"
-cvxpy==1.8.0
-ipykernel==7.1.0
+cvxpy==1.8.1
+ipykernel==7.2.0
 jax==0.6.2 # JAX >0.6.2 not compatible with PennyLane
 jaxlib==0.6.2
 jinja2==3.1.6
@@ -21,12 +20,12 @@ mypy-extensions==1.1.0
 numpy==2.2.6
 openfermion==1.7.1
 openfermionpyscf==0.5
-optax==0.2.6
+optax==0.2.7
 pandas==2.3.3 # pandas >=3.0.0 not compatible with JAX 0.6.2
 pennylane==0.44.0
 pennylane-lightning==0.44.0
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
-qiskit-braket-provider==0.10.1
+qiskit-braket-provider==0.11.0
 qiskit==2.3.0
 scipy==1.17.0
