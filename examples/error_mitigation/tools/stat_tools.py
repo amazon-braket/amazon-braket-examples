@@ -69,8 +69,12 @@ def perform_regression_ols(xs, ys, variances = None, rcond : float = 0.01, error
         return coeff[1], np.sqrt(cov[1, 1])
     return coeff[1]
 
-def perform_regression(xs : np.ndarray, ys : np.ndarray, variances : np.ndarray | None = None, rcond : float = 0.03, error : bool = True) -> float:
-    """ perform a logarithmic (or linear) regression of the data and return estimate with potentially error 
+def perform_regression(xs : np.ndarray, ys : np.ndarray, 
+        variances : np.ndarray | None = None, 
+        rcond : float = 0.03, error : bool = True,
+        coeff_threshold : float = 0.1,
+        ) -> float:
+    """ perform a log (or lin) regression of the data with estimate and error
     
     Arguments:
         xs : numpy array of independent variables
@@ -80,6 +84,8 @@ def perform_regression(xs : np.ndarray, ys : np.ndarray, variances : np.ndarray 
         variances : variance of each estimate, necessary for log transform 
         rcond : conditioning number for the fit -> fed to numpy polyfit
         error : whether to return error estimate (std dev) 
+        coeff_threshold : threshold for the exponential fit coefficient, 
+            if it exceeds this, we revert to linear
     """
     try:
         sgn = -1 if ys[0] < 0 else +1
@@ -94,8 +100,8 @@ def perform_regression(xs : np.ndarray, ys : np.ndarray, variances : np.ndarray 
         var  = np.divide(variances,np.abs(ys)**2)
         coeff, cov = np.polyfit(xs, np.log(np.abs(ys)), 1, rcond=rcond,  w=1/np.sqrt(var), cov = True)
         ans = np.exp(coeff[1])
-        if coeff[1] > 0.1:
-            raise ValueError(f"exp reg coeff {coeff[1]} is not positive, performing linear regression")
+        if coeff[1] > coeff_threshold:
+            raise ValueError(f"exp reg coeff {coeff[1]} is above threshold, performing linear regression")
         if error: 
             return sgn*ans, np.sqrt(cov[1,1]) * ans
         return sgn * ans
