@@ -13,6 +13,7 @@ from braket.program_sets import CircuitBinding, ProgramSet
 from braket.tasks import ProgramSetQuantumTaskResult
 
 PROGRAM_SET_LIMIT = 100
+# TODO : infer from device 
 
 STANDARD_CONVERSION = {
     "X": lambda i : Circuit().h(i), #.measure(i), 
@@ -68,13 +69,22 @@ def distribute_to_program_sets(
         circs : np.ndarray[Circuit],
         parameters : np.ndarray[dict],
         observables : np.ndarray[str],
-        programs : list[Circuit | CircuitBinding] | None = None,
         shots_per_executable : int | list = 100,  
         conversion : dict[str,Callable] = None,
         verbatim : bool = False,
         ) -> list[ProgramSet]:
     """ convert circuits + parameters + observables to valid program sets based on program set limits 
+
+    Arguments:
+        circuits : numpy array with object data type of Circuits
+        parameters : numpy array with object data type of dict (for parameterized circuits)
+        observables : numpy array with object data type of str (observable bases)
     
+    Keywords:
+        shots_per_executable: shots_per_executable
+        conversion : conversion map from Paulis to native gates
+        verbatim : if true, will run in verbatim mode
+        
     """
     n_circ = len(circs)
     n_para = len(parameters) if parameters else 1 
@@ -85,7 +95,7 @@ def distribute_to_program_sets(
     else:
         print(f"-- able to include {n_circ * n_para * n_obs} tasks in a single program set ")
     temp = []
-    psets = programs if programs else [] 
+    psets = []
     for t, item in enumerate(product(circs, parameters, observables),1):
         item = dc(item)
         temp.append(item)
@@ -152,13 +162,13 @@ def run_with_program_sets(
     """ distribute and execute (circuits * bases * parameters) via program sets 
     
     Args:
-        circuits (Circuit): target circuit or list of circuits to run
+        circuits (Circuit): target circuit or array of circuits to run
         measurement_bases (list): list of observable bases to measure in
         basis_observable (list): list of (optional) list of observables to average over per basis
             if None, will return the probability distributions 
         parameters (list) : variations to be executed over 
 
-    Keyword arguments:
+    Keyword Args:
         device (Device) : device to run simulations on; default to local simulator 
         shots_per_executable (int) : shots to run per executable - assume same per executable 
         measurement_filter (Callable) : optional function to process raw measurements 

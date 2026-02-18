@@ -1,3 +1,4 @@
+import networkx as nx
 import numpy as np
 
 from braket.circuits.observables import Hermitian, I, Sum, TensorProduct, X, Y, Z
@@ -130,11 +131,6 @@ def pauli_from_observable(
         pstr[int(observable.targets[0])] = observable.ascii_symbols[0]
     return  (observable.coefficient,"".join(pstr))
 
-def sum_to_pauli(obs : Sum, nq : int = None) -> list[tuple]:
-    """ convert a Sum type to a list of Paulis """
-    assert isinstance(obs, Sum), f"!! expected Sum, got {type(obs)}"
-    return [(p.coefficient, pauli_from_observable(p.factors, nq=nq)) for p in obs.summands]
-
 def qubit_wise_commuting(p1: str | tuple, p2: str | tuple) -> bool:
     """Check if two Pauli strings are qubit-wise commuting. """
     if isinstance(p1,tuple):
@@ -162,8 +158,6 @@ def pauli_grouping(paulis: list[str] | list[tuple[float, str]]) -> tuple[list[st
         signatures: List of group signature strings
         groups: List of lists, each containing Pauli strings in that group
     """
-    import networkx as nx
-    
     # Build anticommutation graph
     G = nx.Graph()
     G.add_nodes_from(range(len(paulis)))
