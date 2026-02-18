@@ -179,7 +179,20 @@ def process_readout_twirl(
         index : int | tuple, 
         bit_masks : list | np.ndarray
         ):
-    """ apply corrections to a readout twirl """
+    """ apply corrections to a readout twirl 
+    
+    Args:
+        counts: dictionary of counts
+        index: index of the bit mask to use
+        bit_masks: list of bit masks
+
+    Note: this function was intended to be fed in partially with the entire bitmask array, 
+    and then iterated over each index by a separate function. It is generalizable by 
+    supplying a single bit_mask variable and correcting with that. 
+
+    TODO: add single bit_mask variable 
+
+    """
     if isinstance(index, int):
         index = _index_check(index, getattr(bit_masks, "shape", None))
     if isinstance(bit_masks, np.ndarray):
@@ -236,6 +249,11 @@ class SparseReadoutMitigation:
     - 3. Calculate the expectation value
 
     Arguments:
+        readout_distribution : main readout data
+        correction_method : Callable that can input data and apply an inverse 
+
+    Note: for user-specified functions, both the inversion and correction
+    method shouuld be specified
 
     """
     def __init__(self, 
@@ -255,7 +273,10 @@ class SparseReadoutMitigation:
         self._gamma = {}
 
     def _standard_inversion(self, index : tuple[int], **kwargs) -> dict:
-        """ given a list of qubits, create a marginal distribution, and get quasi dist """
+        """ given a list of qubits, create marginal distribution, and return inverse dist 
+        
+        The `standard` approach is to create a first order inverse with 1q corrections
+        """
         if len(index) == 0:
             return self.dist
 
@@ -268,14 +289,17 @@ class SparseReadoutMitigation:
         return quasi
 
 
-    def _standard_correction(self, data : dict, inverse : Any):
-        """ apply a given inverse to a distribution """
+    def _standard_correction(self, data : dict, inverse : Any) -> dict:
+        """ apply a given inverse to a distribution 
+        
+        The `standard` approach here is to correct via binary addition of the dictionaries
+        """
         tally = sum(list(data.values()))
         data = {k: v/tally for k,v in data.items()}
         return bit_mul_distribution(data, inverse, len(list(data.keys())[0]))
         
 
-    def get_inverse(self, index : tuple):
+    def get_inverse(self, index : tuple) -> dict:
         """ creates an inverse confusion matrix for a given qubit """
         
         if index not in self.inverses:
@@ -284,7 +308,19 @@ class SparseReadoutMitigation:
 
     def process_single(self, result : dict, index : int, pauli_string : str,
                  bit_masks : np.ndarray) -> float:
-        """ """
+        """ process a single observable 
+
+        Args:
+            result: result from a single executable
+            index: index of the result in the batch
+            pauli_string: pauli string to estimate
+            bit_masks: bit masks to apply to the result
+        
+        Note: this function is not the most intuitive, and is based on compatability with 
+        process_readout_twirl, where the index is fed in as a single array, instead of a single bitmask. 
+        There is a todo there. 
+
+        """
         non_trivial = [n for n,k in enumerate(pauli_string) if k!="I"]
         temp = process_readout_twirl(result, index, bit_masks)
         temp = self.invert_marginal(temp, non_trivial)
@@ -294,7 +330,6 @@ class SparseReadoutMitigation:
         """ given a list of qubits, create a marginal distribution, save inverse, continue 
         
         Note, we ALWAYS sort qubits, to prevent any sort of weird reordering. 
-        
         """
         key = tuple(sorted(qubits))
         inverse = self.get_inverse(key)

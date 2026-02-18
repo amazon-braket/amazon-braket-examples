@@ -47,10 +47,6 @@ for i in range(10):
 qd_total = LocalSimulator("braket_dm", noise_model=_noise_model_total)
 h = Circuit().h(0).h(1).to_unitary()
 
-unitary = np.diag(np.exp([0,0.05*1j, 0.05*1j, 0]))
-unitary = h @ unitary @ h
-
-
 
 _noise_model_ad_2q =  NoiseModel()
 _noise_model_ad_2q.add_noise(AmplitudeDamping(0.05),GateCriteria([CZ,CNot]) )
