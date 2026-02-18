@@ -26,7 +26,7 @@ phases:
       - conda config --set default_threads $CONDA_THREADS
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
-      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1
+      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1 squashfs-tools
   build:
     commands:
       - BRAKET_ENV=Braket
@@ -42,16 +42,23 @@ phases:
         grep -v "braket" | \
         grep -v "numpy" | \
         xargs rm -rf 2>/dev/null || true
+      - echo "Creating SquashFS image with conda-pack..."
       - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
-          --compress-level 3 --n-threads -1
+          --compress-level 3 --n-threads -1 --ignore-missing-files
+      - conda pack --name $BRAKET_ENV --output envs/Braket.sqfs
+          --format squashfs
+          --n-threads -1
+          --compress-level 9
           --ignore-missing-files
-          --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
-          --exclude "share/man/*" --exclude "share/doc/*" --exclude "share/info/*"
+      - echo "SquashFS image size:"
+      - du -hs envs/Braket.sqfs
+      - ls -lh envs/Braket.sqfs
       - echo "Archive size:"
       - du -hs envs/Braket.tar.zst
 
 artifacts:
   files:
+    - envs/Braket.sqfs
     - envs/Braket.tar.zst
     - environment.yml
     - requirements.txt
