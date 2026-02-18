@@ -9,7 +9,6 @@ botocore==1.42.51
 cudaq==0.13.0; sys_platform=="linux"
 cudaq-qec==0.5.0; sys_platform=="linux"
 cudaq-solvers==0.5.0; sys_platform=="linux"
-cupy-cuda13x==14.0.0; sys_platform=="linux"
 cvxpy==1.8.1
 ipykernel==7.2.0
 jax==0.6.2 # JAX >0.6.2 not compatible with PennyLane
