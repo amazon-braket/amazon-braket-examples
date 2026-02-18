@@ -121,7 +121,6 @@ def get_twirled_readout_dist(qubits : list,
             kp = ''.join(str(int(a) ^ int(b)) for a, b in zip(k, mask))
             base[kp] = base.get(kp, 0) + v
     base = {k: v / shots for k, v in base.items()}
-    print('BASE: ',base)
     return base 
 
 def _bit_addition(b1,b2,nq):
