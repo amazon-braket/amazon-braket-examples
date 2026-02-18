@@ -54,22 +54,24 @@ def _readout_pass(circ : Circuit) -> tuple[Circuit, str]:
 
 
 def apply_readout_twirl(
-        circ: Circuit | list[Circuit] | np.ndarray,
+        circ: Circuit | np.ndarray,
         num_samples: int = None,
         ) -> tuple[np.ndarray[Circuit], np.ndarray[str]]:
     """Apply readout twirling to all qubits in circuit.
     
     Args:
-        circ: Input circuit
-        num_samples: Number of twirling samples
+        circ: Input circuit or numpy array of type object with circuits 
+        num_samples: Number of twirling samples | inferred if input is a numpy array 
+
+    Note: if passing a numpy array, it must be of type object, and will be treated as a list of
+    circuits to be twirled. The output will be the same shape as the input.
     
     Returns:
         (list[Circuit], list[dict]) - list of twirled circuits and the Pauli twirls maps
     """
-    # Get all qubits used in circuit
     match circ:
         case Circuit():
-            return zip(*[_readout_pass(circ) for i in range(num_samples)])
+            return zip(*[_readout_pass(circ) for _ in range(num_samples)])
         case np.ndarray():
             circuits,bitmasks = np.empty_like(circ), np.empty_like(circ)
             for index,circuit in np.ndenumerate(circ):
@@ -77,8 +79,6 @@ def apply_readout_twirl(
                 circuits[index] = c
                 bitmasks[index] = b
             return circuits, bitmasks
-        case list():
-            return zip(_readout_pass(circ) for i in range(num_samples))
         case _:
             raise TypeError(f"Unsupported format {type(circ)} to apply readout error.")
 
