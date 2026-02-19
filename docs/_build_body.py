@@ -3,30 +3,13 @@
 import json
 import os
 
-categories = {
-    "new"       : "I'm new to quantum",
-    "braket"    : "Using Amazon Braket features",
-    "advanced"  : "Advanced circuits and algorithms",
-    "hybrid"    : "Hybrid quantum algorithms",
-    "simulators": "Using simulators",
-    "noise"     : "Modeling noise on Amazon Braket",
-    "jobs"      : "Utilizing Amazon Braket hybrid jobs",
-    "qhps"      : "Using quantum devices", 
-    "pulse"     : "Controlling pulse sequences",
-    "ahs"       : "Analog Hamiltonian Simulation",
-    "experimental-dynamic" : "Accessing experimental capabilities",
-    "ionq"      : "IonQ",
-    "iqm"       : "IQM",
-    "quera"     : "QuEra",
-    "rigetti"   : "Rigetti",
-    "cudaq"     : "CUDA-Q",
-    "pennylane" : "Pennylane",
-    "qiskit"    : "Qiskit",
-}
 
 def main(dry_run: bool = False):
     if not os.path.isdir("docs"):
         raise RuntimeError("running script from the wrong directory")
+
+    with open("docs/categories.json", 'r') as fp:
+        categories : dict = json.load(fp)
 
     with open("docs/ENTRIES.json", 'r') as fp:
         # first, check that all categories are used 

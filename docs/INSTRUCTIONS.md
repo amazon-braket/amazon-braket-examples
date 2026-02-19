@@ -30,7 +30,7 @@ The following variables are all strings:
 - `notebook_title` : the title of your notebook -  see previous naming convenctions  "Getting Starts with...", "Hello....", etc. 
 - `my_index_abbreviation` : an abbreviation of your title -  avoid "of", "the", "with", etc., and see other entries.
 - `index_terms` : optional - follow the instructions [in the next section](#adding-index-terms).
-- `category, optional_category` : sections your notebook will appear in - see the category keys listed in [build_body.py](build_body.py). 
+- `category, optional_category` : sections your notebook will appear in - see the category keys listed in [categories.json](categories.json). 
 - `notebook_location` : location of the notebook - directory starts from "examples/...."
 - `notebook_description` : displayed summary of your notebook - about 1-3 sentences with what users will learn and see how to run, and has two leading spaces 
 
