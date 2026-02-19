@@ -1,4 +1,11 @@
+import os
 import pytest
+
+if "integ_tests" in os.getcwd():
+    os.chdir(os.path.join("..", ".."))
+
+root_path = os.getcwd()
+
 
 
 def pytest_addoption(parser):
@@ -28,3 +35,9 @@ def pytest_collection_modifyitems(config, items):
 @pytest.fixture
 def mock_level(request):
     return request.config.getoption("--mock-level")
+
+@pytest.fixture(autouse=True)
+def restore_cwd():
+    """ after each test, move back to root_path - amazon-braket-examples/"""
+    yield
+    os.chdir(root_path)

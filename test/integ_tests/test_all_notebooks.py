@@ -76,10 +76,6 @@ if (
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if "integ_tests" in os.getcwd():
-    os.chdir(os.path.join("..", ".."))
-
-root_path = os.getcwd()
 examples_path = "examples"
 test_notebooks = []
 
@@ -110,19 +106,14 @@ def get_mock_paths(notebook_dir, notebook_file):
 def html_exporter():
     return HTMLExporter(template_name="classic")
 
-@pytest.fixture(autouse=True)
-def restore_cwd():
-    """ after each test, move back to root_path - amazon-braket-examples/"""
-    yield
-    os.chdir(root_path)
-
-
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
-
+    print(os.getcwd())
     os.chdir(notebook_dir)
+    print(os.getcwd())
+
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
     kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
