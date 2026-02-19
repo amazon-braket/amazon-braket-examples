@@ -11,83 +11,20 @@ from testbook import testbook
 UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
-EXCLUDED_NOTEBOOKS = [
-    # These notebooks have cells that have syntax errors
-    "bring_your_own_container.ipynb",
-    "qnspsa_with_embedded_simulator.ipynb",
-    # These notebooks have dependency issues
-    "VQE_chemistry_braket.ipynb",
-    "6_Adjoint_gradient_computation.ipynb",
-    # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
-    "0_Getting_started_papermill.ipynb",
-    # Some AHS examples are running long especially on Mac. Removing while investigating
-    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
-    "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
-    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb",
-    # Some pulse examples does not converge due to device quality
-    "1_Bringup_experiments.ipynb",
-    "2_Native_gate_calibrations.ipynb",
-    "3_Bell_pair_with_pulses_Rigetti.ipynb",
-    "4_Build_single_qubit_gates.ipynb",
-    "Using_the_experimental_local_simulator.ipynb",
-    # CUDA-Q jobs
-    "0_hello_cudaq_jobs.ipynb",
-    "1_simulation_with_GPUs.ipynb",
-    "2_parallel_simulations.ipynb",
-    "3_distributed_statevector_simulations.ipynb",
-    # Notebooks that require devices to be online
-    "Allocating_Qubits_on_QPU_Devices.ipynb",
-    "Getting_Started_with_OpenQASM_on_Braket.ipynb",
-    "0_Getting_Started.ipynb",
-    "Noise_models_on_Rigetti.ipynb",
-    "2_Running_quantum_circuits_on_QPU_devices.ipynb",
-    "Verbatim_Compilation.ipynb",
-    "01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
-    # Simulator TN1 notebook, remove when TN1 issues are fixed
-    "TN1_demo_local_vs_non-local_random_circuits.ipynb",
-    # Dynamic circuits with QBP
-    "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
-    # Investigating local simulator performance on small circuits
-    "02_Expectation_value_calculations_with_program_sets.ipynb",
-    # TODO: Add spending limit mocks
-    "Spending_Limits_Introduction.ipynb",
-    "0_Getting_started_with_mitiq_on_Braket.ipynb",
-    "1_Readout_mitigation_with_mitiq.ipynb",
-    "2_Zero_noise_extrapolation_with_mitiq.ipynb",
-    "3_Twirling_with_program_sets.ipynb",
-    "4_Error_mitigation_workflow_with_mitiq.ipynb",
-]
-
-if (
-    os.environ.get("AWS_DEFAULT_REGION") == "eu-north-1"
-    or os.environ.get("AWS_REGION") == "eu-north-1"
-):
-    EXTRA_EXCLUDES = [
-        "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb",
-        "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb",
-        "Running_notebooks_as_hybrid_jobs.ipynb",
-        "2_Graph_optimization_with_QAOA.ipynb",
-        "Using_The_Adjoint_Gradient_Result_Type.ipynb",
-        "0_Getting_Started.ipynb",
-        "0_Creating_your_first_Hybrid_Job.ipynb",
-    ]
-    EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
+EXCLUDED_NOTEBOOKS = []
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if "integ_tests" in os.getcwd():
-    os.chdir(os.path.join("..", ".."))
-
 root_path = os.getcwd()
-examples_path = "examples"
+examples_path = "examples/error_mitigation/on_mitiq"
+# should be executed from the main directory
 test_notebooks = []
 
 for dir_, _, files in os.walk(examples_path):
     for file_name in files:
         if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
             test_notebooks.append((dir_, file_name))  # noqa: PERF401
-
 
 def get_mock_paths(notebook_dir, notebook_file):
     mock_file = notebook_file.replace(".ipynb", "_mocks.py")
@@ -110,18 +47,13 @@ def get_mock_paths(notebook_dir, notebook_file):
 def html_exporter():
     return HTMLExporter(template_name="classic")
 
-@pytest.fixture(autouse=True)
-def restore_cwd():
-    """ after each test, move back to root_path - amazon-braket-examples/"""
-    yield
-    os.chdir(root_path)
-
-
+@pytest.mark.mitiq
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
 
+    os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
@@ -135,14 +67,15 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         # This can happen in the presence of `%%time` magics.
         check_cells_for_error_output(tb.cells)
 
-
+@pytest.mark.mitiq
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level, html_exporter):
+    os.chdir(root_path)
     os.chdir(notebook_dir)
 
     html_exporter.from_file(notebook_file)
 
-
+@pytest.mark.mitiq
 def test_record():
     # Set the path here to record results.
     notebook_file_search = ""
@@ -156,6 +89,7 @@ def test_record():
                 break
     if not notebook_file or not notebook_dir:
         pytest.skip(f"Notebook not found: '{notebook_file_search}'")
+    os.chdir(root_path)
     os.chdir(notebook_dir)
     path_to_utils, _path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
@@ -248,15 +182,3 @@ def uncomment_test_section(source):
 
     return "\n".join(result)
 
-
-def test_not_imported():
-    """ verify that certain libaries have not been imported 
-    
-    Excluded libraries: 
-        mitiq - see `/examples/error_mitigation/on_mitiq/NOTICE.md` for details
-    """
-    extra_libraries = ["mitiq"]
-    import importlib
-    for library in extra_libraries:
-        with pytest.raises(ImportError):
-            importlib.import_module(library)
