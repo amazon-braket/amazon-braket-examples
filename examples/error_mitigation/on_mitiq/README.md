@@ -6,7 +6,7 @@ In this directory we include several examples for using [Mitiq](https://mitiq.re
 `pip install -r requirements.txt` followed by `pip install -r /extra/requirements-mitiq.txt` from the head folder. 
 
 >[!IMPORTANT]
-*[Mitiq](https://mitiq.readthedocs.io/en/stable/)* is licensed under the GNU GPLv3 license, and Mitiq is <u>**not**</u> distributed or installed by default using standard installation scripts. 
+>*[Mitiq](https://mitiq.readthedocs.io/en/stable/)* is licensed under the GNU GPLv3 license, and Mitiq is <u>**not**</u> distributed or installed by default in provided enviromnents or the default installation. 
 
 ### Contributing
 
