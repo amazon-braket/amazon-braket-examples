@@ -598,7 +598,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SPL](#SPL)| <br>
  | qaa        |  [QAA](#QAA)<a name="index_QAA"></a>| <br>
  | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP)| <br>
- | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [AQEMW](#AQEMW), [CBQBP](#CBQBP)| <br>
+ | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [GSm](#GSm), [ZNEm](#ZNEm), [AQEMW](#AQEMW), [CBQBP](#CBQBP)| <br>
  | qml        |  [QMLHJ](#QMLHJ)| <br>
  | qpe        |  [QPE](#QPE)<a name="index_QPE"></a>| <br>
  | rem        |  [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
