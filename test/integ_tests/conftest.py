@@ -1,5 +1,7 @@
 import os
+
 import pytest
+from nbconvert import HTMLExporter
 
 if "integ_tests" in os.getcwd():
     os.chdir(os.path.join("..", ".."))
@@ -41,3 +43,8 @@ def restore_cwd():
     """ after each test, move back to root_path - amazon-braket-examples/"""
     yield
     os.chdir(root_path)
+    
+@pytest.fixture(scope="module")
+def html_exporter():
+    return HTMLExporter(template_name="classic")
+

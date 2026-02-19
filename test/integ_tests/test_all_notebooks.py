@@ -5,7 +5,6 @@ from importlib.machinery import SourceFileLoader
 
 import pytest
 from jupyter_client import kernelspec
-from nbconvert import HTMLExporter
 from testbook import testbook
 
 UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
@@ -101,10 +100,6 @@ def get_mock_paths(notebook_dir, notebook_file):
         )
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
-
-@pytest.fixture(scope="module")
-def html_exporter():
-    return HTMLExporter(template_name="classic")
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):

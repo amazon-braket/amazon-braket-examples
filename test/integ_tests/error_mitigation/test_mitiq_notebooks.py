@@ -5,7 +5,6 @@ from importlib.machinery import SourceFileLoader
 
 import pytest
 from jupyter_client import kernelspec
-from nbconvert import HTMLExporter
 from testbook import testbook
 
 UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
