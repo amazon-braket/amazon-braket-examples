@@ -54,7 +54,7 @@ dependencies = [
 test = """
 python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
 pytest -ra -v --durations=0 test/repo_tests/
-pytest --dist worksteal -n logical -ra -v --durations=0 -m 'not mitiq' test/integ_tests/
+pytest --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/
 """
 
 [tool.hatch.envs.lint]
@@ -112,7 +112,7 @@ dependencies = [
 test = """
 pip install -r extra/requirements-mitiq.txt --force-reinstall
 python -m ipykernel install --user --name "conda_braket" --display-name "conda_braket"
-pytest -m mitiq --dist worksteal -n logical -ra -v --durations=0 test/integ_tests/error_mitigation/ {args}
+pytest --dist worksteal -n logical -ra -v --durations=0 --test-mitiq test/integ_tests/error_mitigation/ {args}
 """
 
 # TODO: combine installs to single line; numpy version clash until mitiq updates to >=2.x
