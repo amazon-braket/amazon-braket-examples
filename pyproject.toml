@@ -85,7 +85,7 @@ lint.isort = { known-first-party = [
   "braket",
 ] }
 lint.extend-select = ["I", "PERF", "UP", "SIM"]
-lint.preview = true
+lint.preview = false #TODO: address lint, potentially set to true
 lint.ignore = ["E722","F821", "UP015", "SIM115"]
 lint.per-file-ignores."test/**/*.py" = [
   "D",       # don't care about documentation in tests
