@@ -105,9 +105,7 @@ def get_mock_paths(notebook_dir, notebook_file):
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
-    print(os.getcwd())
     os.chdir(notebook_dir)
-    print(os.getcwd())
 
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
