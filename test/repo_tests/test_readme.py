@@ -65,18 +65,43 @@ def test_readme_matches_entries():
     assert extra_in_entries == set(), f"ENTRIES.json links not in README: {extra_in_entries}"
 
 def test_readme_build_successful():
-    """ Doc build should run successful as a dry_run """
+    """ test that README build should run successful as a dry_run """
     root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
     original_cwd = os.getcwd()
     
     try:
         os.chdir(root_path)
         sys.path.insert(0, str(root_path / "docs"))
-        build_body = import_module("build_body")
-        build_index = import_module("build_index")
+        build_body = import_module("_build_body")
+        build_index = import_module("_build_index")
         build_body.main(dry_run=True)
         build_index.main(dry_run=True)
     finally:
         os.chdir(original_cwd)
         sys.path.pop(0)
 
+def test_matching_README():
+    """ test that the generated README matches the current one """
+    root_path = pathlib.Path(__file__).parent.parent.parent.resolve()
+    original_cwd = os.getcwd()
+    
+    try:
+        os.chdir(root_path)
+        sys.path.insert(0, str(root_path / "docs"))
+        build_body = import_module("_build_body")
+        build_index = import_module("_build_index")
+        notebooks = build_body.main(dry_run=True)
+        index = build_index.main(dry_run=True)
+
+        with open("README.md", "r") as f:
+            old_readme = f.read()
+        with open("docs/FRONTMATTER.md","r") as f:
+            frontmatter = f.read()
+        with open("docs/ENDMATTER.md", "r") as f:
+            endmatter = f.read()
+        
+        assert frontmatter + notebooks + index + endmatter == old_readme
+
+    finally:
+        os.chdir(original_cwd)
+        sys.path.pop(0)
