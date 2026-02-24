@@ -447,19 +447,19 @@
         "location": "examples/nvidia_cuda_q/0_Getting_started_with_CUDA-Q.ipynb",
         "content": "  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. "
     },
-    "Using the CUDA-Q Applications library": {
+    "Using the CUDA-Q Applications Hub": {
         "index_abbrv": "CQAPP",
         "index_terms" : [], 
         "categories": ["cudaq"],
-        "location": "examples/nvidia_cuda_q/1_CUDA-Q_Applications_library.ipynb",
-        "content": "  This tutorial introduces the CUDA-Q Applications library. You will learn how to access and explore the applications library provided by CUDA-Q. "
+        "location": "examples/nvidia_cuda_q/1_CUDA-Q_Applications_Hub.ipynb",
+        "content": "  This tutorial introduces the CUDA-Q Applications Hub. You will learn how to access and explore the CUDA-Q Applications Hub provided by NVIDIA. "
     },
     "Using the CUDA-Q Academic library": {
         "index_abbrv": "CQACA",
         "index_terms" : [], 
         "categories": ["cudaq"],
         "location": "examples/nvidia_cuda_q/2_CUDA-Q_Academic_library.ipynb",
-        "content": "  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the academic library provided by CUDA-Q. "
+        "content": "  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the CUDA-Q Academic library provided by NVIDIA. "
     },
     "CUDA-Q with Braket Hybrid Jobs": {
         "index_abbrv": "HCQJ",

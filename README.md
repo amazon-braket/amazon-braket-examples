@@ -479,13 +479,13 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
 
--  [**Using the CUDA-Q Applications library**](examples/nvidia_cuda_q/1_CUDA-Q_Applications_library.ipynb) [(CQAPP)](#index_CQAPP)<a name="CQAPP"></a>
+-  [**Using the CUDA-Q Applications Hub**](examples/nvidia_cuda_q/1_CUDA-Q_Applications_Hub.ipynb) [(CQAPP)](#index_CQAPP)<a name="CQAPP"></a>
 
-  This tutorial introduces the CUDA-Q Applications library. You will learn how to access and explore the applications library provided by CUDA-Q. 
+  This tutorial introduces the CUDA-Q Applications Hub. You will learn how to access and explore the CUDA-Q Applications Hub provided by NVIDIA. 
 
 -  [**Using the CUDA-Q Academic library**](examples/nvidia_cuda_q/2_CUDA-Q_Academic_library.ipynb) [(CQACA)](#index_CQACA)<a name="CQACA"></a>
 
-  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the academic library provided by CUDA-Q. 
+  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the CUDA-Q Academic library provided by NVIDIA. 
 
 -  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/3_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
 
@@ -573,7 +573,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | barrier    |  [Barrier](#Barrier)<a name="index_Barrier"></a>| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
- | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [Barrier](#Barrier), [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
+ | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [Barrier](#Barrier), [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [GSCQ](#GSCQ)<a name="index_GSCQ"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
  | benchmarking |  [Barrier](#Barrier)| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
