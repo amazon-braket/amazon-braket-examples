@@ -29,11 +29,12 @@ EXCLUDED_NOTEBOOKS = [
     "3_Bell_pair_with_pulses_Rigetti.ipynb",
     "4_Build_single_qubit_gates.ipynb",
     "Using_the_experimental_local_simulator.ipynb",
-    # CUDA-Q jobs
-    "0_hello_cudaq_jobs.ipynb",
-    "1_simulation_with_GPUs.ipynb",
-    "2_parallel_simulations.ipynb",
-    "3_distributed_statevector_simulations.ipynb",
+    # CUDA-Q hybrid job notebooks
+    "0_Getting_started_with_CUDA-Q.ipynb",
+    "3_Hybrid_jobs_with_CUDA-Q.ipynb",
+    "4_Simulation_with_GPUs.ipynb",
+    "5_Multiple_GPU_simulations.ipynb",
+    "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
     "Allocating_Qubits_on_QPU_Devices.ipynb",
     "Getting_Started_with_OpenQASM_on_Braket.ipynb",
