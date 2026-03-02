@@ -440,32 +440,53 @@
         "location": "examples/experimental_capabilities/dynamic_circuits/4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
         "content": "  This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. "
     },
-    "Hello CUDA-Q Jobs": {
+    "Getting started with CUDA-Q on Amazon Braket": {
+        "index_abbrv": "GSCQ",
+        "index_terms" : [], 
+        "categories": ["cudaq"],
+        "location": "examples/nvidia_cuda_q/0_Getting_started_with_CUDA-Q.ipynb",
+        "content": "  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. "
+    },
+    "Using the CUDA-Q Applications Hub": {
+        "index_abbrv": "CQAPP",
+        "index_terms" : [], 
+        "categories": ["cudaq"],
+        "location": "examples/nvidia_cuda_q/1_CUDA-Q_Applications_Hub.ipynb",
+        "content": "  This tutorial introduces the CUDA-Q Applications Hub. You will learn how to access and explore the CUDA-Q Applications Hub provided by NVIDIA. "
+    },
+    "Using the CUDA-Q Academic library": {
+        "index_abbrv": "CQACA",
+        "index_terms" : [], 
+        "categories": ["cudaq"],
+        "location": "examples/nvidia_cuda_q/2_CUDA-Q_Academic_library.ipynb",
+        "content": "  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the CUDA-Q Academic library provided by NVIDIA. "
+    },
+    "CUDA-Q with Braket Hybrid Jobs": {
         "index_abbrv": "HCQJ",
         "index_terms" : [], 
         "categories": ["cudaq"],
-        "location": "examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb",
-        "content": "  This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. "
+        "location": "examples/nvidia_cuda_q/3_Hybrid_jobs_with_CUDA-Q.ipynb",
+        "content": "  This tutorial shows you how to run CUDA-Q programs inside Amazon Braket Hybrid Jobs. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. "
     },
     "Simulating quantum programs on GPUs": {
         "index_abbrv": "SQPG",
         "index_terms" : ["gpus", "parallel"], 
         "categories": ["cudaq","simulators"],
-        "location": "examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb",
+        "location": "examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb",
         "content": "  This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. "
     },
     "Parallel simulations on multiple GPUs": {
         "index_abbrv": "PSG",
         "index_terms" : ["parallel","gpus"], 
         "categories": ["cudaq","simulators"],
-        "location": "examples/nvidia_cuda_q/2_parallel_simulations.ipynb",
+        "location": "examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb",
         "content": "  This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs."
     },
     "Distributed state vector simulations on multiple GPUs": {
         "index_abbrv": "DSVSG",
         "index_terms" : ["gpus","parallel"], 
         "categories": ["simulators","cudaq"],
-        "location": "examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb",
+        "location": "examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb",
         "content": "  This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs."
     },
     "Getting Started with Dynamic Circuits on IQM": {
