@@ -89,6 +89,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial explains how to use _verbatim compilation_ to run your circuits exactly as defined without any modification during the compilation process that's usually done behind-the-scenes when you run your circuits.
 
+-  [**Using the Barrier Statement on Amazon Braket**](examples/braket_features/Using_Barrier_Statement_on_Braket.ipynb) [(Barrier)](#index_Barrier)<a name="Barrier"></a>
+
+  This tutorial demonstrates how to use the OpenQASM 3 barrier statement on Amazon Braket to prevent compiler optimization across barrier boundaries. You will learn how barriers work, when to use them for preserving circuit structure, and how to apply them with both OpenQASM programs and the Braket SDK. The tutorial includes practical examples running on Rigetti and IQM Garnet QPUs, comparing circuits with and without barriers, and demonstrates mirror benchmarking as a real-world use case for measuring device fidelity.
+
 -  [**Getting started with Amazon Braket program sets**](examples/braket_features/program_sets/01_Getting_started_with_program_sets.ipynb) [(GSPrS)](#index_GSPrS)<a name="GSPrS"></a>
 
   Amazon Braket's program sets feature enables efficient batch processing of quantum computations by allowing multiple quantum circuits to be executed together. The feature provides various ways to combine circuits, parameters, and observables through methods like `CircuitBinding`, `product()`, and `zip()`, making it particularly useful for variational algorithms and parameter sweeps. Program sets can significantly reduce overhead and costs compared to running individual quantum tasks, while maintaining the same computational results.
@@ -176,15 +180,15 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)<a name="SQPG"></a>
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)<a name="PSG"></a>
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)<a name="DSVSG"></a>
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -471,19 +475,31 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 ## <a name="cudaq">CUDA-Q</a>
 
--  [**Hello CUDA-Q Jobs**](examples/nvidia_cuda_q/0_hello_cudaq_jobs.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
+-  [**Getting started with CUDA-Q on Amazon Braket**](examples/nvidia_cuda_q/0_Getting_started_with_CUDA-Q.ipynb) [(GSCQ)](#index_GSCQ)<a name="GSCQ"></a>
 
-  This tutorial introduces CUDA-Q in Amazon Braket. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
+  This tutorial introduces CUDA-Q with Amazon Braket. You will learn how to write and run CUDA-Q programs on Amazon Braket simulators and QPUs. 
 
--  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/1_simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
+-  [**Using the CUDA-Q Applications Hub**](examples/nvidia_cuda_q/1_CUDA-Q_Applications_Hub.ipynb) [(CQAPP)](#index_CQAPP)<a name="CQAPP"></a>
+
+  This tutorial introduces the CUDA-Q Applications Hub. You will learn how to access and explore the CUDA-Q Applications Hub provided by NVIDIA. 
+
+-  [**Using the CUDA-Q Academic library**](examples/nvidia_cuda_q/2_CUDA-Q_Academic_library.ipynb) [(CQACA)](#index_CQACA)<a name="CQACA"></a>
+
+  This tutorial introduces the CUDA-Q Academic library. You will learn how to access and explore the CUDA-Q Academic library provided by NVIDIA. 
+
+-  [**CUDA-Q with Braket Hybrid Jobs**](examples/nvidia_cuda_q/3_Hybrid_jobs_with_CUDA-Q.ipynb) [(HCQJ)](#index_HCQJ)<a name="HCQJ"></a>
+
+  This tutorial shows you how to run CUDA-Q programs inside Amazon Braket Hybrid Jobs. You will learn about configuring a Braket Hybrid Jobs container to run CUDA-Q programs, and you will learn how to run your Braket Hybrid Jobs using CUDA-Q both locally and on AWS. 
+
+-  [**Simulating quantum programs on GPUs**](examples/nvidia_cuda_q/4_Simulation_with_GPUs.ipynb) [(SQPG)](#index_SQPG)
 
   This tutorial shows you how to perform simulations with CUDA-Q GPU simulators on Amazon-managed GPU instances using Braket Hybrid Jobs. 
 
--  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/2_parallel_simulations.ipynb) [(PSG)](#index_PSG)
+-  [**Parallel simulations on multiple GPUs**](examples/nvidia_cuda_q/5_Multiple_GPU_simulations.ipynb) [(PSG)](#index_PSG)
 
   This tutorial shows you how to parallelize the simulations of observables and circuit batches over multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
--  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/3_distributed_statevector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
+-  [**Distributed state vector simulations on multiple GPUs**](examples/nvidia_cuda_q/6_Distributed_state_vector_simulations.ipynb) [(DSVSG)](#index_DSVSG)
 
   This tutorial shows you how to distribute a single state vector simulation across multiple GPUs using CUDA-Q with Braket Hybrid Jobs.
 
@@ -555,15 +571,17 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | allocation |  [AQQD](#AQQD)<a name="index_AQQD"></a>| <br>
  | arn        |  [GSHJ](#GSHJ)<a name="index_GSHJ"></a>| <br>
  | atoms      |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
+ | barrier    |  [Barrier](#Barrier)<a name="index_Barrier"></a>| <br>
  | beginner   |  [GS](#GS)<a name="index_GS"></a>| <br>
- | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
+ | bell       |  [GS](#GS), [RQCQ](#RQCQ)<a name="index_RQCQ"></a>, [GSOQ](#GSOQ)<a name="index_GSOQ"></a>, [Barrier](#Barrier), [NQD](#NQD), [NGC](#NGC)<a name="index_NGC"></a>, [BPPR](#BPPR)<a name="index_BPPR"></a>, [GSCQ](#GSCQ)<a name="index_GSCQ"></a>, [HCQJ](#HCQJ)<a name="index_HCQJ"></a>, [HNDC](#HNDC)<a name="index_HNDC"></a>| <br>
+ | benchmarking |  [Barrier](#Barrier)| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
- | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
+ | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
  | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
- | cuda       |  [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
+ | cuda       |  [GSCQ](#GSCQ), [CQAPP](#CQAPP)<a name="index_CQAPP"></a>, [CQACA](#CQACA)<a name="index_CQACA"></a>, [HCQJ](#HCQJ), [SQPG](#SQPG)<a name="index_SQPG"></a>, [PSG](#PSG)<a name="index_PSG"></a>, [DSVSG](#DSVSG)<a name="index_DSVSG"></a>| <br>
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
  | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
  | dynamic circuits |  [DCOQ3](#DCOQ3)<a name="index_DCOQ3"></a>| <br>
@@ -576,7 +594,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS), [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ), [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
- | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
+ | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Barrier](#Barrier), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
  | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL)| <br>
  | kraus      |  [GSOQ](#GSOQ), [SN](#SN)<a name="index_SN"></a>, [SNCP](#SNCP)<a name="index_SNCP"></a>| <br>
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ExpLS](#ExpLS)<a name="index_ExpLS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
@@ -586,7 +604,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu)| <br>
  | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [ZNEm](#ZNEm), [LEmu](#LEmu)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
- | openqasm   |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
+ | openqasm   |  [GSOQ](#GSOQ), [Barrier](#Barrier), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
  | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG), [EMWm](#EMWm)| <br>
@@ -605,7 +623,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | reset      |  [GSDCI](#GSDCI), [DCC](#DCC), [HNDC](#HNDC)| <br>
  | result type |  [AGRT](#AGRT)| <br>
  | results    |  [DDQC](#DDQC), [GSOQ](#GSOQ), [AGRT](#AGRT), [QFT](#QFT)<a name="index_QFT"></a>, [GSPrS](#GSPrS), [LEmu](#LEmu)| <br>
- | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [LEmu](#LEmu), [AQEMW](#AQEMW)| <br>
+ | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [Barrier](#Barrier), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [LEmu](#LEmu), [AQEMW](#AQEMW)| <br>
  | rydberg    |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | s3         |  [GNQT](#GNQT)<a name="index_GNQT"></a>, [CHJS](#CHJS)| <br>
  | shots      |  [GSPrS](#GSPrS)| <br>

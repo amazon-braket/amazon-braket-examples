@@ -5,7 +5,6 @@ from importlib.machinery import SourceFileLoader
 
 import pytest
 from jupyter_client import kernelspec
-from nbconvert import HTMLExporter
 from testbook import testbook
 
 UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
@@ -30,11 +29,12 @@ EXCLUDED_NOTEBOOKS = [
     "3_Bell_pair_with_pulses_Rigetti.ipynb",
     "4_Build_single_qubit_gates.ipynb",
     "Using_the_experimental_local_simulator.ipynb",
-    # CUDA-Q jobs
-    "0_hello_cudaq_jobs.ipynb",
-    "1_simulation_with_GPUs.ipynb",
-    "2_parallel_simulations.ipynb",
-    "3_distributed_statevector_simulations.ipynb",
+    # CUDA-Q hybrid job notebooks
+    "0_Getting_started_with_CUDA-Q.ipynb",
+    "3_Hybrid_jobs_with_CUDA-Q.ipynb",
+    "4_Simulation_with_GPUs.ipynb",
+    "5_Multiple_GPU_simulations.ipynb",
+    "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
     "Allocating_Qubits_on_QPU_Devices.ipynb",
     "Getting_Started_with_OpenQASM_on_Braket.ipynb",
@@ -76,10 +76,6 @@ if (
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if "integ_tests" in os.getcwd():
-    os.chdir(os.path.join("..", ".."))
-
-root_path = os.getcwd()
 examples_path = "examples"
 test_notebooks = []
 
@@ -106,23 +102,12 @@ def get_mock_paths(notebook_dir, notebook_file):
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
 
-@pytest.fixture(scope="module")
-def html_exporter():
-    return HTMLExporter(template_name="classic")
-
-@pytest.fixture(autouse=True)
-def restore_cwd():
-    """ after each test, move back to root_path - amazon-braket-examples/"""
-    yield
-    os.chdir(root_path)
-
-
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
-
     os.chdir(notebook_dir)
+
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
     kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
@@ -250,10 +235,10 @@ def uncomment_test_section(source):
 
 
 def test_not_imported():
-    """ verify that certain libaries have not been imported 
+    """ This verifies that certain tests were not imported - do not remove!
     
     Excluded libraries: 
-        mitiq - see `/examples/error_mitigation/on_mitiq/NOTICE.md` for details
+        mitiq - see `/examples/error_mitigation/on_mitiq/README.md` for details
     """
     extra_libraries = ["mitiq"]
     import importlib
