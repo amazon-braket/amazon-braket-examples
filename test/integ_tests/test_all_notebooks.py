@@ -20,11 +20,8 @@ EXCLUDED_NOTEBOOKS = [
     # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
     "0_Getting_started_papermill.ipynb",
     # Some AHS examples are running long especially on Mac. Removing while investigating
-    "04_Maximum_Independent_Sets_with_Analog_Hamiltonian_Simulation.ipynb",
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
-    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb",
     # Some pulse examples does not converge due to device quality
-    "1_Bringup_experiments.ipynb",
     "2_Native_gate_calibrations.ipynb",
     "3_Bell_pair_with_pulses_Rigetti.ipynb",
     "4_Build_single_qubit_gates.ipynb",
@@ -37,7 +34,6 @@ EXCLUDED_NOTEBOOKS = [
     "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
     "Allocating_Qubits_on_QPU_Devices.ipynb",
-    "Getting_Started_with_OpenQASM_on_Braket.ipynb",
     "0_Getting_Started.ipynb",
     "Noise_models_on_Rigetti.ipynb",
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
