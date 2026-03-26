@@ -8,4 +8,5 @@ cirq-ionq
 matplotlib==3.10.8
 matplotlib-venn==1.1.2
 mitiq==1.0.0
+pennylane==0.44.1
 qiskit-braket-provider==0.11.1
