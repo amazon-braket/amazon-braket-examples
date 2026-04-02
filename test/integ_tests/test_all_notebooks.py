@@ -21,10 +21,7 @@ EXCLUDED_NOTEBOOKS = [
     "0_Getting_started_papermill.ipynb",
     # Some AHS examples are running long especially on Mac. Removing while investigating
     "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
-    # Some pulse examples does not converge due to device quality
-    "2_Native_gate_calibrations.ipynb",
-    "3_Bell_pair_with_pulses_Rigetti.ipynb",
-    "4_Build_single_qubit_gates.ipynb",
+    # Requires amazon-braket-simulator-v2 package (optional install)
     "Using_the_experimental_local_simulator.ipynb",
     # CUDA-Q hybrid job notebooks
     "0_Getting_started_with_CUDA-Q.ipynb",
