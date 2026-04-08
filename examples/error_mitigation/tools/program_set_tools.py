@@ -22,7 +22,7 @@ STANDARD_CONVERSION = {
     "I": lambda i : Circuit(), #.measure(i),
 }
 
-ANKAA_CONVERSION = {
+CEPHEUS_CONVERSION = {
     "X" : lambda i : Circuit().rz(i,pi/2).rx(i,np.pi/2), #.measure(i),
     "Y": lambda i : Circuit().rx(i,pi/2), #.measure(i),
     "Z": lambda i : Circuit(), #.measure(i),

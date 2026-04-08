@@ -46,6 +46,6 @@
     "ionq":[],
     "parameters" :["freeparameter","freeparameterexpression"],
     "iqm":[],
-    "rigetti":["rigetti","ankaa"],
+    "rigetti":["rigetti","cepheus"],
     "unitary": [".unitary","custom unitary"]
 }

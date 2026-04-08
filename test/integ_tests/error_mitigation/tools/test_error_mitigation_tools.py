@@ -11,7 +11,7 @@ from tools.mitigation_tools import (
     SparseReadoutMitigation,
     build_inverse_quasi_distribution,
     process_readout_twirl,
-    twirl_iswap,
+    twirl_cz,
 )
 from tools.observable_tools import _pauli_mul, matrix_to_pauli, pauli_grouping, qubit_wise_commuting
 from tools.program_set_tools import run_with_program_sets
@@ -81,10 +81,10 @@ class TestMitigationTools(unittest.TestCase):
         ref = {"010":0.8, "110":0.2}
         assert ref == test
 
-    def test_iswap_twirl(self):
+    def test_cz_twirl(self):
         """Test twirling of iSWAP gate."""
-        circ = Circuit().iswap(0, 1)
-        twirls = twirl_iswap(circ, 32)
+        circ = Circuit().cz(0, 1)
+        twirls = twirl_cz(circ, 32)
         for t in twirls:
             assert abs(np.abs(np.trace(circ.to_unitary() @ np.conj(t.to_unitary()).T)) - 4) <= 1e-6
 
@@ -176,7 +176,7 @@ class TestStatTools(unittest.TestCase):
 class TestCircuitTools(unittest.TestCase):
     def test_find_linear_chain(self):
         """Test finding linear chain in circuit."""
-        circ = Circuit().iswap(0, 1).iswap(1, 2).iswap(2, 3)
+        circ = Circuit().cz(0, 1).cz(1, 2).cz(2, 3)
         chain = find_linear_chain(circ)
         assert len(chain) == 4
         assert set(chain) == {0, 1, 2, 3}

@@ -6,11 +6,11 @@ from typing import Any
 import numpy as np
 
 from braket.circuits import Circuit
-from braket.circuits.gates import ISwap
+from braket.circuits.gates import CZ
 from braket.devices import Device
 from braket.program_sets import ProgramSet
 
-ISWAP_TWIRLS = [
+CZ_TWIRLS = [
     ['i','i','i','i'],
     ['i','x','y','z'],
     ['i','y','x','z'],
@@ -222,13 +222,13 @@ def generate_bit_mask(twirls : np.ndarray, pauli_bases : list) -> np.ndarray:
     return bit_masks
 
 
-def twirl_iswap(circ, repetitions : int = 1) -> list[Circuit]:
-    """ apply twirling operation for ISwap gates """
+def twirl_cz(circ, repetitions : int = 1) -> list[Circuit]:
+    """ apply twirling operation for CZ gates """
     circuits = [Circuit() for _ in range(repetitions)]
     for ins in circ.instructions:
-        if isinstance(ins.operator, ISwap):
+        if isinstance(ins.operator, CZ):
             for i in range(repetitions):
-                twirl = random.choice(ISWAP_TWIRLS)
+                twirl = random.choice(CZ_TWIRLS)
                 circuits[i]+= gen_pauli_circ(twirl[0],ins.target[0])
                 circuits[i]+= gen_pauli_circ(twirl[1],ins.target[1])
                 circuits[i].add_instruction(ins)

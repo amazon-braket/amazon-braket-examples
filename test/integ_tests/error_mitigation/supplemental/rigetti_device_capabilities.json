@@ -1527,7 +1527,7 @@
             ]
           }
         ],
-        "family": "Ankaa",
+        "family": "Cepheus",
         "nodes": [
           {
             "node_id": 0
@@ -8746,7 +8746,7 @@
         },
         {
           "characteristics": [],
-          "name": "ISWAP",
+          "name": "CZ",
           "node_count": 2,
           "parameters": [],
           "sites": [
@@ -8754,7 +8754,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:04:42+00:00",
                   "value": 0.5
@@ -8769,7 +8769,7 @@
               "characteristics": [
                 {
                   "error": 0.0010323337625509198,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:04:45+00:00",
                   "value": 0.993152621749302
@@ -8784,7 +8784,7 @@
               "characteristics": [
                 {
                   "error": 0.004791686796618514,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:04:49+00:00",
                   "value": 0.9575992745903928
@@ -8799,7 +8799,7 @@
               "characteristics": [
                 {
                   "error": 0.0011314757317876169,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:04:53+00:00",
                   "value": 0.991507285221606
@@ -8814,7 +8814,7 @@
               "characteristics": [
                 {
                   "error": 0.021797733622692255,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:04:57+00:00",
                   "value": 0.9202791819658892
@@ -8829,7 +8829,7 @@
               "characteristics": [
                 {
                   "error": 0.031050606473005248,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:05:01+00:00",
                   "value": 0.8065362440847814
@@ -8844,7 +8844,7 @@
               "characteristics": [
                 {
                   "error": 0.0019148253788813885,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:05:06+00:00",
                   "value": 0.9896866945249144
@@ -8859,7 +8859,7 @@
               "characteristics": [
                 {
                   "error": 0.00826728803084835,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:28:53+00:00",
                   "value": 0.9173285982026248
@@ -8874,7 +8874,7 @@
               "characteristics": [
                 {
                   "error": 0.002101870495630541,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:28:55+00:00",
                   "value": 0.9863052405801088
@@ -8889,7 +8889,7 @@
               "characteristics": [
                 {
                   "error": 0.0012154870026997795,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:28:58+00:00",
                   "value": 0.992828041793406
@@ -8904,7 +8904,7 @@
               "characteristics": [
                 {
                   "error": 0.0012475812465644774,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:31+00:00",
                   "value": 0.9914160571605096
@@ -8919,7 +8919,7 @@
               "characteristics": [
                 {
                   "error": 0.0028994282802167503,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:33+00:00",
                   "value": 0.9835706644944542
@@ -8934,7 +8934,7 @@
               "characteristics": [
                 {
                   "error": 0.000645329062499931,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:36+00:00",
                   "value": 0.9916556166208788
@@ -8949,7 +8949,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:29:02+00:00",
                   "value": 0.5
@@ -8964,7 +8964,7 @@
               "characteristics": [
                 {
                   "error": 0.005950167644215398,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:40+00:00",
                   "value": 0.9312885337535002
@@ -8979,7 +8979,7 @@
               "characteristics": [
                 {
                   "error": 0.0023423133689481736,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:29:05+00:00",
                   "value": 0.9853860857129888
@@ -8994,7 +8994,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:47+00:00",
                   "value": 0.5
@@ -9009,7 +9009,7 @@
               "characteristics": [
                 {
                   "error": 0.0020283474345222452,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:47+00:00",
                   "value": 0.9834385411973212
@@ -9024,7 +9024,7 @@
               "characteristics": [
                 {
                   "error": 0.0011016180457673597,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:17:50+00:00",
                   "value": 0.9883699332214244
@@ -9039,7 +9039,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:29:11+00:00",
                   "value": 0.5
@@ -9054,7 +9054,7 @@
               "characteristics": [
                 {
                   "error": 0.0010646300393705665,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:29:13+00:00",
                   "value": 0.9877015177915748
@@ -9069,7 +9069,7 @@
               "characteristics": [
                 {
                   "error": 0.0015970778198341649,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:29:17+00:00",
                   "value": 0.9870825677048024
@@ -9084,7 +9084,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:29:20+00:00",
                   "value": 0.5
@@ -9099,7 +9099,7 @@
               "characteristics": [
                 {
                   "error": 0.001891043013888592,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:33+00:00",
                   "value": 0.9814079966311288
@@ -9114,7 +9114,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:36+00:00",
                   "value": 0.5
@@ -9129,7 +9129,7 @@
               "characteristics": [
                 {
                   "error": 0.0019300640379630344,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:40+00:00",
                   "value": 0.9831712705911946
@@ -9144,7 +9144,7 @@
               "characteristics": [
                 {
                   "error": 0.0013353570249970057,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:45+00:00",
                   "value": 0.990119289952219
@@ -9159,7 +9159,7 @@
               "characteristics": [
                 {
                   "error": 0.004606238579304273,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:49+00:00",
                   "value": 0.9558960818946644
@@ -9174,7 +9174,7 @@
               "characteristics": [
                 {
                   "error": 0.0018945339077702792,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:49+00:00",
                   "value": 0.9858360703190118
@@ -9189,7 +9189,7 @@
               "characteristics": [
                 {
                   "error": 0.004703773456469827,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:53+00:00",
                   "value": 0.9809836560186748
@@ -9204,7 +9204,7 @@
               "characteristics": [
                 {
                   "error": 0.013099722902984213,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:57+00:00",
                   "value": 0.9568593036061046
@@ -9219,7 +9219,7 @@
               "characteristics": [
                 {
                   "error": 0.00250500467155319,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:40:41+00:00",
                   "value": 0.991901932074004
@@ -9234,7 +9234,7 @@
               "characteristics": [
                 {
                   "error": 0.0008814383191270505,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:06:59+00:00",
                   "value": 0.9924624471329146
@@ -9249,7 +9249,7 @@
               "characteristics": [
                 {
                   "error": 0.021724404474993794,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:40:41+00:00",
                   "value": 0.9173753156570892
@@ -9264,7 +9264,7 @@
               "characteristics": [
                 {
                   "error": 0.0007180827573294616,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:40:45+00:00",
                   "value": 0.9922243550457328
@@ -9279,7 +9279,7 @@
               "characteristics": [
                 {
                   "error": 0.0021515058987417253,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:02+00:00",
                   "value": 0.9889384713128088
@@ -9294,7 +9294,7 @@
               "characteristics": [
                 {
                   "error": 0.0011016967701239536,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:40:47+00:00",
                   "value": 0.993439061889924
@@ -9309,7 +9309,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:40:53+00:00",
                   "value": 0.5
@@ -9324,7 +9324,7 @@
               "characteristics": [
                 {
                   "error": 0.0013568042857676794,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:06+00:00",
                   "value": 0.9910053073127604
@@ -9339,7 +9339,7 @@
               "characteristics": [
                 {
                   "error": 0.0009206467051901146,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:40:59+00:00",
                   "value": 0.9940091140746542
@@ -9354,7 +9354,7 @@
               "characteristics": [
                 {
                   "error": 0.0007232749894866615,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:11+00:00",
                   "value": 0.9950783093661928
@@ -9369,7 +9369,7 @@
               "characteristics": [
                 {
                   "error": 0.001574879477370114,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:14+00:00",
                   "value": 0.991612547130486
@@ -9384,7 +9384,7 @@
               "characteristics": [
                 {
                   "error": 0.027534604743748314,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:20+00:00",
                   "value": 0.8672646296150488
@@ -9399,7 +9399,7 @@
               "characteristics": [
                 {
                   "error": 0.0024442521278709543,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:24+00:00",
                   "value": 0.9915334888467038
@@ -9414,7 +9414,7 @@
               "characteristics": [
                 {
                   "error": 0.003818745632142999,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:27+00:00",
                   "value": 0.9786303417876144
@@ -9429,7 +9429,7 @@
               "characteristics": [
                 {
                   "error": 0.001260631451566684,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:41:01+00:00",
                   "value": 0.9881451706604428
@@ -9444,7 +9444,7 @@
               "characteristics": [
                 {
                   "error": 0.0018538968618943656,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:41:03+00:00",
                   "value": 0.9940081259825212
@@ -9459,7 +9459,7 @@
               "characteristics": [
                 {
                   "error": 0.0036985166865159983,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:29+00:00",
                   "value": 0.9925911073693984
@@ -9474,7 +9474,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:53:32+00:00",
                   "value": 0.5
@@ -9489,7 +9489,7 @@
               "characteristics": [
                 {
                   "error": 0.0027225413062396285,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:05+00:00",
                   "value": 0.9819736019951164
@@ -9504,7 +9504,7 @@
               "characteristics": [
                 {
                   "error": 0.0009175606902719728,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:08+00:00",
                   "value": 0.9934170592844814
@@ -9519,7 +9519,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:11+00:00",
                   "value": 0.5
@@ -9534,7 +9534,7 @@
               "characteristics": [
                 {
                   "error": 0.0020882340978426064,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:15+00:00",
                   "value": 0.9839876438310724
@@ -9549,7 +9549,7 @@
               "characteristics": [
                 {
                   "error": 0.002010313050037958,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:19+00:00",
                   "value": 0.9916825327614216
@@ -9564,7 +9564,7 @@
               "characteristics": [
                 {
                   "error": 0.004339385861920169,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:21+00:00",
                   "value": 0.9762833410270856
@@ -9579,7 +9579,7 @@
               "characteristics": [
                 {
                   "error": 0.01371399637400739,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:27+00:00",
                   "value": 0.9467563841849532
@@ -9594,7 +9594,7 @@
               "characteristics": [
                 {
                   "error": 0.0028144829250653426,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:31+00:00",
                   "value": 0.9855071926337432
@@ -9609,7 +9609,7 @@
               "characteristics": [
                 {
                   "error": 0.005572193473079767,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:21:33+00:00",
                   "value": 0.9394150916869836
@@ -9624,7 +9624,7 @@
               "characteristics": [
                 {
                   "error": 0.001971138278174127,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:28+00:00",
                   "value": 0.9844296410547878
@@ -9639,7 +9639,7 @@
               "characteristics": [
                 {
                   "error": 0.00112773794153489,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:28+00:00",
                   "value": 0.987518830414044
@@ -9654,7 +9654,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:29+00:00",
                   "value": 0.5
@@ -9669,7 +9669,7 @@
               "characteristics": [
                 {
                   "error": 0.008786579241541546,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:56:52+00:00",
                   "value": 0.946184781682943
@@ -9684,7 +9684,7 @@
               "characteristics": [
                 {
                   "error": 0.00164092126170366,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:36+00:00",
                   "value": 0.9832156927942376
@@ -9699,7 +9699,7 @@
               "characteristics": [
                 {
                   "error": 0.003908741320122594,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:37+00:00",
                   "value": 0.9769755552299992
@@ -9714,7 +9714,7 @@
               "characteristics": [
                 {
                   "error": 0.001182045285940691,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:56:55+00:00",
                   "value": 0.9926723208095292
@@ -9729,7 +9729,7 @@
               "characteristics": [
                 {
                   "error": 0.0015411553334360284,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:56:59+00:00",
                   "value": 0.9911794766096858
@@ -9744,7 +9744,7 @@
               "characteristics": [
                 {
                   "error": 0.00216906043248762,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:57:04+00:00",
                   "value": 0.9903250892673784
@@ -9759,7 +9759,7 @@
               "characteristics": [
                 {
                   "error": 0.008651994789108304,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:57:08+00:00",
                   "value": 0.9080219178818132
@@ -9774,7 +9774,7 @@
               "characteristics": [
                 {
                   "error": 0.0011253478622481295,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:57:09+00:00",
                   "value": 0.988838977769692
@@ -9789,7 +9789,7 @@
               "characteristics": [
                 {
                   "error": 0.004827517457250522,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:44+00:00",
                   "value": 0.97666069727409
@@ -9804,7 +9804,7 @@
               "characteristics": [
                 {
                   "error": 0.021468065009255313,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:46+00:00",
                   "value": 0.9178200020065072
@@ -9819,7 +9819,7 @@
               "characteristics": [
                 {
                   "error": 0.0015465506120145574,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:57:13+00:00",
                   "value": 0.96692863861561
@@ -9834,7 +9834,7 @@
               "characteristics": [
                 {
                   "error": 0.0021504346051790394,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:48+00:00",
                   "value": 0.9850157795332783
@@ -9849,7 +9849,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:10:50+00:00",
                   "value": 0.5
@@ -9864,7 +9864,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:44:49+00:00",
                   "value": 0.5
@@ -9879,7 +9879,7 @@
               "characteristics": [
                 {
                   "error": 0.016892254233328557,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:44:51+00:00",
                   "value": 0.9514947798915188
@@ -9894,7 +9894,7 @@
               "characteristics": [
                 {
                   "error": 0.007688422021384426,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:31+00:00",
                   "value": 0.9666601722121368
@@ -9909,7 +9909,7 @@
               "characteristics": [
                 {
                   "error": 0.005578263130420454,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:34+00:00",
                   "value": 0.9567528653892152
@@ -9924,7 +9924,7 @@
               "characteristics": [
                 {
                   "error": 0.0010239894425012994,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:44:53+00:00",
                   "value": 0.9957172584078384
@@ -9939,7 +9939,7 @@
               "characteristics": [
                 {
                   "error": 0.0030468255368150737,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:37+00:00",
                   "value": 0.9838289503979768
@@ -9954,7 +9954,7 @@
               "characteristics": [
                 {
                   "error": 0.0015704751724979257,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:40+00:00",
                   "value": 0.9793546444997756
@@ -9969,7 +9969,7 @@
               "characteristics": [
                 {
                   "error": 0.0012460328161781164,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:57:17+00:00",
                   "value": 0.99230802024261
@@ -9984,7 +9984,7 @@
               "characteristics": [
                 {
                   "error": 0.001142586718249595,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:02+00:00",
                   "value": 0.994043800595148
@@ -9999,7 +9999,7 @@
               "characteristics": [
                 {
                   "error": 0.0019175506712372564,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:02+00:00",
                   "value": 0.9891227316407032
@@ -10014,7 +10014,7 @@
               "characteristics": [
                 {
                   "error": 0.001552339224537029,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:06+00:00",
                   "value": 0.991622132899264
@@ -10029,7 +10029,7 @@
               "characteristics": [
                 {
                   "error": 0.0024804216629117463,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:09+00:00",
                   "value": 0.9735590223782332
@@ -10044,7 +10044,7 @@
               "characteristics": [
                 {
                   "error": 0.002606757060929502,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:44+00:00",
                   "value": 0.974766301819347
@@ -10059,7 +10059,7 @@
               "characteristics": [
                 {
                   "error": 0.002526520779254632,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:47+00:00",
                   "value": 0.9836857420765354
@@ -10074,7 +10074,7 @@
               "characteristics": [
                 {
                   "error": 0.0017401900779157643,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:51+00:00",
                   "value": 0.9865387480564156
@@ -10089,7 +10089,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:14+00:00",
                   "value": 0.5
@@ -10104,7 +10104,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:18+00:00",
                   "value": 0.5
@@ -10119,7 +10119,7 @@
               "characteristics": [
                 {
                   "error": 0.001227705075690634,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:32:54+00:00",
                   "value": 0.9878041851343534
@@ -10134,7 +10134,7 @@
               "characteristics": [
                 {
                   "error": 0.01355554864054542,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:21+00:00",
                   "value": 0.9125438655881166
@@ -10149,7 +10149,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:45:28+00:00",
                   "value": 0.5
@@ -10164,7 +10164,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:24:49+00:00",
                   "value": 0.5
@@ -10179,7 +10179,7 @@
               "characteristics": [
                 {
                   "error": 0.017765845045569814,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:24:52+00:00",
                   "value": 0.9550252439076512
@@ -10194,7 +10194,7 @@
               "characteristics": [
                 {
                   "error": 0.00450766704454943,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:24:55+00:00",
                   "value": 0.9735363504033092
@@ -10209,7 +10209,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:24:58+00:00",
                   "value": 0.5
@@ -10224,7 +10224,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:25:01+00:00",
                   "value": 0.5
@@ -10239,7 +10239,7 @@
               "characteristics": [
                 {
                   "error": 0.003493758810812384,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:25:06+00:00",
                   "value": 0.982551242893578
@@ -10254,7 +10254,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:00:45+00:00",
                   "value": 0.5
@@ -10269,7 +10269,7 @@
               "characteristics": [
                 {
                   "error": 0.0009793267617175445,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:00:46+00:00",
                   "value": 0.9871353658076424
@@ -10284,7 +10284,7 @@
               "characteristics": [
                 {
                   "error": 0.0010445681545582755,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:25:09+00:00",
                   "value": 0.9907836273865934
@@ -10299,7 +10299,7 @@
               "characteristics": [
                 {
                   "error": 0.026634335905674808,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:25:12+00:00",
                   "value": 0.9382766848927724
@@ -10314,7 +10314,7 @@
               "characteristics": [
                 {
                   "error": 0.0029327993775868965,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:00:50+00:00",
                   "value": 0.9827903659442636
@@ -10329,7 +10329,7 @@
               "characteristics": [
                 {
                   "error": 0.0007946950639110349,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:25:16+00:00",
                   "value": 0.9851676367395702
@@ -10344,7 +10344,7 @@
               "characteristics": [
                 {
                   "error": 0.0008555057966106922,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:00:53+00:00",
                   "value": 0.9933427936446668
@@ -10359,7 +10359,7 @@
               "characteristics": [
                 {
                   "error": 0.002495688659784945,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:00:59+00:00",
                   "value": 0.9825404670940932
@@ -10374,7 +10374,7 @@
               "characteristics": [
                 {
                   "error": 0.0012092801675054618,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:01:01+00:00",
                   "value": 0.9807300339423222
@@ -10389,7 +10389,7 @@
               "characteristics": [
                 {
                   "error": 0.0007055203308801003,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:01:06+00:00",
                   "value": 0.9932815660174574
@@ -10404,7 +10404,7 @@
               "characteristics": [
                 {
                   "error": 0.003053486668663274,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:01:11+00:00",
                   "value": 0.9764160612423456
@@ -10419,7 +10419,7 @@
               "characteristics": [
                 {
                   "error": 0.0028898959530139256,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T21:01:12+00:00",
                   "value": 0.9826327178179016
@@ -10434,7 +10434,7 @@
               "characteristics": [
                 {
                   "error": 0.0010197501162665444,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:00+00:00",
                   "value": 0.9937969393820616
@@ -10449,7 +10449,7 @@
               "characteristics": [
                 {
                   "error": 0.00633365228237402,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:00+00:00",
                   "value": 0.9652806713116712
@@ -10464,7 +10464,7 @@
               "characteristics": [
                 {
                   "error": 0.0012646112321803191,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:03+00:00",
                   "value": 0.9841868032125548
@@ -10479,7 +10479,7 @@
               "characteristics": [
                 {
                   "error": 0.000651876254051597,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:06+00:00",
                   "value": 0.9923491700412356
@@ -10494,7 +10494,7 @@
               "characteristics": [
                 {
                   "error": 0.0019255788041606097,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:09+00:00",
                   "value": 0.981648011408358
@@ -10509,7 +10509,7 @@
               "characteristics": [
                 {
                   "error": 0.0014265575291457931,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:12+00:00",
                   "value": 0.991414220648368
@@ -10524,7 +10524,7 @@
               "characteristics": [
                 {
                   "error": 0.0036716636001021055,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:16+00:00",
                   "value": 0.9902749380193306
@@ -10539,7 +10539,7 @@
               "characteristics": [
                 {
                   "error": 0.001144506225451893,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:14:20+00:00",
                   "value": 0.9894719682468796
@@ -10554,7 +10554,7 @@
               "characteristics": [
                 {
                   "error": 0.0017255910910884925,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:36:35+00:00",
                   "value": 0.9901575582179758
@@ -10569,7 +10569,7 @@
               "characteristics": [
                 {
                   "error": 0.0030858603138286403,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:36:43+00:00",
                   "value": 0.9895577059780748
@@ -10584,7 +10584,7 @@
               "characteristics": [
                 {
                   "error": 0.006600335286120824,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:36:46+00:00",
                   "value": 0.9165187561773664
@@ -10599,7 +10599,7 @@
               "characteristics": [
                 {
                   "error": 0.001338366162964488,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:36:49+00:00",
                   "value": 0.9871388152276064
@@ -10614,7 +10614,7 @@
               "characteristics": [
                 {
                   "error": 0.0030728279467393616,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:36:54+00:00",
                   "value": 0.991707738993548
@@ -10629,7 +10629,7 @@
               "characteristics": [
                 {
                   "error": 0.0018674746703601108,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:36:56+00:00",
                   "value": 0.9906088675515644
@@ -10644,7 +10644,7 @@
               "characteristics": [
                 {
                   "error": 0.0012015960668830892,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:37:02+00:00",
                   "value": 0.9899948422473356
@@ -10659,7 +10659,7 @@
               "characteristics": [
                 {
                   "error": 0.001167713229175877,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:48:57+00:00",
                   "value": 0.9837144646225858
@@ -10674,7 +10674,7 @@
               "characteristics": [
                 {
                   "error": 0.0012923665317829927,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:01+00:00",
                   "value": 0.993451025110172
@@ -10689,7 +10689,7 @@
               "characteristics": [
                 {
                   "error": 0.0019933437389529035,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:37:06+00:00",
                   "value": 0.9854082353001632
@@ -10704,7 +10704,7 @@
               "characteristics": [
                 {
                   "error": 0.001269349784596516,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:02+00:00",
                   "value": 0.991929181617624
@@ -10719,7 +10719,7 @@
               "characteristics": [
                 {
                   "error": 0.0017490428191722805,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:37:08+00:00",
                   "value": 0.9921437001250905
@@ -10734,7 +10734,7 @@
               "characteristics": [
                 {
                   "error": 0.00114843967809028,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:37:11+00:00",
                   "value": 0.99008347121483
@@ -10749,7 +10749,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:08+00:00",
                   "value": 0.5
@@ -10764,7 +10764,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:37:15+00:00",
                   "value": 0.5
@@ -10779,7 +10779,7 @@
               "characteristics": [
                 {
                   "error": 0.0027180067734179714,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:11+00:00",
                   "value": 0.9879466094145888
@@ -10794,7 +10794,7 @@
               "characteristics": [
                 {
                   "error": 0.0029172262800078582,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:13+00:00",
                   "value": 0.9829294652994278
@@ -10809,7 +10809,7 @@
               "characteristics": [
                 {
                   "error": 0.001917916838905559,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:17+00:00",
                   "value": 0.9949186149579808
@@ -10824,7 +10824,7 @@
               "characteristics": [
                 {
                   "error": 0.010274435657903872,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:21+00:00",
                   "value": 0.9145380593007492
@@ -10839,7 +10839,7 @@
               "characteristics": [
                 {
                   "error": 1.0,
-                  "name": "fISWAP",
+                  "name": "fCZ",
                   "parameter_values": [],
                   "timestamp": "2026-01-07T20:49:25+00:00",
                   "value": 0.5
@@ -10853,7 +10853,7 @@
           ]
         }
       ],
-      "name": "Ankaa-3"
+      "name": "Cepheus-1-108Q"
     }
   },
   "standardized": {
@@ -13984,7 +13984,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -13998,7 +13998,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.993152621749302,
             "standardError": 0.0010323337625509198,
             "fidelityType": {
@@ -14012,7 +14012,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9575992745903928,
             "standardError": 0.004791686796618514,
             "fidelityType": {
@@ -14026,7 +14026,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991507285221606,
             "standardError": 0.0011314757317876169,
             "fidelityType": {
@@ -14040,7 +14040,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9202791819658892,
             "standardError": 0.021797733622692255,
             "fidelityType": {
@@ -14054,7 +14054,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.8065362440847814,
             "standardError": 0.031050606473005248,
             "fidelityType": {
@@ -14068,7 +14068,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9896866945249144,
             "standardError": 0.0019148253788813885,
             "fidelityType": {
@@ -14082,7 +14082,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9173285982026248,
             "standardError": 0.00826728803084835,
             "fidelityType": {
@@ -14096,7 +14096,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9863052405801088,
             "standardError": 0.002101870495630541,
             "fidelityType": {
@@ -14110,7 +14110,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.992828041793406,
             "standardError": 0.0012154870026997795,
             "fidelityType": {
@@ -14124,7 +14124,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9914160571605096,
             "standardError": 0.0012475812465644774,
             "fidelityType": {
@@ -14138,7 +14138,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9835706644944542,
             "standardError": 0.0028994282802167503,
             "fidelityType": {
@@ -14152,7 +14152,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9916556166208788,
             "standardError": 0.000645329062499931,
             "fidelityType": {
@@ -14166,7 +14166,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14180,7 +14180,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9312885337535002,
             "standardError": 0.005950167644215398,
             "fidelityType": {
@@ -14194,7 +14194,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9853860857129888,
             "standardError": 0.0023423133689481736,
             "fidelityType": {
@@ -14208,7 +14208,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14222,7 +14222,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9834385411973212,
             "standardError": 0.0020283474345222452,
             "fidelityType": {
@@ -14236,7 +14236,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9883699332214244,
             "standardError": 0.0011016180457673597,
             "fidelityType": {
@@ -14250,7 +14250,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14264,7 +14264,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9877015177915748,
             "standardError": 0.0010646300393705665,
             "fidelityType": {
@@ -14278,7 +14278,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9870825677048024,
             "standardError": 0.0015970778198341649,
             "fidelityType": {
@@ -14292,7 +14292,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14306,7 +14306,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9814079966311288,
             "standardError": 0.001891043013888592,
             "fidelityType": {
@@ -14320,7 +14320,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14334,7 +14334,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9831712705911946,
             "standardError": 0.0019300640379630344,
             "fidelityType": {
@@ -14348,7 +14348,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.990119289952219,
             "standardError": 0.0013353570249970057,
             "fidelityType": {
@@ -14362,7 +14362,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9558960818946644,
             "standardError": 0.004606238579304273,
             "fidelityType": {
@@ -14376,7 +14376,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9858360703190118,
             "standardError": 0.0018945339077702792,
             "fidelityType": {
@@ -14390,7 +14390,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9809836560186748,
             "standardError": 0.004703773456469827,
             "fidelityType": {
@@ -14404,7 +14404,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9568593036061046,
             "standardError": 0.013099722902984213,
             "fidelityType": {
@@ -14418,7 +14418,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991901932074004,
             "standardError": 0.00250500467155319,
             "fidelityType": {
@@ -14432,7 +14432,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9924624471329146,
             "standardError": 0.0008814383191270505,
             "fidelityType": {
@@ -14446,7 +14446,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9173753156570892,
             "standardError": 0.021724404474993794,
             "fidelityType": {
@@ -14460,7 +14460,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9922243550457328,
             "standardError": 0.0007180827573294616,
             "fidelityType": {
@@ -14474,7 +14474,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9889384713128088,
             "standardError": 0.0021515058987417253,
             "fidelityType": {
@@ -14488,7 +14488,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.993439061889924,
             "standardError": 0.0011016967701239536,
             "fidelityType": {
@@ -14502,7 +14502,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14516,7 +14516,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9910053073127604,
             "standardError": 0.0013568042857676794,
             "fidelityType": {
@@ -14530,7 +14530,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9940091140746542,
             "standardError": 0.0009206467051901146,
             "fidelityType": {
@@ -14544,7 +14544,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9950783093661928,
             "standardError": 0.0007232749894866615,
             "fidelityType": {
@@ -14558,7 +14558,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991612547130486,
             "standardError": 0.001574879477370114,
             "fidelityType": {
@@ -14572,7 +14572,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.8672646296150488,
             "standardError": 0.027534604743748314,
             "fidelityType": {
@@ -14586,7 +14586,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9915334888467038,
             "standardError": 0.0024442521278709543,
             "fidelityType": {
@@ -14600,7 +14600,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9786303417876144,
             "standardError": 0.003818745632142999,
             "fidelityType": {
@@ -14614,7 +14614,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9881451706604428,
             "standardError": 0.001260631451566684,
             "fidelityType": {
@@ -14628,7 +14628,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9940081259825212,
             "standardError": 0.0018538968618943656,
             "fidelityType": {
@@ -14642,7 +14642,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9925911073693984,
             "standardError": 0.0036985166865159983,
             "fidelityType": {
@@ -14656,7 +14656,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14670,7 +14670,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9819736019951164,
             "standardError": 0.0027225413062396285,
             "fidelityType": {
@@ -14684,7 +14684,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9934170592844814,
             "standardError": 0.0009175606902719728,
             "fidelityType": {
@@ -14698,7 +14698,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14712,7 +14712,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9839876438310724,
             "standardError": 0.0020882340978426064,
             "fidelityType": {
@@ -14726,7 +14726,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9916825327614216,
             "standardError": 0.002010313050037958,
             "fidelityType": {
@@ -14740,7 +14740,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9762833410270856,
             "standardError": 0.004339385861920169,
             "fidelityType": {
@@ -14754,7 +14754,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9467563841849532,
             "standardError": 0.01371399637400739,
             "fidelityType": {
@@ -14768,7 +14768,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9855071926337432,
             "standardError": 0.0028144829250653426,
             "fidelityType": {
@@ -14782,7 +14782,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9394150916869836,
             "standardError": 0.005572193473079767,
             "fidelityType": {
@@ -14796,7 +14796,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9844296410547878,
             "standardError": 0.001971138278174127,
             "fidelityType": {
@@ -14810,7 +14810,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.987518830414044,
             "standardError": 0.00112773794153489,
             "fidelityType": {
@@ -14824,7 +14824,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -14838,7 +14838,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.946184781682943,
             "standardError": 0.008786579241541546,
             "fidelityType": {
@@ -14852,7 +14852,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9832156927942376,
             "standardError": 0.00164092126170366,
             "fidelityType": {
@@ -14866,7 +14866,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9769755552299992,
             "standardError": 0.003908741320122594,
             "fidelityType": {
@@ -14880,7 +14880,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9926723208095292,
             "standardError": 0.001182045285940691,
             "fidelityType": {
@@ -14894,7 +14894,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9911794766096858,
             "standardError": 0.0015411553334360284,
             "fidelityType": {
@@ -14908,7 +14908,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9903250892673784,
             "standardError": 0.00216906043248762,
             "fidelityType": {
@@ -14922,7 +14922,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9080219178818132,
             "standardError": 0.008651994789108304,
             "fidelityType": {
@@ -14936,7 +14936,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.988838977769692,
             "standardError": 0.0011253478622481295,
             "fidelityType": {
@@ -14950,7 +14950,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.97666069727409,
             "standardError": 0.004827517457250522,
             "fidelityType": {
@@ -14964,7 +14964,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9178200020065072,
             "standardError": 0.021468065009255313,
             "fidelityType": {
@@ -14978,7 +14978,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.96692863861561,
             "standardError": 0.0015465506120145574,
             "fidelityType": {
@@ -14992,7 +14992,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9850157795332783,
             "standardError": 0.0021504346051790394,
             "fidelityType": {
@@ -15006,7 +15006,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15020,7 +15020,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15034,7 +15034,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9514947798915188,
             "standardError": 0.016892254233328557,
             "fidelityType": {
@@ -15048,7 +15048,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9666601722121368,
             "standardError": 0.007688422021384426,
             "fidelityType": {
@@ -15062,7 +15062,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9567528653892152,
             "standardError": 0.005578263130420454,
             "fidelityType": {
@@ -15076,7 +15076,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9957172584078384,
             "standardError": 0.0010239894425012994,
             "fidelityType": {
@@ -15090,7 +15090,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9838289503979768,
             "standardError": 0.0030468255368150737,
             "fidelityType": {
@@ -15104,7 +15104,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9793546444997756,
             "standardError": 0.0015704751724979257,
             "fidelityType": {
@@ -15118,7 +15118,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.99230802024261,
             "standardError": 0.0012460328161781164,
             "fidelityType": {
@@ -15132,7 +15132,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.994043800595148,
             "standardError": 0.001142586718249595,
             "fidelityType": {
@@ -15146,7 +15146,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9891227316407032,
             "standardError": 0.0019175506712372564,
             "fidelityType": {
@@ -15160,7 +15160,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991622132899264,
             "standardError": 0.001552339224537029,
             "fidelityType": {
@@ -15174,7 +15174,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9735590223782332,
             "standardError": 0.0024804216629117463,
             "fidelityType": {
@@ -15188,7 +15188,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.974766301819347,
             "standardError": 0.002606757060929502,
             "fidelityType": {
@@ -15202,7 +15202,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9836857420765354,
             "standardError": 0.002526520779254632,
             "fidelityType": {
@@ -15216,7 +15216,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9865387480564156,
             "standardError": 0.0017401900779157643,
             "fidelityType": {
@@ -15230,7 +15230,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15244,7 +15244,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15258,7 +15258,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9878041851343534,
             "standardError": 0.001227705075690634,
             "fidelityType": {
@@ -15272,7 +15272,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9125438655881166,
             "standardError": 0.01355554864054542,
             "fidelityType": {
@@ -15286,7 +15286,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15300,7 +15300,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15314,7 +15314,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9550252439076512,
             "standardError": 0.017765845045569814,
             "fidelityType": {
@@ -15328,7 +15328,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9735363504033092,
             "standardError": 0.00450766704454943,
             "fidelityType": {
@@ -15342,7 +15342,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15356,7 +15356,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15370,7 +15370,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.982551242893578,
             "standardError": 0.003493758810812384,
             "fidelityType": {
@@ -15384,7 +15384,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15398,7 +15398,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9871353658076424,
             "standardError": 0.0009793267617175445,
             "fidelityType": {
@@ -15412,7 +15412,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9907836273865934,
             "standardError": 0.0010445681545582755,
             "fidelityType": {
@@ -15426,7 +15426,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9382766848927724,
             "standardError": 0.026634335905674808,
             "fidelityType": {
@@ -15440,7 +15440,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9827903659442636,
             "standardError": 0.0029327993775868965,
             "fidelityType": {
@@ -15454,7 +15454,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9851676367395702,
             "standardError": 0.0007946950639110349,
             "fidelityType": {
@@ -15468,7 +15468,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9933427936446668,
             "standardError": 0.0008555057966106922,
             "fidelityType": {
@@ -15482,7 +15482,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9825404670940932,
             "standardError": 0.002495688659784945,
             "fidelityType": {
@@ -15496,7 +15496,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9807300339423222,
             "standardError": 0.0012092801675054618,
             "fidelityType": {
@@ -15510,7 +15510,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9932815660174574,
             "standardError": 0.0007055203308801003,
             "fidelityType": {
@@ -15524,7 +15524,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9764160612423456,
             "standardError": 0.003053486668663274,
             "fidelityType": {
@@ -15538,7 +15538,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9826327178179016,
             "standardError": 0.0028898959530139256,
             "fidelityType": {
@@ -15552,7 +15552,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9937969393820616,
             "standardError": 0.0010197501162665444,
             "fidelityType": {
@@ -15566,7 +15566,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9652806713116712,
             "standardError": 0.00633365228237402,
             "fidelityType": {
@@ -15580,7 +15580,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9841868032125548,
             "standardError": 0.0012646112321803191,
             "fidelityType": {
@@ -15594,7 +15594,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9923491700412356,
             "standardError": 0.000651876254051597,
             "fidelityType": {
@@ -15608,7 +15608,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.981648011408358,
             "standardError": 0.0019255788041606097,
             "fidelityType": {
@@ -15622,7 +15622,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991414220648368,
             "standardError": 0.0014265575291457931,
             "fidelityType": {
@@ -15636,7 +15636,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9902749380193306,
             "standardError": 0.0036716636001021055,
             "fidelityType": {
@@ -15650,7 +15650,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9894719682468796,
             "standardError": 0.001144506225451893,
             "fidelityType": {
@@ -15664,7 +15664,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9901575582179758,
             "standardError": 0.0017255910910884925,
             "fidelityType": {
@@ -15678,7 +15678,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9895577059780748,
             "standardError": 0.0030858603138286403,
             "fidelityType": {
@@ -15692,7 +15692,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9165187561773664,
             "standardError": 0.006600335286120824,
             "fidelityType": {
@@ -15706,7 +15706,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9871388152276064,
             "standardError": 0.001338366162964488,
             "fidelityType": {
@@ -15720,7 +15720,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991707738993548,
             "standardError": 0.0030728279467393616,
             "fidelityType": {
@@ -15734,7 +15734,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9906088675515644,
             "standardError": 0.0018674746703601108,
             "fidelityType": {
@@ -15748,7 +15748,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9899948422473356,
             "standardError": 0.0012015960668830892,
             "fidelityType": {
@@ -15762,7 +15762,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9837144646225858,
             "standardError": 0.001167713229175877,
             "fidelityType": {
@@ -15776,7 +15776,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.993451025110172,
             "standardError": 0.0012923665317829927,
             "fidelityType": {
@@ -15790,7 +15790,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9854082353001632,
             "standardError": 0.0019933437389529035,
             "fidelityType": {
@@ -15804,7 +15804,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.991929181617624,
             "standardError": 0.001269349784596516,
             "fidelityType": {
@@ -15818,7 +15818,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9921437001250905,
             "standardError": 0.0017490428191722805,
             "fidelityType": {
@@ -15832,7 +15832,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.99008347121483,
             "standardError": 0.00114843967809028,
             "fidelityType": {
@@ -15846,7 +15846,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15860,7 +15860,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -15874,7 +15874,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9879466094145888,
             "standardError": 0.0027180067734179714,
             "fidelityType": {
@@ -15888,7 +15888,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9829294652994278,
             "standardError": 0.0029172262800078582,
             "fidelityType": {
@@ -15902,7 +15902,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9949186149579808,
             "standardError": 0.001917916838905559,
             "fidelityType": {
@@ -15916,7 +15916,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.9145380593007492,
             "standardError": 0.010274435657903872,
             "fidelityType": {
@@ -15930,7 +15930,7 @@
         "twoQubitGateFidelity": [
           {
             "direction": null,
-            "gateName": "ISWAP",
+            "gateName": "CZ",
             "fidelity": 0.5,
             "standardError": 1.0,
             "fidelityType": {
@@ -21550,8 +21550,8 @@
       }
     },
     "frames": {
-      "Transmon_200_flux_tx_iswap": {
-        "frameId": "Transmon_200_flux_tx_iswap",
+      "Transmon_200_flux_tx_cz": {
+        "frameId": "Transmon_200_flux_tx_cz",
         "portId": "q200_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21586,8 +21586,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_79_flux_tx_iswap_72": {
-        "frameId": "Transmon_79_flux_tx_iswap_72",
+      "Transmon_79_flux_tx_cz_72": {
+        "frameId": "Transmon_79_flux_tx_cz_72",
         "portId": "q79_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -21598,8 +21598,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_32_flux_tx_iswap_25": {
-        "frameId": "Transmon_32_flux_tx_iswap_25",
+      "Transmon_32_flux_tx_cz_25": {
+        "frameId": "Transmon_32_flux_tx_cz_25",
         "portId": "q32_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -21646,8 +21646,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_39_flux_tx_iswap_38": {
-        "frameId": "Transmon_39_flux_tx_iswap_38",
+      "Transmon_39_flux_tx_cz_38": {
+        "frameId": "Transmon_39_flux_tx_cz_38",
         "portId": "q39_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21658,8 +21658,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_32_flux_tx_iswap_31": {
-        "frameId": "Transmon_32_flux_tx_iswap_31",
+      "Transmon_32_flux_tx_cz_31": {
+        "frameId": "Transmon_32_flux_tx_cz_31",
         "portId": "q32_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -21682,8 +21682,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_223_flux_tx_iswap": {
-        "frameId": "Transmon_223_flux_tx_iswap",
+      "Transmon_223_flux_tx_cz": {
+        "frameId": "Transmon_223_flux_tx_cz",
         "portId": "q223_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21706,8 +21706,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_98_flux_tx_iswap": {
-        "frameId": "Transmon_98_flux_tx_iswap",
+      "Transmon_98_flux_tx_cz": {
+        "frameId": "Transmon_98_flux_tx_cz",
         "portId": "q98_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21766,8 +21766,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_21_flux_tx_iswap_22": {
-        "frameId": "Transmon_21_flux_tx_iswap_22",
+      "Transmon_21_flux_tx_cz_22": {
+        "frameId": "Transmon_21_flux_tx_cz_22",
         "portId": "q21_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -21802,8 +21802,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_93_flux_tx_iswap": {
-        "frameId": "Transmon_93_flux_tx_iswap",
+      "Transmon_93_flux_tx_cz": {
+        "frameId": "Transmon_93_flux_tx_cz",
         "portId": "q93_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21826,8 +21826,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_218_flux_tx_iswap": {
-        "frameId": "Transmon_218_flux_tx_iswap",
+      "Transmon_218_flux_tx_cz": {
+        "frameId": "Transmon_218_flux_tx_cz",
         "portId": "q218_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21838,8 +21838,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_77_flux_tx_iswap_78": {
-        "frameId": "Transmon_77_flux_tx_iswap_78",
+      "Transmon_77_flux_tx_cz_78": {
+        "frameId": "Transmon_77_flux_tx_cz_78",
         "portId": "q77_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21850,8 +21850,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_66_flux_tx_iswap_59": {
-        "frameId": "Transmon_66_flux_tx_iswap_59",
+      "Transmon_66_flux_tx_cz_59": {
+        "frameId": "Transmon_66_flux_tx_cz_59",
         "portId": "q66_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21922,8 +21922,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_76_flux_tx_iswap_69": {
-        "frameId": "Transmon_76_flux_tx_iswap_69",
+      "Transmon_76_flux_tx_cz_69": {
+        "frameId": "Transmon_76_flux_tx_cz_69",
         "portId": "q76_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -21958,8 +21958,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_158_flux_tx_iswap": {
-        "frameId": "Transmon_158_flux_tx_iswap",
+      "Transmon_158_flux_tx_cz": {
+        "frameId": "Transmon_158_flux_tx_cz",
         "portId": "q158_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -21982,8 +21982,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_107_flux_tx_iswap": {
-        "frameId": "Transmon_107_flux_tx_iswap",
+      "Transmon_107_flux_tx_cz": {
+        "frameId": "Transmon_107_flux_tx_cz",
         "portId": "q107_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22006,8 +22006,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_231_flux_tx_iswap": {
-        "frameId": "Transmon_231_flux_tx_iswap",
+      "Transmon_231_flux_tx_cz": {
+        "frameId": "Transmon_231_flux_tx_cz",
         "portId": "q231_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22018,8 +22018,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_11_flux_tx_iswap_18": {
-        "frameId": "Transmon_11_flux_tx_iswap_18",
+      "Transmon_11_flux_tx_cz_18": {
+        "frameId": "Transmon_11_flux_tx_cz_18",
         "portId": "q11_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22066,8 +22066,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_16_flux_tx_iswap_17": {
-        "frameId": "Transmon_16_flux_tx_iswap_17",
+      "Transmon_16_flux_tx_cz_17": {
+        "frameId": "Transmon_16_flux_tx_cz_17",
         "portId": "q16_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22078,8 +22078,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_191_flux_tx_iswap": {
-        "frameId": "Transmon_191_flux_tx_iswap",
+      "Transmon_191_flux_tx_cz": {
+        "frameId": "Transmon_191_flux_tx_cz",
         "portId": "q191_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22102,8 +22102,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_229_flux_tx_iswap": {
-        "frameId": "Transmon_229_flux_tx_iswap",
+      "Transmon_229_flux_tx_cz": {
+        "frameId": "Transmon_229_flux_tx_cz",
         "portId": "q229_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22114,8 +22114,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_116_flux_tx_iswap": {
-        "frameId": "Transmon_116_flux_tx_iswap",
+      "Transmon_116_flux_tx_cz": {
+        "frameId": "Transmon_116_flux_tx_cz",
         "portId": "q116_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22138,8 +22138,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_81_flux_tx_iswap_80": {
-        "frameId": "Transmon_81_flux_tx_iswap_80",
+      "Transmon_81_flux_tx_cz_80": {
+        "frameId": "Transmon_81_flux_tx_cz_80",
         "portId": "q81_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22162,8 +22162,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_2_flux_tx_iswap_3": {
-        "frameId": "Transmon_2_flux_tx_iswap_3",
+      "Transmon_2_flux_tx_cz_3": {
+        "frameId": "Transmon_2_flux_tx_cz_3",
         "portId": "q2_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22198,8 +22198,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_8_flux_tx_iswap_1": {
-        "frameId": "Transmon_8_flux_tx_iswap_1",
+      "Transmon_8_flux_tx_cz_1": {
+        "frameId": "Transmon_8_flux_tx_cz_1",
         "portId": "q8_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22210,8 +22210,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_78_flux_tx_iswap_79": {
-        "frameId": "Transmon_78_flux_tx_iswap_79",
+      "Transmon_78_flux_tx_cz_79": {
+        "frameId": "Transmon_78_flux_tx_cz_79",
         "portId": "q78_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22234,8 +22234,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_134_flux_tx_iswap": {
-        "frameId": "Transmon_134_flux_tx_iswap",
+      "Transmon_134_flux_tx_cz": {
+        "frameId": "Transmon_134_flux_tx_cz",
         "portId": "q134_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22246,8 +22246,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_208_flux_tx_iswap": {
-        "frameId": "Transmon_208_flux_tx_iswap",
+      "Transmon_208_flux_tx_cz": {
+        "frameId": "Transmon_208_flux_tx_cz",
         "portId": "q208_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22306,8 +22306,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_184_flux_tx_iswap": {
-        "frameId": "Transmon_184_flux_tx_iswap",
+      "Transmon_184_flux_tx_cz": {
+        "frameId": "Transmon_184_flux_tx_cz",
         "portId": "q184_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22342,8 +22342,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_91_flux_tx_iswap": {
-        "frameId": "Transmon_91_flux_tx_iswap",
+      "Transmon_91_flux_tx_cz": {
+        "frameId": "Transmon_91_flux_tx_cz",
         "portId": "q91_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22354,8 +22354,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_52_flux_tx_iswap_59": {
-        "frameId": "Transmon_52_flux_tx_iswap_59",
+      "Transmon_52_flux_tx_cz_59": {
+        "frameId": "Transmon_52_flux_tx_cz_59",
         "portId": "q52_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22366,8 +22366,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_55_flux_tx_iswap_62": {
-        "frameId": "Transmon_55_flux_tx_iswap_62",
+      "Transmon_55_flux_tx_cz_62": {
+        "frameId": "Transmon_55_flux_tx_cz_62",
         "portId": "q55_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22378,8 +22378,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_33_flux_tx_iswap_26": {
-        "frameId": "Transmon_33_flux_tx_iswap_26",
+      "Transmon_33_flux_tx_cz_26": {
+        "frameId": "Transmon_33_flux_tx_cz_26",
         "portId": "q33_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22414,8 +22414,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_29_flux_tx_iswap_30": {
-        "frameId": "Transmon_29_flux_tx_iswap_30",
+      "Transmon_29_flux_tx_cz_30": {
+        "frameId": "Transmon_29_flux_tx_cz_30",
         "portId": "q29_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22426,8 +22426,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_222_flux_tx_iswap": {
-        "frameId": "Transmon_222_flux_tx_iswap",
+      "Transmon_222_flux_tx_cz": {
+        "frameId": "Transmon_222_flux_tx_cz",
         "portId": "q222_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22438,8 +22438,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_130_flux_tx_iswap": {
-        "frameId": "Transmon_130_flux_tx_iswap",
+      "Transmon_130_flux_tx_cz": {
+        "frameId": "Transmon_130_flux_tx_cz",
         "portId": "q130_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22474,8 +22474,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_7_flux_tx_iswap_8": {
-        "frameId": "Transmon_7_flux_tx_iswap_8",
+      "Transmon_7_flux_tx_cz_8": {
+        "frameId": "Transmon_7_flux_tx_cz_8",
         "portId": "q7_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22486,8 +22486,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_74_flux_tx_iswap_67": {
-        "frameId": "Transmon_74_flux_tx_iswap_67",
+      "Transmon_74_flux_tx_cz_67": {
+        "frameId": "Transmon_74_flux_tx_cz_67",
         "portId": "q74_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22498,8 +22498,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_215_flux_tx_iswap": {
-        "frameId": "Transmon_215_flux_tx_iswap",
+      "Transmon_215_flux_tx_cz": {
+        "frameId": "Transmon_215_flux_tx_cz",
         "portId": "q215_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22510,8 +22510,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_224_flux_tx_iswap": {
-        "frameId": "Transmon_224_flux_tx_iswap",
+      "Transmon_224_flux_tx_cz": {
+        "frameId": "Transmon_224_flux_tx_cz",
         "portId": "q224_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22558,8 +22558,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_3_flux_tx_iswap_10": {
-        "frameId": "Transmon_3_flux_tx_iswap_10",
+      "Transmon_3_flux_tx_cz_10": {
+        "frameId": "Transmon_3_flux_tx_cz_10",
         "portId": "q3_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22582,8 +22582,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_70_flux_tx_iswap_63": {
-        "frameId": "Transmon_70_flux_tx_iswap_63",
+      "Transmon_70_flux_tx_cz_63": {
+        "frameId": "Transmon_70_flux_tx_cz_63",
         "portId": "q70_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22594,8 +22594,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_6_flux_tx_iswap_5": {
-        "frameId": "Transmon_6_flux_tx_iswap_5",
+      "Transmon_6_flux_tx_cz_5": {
+        "frameId": "Transmon_6_flux_tx_cz_5",
         "portId": "q6_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22630,8 +22630,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_5_flux_tx_iswap_12": {
-        "frameId": "Transmon_5_flux_tx_iswap_12",
+      "Transmon_5_flux_tx_cz_12": {
+        "frameId": "Transmon_5_flux_tx_cz_12",
         "portId": "q5_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22678,8 +22678,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_71_flux_tx_iswap_64": {
-        "frameId": "Transmon_71_flux_tx_iswap_64",
+      "Transmon_71_flux_tx_cz_64": {
+        "frameId": "Transmon_71_flux_tx_cz_64",
         "portId": "q71_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22714,8 +22714,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_123_flux_tx_iswap": {
-        "frameId": "Transmon_123_flux_tx_iswap",
+      "Transmon_123_flux_tx_cz": {
+        "frameId": "Transmon_123_flux_tx_cz",
         "portId": "q123_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22738,8 +22738,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_64_flux_tx_iswap_65": {
-        "frameId": "Transmon_64_flux_tx_iswap_65",
+      "Transmon_64_flux_tx_cz_65": {
+        "frameId": "Transmon_64_flux_tx_cz_65",
         "portId": "q64_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22762,8 +22762,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_148_flux_tx_iswap": {
-        "frameId": "Transmon_148_flux_tx_iswap",
+      "Transmon_148_flux_tx_cz": {
+        "frameId": "Transmon_148_flux_tx_cz",
         "portId": "q148_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22786,8 +22786,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_227_flux_tx_iswap": {
-        "frameId": "Transmon_227_flux_tx_iswap",
+      "Transmon_227_flux_tx_cz": {
+        "frameId": "Transmon_227_flux_tx_cz",
         "portId": "q227_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22846,8 +22846,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_0_flux_tx_iswap_7": {
-        "frameId": "Transmon_0_flux_tx_iswap_7",
+      "Transmon_0_flux_tx_cz_7": {
+        "frameId": "Transmon_0_flux_tx_cz_7",
         "portId": "q0_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22882,8 +22882,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_71_flux_tx_iswap_72": {
-        "frameId": "Transmon_71_flux_tx_iswap_72",
+      "Transmon_71_flux_tx_cz_72": {
+        "frameId": "Transmon_71_flux_tx_cz_72",
         "portId": "q71_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22906,8 +22906,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_18_flux_tx_iswap_17": {
-        "frameId": "Transmon_18_flux_tx_iswap_17",
+      "Transmon_18_flux_tx_cz_17": {
+        "frameId": "Transmon_18_flux_tx_cz_17",
         "portId": "q18_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22918,8 +22918,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_28_flux_tx_iswap_21": {
-        "frameId": "Transmon_28_flux_tx_iswap_21",
+      "Transmon_28_flux_tx_cz_21": {
+        "frameId": "Transmon_28_flux_tx_cz_21",
         "portId": "q28_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22930,8 +22930,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_13_flux_tx_iswap_20": {
-        "frameId": "Transmon_13_flux_tx_iswap_20",
+      "Transmon_13_flux_tx_cz_20": {
+        "frameId": "Transmon_13_flux_tx_cz_20",
         "portId": "q13_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -22978,8 +22978,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_85_flux_tx_iswap": {
-        "frameId": "Transmon_85_flux_tx_iswap",
+      "Transmon_85_flux_tx_cz": {
+        "frameId": "Transmon_85_flux_tx_cz",
         "portId": "q85_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -22990,8 +22990,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_144_flux_tx_iswap": {
-        "frameId": "Transmon_144_flux_tx_iswap",
+      "Transmon_144_flux_tx_cz": {
+        "frameId": "Transmon_144_flux_tx_cz",
         "portId": "q144_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23050,8 +23050,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_84_flux_tx_iswap": {
-        "frameId": "Transmon_84_flux_tx_iswap",
+      "Transmon_84_flux_tx_cz": {
+        "frameId": "Transmon_84_flux_tx_cz",
         "portId": "q84_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23074,8 +23074,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_196_flux_tx_iswap": {
-        "frameId": "Transmon_196_flux_tx_iswap",
+      "Transmon_196_flux_tx_cz": {
+        "frameId": "Transmon_196_flux_tx_cz",
         "portId": "q196_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23098,8 +23098,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_152_flux_tx_iswap": {
-        "frameId": "Transmon_152_flux_tx_iswap",
+      "Transmon_152_flux_tx_cz": {
+        "frameId": "Transmon_152_flux_tx_cz",
         "portId": "q152_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23158,8 +23158,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_132_flux_tx_iswap": {
-        "frameId": "Transmon_132_flux_tx_iswap",
+      "Transmon_132_flux_tx_cz": {
+        "frameId": "Transmon_132_flux_tx_cz",
         "portId": "q132_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23218,8 +23218,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_9_flux_tx_iswap_10": {
-        "frameId": "Transmon_9_flux_tx_iswap_10",
+      "Transmon_9_flux_tx_cz_10": {
+        "frameId": "Transmon_9_flux_tx_cz_10",
         "portId": "q9_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23230,8 +23230,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_61_flux_tx_iswap_60": {
-        "frameId": "Transmon_61_flux_tx_iswap_60",
+      "Transmon_61_flux_tx_cz_60": {
+        "frameId": "Transmon_61_flux_tx_cz_60",
         "portId": "q61_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23242,8 +23242,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_30_flux_tx_iswap_23": {
-        "frameId": "Transmon_30_flux_tx_iswap_23",
+      "Transmon_30_flux_tx_cz_23": {
+        "frameId": "Transmon_30_flux_tx_cz_23",
         "portId": "q30_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23302,8 +23302,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_157_flux_tx_iswap": {
-        "frameId": "Transmon_157_flux_tx_iswap",
+      "Transmon_157_flux_tx_cz": {
+        "frameId": "Transmon_157_flux_tx_cz",
         "portId": "q157_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23326,8 +23326,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_72_flux_tx_iswap_73": {
-        "frameId": "Transmon_72_flux_tx_iswap_73",
+      "Transmon_72_flux_tx_cz_73": {
+        "frameId": "Transmon_72_flux_tx_cz_73",
         "portId": "q72_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23338,8 +23338,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_102_flux_tx_iswap": {
-        "frameId": "Transmon_102_flux_tx_iswap",
+      "Transmon_102_flux_tx_cz": {
+        "frameId": "Transmon_102_flux_tx_cz",
         "portId": "q102_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23350,8 +23350,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_57_flux_tx_iswap_58": {
-        "frameId": "Transmon_57_flux_tx_iswap_58",
+      "Transmon_57_flux_tx_cz_58": {
+        "frameId": "Transmon_57_flux_tx_cz_58",
         "portId": "q57_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23386,8 +23386,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_95_flux_tx_iswap": {
-        "frameId": "Transmon_95_flux_tx_iswap",
+      "Transmon_95_flux_tx_cz": {
+        "frameId": "Transmon_95_flux_tx_cz",
         "portId": "q95_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23422,8 +23422,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_6_flux_tx_iswap_13": {
-        "frameId": "Transmon_6_flux_tx_iswap_13",
+      "Transmon_6_flux_tx_cz_13": {
+        "frameId": "Transmon_6_flux_tx_cz_13",
         "portId": "q6_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23434,8 +23434,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_115_flux_tx_iswap": {
-        "frameId": "Transmon_115_flux_tx_iswap",
+      "Transmon_115_flux_tx_cz": {
+        "frameId": "Transmon_115_flux_tx_cz",
         "portId": "q115_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23446,8 +23446,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_164_flux_tx_iswap": {
-        "frameId": "Transmon_164_flux_tx_iswap",
+      "Transmon_164_flux_tx_cz": {
+        "frameId": "Transmon_164_flux_tx_cz",
         "portId": "q164_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23458,8 +23458,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_171_flux_tx_iswap": {
-        "frameId": "Transmon_171_flux_tx_iswap",
+      "Transmon_171_flux_tx_cz": {
+        "frameId": "Transmon_171_flux_tx_cz",
         "portId": "q171_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23470,8 +23470,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_9_flux_tx_iswap_16": {
-        "frameId": "Transmon_9_flux_tx_iswap_16",
+      "Transmon_9_flux_tx_cz_16": {
+        "frameId": "Transmon_9_flux_tx_cz_16",
         "portId": "q9_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23542,8 +23542,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_12_flux_tx_iswap_11": {
-        "frameId": "Transmon_12_flux_tx_iswap_11",
+      "Transmon_12_flux_tx_cz_11": {
+        "frameId": "Transmon_12_flux_tx_cz_11",
         "portId": "q12_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23554,8 +23554,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_128_flux_tx_iswap": {
-        "frameId": "Transmon_128_flux_tx_iswap",
+      "Transmon_128_flux_tx_cz": {
+        "frameId": "Transmon_128_flux_tx_cz",
         "portId": "q128_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23566,8 +23566,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_8_flux_tx_iswap_9": {
-        "frameId": "Transmon_8_flux_tx_iswap_9",
+      "Transmon_8_flux_tx_cz_9": {
+        "frameId": "Transmon_8_flux_tx_cz_9",
         "portId": "q8_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23578,8 +23578,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_87_flux_tx_iswap": {
-        "frameId": "Transmon_87_flux_tx_iswap",
+      "Transmon_87_flux_tx_cz": {
+        "frameId": "Transmon_87_flux_tx_cz",
         "portId": "q87_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23626,8 +23626,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_11_flux_tx_iswap_10": {
-        "frameId": "Transmon_11_flux_tx_iswap_10",
+      "Transmon_11_flux_tx_cz_10": {
+        "frameId": "Transmon_11_flux_tx_cz_10",
         "portId": "q11_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23662,8 +23662,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_100_flux_tx_iswap": {
-        "frameId": "Transmon_100_flux_tx_iswap",
+      "Transmon_100_flux_tx_cz": {
+        "frameId": "Transmon_100_flux_tx_cz",
         "portId": "q100_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23674,8 +23674,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_27_flux_tx_iswap_20": {
-        "frameId": "Transmon_27_flux_tx_iswap_20",
+      "Transmon_27_flux_tx_cz_20": {
+        "frameId": "Transmon_27_flux_tx_cz_20",
         "portId": "q27_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23686,8 +23686,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_220_flux_tx_iswap": {
-        "frameId": "Transmon_220_flux_tx_iswap",
+      "Transmon_220_flux_tx_cz": {
+        "frameId": "Transmon_220_flux_tx_cz",
         "portId": "q220_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23710,8 +23710,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_114_flux_tx_iswap": {
-        "frameId": "Transmon_114_flux_tx_iswap",
+      "Transmon_114_flux_tx_cz": {
+        "frameId": "Transmon_114_flux_tx_cz",
         "portId": "q114_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23746,8 +23746,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_217_flux_tx_iswap": {
-        "frameId": "Transmon_217_flux_tx_iswap",
+      "Transmon_217_flux_tx_cz": {
+        "frameId": "Transmon_217_flux_tx_cz",
         "portId": "q217_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23758,8 +23758,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_188_flux_tx_iswap": {
-        "frameId": "Transmon_188_flux_tx_iswap",
+      "Transmon_188_flux_tx_cz": {
+        "frameId": "Transmon_188_flux_tx_cz",
         "portId": "q188_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23782,8 +23782,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_10_flux_tx_iswap_17": {
-        "frameId": "Transmon_10_flux_tx_iswap_17",
+      "Transmon_10_flux_tx_cz_17": {
+        "frameId": "Transmon_10_flux_tx_cz_17",
         "portId": "q10_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23794,8 +23794,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_232_flux_tx_iswap": {
-        "frameId": "Transmon_232_flux_tx_iswap",
+      "Transmon_232_flux_tx_cz": {
+        "frameId": "Transmon_232_flux_tx_cz",
         "portId": "q232_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23806,8 +23806,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_166_flux_tx_iswap": {
-        "frameId": "Transmon_166_flux_tx_iswap",
+      "Transmon_166_flux_tx_cz": {
+        "frameId": "Transmon_166_flux_tx_cz",
         "portId": "q166_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23818,8 +23818,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_82_flux_tx_iswap_75": {
-        "frameId": "Transmon_82_flux_tx_iswap_75",
+      "Transmon_82_flux_tx_cz_75": {
+        "frameId": "Transmon_82_flux_tx_cz_75",
         "portId": "q82_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23842,8 +23842,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_15_flux_tx_iswap_16": {
-        "frameId": "Transmon_15_flux_tx_iswap_16",
+      "Transmon_15_flux_tx_cz_16": {
+        "frameId": "Transmon_15_flux_tx_cz_16",
         "portId": "q15_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23878,8 +23878,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_65_flux_tx_iswap_66": {
-        "frameId": "Transmon_65_flux_tx_iswap_66",
+      "Transmon_65_flux_tx_cz_66": {
+        "frameId": "Transmon_65_flux_tx_cz_66",
         "portId": "q65_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -23914,8 +23914,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_13_flux_tx_iswap_12": {
-        "frameId": "Transmon_13_flux_tx_iswap_12",
+      "Transmon_13_flux_tx_cz_12": {
+        "frameId": "Transmon_13_flux_tx_cz_12",
         "portId": "q13_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23926,8 +23926,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_35_flux_tx_iswap_36": {
-        "frameId": "Transmon_35_flux_tx_iswap_36",
+      "Transmon_35_flux_tx_cz_36": {
+        "frameId": "Transmon_35_flux_tx_cz_36",
         "portId": "q35_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -23950,8 +23950,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_47_flux_tx_iswap_46": {
-        "frameId": "Transmon_47_flux_tx_iswap_46",
+      "Transmon_47_flux_tx_cz_46": {
+        "frameId": "Transmon_47_flux_tx_cz_46",
         "portId": "q47_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24010,8 +24010,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_73_flux_tx_iswap_66": {
-        "frameId": "Transmon_73_flux_tx_iswap_66",
+      "Transmon_73_flux_tx_cz_66": {
+        "frameId": "Transmon_73_flux_tx_cz_66",
         "portId": "q73_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24022,8 +24022,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_56_flux_tx_iswap_57": {
-        "frameId": "Transmon_56_flux_tx_iswap_57",
+      "Transmon_56_flux_tx_cz_57": {
+        "frameId": "Transmon_56_flux_tx_cz_57",
         "portId": "q56_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24058,8 +24058,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_178_flux_tx_iswap": {
-        "frameId": "Transmon_178_flux_tx_iswap",
+      "Transmon_178_flux_tx_cz": {
+        "frameId": "Transmon_178_flux_tx_cz",
         "portId": "q178_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24082,8 +24082,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_30_flux_tx_iswap_31": {
-        "frameId": "Transmon_30_flux_tx_iswap_31",
+      "Transmon_30_flux_tx_cz_31": {
+        "frameId": "Transmon_30_flux_tx_cz_31",
         "portId": "q30_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24106,8 +24106,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_36_flux_tx_iswap_37": {
-        "frameId": "Transmon_36_flux_tx_iswap_37",
+      "Transmon_36_flux_tx_cz_37": {
+        "frameId": "Transmon_36_flux_tx_cz_37",
         "portId": "q36_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24118,8 +24118,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_201_flux_tx_iswap": {
-        "frameId": "Transmon_201_flux_tx_iswap",
+      "Transmon_201_flux_tx_cz": {
+        "frameId": "Transmon_201_flux_tx_cz",
         "portId": "q201_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24130,8 +24130,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_149_flux_tx_iswap": {
-        "frameId": "Transmon_149_flux_tx_iswap",
+      "Transmon_149_flux_tx_cz": {
+        "frameId": "Transmon_149_flux_tx_cz",
         "portId": "q149_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24142,8 +24142,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_111_flux_tx_iswap": {
-        "frameId": "Transmon_111_flux_tx_iswap",
+      "Transmon_111_flux_tx_cz": {
+        "frameId": "Transmon_111_flux_tx_cz",
         "portId": "q111_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24166,8 +24166,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_83_flux_tx_iswap_82": {
-        "frameId": "Transmon_83_flux_tx_iswap_82",
+      "Transmon_83_flux_tx_cz_82": {
+        "frameId": "Transmon_83_flux_tx_cz_82",
         "portId": "q83_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24190,8 +24190,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_47_flux_tx_iswap_54": {
-        "frameId": "Transmon_47_flux_tx_iswap_54",
+      "Transmon_47_flux_tx_cz_54": {
+        "frameId": "Transmon_47_flux_tx_cz_54",
         "portId": "q47_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24214,8 +24214,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_53_flux_tx_iswap_60": {
-        "frameId": "Transmon_53_flux_tx_iswap_60",
+      "Transmon_53_flux_tx_cz_60": {
+        "frameId": "Transmon_53_flux_tx_cz_60",
         "portId": "q53_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24226,8 +24226,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_26_flux_tx_iswap_25": {
-        "frameId": "Transmon_26_flux_tx_iswap_25",
+      "Transmon_26_flux_tx_cz_25": {
+        "frameId": "Transmon_26_flux_tx_cz_25",
         "portId": "q26_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24250,8 +24250,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_126_flux_tx_iswap": {
-        "frameId": "Transmon_126_flux_tx_iswap",
+      "Transmon_126_flux_tx_cz": {
+        "frameId": "Transmon_126_flux_tx_cz",
         "portId": "q126_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24262,8 +24262,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_79_flux_tx_iswap_80": {
-        "frameId": "Transmon_79_flux_tx_iswap_80",
+      "Transmon_79_flux_tx_cz_80": {
+        "frameId": "Transmon_79_flux_tx_cz_80",
         "portId": "q79_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24322,8 +24322,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_63_flux_tx_iswap_64": {
-        "frameId": "Transmon_63_flux_tx_iswap_64",
+      "Transmon_63_flux_tx_cz_64": {
+        "frameId": "Transmon_63_flux_tx_cz_64",
         "portId": "q63_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24334,8 +24334,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_131_flux_tx_iswap": {
-        "frameId": "Transmon_131_flux_tx_iswap",
+      "Transmon_131_flux_tx_cz": {
+        "frameId": "Transmon_131_flux_tx_cz",
         "portId": "q131_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24346,8 +24346,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_7_flux_tx_iswap_14": {
-        "frameId": "Transmon_7_flux_tx_iswap_14",
+      "Transmon_7_flux_tx_cz_14": {
+        "frameId": "Transmon_7_flux_tx_cz_14",
         "portId": "q7_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24358,8 +24358,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_45_flux_tx_iswap_52": {
-        "frameId": "Transmon_45_flux_tx_iswap_52",
+      "Transmon_45_flux_tx_cz_52": {
+        "frameId": "Transmon_45_flux_tx_cz_52",
         "portId": "q45_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24382,8 +24382,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_119_flux_tx_iswap": {
-        "frameId": "Transmon_119_flux_tx_iswap",
+      "Transmon_119_flux_tx_cz": {
+        "frameId": "Transmon_119_flux_tx_cz",
         "portId": "q119_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24418,8 +24418,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_78_flux_tx_iswap_71": {
-        "frameId": "Transmon_78_flux_tx_iswap_71",
+      "Transmon_78_flux_tx_cz_71": {
+        "frameId": "Transmon_78_flux_tx_cz_71",
         "portId": "q78_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24442,8 +24442,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_75_flux_tx_iswap_68": {
-        "frameId": "Transmon_75_flux_tx_iswap_68",
+      "Transmon_75_flux_tx_cz_68": {
+        "frameId": "Transmon_75_flux_tx_cz_68",
         "portId": "q75_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24502,8 +24502,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_120_flux_tx_iswap": {
-        "frameId": "Transmon_120_flux_tx_iswap",
+      "Transmon_120_flux_tx_cz": {
+        "frameId": "Transmon_120_flux_tx_cz",
         "portId": "q120_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24526,8 +24526,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_213_flux_tx_iswap": {
-        "frameId": "Transmon_213_flux_tx_iswap",
+      "Transmon_213_flux_tx_cz": {
+        "frameId": "Transmon_213_flux_tx_cz",
         "portId": "q213_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24538,8 +24538,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_38_flux_tx_iswap_45": {
-        "frameId": "Transmon_38_flux_tx_iswap_45",
+      "Transmon_38_flux_tx_cz_45": {
+        "frameId": "Transmon_38_flux_tx_cz_45",
         "portId": "q38_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24562,8 +24562,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_198_flux_tx_iswap": {
-        "frameId": "Transmon_198_flux_tx_iswap",
+      "Transmon_198_flux_tx_cz": {
+        "frameId": "Transmon_198_flux_tx_cz",
         "portId": "q198_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24586,8 +24586,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_101_flux_tx_iswap": {
-        "frameId": "Transmon_101_flux_tx_iswap",
+      "Transmon_101_flux_tx_cz": {
+        "frameId": "Transmon_101_flux_tx_cz",
         "portId": "q101_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24610,8 +24610,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_175_flux_tx_iswap": {
-        "frameId": "Transmon_175_flux_tx_iswap",
+      "Transmon_175_flux_tx_cz": {
+        "frameId": "Transmon_175_flux_tx_cz",
         "portId": "q175_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24658,8 +24658,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_51_flux_tx_iswap_52": {
-        "frameId": "Transmon_51_flux_tx_iswap_52",
+      "Transmon_51_flux_tx_cz_52": {
+        "frameId": "Transmon_51_flux_tx_cz_52",
         "portId": "q51_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24670,8 +24670,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_29_flux_tx_iswap_22": {
-        "frameId": "Transmon_29_flux_tx_iswap_22",
+      "Transmon_29_flux_tx_cz_22": {
+        "frameId": "Transmon_29_flux_tx_cz_22",
         "portId": "q29_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24682,8 +24682,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_151_flux_tx_iswap": {
-        "frameId": "Transmon_151_flux_tx_iswap",
+      "Transmon_151_flux_tx_cz": {
+        "frameId": "Transmon_151_flux_tx_cz",
         "portId": "q151_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24718,8 +24718,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_4_flux_tx_iswap_3": {
-        "frameId": "Transmon_4_flux_tx_iswap_3",
+      "Transmon_4_flux_tx_cz_3": {
+        "frameId": "Transmon_4_flux_tx_cz_3",
         "portId": "q4_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24730,8 +24730,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_43_flux_tx_iswap_50": {
-        "frameId": "Transmon_43_flux_tx_iswap_50",
+      "Transmon_43_flux_tx_cz_50": {
+        "frameId": "Transmon_43_flux_tx_cz_50",
         "portId": "q43_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24766,8 +24766,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_31_flux_tx_iswap_24": {
-        "frameId": "Transmon_31_flux_tx_iswap_24",
+      "Transmon_31_flux_tx_cz_24": {
+        "frameId": "Transmon_31_flux_tx_cz_24",
         "portId": "q31_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24814,8 +24814,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_77_flux_tx_iswap_70": {
-        "frameId": "Transmon_77_flux_tx_iswap_70",
+      "Transmon_77_flux_tx_cz_70": {
+        "frameId": "Transmon_77_flux_tx_cz_70",
         "portId": "q77_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24826,8 +24826,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_165_flux_tx_iswap": {
-        "frameId": "Transmon_165_flux_tx_iswap",
+      "Transmon_165_flux_tx_cz": {
+        "frameId": "Transmon_165_flux_tx_cz",
         "portId": "q165_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24838,8 +24838,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_46_flux_tx_iswap_45": {
-        "frameId": "Transmon_46_flux_tx_iswap_45",
+      "Transmon_46_flux_tx_cz_45": {
+        "frameId": "Transmon_46_flux_tx_cz_45",
         "portId": "q46_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -24850,8 +24850,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_60_flux_tx_iswap_59": {
-        "frameId": "Transmon_60_flux_tx_iswap_59",
+      "Transmon_60_flux_tx_cz_59": {
+        "frameId": "Transmon_60_flux_tx_cz_59",
         "portId": "q60_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24862,8 +24862,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_221_flux_tx_iswap": {
-        "frameId": "Transmon_221_flux_tx_iswap",
+      "Transmon_221_flux_tx_cz": {
+        "frameId": "Transmon_221_flux_tx_cz",
         "portId": "q221_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24874,8 +24874,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_172_flux_tx_iswap": {
-        "frameId": "Transmon_172_flux_tx_iswap",
+      "Transmon_172_flux_tx_cz": {
+        "frameId": "Transmon_172_flux_tx_cz",
         "portId": "q172_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24910,8 +24910,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_20_flux_tx_iswap_19": {
-        "frameId": "Transmon_20_flux_tx_iswap_19",
+      "Transmon_20_flux_tx_cz_19": {
+        "frameId": "Transmon_20_flux_tx_cz_19",
         "portId": "q20_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24922,8 +24922,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_141_flux_tx_iswap": {
-        "frameId": "Transmon_141_flux_tx_iswap",
+      "Transmon_141_flux_tx_cz": {
+        "frameId": "Transmon_141_flux_tx_cz",
         "portId": "q141_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24970,8 +24970,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_90_flux_tx_iswap": {
-        "frameId": "Transmon_90_flux_tx_iswap",
+      "Transmon_90_flux_tx_cz": {
+        "frameId": "Transmon_90_flux_tx_cz",
         "portId": "q90_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24982,8 +24982,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_219_flux_tx_iswap": {
-        "frameId": "Transmon_219_flux_tx_iswap",
+      "Transmon_219_flux_tx_cz": {
+        "frameId": "Transmon_219_flux_tx_cz",
         "portId": "q219_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -24994,8 +24994,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_211_flux_tx_iswap": {
-        "frameId": "Transmon_211_flux_tx_iswap",
+      "Transmon_211_flux_tx_cz": {
+        "frameId": "Transmon_211_flux_tx_cz",
         "portId": "q211_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25006,8 +25006,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_89_flux_tx_iswap": {
-        "frameId": "Transmon_89_flux_tx_iswap",
+      "Transmon_89_flux_tx_cz": {
+        "frameId": "Transmon_89_flux_tx_cz",
         "portId": "q89_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25066,8 +25066,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_147_flux_tx_iswap": {
-        "frameId": "Transmon_147_flux_tx_iswap",
+      "Transmon_147_flux_tx_cz": {
+        "frameId": "Transmon_147_flux_tx_cz",
         "portId": "q147_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25090,8 +25090,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_160_flux_tx_iswap": {
-        "frameId": "Transmon_160_flux_tx_iswap",
+      "Transmon_160_flux_tx_cz": {
+        "frameId": "Transmon_160_flux_tx_cz",
         "portId": "q160_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25102,8 +25102,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_117_flux_tx_iswap": {
-        "frameId": "Transmon_117_flux_tx_iswap",
+      "Transmon_117_flux_tx_cz": {
+        "frameId": "Transmon_117_flux_tx_cz",
         "portId": "q117_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25114,8 +25114,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_97_flux_tx_iswap": {
-        "frameId": "Transmon_97_flux_tx_iswap",
+      "Transmon_97_flux_tx_cz": {
+        "frameId": "Transmon_97_flux_tx_cz",
         "portId": "q97_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25126,8 +25126,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_44_flux_tx_iswap_45": {
-        "frameId": "Transmon_44_flux_tx_iswap_45",
+      "Transmon_44_flux_tx_cz_45": {
+        "frameId": "Transmon_44_flux_tx_cz_45",
         "portId": "q44_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25138,8 +25138,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_68_flux_tx_iswap_61": {
-        "frameId": "Transmon_68_flux_tx_iswap_61",
+      "Transmon_68_flux_tx_cz_61": {
+        "frameId": "Transmon_68_flux_tx_cz_61",
         "portId": "q68_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25150,8 +25150,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_143_flux_tx_iswap": {
-        "frameId": "Transmon_143_flux_tx_iswap",
+      "Transmon_143_flux_tx_cz": {
+        "frameId": "Transmon_143_flux_tx_cz",
         "portId": "q143_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25162,8 +25162,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_37_flux_tx_iswap_38": {
-        "frameId": "Transmon_37_flux_tx_iswap_38",
+      "Transmon_37_flux_tx_cz_38": {
+        "frameId": "Transmon_37_flux_tx_cz_38",
         "portId": "q37_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25174,8 +25174,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_183_flux_tx_iswap": {
-        "frameId": "Transmon_183_flux_tx_iswap",
+      "Transmon_183_flux_tx_cz": {
+        "frameId": "Transmon_183_flux_tx_cz",
         "portId": "q183_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25186,8 +25186,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_181_flux_tx_iswap": {
-        "frameId": "Transmon_181_flux_tx_iswap",
+      "Transmon_181_flux_tx_cz": {
+        "frameId": "Transmon_181_flux_tx_cz",
         "portId": "q181_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25210,8 +25210,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_50_flux_tx_iswap_57": {
-        "frameId": "Transmon_50_flux_tx_iswap_57",
+      "Transmon_50_flux_tx_cz_57": {
+        "frameId": "Transmon_50_flux_tx_cz_57",
         "portId": "q50_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25246,8 +25246,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_27_flux_tx_iswap_26": {
-        "frameId": "Transmon_27_flux_tx_iswap_26",
+      "Transmon_27_flux_tx_cz_26": {
+        "frameId": "Transmon_27_flux_tx_cz_26",
         "portId": "q27_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25258,8 +25258,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_8_flux_tx_iswap_15": {
-        "frameId": "Transmon_8_flux_tx_iswap_15",
+      "Transmon_8_flux_tx_cz_15": {
+        "frameId": "Transmon_8_flux_tx_cz_15",
         "portId": "q8_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25270,8 +25270,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_4_flux_tx_iswap_11": {
-        "frameId": "Transmon_4_flux_tx_iswap_11",
+      "Transmon_4_flux_tx_cz_11": {
+        "frameId": "Transmon_4_flux_tx_cz_11",
         "portId": "q4_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25282,8 +25282,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_34_flux_tx_iswap_33": {
-        "frameId": "Transmon_34_flux_tx_iswap_33",
+      "Transmon_34_flux_tx_cz_33": {
+        "frameId": "Transmon_34_flux_tx_cz_33",
         "portId": "q34_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25294,8 +25294,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_170_flux_tx_iswap": {
-        "frameId": "Transmon_170_flux_tx_iswap",
+      "Transmon_170_flux_tx_cz": {
+        "frameId": "Transmon_170_flux_tx_cz",
         "portId": "q170_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25318,8 +25318,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_142_flux_tx_iswap": {
-        "frameId": "Transmon_142_flux_tx_iswap",
+      "Transmon_142_flux_tx_cz": {
+        "frameId": "Transmon_142_flux_tx_cz",
         "portId": "q142_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25342,8 +25342,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_228_flux_tx_iswap": {
-        "frameId": "Transmon_228_flux_tx_iswap",
+      "Transmon_228_flux_tx_cz": {
+        "frameId": "Transmon_228_flux_tx_cz",
         "portId": "q228_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25354,8 +25354,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_25_flux_tx_iswap_18": {
-        "frameId": "Transmon_25_flux_tx_iswap_18",
+      "Transmon_25_flux_tx_cz_18": {
+        "frameId": "Transmon_25_flux_tx_cz_18",
         "portId": "q25_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25390,8 +25390,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_47_flux_tx_iswap_40": {
-        "frameId": "Transmon_47_flux_tx_iswap_40",
+      "Transmon_47_flux_tx_cz_40": {
+        "frameId": "Transmon_47_flux_tx_cz_40",
         "portId": "q47_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25414,8 +25414,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_12_flux_tx_iswap_19": {
-        "frameId": "Transmon_12_flux_tx_iswap_19",
+      "Transmon_12_flux_tx_cz_19": {
+        "frameId": "Transmon_12_flux_tx_cz_19",
         "portId": "q12_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25426,8 +25426,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_58_flux_tx_iswap_59": {
-        "frameId": "Transmon_58_flux_tx_iswap_59",
+      "Transmon_58_flux_tx_cz_59": {
+        "frameId": "Transmon_58_flux_tx_cz_59",
         "portId": "q58_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25462,8 +25462,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_23_flux_tx_iswap_24": {
-        "frameId": "Transmon_23_flux_tx_iswap_24",
+      "Transmon_23_flux_tx_cz_24": {
+        "frameId": "Transmon_23_flux_tx_cz_24",
         "portId": "q23_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25474,8 +25474,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_202_flux_tx_iswap": {
-        "frameId": "Transmon_202_flux_tx_iswap",
+      "Transmon_202_flux_tx_cz": {
+        "frameId": "Transmon_202_flux_tx_cz",
         "portId": "q202_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25498,8 +25498,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_146_flux_tx_iswap": {
-        "frameId": "Transmon_146_flux_tx_iswap",
+      "Transmon_146_flux_tx_cz": {
+        "frameId": "Transmon_146_flux_tx_cz",
         "portId": "q146_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25510,8 +25510,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_81_flux_tx_iswap_74": {
-        "frameId": "Transmon_81_flux_tx_iswap_74",
+      "Transmon_81_flux_tx_cz_74": {
+        "frameId": "Transmon_81_flux_tx_cz_74",
         "portId": "q81_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25534,8 +25534,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_33_flux_tx_iswap_32": {
-        "frameId": "Transmon_33_flux_tx_iswap_32",
+      "Transmon_33_flux_tx_cz_32": {
+        "frameId": "Transmon_33_flux_tx_cz_32",
         "portId": "q33_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25546,8 +25546,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_205_flux_tx_iswap": {
-        "frameId": "Transmon_205_flux_tx_iswap",
+      "Transmon_205_flux_tx_cz": {
+        "frameId": "Transmon_205_flux_tx_cz",
         "portId": "q205_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25570,8 +25570,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_96_flux_tx_iswap": {
-        "frameId": "Transmon_96_flux_tx_iswap",
+      "Transmon_96_flux_tx_cz": {
+        "frameId": "Transmon_96_flux_tx_cz",
         "portId": "q96_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25594,8 +25594,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_50_flux_tx_iswap_51": {
-        "frameId": "Transmon_50_flux_tx_iswap_51",
+      "Transmon_50_flux_tx_cz_51": {
+        "frameId": "Transmon_50_flux_tx_cz_51",
         "portId": "q50_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25606,8 +25606,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_118_flux_tx_iswap": {
-        "frameId": "Transmon_118_flux_tx_iswap",
+      "Transmon_118_flux_tx_cz": {
+        "frameId": "Transmon_118_flux_tx_cz",
         "portId": "q118_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25618,8 +25618,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_194_flux_tx_iswap": {
-        "frameId": "Transmon_194_flux_tx_iswap",
+      "Transmon_194_flux_tx_cz": {
+        "frameId": "Transmon_194_flux_tx_cz",
         "portId": "q194_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25678,8 +25678,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_110_flux_tx_iswap": {
-        "frameId": "Transmon_110_flux_tx_iswap",
+      "Transmon_110_flux_tx_cz": {
+        "frameId": "Transmon_110_flux_tx_cz",
         "portId": "q110_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25690,8 +25690,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_41_flux_tx_iswap_40": {
-        "frameId": "Transmon_41_flux_tx_iswap_40",
+      "Transmon_41_flux_tx_cz_40": {
+        "frameId": "Transmon_41_flux_tx_cz_40",
         "portId": "q41_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25726,8 +25726,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_150_flux_tx_iswap": {
-        "frameId": "Transmon_150_flux_tx_iswap",
+      "Transmon_150_flux_tx_cz": {
+        "frameId": "Transmon_150_flux_tx_cz",
         "portId": "q150_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25750,8 +25750,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_69_flux_tx_iswap_68": {
-        "frameId": "Transmon_69_flux_tx_iswap_68",
+      "Transmon_69_flux_tx_cz_68": {
+        "frameId": "Transmon_69_flux_tx_cz_68",
         "portId": "q69_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25762,8 +25762,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_92_flux_tx_iswap": {
-        "frameId": "Transmon_92_flux_tx_iswap",
+      "Transmon_92_flux_tx_cz": {
+        "frameId": "Transmon_92_flux_tx_cz",
         "portId": "q92_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25774,8 +25774,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_99_flux_tx_iswap": {
-        "frameId": "Transmon_99_flux_tx_iswap",
+      "Transmon_99_flux_tx_cz": {
+        "frameId": "Transmon_99_flux_tx_cz",
         "portId": "q99_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25810,8 +25810,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_54_flux_tx_iswap_53": {
-        "frameId": "Transmon_54_flux_tx_iswap_53",
+      "Transmon_54_flux_tx_cz_53": {
+        "frameId": "Transmon_54_flux_tx_cz_53",
         "portId": "q54_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25822,8 +25822,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_72_flux_tx_iswap_65": {
-        "frameId": "Transmon_72_flux_tx_iswap_65",
+      "Transmon_72_flux_tx_cz_65": {
+        "frameId": "Transmon_72_flux_tx_cz_65",
         "portId": "q72_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -25846,8 +25846,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_49_flux_tx_iswap_56": {
-        "frameId": "Transmon_49_flux_tx_iswap_56",
+      "Transmon_49_flux_tx_cz_56": {
+        "frameId": "Transmon_49_flux_tx_cz_56",
         "portId": "q49_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25858,8 +25858,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_179_flux_tx_iswap": {
-        "frameId": "Transmon_179_flux_tx_iswap",
+      "Transmon_179_flux_tx_cz": {
+        "frameId": "Transmon_179_flux_tx_cz",
         "portId": "q179_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25870,8 +25870,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_207_flux_tx_iswap": {
-        "frameId": "Transmon_207_flux_tx_iswap",
+      "Transmon_207_flux_tx_cz": {
+        "frameId": "Transmon_207_flux_tx_cz",
         "portId": "q207_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25918,8 +25918,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_108_flux_tx_iswap": {
-        "frameId": "Transmon_108_flux_tx_iswap",
+      "Transmon_108_flux_tx_cz": {
+        "frameId": "Transmon_108_flux_tx_cz",
         "portId": "q108_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25930,8 +25930,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_122_flux_tx_iswap": {
-        "frameId": "Transmon_122_flux_tx_iswap",
+      "Transmon_122_flux_tx_cz": {
+        "frameId": "Transmon_122_flux_tx_cz",
         "portId": "q122_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25942,8 +25942,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_137_flux_tx_iswap": {
-        "frameId": "Transmon_137_flux_tx_iswap",
+      "Transmon_137_flux_tx_cz": {
+        "frameId": "Transmon_137_flux_tx_cz",
         "portId": "q137_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -25954,8 +25954,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_104_flux_tx_iswap": {
-        "frameId": "Transmon_104_flux_tx_iswap",
+      "Transmon_104_flux_tx_cz": {
+        "frameId": "Transmon_104_flux_tx_cz",
         "portId": "q104_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26038,8 +26038,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_182_flux_tx_iswap": {
-        "frameId": "Transmon_182_flux_tx_iswap",
+      "Transmon_182_flux_tx_cz": {
+        "frameId": "Transmon_182_flux_tx_cz",
         "portId": "q182_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26050,8 +26050,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_69_flux_tx_iswap_62": {
-        "frameId": "Transmon_69_flux_tx_iswap_62",
+      "Transmon_69_flux_tx_cz_62": {
+        "frameId": "Transmon_69_flux_tx_cz_62",
         "portId": "q69_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26062,8 +26062,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_109_flux_tx_iswap": {
-        "frameId": "Transmon_109_flux_tx_iswap",
+      "Transmon_109_flux_tx_cz": {
+        "frameId": "Transmon_109_flux_tx_cz",
         "portId": "q109_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26074,8 +26074,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_195_flux_tx_iswap": {
-        "frameId": "Transmon_195_flux_tx_iswap",
+      "Transmon_195_flux_tx_cz": {
+        "frameId": "Transmon_195_flux_tx_cz",
         "portId": "q195_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26086,8 +26086,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_192_flux_tx_iswap": {
-        "frameId": "Transmon_192_flux_tx_iswap",
+      "Transmon_192_flux_tx_cz": {
+        "frameId": "Transmon_192_flux_tx_cz",
         "portId": "q192_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26098,8 +26098,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_185_flux_tx_iswap": {
-        "frameId": "Transmon_185_flux_tx_iswap",
+      "Transmon_185_flux_tx_cz": {
+        "frameId": "Transmon_185_flux_tx_cz",
         "portId": "q185_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26110,8 +26110,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_139_flux_tx_iswap": {
-        "frameId": "Transmon_139_flux_tx_iswap",
+      "Transmon_139_flux_tx_cz": {
+        "frameId": "Transmon_139_flux_tx_cz",
         "portId": "q139_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26134,8 +26134,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_190_flux_tx_iswap": {
-        "frameId": "Transmon_190_flux_tx_iswap",
+      "Transmon_190_flux_tx_cz": {
+        "frameId": "Transmon_190_flux_tx_cz",
         "portId": "q190_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26146,8 +26146,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_37_flux_tx_iswap_44": {
-        "frameId": "Transmon_37_flux_tx_iswap_44",
+      "Transmon_37_flux_tx_cz_44": {
+        "frameId": "Transmon_37_flux_tx_cz_44",
         "portId": "q37_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26182,8 +26182,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_124_flux_tx_iswap": {
-        "frameId": "Transmon_124_flux_tx_iswap",
+      "Transmon_124_flux_tx_cz": {
+        "frameId": "Transmon_124_flux_tx_cz",
         "portId": "q124_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26194,8 +26194,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_173_flux_tx_iswap": {
-        "frameId": "Transmon_173_flux_tx_iswap",
+      "Transmon_173_flux_tx_cz": {
+        "frameId": "Transmon_173_flux_tx_cz",
         "portId": "q173_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26218,8 +26218,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_2_flux_tx_iswap_1": {
-        "frameId": "Transmon_2_flux_tx_iswap_1",
+      "Transmon_2_flux_tx_cz_1": {
+        "frameId": "Transmon_2_flux_tx_cz_1",
         "portId": "q2_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26230,8 +26230,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_176_flux_tx_iswap": {
-        "frameId": "Transmon_176_flux_tx_iswap",
+      "Transmon_176_flux_tx_cz": {
+        "frameId": "Transmon_176_flux_tx_cz",
         "portId": "q176_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26278,8 +26278,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_26_flux_tx_iswap_19": {
-        "frameId": "Transmon_26_flux_tx_iswap_19",
+      "Transmon_26_flux_tx_cz_19": {
+        "frameId": "Transmon_26_flux_tx_cz_19",
         "portId": "q26_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26302,8 +26302,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_54_flux_tx_iswap_61": {
-        "frameId": "Transmon_54_flux_tx_iswap_61",
+      "Transmon_54_flux_tx_cz_61": {
+        "frameId": "Transmon_54_flux_tx_cz_61",
         "portId": "q54_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26326,8 +26326,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_159_flux_tx_iswap": {
-        "frameId": "Transmon_159_flux_tx_iswap",
+      "Transmon_159_flux_tx_cz": {
+        "frameId": "Transmon_159_flux_tx_cz",
         "portId": "q159_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26398,8 +26398,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_212_flux_tx_iswap": {
-        "frameId": "Transmon_212_flux_tx_iswap",
+      "Transmon_212_flux_tx_cz": {
+        "frameId": "Transmon_212_flux_tx_cz",
         "portId": "q212_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26410,8 +26410,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_230_flux_tx_iswap": {
-        "frameId": "Transmon_230_flux_tx_iswap",
+      "Transmon_230_flux_tx_cz": {
+        "frameId": "Transmon_230_flux_tx_cz",
         "portId": "q230_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26422,8 +26422,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_25_flux_tx_iswap_24": {
-        "frameId": "Transmon_25_flux_tx_iswap_24",
+      "Transmon_25_flux_tx_cz_24": {
+        "frameId": "Transmon_25_flux_tx_cz_24",
         "portId": "q25_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26434,8 +26434,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_28_flux_tx_iswap_29": {
-        "frameId": "Transmon_28_flux_tx_iswap_29",
+      "Transmon_28_flux_tx_cz_29": {
+        "frameId": "Transmon_28_flux_tx_cz_29",
         "portId": "q28_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26446,8 +26446,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_22_flux_tx_iswap_23": {
-        "frameId": "Transmon_22_flux_tx_iswap_23",
+      "Transmon_22_flux_tx_cz_23": {
+        "frameId": "Transmon_22_flux_tx_cz_23",
         "portId": "q22_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26482,8 +26482,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_46_flux_tx_iswap_53": {
-        "frameId": "Transmon_46_flux_tx_iswap_53",
+      "Transmon_46_flux_tx_cz_53": {
+        "frameId": "Transmon_46_flux_tx_cz_53",
         "portId": "q46_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26494,8 +26494,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_0_flux_tx_iswap_1": {
-        "frameId": "Transmon_0_flux_tx_iswap_1",
+      "Transmon_0_flux_tx_cz_1": {
+        "frameId": "Transmon_0_flux_tx_cz_1",
         "portId": "q0_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26506,8 +26506,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_2_flux_tx_iswap_9": {
-        "frameId": "Transmon_2_flux_tx_iswap_9",
+      "Transmon_2_flux_tx_cz_9": {
+        "frameId": "Transmon_2_flux_tx_cz_9",
         "portId": "q2_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26530,8 +26530,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_210_flux_tx_iswap": {
-        "frameId": "Transmon_210_flux_tx_iswap",
+      "Transmon_210_flux_tx_cz": {
+        "frameId": "Transmon_210_flux_tx_cz",
         "portId": "q210_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26542,8 +26542,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_41_flux_tx_iswap_34": {
-        "frameId": "Transmon_41_flux_tx_iswap_34",
+      "Transmon_41_flux_tx_cz_34": {
+        "frameId": "Transmon_41_flux_tx_cz_34",
         "portId": "q41_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26566,8 +26566,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_225_flux_tx_iswap": {
-        "frameId": "Transmon_225_flux_tx_iswap",
+      "Transmon_225_flux_tx_cz": {
+        "frameId": "Transmon_225_flux_tx_cz",
         "portId": "q225_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26578,8 +26578,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_24_flux_tx_iswap_17": {
-        "frameId": "Transmon_24_flux_tx_iswap_17",
+      "Transmon_24_flux_tx_cz_17": {
+        "frameId": "Transmon_24_flux_tx_cz_17",
         "portId": "q24_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26602,8 +26602,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_55_flux_tx_iswap_54": {
-        "frameId": "Transmon_55_flux_tx_iswap_54",
+      "Transmon_55_flux_tx_cz_54": {
+        "frameId": "Transmon_55_flux_tx_cz_54",
         "portId": "q55_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26614,8 +26614,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_67_flux_tx_iswap_60": {
-        "frameId": "Transmon_67_flux_tx_iswap_60",
+      "Transmon_67_flux_tx_cz_60": {
+        "frameId": "Transmon_67_flux_tx_cz_60",
         "portId": "q67_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26626,8 +26626,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_64_flux_tx_iswap_57": {
-        "frameId": "Transmon_64_flux_tx_iswap_57",
+      "Transmon_64_flux_tx_cz_57": {
+        "frameId": "Transmon_64_flux_tx_cz_57",
         "portId": "q64_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26638,8 +26638,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_40_flux_tx_iswap_33": {
-        "frameId": "Transmon_40_flux_tx_iswap_33",
+      "Transmon_40_flux_tx_cz_33": {
+        "frameId": "Transmon_40_flux_tx_cz_33",
         "portId": "q40_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26650,8 +26650,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_156_flux_tx_iswap": {
-        "frameId": "Transmon_156_flux_tx_iswap",
+      "Transmon_156_flux_tx_cz": {
+        "frameId": "Transmon_156_flux_tx_cz",
         "portId": "q156_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26674,8 +26674,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_62_flux_tx_iswap_61": {
-        "frameId": "Transmon_62_flux_tx_iswap_61",
+      "Transmon_62_flux_tx_cz_61": {
+        "frameId": "Transmon_62_flux_tx_cz_61",
         "portId": "q62_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26722,8 +26722,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_36_flux_tx_iswap_43": {
-        "frameId": "Transmon_36_flux_tx_iswap_43",
+      "Transmon_36_flux_tx_cz_43": {
+        "frameId": "Transmon_36_flux_tx_cz_43",
         "portId": "q36_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26734,8 +26734,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_53_flux_tx_iswap_52": {
-        "frameId": "Transmon_53_flux_tx_iswap_52",
+      "Transmon_53_flux_tx_cz_52": {
+        "frameId": "Transmon_53_flux_tx_cz_52",
         "portId": "q53_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26746,8 +26746,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_129_flux_tx_iswap": {
-        "frameId": "Transmon_129_flux_tx_iswap",
+      "Transmon_129_flux_tx_cz": {
+        "frameId": "Transmon_129_flux_tx_cz",
         "portId": "q129_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26758,8 +26758,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_112_flux_tx_iswap": {
-        "frameId": "Transmon_112_flux_tx_iswap",
+      "Transmon_112_flux_tx_cz": {
+        "frameId": "Transmon_112_flux_tx_cz",
         "portId": "q112_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26770,8 +26770,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_83_flux_tx_iswap_76": {
-        "frameId": "Transmon_83_flux_tx_iswap_76",
+      "Transmon_83_flux_tx_cz_76": {
+        "frameId": "Transmon_83_flux_tx_cz_76",
         "portId": "q83_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -26782,8 +26782,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_68_flux_tx_iswap_67": {
-        "frameId": "Transmon_68_flux_tx_iswap_67",
+      "Transmon_68_flux_tx_cz_67": {
+        "frameId": "Transmon_68_flux_tx_cz_67",
         "portId": "q68_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26806,8 +26806,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_88_flux_tx_iswap": {
-        "frameId": "Transmon_88_flux_tx_iswap",
+      "Transmon_88_flux_tx_cz": {
+        "frameId": "Transmon_88_flux_tx_cz",
         "portId": "q88_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26830,8 +26830,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_169_flux_tx_iswap": {
-        "frameId": "Transmon_169_flux_tx_iswap",
+      "Transmon_169_flux_tx_cz": {
+        "frameId": "Transmon_169_flux_tx_cz",
         "portId": "q169_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26842,8 +26842,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_193_flux_tx_iswap": {
-        "frameId": "Transmon_193_flux_tx_iswap",
+      "Transmon_193_flux_tx_cz": {
+        "frameId": "Transmon_193_flux_tx_cz",
         "portId": "q193_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26890,8 +26890,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_82_flux_tx_iswap_81": {
-        "frameId": "Transmon_82_flux_tx_iswap_81",
+      "Transmon_82_flux_tx_cz_81": {
+        "frameId": "Transmon_82_flux_tx_cz_81",
         "portId": "q82_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26902,8 +26902,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_133_flux_tx_iswap": {
-        "frameId": "Transmon_133_flux_tx_iswap",
+      "Transmon_133_flux_tx_cz": {
+        "frameId": "Transmon_133_flux_tx_cz",
         "portId": "q133_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26926,8 +26926,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_136_flux_tx_iswap": {
-        "frameId": "Transmon_136_flux_tx_iswap",
+      "Transmon_136_flux_tx_cz": {
+        "frameId": "Transmon_136_flux_tx_cz",
         "portId": "q136_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26938,8 +26938,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_197_flux_tx_iswap": {
-        "frameId": "Transmon_197_flux_tx_iswap",
+      "Transmon_197_flux_tx_cz": {
+        "frameId": "Transmon_197_flux_tx_cz",
         "portId": "q197_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26950,8 +26950,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_214_flux_tx_iswap": {
-        "frameId": "Transmon_214_flux_tx_iswap",
+      "Transmon_214_flux_tx_cz": {
+        "frameId": "Transmon_214_flux_tx_cz",
         "portId": "q214_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26962,8 +26962,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_35_flux_tx_iswap_28": {
-        "frameId": "Transmon_35_flux_tx_iswap_28",
+      "Transmon_35_flux_tx_cz_28": {
+        "frameId": "Transmon_35_flux_tx_cz_28",
         "portId": "q35_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26974,8 +26974,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_37_flux_tx_iswap_30": {
-        "frameId": "Transmon_37_flux_tx_iswap_30",
+      "Transmon_37_flux_tx_cz_30": {
+        "frameId": "Transmon_37_flux_tx_cz_30",
         "portId": "q37_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26986,8 +26986,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_5_flux_tx_iswap_4": {
-        "frameId": "Transmon_5_flux_tx_iswap_4",
+      "Transmon_5_flux_tx_cz_4": {
+        "frameId": "Transmon_5_flux_tx_cz_4",
         "portId": "q5_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -26998,8 +26998,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_40_flux_tx_iswap_39": {
-        "frameId": "Transmon_40_flux_tx_iswap_39",
+      "Transmon_40_flux_tx_cz_39": {
+        "frameId": "Transmon_40_flux_tx_cz_39",
         "portId": "q40_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27034,8 +27034,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_180_flux_tx_iswap": {
-        "frameId": "Transmon_180_flux_tx_iswap",
+      "Transmon_180_flux_tx_cz": {
+        "frameId": "Transmon_180_flux_tx_cz",
         "portId": "q180_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27070,8 +27070,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_14_flux_tx_iswap_15": {
-        "frameId": "Transmon_14_flux_tx_iswap_15",
+      "Transmon_14_flux_tx_cz_15": {
+        "frameId": "Transmon_14_flux_tx_cz_15",
         "portId": "q14_QDOFastFluxChannel-1",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27094,8 +27094,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_125_flux_tx_iswap": {
-        "frameId": "Transmon_125_flux_tx_iswap",
+      "Transmon_125_flux_tx_cz": {
+        "frameId": "Transmon_125_flux_tx_cz",
         "portId": "q125_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27118,8 +27118,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_209_flux_tx_iswap": {
-        "frameId": "Transmon_209_flux_tx_iswap",
+      "Transmon_209_flux_tx_cz": {
+        "frameId": "Transmon_209_flux_tx_cz",
         "portId": "q209_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27130,8 +27130,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_105_flux_tx_iswap": {
-        "frameId": "Transmon_105_flux_tx_iswap",
+      "Transmon_105_flux_tx_cz": {
+        "frameId": "Transmon_105_flux_tx_cz",
         "portId": "q105_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27142,8 +27142,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_74_flux_tx_iswap_73": {
-        "frameId": "Transmon_74_flux_tx_iswap_73",
+      "Transmon_74_flux_tx_cz_73": {
+        "frameId": "Transmon_74_flux_tx_cz_73",
         "portId": "q74_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27154,8 +27154,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_70_flux_tx_iswap_71": {
-        "frameId": "Transmon_70_flux_tx_iswap_71",
+      "Transmon_70_flux_tx_cz_71": {
+        "frameId": "Transmon_70_flux_tx_cz_71",
         "portId": "q70_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27166,8 +27166,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_63_flux_tx_iswap_56": {
-        "frameId": "Transmon_63_flux_tx_iswap_56",
+      "Transmon_63_flux_tx_cz_56": {
+        "frameId": "Transmon_63_flux_tx_cz_56",
         "portId": "q63_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27202,8 +27202,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_121_flux_tx_iswap": {
-        "frameId": "Transmon_121_flux_tx_iswap",
+      "Transmon_121_flux_tx_cz": {
+        "frameId": "Transmon_121_flux_tx_cz",
         "portId": "q121_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27214,8 +27214,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_65_flux_tx_iswap_58": {
-        "frameId": "Transmon_65_flux_tx_iswap_58",
+      "Transmon_65_flux_tx_cz_58": {
+        "frameId": "Transmon_65_flux_tx_cz_58",
         "portId": "q65_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27226,8 +27226,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_76_flux_tx_iswap_75": {
-        "frameId": "Transmon_76_flux_tx_iswap_75",
+      "Transmon_76_flux_tx_cz_75": {
+        "frameId": "Transmon_76_flux_tx_cz_75",
         "portId": "q76_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27262,8 +27262,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_23_flux_tx_iswap_16": {
-        "frameId": "Transmon_23_flux_tx_iswap_16",
+      "Transmon_23_flux_tx_cz_16": {
+        "frameId": "Transmon_23_flux_tx_cz_16",
         "portId": "q23_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27274,8 +27274,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_203_flux_tx_iswap": {
-        "frameId": "Transmon_203_flux_tx_iswap",
+      "Transmon_203_flux_tx_cz": {
+        "frameId": "Transmon_203_flux_tx_cz",
         "portId": "q203_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27286,8 +27286,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_94_flux_tx_iswap": {
-        "frameId": "Transmon_94_flux_tx_iswap",
+      "Transmon_94_flux_tx_cz": {
+        "frameId": "Transmon_94_flux_tx_cz",
         "portId": "q94_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27298,8 +27298,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_187_flux_tx_iswap": {
-        "frameId": "Transmon_187_flux_tx_iswap",
+      "Transmon_187_flux_tx_cz": {
+        "frameId": "Transmon_187_flux_tx_cz",
         "portId": "q187_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27310,8 +27310,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_127_flux_tx_iswap": {
-        "frameId": "Transmon_127_flux_tx_iswap",
+      "Transmon_127_flux_tx_cz": {
+        "frameId": "Transmon_127_flux_tx_cz",
         "portId": "q127_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27322,8 +27322,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_154_flux_tx_iswap": {
-        "frameId": "Transmon_154_flux_tx_iswap",
+      "Transmon_154_flux_tx_cz": {
+        "frameId": "Transmon_154_flux_tx_cz",
         "portId": "q154_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27334,8 +27334,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_19_flux_tx_iswap_18": {
-        "frameId": "Transmon_19_flux_tx_iswap_18",
+      "Transmon_19_flux_tx_cz_18": {
+        "frameId": "Transmon_19_flux_tx_cz_18",
         "portId": "q19_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27370,8 +27370,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_177_flux_tx_iswap": {
-        "frameId": "Transmon_177_flux_tx_iswap",
+      "Transmon_177_flux_tx_cz": {
+        "frameId": "Transmon_177_flux_tx_cz",
         "portId": "q177_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27406,8 +27406,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_186_flux_tx_iswap": {
-        "frameId": "Transmon_186_flux_tx_iswap",
+      "Transmon_186_flux_tx_cz": {
+        "frameId": "Transmon_186_flux_tx_cz",
         "portId": "q186_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27454,8 +27454,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_113_flux_tx_iswap": {
-        "frameId": "Transmon_113_flux_tx_iswap",
+      "Transmon_113_flux_tx_cz": {
+        "frameId": "Transmon_113_flux_tx_cz",
         "portId": "q113_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27466,8 +27466,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_226_flux_tx_iswap": {
-        "frameId": "Transmon_226_flux_tx_iswap",
+      "Transmon_226_flux_tx_cz": {
+        "frameId": "Transmon_226_flux_tx_cz",
         "portId": "q226_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27490,8 +27490,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_51_flux_tx_iswap_58": {
-        "frameId": "Transmon_51_flux_tx_iswap_58",
+      "Transmon_51_flux_tx_cz_58": {
+        "frameId": "Transmon_51_flux_tx_cz_58",
         "portId": "q51_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27502,8 +27502,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_39_flux_tx_iswap_46": {
-        "frameId": "Transmon_39_flux_tx_iswap_46",
+      "Transmon_39_flux_tx_cz_46": {
+        "frameId": "Transmon_39_flux_tx_cz_46",
         "portId": "q39_QDOFastFluxChannel-3",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27538,8 +27538,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_21_flux_tx_iswap_14": {
-        "frameId": "Transmon_21_flux_tx_iswap_14",
+      "Transmon_21_flux_tx_cz_14": {
+        "frameId": "Transmon_21_flux_tx_cz_14",
         "portId": "q21_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27550,8 +27550,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_145_flux_tx_iswap": {
-        "frameId": "Transmon_145_flux_tx_iswap",
+      "Transmon_145_flux_tx_cz": {
+        "frameId": "Transmon_145_flux_tx_cz",
         "portId": "q145_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27562,8 +27562,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_75_flux_tx_iswap_74": {
-        "frameId": "Transmon_75_flux_tx_iswap_74",
+      "Transmon_75_flux_tx_cz_74": {
+        "frameId": "Transmon_75_flux_tx_cz_74",
         "portId": "q75_QDOFastFluxChannel-0",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27574,8 +27574,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_138_flux_tx_iswap": {
-        "frameId": "Transmon_138_flux_tx_iswap",
+      "Transmon_138_flux_tx_cz": {
+        "frameId": "Transmon_138_flux_tx_cz",
         "portId": "q138_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27586,8 +27586,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_86_flux_tx_iswap": {
-        "frameId": "Transmon_86_flux_tx_iswap",
+      "Transmon_86_flux_tx_cz": {
+        "frameId": "Transmon_86_flux_tx_cz",
         "portId": "q86_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27598,8 +27598,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_153_flux_tx_iswap": {
-        "frameId": "Transmon_153_flux_tx_iswap",
+      "Transmon_153_flux_tx_cz": {
+        "frameId": "Transmon_153_flux_tx_cz",
         "portId": "q153_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27622,8 +27622,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_22_flux_tx_iswap_15": {
-        "frameId": "Transmon_22_flux_tx_iswap_15",
+      "Transmon_22_flux_tx_cz_15": {
+        "frameId": "Transmon_22_flux_tx_cz_15",
         "portId": "q22_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27634,8 +27634,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_140_flux_tx_iswap": {
-        "frameId": "Transmon_140_flux_tx_iswap",
+      "Transmon_140_flux_tx_cz": {
+        "frameId": "Transmon_140_flux_tx_cz",
         "portId": "q140_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27646,8 +27646,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_106_flux_tx_iswap": {
-        "frameId": "Transmon_106_flux_tx_iswap",
+      "Transmon_106_flux_tx_cz": {
+        "frameId": "Transmon_106_flux_tx_cz",
         "portId": "q106_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27682,8 +27682,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_49_flux_tx_iswap_50": {
-        "frameId": "Transmon_49_flux_tx_iswap_50",
+      "Transmon_49_flux_tx_cz_50": {
+        "frameId": "Transmon_49_flux_tx_cz_50",
         "portId": "q49_QDOFastFluxChannel-1",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27694,8 +27694,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_80_flux_tx_iswap_73": {
-        "frameId": "Transmon_80_flux_tx_iswap_73",
+      "Transmon_80_flux_tx_cz_73": {
+        "frameId": "Transmon_80_flux_tx_cz_73",
         "portId": "q80_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27730,8 +27730,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_103_flux_tx_iswap": {
-        "frameId": "Transmon_103_flux_tx_iswap",
+      "Transmon_103_flux_tx_cz": {
+        "frameId": "Transmon_103_flux_tx_cz",
         "portId": "q103_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27742,8 +27742,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_189_flux_tx_iswap": {
-        "frameId": "Transmon_189_flux_tx_iswap",
+      "Transmon_189_flux_tx_cz": {
+        "frameId": "Transmon_189_flux_tx_cz",
         "portId": "q189_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27754,8 +27754,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_216_flux_tx_iswap": {
-        "frameId": "Transmon_216_flux_tx_iswap",
+      "Transmon_216_flux_tx_cz": {
+        "frameId": "Transmon_216_flux_tx_cz",
         "portId": "q216_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27778,8 +27778,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_36_flux_tx_iswap_29": {
-        "frameId": "Transmon_36_flux_tx_iswap_29",
+      "Transmon_36_flux_tx_cz_29": {
+        "frameId": "Transmon_36_flux_tx_cz_29",
         "portId": "q36_QDOFastFluxChannel-2",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27790,8 +27790,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_44_flux_tx_iswap_51": {
-        "frameId": "Transmon_44_flux_tx_iswap_51",
+      "Transmon_44_flux_tx_cz_51": {
+        "frameId": "Transmon_44_flux_tx_cz_51",
         "portId": "q44_QDOFastFluxChannel-3",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27802,8 +27802,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_206_flux_tx_iswap": {
-        "frameId": "Transmon_206_flux_tx_iswap",
+      "Transmon_206_flux_tx_cz": {
+        "frameId": "Transmon_206_flux_tx_cz",
         "portId": "q206_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27814,8 +27814,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_38_flux_tx_iswap_31": {
-        "frameId": "Transmon_38_flux_tx_iswap_31",
+      "Transmon_38_flux_tx_cz_31": {
+        "frameId": "Transmon_38_flux_tx_cz_31",
         "portId": "q38_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27826,8 +27826,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_199_flux_tx_iswap": {
-        "frameId": "Transmon_199_flux_tx_iswap",
+      "Transmon_199_flux_tx_cz": {
+        "frameId": "Transmon_199_flux_tx_cz",
         "portId": "q199_QDOFastFluxChannel-0",
         "frequency": 0.0,
         "centerFrequency": null,
@@ -27838,8 +27838,8 @@
         ],
         "qhpSpecificProperties": null
       },
-      "Transmon_39_flux_tx_iswap_32": {
-        "frameId": "Transmon_39_flux_tx_iswap_32",
+      "Transmon_39_flux_tx_cz_32": {
+        "frameId": "Transmon_39_flux_tx_cz_32",
         "portId": "q39_QDOFastFluxChannel-2",
         "frequency": 100000000.0,
         "centerFrequency": null,
@@ -27885,6 +27885,6 @@
       "MAX_WAVEFORM_SAMPLES": 65536.0,
       "MAX_PULSE_LENGTH": 0.067
     },
-    "nativeGateCalibrationsRef": "https://dsq6c4wdong7p.cloudfront.net/native_gate_calibrations/device:arn:aws:braket:us-west-1::device/qpu/rigetti/Ankaa-3?versionId=VsNVa60gkMuOVfmidll9BGlkpQYaWyIc"
+    "nativeGateCalibrationsRef": "https://dsq6c4wdong7p.cloudfront.net/native_gate_calibrations/device:arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q?versionId=VsNVa60gkMuOVfmidll9BGlkpQYaWyIc"
   }
 }
