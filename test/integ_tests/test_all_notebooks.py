@@ -42,8 +42,6 @@ EXCLUDED_NOTEBOOKS = [
     "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
     # Investigating local simulator performance on small circuits
     "02_Expectation_value_calculations_with_program_sets.ipynb",
-    # TODO: Add spending limit mocks
-    "Spending_Limits_Introduction.ipynb",
     "0_Getting_started_with_mitiq_on_Braket.ipynb",
     "1_Readout_mitigation_with_mitiq.ipynb",
     "2_Zero_noise_extrapolation_with_mitiq.ipynb",
