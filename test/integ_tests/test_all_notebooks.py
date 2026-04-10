@@ -31,7 +31,6 @@ EXCLUDED_NOTEBOOKS = [
     "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
     "Allocating_Qubits_on_QPU_Devices.ipynb",
-    "0_Getting_Started.ipynb",
     "Noise_models_on_Rigetti.ipynb",
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
     "Verbatim_Compilation.ipynb",
