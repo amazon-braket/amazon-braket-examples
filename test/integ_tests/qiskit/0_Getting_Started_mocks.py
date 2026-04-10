@@ -12,10 +12,7 @@ def pre_run_inject(mock_utils):
         {
             "deviceType": "QPU",
             "providerName": "Rigetti",
-            "deviceCapabilities": mock_utils.read_file(
-                "rig_pulse_device_capabilities.json",
-                __file__,
-            ),
+            "deviceCapabilities": mock_utils.read_file("ankaa3_device_capabilities.json"),
         },
     )
     mocker.set_search_result(
