@@ -30,11 +30,8 @@ EXCLUDED_NOTEBOOKS = [
     "5_Multiple_GPU_simulations.ipynb",
     "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
-    "Allocating_Qubits_on_QPU_Devices.ipynb",
-    "Noise_models_on_Rigetti.ipynb",
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
     "Verbatim_Compilation.ipynb",
-    "01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
     # Dynamic circuits with QBP
