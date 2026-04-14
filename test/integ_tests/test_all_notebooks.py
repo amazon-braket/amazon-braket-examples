@@ -38,8 +38,7 @@ EXCLUDED_NOTEBOOKS = [
     "Verbatim_Compilation.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
-    # Dynamic circuits with QBP
-    "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
+    # Mitiq notebooks require separate test setup and dependencies
     "0_Getting_started_with_mitiq_on_Braket.ipynb",
     "1_Readout_mitigation_with_mitiq.ipynb",
     "2_Zero_noise_extrapolation_with_mitiq.ipynb",
