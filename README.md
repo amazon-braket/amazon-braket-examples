@@ -196,6 +196,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
 
+-  [**Emulating non-verbatim circuits with Qiskit**](examples/braket_features/Device_emulation/02_Emulating_Non-Verbatim_Circuits_with_Qiskit.ipynb) [(EmuQis)](#index_EmuQis)<a name="EmuQis"></a>
+
+  This tutorial shows how to combine the Qiskit-Braket provider compilation pipeline with the local emulator to emulate non-verbatim circuits for a target QPU. The workflow converts a high-level Braket circuit to Qiskit, transpiles it to native gates, and runs the resulting verbatim circuit on the local emulator with a realistic noise model.
+
 
 ---
 
@@ -232,6 +236,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 -  [**Using the local emulator**](examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb) [(LEmu)](#index_LEmu)
 
   This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally.
+
+-  [**Emulating non-verbatim circuits with Qiskit**](examples/braket_features/Device_emulation/02_Emulating_Non-Verbatim_Circuits_with_Qiskit.ipynb) [(EmuQis)](#index_EmuQis)
+
+  This tutorial shows how to combine the Qiskit-Braket provider compilation pipeline with the local emulator to emulate non-verbatim circuits for a target QPU. The workflow converts a high-level Braket circuit to Qiskit, transpiles it to native gates, and runs the resulting verbatim circuit on the local emulator with a realistic noise model.
 
 -  [**Getting started with Mitiq on Braket**](examples/error_mitigation/on_mitiq/0_Getting_started_with_mitiq_on_Braket.ipynb) [(GSm)](#index_GSm)<a name="GSm"></a>
 
@@ -557,6 +565,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how we can use the qiskit-braket-provider to run dynamic circuits on IQM using the Amazon Braket service. 
 
+-  [**Emulating non-verbatim circuits with Qiskit**](examples/braket_features/Device_emulation/02_Emulating_Non-Verbatim_Circuits_with_Qiskit.ipynb) [(EmuQis)](#index_EmuQis)
+
+  This tutorial shows how to combine the Qiskit-Braket provider compilation pipeline with the local emulator to emulate non-verbatim circuits for a target QPU. The workflow converts a high-level Braket circuit to Qiskit, transpiles it to native gates, and runs the resulting verbatim circuit on the local emulator with a realistic noise model.
+
 -  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
 
   This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation.
@@ -577,7 +589,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | benchmarking |  [Barrier](#Barrier)| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
- | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
+ | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [EmuQis](#EmuQis)<a name="index_EmuQis"></a>, [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
  | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
@@ -585,7 +597,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | device properties |  [GDCDP](#GDCDP)<a name="index_GDCDP"></a>| <br>
  | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
  | dynamic circuits |  [DCOQ3](#DCOQ3)<a name="index_DCOQ3"></a>| <br>
- | emulator   |  [LEmu](#LEmu)| <br>
+ | emulator   |  [LEmu](#LEmu), [EmuQis](#EmuQis)| <br>
  | error mitigation |  [GSm](#GSm)<a name="index_GSm"></a>, [REMm](#REMm)<a name="index_REMm"></a>, [EMWm](#EMWm)<a name="index_EMWm"></a>, [AQEMW](#AQEMW)<a name="index_AQEMW"></a>, [EMIQ](#EMIQ)<a name="index_EMIQ"></a>, [ZNEm](#ZNEm)<a name="index_ZNEm"></a>, [TPS](#TPS)<a name="index_TPS"></a>| <br>
  | estimators |  [EVPrS](#EVPrS)| <br>
  | gates      |  [IQMNG](#IQMNG)<a name="index_IQMNG"></a>, [BSQG](#BSQG)<a name="index_BSQG"></a>| <br>
@@ -601,8 +613,8 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | mitiq      |  [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [TPS](#TPS), [EMWm](#EMWm)| <br>
  | model      |  [VQETFIM](#VQETFIM)| <br>
  | moments    |  [DDQC](#DDQC)<a name="index_DDQC"></a>| <br>
- | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu)| <br>
- | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [ZNEm](#ZNEm), [LEmu](#LEmu)| <br>
+ | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu), [EmuQis](#EmuQis)| <br>
+ | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [ZNEm](#ZNEm), [LEmu](#LEmu), [EmuQis](#EmuQis)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
  | openqasm   |  [GSOQ](#GSOQ), [Barrier](#Barrier), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
@@ -616,7 +628,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SPL](#SPL)| <br>
  | qaa        |  [QAA](#QAA)<a name="index_QAA"></a>| <br>
  | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP)| <br>
- | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [GSm](#GSm), [ZNEm](#ZNEm), [AQEMW](#AQEMW), [CBQBP](#CBQBP)| <br>
+ | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [EmuQis](#EmuQis), [GSm](#GSm), [ZNEm](#ZNEm), [AQEMW](#AQEMW), [CBQBP](#CBQBP)| <br>
  | qml        |  [QMLHJ](#QMLHJ)| <br>
  | qpe        |  [QPE](#QPE)<a name="index_QPE"></a>| <br>
  | rem        |  [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
@@ -634,7 +646,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [TNSim](#TNSim), [TNHP](#TNHP), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
  | teleportation |  [SC](#SC), [DCC](#DCC)| <br>
  | twirling   |  [TPS](#TPS), [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
- | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [LEmu](#LEmu), [GSm](#GSm), [AQEMW](#AQEMW)| <br>
+ | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [LEmu](#LEmu), [EmuQis](#EmuQis), [GSm](#GSm), [AQEMW](#AQEMW)| <br>
  | vqe        |  [VQEChem](#VQEChem), [VQETFIM](#VQETFIM), [HGV](#HGV), [AGC](#AGC), [Qis](#Qis)| <br>
  | zne        |  [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
 
