@@ -21,8 +21,6 @@ EXCLUDED_NOTEBOOKS = [
     # These notebooks have cells that have syntax errors
     "bring_your_own_container.ipynb",
     "qnspsa_with_embedded_simulator.ipynb",
-    # These notebooks have dependency issues
-    "6_Adjoint_gradient_computation.ipynb",
     # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
     "0_Getting_started_papermill.ipynb",
     # Requires amazon-braket-simulator-v2 package (optional install)
