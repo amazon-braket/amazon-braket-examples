@@ -9,8 +9,34 @@ from braket.circuits import Circuit, QubitSet
 from braket.devices import Device
 
 
-def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
-    """ find a layout with the VF2 pass by tapering the layout """
+class QubitMap:
+    def __init__(self, braket_circuit : Circuit, braket_physical : list):
+        """ input a sorted braket logical circuit, """
+        self.regs = {
+            "virt":{
+                "braket":[int(k) for k in sorted(braket_circuit.qubits)],
+                "qiskit":list(range(braket_circuit.qubit_count))
+                },
+            "phys":{
+                "braket":braket_physical,
+                "qiskit":list(range(len(braket_physical)))
+                }
+            }
+        
+    def b_to_q(self, key : int, reg : str = "phys") -> int:
+        assert reg in self.regs
+        inp = self.regs[reg]["braket"].index(key)
+        return self.regs[reg]["qiskit"][inp]
+
+    def q_to_b(self, key : int, reg : str = "phys") -> int:
+        assert reg in self.regs
+        inp = self.regs[reg]["qiskit"].index(key)
+        return self.regs[reg]["braket"][inp]
+
+
+def restricted_circuit_layout(ansatz : Circuit, device : Device,
+        ) -> Circuit:
+    """ when possible to be laid out will return such a layout  """
 
     def score(a,b,c):
         """ simple score function """
@@ -24,21 +50,26 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
     min_step = 0.0001
     
     props = device.properties.standardized
-    ansatz_q = to_qiskit(ansatz, False)
-
+    ansatz_q = to_qiskit(ansatz, False) #now, a contiguous ordering 
+    # braket_logical -> qiskit_logical 
+    
 
     while trials < 75 and any([s > min_step for s in steps]):
         idx = trials % 3
         qubits = set()
         layout = []
         for pair, vals in props.twoQubitProperties.items():
-            infidelity = 1 - vals.twoQubitGateFidelity[0].dict()['fidelity']
+            infidelity = vals.twoQubitGateFidelity[0].dict()['fidelity']
+            infidelity = min(infidelity, 1-infidelity)
             pair = [int(k) for k in pair.split('-')]
-            ro_i = 1 - props.oneQubitProperties[str(pair[0])].oneQubitFidelity[2].fidelity
-            ro_j = 1 - props.oneQubitProperties[str(pair[1])].oneQubitFidelity[2].fidelity 
-            
-            g_i =  1-props.oneQubitProperties[str(pair[0])].oneQubitFidelity[1].fidelity
-            g_j =  1-props.oneQubitProperties[str(pair[1])].oneQubitFidelity[1].fidelity
+            ro_i = props.oneQubitProperties[str(pair[0])].oneQubitFidelity[2].fidelity
+            ro_j = props.oneQubitProperties[str(pair[1])].oneQubitFidelity[2].fidelity 
+            ro_i, ro_j = min(1-ro_i, ro_i), min(ro_j, 1-ro_j)
+
+            g_i =  props.oneQubitProperties[str(pair[0])].oneQubitFidelity[1].fidelity
+            g_j =  props.oneQubitProperties[str(pair[1])].oneQubitFidelity[1].fidelity
+            g_i, g_j = min(1-g_i, g_i), min(1-g_j, g_j)
+
             if all([
                 infidelity < limits[0], 
                 ro_i < limits[1],
@@ -49,15 +80,25 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
             qubits.add(pair[0])
             qubits.add(pair[1])
 
-        coupling_map = CouplingMap(layout)
-
+        if not layout:
+            limits[idx] += steps[idx]
+            steps[idx] /= 2
+            trials += 1
+            continue
+        qmap = QubitMap(ansatz, list(qubits) )
+        qiskit_layout = [[qmap.b_to_q(i),qmap.b_to_q(j)] for (i,j) in layout]
+        coupling_map = CouplingMap(qiskit_layout)
         pm = PassManager([VF2Layout(coupling_map, max_trials=1,time_limit=5)])
         pm.run(ansatz_q)
 
         if pm.property_set["VF2Layout_stop_reason"].name == "SOLUTION_FOUND":
             if score(*limits) < score(*best):
                 best = limits.copy()
-                final = {k._index:v for k,v in pm.property_set["layout"].get_virtual_bits().items()}
+                zero_to_phys = pm.property_set["layout"].get_virtual_bits()
+                # virt to phys
+                final = {qmap.q_to_b(v._index,"virt"):qmap.q_to_b(p,"phys") for v,p in zero_to_phys.items()}
+
+
             limits[idx] -= steps[idx]
             steps[idx] /= 2
         else:
@@ -68,41 +109,16 @@ def restricted_circuit_layout(ansatz : Circuit, device : Device) -> Circuit:
     if final is None:
         warn("could not find valid layout, returning original")
         return ansatz
-    
-    final = Circuit().add_circuit(ansatz, target_mapping = final)
 
+    circuit = Circuit().add_circuit(ansatz, target_mapping = final)
     print(f'= limit(2q): {best[0]}')
     print(f'= limit(ro): {best[1]}')
     print(f'= limit(1q): {best[2]}')
     print(f' - num steps: {trials}')
     print(f' - steps: {steps}')
-    return final
+    # final = to_braket(final, qubit_labels=device.qubit_labels)
+    return circuit, final
 
-
-def find_linear_chain(circ : Circuit) -> list:
-    """ find the chain corresponding to a circuit """
-    chain = []
-    length = -1
-    iters = 0
-    while len(chain) != length and iters < 25:
-        iters += 1
-        length = len(chain)
-        for ins in circ.instructions:
-            if len(ins.target) == 2:
-                if len(chain) == 0:
-                    chain = [ins.target[0], ins.target[1]]
-                else:
-                    if ins.target[0] == chain[0] and ins.target[1] != chain[1]:
-                        chain.insert(0, ins.target[1])
-                    elif ins.target[1] == chain[0] and ins.target[0] != chain[1]:
-                        chain.insert(0, ins.target[0])
-                    elif len(chain) >= 2 and ins.target[0] == chain[-1] and ins.target[1] != chain[-2]:
-                        chain.append(ins.target[1])
-                    elif len(chain) >= 2 and ins.target[1] == chain[-1] and ins.target[0] != chain[-2]:
-                        chain.append(ins.target[0])
-    if len(chain) < len(circ.qubits):
-        raise ValueError("2Q chain not found")
-    return chain
 
 
 def multiply_gates(circuit : Circuit, gates : list[str], repetitions : int = 1) -> Circuit:

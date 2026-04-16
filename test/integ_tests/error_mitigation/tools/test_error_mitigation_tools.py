@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 import unittest
 
 import numpy as np
-from tools.circuit_tools import convert_paulis, find_linear_chain, multiply_gates, strip_verbatim
+from tools.circuit_tools import convert_paulis, multiply_gates, strip_verbatim
 from tools.mitigation_tools import (
     SparseReadoutMitigation,
     build_inverse_quasi_distribution,
@@ -173,14 +173,7 @@ class TestStatTools(unittest.TestCase):
         assert isinstance(result, (int, float, np.number))
 
 
-class TestCircuitTools(unittest.TestCase):
-    def test_find_linear_chain(self):
-        """Test finding linear chain in circuit."""
-        circ = Circuit().cz(0, 1).cz(1, 2).cz(2, 3)
-        chain = find_linear_chain(circ)
-        assert len(chain) == 4
-        assert set(chain) == {0, 1, 2, 3}
-        
+class TestCircuitTools(unittest.TestCase):        
     def test_multiply_gates(self):
         """Test gate multiplication."""
         circ = Circuit().x(0).h(1)

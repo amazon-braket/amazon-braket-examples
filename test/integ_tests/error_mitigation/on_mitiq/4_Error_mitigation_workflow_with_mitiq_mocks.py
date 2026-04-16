@@ -17,7 +17,7 @@ def pre_run_inject(mock_utils):
     mocker.set_get_device_result(
         {
             "deviceType": "QPU",
-            "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json", __file__),
+            "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json"),
         },
     )
     
