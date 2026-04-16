@@ -24,12 +24,12 @@ class QubitMap:
             }
         
     def b_to_q(self, key : int, reg : str = "phys") -> int:
-        assert reg in self.regs.keys()
+        assert reg in self.regs
         inp = self.regs[reg]["braket"].index(key)
         return self.regs[reg]["qiskit"][inp]
 
     def q_to_b(self, key : int, reg : str = "phys") -> int:
-        assert reg in self.regs.keys()
+        assert reg in self.regs
         inp = self.regs[reg]["qiskit"].index(key)
         return self.regs[reg]["braket"][inp]
 
