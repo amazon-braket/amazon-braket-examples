@@ -589,7 +589,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | benchmarking |  [Barrier](#Barrier)| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
- | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [EmuQis](#EmuQis)<a name="index_EmuQis"></a>, [CBQBP](#CBQBP)<a name="index_CBQBP"></a>| <br>
+ | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>, [EmuQis](#EmuQis)<a name="index_EmuQis"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
  | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
@@ -613,7 +613,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | mitiq      |  [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [TPS](#TPS), [EMWm](#EMWm)| <br>
  | model      |  [VQETFIM](#VQETFIM)| <br>
  | moments    |  [DDQC](#DDQC)<a name="index_DDQC"></a>| <br>
- | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu), [EmuQis](#EmuQis)| <br>
+ | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu)| <br>
  | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [ZNEm](#ZNEm), [LEmu](#LEmu), [EmuQis](#EmuQis)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
  | openqasm   |  [GSOQ](#GSOQ), [Barrier](#Barrier), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
