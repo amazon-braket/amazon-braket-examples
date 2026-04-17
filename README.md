@@ -333,7 +333,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Native Gate Calibrations**](examples/pulse_control/2_Native_gate_calibrations.ipynb) [(NGC)](#index_NGC)<a name="NGC"></a>
 
-  This tutorial shows how to retrieve the calibrations of native gates for Rigetti's Ankaa devices and submit a circuit with custom gate calibrations.
+  This tutorial shows how to retrieve the calibrations of native gates for Rigetti's Cepheus devices and submit a circuit with custom gate calibrations.
 
 
 ---
@@ -346,11 +346,11 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Native Gate Calibrations**](examples/pulse_control/2_Native_gate_calibrations.ipynb) [(NGC)](#index_NGC)
 
-  This tutorial shows how to retrieve the calibrations of native gates for Rigetti's Ankaa devices and submit a circuit with custom gate calibrations.
+  This tutorial shows how to retrieve the calibrations of native gates for Rigetti's Cepheus devices and submit a circuit with custom gate calibrations.
 
 -  [**Bell pair with pulses on Rigetti**](examples/pulse_control/3_Bell_pair_with_pulses_Rigetti.ipynb) [(BPPR)](#index_BPPR)<a name="BPPR"></a>
 
-  This tutorial shows creating a Bell state with cross-resonance pulses on Rigetti's Ankaa device.
+  This tutorial shows creating a Bell state with cross-resonance pulses on Rigetti's Cepheus device.
 
 -  [**Build single qubit gates**](examples/pulse_control/4_Build_single_qubit_gates.ipynb) [(BSQG)](#index_BSQG)<a name="BSQG"></a>
 
@@ -476,7 +476,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Bell pair with pulses on Rigetti**](examples/pulse_control/3_Bell_pair_with_pulses_Rigetti.ipynb) [(BPPR)](#index_BPPR)
 
-  This tutorial shows creating a Bell state with cross-resonance pulses on Rigetti's Ankaa device.
+  This tutorial shows creating a Bell state with cross-resonance pulses on Rigetti's Cepheus device.
 
 
 ---
