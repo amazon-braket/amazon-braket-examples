@@ -5,7 +5,7 @@ def pre_run_inject(mock_utils):
         {
             "deviceType": "QPU",
             "providerName": "Rigetti",
-            "deviceCapabilities": mock_utils.read_file("ankaa3_device_capabilities.json"),
+            "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json"),
             "deviceQueueInfo": [
                 {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Normal"},
                 {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
