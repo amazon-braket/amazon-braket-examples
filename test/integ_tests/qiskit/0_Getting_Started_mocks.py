@@ -11,10 +11,8 @@ def pre_run_inject(mock_utils):
     mocker.set_get_device_result(
         {
             "deviceType": "QPU",
-            "deviceCapabilities": mock_utils.read_file(
-                "rig_pulse_device_capabilities.json",
-                __file__,
-            ),
+            "providerName": "Rigetti",
+            "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json"),
         },
     )
     mocker.set_search_result(
@@ -44,7 +42,7 @@ def pre_run_inject(mock_utils):
                     },
                     {
                         "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
-                        "deviceName": "Ankaa-3",
+                        "deviceName": "Cepheus-1-108Q",
                         "deviceType": "QPU",
                         "deviceStatus": "ONLINE",
                         "providerName": "Test Provider",

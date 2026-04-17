@@ -9,18 +9,22 @@ from testbook import testbook
 
 UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
 
+DEFAULT_CELL_TIMEOUT = 600
+
+# Notebooks that need longer cell timeout due to heavy local simulation
+NOTEBOOK_TIMEOUTS = {
+    "02_Expectation_value_calculations_with_program_sets.ipynb": 900,
+}
+
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
     # These notebooks have cells that have syntax errors
     "bring_your_own_container.ipynb",
     "qnspsa_with_embedded_simulator.ipynb",
     # These notebooks have dependency issues
-    "VQE_chemistry_braket.ipynb",
     "6_Adjoint_gradient_computation.ipynb",
     # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
     "0_Getting_started_papermill.ipynb",
-    # Some AHS examples are running long especially on Mac. Removing while investigating
-    "05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb",
     # Requires amazon-braket-simulator-v2 package (optional install)
     "Using_the_experimental_local_simulator.ipynb",
     # CUDA-Q hybrid job notebooks
@@ -30,20 +34,11 @@ EXCLUDED_NOTEBOOKS = [
     "5_Multiple_GPU_simulations.ipynb",
     "6_Distributed_state_vector_simulations.ipynb",
     # Notebooks that require devices to be online
-    "Allocating_Qubits_on_QPU_Devices.ipynb",
-    "0_Getting_Started.ipynb",
-    "Noise_models_on_Rigetti.ipynb",
     "2_Running_quantum_circuits_on_QPU_devices.ipynb",
     "Verbatim_Compilation.ipynb",
-    "01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
-    # Dynamic circuits with QBP
-    "4_Dynamic_Circuits_with_Qiskit_Braket_Provider.ipynb",
-    # Investigating local simulator performance on small circuits
-    "02_Expectation_value_calculations_with_program_sets.ipynb",
-    # TODO: Add spending limit mocks
-    "Spending_Limits_Introduction.ipynb",
+    # Mitiq notebooks require separate test setup and dependencies
     "0_Getting_started_with_mitiq_on_Braket.ipynb",
     "1_Readout_mitigation_with_mitiq.ipynb",
     "2_Zero_noise_extrapolation_with_mitiq.ipynb",
@@ -104,7 +99,7 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
     kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
-    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
+    with testbook(notebook_file, timeout=NOTEBOOK_TIMEOUTS.get(notebook_file, DEFAULT_CELL_TIMEOUT), kernel_name=kernel) as tb:
         # We check the existing notebook output for errors before we execute the
         # notebook because it will change after executing it.
         check_cells_for_error_output(tb.cells)
@@ -139,7 +134,7 @@ def test_record():
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
     kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
-    with testbook(notebook_file, timeout=600, kernel_name=kernel) as tb:
+    with testbook(notebook_file, timeout=NOTEBOOK_TIMEOUTS.get(notebook_file, DEFAULT_CELL_TIMEOUT), kernel_name=kernel) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
