@@ -538,6 +538,13 @@
         "location": "examples/braket_features/Device_emulation/01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb",
         "content" : "  This tutorial serves as an introduction to the local emulator for validating and debugging verbatim circuits for gate-based devices. This tutorial explains how to instantiate local emulator from up-to-date device calibration data and customize it for emulating verbatim circuits locally."
     },
+    "Emulating non-verbatim circuits with Qiskit": {
+        "index_abbrv": "EmuQis",
+        "index_terms" : ["noise", "emulator", "compilation", "qiskit"],
+        "categories"  : ["noise", "simulators", "qiskit"],
+        "location": "examples/braket_features/Device_emulation/02_Emulating_Non-Verbatim_Circuits_with_Qiskit.ipynb",
+        "content" : "  This tutorial shows how to combine the Qiskit-Braket provider compilation pipeline with the local emulator to emulate non-verbatim circuits for a target QPU. The workflow converts a high-level Braket circuit to Qiskit, transpiles it to native gates, and runs the resulting verbatim circuit on the local emulator with a realistic noise model."
+    },
     "Expectation value calculations with Amazon Braket program sets": {
         "index_abbrv" : "EVPrS",
         "index_terms": ["program sets", "estimators"],
