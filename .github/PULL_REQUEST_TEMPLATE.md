@@ -11,11 +11,12 @@ _Put an `x` in the boxes that apply. You can also fill these out after creating 
 #### General
 
 - [ ] I have read the [CONTRIBUTING](https://github.com/amazon-braket/amazon-braket-examples/blob/main/CONTRIBUTING.md) doc
+- [ ] I have read [docs/INSTRUCTIONS.md](https://github.com/amazon-braket/amazon-braket-examples/blob/main/docs/INSTRUCTIONS.md) and if necessary, added to `docs/ENTRIES.json` and run `docs/build_readme.sh`
 
 #### Tests
 
-- [ ] I have verified my changes pass `pytest test/integ_tests` (see [TESTING.md](https://github.com/amazon-braket/amazon-braket-examples/blob/main/TESTING.md))
-- [ ] If adding to `EXCLUDED_NOTEBOOKS`, I have included reason and owner in the comment (e.g. `# Owner: APPLE | Reason: requires GPU runtime`)
+- [ ] I have verified my changes pass `pytest test/` (see [TESTING.md](https://github.com/amazon-braket/amazon-braket-examples/blob/main/TESTING.md))
+- [ ] If adding to `EXCLUDED_NOTEBOOKS`, I have included reason in the comment (e.g. `# Reason: requires GPU runtime`)
 - [ ] If modifying a notebook, I have verified no broken outputs or missing imports
 
 By submitting this pull request, I confirm that my contribution is made under the terms of the Apache 2.0 license.
