@@ -172,7 +172,7 @@
         "index_terms" : ["error mitigation"], 
         "categories": ["noise","ionq"],
         "location": "examples/braket_features/Error_Mitigation_on_Amazon_Braket.ipynb",
-        "content": "  This tutorial explains how to get started with using error mitigation on IonQ\u2019s Aria QPU. You\u2019ll learn how Aria\u2019s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems."
+        "content": "  This tutorial explains how to get started with using error mitigation on IonQ\u2019s Forte Enterprise QPU. You\u2019ll learn how Forte Enterprise\u2019s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems."
     },
     "Noise Models on Amazon Braket": {
         "index_abbrv": "NM",
