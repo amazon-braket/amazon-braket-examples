@@ -211,7 +211,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Error Mitigation on IonQ**](examples/braket_features/Error_Mitigation_on_Amazon_Braket.ipynb) [(EMIQ)](#index_EMIQ)<a name="EMIQ"></a>
 
-  This tutorial explains how to get started with using error mitigation on IonQ’s Aria QPU. You’ll learn how Aria’s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems.
+  This tutorial explains how to get started with using error mitigation on IonQ’s Forte Enterprise QPU. You’ll learn how Forte Enterprise’s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems.
 
 -  [**Noise Models on Amazon Braket**](examples/braket_features/Noise_models/Noise_models_on_Amazon_Braket.ipynb) [(NM)](#index_NM)<a name="NM"></a>
 
@@ -433,7 +433,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Error Mitigation on IonQ**](examples/braket_features/Error_Mitigation_on_Amazon_Braket.ipynb) [(EMIQ)](#index_EMIQ)
 
-  This tutorial explains how to get started with using error mitigation on IonQ’s Aria QPU. You’ll learn how Aria’s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems.
+  This tutorial explains how to get started with using error mitigation on IonQ’s Forte Enterprise QPU. You’ll learn how Forte Enterprise’s two built-in error mitigation techniques work, how to switch between them, and the performance difference you can expect to see with and without these techniques for some problems.
 
 -  [**IonQ Native Gates**](examples/braket_features/IonQ_Native_Gates.ipynb) [(IonNG)](#index_IonNG)
 
