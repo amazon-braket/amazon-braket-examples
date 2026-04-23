@@ -33,9 +33,6 @@ EXCLUDED_NOTEBOOKS = [
     "4_Simulation_with_GPUs.ipynb",
     "5_Multiple_GPU_simulations.ipynb",
     "6_Distributed_state_vector_simulations.ipynb",
-    # Notebooks that require devices to be online
-    "2_Running_quantum_circuits_on_QPU_devices.ipynb",
-    "Verbatim_Compilation.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
     # Mitiq notebooks require separate test setup and dependencies
