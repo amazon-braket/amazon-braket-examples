@@ -163,10 +163,10 @@ def mock_default_job_calls(mocker):
 
 def mock_job_results(results):
     with open("results.json", "w") as f:
-        serialized_data = serialize_values(results, PersistedJobDataFormat.PICKLED_V4)
+        serialized_data = serialize_values(results, PersistedJobDataFormat.PLAINTEXT)
         persisted_data = PersistedJobData(
             dataDictionary=serialized_data,
-            dataFormat=PersistedJobDataFormat.PICKLED_V4,
+            dataFormat=PersistedJobDataFormat.PLAINTEXT,
         )
         f.write(persisted_data.json())
     with tarfile.open("model.tar.gz", "w:gz") as tar:
