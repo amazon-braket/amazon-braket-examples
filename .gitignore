@@ -138,12 +138,14 @@ dmypy.json
 
 # Data intermediates
 *.pck
+examples/analog_hamiltonian_simulation/task_arns.npy
 examples/hybrid_jobs/2_Using_PennyLane_with_Braket_Jobs/input-data.adjlist
 
 # Notebook artifacts
 */3_Deep_dive_into_the_anatomy_of_quantum_circuits/device_logs-*.txt
 examples/hybrid_jobs/4_Embedded_simulators_in_Braket_Hybrid_Jobs/embedded-simulation-*
 examples/hybrid_jobs/8_Creating_Hybrid_Job_Scripts/braket-job-default-*
+examples/hybrid_quantum_algorithms/VQE_Chemistry/data
 examples/nvidia_cuda_q/cuda-q-applications*
 examples/nvidia_cuda_q/cuda-q-academic*
 examples/**/model.tar.gz
