@@ -26,7 +26,8 @@ phases:
       - conda config --set default_threads $CONDA_THREADS
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
-      - conda install -y -q -c conda-forge conda-pack=0.8.1 setuptools
+      - pip install 'setuptools<70'
+      - conda install -y -q -c conda-forge conda-pack=0.8.1
   build:
     commands:
       - BRAKET_ENV=Braket
