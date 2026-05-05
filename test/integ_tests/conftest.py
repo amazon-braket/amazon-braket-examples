@@ -1,4 +1,6 @@
+import glob
 import os
+import shutil
 
 import pytest
 from nbconvert import HTMLExporter
@@ -8,6 +10,18 @@ if "integ_tests" in os.getcwd():
 
 root_path = os.getcwd()
 
+
+def _remove_test_artifacts():
+    test_artifact_globs = (
+        os.path.join(root_path, "examples", "nvidia_cuda_q", "cuda-q-applications*"),
+        os.path.join(root_path, "examples", "nvidia_cuda_q", "cuda-q-academic*"),
+    )
+    for pattern in test_artifact_globs:
+        for path in glob.glob(pattern):
+            shutil.rmtree(path, ignore_errors=True)
+
+
+_remove_test_artifacts()
 
 
 def pytest_addoption(parser):
@@ -43,6 +57,7 @@ def restore_cwd():
     """ after each test, move back to root_path - amazon-braket-examples/"""
     yield
     os.chdir(root_path)
+    _remove_test_artifacts()
     
 @pytest.fixture(scope="module")
 def html_exporter():
