@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import sys
 from importlib.machinery import SourceFileLoader
 
 import pytest
@@ -27,8 +28,7 @@ EXCLUDED_NOTEBOOKS = [
     "0_Getting_started_papermill.ipynb",
     # Requires amazon-braket-simulator-v2 package (optional install)
     "Using_the_experimental_local_simulator.ipynb",
-    # CUDA-Q hybrid job notebooks
-    "0_Getting_started_with_CUDA-Q.ipynb",
+    # CUDA-Q notebooks that require GPU/CUDA-Q runtime
     "3_Hybrid_jobs_with_CUDA-Q.ipynb",
     "4_Simulation_with_GPUs.ipynb",
     "5_Multiple_GPU_simulations.ipynb",
@@ -60,6 +60,10 @@ if (
         "0_Creating_your_first_Hybrid_Job.ipynb",
     ]
     EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
+
+# cudaq is only available on linux; requirements.txt pins it with sys_platform=="linux"
+if sys.platform != "linux":
+    EXCLUDED_NOTEBOOKS.append("0_Getting_started_with_CUDA-Q.ipynb")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
