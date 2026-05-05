@@ -26,7 +26,8 @@ phases:
       - conda config --set default_threads $CONDA_THREADS
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
-      - conda install -y -q --freeze-installed -c conda-forge conda-pack=0.8.1
+      - pip install 'setuptools<70'
+      - conda install -y -q -c conda-forge conda-pack=0.8.1
   build:
     commands:
       - BRAKET_ENV=Braket
@@ -42,7 +43,7 @@ phases:
         grep -v "braket" | \
         grep -v "numpy" | \
         xargs rm -rf 2>/dev/null || true
-      - conda pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
+      - conda-pack --quiet --name $BRAKET_ENV --output envs/Braket.tar.zst 
           --compress-level 3 --n-threads -1
           --ignore-missing-files
           --exclude "*.pyc" --exclude "*.pyo" --exclude "__pycache__/*"
