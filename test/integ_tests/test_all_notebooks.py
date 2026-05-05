@@ -14,6 +14,7 @@ DEFAULT_CELL_TIMEOUT = 600
 # Notebooks that need longer cell timeout due to heavy local simulation
 NOTEBOOK_TIMEOUTS = {
     "02_Expectation_value_calculations_with_program_sets.ipynb": 900,
+    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb": 900,
 }
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
