@@ -1,6 +1,7 @@
 import logging
 import os
 import re
+import sys
 from importlib.machinery import SourceFileLoader
 
 import pytest
@@ -14,6 +15,7 @@ DEFAULT_CELL_TIMEOUT = 600
 # Notebooks that need longer cell timeout due to heavy local simulation
 NOTEBOOK_TIMEOUTS = {
     "02_Expectation_value_calculations_with_program_sets.ipynb": 900,
+    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb": 1200,
 }
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
@@ -27,15 +29,11 @@ EXCLUDED_NOTEBOOKS = [
     "0_Getting_started_papermill.ipynb",
     # Requires amazon-braket-simulator-v2 package (optional install)
     "Using_the_experimental_local_simulator.ipynb",
-    # CUDA-Q hybrid job notebooks
-    "0_Getting_started_with_CUDA-Q.ipynb",
+    # CUDA-Q notebooks that require GPU/CUDA-Q runtime
     "3_Hybrid_jobs_with_CUDA-Q.ipynb",
     "4_Simulation_with_GPUs.ipynb",
     "5_Multiple_GPU_simulations.ipynb",
     "6_Distributed_state_vector_simulations.ipynb",
-    # Notebooks that require devices to be online
-    "2_Running_quantum_circuits_on_QPU_devices.ipynb",
-    "Verbatim_Compilation.ipynb",
     # Simulator TN1 notebook, remove when TN1 issues are fixed
     "TN1_demo_local_vs_non-local_random_circuits.ipynb",
     # Mitiq notebooks require separate test setup and dependencies
@@ -60,6 +58,10 @@ if (
         "0_Creating_your_first_Hybrid_Job.ipynb",
     ]
     EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
+
+# cudaq is only available on linux; requirements.txt pins it with sys_platform=="linux"
+if sys.platform != "linux":
+    EXCLUDED_NOTEBOOKS.append("0_Getting_started_with_CUDA-Q.ipynb")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
