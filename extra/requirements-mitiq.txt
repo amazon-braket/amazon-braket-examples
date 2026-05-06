@@ -1,9 +1,9 @@
-amazon-braket-default-simulator==1.39.0
+amazon-braket-default-simulator==1.39.1
 amazon-braket-schemas==1.29.1
 amazon-braket-sdk==1.117.1
-awscli==1.45.2
-boto3==1.43.2
-botocore==1.43.2
+awscli==1.45.4
+boto3==1.43.4
+botocore==1.43.4
 cirq-ionq
 matplotlib==3.10.9
 matplotlib-venn==1.1.2
