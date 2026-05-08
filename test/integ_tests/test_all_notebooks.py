@@ -56,6 +56,8 @@ if (
         "Using_The_Adjoint_Gradient_Result_Type.ipynb",
         "0_Getting_Started.ipynb",
         "0_Creating_your_first_Hybrid_Job.ipynb",
+        # SV1 not available in eu-north-1
+        "0_Getting_started_with_CUDA-Q.ipynb",
     ]
     EXCLUDED_NOTEBOOKS.extend(EXTRA_EXCLUDES)
 
