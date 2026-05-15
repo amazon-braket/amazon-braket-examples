@@ -6,9 +6,9 @@ amazon-braket-algorithm-library==1.7.6
 awscli==1.45.6
 boto3==1.43.6
 botocore==1.43.6
-cudaq==0.14.2; sys_platform=="linux"
-cudaq-qec==0.6.0; sys_platform=="linux"
-cudaq-solvers==0.6.0; sys_platform=="linux"
+cuda-quantum-cu12==0.14.2; sys_platform=="linux"
+cudaq-qec-cu12==0.6.0; sys_platform=="linux"
+cudaq-solvers-cu12==0.6.0; sys_platform=="linux"
 cvxpy==1.8.2
 ipykernel==7.2.0
 jax==0.6.2 # JAX >0.6.2 not compatible with PennyLane
