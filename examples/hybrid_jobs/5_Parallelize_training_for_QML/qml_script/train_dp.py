@@ -79,11 +79,7 @@ def main():
     if qc_dev_name == "lightning.gpu":
         torch.cuda.set_device(dp_info["local_rank"])
         device = torch.device(f"cuda:{dp_info['local_rank']}")
-        model = DDP(
-            DressedQNN(qc_dev).to(device),
-            device_ids=[dp_info["local_rank"]],
-            find_unused_parameters=True,
-        )
+        model = DDP(DressedQNN(qc_dev).to(device), device_ids=[dp_info["local_rank"]])
     else:
         device = torch.device("cpu")
         model = DDP(DressedQNN(qc_dev).to(device))
@@ -104,10 +100,16 @@ def main():
                 iteration_number=epoch,
             )
 
+        # Sync all ranks at the end of each epoch so rank-0-only work
+        # (logging, saving) doesn't desync the next iteration's all-reduce.
+        dist.barrier()
+
     if dp_info["rank"] == 0:
         print("Training Finished!!")
         torch.save(model.state_dict(), f"{output_dir}/test_local.pt")
         save_job_result({"last loss": float(loss_before.detach().cpu())})
+
+    dist.destroy_process_group()
 
 
 def train(dp_info, model, device, train_loader, optimizer, epoch):
