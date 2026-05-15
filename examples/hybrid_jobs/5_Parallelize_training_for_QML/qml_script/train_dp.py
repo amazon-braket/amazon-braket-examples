@@ -3,9 +3,9 @@ import os
 
 import numpy as np
 
-# Import SMDataParallel PyTorch Modules
-import smdistributed.dataparallel.torch.distributed as dist
+# PyTorch native distributed data parallel
 import torch
+import torch.distributed as dist
 import torch.nn.functional as F
 
 # Dataset
@@ -13,8 +13,8 @@ from qml_script.helper_funs import get_device, sonar_dataset
 
 # Network definition
 from qml_script.model import DressedQNN
-from smdistributed.dataparallel.torch.parallel.distributed import DistributedDataParallel as DDP
 from torch import optim
+from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.optim.lr_scheduler import StepLR
 
 from braket.jobs import save_job_result
@@ -44,11 +44,11 @@ def main():
     np.random.seed(seed)
 
     # DP setup ##########
-    dist.init_process_group()
+    dist.init_process_group(backend="nccl", init_method="env://")
     dp_info = {
         "world_size": dist.get_world_size(),
         "rank": dist.get_rank(),
-        "local_rank": dist.get_local_rank(),
+        "local_rank": int(os.environ["LOCAL_RANK"]),
     }
     batch_size //= dp_info["world_size"] // 8
     batch_size = max(batch_size, 1)
