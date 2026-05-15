@@ -79,7 +79,11 @@ def main():
     if qc_dev_name == "lightning.gpu":
         torch.cuda.set_device(dp_info["local_rank"])
         device = torch.device(f"cuda:{dp_info['local_rank']}")
-        model = DDP(DressedQNN(qc_dev).to(device), device_ids=[dp_info["local_rank"]])
+        model = DDP(
+            DressedQNN(qc_dev).to(device),
+            device_ids=[dp_info["local_rank"]],
+            find_unused_parameters=True,
+        )
     else:
         device = torch.device("cpu")
         model = DDP(DressedQNN(qc_dev).to(device))
