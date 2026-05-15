@@ -50,7 +50,7 @@ def main():
         "rank": dist.get_rank(),
         "local_rank": int(os.environ["LOCAL_RANK"]),
     }
-    batch_size //= dp_info["world_size"] // 8
+    batch_size //= dp_info["world_size"]
     batch_size = max(batch_size, 1)
     print("dp_info: ", dp_info)
 
