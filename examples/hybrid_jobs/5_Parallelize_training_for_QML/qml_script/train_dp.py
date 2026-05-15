@@ -76,12 +76,13 @@ def main():
     qc_dev = get_device(nwires, qc_dev_string)
     qc_dev_name = qc_dev.name
 
-    device = torch.device("cuda") if qc_dev_name == "lightning.gpu" else torch.device("cpu")
-
-    model = DressedQNN(qc_dev).to(device)
-    model = DDP(model)
-    torch.cuda.set_device(dp_info["local_rank"])
-    model.cuda(dp_info["local_rank"])
+    if qc_dev_name == "lightning.gpu":
+        torch.cuda.set_device(dp_info["local_rank"])
+        device = torch.device(f"cuda:{dp_info['local_rank']}")
+        model = DDP(DressedQNN(qc_dev).to(device), device_ids=[dp_info["local_rank"]])
+    else:
+        device = torch.device("cpu")
+        model = DDP(DressedQNN(qc_dev).to(device))
 
     optimizer = optim.Adam(model.parameters(), lr=lr)
     scheduler = StepLR(optimizer, step_size=1, gamma=gamma)
