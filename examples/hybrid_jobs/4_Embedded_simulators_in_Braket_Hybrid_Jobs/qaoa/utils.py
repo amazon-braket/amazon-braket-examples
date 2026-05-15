@@ -9,11 +9,7 @@ def get_device(n_wires):
 
     if device_prefix == "local":
         _prefix, device_name = device_string.split("/")
-        device = qml.device(
-            device_name,
-            wires=n_wires,
-            custom_decomps={"MultiRZ": qml.MultiRZ.compute_decomposition},
-        )
+        device = qml.device(device_name, wires=n_wires)
         print("Using local simulator: ", device.name)
     else:
         device = qml.device(
