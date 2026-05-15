@@ -11,17 +11,14 @@ class DressedQNN(nn.Module):
         nwires = len(qc_dev.wires)
         q_circuit = QuantumCircuit(qc_dev)
         weights = q_circuit.initialize_weights()
-        self.w1 = nn.Parameter(weights[0])
-        self.w2 = nn.Parameter(weights[1])
-        self.rot = nn.Parameter(weights[2])
         self.circuit = q_circuit.q_circuit()
 
         self.qlayer = qml.qnn.TorchLayer(
             self.circuit,
             {
-                "w_layer1": self.w1.shape,
-                "w_layer2": self.w2.shape,
-                "rotation": self.rot.shape,
+                "w_layer1": weights[0].shape,
+                "w_layer2": weights[1].shape,
+                "rotation": weights[2].shape,
             },
         )
         self.input_layer = nn.Linear(60, nwires)
