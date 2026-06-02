@@ -184,7 +184,6 @@ def check_cells_for_error_output(cells):
 
 
 def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
-    # We do this check to make sure that the notebook can be executed (with mocks).
     tb.inject(
         f"""
         from importlib.machinery import SourceFileLoader

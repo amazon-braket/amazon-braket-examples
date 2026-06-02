@@ -94,17 +94,11 @@ def shared_kernel_manager():
 
 @pytest.fixture
 def shared_km(request, shared_kernel_manager):
-    """Yields the shared KernelManager and resets kernel state after each test."""
+    """Yields the shared KernelManager, restarts kernel after each test for isolation."""
     if request.config.getoption("--no-kernel-pool"):
         yield None
         return
 
     yield shared_kernel_manager
 
-    kc = shared_kernel_manager.client()
-    kc.start_channels()
-    try:
-        kc.wait_for_ready(timeout=30)
-        kc.execute("%reset -f\nimport gc; gc.collect()", reply=True, timeout=30)
-    finally:
-        kc.stop_channels()
+    shared_kernel_manager.restart_kernel(now=True)
