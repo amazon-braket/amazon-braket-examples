@@ -139,13 +139,6 @@
         "location": "examples/braket_features/Simulating_Advanced_OpenQASM_Programs_with_the_Local_Simulator.ipynb",
         "content": "  This notebook serves as a reference of OpenQASM features supported by Braket with the LocalSimulator."
     },
-    "Using the experimental local simulator": {
-        "index_abbrv": "ExpLS",
-        "index_terms": ["simulators"], 
-        "categories": ["simulators"],
-        "location": "examples/braket_features/Using_the_experimental_local_simulator.ipynb",
-        "content": "  This tutorial serves as an introduction to the experimental v2 local simulator for Amazon Braket. This tutorial explains how to use the v2 local simulator and the performance difference you can expect to see."
-    },
     "Using the tensor network simulator TN1": {
         "index_abbrv": "TNSim",
         "index_terms" : ["simulators"], 

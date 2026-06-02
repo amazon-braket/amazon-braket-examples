@@ -27,8 +27,6 @@ EXCLUDED_NOTEBOOKS = [
     "6_Adjoint_gradient_computation.ipynb",
     # These notebooks are run from within a job (see Running_notebooks_as_hybrid_jobs.ipynb)
     "0_Getting_started_papermill.ipynb",
-    # Requires amazon-braket-simulator-v2 package (optional install)
-    "Using_the_experimental_local_simulator.ipynb",
     # CUDA-Q notebooks that require GPU/CUDA-Q runtime
     "3_Hybrid_jobs_with_CUDA-Q.ipynb",
     "4_Simulation_with_GPUs.ipynb",
