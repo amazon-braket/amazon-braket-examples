@@ -13,10 +13,7 @@ UNCOMMENT_NOTEBOOK_TAG = "## UNCOMMENT_TO_RUN"
 DEFAULT_CELL_TIMEOUT = 600
 
 # Notebooks that need longer cell timeout due to heavy local simulation
-NOTEBOOK_TIMEOUTS = {
-    "02_Expectation_value_calculations_with_program_sets.ipynb": 900,
-    "09_Noisy_quantum_dynamics_for_Rydberg_atom_arrays.ipynb": 1200,
-}
+NOTEBOOK_TIMEOUTS = {}
 
 # These notebooks have syntax or dependency issues that prevent them from being tested.
 EXCLUDED_NOTEBOOKS = [
@@ -196,18 +193,19 @@ def execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks):
         before=0,
     )
 
-    # Uncomment all test sections in the notebook
+    test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
+
+    if hasattr(test_mocks, "modify_cells"):
+        test_mocks.modify_cells(tb.cells)
+
     for i, cell in enumerate(tb.cells):
         if cell.get("cell_type") == "code" and "source" in cell:
             source = cell["source"]
             if UNCOMMENT_NOTEBOOK_TAG in source:
-                # Uncomment the test section
                 modified_source = uncomment_test_section(source)
                 tb.cells[i]["source"] = modified_source
 
-    # Execute the notebook with the uncommented test sections
     tb.execute()
-    test_mocks = SourceFileLoader("notebook_mocks", path_to_mocks).load_module()
     test_mocks.post_run(tb)
 
 
