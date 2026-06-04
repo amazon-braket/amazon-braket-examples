@@ -10,8 +10,10 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_get_device_result(
         {
-            "deviceType": "QPU",
-            "providerName": "Rigetti",
+            "deviceType": "SIMULATOR",
+            "deviceName": "SV1",
+            "deviceStatus": "ONLINE",
+            "providerName": "Amazon",
             "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json"),
         },
     )

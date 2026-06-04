@@ -8,6 +8,9 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_get_device_result({
         "deviceType": "QPU",
+        "deviceName": "Garnet",
+        "deviceStatus": "ONLINE",
+        "providerName": "IQM",
         "deviceCapabilities": mock_utils.read_file(
             "garnet_device_capabilities_without_programset.json", __file__
         ),
