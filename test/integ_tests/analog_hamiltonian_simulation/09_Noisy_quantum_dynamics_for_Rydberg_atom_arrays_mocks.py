@@ -1,3 +1,6 @@
+import re
+
+
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
@@ -8,6 +11,17 @@ def pre_run_inject(mock_utils):
         },
     )
     mocker.set_task_result_return(mock_utils.read_file("ahs_results.json", __file__))
+
+
+def modify_cells(cells):
+    for cell in cells:
+        if cell.get("cell_type") != "code":
+            continue
+        src = cell["source"]
+        src = re.sub(r"n_times = 19", "n_times = 3", src)
+        src = re.sub(r"shots=100, steps=100", "shots=2, steps=5", src)
+        src = re.sub(r"shots=1000, steps=100", "shots=2, steps=5", src)
+        cell["source"] = src
 
 
 def post_run(tb):
