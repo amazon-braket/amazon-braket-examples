@@ -1,7 +1,6 @@
 import json
 import tarfile
 
-
 QUEUE_INFO = [
     {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Normal"},
     {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
@@ -59,7 +58,7 @@ def configure_qiskit_devices(mock_utils, mocker):
 def device_response(mock_utils, arn):
     if arn == SV1_ARN or "quantum-simulator/amazon/sv1" in arn:
         return _response(mock_utils, arn, "SV1", "SIMULATOR", "Amazon Braket", "default_capabilities.json")
-    if arn == EMERALD_ARN or arn == GARNET_ARN or "/iqm/" in arn:
+    if arn in (EMERALD_ARN, GARNET_ARN) or "/iqm/" in arn:
         name = "Emerald" if "Emerald" in arn else "Garnet"
         return _response(mock_utils, arn, name, "QPU", "IQM", "iqm_garnet_device_capabilities.json")
     if arn == ANKAA_3_ARN or "/rigetti/" in arn:
