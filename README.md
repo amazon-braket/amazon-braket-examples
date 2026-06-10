@@ -105,6 +105,18 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold.
 
+-  [**Native programming with the Qiskit-Braket provider**](examples/qiskit/4_tutorial_native_programming.ipynb) [(NPQBP)](#index_NPQBP)<a name="NPQBP"></a>
+
+  This tutorial explains how to use native gate sets and verbatim execution through the Qiskit-Braket provider.
+
+-  [**Transpiling circuits and programs to Braket with Qiskit**](examples/qiskit/5_tutorial_transpilation.ipynb) [(TCBQ)](#index_TCBQ)<a name="TCBQ"></a>
+
+  This tutorial demonstrates how to transpile Qiskit circuits, Braket circuits, and OpenQASM programs to Braket targets.
+
+-  [**Braket-native primitives with Qiskit**](examples/qiskit/6_tutorial_primitives.ipynb) [(BNPQ)](#index_BNPQ)<a name="BNPQ"></a>
+
+  This tutorial introduces BraketEstimator and BraketSampler primitives for Qiskit workloads on Amazon Braket.
+
 
 ---
 
@@ -150,6 +162,14 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 -  [**VQE Transverse Ising**](examples/hybrid_quantum_algorithms/VQE_Transverse_Ising/VQE_Transverse_Ising_Model.ipynb) [(VQETFIM)](#index_VQETFIM)<a name="VQETFIM"></a>
 
   This tutorial shows how to solve for the ground state of the Transverse Ising Model, which is arguably one of the most prominent, canonical quantum spin systems, using the variational quantum eigenvalue solver (VQE). The VQE algorithm belongs to the class of _hybrid quantum algorithms_ (leveraging classical andquantum computers), which are widely believed to be the working horse for the current NISQ (noisy intermediate-scale quantum) era. To validate our approach, we benchmark our results with exact results as obtained from a Jordan-Wigner transformation.
+
+-  [**VQE with the Qiskit-Braket provider**](examples/qiskit/1_tutorial_vqe.ipynb) [(VQEQBP)](#index_VQEQBP)<a name="VQEQBP"></a>
+
+  This tutorial runs a Variational Quantum Eigensolver workflow with Qiskit algorithms and Braket-backed primitives.
+
+-  [**Minimum Eigen Optimizer with the Qiskit-Braket provider**](examples/qiskit/3_tutorial_minimum_eigen_optimizer.ipynb) [(MEOQBP)](#index_MEOQBP)<a name="MEOQBP"></a>
+
+  This tutorial adapts Qiskit's minimum eigen optimizer workflow to execute with a Braket sampler backend.
 
 
 ---
@@ -301,6 +321,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 -  [**Creating Hybrid Job Scripts**](examples/hybrid_jobs/8_Creating_Hybrid_Job_Scripts/Creating_your_first_Hybrid_Job.ipynb) [(CHJS)](#index_CHJS)<a name="CHJS"></a>
 
   This notebook shows an alternate way to create a Hybrid Job without using a @hybrid_job decorator. The demonstrated method may be useful in some circumstances, such as using older versions of Python.
+
+-  [**Qiskit-Braket provider Hybrid Jobs**](examples/qiskit/2_tutorial_hybrid_jobs.ipynb) [(QBPHJ)](#index_QBPHJ)<a name="QBPHJ"></a>
+
+  This tutorial shows how to package a Qiskit variational algorithm as an Amazon Braket Hybrid Job.
 
 
 ---
@@ -565,6 +589,34 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how to combine the Qiskit-Braket provider compilation pipeline with the local emulator to emulate non-verbatim circuits for a target QPU. The workflow converts a high-level Braket circuit to Qiskit, transpiles it to native gates, and runs the resulting verbatim circuit on the local emulator with a realistic noise model.
 
+-  [**Qiskit-Braket provider overview**](examples/qiskit/0_tutorial_qiskit-braket-provider_overview.ipynb) [(QBPO)](#index_QBPO)<a name="QBPO"></a>
+
+  This tutorial introduces the Qiskit-Braket provider, including backend discovery, local simulation, Braket task retrieval, and Qiskit-to-Braket circuit conversion.
+
+-  [**VQE with the Qiskit-Braket provider**](examples/qiskit/1_tutorial_vqe.ipynb) [(VQEQBP)](#index_VQEQBP)
+
+  This tutorial runs a Variational Quantum Eigensolver workflow with Qiskit algorithms and Braket-backed primitives.
+
+-  [**Qiskit-Braket provider Hybrid Jobs**](examples/qiskit/2_tutorial_hybrid_jobs.ipynb) [(QBPHJ)](#index_QBPHJ)
+
+  This tutorial shows how to package a Qiskit variational algorithm as an Amazon Braket Hybrid Job.
+
+-  [**Minimum Eigen Optimizer with the Qiskit-Braket provider**](examples/qiskit/3_tutorial_minimum_eigen_optimizer.ipynb) [(MEOQBP)](#index_MEOQBP)
+
+  This tutorial adapts Qiskit's minimum eigen optimizer workflow to execute with a Braket sampler backend.
+
+-  [**Native programming with the Qiskit-Braket provider**](examples/qiskit/4_tutorial_native_programming.ipynb) [(NPQBP)](#index_NPQBP)
+
+  This tutorial explains how to use native gate sets and verbatim execution through the Qiskit-Braket provider.
+
+-  [**Transpiling circuits and programs to Braket with Qiskit**](examples/qiskit/5_tutorial_transpilation.ipynb) [(TCBQ)](#index_TCBQ)
+
+  This tutorial demonstrates how to transpile Qiskit circuits, Braket circuits, and OpenQASM programs to Braket targets.
+
+-  [**Braket-native primitives with Qiskit**](examples/qiskit/6_tutorial_primitives.ipynb) [(BNPQ)](#index_BNPQ)
+
+  This tutorial introduces BraketEstimator and BraketSampler primitives for Qiskit workloads on Amazon Braket.
+
 -  [**Compiling Braket circuits with the Qiskit-Braket provider**](examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb) [(CBQBP)](#index_CBQBP)<a name="CBQBP"></a>
 
   This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation.
@@ -585,7 +637,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | benchmarking |  [Barrier](#Barrier)| <br>
  | calibration |  [NM](#NM)<a name="index_NM"></a>, [AQQD](#AQQD), [NGC](#NGC), [LEmu](#LEmu)<a name="index_LEmu"></a>| <br>
  | chemistry  |  [VQEChem](#VQEChem)<a name="index_VQEChem"></a>, [HGV](#HGV)<a name="index_HGV"></a>| <br>
- | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [CBQBP](#CBQBP)<a name="index_CBQBP"></a>, [EmuQis](#EmuQis)<a name="index_EmuQis"></a>| <br>
+ | compilation |  [RQCQ](#RQCQ), [VC](#VC)<a name="index_VC"></a>, [Barrier](#Barrier), [AQQD](#AQQD), [NPQBP](#NPQBP)<a name="index_NPQBP"></a>, [TCBQ](#TCBQ)<a name="index_TCBQ"></a>, [CBQBP](#CBQBP)<a name="index_CBQBP"></a>, [EmuQis](#EmuQis)<a name="index_EmuQis"></a>| <br>
  | connectivity |  [VC](#VC), [AQQD](#AQQD)| <br>
  | container  |  [BYOC](#BYOC)<a name="index_BYOC"></a>, [ESHJ](#ESHJ)<a name="index_ESHJ"></a>, [CHJS](#CHJS)<a name="index_CHJS"></a>| <br>
  | cost       |  [EVPrS](#EVPrS)<a name="index_EVPrS"></a>, [IntroSL](#IntroSL)<a name="index_IntroSL"></a>, [TRU](#TRU)<a name="index_TRU"></a>| <br>
@@ -599,32 +651,34 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | gates      |  [IQMNG](#IQMNG)<a name="index_IQMNG"></a>, [BSQG](#BSQG)<a name="index_BSQG"></a>| <br>
  | gpus       |  [PTQML](#PTQML)<a name="index_PTQML"></a>, [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | graph      |  [MIS](#MIS), [MWIS](#MWIS)| <br>
- | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [DSVSG](#DSVSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS), [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
- | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG)| <br>
+ | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [DSVSG](#DSVSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS), [EMWm](#EMWm), [AQEMW](#AQEMW), [MEOQBP](#MEOQBP)<a name="index_MEOQBP"></a>, [BNPQ](#BNPQ)<a name="index_BNPQ"></a>| <br>
+ | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [QBPHJ](#QBPHJ)<a name="index_QBPHJ"></a>| <br>
+ | hybrid jobs |  [QBPHJ](#QBPHJ)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ), [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
  | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Barrier](#Barrier), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
- | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL)| <br>
+ | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL), [QBPO](#QBPO)<a name="index_QBPO"></a>, [QBPHJ](#QBPHJ)| <br>
  | kraus      |  [GSOQ](#GSOQ), [SN](#SN)<a name="index_SN"></a>, [SNCP](#SNCP)<a name="index_SNCP"></a>| <br>
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
  | mitiq      |  [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [TPS](#TPS), [EMWm](#EMWm)| <br>
  | model      |  [VQETFIM](#VQETFIM)| <br>
  | moments    |  [DDQC](#DDQC)<a name="index_DDQC"></a>| <br>
- | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu)| <br>
+ | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu), [NPQBP](#NPQBP)| <br>
  | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [LEmu](#LEmu), [ZNEm](#ZNEm), [EmuQis](#EmuQis)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
- | openqasm   |  [GSOQ](#GSOQ), [Barrier](#Barrier), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3)| <br>
- | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS)| <br>
+ | openqasm   |  [GSOQ](#GSOQ), [Barrier](#Barrier), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3), [TCBQ](#TCBQ)| <br>
+ | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS), [MEOQBP](#MEOQBP)| <br>
  | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG), [EMWm](#EMWm)| <br>
  | pauli operators |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
  | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SPL](#SPL)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
  | pragma     |  [GSOQ](#GSOQ), [AOQLS](#AOQLS)| <br>
- | program sets |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
+ | primitives |  [BNPQ](#BNPQ)| <br>
+ | program sets |  [GSPrS](#GSPrS), [EVPrS](#EVPrS), [BNPQ](#BNPQ)| <br>
  | pulse      |  [BE](#BE), [NGC](#NGC), [BPPR](#BPPR), [BSQG](#BSQG), [SPL](#SPL)| <br>
  | qaa        |  [QAA](#QAA)<a name="index_QAA"></a>| <br>
- | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP)| <br>
- | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [EmuQis](#EmuQis), [GSm](#GSm), [ZNEm](#ZNEm), [AQEMW](#AQEMW), [CBQBP](#CBQBP)| <br>
+ | qaoa       |  [AGRT](#AGRT), [QAOA](#QAOA), [QHJP](#QHJP), [ESHJ](#ESHJ), [QNES](#QNES), [GOQ](#GOQ), [SNCP](#SNCP), [MEOQBP](#MEOQBP)| <br>
+ | qiskit     |  [Qis](#Qis)<a name="index_Qis"></a>, [DCQis](#DCQis)<a name="index_DCQis"></a>, [EmuQis](#EmuQis), [GSm](#GSm), [ZNEm](#ZNEm), [AQEMW](#AQEMW), [QBPO](#QBPO), [VQEQBP](#VQEQBP)<a name="index_VQEQBP"></a>, [QBPHJ](#QBPHJ), [MEOQBP](#MEOQBP), [NPQBP](#NPQBP), [TCBQ](#TCBQ), [BNPQ](#BNPQ), [CBQBP](#CBQBP)| <br>
  | qml        |  [QMLHJ](#QMLHJ)| <br>
  | qpe        |  [QPE](#QPE)<a name="index_QPE"></a>| <br>
  | rem        |  [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
@@ -641,9 +695,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | superdense |  [SC](#SC)| <br>
  | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [TNSim](#TNSim), [TNHP](#TNHP), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
  | teleportation |  [SC](#SC), [DCC](#DCC)| <br>
+ | transpilation |  [TCBQ](#TCBQ)| <br>
  | twirling   |  [TPS](#TPS), [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
- | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [LEmu](#LEmu), [EmuQis](#EmuQis), [GSm](#GSm), [AQEMW](#AQEMW)| <br>
- | vqe        |  [VQEChem](#VQEChem), [VQETFIM](#VQETFIM), [HGV](#HGV), [AGC](#AGC), [Qis](#Qis)| <br>
+ | verbatim   |  [GSOQ](#GSOQ), [VC](#VC), [IQMNG](#IQMNG), [HNDC](#HNDC), [LEmu](#LEmu), [EmuQis](#EmuQis), [GSm](#GSm), [AQEMW](#AQEMW), [NPQBP](#NPQBP)| <br>
+ | vqe        |  [VQEChem](#VQEChem), [VQETFIM](#VQETFIM), [HGV](#HGV), [AGC](#AGC), [Qis](#Qis), [VQEQBP](#VQEQBP), [QBPHJ](#QBPHJ)| <br>
  | zne        |  [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>
 
 ---

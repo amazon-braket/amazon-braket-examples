@@ -594,6 +594,55 @@
         "location"   : "examples/braket_features/Spending_Limits_Introduction.ipynb",
         "content"    : "  Amazon Braket spending limits allow for setting optional budget caps on individual QPUs that automatically validate and reject tasks exceeding the configured spending threshold."
     },
+    "Qiskit-Braket provider overview": {
+        "index_abbrv" : "QBPO",
+        "index_terms": ["qiskit"],
+        "categories" : ["qiskit"],
+        "location"   : "examples/qiskit/0_tutorial_qiskit-braket-provider_overview.ipynb",
+        "content"    : "  This tutorial introduces the Qiskit-Braket provider, including backend discovery, local simulation, Braket task retrieval, and Qiskit-to-Braket circuit conversion."
+    },
+    "VQE with the Qiskit-Braket provider": {
+        "index_abbrv" : "VQEQBP",
+        "index_terms": ["qiskit", "vqe"],
+        "categories" : ["qiskit", "hybrid"],
+        "location"   : "examples/qiskit/1_tutorial_vqe.ipynb",
+        "content"    : "  This tutorial runs a Variational Quantum Eigensolver workflow with Qiskit algorithms and Braket-backed primitives."
+    },
+    "Qiskit-Braket provider Hybrid Jobs": {
+        "index_abbrv" : "QBPHJ",
+        "index_terms": ["qiskit", "hybrid jobs"],
+        "categories" : ["qiskit", "jobs"],
+        "location"   : "examples/qiskit/2_tutorial_hybrid_jobs.ipynb",
+        "content"    : "  This tutorial shows how to package a Qiskit variational algorithm as an Amazon Braket Hybrid Job."
+    },
+    "Minimum Eigen Optimizer with the Qiskit-Braket provider": {
+        "index_abbrv" : "MEOQBP",
+        "index_terms": ["qiskit", "optimization"],
+        "categories" : ["qiskit", "hybrid"],
+        "location"   : "examples/qiskit/3_tutorial_minimum_eigen_optimizer.ipynb",
+        "content"    : "  This tutorial adapts Qiskit's minimum eigen optimizer workflow to execute with a Braket sampler backend."
+    },
+    "Native programming with the Qiskit-Braket provider": {
+        "index_abbrv" : "NPQBP",
+        "index_terms": ["qiskit", "verbatim", "native gates"],
+        "categories" : ["qiskit", "braket"],
+        "location"   : "examples/qiskit/4_tutorial_native_programming.ipynb",
+        "content"    : "  This tutorial explains how to use native gate sets and verbatim execution through the Qiskit-Braket provider."
+    },
+    "Transpiling circuits and programs to Braket with Qiskit": {
+        "index_abbrv" : "TCBQ",
+        "index_terms": ["qiskit", "transpilation", "openqasm"],
+        "categories" : ["qiskit", "braket"],
+        "location"   : "examples/qiskit/5_tutorial_transpilation.ipynb",
+        "content"    : "  This tutorial demonstrates how to transpile Qiskit circuits, Braket circuits, and OpenQASM programs to Braket targets."
+    },
+    "Braket-native primitives with Qiskit": {
+        "index_abbrv" : "BNPQ",
+        "index_terms": ["qiskit", "primitives", "program sets"],
+        "categories" : ["qiskit", "braket"],
+        "location"   : "examples/qiskit/6_tutorial_primitives.ipynb",
+        "content"    : "  This tutorial introduces BraketEstimator and BraketSampler primitives for Qiskit workloads on Amazon Braket."
+    },
     "Compiling Braket circuits with the Qiskit-Braket provider": {
         "index_abbrv" : "CBQBP",
         "index_terms": ["qiskit", "compilation"],
