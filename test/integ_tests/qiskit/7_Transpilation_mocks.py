@@ -1,8 +1,3 @@
-from unittest.mock import patch
-
-from qiskit_braket_provider import BraketAwsBackend
-
-
 def pre_run_inject(mock_utils):
     mocker = mock_utils.Mocker()
     # IQM Emerald uses the same schema as Garnet (IQM device)
@@ -15,11 +10,7 @@ def pre_run_inject(mock_utils):
             "deviceCapabilities": mock_utils.read_file(
                 "garnet_device_capabilities_without_programset.json", __file__
             ),
-            "deviceQueueInfo": [
-                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Normal"},
-                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
-                {"queue": "JOBS_QUEUE", "queueSize": "0"},
-            ],
+            "deviceQueueInfo": mock_utils.EMPTY_QUEUE_INFO,
         }
     )
     mocker.set_create_quantum_task_result(
@@ -42,19 +33,7 @@ def pre_run_inject(mock_utils):
         }
     )
     mocker.set_task_result_return(mock_utils.read_file("default_results.json"))
-
-    patch.object(
-        BraketAwsBackend,
-        "qubit_labels",
-        property(
-            lambda self: (
-                tuple(sorted(self._device.topology_graph.nodes))
-                if self._device.topology_graph
-                else None
-            )
-        ),
-        create=True,
-    ).start()
+    mock_utils.patch_braket_qubit_labels()
 
 
 def post_run(tb):

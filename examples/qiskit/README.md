@@ -16,6 +16,15 @@ This directory contains notebooks demonstrating how to use the [Qiskit-Braket Pr
 | [7_Transpilation.ipynb](7_Transpilation.ipynb) | Transpiling Qiskit circuits to Braket using pass managers |
 | [8_Braket_Native_Primitives.ipynb](8_Braket_Native_Primitives.ipynb) | Using Braket-native Estimator and Sampler primitives |
 
+## Local Testing
+
+Run the Qiskit notebook integration tests with mocked AWS calls. See [TESTING.md](../../TESTING.md) for the full testing guide.
+
+```bash
+AWS_ACCESS_KEY_ID= AWS_SECRET_ACCESS_KEY= AWS_SESSION_TOKEN= AWS_PROFILE= AWS_EC2_METADATA_DISABLED=true \
+  pytest test/integ_tests/test_all_notebooks.py -q -k "examples/qiskit" --mock-level=ALL
+```
+
 ## Additional Resources
 
 See the [Qiskit-Braket Provider repository](https://github.com/amazon-braket/qiskit-braket-provider) for additional documentation.

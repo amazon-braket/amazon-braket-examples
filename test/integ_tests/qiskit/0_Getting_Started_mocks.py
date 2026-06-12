@@ -1,10 +1,5 @@
-from qiskit import user_config
-
-
 def pre_run_inject(mock_utils):
-    qiskit_config = user_config.get_config()
-    if qiskit_config:
-        user_config.set_config("circuit_drawer", "text")
+    mock_utils.prefer_text_circuit_drawer()
 
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)

@@ -24,8 +24,10 @@ optax==0.2.8
 pandas==2.3.3 # pandas >=3.0.0 not compatible with JAX 0.6.2
 pennylane==0.45.0
 pennylane-lightning==0.45.0
+pylatexenc==2.10
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
 qiskit-braket-provider==0.14.4
+qiskit-optimization==0.7.0
 qiskit==2.4.1
 scipy==1.17.1

@@ -1,10 +1,5 @@
-from qiskit import user_config
-
-
 def pre_run_inject(mock_utils):
-    qiskit_config = user_config.get_config()
-    if qiskit_config:
-        user_config.set_config("circuit_drawer", "text")
+    mock_utils.prefer_text_circuit_drawer()
 
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
@@ -17,45 +12,37 @@ def pre_run_inject(mock_utils):
             "deviceCapabilities": mock_utils.read_file(
                 "ionq_forte_enterprise_device_capabilities.json"
             ),
-            "deviceQueueInfo": [
-                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Normal"},
-                {"queue": "QUANTUM_TASKS_QUEUE", "queueSize": "0", "queuePriority": "Priority"},
-                {"queue": "JOBS_QUEUE", "queueSize": "0"},
-            ],
+            "deviceQueueInfo": mock_utils.EMPTY_QUEUE_INFO,
         }
     )
     mocker.set_search_result(
         [
             {
                 "devices": [
-                    {
-                        "deviceArn": "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1",
-                        "deviceName": "Aria 1",
-                        "deviceType": "QPU",
-                        "deviceStatus": "ONLINE",
-                        "providerName": "IonQ",
-                    },
-                    {
-                        "deviceArn": "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-2",
-                        "deviceName": "Aria 2",
-                        "deviceType": "QPU",
-                        "deviceStatus": "ONLINE",
-                        "providerName": "IonQ",
-                    },
-                    {
-                        "deviceArn": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
-                        "deviceName": "SV1",
-                        "deviceType": "SIMULATOR",
-                        "deviceStatus": "ONLINE",
-                        "providerName": "Amazon",
-                    },
-                    {
-                        "deviceArn": "arn:aws:braket:::device/quantum-simulator/amazon/dm1",
-                        "deviceName": "dm1",
-                        "deviceType": "SIMULATOR",
-                        "deviceStatus": "ONLINE",
-                        "providerName": "Amazon",
-                    },
+                    mock_utils.device_summary(
+                        "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1",
+                        "Aria 1",
+                        "QPU",
+                        "IonQ",
+                    ),
+                    mock_utils.device_summary(
+                        "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-2",
+                        "Aria 2",
+                        "QPU",
+                        "IonQ",
+                    ),
+                    mock_utils.device_summary(
+                        "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+                        "SV1",
+                        "SIMULATOR",
+                        "Amazon",
+                    ),
+                    mock_utils.device_summary(
+                        "arn:aws:braket:::device/quantum-simulator/amazon/dm1",
+                        "dm1",
+                        "SIMULATOR",
+                        "Amazon",
+                    ),
                 ],
             }
         ]
