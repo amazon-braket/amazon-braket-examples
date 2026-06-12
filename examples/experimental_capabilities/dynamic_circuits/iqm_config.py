@@ -1,11 +1,7 @@
 from math import pi
 
-from braket.aws import AwsDevice
 from braket.circuits import Circuit
 from braket.circuits.circuit import subroutine
-from braket.devices.devices import Devices
-
-qd = AwsDevice(Devices.IQM.Garnet)
 
 global _keys
 _keys = 0
