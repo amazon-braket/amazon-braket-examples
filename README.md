@@ -674,7 +674,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | reset      |  [GSDCI](#GSDCI), [DCC](#DCC), [HNDC](#HNDC)| <br>
  | result type |  [AGRT](#AGRT)| <br>
  | results    |  [DDQC](#DDQC), [GSOQ](#GSOQ), [AGRT](#AGRT), [QFT](#QFT)<a name="index_QFT"></a>, [GSPrS](#GSPrS), [LEmu](#LEmu)| <br>
- | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [Barrier](#Barrier), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [LEmu](#LEmu), [AQEMW](#AQEMW)| <br>
+ | rigetti    |  [RQCQ](#RQCQ), [GSOQ](#GSOQ), [VC](#VC), [Barrier](#Barrier), [RNG](#RNG), [NM](#NM), [AQQD](#AQQD), [BE](#BE), [BPPR](#BPPR), [CPL](#CPL), [LEmu](#LEmu), [AQEMW](#AQEMW), [NGPQis](#NGPQis)| <br>
  | rydberg    |  [NQD](#NQD), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS)| <br>
  | s3         |  [GNQT](#GNQT)<a name="index_GNQT"></a>, [CHJS](#CHJS)| <br>
  | sampler    |  [BNPQis](#BNPQis)| <br>

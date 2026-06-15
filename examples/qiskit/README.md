@@ -21,18 +21,18 @@ This directory contains notebooks demonstrating how to use the [Qiskit-Braket Pr
 Run the Qiskit notebook integration tests with mocked AWS calls. See [TESTING.md](../../TESTING.md) for the full testing guide.
 
 ```bash
-AWS_ACCESS_KEY_ID= AWS_SECRET_ACCESS_KEY= AWS_SESSION_TOKEN= AWS_PROFILE= AWS_EC2_METADATA_DISABLED=true \
-  pytest test/integ_tests/test_all_notebooks.py -q -k "examples/qiskit" --mock-level=ALL
+pytest test/integ_tests/test_all_notebooks.py -q -k "examples/qiskit"
 ```
 
 ## Additional Resources
 
-See the [Qiskit-Braket Provider repository](https://github.com/amazon-braket/qiskit-braket-provider) for additional documentation.
+For step-by-step guides, see the **[How-tos](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/index.html)** documentation:
 
-- **[How-tos](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/)**
-    - [How-to: Access devices on Amazon Braket](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/0_how_to_access_devices_on_amazon_braket.html)
-    - [How-to: Run circuits on Braket devices](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/1_how_to_run_circuits_on_braket_devices.html)
-    - [How-to: Retrieve results from a backend](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/2_how_to_retrieve_results_from_backend.html)
-    - [How-to: Hybrid Job on Qiskit](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/3_how_to_qiskit_hybrid_job.html)
-    - [How-to: Run verbatim circuits](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/4_how_to_verbatim_circuits.html)
-    - [How-to: Run circuits on the Braket local backend](https://amazon-braket.github.io/qiskit-braket-provider/how_tos/5_how_to_run_circuits_on_Braket_local_backend.html)
+- [How-to: Access devices on Amazon Braket](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/0_how_to_access_devices_on_amazon_braket.html)
+- [How-to: Run circuits on Braket devices](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/1_how_to_run_circuits_on_braket_devices.html)
+- [How-to: Retrieve results from a backend](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/2_how_to_retrieve_results_from_backend.html)
+- [How-to: Hybrid Job on Qiskit](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/3_how_to_qiskit_hybrid_job.html)
+- [How-to: Run verbatim circuits](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/4_how_to_verbatim_circuits.html)
+- [How-to: Run circuits on the Braket local backend](https://qiskit-braket-provider.readthedocs.io/en/stable/how_tos/5_how_to_run_circuits_on_Braket_local_backend.html)
+
+See the [Qiskit-Braket Provider documentation](https://qiskit-braket-provider.readthedocs.io/en/stable/) and [repository](https://github.com/amazon-braket/qiskit-braket-provider) for additional resources.

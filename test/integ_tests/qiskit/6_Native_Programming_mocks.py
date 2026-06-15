@@ -5,10 +5,10 @@ def pre_run_inject(mock_utils):
     mock_utils.prefer_text_circuit_drawer()
     mocker = mock_utils.Mocker()
 
-    # Cycle through: Ankaa-3 (Rigetti), Garnet (IQM), Aria 1 (IonQ), Aria 1 again (for task runs)
-    ankaa_caps = {
+    # Cycle through: Cepheus-1-108Q (Rigetti), Garnet (IQM), Aria 1 (IonQ), Aria 1 again (for task runs)
+    cepheus_caps = {
         "deviceType": "QPU",
-        "deviceName": "Ankaa-3",
+        "deviceName": "Cepheus-1-108Q",
         "deviceStatus": "ONLINE",
         "providerName": "Rigetti",
         "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json"),
@@ -33,9 +33,9 @@ def pre_run_inject(mock_utils):
         "deviceQueueInfo": mock_utils.EMPTY_QUEUE_INFO,
     }
 
-    # get_device is called for: Ankaa-3, Garnet, Aria 1, then task operations reuse Aria 1
+    # get_device is called for: Cepheus-1-108Q, Garnet, Aria 1, then task operations reuse Aria 1
     mocker._wrapper.boto_client.get_device.side_effect = cycle(
-        [ankaa_caps, garnet_caps, aria_caps]
+        [cepheus_caps, garnet_caps, aria_caps]
     )
 
     mocker.set_create_quantum_task_result(
@@ -63,8 +63,8 @@ def pre_run_inject(mock_utils):
             {
                 "devices": [
                     mock_utils.device_summary(
-                        "arn:aws:braket:us-west-2::device/qpu/rigetti/Ankaa-3",
-                        "Ankaa-3",
+                        "arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q",
+                        "Cepheus-1-108Q",
                         "QPU",
                         "Rigetti",
                     ),
