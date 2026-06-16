@@ -1,0 +1,15 @@
+{
+  "braketSchemaHeader": {
+    "name": "braket.jobs_data.persisted_job_data",
+    "version": "1"
+  },
+  "dataDictionary": {
+    "VQE": {
+      "eigenvalue": -1.0523732457728592,
+      "optimal_parameters": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+      "optimal_point": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+      "optimal_value": -1.0523732457728592
+    }
+  },
+  "dataFormat": "plaintext"
+}
