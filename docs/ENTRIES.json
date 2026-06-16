@@ -600,5 +600,54 @@
         "categories" : ["qiskit"],
         "location"   : "examples/qiskit/1_Compilation_with_the_Qiskit_Braket_provider.ipynb",
         "content"    : "  This tutorial shows how to compile Braket circuits using the to_braket Qiskit-Braket provider, allowing for circuit compilation."
+    },
+    "Overview of the Qiskit-Braket provider": {
+        "index_abbrv": "OvQBP",
+        "index_terms": ["qiskit"],
+        "categories": ["qiskit"],
+        "location": "examples/qiskit/2_Overview_of_the_Qiskit_Braket_provider.ipynb",
+        "content": "  An overview of the Qiskit-Braket provider: listing backends, running circuits on local and cloud backends, and retrieving results."
+    },
+    "Running VQE on Amazon Braket with Qiskit": {
+        "index_abbrv": "VQEQBP",
+        "index_terms": ["qiskit", "vqe", "variational"],
+        "categories": ["qiskit", "hybrid"],
+        "location": "examples/qiskit/3_Running_VQE_on_Braket.ipynb",
+        "content": "  This tutorial demonstrates how to run the Variational Quantum Eigensolver (VQE) algorithm on a Braket local backend using Qiskit algorithms."
+    },
+    "Hybrid Jobs with Qiskit on Amazon Braket": {
+        "index_abbrv": "HJQis",
+        "index_terms": ["qiskit", "hybrid jobs", "vqe"],
+        "categories": ["qiskit", "jobs"],
+        "location": "examples/qiskit/4_Hybrid_Jobs_with_Qiskit.ipynb",
+        "content": "  This tutorial shows how to run variational quantum algorithms with Amazon Braket Hybrid Jobs using the Qiskit-Braket provider."
+    },
+    "Minimum Eigen Optimizer with Qiskit on Amazon Braket": {
+        "index_abbrv": "MEOQis",
+        "index_terms": ["qiskit", "optimization", "qaoa"],
+        "categories": ["qiskit", "hybrid"],
+        "location": "examples/qiskit/5_Minimum_Eigen_Optimizer.ipynb",
+        "content": "  This tutorial shows how to use the Qiskit Optimization Minimum Eigen Optimizer to solve combinatorial optimization problems on a Braket backend."
+    },
+    "Native Gate Programming with Qiskit on Amazon Braket": {
+        "index_abbrv": "NGPQis",
+        "index_terms": ["qiskit", "native gates", "verbatim"],
+        "categories": ["qiskit"],
+        "location": "examples/qiskit/6_Native_Programming.ipynb",
+        "content": "  This tutorial demonstrates native gate programming on QPU devices (Rigetti, IQM, IonQ) using the Qiskit-Braket provider, including verbatim circuit submission."
+    },
+    "Transpiling Qiskit Circuits to Amazon Braket": {
+        "index_abbrv": "TQCBr",
+        "index_terms": ["qiskit", "transpilation", "compilation"],
+        "categories": ["qiskit"],
+        "location": "examples/qiskit/7_Transpilation.ipynb",
+        "content": "  This tutorial shows how to transpile Qiskit circuits to Braket using pass managers and the to_braket conversion utility."
+    },
+    "Braket-native Primitives with Qiskit": {
+        "index_abbrv": "BNPQis",
+        "index_terms": ["qiskit", "primitives", "estimator", "sampler"],
+        "categories": ["qiskit"],
+        "location": "examples/qiskit/8_Braket_Native_Primitives.ipynb",
+        "content": "  This tutorial shows how to use the Braket-native Estimator and Sampler primitives with Qiskit circuits."
     }
 }
