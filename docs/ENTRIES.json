@@ -139,20 +139,7 @@
         "location": "examples/braket_features/Simulating_Advanced_OpenQASM_Programs_with_the_Local_Simulator.ipynb",
         "content": "  This notebook serves as a reference of OpenQASM features supported by Braket with the LocalSimulator."
     },
-    "Using the tensor network simulator TN1": {
-        "index_abbrv": "TNSim",
-        "index_terms" : ["simulators"], 
-        "categories": ["simulators"],
-        "location": "examples/braket_features/Using_the_tensor_network_simulator_TN1.ipynb",
-        "content": "  This notebook introduces the Amazon Braket on-demand tensor network simulator, TN1. You will learn about how TN1 works, how to use it, and which problems are best suited to run on TN1."
-    },
-    "TN1 and Hayden-Preskill circuits": {
-        "index_abbrv": "TNHP",
-        "index_terms" : ["simulators"], 
-        "categories": ["simulators"],
-        "location": "examples/braket_features/TN1_demo_local_vs_non-local_random_circuits.ipynb",
-        "content": "  This tutorial dives into showing the degree to which the tensor network simulator is capable of detecting a hidden local structure in a quantum circuit by working with Hayden-Preskill circuits, which are a class of unstructured, random quantum circuits."
-    },
+
     "Simulating noise on Amazon Braket": {
         "index_abbrv": "SN",
         "index_terms" : ["simulators"], 
@@ -221,7 +208,7 @@
         "index_terms" : [], 
         "categories": ["jobs"],
         "location": "examples/hybrid_jobs/4_Embedded_simulators_in_Braket_Hybrid_Jobs/Embedded_simulators_in_Braket_Hybrid_Jobs.ipynb",
-        "content": "  This notebook shows how to use embedded simulators in Braket Hybrid Jobs. An embedded simulator is a local simulator that runs completely within a hybrid job instance, i.e., the compute resource that is running your algorithm script. In contrast, on-demand simulators, such as SV1, DM1, or TN1, calculate the results of a quantum circuit on dedicated compute infrastructure on-demand by Amazon Braket. Hybrid workloads usually consist of iterations of quantum circuit executions and variational parameter optimizations. By using embedded simulators, we keep all computations in the same environment. This allows the optimization algorithm to access advanced features supported by the embedded simulator."
+        "content": "  This notebook shows how to use embedded simulators in Braket Hybrid Jobs. An embedded simulator is a local simulator that runs completely within a hybrid job instance, i.e., the compute resource that is running your algorithm script. In contrast, on-demand simulators, such as SV1 or DM1, calculate the results of a quantum circuit on dedicated compute infrastructure on-demand by Amazon Braket. Hybrid workloads usually consist of iterations of quantum circuit executions and variational parameter optimizations. By using embedded simulators, we keep all computations in the same environment. This allows the optimization algorithm to access advanced features supported by the embedded simulator."
     },
     "Parallelize training for Quantum Machine Learning": {
         "index_abbrv": "PTQML",
