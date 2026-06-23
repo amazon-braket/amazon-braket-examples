@@ -6,7 +6,7 @@ def pre_run_inject(mock_utils):
     mocker.set_get_device_result(
         {
             "deviceType": "QPU",
-            "deviceName": "Aria 1",
+            "deviceName": "Forte Enterprise 1",
             "deviceStatus": "ONLINE",
             "providerName": "IonQ",
             "deviceCapabilities": mock_utils.read_file(
@@ -20,14 +20,8 @@ def pre_run_inject(mock_utils):
             {
                 "devices": [
                     mock_utils.device_summary(
-                        "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1",
-                        "Aria 1",
-                        "QPU",
-                        "IonQ",
-                    ),
-                    mock_utils.device_summary(
-                        "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-2",
-                        "Aria 2",
+                        "arn:aws:braket:us-east-1::device/qpu/ionq/Forte-Enterprise-1",
+                        "Forte Enterprise 1",
                         "QPU",
                         "IonQ",
                     ),
