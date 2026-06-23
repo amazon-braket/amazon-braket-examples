@@ -17,8 +17,14 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
+      - dependency-name: "jax"
+        versions: [ ">0.6.2" ]  # JAX >0.6.2 not compatible with PennyLane
+      - dependency-name: "jaxlib"
+        versions: [ ">0.6.2" ]  # JAX >0.6.2 not compatible with PennyLane
       - dependency-name: "pandas"
         versions: [ ">=3.0.0" ]  # pandas >=3.0.0 not compatible with JAX 0.6.2
+      - dependency-name: "numpy"
+        versions: [ ">=2.3.0" ]
     commit-message:
       prefix: infra
     groups:
@@ -35,6 +41,13 @@ updates:
     directory: "/extra"
     schedule:
       interval: "monthly"
+    ignore:
+      - dependency-name: "jax"
+        versions: [ ">0.6.2" ]  # JAX >0.6.2 not compatible with PennyLane
+      - dependency-name: "jaxlib"
+        versions: [ ">0.6.2" ]  # JAX >0.6.2 not compatible with PennyLane
+      - dependency-name: "numpy"
+        versions: [ ">=2.3.0" ]
     commit-message:
       prefix: infra
     groups:
