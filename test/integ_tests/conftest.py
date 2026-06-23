@@ -3,6 +3,8 @@ import os
 import shutil
 
 import pytest
+from jupyter_client import kernelspec
+from jupyter_client.manager import KernelManager
 from nbconvert import HTMLExporter
 
 if "integ_tests" in os.getcwd():
@@ -37,6 +39,13 @@ def pytest_addoption(parser):
         default=False,
         help="specify to include execute tests requiring mitiq",
     )
+    parser.addoption(
+        "--no-kernel-pool",
+        action="store_true",
+        default=False,
+        help="Disable kernel pooling (use original per-test kernel startup)",
+    )
+
 
 def pytest_configure(config):
     config.addinivalue_line("markers", "mitiq: tests only specific to mitiq-related notebooks")
@@ -84,14 +93,42 @@ def pytest_collection_modifyitems(config, items):
 def mock_level(request):
     return request.config.getoption("--mock-level")
 
+
 @pytest.fixture(autouse=True)
 def restore_cwd():
-    """ after each test, move back to root_path - amazon-braket-examples/"""
     yield
     os.chdir(root_path)
     _remove_test_artifacts()
-    
+
+
 @pytest.fixture(scope="module")
 def html_exporter():
     return HTMLExporter(template_name="classic")
 
+
+def _get_kernel_name():
+    return "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
+
+
+@pytest.fixture(scope="session")
+def shared_kernel_manager():
+    """Start a single kernel per session/xdist-worker, reused across all notebook tests."""
+    km = KernelManager(kernel_name=_get_kernel_name())
+    km.start_kernel(extra_arguments=["--Kernel.stop_on_error_timeout=0"])
+    try:
+        yield km
+    finally:
+        km.shutdown_kernel(now=True)
+        km.cleanup_resources()
+
+
+@pytest.fixture
+def shared_km(request, shared_kernel_manager):
+    """Yields the shared KernelManager, restarts kernel after each test for isolation."""
+    if request.config.getoption("--no-kernel-pool"):
+        yield None
+        return
+
+    yield shared_kernel_manager
+
+    shared_kernel_manager.restart_kernel(now=True)
