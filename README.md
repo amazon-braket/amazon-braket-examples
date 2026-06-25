@@ -172,14 +172,6 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This notebook serves as a reference of OpenQASM features supported by Braket with the LocalSimulator.
 
--  [**Using the tensor network simulator TN1**](examples/braket_features/Using_the_tensor_network_simulator_TN1.ipynb) [(TNSim)](#index_TNSim)<a name="TNSim"></a>
-
-  This notebook introduces the Amazon Braket on-demand tensor network simulator, TN1. You will learn about how TN1 works, how to use it, and which problems are best suited to run on TN1.
-
--  [**TN1 and Hayden-Preskill circuits**](examples/braket_features/TN1_demo_local_vs_non-local_random_circuits.ipynb) [(TNHP)](#index_TNHP)<a name="TNHP"></a>
-
-  This tutorial dives into showing the degree to which the tensor network simulator is capable of detecting a hidden local structure in a quantum circuit by working with Hayden-Preskill circuits, which are a class of unstructured, random quantum circuits.
-
 -  [**Running on Local Simulator**](examples/analog_hamiltonian_simulation/05_Running_Analog_Hamiltonian_Simulation_with_local_simulator.ipynb) [(RLS)](#index_RLS)<a name="RLS"></a>
 
   This tutorial shows how to test and debug an analog Hamiltonian simulation (AHS) program on the local simulator before submitting it to a QPU. It introduces several features of the local simulator that will be useful to streamline this testing process.
@@ -292,7 +284,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
 -  [**Embedded simulators in Braket Hybrid Jobs**](examples/hybrid_jobs/4_Embedded_simulators_in_Braket_Hybrid_Jobs/Embedded_simulators_in_Braket_Hybrid_Jobs.ipynb) [(ESHJ)](#index_ESHJ)<a name="ESHJ"></a>
 
-  This notebook shows how to use embedded simulators in Braket Hybrid Jobs. An embedded simulator is a local simulator that runs completely within a hybrid job instance, i.e., the compute resource that is running your algorithm script. In contrast, on-demand simulators, such as SV1, DM1, or TN1, calculate the results of a quantum circuit on dedicated compute infrastructure on-demand by Amazon Braket. Hybrid workloads usually consist of iterations of quantum circuit executions and variational parameter optimizations. By using embedded simulators, we keep all computations in the same environment. This allows the optimization algorithm to access advanced features supported by the embedded simulator.
+  This notebook shows how to use embedded simulators in Braket Hybrid Jobs. An embedded simulator is a local simulator that runs completely within a hybrid job instance, i.e., the compute resource that is running your algorithm script. In contrast, on-demand simulators, such as SV1 or DM1, calculate the results of a quantum circuit on dedicated compute infrastructure on-demand by Amazon Braket. Hybrid workloads usually consist of iterations of quantum circuit executions and variational parameter optimizations. By using embedded simulators, we keep all computations in the same environment. This allows the optimization algorithm to access advanced features supported by the embedded simulator.
 
 -  [**Parallelize training for Quantum Machine Learning**](examples/hybrid_jobs/5_Parallelize_training_for_QML/Parallelize_training_for_QML.ipynb) [(PTQML)](#index_PTQML)<a name="PTQML"></a>
 
@@ -680,10 +672,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | sampler    |  [BNPQis](#BNPQis)| <br>
  | shots      |  [GSPrS](#GSPrS)| <br>
  | simons     |  [Simon](#Simon)<a name="index_Simon"></a>| <br>
- | simulators |  [RQCS](#RQCS), [AOQLS](#AOQLS), [TNSim](#TNSim)<a name="index_TNSim"></a>, [TNHP](#TNHP)<a name="index_TNHP"></a>, [SN](#SN)| <br>
+ | simulators |  [RQCS](#RQCS), [AOQLS](#AOQLS), [SN](#SN)| <br>
  | subroutine |  [Grover](#Grover), [QAA](#QAA), [QFT](#QFT), [QPE](#QPE), [AOQLS](#AOQLS), [IonNG](#IonNG)| <br>
  | superdense |  [SC](#SC)| <br>
- | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [TNSim](#TNSim), [TNHP](#TNHP), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
+ | task       |  [RQCQ](#RQCQ), [SC](#SC), [DDQC](#DDQC), [GSOQ](#GSOQ), [GNQT](#GNQT), [Grover](#Grover), [RNG](#RNG), [GSHJ](#GSHJ), [CHJS](#CHJS), [AQQD](#AQQD), [CPL](#CPL), [TRU](#TRU), [AGC](#AGC), [GSA](#GSA), [PTA](#PTA)| <br>
  | teleportation |  [SC](#SC), [DCC](#DCC)| <br>
  | transpilation |  [TQCBr](#TQCBr)| <br>
  | twirling   |  [TPS](#TPS), [EMWm](#EMWm), [AQEMW](#AQEMW)| <br>

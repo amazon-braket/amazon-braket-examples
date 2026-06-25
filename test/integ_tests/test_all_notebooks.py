@@ -29,8 +29,6 @@ EXCLUDED_NOTEBOOKS = [
     "4_Simulation_with_GPUs.ipynb",
     "5_Multiple_GPU_simulations.ipynb",
     "6_Distributed_state_vector_simulations.ipynb",
-    # Simulator TN1 notebook, remove when TN1 issues are fixed
-    "TN1_demo_local_vs_non-local_random_circuits.ipynb",
     # Mitiq notebooks require separate test setup and dependencies
     "0_Getting_started_with_mitiq_on_Braket.ipynb",
     "1_Readout_mitigation_with_mitiq.ipynb",
