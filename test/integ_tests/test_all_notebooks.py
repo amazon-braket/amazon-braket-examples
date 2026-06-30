@@ -29,8 +29,6 @@ EXCLUDED_NOTEBOOKS = [
     "4_Simulation_with_GPUs.ipynb",
     "5_Multiple_GPU_simulations.ipynb",
     "6_Distributed_state_vector_simulations.ipynb",
-    # Simulator TN1 notebook, remove when TN1 issues are fixed
-    "TN1_demo_local_vs_non-local_random_circuits.ipynb",
     # Mitiq notebooks require separate test setup and dependencies
     "0_Getting_started_with_mitiq_on_Braket.ipynb",
     "1_Readout_mitigation_with_mitiq.ipynb",
@@ -90,22 +88,47 @@ def get_mock_paths(notebook_dir, notebook_file):
     return path_to_utils, path_to_mocks
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
-def test_all_notebooks(notebook_dir, notebook_file, mock_level):
+def test_all_notebooks(notebook_dir, notebook_file, mock_level, shared_km):
     if notebook_file in EXCLUDED_NOTEBOOKS:
         pytest.skip(f"Skipping Notebook: '{notebook_file}'")
     os.chdir(notebook_dir)
 
     path_to_utils, path_to_mocks = get_mock_paths(notebook_dir, notebook_file)
-    # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
     kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
-    with testbook(notebook_file, timeout=NOTEBOOK_TIMEOUTS.get(notebook_file, DEFAULT_CELL_TIMEOUT), kernel_name=kernel) as tb:
-        # We check the existing notebook output for errors before we execute the
-        # notebook because it will change after executing it.
-        check_cells_for_error_output(tb.cells)
-        execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
-        # Check if there are any errors which didn't stop the testbook execution
-        # This can happen in the presence of `%%time` magics.
-        check_cells_for_error_output(tb.cells)
+    timeout = NOTEBOOK_TIMEOUTS.get(notebook_file, DEFAULT_CELL_TIMEOUT)
+
+    if shared_km is not None:
+        _run_notebook_with_shared_kernel(
+            notebook_file, kernel, timeout, mock_level, path_to_utils, path_to_mocks, shared_km
+        )
+    else:
+        with testbook(notebook_file, timeout=timeout, kernel_name=kernel) as tb:
+            check_cells_for_error_output(tb.cells)
+            execute_with_mocks(tb, mock_level, path_to_utils, path_to_mocks)
+            check_cells_for_error_output(tb.cells)
+
+
+def _run_notebook_with_shared_kernel(
+    notebook_file, kernel, timeout, mock_level, path_to_utils, path_to_mocks, km
+):
+    import nbformat
+    from testbook.client import TestbookNotebookClient
+
+    nb = nbformat.read(notebook_file, as_version=4)
+    client = TestbookNotebookClient(nb, km=km, timeout=timeout, kernel_name=kernel)
+    client.kc = km.client()
+    client.kc.start_channels()
+    client.kc.wait_for_ready(timeout=60)
+    client.kc.allow_stdin = False
+    try:
+        cwd = os.getcwd().replace("\\", "\\\\").replace("'", "\\'")
+        client.kc.execute(f"import os; os.chdir('{cwd}')", reply=True, timeout=30)
+        check_cells_for_error_output(client.cells)
+        execute_with_mocks(client, mock_level, path_to_utils, path_to_mocks)
+        check_cells_for_error_output(client.cells)
+    finally:
+        client.kc.stop_channels()
+        client.kc = None
 
 
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)

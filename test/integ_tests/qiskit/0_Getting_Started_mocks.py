@@ -1,17 +1,14 @@
-from qiskit import user_config
-
-
 def pre_run_inject(mock_utils):
-    qiskit_config = user_config.get_config()
-    if qiskit_config:
-        user_config.set_config("circuit_drawer", "text")
+    mock_utils.prefer_text_circuit_drawer()
 
     mocker = mock_utils.Mocker()
     mock_utils.mock_default_device_calls(mocker)
     mocker.set_get_device_result(
         {
-            "deviceType": "QPU",
-            "providerName": "Rigetti",
+            "deviceType": "SIMULATOR",
+            "deviceName": "SV1",
+            "deviceStatus": "ONLINE",
+            "providerName": "Amazon",
             "deviceCapabilities": mock_utils.read_file("rigetti_device_capabilities.json"),
         },
     )
@@ -29,13 +26,6 @@ def pre_run_inject(mock_utils):
                     {
                         "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
                         "deviceName": "dm1",
-                        "deviceType": "SIMULATOR",
-                        "deviceStatus": "ONLINE",
-                        "providerName": "Test Provider",
-                    },
-                    {
-                        "deviceArn": "arn:aws:braket:us-west-2::device/qpu/arn/TestARN",
-                        "deviceName": "TN1",
                         "deviceType": "SIMULATOR",
                         "deviceStatus": "ONLINE",
                         "providerName": "Test Provider",
