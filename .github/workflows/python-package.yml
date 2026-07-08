@@ -19,6 +19,12 @@ permissions:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      VECLIB_MAXIMUM_THREADS: "1"
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
