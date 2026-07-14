@@ -10,9 +10,7 @@ def pre_run_inject(mock_utils):
             ),
         },
     )
-    effects = [
-            mock_utils.read_file(f"results/results_2_{i}.json", __file__)
-            for i in range(6)]
+    effects = [mock_utils.read_file(f"results/results_2_{i}.json", __file__) for i in range(6)]
     mocker.set_task_result_side_effect(effects)
 
 

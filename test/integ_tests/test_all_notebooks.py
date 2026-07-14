@@ -87,6 +87,7 @@ def get_mock_paths(notebook_dir, notebook_file):
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
 
+
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_all_notebooks(notebook_dir, notebook_file, mock_level, shared_km):
     if notebook_file in EXCLUDED_NOTEBOOKS:
@@ -156,7 +157,11 @@ def test_record():
     path_to_utils = path_to_utils.replace("mock_utils.py", "record_utils.py")
     # Try to use the conda_braket kernel if installed, otherwise fall back to the default value of python3
     kernel = "conda_braket" if "conda_braket" in kernelspec.find_kernel_specs() else "python3"
-    with testbook(notebook_file, timeout=NOTEBOOK_TIMEOUTS.get(notebook_file, DEFAULT_CELL_TIMEOUT), kernel_name=kernel) as tb:
+    with testbook(
+        notebook_file,
+        timeout=NOTEBOOK_TIMEOUTS.get(notebook_file, DEFAULT_CELL_TIMEOUT),
+        kernel_name=kernel,
+    ) as tb:
         tb.inject(
             f"""
             from importlib.machinery import SourceFileLoader
@@ -245,13 +250,14 @@ def uncomment_test_section(source):
 
 
 def test_not_imported():
-    """ This verifies that certain tests were not imported - do not remove!
-    
-    Excluded libraries: 
+    """This verifies that certain tests were not imported - do not remove!
+
+    Excluded libraries:
         mitiq - see `/examples/error_mitigation/on_mitiq/README.md` for details
     """
     extra_libraries = ["mitiq"]
     import importlib
+
     for library in extra_libraries:
         with pytest.raises(ImportError):
             importlib.import_module(library)

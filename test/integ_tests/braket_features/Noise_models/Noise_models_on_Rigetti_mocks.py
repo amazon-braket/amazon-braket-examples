@@ -18,4 +18,3 @@ def pre_run_inject(mock_utils):
 
 def post_run(tb):
     pass
-

@@ -50,6 +50,7 @@ def pytest_addoption(parser):
 def pytest_configure(config):
     config.addinivalue_line("markers", "mitiq: tests only specific to mitiq-related notebooks")
 
+
 # Known test durations (seconds) to ensure xdist schedules slow tests first.
 # This prevents long-running tests from clustering on a single worker.
 NOTEBOOK_DURATIONS = {
@@ -88,6 +89,7 @@ def pytest_collection_modifyitems(config, items):
         return 0
 
     items.sort(key=_get_duration, reverse=True)
+
 
 @pytest.fixture
 def mock_level(request):
