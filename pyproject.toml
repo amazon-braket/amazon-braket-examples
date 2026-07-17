@@ -60,16 +60,20 @@ test = [
 [tool.hatch.envs.lint]
 detached = true
 dependencies = [
-  "ruff",
+  # Pinned: ruff's formatter output changes between releases, so an unpinned
+  # version would make `ruff format --check` fail spontaneously on new
+  # releases. Bump via dependabot alongside any required reformat.
+  "ruff==0.12.9",
 ]
 
 [tool.hatch.envs.lint.scripts]
 style = [
   "ruff check {args:.}",
+  "ruff format --check {args:.}",
 ]
 fmt = [
   "ruff format {args:.}",
-  "style",
+  "ruff check {args:.}",
 ]
 
 [[tool.hatch.envs.all.matrix]]

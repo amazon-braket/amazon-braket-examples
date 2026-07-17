@@ -107,7 +107,8 @@ def braket_rem_twirl_mitigator(
     inverse_confusion_matrix: np.ndarray,
     bit_masks: np.ndarray,
 ) -> Callable:
-    """return a function to modify a count with a inverse confusion matrix"""        
+    """return a function to modify a count with a inverse confusion matrix"""
+
     def to_run(counts: dict, index: int) -> dict:
         return mitigate_measurements(
             MeasurementResult.from_counts(process_readout_twirl(counts, index, bit_masks)),
@@ -169,7 +170,7 @@ def _execute_expectation_batch(
         ProgramSet.zip(
             programs,
             observables=[observable] * len(programs),
-            shots_per_executable = shots // len(programs),
+            shots_per_executable=shots // len(programs),
         )
     ).result()
     return [item.expectation for entry in result for item in entry.entries]

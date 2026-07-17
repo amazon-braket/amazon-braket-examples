@@ -7,10 +7,13 @@ def pre_run_inject(mock_utils):
     # path is tested with MOCK_DEVICE_CONFIG handling device routing.
     if mock_utils.Mocker.mock_level == "ALL":
         import cudaq
+
         _real = cudaq.set_target
+
         def _wrapped(*a, **kw):
             kw.setdefault("emulate", True)
             return _real(*a, **kw)
+
         cudaq.set_target = _wrapped
 
 

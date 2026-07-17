@@ -24,6 +24,7 @@ for dir_, _, files in os.walk(examples_path):
         if file_name.endswith(".ipynb") and ".ipynb_checkpoints" not in dir_:
             test_notebooks.append((dir_, file_name))  # noqa: PERF401
 
+
 def get_mock_paths(notebook_dir, notebook_file):
     mock_file = notebook_file.replace(".ipynb", "_mocks.py")
     split_notebook_dir = notebook_dir.split(os.sep)
@@ -40,6 +41,7 @@ def get_mock_paths(notebook_dir, notebook_file):
         )
     path_to_utils = os.path.join(path_to_root, "test", "integ_tests", "mock_utils.py")
     return path_to_utils, path_to_mocks
+
 
 @pytest.mark.mitiq
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
@@ -60,12 +62,14 @@ def test_all_notebooks(notebook_dir, notebook_file, mock_level):
         # This can happen in the presence of `%%time` magics.
         check_cells_for_error_output(tb.cells)
 
+
 @pytest.mark.mitiq
 @pytest.mark.parametrize("notebook_dir, notebook_file", test_notebooks)
 def test_notebook_to_html_conversion(notebook_dir, notebook_file, mock_level, html_exporter):
     os.chdir(notebook_dir)
 
     html_exporter.from_file(notebook_file)
+
 
 @pytest.mark.mitiq
 def test_record():
@@ -172,4 +176,3 @@ def uncomment_test_section(source):
             result.append(line)
 
     return "\n".join(result)
-

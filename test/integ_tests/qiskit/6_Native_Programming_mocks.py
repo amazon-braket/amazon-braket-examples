@@ -29,7 +29,9 @@ def pre_run_inject(mock_utils):
         "deviceName": "Forte Enterprise 1",
         "deviceStatus": "ONLINE",
         "providerName": "IonQ",
-        "deviceCapabilities": mock_utils.read_file("ionq_forte_enterprise_device_capabilities.json"),
+        "deviceCapabilities": mock_utils.read_file(
+            "ionq_forte_enterprise_device_capabilities.json"
+        ),
         "deviceQueueInfo": mock_utils.EMPTY_QUEUE_INFO,
     }
 
