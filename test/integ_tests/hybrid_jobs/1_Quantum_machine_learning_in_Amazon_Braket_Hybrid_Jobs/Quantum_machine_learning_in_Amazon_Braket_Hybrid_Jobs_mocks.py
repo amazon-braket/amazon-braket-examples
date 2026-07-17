@@ -1,3 +1,4 @@
+import re
 from unittest.mock import patch
 
 import numpy as np
@@ -61,6 +62,19 @@ def pre_run_inject(mock_utils):
     mock_utils.mock_job_results(default_job_results)
     # not explicitly stopped as notebooks are run in new kernels
     patch("cloudpickle.dumps", return_value="serialized").start()
+
+
+def modify_cells(cells):
+    # The only real local compute is the direct `train_circuit(..., n_iterations=5)`
+    # demo call (L-BFGS-B with parameter-shift gradients over 30 params on the
+    # Braket LocalSimulator); its return value is unused and every @hybrid_job run
+    # is mocked. The integ test only checks cells execute without error, so fewer
+    # iterations is safe. n_qubits/n_layers are left as-is because the mocked job
+    # results hard-code a 30-element params array (3 * n_layers * n_qubits).
+    for cell in cells:
+        if cell.get("cell_type") != "code":
+            continue
+        cell["source"] = re.sub(r"n_iterations=5\b", "n_iterations=1", cell["source"])
 
 
 def post_run(tb):
