@@ -1,7 +1,13 @@
 import os
 import sys
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'examples', 'error_mitigation')))
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__), "..", "..", "..", "..", "examples", "error_mitigation"
+        )
+    )
+)
 
 import unittest
 
@@ -27,11 +33,11 @@ class TestObservables(unittest.TestCase):
         # Test single Pauli matrices
         assert matrix_to_pauli(X(0).to_matrix()) == [(1.0, "X")]
         assert matrix_to_pauli(Z(0).to_matrix()) == [(1.0, "Z")]
-        
+
         # Test two-qubit cases
         xx_result = matrix_to_pauli((X(0) @ X(1)).to_matrix())
         assert len(xx_result) == 1 and xx_result[0][1] == "XX"
-        
+
         # Test mixed observable - construct matrix manually
         zz_mat = (Z(0) @ Z(1)).to_matrix()
         xx_mat = (X(0) @ X(1)).to_matrix()
@@ -46,11 +52,11 @@ class TestObservables(unittest.TestCase):
         # XY = iZ
         pauli, phase = _pauli_mul("X", "Y")
         assert pauli == "Z" and phase == 1j
-        
-        # YX = -iZ  
+
+        # YX = -iZ
         pauli, phase = _pauli_mul("Y", "X")
         assert pauli == "Z" and phase == -1j
-        
+
         # XZ = -iY
         pauli, phase = _pauli_mul("X", "Z")
         assert pauli == "Y" and phase == -1j
@@ -60,7 +66,7 @@ class TestObservables(unittest.TestCase):
         paulis = [(1.0, "XX"), (0.5, "ZZ"), (0.3, "XY")]
         signatures, _ = pauli_grouping(paulis)
         assert len(signatures) == 3  # XX and XY anticommute, so separate groups
-        
+
     def test_qubit_wise_commuting(self):
         """Test qubit-wise commutation check."""
         assert not qubit_wise_commuting("XX", "XY")
@@ -70,15 +76,14 @@ class TestObservables(unittest.TestCase):
 
 
 class TestMitigationTools(unittest.TestCase):
-
     def test_process_readout_twirl(self):
         """Test readout twirling."""
         # Test with simple 2-qubit case
-        dist = {"000":0.8,"100":0.2}
+        dist = {"000": 0.8, "100": 0.2}
         twirls = ["010"]
         test = process_readout_twirl(dist, 0, twirls)
 
-        ref = {"010":0.8, "110":0.2}
+        ref = {"010": 0.8, "110": 0.2}
         assert ref == test
 
     def test_cz_twirl(self):
@@ -100,48 +105,58 @@ class TestMitigationTools(unittest.TestCase):
         """Test SparseReadoutMitigation class."""
         test_dist = {"00": 0.9, "01": 0.05, "10": 0.03, "11": 0.02}
         srm = SparseReadoutMitigation(test_dist)
-        
+
         # Test getting inverse for single qubit
         inverse = srm.get_inverse((0,))
         assert isinstance(inverse, dict)
-        
+
         # Test marginal inversion
         test_data = {"00": 100, "01": 5, "10": 3, "11": 2}
         result = srm.invert_marginal(test_data, [0])
         assert isinstance(result, dict)
 
-
     def test_sparse_process_single(self):
-        dist = {"0000":1}
+        dist = {"0000": 1}
         sro = SparseReadoutMitigation(dist)
-        res = {"1000":1.0}
+        res = {"1000": 1.0}
         bitflip = ["0101"]
-        zs = ["ZIII","IZII","IIZI","IIIZ"]
-        ans = [-1,-1,+1,-1]
-        for z,a in zip(zs,ans):
-            test = sro.process_single(res,0, z, bitflip)
-            assert test == a 
-
+        zs = ["ZIII", "IZII", "IIZI", "IIIZ"]
+        ans = [-1, -1, +1, -1]
+        for z, a in zip(zs, ans):
+            test = sro.process_single(res, 0, z, bitflip)
+            assert test == a
 
     def test_sparse_process_single_wth_noise(self):
         """Test process_single with bit flip noise model."""
         # Bit flip noise: 10% chance of flipping each qubit
-        dist = {"0000": 0.6561, "0001": 0.0729, "0010": 0.0729, "0100": 0.0729,
-                "1000": 0.0729, "0011": 0.0081, "0101": 0.0081, "1001": 0.0081,
-                "0110": 0.0081, "1010": 0.0081, "1100": 0.0081, "0111": 0.0009,
-                "1011": 0.0009, "1101": 0.0009, "1110": 0.0009, "1111": 0.0001}
+        dist = {
+            "0000": 0.6561,
+            "0001": 0.0729,
+            "0010": 0.0729,
+            "0100": 0.0729,
+            "1000": 0.0729,
+            "0011": 0.0081,
+            "0101": 0.0081,
+            "1001": 0.0081,
+            "0110": 0.0081,
+            "1010": 0.0081,
+            "1100": 0.0081,
+            "0111": 0.0009,
+            "1011": 0.0009,
+            "1101": 0.0009,
+            "1110": 0.0009,
+            "1111": 0.0001,
+        }
         sro = SparseReadoutMitigation(dist)
-        
+
         # Noisy result with bit flips
         res = {"1000": 0.7, "0000": 0.2, "1100": 0.05, "1001": 0.05}
         bitflip = ["0101"]
-        
+
         # Test Z measurement on first qubit
         result = sro.process_single(res, 0, "ZIII", bitflip)
-        assert isinstance(result, (int, float, np.number))
+        assert isinstance(result, int | float | np.number)
         assert -1 <= result <= 1
-
-
 
 
 class TestStatTools(unittest.TestCase):
@@ -151,36 +166,36 @@ class TestStatTools(unittest.TestCase):
         mu, sigma, estimates = jackknife(data, np.mean)
         assert abs(mu - 3.0) < 1e-10  # Mean should be 3
         assert len(estimates) == 5
-        
+
     def test_jackknife_multidimensional(self):
         """Test jackknife with multidimensional data."""
         data = np.random.rand(4, 3, 2)
         mu, sigma, estimates = jackknife(data, np.mean, axis=1)
         assert estimates.shape == (3,)  # Should have 3 estimates (axis=1 has size 3)
-        
+
     def test_jackknife_bias_corrected(self):
         """Test bias-corrected jackknife."""
         data = np.array([1, 2, 3, 4, 5])
         corrected_mu, sigma = jackknife_bias_corrected(data, np.mean)
-        assert isinstance(corrected_mu, (int, float, np.number))
-        assert isinstance(sigma, (int, float, np.number))
-        
+        assert isinstance(corrected_mu, int | float | np.number)
+        assert isinstance(sigma, int | float | np.number)
+
     def test_perform_regression(self):
         """Test regression functionality."""
         xs = np.array([1, 2, 3, 4])
         ys = np.exp(xs)  # Exponential data
         result = perform_regression(xs, ys, error=False)
-        assert isinstance(result, (int, float, np.number))
+        assert isinstance(result, int | float | np.number)
 
 
-class TestCircuitTools(unittest.TestCase):        
+class TestCircuitTools(unittest.TestCase):
     def test_multiply_gates(self):
         """Test gate multiplication."""
         circ = Circuit().x(0).h(1)
         multiplied = multiply_gates(circ, ["X"], repetitions=3)
         x_count = sum(1 for ins in multiplied.instructions if ins.operator.name == "X")
         assert x_count == 3
-        
+
     def test_strip_verbatim(self):
         """Test verbatim stripping."""
         circ = Circuit().x(0)
@@ -188,7 +203,7 @@ class TestCircuitTools(unittest.TestCase):
         ncirc = Circuit().add_verbatim_box(circ)
         stripped = strip_verbatim(ncirc)
         assert len(stripped.instructions) == len(circ.instructions)
-        
+
     def test_convert_paulis(self):
         """Test Pauli gate conversion."""
         circ = Circuit().x(0).y(1).z(2)
@@ -201,27 +216,43 @@ class TestCircuitTools(unittest.TestCase):
 
 
 class TestProgramSetTools(unittest.TestCase):
-        
     def test_program_set_proc(self):
-        """ test ordering of program set submission and recombination """
+        """test ordering of program set submission and recombination"""
         circuits = np.array(
             [
                 [
-                    [Circuit().z(0).z(1).z(2),Circuit().x(2).z(0).z(1)],
-                    [Circuit().z(0).x(1).z(2),Circuit().z(0).x(1).x(2)]
-                    ],
+                    [Circuit().z(0).z(1).z(2), Circuit().x(2).z(0).z(1)],
+                    [Circuit().z(0).x(1).z(2), Circuit().z(0).x(1).x(2)],
+                ],
                 [
-                    [Circuit().x(0).z(1).z(2),Circuit().x(0).z(1).x(2)],
-                    [Circuit().x(0).x(1).z(2),Circuit().x(0).x(1).x(2)]
-                    ]
-                    ],
-              dtype=object
+                    [Circuit().x(0).z(1).z(2), Circuit().x(0).z(1).x(2)],
+                    [Circuit().x(0).x(1).z(2), Circuit().x(0).x(1).x(2)],
+                ],
+            ],
+            dtype=object,
         )
 
         test = run_with_program_sets(circuits, ["ZZZ"], [None], [{}])
-        for ind in [(0,0,0),(0,0,1),(0,1,0),(0,1,1),(1, 0, 0),(1, 0, 1),(1, 1, 0),(1, 1, 1)]:
-            assert list(test[ind+(0,0,)].keys())[0] == "".join([str(s) for s in ind])
+        for ind in [
+            (0, 0, 0),
+            (0, 0, 1),
+            (0, 1, 0),
+            (0, 1, 1),
+            (1, 0, 0),
+            (1, 0, 1),
+            (1, 1, 0),
+            (1, 1, 1),
+        ]:
+            assert list(
+                test[
+                    ind
+                    + (
+                        0,
+                        0,
+                    )
+                ].keys()
+            )[0] == "".join([str(s) for s in ind])
+
 
 if __name__ == "__main__":
     unittest.main()
-
