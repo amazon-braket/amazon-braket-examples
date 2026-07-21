@@ -38,18 +38,24 @@ jobs:
       uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
-        cache: 'pip'
+    - name: Install uv
+      uses: astral-sh/setup-uv@v6
     - name: Install dependencies
+      env:
+        UV_SYSTEM_PYTHON: "true"
       run: |
-        pip install --upgrade pip
-        pip install hatch
+        uv pip install hatch
     - name: Install BLAS/LAPACK libraries on Ubuntu
       if: ${{ runner.os == 'Linux' }}
       run: sudo apt-get update && sudo apt-get install -y libopenblas-dev liblapack-dev
     - name: Run integ tests
+      env:
+        HATCH_INSTALLER: uv
       run: |
         hatch run test -p no:cacheprovider
     - name: Run optional tests
       if: ${{ matrix.python-version != '3.10' && matrix.python-version != '3.13' }}
+      env:
+        HATCH_INSTALLER: uv
       run: |
         hatch run test-mitiq:test
