@@ -6,17 +6,20 @@ from braket.circuits.circuit import subroutine
 global _keys
 _keys = 0
 
+
 @subroutine(register=True)
 def x(target) -> Circuit:
     circ = Circuit()
     circ.prx(target, pi, 0)
     return circ
 
+
 @subroutine(register=True)
 def ry(target, theta) -> Circuit:
     circ = Circuit()
-    circ.prx(target, theta,pi/2)
+    circ.prx(target, theta, pi / 2)
     return circ
+
 
 @subroutine(register=True)
 def rx(target, theta) -> Circuit:
@@ -24,46 +27,53 @@ def rx(target, theta) -> Circuit:
     circ.prx(target, theta, 0)
     return circ
 
+
 @subroutine(register=True)
 def rz(target, theta) -> Circuit:
     circ = Circuit()
-    circ.prx(target, pi, 0).prx(target, pi, theta/2)
+    circ.prx(target, pi, 0).prx(target, pi, theta / 2)
     return circ
+
 
 @subroutine(register=True)
 def h(target) -> Circuit:
     circ = Circuit()
-    circ.prx(target, pi/2,pi/2).prx(target, pi, 0) 
+    circ.prx(target, pi / 2, pi / 2).prx(target, pi, 0)
     return circ
+
 
 @subroutine(register=True)
 def hi(target) -> Circuit:
     circ = Circuit()
-    circ.prx(target, -pi, 0).prx(target, -pi/2,pi/2)
+    circ.prx(target, -pi, 0).prx(target, -pi / 2, pi / 2)
     return circ
+
 
 @subroutine(register=True)
 def s(target) -> Circuit:
     circ = Circuit()
-    circ.rz(target, pi/2)
-    return circ 
+    circ.rz(target, pi / 2)
+    return circ
+
 
 @subroutine(register=True)
 def si(target) -> Circuit:
     circ = Circuit()
-    circ.rz(target, -pi/2)
-    return circ 
+    circ.rz(target, -pi / 2)
+    return circ
+
 
 @subroutine(register=True)
 def cnot(control, target) -> Circuit:
-    qc = Circuit().prx(target, pi/2, pi/2).prx(target, pi, 0)
-    qc.cz(control,target)
-    qc.prx(target, -pi, 0).prx(target, -pi/2, pi/2)
+    qc = Circuit().prx(target, pi / 2, pi / 2).prx(target, pi, 0)
+    qc.cz(control, target)
+    qc.prx(target, -pi, 0).prx(target, -pi / 2, pi / 2)
     return qc
 
+
 @subroutine(register=True)
-def cc_x(targets : list[int], reset : bool = True) -> Circuit:
-    """ classically conditioned X-gate from one to many with optional reset """
+def cc_x(targets: list[int], reset: bool = True) -> Circuit:
+    """classically conditioned X-gate from one to many with optional reset"""
     global _keys
     circ = Circuit().measure_ff(targets[0], _keys)
 
@@ -75,9 +85,10 @@ def cc_x(targets : list[int], reset : bool = True) -> Circuit:
     _keys += 1
     return circ
 
+
 @subroutine(register=True)
-def cc_z(targets : list[int], reset : bool = True) -> Circuit:
-    """ classically conditioned Z-gate from one to many with optional reset """
+def cc_z(targets: list[int], reset: bool = True) -> Circuit:
+    """classically conditioned Z-gate from one to many with optional reset"""
     global _keys
 
     circ = Circuit().measure_ff(targets[0], _keys)
