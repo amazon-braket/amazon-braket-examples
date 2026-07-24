@@ -636,5 +636,12 @@
         "categories": ["qiskit"],
         "location": "examples/qiskit/8_Braket_Native_Primitives.ipynb",
         "content": "  This tutorial shows how to use the Braket-native Estimator and Sampler primitives with Qiskit circuits."
+    },
+    "Quantum Error Correction with Dynamic Circuits": {
+        "index_abbrv": "QECDC",
+        "index_terms": ["error correction"],
+        "categories": ["experimental-dynamic", "noise", "iqm"],
+        "location": "examples/experimental_capabilities/dynamic_circuits/6_Quantum_Error_Correction_with_Dynamic_Circuits.ipynb",
+        "content": "  This tutorial implements the three-qubit bit-flip code with dynamic circuits, using mid-circuit measurements for syndrome extraction and real-time feedforward to actively correct errors. You will encode a logical qubit, verify the syndrome table, decode with a one-hot feedforward decoder, and run a noise sweep comparing the logical and physical error rates."
     }
 }
