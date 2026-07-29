@@ -16,12 +16,13 @@ entry_point = os.environ["AMZN_BRAKET_SCRIPT_ENTRY_POINT"]
 if not entry_point.endswith("run_notebook"):
     print("installing jupyter, papermill")
     required = {"jupyter", "papermill"}
+    import re
     import subprocess
     import sys
+    from importlib.metadata import distributions
 
-    import pkg_resources
-
-    installed = {pkg.key for pkg in pkg_resources.working_set}
+    # Normalize distribution names per PEP 503 so lookups are separator-insensitive.
+    installed = {re.sub(r"[-_.]+", "-", dist.metadata["Name"]).lower() for dist in distributions()}
     missing = required - installed
     # print("missing:",missing)
 
