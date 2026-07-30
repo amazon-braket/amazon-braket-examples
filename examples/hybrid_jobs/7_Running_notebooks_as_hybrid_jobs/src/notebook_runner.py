@@ -18,10 +18,9 @@ if not entry_point.endswith("run_notebook"):
     required = {"jupyter", "papermill"}
     import subprocess
     import sys
+    from importlib.metadata import distributions
 
-    import pkg_resources
-
-    installed = {pkg.key for pkg in pkg_resources.working_set}
+    installed = {dist.metadata["Name"].lower() for dist in distributions()}
     missing = required - installed
     # print("missing:",missing)
 
