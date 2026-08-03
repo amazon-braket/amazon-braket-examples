@@ -54,13 +54,9 @@ def pytest_configure(config):
 # Known test durations (seconds) to ensure xdist schedules slow tests first.
 # This prevents long-running tests from clustering on a single worker.
 NOTEBOOK_DURATIONS = {
-    "06_Analog_Hamiltonian_simulation_with_PennyLane.ipynb": 70,
-    "Quantum_machine_learning_in_Amazon_Braket_Hybrid_Jobs.ipynb": 57,
     "QAOA_braket.ipynb": 32,
-    "3_Hydrogen_Molecule_geometry_with_VQE.ipynb": 30,
     "Using_PennyLane_with_Braket_Hybrid_Jobs.ipynb": 28,
     "0_Creating_your_first_Hybrid_Job.ipynb": 28,
-    "VQE_chemistry_braket.ipynb": 26,
     "2_Graph_optimization_with_QAOA.ipynb": 26,
     "01_Local_Emulation_for_Verbatim_Circuits_on_Amazon_Braket.ipynb": 24,
     "4_Simulation_of_noisy_quantum_circuits_on_Amazon_Braket_with_PennyLane.ipynb": 20,
