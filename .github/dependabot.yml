@@ -17,6 +17,8 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
+      - dependency-name: "cuda-quantum*"  # manually upgrade CUDA-Q
+      - dependency-name: "cudaq*"         # manually upgrade CUDA-Q
       - dependency-name: "jax"
         versions: [ ">0.6.2" ]  # JAX >0.6.2 not compatible with PennyLane
       - dependency-name: "jaxlib"
