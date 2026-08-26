@@ -1,6 +1,6 @@
 import os
 
-import pennylane as qml
+import pennylane as qp
 from pennylane import numpy as np
 
 
@@ -12,10 +12,10 @@ def get_device(n_wires, shots):
         _prefix, device_name = device_string.split("/")
         if shots == 0:
             shots = None
-        device = qml.device(device_name, wires=n_wires, shots=shots)
+        device = qp.device(device_name, wires=n_wires, shots=shots)
         print("Using local simulator: ", device.name)
     else:
-        device = qml.device(
+        device = qp.device(
             "braket.aws.qubit",
             device_arn=device_string,
             s3_destination_folder=None,

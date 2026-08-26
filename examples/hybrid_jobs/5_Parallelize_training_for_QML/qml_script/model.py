@@ -1,5 +1,5 @@
 import numpy as np
-import pennylane as qml
+import pennylane as qp
 import torch
 from qml_script.quantum_circuit import QuantumCircuit
 from torch import nn
@@ -16,7 +16,7 @@ class DressedQNN(nn.Module):
         self.rot = nn.Parameter(weights[2])
         self.circuit = q_circuit.q_circuit()
 
-        self.qlayer = qml.qnn.TorchLayer(
+        self.qlayer = qp.qnn.TorchLayer(
             self.circuit,
             {
                 "w_layer1": self.w1.shape,

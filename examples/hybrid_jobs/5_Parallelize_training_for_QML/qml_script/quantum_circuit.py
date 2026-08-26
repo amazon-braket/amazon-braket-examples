@@ -1,4 +1,4 @@
-import pennylane as qml
+import pennylane as qp
 import torch
 from pennylane.templates import AngleEmbedding
 
@@ -6,7 +6,7 @@ from pennylane.templates import AngleEmbedding
 class QuantumCircuit:
     def __init__(self, qc_dev):
         """Args:
-        qc_dev (qml.device): a pennylane device.
+        qc_dev (qp.device): a pennylane device.
 
         """
         self.qc_dev = qc_dev
@@ -17,13 +17,13 @@ class QuantumCircuit:
         nwires = self.nwires
         qc_dev = self.qc_dev
 
-        @qml.qnode(qc_dev, interface="torch", diff_method="adjoint")
+        @qp.qnode(qc_dev, interface="torch", diff_method="adjoint")
         def circuit(inputs, w_layer1, w_layer2, rotation):
             AngleEmbedding(features=inputs, wires=range(nwires))
             self._entangle_layer(p1=w_layer1[0], p2=w_layer1[1], rng=1)
             self._entangle_layer(p1=w_layer2[0], p2=w_layer2[1], rng=3)
-            qml.Rot(rotation[0], rotation[1], rotation[2], wires=0)
-            return [qml.expval(qml.PauliZ(0))]
+            qp.Rot(rotation[0], rotation[1], rotation[2], wires=0)
+            return [qp.expval(qp.PauliZ(0))]
 
         return circuit
 
@@ -45,9 +45,9 @@ class QuantumCircuit:
         """
         wirelist = range(self.nwires)
         for iw, params in zip(wirelist, p1):
-            qml.Rot(params[0], params[1], params[2], wires=iw)
+            qp.Rot(params[0], params[1], params[2], wires=iw)
         wire1 = 0
         for _, params in zip(wirelist, p2):
             wire2 = (wire1 - rng) % self.nwires
-            qml.CRot.compute_decomposition(params[0], params[1], params[2], wires=[wire1, wire2])
+            qp.CRot.compute_decomposition(params[0], params[1], params[2], wires=[wire1, wire2])
             wire1 = wire2

@@ -1,7 +1,7 @@
 import random
 import warnings
 
-import pennylane as qml
+import pennylane as qp
 from pennylane import numpy as np
 from scipy.linalg import sqrtm
 
@@ -63,7 +63,7 @@ class QNSPSA:
             measurements are required for the updates for the case.
 
         Args:
-            cost (qml.QNode): the QNode wrapper for the objective function for
+            cost (qp.QNode): the QNode wrapper for the objective function for
             optimization
             params (np.array): Parameter before update.
 
@@ -89,7 +89,7 @@ class QNSPSA:
         the corresponding objective function value after the step.
 
         Args:
-            cost (qml.QNode): the QNode wrapper for the objective function for
+            cost (qp.QNode): the QNode wrapper for the objective function for
                 optimization
             params (np.array): Parameter before update.
 
@@ -116,7 +116,7 @@ class QNSPSA:
         for i in range(self.resamplings):
             grad_tapes, grad_dir = self.__get_spsa_grad_tapes(cost, params)
             metric_tapes, tensor_dirs = self.__get_tensor_tapes(cost, params)
-            raw_results = qml.execute(grad_tapes + metric_tapes, cost.device, None)
+            raw_results = qp.execute(grad_tapes + metric_tapes, cost.device, None)
             grad = self.__post_process_grad(raw_results[:2], grad_dir)
             metric_tensor = self.__post_process_tensor(raw_results[2:], tensor_dirs)
             grad_avg = grad_avg * i / (i + 1) + grad / (i + 1)
@@ -129,7 +129,7 @@ class QNSPSA:
         grad_avg = np.zeros(params.shape)
         for i in range(self.resamplings):
             grad_tapes, grad_dir = self.__get_spsa_grad_tapes(cost, params)
-            raw_results = qml.execute(grad_tapes, cost.device, None)
+            raw_results = qp.execute(grad_tapes, cost.device, None)
             grad = self.__post_process_grad(raw_results, grad_dir)
             grad_avg = grad_avg * i / (i + 1) + grad / (i + 1)
         return params - self.stepsize * grad_avg
@@ -203,12 +203,12 @@ class QNSPSA:
         op_forward = self.__get_operations(cost, params1)
         op_inv = self.__get_operations(cost, params2)
 
-        with qml.tape.QuantumTape() as tape:
+        with qp.tape.QuantumTape() as tape:
             for op in op_forward:
-                qml.apply(op)
+                qp.apply(op)
             for op in reversed(op_inv):
                 op.adjoint()
-            qml.probs(wires=cost.tape.wires.labels)
+            qp.probs(wires=cost.tape.wires.labels)
         return tape
 
     def __get_operations(self, cost, params):
@@ -230,7 +230,7 @@ class QNSPSA:
         cost.construct([params_next], {})
         tape_loss_next = cost.tape.copy(copy_operations=True)
 
-        loss_curr, loss_next = qml.execute([tape_loss_curr, tape_loss_next], cost.device, None)
+        loss_curr, loss_next = qp.execute([tape_loss_curr, tape_loss_next], cost.device, None)
         # self.k has been updated earlier
         ind = (self.k - 2) % self.history_length
         self.last_n_steps[ind] = loss_curr

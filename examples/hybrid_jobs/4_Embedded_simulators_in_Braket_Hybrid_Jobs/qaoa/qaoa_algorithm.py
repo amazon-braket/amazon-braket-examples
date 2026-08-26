@@ -2,7 +2,7 @@ import json
 import os
 
 import networkx as nx
-import pennylane as qml
+import pennylane as qp
 from pennylane import numpy as np
 from qaoa.utils import get_device
 
@@ -37,29 +37,29 @@ def main():
     g = nx.gnm_random_graph(n_nodes, n_edges, seed=seed)
     nx.spring_layout(g, seed=seed)
 
-    cost_h, mixer_h = qml.qaoa.max_clique(g, constrained=False)
+    cost_h, mixer_h = qp.qaoa.max_clique(g, constrained=False)
     print("number of observables: ", len(cost_h._ops))
 
     def qaoa_layer(gamma, alpha):
-        qml.qaoa.cost_layer(gamma, cost_h)
-        qml.qaoa.mixer_layer(alpha, mixer_h)
+        qp.qaoa.cost_layer(gamma, cost_h)
+        qp.qaoa.mixer_layer(alpha, mixer_h)
 
     def circuit(params):
         for i in range(n_nodes):
-            qml.Hadamard(wires=i)
-        qml.layer(qaoa_layer, n_layers, params[0], params[1])
+            qp.Hadamard(wires=i)
+        qp.layer(qaoa_layer, n_layers, params[0], params[1])
 
-    @qml.qnode(device, diff_method=diff_method)
+    @qp.qnode(device, diff_method=diff_method)
     def cost_function(params):
         circuit(params)
-        return qml.expval(cost_h)
+        return qp.expval(cost_h)
 
     # Optimization ###########
     print("start optimizing...")
     np.random.seed(seed)
     params = np.random.uniform(size=[2, n_layers])
 
-    opt = qml.AdamOptimizer(stepsize=stepsize)
+    opt = qp.AdamOptimizer(stepsize=stepsize)
 
     for i in range(iterations):
         params, cost_before = opt.step_and_cost(cost_function, params)

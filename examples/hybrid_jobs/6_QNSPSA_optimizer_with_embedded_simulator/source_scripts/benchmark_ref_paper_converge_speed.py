@@ -4,7 +4,7 @@ import os
 import random
 import time
 
-import pennylane as qml
+import pennylane as qp
 from pennylane import numpy as np
 from source_scripts.QNSPSA import QNSPSA
 from source_scripts.utils import get_device, train
@@ -14,7 +14,7 @@ from braket.jobs import save_job_result
 
 def sample_gates(n_qubits, n_layers, seed):
     random.seed(seed)
-    rot_gates = [qml.RX, qml.RY, qml.RZ]
+    rot_gates = [qp.RX, qp.RY, qp.RZ]
     sampled_gates = []
     for i in range(n_qubits):
         gates_per_qubit = random.choices(rot_gates, k=n_layers)
@@ -32,17 +32,17 @@ def ansatz_template(params, num_of_wires, sampled_gates, H):
     m = len(sampled_gates[0])
     for k in range(m - 1):
         for i in range(num_of_wires):
-            qml.RY(np.pi / 4, wires=i)
+            qp.RY(np.pi / 4, wires=i)
             sampled_gates[i][k](params[i * m + k], wires=i)
         for i in range(0, num_of_wires - 1, 2):
-            qml.CZ(wires=[i, i + 1])
+            qp.CZ(wires=[i, i + 1])
         for i in range(1, num_of_wires - 1, 2):
-            qml.CZ(wires=[i, i + 1])
+            qp.CZ(wires=[i, i + 1])
 
     for i in range(num_of_wires):
-        qml.RY(np.pi / 4, wires=i)
+        qp.RY(np.pi / 4, wires=i)
         sampled_gates[i][m - 1](params[i * m + m - 1], wires=i)
-    return qml.expval(H)
+    return qp.expval(H)
 
 
 def main():
@@ -67,9 +67,9 @@ def main():
     params_init = 2 * (np.random.rand(n_qubits * n_layers) - 0.5) * np.pi
     sampled_gates = sample_gates(n_qubits, n_layers, seed)
 
-    H = qml.PauliZ(n_qubits // 2 - 1) @ qml.PauliZ(n_qubits // 2)
+    H = qp.PauliZ(n_qubits // 2 - 1) @ qp.PauliZ(n_qubits // 2)
 
-    @qml.qnode(dev)
+    @qp.qnode(dev)
     def cost(params):
         return ansatz_template(params, n_qubits, sampled_gates, H)
 
@@ -78,8 +78,8 @@ def main():
     # SPSA optimizer is initialized with the QNSPSA class, with
     # disable_metric_tensor option set to be True.
     opt_choice = {
-        "GD": qml.GradientDescentOptimizer,
-        "QNG": qml.QNGOptimizer,
+        "GD": qp.GradientDescentOptimizer,
+        "QNG": qp.QNGOptimizer,
         "QNSPSA": QNSPSA,
         "SPSA": functools.partial(
             QNSPSA,
