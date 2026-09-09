@@ -3,7 +3,7 @@ import os
 import time
 
 import networkx as nx
-import pennylane as qml
+import pennylane as qp
 from pennylane import numpy as np
 from pennylane import qaoa
 from source_scripts.QNSPSA import QNSPSA
@@ -53,16 +53,16 @@ def main():
     def qaoa_circuit(params, n_qubits, depth):
         # initializing all qubits into +X eigenstate.
         for w in range(n_qubits):
-            qml.Hadamard(wires=w)
+            qp.Hadamard(wires=w)
         gammas = params[0]
         alphas = params[1]
         # stacking building blocks for depth times.
-        qml.layer(qaoa_layer, depth, gammas, alphas)
+        qp.layer(qaoa_layer, depth, gammas, alphas)
 
-    @qml.qnode(dev)
+    @qp.qnode(dev)
     def cost(params):
         qaoa_circuit(params, n_qubits, depth)
-        return qml.expval(cost_h)
+        return qp.expval(cost_h)
 
     results = {}
 

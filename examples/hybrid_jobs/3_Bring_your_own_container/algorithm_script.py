@@ -2,7 +2,7 @@ import os
 import time
 from datetime import datetime
 
-import pennylane as qml
+import pennylane as qp
 import spacy_sentence_bert
 from pennylane import numpy as np
 from pennylane.templates import AmplitudeEmbedding
@@ -36,7 +36,7 @@ def main():
     # Initialize and train the quantum model
     print("=" * 25 + "  Training  " + "=" * 25)
     qml_model = CCQC(nwires=9)
-    opt = qml.AdamOptimizer(stepsize=0.1)
+    opt = qp.AdamOptimizer(stepsize=0.1)
     weights = qml_model.initialize_weights()
     nsteps = 10
 
@@ -95,7 +95,7 @@ class CCQC:
         See figure 4 of https://arxiv.org/abs/1804.00633
         """
         nwires = self.nwires
-        dev = qml.device(
+        dev = qp.device(
             "braket.aws.qubit",
             device_arn=self.device_arn,
             wires=nwires,
@@ -106,14 +106,14 @@ class CCQC:
             s3_destination_folder=None,
         )
 
-        @qml.qnode(dev, diff_method="device", interface="autograd")
+        @qp.qnode(dev, diff_method="device", interface="autograd")
         def circuit(*weights, features=np.zeros(2**nwires)):
             AmplitudeEmbedding(features=features, wires=range(nwires), normalize=True, pad_with=0.0)
             w_layer1, w_layer2, rotation = weights
             self._entangle_layer(p1=w_layer1[0], p2=w_layer1[1], rng=1)
             self._entangle_layer(p1=w_layer2[0], p2=w_layer2[1], rng=3)
-            qml.Rot(rotation[0], rotation[1], rotation[2], wires=0)
-            return qml.expval(qml.PauliZ(0))
+            qp.Rot(rotation[0], rotation[1], rotation[2], wires=0)
+            return qp.expval(qp.PauliZ(0))
 
         return circuit
 
@@ -184,11 +184,11 @@ class CCQC:
         """
         wirelist = range(self.nwires)
         for iw, params in zip(wirelist, p1):
-            qml.Rot(params[0], params[1], params[2], wires=iw)
+            qp.Rot(params[0], params[1], params[2], wires=iw)
         wire1 = 0
         for _, params in zip(wirelist, p2):
             wire2 = (wire1 - rng) % self.nwires
-            qml.CRot(params[0], params[1], params[2], wires=[wire1, wire2])
+            qp.CRot(params[0], params[1], params[2], wires=[wire1, wire2])
             wire1 = wire2
 
     def _ReLU(self, x, margin=0.0):
