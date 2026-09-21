@@ -1,3 +1,4 @@
+import inspect
 import numpy as np
 from typing import List
 from dataclasses import dataclass
@@ -8,6 +9,19 @@ from scipy.linalg import null_space
 from openfermion.circuits.low_rank import low_rank_two_body_decomposition
 from openfermion.ops import general_basis_change
 from afqmc.utils.linalg import reortho
+
+# Newer OpenFermion adds a 'transpose' argument to general_basis_change whose default is scheduled
+# to flip from True to False. Detect it once so we can pin transpose=True (the current/legacy
+# behavior) where supported, silencing the FutureWarning and staying robust to the upcoming flip,
+# while remaining compatible with versions that predate the argument.
+_GBC_ACCEPTS_TRANSPOSE = "transpose" in inspect.signature(general_basis_change).parameters
+
+
+def _general_basis_change(general_tensor, rotation_matrix, key):
+    """Version-tolerant wrapper around openfermion.general_basis_change (see note above)."""
+    if _GBC_ACCEPTS_TRANSPOSE:
+        return general_basis_change(general_tensor, rotation_matrix, key, transpose=True)
+    return general_basis_change(general_tensor, rotation_matrix, key)
 
 @dataclass
 class ChemicalProperties:
@@ -26,37 +40,31 @@ class ChemicalProperties:
         
 def chemistry_preparation(mol: Mole, hf: RHF, active_orbitals=None, nel=None):
     """
-    This function returns necessary operators and vectors for classical AFQMC calculations from PySCF.
+    This function returns necessary operators and vectors for AFQMC calculations from PySCF.
 
     Args:
         mol (pyscf.gto.mole.Mole): PySCF molecular structure
         hf (pyscf.scf.hf.RHF): PySCF non-relativistic RHF
-        trial (np.ndarray): trial wavefunction, currently only the hartree-fock state has been implemented
-        active_orbitals: list of (1-based) active orbitals; default None
+        active_orbitals: list of (1-based) active orbitals; default None (full space)
         nel: tuple of (alpha, beta) electrons in the active space; default None
     Returns:
-        v_0: one-body term stored as np.ndarray, with mean-field subtraction
-        h_chem: one-body term stored as np.ndarray, without mean-field subtraction
-        v_gamma: 1.j*L_gamma
-        L_gamma: Cholesky vector decomposed from two-body terms
-        mf_shift: mean-field shift
-        nuclear_repulsion: nuclear repulsion constant
+        ChemicalProperties: dataclass holding nbasis, nup, ndown, h1e, eri, nuclear_repulsion,
+            h_chem (one-body term with the low-rank correction), v_gamma (= 1j*L_gamma),
+            L_gamma (Cholesky vectors of the two-body term), and lambda_l / U_l (their
+            eigendecompositions).
     """
-    if active_orbitals == None:
-        nbasis = mol.nao_nr()
-        nup, ndown = mol.nelectron//2, mol.nelectron//2   # assuming the number of spin-up and down eles being the same
-        h1e = mol.intor("int1e_kin") + mol.intor("int1e_nuc")
-        h2e = mol.intor("int2e")
+    if active_orbitals is None:
         scf_c = hf.mo_coeff
+        nbasis = mol.nao_nr()
+        nup, ndown = mol.nelec                 # (n_alpha, n_beta)
         nuclear_repulsion = mol.energy_nuc()
 
-        # Get the one and two electron integral in the Hatree Fock basis
-        h1e = scf_c.T @ h1e @ scf_c
-
-        # For the modified physics notation adapted to quantum computing convention.
-        for _ in range(4):
-            h2e = np.tensordot(h2e, scf_c, axes=1).transpose(3, 0, 1, 2)
-        eri = h2e.transpose(0,2,3,1)
+        # one- and two-electron integrals in the Hartree-Fock (MO) basis, via PySCF built-ins.
+        # hf.get_hcore() returns the AO core Hamiltonian (kinetic + nuclear, incl. ECP if present);
+        # ao2mo performs the AO->MO 4-index transform using permutational symmetry.
+        h1e = scf_c.T @ hf.get_hcore() @ scf_c
+        eri = ao2mo.restore(1, ao2mo.kernel(mol, scf_c), nbasis)  # chemist notation (pq|rs)
+        eri = eri.transpose(0, 2, 3, 1)                           # modified physicist's notation
     else:
         nbasis = len(active_orbitals)
         cas = mcscf.CASCI(hf, len(active_orbitals), nel)
@@ -69,7 +77,7 @@ def chemistry_preparation(mol: Mole, hf: RHF, active_orbitals=None, nel=None):
         eri = h2e.transpose(0,2,3,1)
         nup, ndown = nel[0], nel[1]
 
-    lamb, g, one_body_correction, residue = low_rank_two_body_decomposition(eri, spin_basis=False)
+    lamb, g, one_body_correction, _ = low_rank_two_body_decomposition(eri, spin_basis=False)
     h_chem = np.kron(h1e, np.eye(2)) + 0.5 * one_body_correction
     num_spin_orbitals = int(h_chem.shape[0])
     
@@ -109,19 +117,37 @@ def rotated_hamiltonian_preparation(h1e, eri, phi: np.ndarray):
     """
     # define the unitary rotation matrix from walker wavefunction
     R = R_basis_change(phi)
-    
-    h1e_rotated = general_basis_change(h1e, R, (1, 0))
-    eri_rotated = general_basis_change(eri, R, (1, 1, 0, 0))
+
+    h1e_rotated = _general_basis_change(h1e, R, (1, 0))
+    eri_rotated = _general_basis_change(eri, R, (1, 1, 0, 0))
     return h1e_rotated, eri_rotated
 
-        
+
 def R_basis_change(phi):
-    """This only applies to hydrogen molecule for the moment
+    """Build the spatial orbital rotation V that maps the walker's occupied orbitals to the
+    Hartree-Fock reference (i.e. the U_phi of Eq. B1 in arXiv:2310.16915), used to rotate the
+    Hamiltonian for local-energy evaluation.
+
+    This is valid for any closed-shell / restricted (nup == ndown) system, not only hydrogen: the
+    walker keeps a spin-block structure with identical up/down spatial orbitals throughout the
+    propagation (h_chem and the Cholesky vectors all carry the "spatial (x) I_2" structure), so the
+    single spatial rotation extracted from the up block phi[::2, ::2] applies to both spin sectors.
+    Verified to reproduce <phi|H|phi> exactly for H2, H4, LiH, and H6.
+
+    Limitation: it assumes a restricted walker (up and down orbitals coincide). Unrestricted /
+    open-shell walkers would need separate alpha/beta rotations and spin-resolved integrals, which
+    the surrounding estimator stack (spatial h1e/eri + map_orb, excitation lists,
+    generate_excited_slater) does not currently support.
+
+    Args:
+        phi (np.ndarray): walker state, shape (2*nbasis, num_electrons), spin-orbital interleaved.
+    Returns:
+        V (np.ndarray): nbasis x nbasis unitary orbital rotation.
     """
     num_qubits, num_electrons = phi.shape
     R = np.zeros((num_qubits//2, num_qubits//2), dtype=np.complex128)
     R[:, :num_electrons//2] = phi[::2, ::2]
     R[:, num_electrons//2:] = null_space(phi[::2, ::2].T)
-    
+
     V, _ = reortho(R)
     return V
