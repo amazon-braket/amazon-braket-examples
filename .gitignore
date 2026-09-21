@@ -146,3 +146,9 @@ examples/hybrid_jobs/4_Embedded_simulators_in_Braket_Hybrid_Jobs/embedded-simula
 examples/hybrid_jobs/8_Creating_Hybrid_Job_Scripts/braket-job-default-*
 examples/**/model.tar.gz
 examples/**results.json
+
+# Claude Code
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.mcp.json
