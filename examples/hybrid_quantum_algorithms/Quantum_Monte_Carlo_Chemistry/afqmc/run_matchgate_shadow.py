@@ -1,6 +1,6 @@
 import os, time
 import numpy as np
-import pennylane as qml
+import pennylane as qp
 from pyscf import fci, gto
 from afqmc.utils.shadow import random_signed_permutation
 from afqmc.utils.shadow import calculate_classical_shadow
@@ -42,44 +42,41 @@ def run(
     myci.kernel()
     prop = chemistry_preparation(mol, hf)
     
-    # collect classical shadows
-    num_qubits = 4
-    dev = get_pennylane_device(n_wires=num_qubits, shots=shots)
-    @qml.qnode(dev)
+    # collect classical shadows. num_qubits = number of JW spin orbitals = 2 * nbasis.
+    num_qubits = 2 * prop.nbasis
+    dev = get_pennylane_device(n_wires=num_qubits)
+    @qp.set_shots(shots=shots)
+    @qp.qnode(dev)
     def hydrogen_shadow_circuit(Q):
-        qml.Hadamard(wires=0)
-        qml.CNOT(wires=[0, 1])
-        
-        qml.DoubleExcitation(0.12, wires=[0, 1, 2, 3])
+        # NOTE: this state preparation is the H2 trial ansatz; for another molecule replace it with
+        # an ansatz acting on all `num_qubits` wires.
+        qp.Hadamard(wires=0)
+        qp.CNOT(wires=[0, 1])
+
+        qp.DoubleExcitation(0.12, wires=[0, 1, 2, 3])
         gaussian_givens_decomposition(Q)
-        return qml.counts()
+        return qp.counts()
     
-    Q_list = []
-    for _ in range(shadow_size):
-        Q_list.append(random_signed_permutation(2*num_qubits))
-        
-    outcomes = calculate_classical_shadow(hydrogen_shadow_circuit, Q_list)
-    shadow = (outcomes, Q_list)
+    Q_list = [random_signed_permutation(2*num_qubits) for _ in range(num_shadows)]
+
+    shadow = calculate_classical_shadow(hydrogen_shadow_circuit, Q_list)
     print("The classical shadows are successfully collected.")
     
-    Angstrom_to_Bohr = 1.88973
-    symbols = ["H", "H"]
-    geometry = np.array([[0., 0., 0.], [0., 0., 0.75*Angstrom_to_Bohr]])
-    
-    hamiltonian, _ = qml.qchem.molecular_hamiltonian(symbols, geometry, charge=0, basis='sto-3g')
-    psi0 = np.array([[1, 0], [0, 1], [0, 0], [0, 0]])
-    
-    # define the quantum trial state
-    qtrial = QTrial(prop=prop, initial_state=[0, 1], ansatz_circuit=V_T, ifshadow=True, shadow=shadow)
-    
-    # Start QC-QFQMC computation
+    # initial HF walker (spin-orbital Slater determinant): N = nup + ndown electrons occupy the
+    # lowest N of the 2*nbasis spin orbitals.
+    psi0 = np.eye(num_qubits, prop.nup + prop.ndown)
+
+    # define the quantum trial state (evaluated entirely from the matchgate shadows)
+    qtrial = QTrial(prop=prop, shadow=shadow)
+
+    # Start QC-QFQMC computation. The reference energy E_shift = <Psi_Q|H|Psi_Q> is estimated
+    # from the same matchgate shadows inside cqa_afqmc, so no separate Hamiltonian is needed.
     start = time.time()
     quantum_energies = cqa_afqmc(
         num_walkers,
         num_steps,
         dtau,
         qtrial,
-        hamiltonian,
         psi0,
         max_pool=48,
     )
@@ -94,13 +91,14 @@ def run(
 
 
 def V_T():
-    qml.DoubleExcitation(0.12, wires=[0,1,2,3])
+    qp.DoubleExcitation(0.12, wires=[0,1,2,3])
 
 
-def get_pennylane_device(n_wires: int, shots: int) -> qml.device:
+def get_pennylane_device(n_wires: int) -> qp.device:
     """Create Pennylane device from the `device` keyword argument of AwsQuantumJob.create().
     See https://docs.aws.amazon.com/braket/latest/developerguide/pennylane-embedded-simulators.html
-    about the format of the `device` argument.
+    about the format of the `device` argument. Shots are applied at the QNode via the
+    `qp.set_shots` transform (setting shots on the device is deprecated).
     Args:
         n_wires (int): number of qubits to initiate the local simulator.
     Returns:
@@ -108,6 +106,6 @@ def get_pennylane_device(n_wires: int, shots: int) -> qml.device:
     """
     device_string = os.environ["AMZN_BRAKET_DEVICE_ARN"]
     prefix, device_name = device_string.split("/")
-    device = qml.device(device_name, wires=n_wires, shots=shots)
+    device = qp.device(device_name, wires=n_wires)
     print("Using simulator: ", device.name)
     return device

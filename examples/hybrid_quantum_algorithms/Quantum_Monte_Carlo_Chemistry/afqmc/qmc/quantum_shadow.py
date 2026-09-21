@@ -11,7 +11,6 @@ def cqa_afqmc(
     num_steps: int,
     dtau: float,
     trial: QTrial,
-    hamiltonian,
     psi0: np.ndarray,
     max_pool: int=8,
 ):
@@ -20,14 +19,14 @@ def cqa_afqmc(
         num_walkers (int): Number of walkers.
         num_steps (int): Number of (imaginary) time steps
         dtau (float): Increment of each time step
-        trial (QTrial): quantum trial wavefunction.
-        hamiltonian: pennylane hamiltonian class, for computing the trial state energy
+        trial (QTrial): quantum trial wavefunction (matchgate-shadow based).
         psi0 (np.ndarray): initial walker state.
         max_pool (int, optional): Max workers. Defaults to 8.
     Returns:
         energies: energies
     """
-    E_shift = trial.compute_trial_energy(hamiltonian)
+    # reference energy E_shift = <Psi_Q|H|Psi_Q>, estimated from the matchgate shadows
+    E_shift = trial.compute_trial_energy_shadow()
     walkers = [psi0] * num_walkers
     weights = [1.0] * num_walkers
     

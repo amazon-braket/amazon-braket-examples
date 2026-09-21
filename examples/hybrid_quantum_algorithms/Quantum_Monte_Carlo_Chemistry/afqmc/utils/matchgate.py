@@ -1,7 +1,18 @@
+import warnings
 import numpy as np
-import pennylane as qml
+import pennylane as qp
 from numba import jit
+from scipy.linalg import null_space
 from typing import cast, Tuple
+
+# The matchgate post-processing matmuls act on tiny (2n x 2n) matrices, and Numba's chained matmul
+# yields non-contiguous intermediates that raise a benign performance hint. Silence it so it does
+# not flood the QMC time-evolution logs (one warning per walker per step otherwise).
+try:
+    from numba.core.errors import NumbaPerformanceWarning
+    warnings.filterwarnings("ignore", category=NumbaPerformanceWarning)
+except Exception:
+    pass
 from openfermion.linalg.givens_rotations import (
     givens_rotate,
     givens_matrix_elements,
@@ -12,61 +23,55 @@ from afqmc.utils.linalg import reortho, pfaffian_LTL, fit_poly
 '''
 This file contains functions to compute overlap integrals from matchgate shadows
 '''
-def ovlp_reconstruction(b_lists, Q_list, comb_coeffs, phi_state):
-    """Reconstruct overlap approximation as an average over all shadows.
+def ovlp_reconstruction(c_hats, counts, comb_coeffs, phi_state):
+    """Reconstruct the overlap <Psi_Q|phi> as a shot-weighted average over all shadows.
+
+    Takes the walker-independent reconstructed covariances c_hats = Q^T C_b Q (one per measurement
+    outcome), which the caller precomputes once per shadow and reuses across every walker/excitation.
     Args:
-        b_lists:
-        Q_list:
-        comb_coeffs:
-        phi_state (np.ndarray): walker state
-        num_fit:
+        c_hats (np.ndarray): (N_out, 2n, 2n) complex array of Q^T C_b Q per outcome.
+        counts (np.ndarray): (N_out,) shot count per outcome (averaging weights).
+        comb_coeffs (np.ndarray): channel-inversion coefficients comb(2n,2k)/comb(n,k),
+            length dim+1 with dim = num_qubits - num_particles//2.
+        phi_state (np.ndarray): walker state, shape (num_qubits, num_particles).
     Returns:
         ovlp (np.complex128): overlap integral reconstructed from matchgate shadows.
     """
     num_qubits, num_particles = phi_state.shape
     dim = int(num_qubits - num_particles//2)
     prefactor = 1.j**(num_particles//2) / (2**(num_qubits - num_particles//2))
-    
+
     # create necessary quantities for postprocessing
     C_0 = construct_covariance('0'*num_qubits)
     W = construct_W(num_qubits, num_particles)
     Q_tilde = construct_Q_tilde(phi_state)
-    
+
     M1 = np.delete(C_0, [2*i for i in range(num_particles)], 0)
     M1 = np.delete(M1, [2*i for i in range(num_particles)], 1)
-    
-    # first create all the M1, M2s from b_lists and Q_list
-    M2s = []
-    for b_list, Q in zip(b_lists, Q_list):
-        Q = Q.astype('complex128')
-        for b_state in b_list:
-            COMP = ma_mul(Q, Q_tilde, W, b_state[0])
-            M2s.append(COMP)
-            
-    M2s = np.stack(M2s, axis=0)
+
+    # Per-outcome M2 = W* Q~^T (Q^T C_b Q) Q~ W*^T = A c_hat A^T, where A = W* Q~^T is fixed for this
+    # call (walker-dependent only). Both A c_hat and the outer product are vectorized over outcomes.
+    A = W.conj() @ Q_tilde.T
+    M2s = A @ c_hats @ A.T                      # (N_out, 2n, 2n)
     M2s = np.delete(M2s, [2*i for i in range(num_particles)], 1)
     M2s = np.delete(M2s, [2*i for i in range(num_particles)], 2)
-    
+
     # next create all matrices necessary to interpolate and stack them
     num_fit = dim + 1
     z_list = np.linspace(0., 1., num_fit)
     M = m_pf_generator(M1, M2s, z_list)
-    
+
     # then perform the vectorized pfaffian calculations
     pfaffian_list = pfaffian_LTL(M)
-    
-    b_flattened = [i for j in b_lists for i in j]
     z_list = z_list.astype('complex128')
-    
+
     # generate the coeffs by fitting the data
-    ovlp_list = np.zeros(len(b_flattened), dtype=np.complex128)
-    denom_list = np.zeros(len(b_flattened))
-    for i, b_state in enumerate(b_flattened):
+    ovlp_list = np.zeros(len(counts), dtype=np.complex128)
+    for i in range(len(counts)):
         pf_coeffs = fit_poly(z_list, pfaffian_list[i*num_fit:(i+1)*num_fit], deg=dim)
         ovlp_list[i] = pf_coeffs @ comb_coeffs
-        denom_list[i] = b_state[1]
-    
-    ovlp_mean = np.average(ovlp_list, weights=denom_list, axis=0)
+
+    ovlp_mean = np.average(ovlp_list, weights=counts.astype(float))
     return 2 * prefactor * ovlp_mean
 
     
@@ -75,16 +80,20 @@ Next we define a series of help functions for post-processing the matchgate shad
 """
 
 def construct_Q_tilde(phi_state):
-    '''This function constructs the \tilde{Q} matrix according to Eqn.(15) from https://arxiv.org/abs/2207.13723.
+    r'''This function constructs the \tilde{Q} matrix according to Eqn.(15) from https://arxiv.org/abs/2207.13723.
     Args:
         phi_state (np.ndarray)
     Returns:
         Q_tilde (np.ndarray)
     '''
     num_qubits, num_particles = phi_state.shape
-    
-    # construct a unitary matrix V from phi
-    complement = np.random.rand(num_qubits, num_qubits-num_particles)
+
+    # construct a unitary matrix V by completing the occupied orbitals of phi with an orthonormal
+    # basis of their complement. The reconstructed overlap is invariant to the choice of complement,
+    # so we build it deterministically (via null_space) rather than from a random matrix: a random
+    # complement would advance the global NumPy RNG as a side effect, perturbing the auxiliary-field
+    # sampling of the AFQMC propagator and making runs non-reproducible.
+    complement = null_space(phi_state.T)
     V, _ = reortho(np.hstack((phi_state, complement)))
     
     Q_tilde = np.zeros((2*num_qubits, 2*num_qubits), dtype=np.complex128)
@@ -128,12 +137,7 @@ def m_pf_generator(M1, M2s, z_list):
     return M
 
 
-@jit('complex128[:,:](complex128[:,:], complex128[:,:], complex128[:,:], complex128[:,:])', nopython=True)
-def ma_mul(Q, Q_tilde, W, b_cov):
-    COMP = W.conj() @ Q_tilde.T @ Q.T @ b_cov @ Q @ Q_tilde @ W.conj().T
-    return COMP
-
-"""
+r"""
 The code here allows for compiling Cirq circuits of general fermionic
 Gaussian unitaries, using their O(2n)-matrix representation.
 Adapted from OpenFermion's optimal_givens_decomposition to the context of
@@ -253,10 +257,10 @@ def gaussian_givens_decomposition(orthogonal_matrix: np.ndarray):
         i, j, theta = cast(Tuple[int, int, float], op)
         if not np.isclose(theta, 0.0):
             if i % 2 == 0:
-                qml.RZ(theta, wires=i//2)
+                qp.RZ(theta, wires=i//2)
             else:
                 p = (i - 1) // 2
-                qml.IsingXX(theta, wires=[p, p+1])
+                qp.IsingXX(theta, wires=[p, p+1])
     
     # final layer of Pauli gates to implement phases, which must be \pm 1 since
     # orthogonal matrices are real
@@ -278,8 +282,8 @@ def gaussian_givens_decomposition(orthogonal_matrix: np.ndarray):
     
     for p in range(n):
         if final_pauli_gate[p] % 2 == 0 and final_pauli_gate[p + n] % 2 == 1:
-            qml.PauliZ(wires=p)
+            qp.PauliZ(wires=p)
         elif final_pauli_gate[p] % 2 == 1 and final_pauli_gate[p + n] % 2 == 0:
-            qml.PauliX(wires=p)
+            qp.PauliX(wires=p)
         elif final_pauli_gate[p] % 2 == 1 and final_pauli_gate[p + n] % 2 == 1:
-            qml.PauliY(wires=p)
+            qp.PauliY(wires=p)
