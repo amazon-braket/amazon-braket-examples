@@ -1,5 +1,5 @@
 import numpy as np
-import pennylane as qml
+import pennylane as qp
 from typing import Callable, List, Tuple
 from scipy.linalg import null_space
 from afqmc.utils.linalg import reortho
@@ -15,16 +15,16 @@ def givens_block_circuit(givens: Tuple):
     """
     (i, j, theta, varphi) = givens
 
-    qml.RZ(-varphi, wires=j)
-    qml.CNOT(wires=[j, i])
+    qp.RZ(-varphi, wires=j)
+    qp.CNOT(wires=[j, i])
 
     # implement the cry rotation
-    qml.RY(theta, wires=j)
-    qml.CNOT(wires=[i, j])
-    qml.RY(-theta, wires=j)
-    qml.CNOT(wires=[i, j])
+    qp.RY(theta, wires=j)
+    qp.CNOT(wires=[i, j])
+    qp.RY(-theta, wires=j)
+    qp.CNOT(wires=[i, j])
 
-    qml.CNOT(wires=[j, i])
+    qp.CNOT(wires=[j, i])
 
 
 def prepare_slater_circuit(circuit_description: Tuple):
@@ -35,7 +35,7 @@ def prepare_slater_circuit(circuit_description: Tuple):
     """
     for parallel_ops in circuit_description:
         for givens in parallel_ops:
-            qml.adjoint(givens_block_circuit)(givens)
+            qp.adjoint(givens_block_circuit)(givens)
 
 
 def construct_slater(walker):
@@ -45,7 +45,7 @@ def construct_slater(walker):
     """
     num_qubits, num_particles = walker.shape
     for i in range(num_particles):
-        qml.PauliX(wires=i)
+        qp.PauliX(wires=i)
         
     complement = null_space(walker.T)
     W, _ = reortho(np.hstack((walker, complement)))
@@ -54,7 +54,7 @@ def construct_slater(walker):
     circuit_description = list(reversed(decomposition))
     
     for i in range(len(diagonal)):
-        qml.RZ(np.angle(diagonal[i]), wires=i)
+        qp.RZ(np.angle(diagonal[i]), wires=i)
         
     prepare_slater_circuit(circuit_description)            
             
@@ -65,11 +65,11 @@ def circuit_first_half(phi: np.ndarray):
         phi (np.ndarray): orthonormalized walker state
     """
     num_qubits, num_particles = phi.shape
-    qml.Hadamard(wires=0)
+    qp.Hadamard(wires=0)
 
     if num_particles > 1.0:
         for i in range(1, num_particles):
-            qml.CNOT(wires=[0, i])
+            qp.CNOT(wires=[0, i])
             
     complement = null_space(phi.T)
     W, _ = reortho(np.hstack((phi, complement)))
@@ -77,7 +77,7 @@ def circuit_first_half(phi: np.ndarray):
     circuit_description = list(reversed(decomposition))
 
     for i in range(len(diagonal)):
-        qml.RZ(np.angle(diagonal[i]), wires=i)
+        qp.RZ(np.angle(diagonal[i]), wires=i)
 
     prepare_slater_circuit(circuit_description)
 
@@ -89,12 +89,12 @@ def circuit_second_half_real(phi: np.ndarray, q_trial: Callable):
         q_trial (function): quantum trial circuit from Pennylane
     """
     num_qubits, num_particles = phi.shape
-    qml.adjoint(q_trial)()
+    qp.adjoint(q_trial)()
     
     if num_particles > 1.0:
         for i in range(1, num_particles)[::-1]:
-            qml.CNOT(wires=[0, i])
-    qml.Hadamard(wires=0)
+            qp.CNOT(wires=[0, i])
+    qp.Hadamard(wires=0)
 
 
 def circuit_second_half_imag(phi: np.ndarray, q_trial: Callable):
@@ -104,16 +104,16 @@ def circuit_second_half_imag(phi: np.ndarray, q_trial: Callable):
         q_trial (function): quantum trial state
     """
     num_qubits, num_particles = phi.shape
-    qml.adjoint(q_trial)()
+    qp.adjoint(q_trial)()
 
     if num_particles > 1.0:
         for i in range(1, num_particles)[::-1]:
-            qml.CNOT(wires=[0, i])
+            qp.CNOT(wires=[0, i])
 
-    qml.S(wires=0)
-    qml.S(wires=0)
-    qml.S(wires=0)
-    qml.Hadamard(wires=0)
+    qp.S(wires=0)
+    qp.S(wires=0)
+    qp.S(wires=0)
+    qp.Hadamard(wires=0)
 
 
 def amplitude_real(phi: np.ndarray, q_trial: Callable):
@@ -147,19 +147,19 @@ def amplitude_estimate(phi: np.ndarray, q_trial: Callable, dev: str):
     """
     num_qubits, num_particles = phi.shape
     
-    device = qml.device(dev, wires=num_qubits)
-    @qml.qnode(device, interface=None, diff_method=None)
+    device = qp.device(dev, wires=num_qubits)
+    @qp.qnode(device, interface=None, diff_method=None)
     def compute_real(phi, q_trial):
         amplitude_real(phi, q_trial)
-        return qml.probs(range(num_qubits))
+        return qp.probs(range(num_qubits))
 
     probs_values = compute_real(phi, q_trial)
     real = probs_values[0] - probs_values[int(2**num_qubits / 2)]
 
-    @qml.qnode(device, interface=None, diff_method=None)
+    @qp.qnode(device, interface=None, diff_method=None)
     def compute_imag(phi, q_trial):
         amplitude_imag(phi, q_trial)
-        return qml.probs(range(num_qubits))
+        return qp.probs(range(num_qubits))
 
     probs_values = compute_imag(phi, q_trial)
     imag = probs_values[0] - probs_values[int(2**num_qubits / 2)]
@@ -174,7 +174,7 @@ def U_circuit(U: np.ndarray):
     circuit_description = list(reversed(decomposition))
 
     for i in range(len(diagonal)):
-        qml.RZ(np.angle(diagonal[i]), i)
+        qp.RZ(np.angle(diagonal[i]), i)
 
     if circuit_description != []:
         prepare_slater_circuit(circuit_description)
@@ -192,9 +192,9 @@ def pauli_real(phi: np.ndarray, q_trial: Callable, U: np.ndarray, pauli: List[in
 
     U_circuit(U)
     for i in pauli:
-        qml.PauliZ(wires=i)
+        qp.PauliZ(wires=i)
 
-    qml.adjoint(U_circuit)(U)
+    qp.adjoint(U_circuit)(U)
     circuit_second_half_real(phi, q_trial)
 
     
@@ -210,14 +210,14 @@ def pauli_imag(phi: np.ndarray, q_trial: Callable, U: np.ndarray, pauli: List[in
 
     U_circuit(U)
     for i in pauli:
-        qml.PauliZ(wires=i)
+        qp.PauliZ(wires=i)
 
-    qml.adjoint(U_circuit)(U)
+    qp.adjoint(U_circuit)(U)
     circuit_second_half_imag(phi, q_trial)
 
     
 def pauli_estimate(phi: np.ndarray, q_trial: Callable, U: np.ndarray, pauli: List[int], dev: str):    
-    """This function returns the expectation value of $\\langle \\Psi_Q|pauli|\\phi_l\rangle$.
+    r"""This function returns the expectation value of $\langle \Psi_Q|pauli|\phi_l\rangle$.
     Args:
         phi: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
         q_trial: circuit unitary to prepare the quantum trial state
@@ -230,19 +230,19 @@ def pauli_estimate(phi: np.ndarray, q_trial: Callable, U: np.ndarray, pauli: Lis
     """
     num_qubits, num_particles = phi.shape
     
-    device = qml.device(dev, wires=num_qubits)
-    @qml.qnode(device, interface=None, diff_method=None)
+    device = qp.device(dev, wires=num_qubits)
+    @qp.qnode(device, interface=None, diff_method=None)
     def compute_real(phi, q_trial, U, pauli):
         pauli_real(phi, q_trial, U, pauli)
-        return qml.probs(range(num_qubits))
+        return qp.probs(range(num_qubits))
 
     probs_values = compute_real(phi, q_trial, U, pauli)
     real = probs_values[0] - probs_values[int(2**num_qubits / 2)]
 
-    @qml.qnode(device, interface=None, diff_method=None)
+    @qp.qnode(device, interface=None, diff_method=None)
     def compute_imag(phi, q_trial, U, pauli):
         pauli_imag(phi, q_trial, U, pauli)
-        return qml.probs(range(num_qubits))
+        return qp.probs(range(num_qubits))
 
     probs_values = compute_imag(phi, q_trial, U, pauli)
     imag = probs_values[0] - probs_values[int(2**num_qubits / 2)]
@@ -251,7 +251,7 @@ def pauli_estimate(phi: np.ndarray, q_trial: Callable, U: np.ndarray, pauli: Lis
 
 
 def pauli_expect(initial_state: list, q_trial: Callable, U: np.ndarray, pauli: List[int], dev: str):
-    '''This function computes the pauli expectation value $<\Psi_Q|U^+ v U|\Psi_Q>$
+    r'''This function computes the pauli expectation value $<\Psi_Q|U^+ v U|\Psi_Q>$
     Args:
         initial_state: Hartree-Fock state by default
         q_trial: quantum trial state
@@ -261,17 +261,17 @@ def pauli_expect(initial_state: list, q_trial: Callable, U: np.ndarray, pauli: L
         expectation
     '''
     num_qubits = U.shape[1]
-    device = qml.device(dev, wires=num_qubits)
-    @qml.qnode(device, interface=None, diff_method=None)
+    device = qp.device(dev, wires=num_qubits)
+    @qp.qnode(device, interface=None, diff_method=None)
     def compute_expectation(initial_state, q_trial, U, pauli):
         for i in initial_state:
-            qml.PauliX(wires=i)
+            qp.PauliX(wires=i)
         q_trial()
         U_circuit(U)
         if len(pauli) == 1:
-            return qml.expval(qml.PauliZ(pauli[0]))
+            return qp.expval(qp.PauliZ(pauli[0]))
         elif len(pauli) == 2:
-            return qml.expval(qml.PauliZ(pauli[0]) @ qml.PauliZ(pauli[1]))
+            return qp.expval(qp.PauliZ(pauli[0]) @ qp.PauliZ(pauli[1]))
         else:
             raise Exception("Not implemented error.")
     

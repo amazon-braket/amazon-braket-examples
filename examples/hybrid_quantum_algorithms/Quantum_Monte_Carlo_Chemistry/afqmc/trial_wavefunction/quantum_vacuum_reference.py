@@ -1,6 +1,6 @@
 import copy
 import numpy as np
-import pennylane as qml
+import pennylane as qp
 from typing import List
 from afqmc.utils.chemical_preparation import ChemicalProperties
 from afqmc.utils.quantum import amplitude_estimate, pauli_expect, pauli_estimate
@@ -40,26 +40,26 @@ class QTrial:
         
             
     def compute_trial_energy(self, hamiltonian):
-        """This function estimates the integral $\langle \Psi_Q|H|\Psi_Q\rangle$.
+        r"""This function estimates the integral $\langle \Psi_Q|H|\Psi_Q\rangle$.
         Args:
-            hamiltonian: hamiltonian class from pennylane, nuclear repulsion energy included; 
+            hamiltonian: hamiltonian class from pennylane, nuclear repulsion energy included;
         Returns:
             energy: np.complex128
         """
-        device = qml.device(self.dev, wires=self.num_qubits)
-        @qml.qnode(device, interface=None, diff_method=None)
+        device = qp.device(self.dev, wires=self.num_qubits)
+        @qp.qnode(device, interface=None, diff_method=None)
         def compute_hamiltonian_expectation(initial_state, q_trial, hamiltonian):
             for i in initial_state:
-                qml.PauliX(wires=i)
+                qp.PauliX(wires=i)
             q_trial()
-            return qml.expval(hamiltonian)
+            return qp.expval(hamiltonian)
         
         energy = compute_hamiltonian_expectation(self.initial_state, self.q_trial, hamiltonian)
         return energy
     
     
     def compute_trial_one_body(self, one_body_list):
-        '''This function computes the expectation value of one-body operator of quantum trial state
+        r'''This function computes the expectation value of one-body operator of quantum trial state
         <\Psi_Q|v|\Psi_Q>
         Args:
             one_body_list: a list of real-symmetric or hermitian one-body operators
@@ -95,7 +95,7 @@ class QTrial:
     
     
     def compute_one_body_local(self, walker, one_body_list, ovlp):
-        """This function computes the expectation value of one-body operator between q trial state and walker 
+        r"""This function computes the expectation value of one-body operator between q trial state and walker
         <\Psi_Q|v|\phi> / <\Psi_Q|\phi>
         Args:
             walker: walker Slater determinant
@@ -127,7 +127,7 @@ class QTrial:
         
         
     def compute_local_energy(self, walker, ovlp):
-        """This function estimates the integral $\langle \Psi_Q|H|\phi_l\rangle$ with vacuum reference circuit.
+        r"""This function estimates the integral $\langle \Psi_Q|H|\phi_l\rangle$ with vacuum reference circuit.
         Args:
             walker: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
             ovlp: amplitude between walker and the quantum trial state

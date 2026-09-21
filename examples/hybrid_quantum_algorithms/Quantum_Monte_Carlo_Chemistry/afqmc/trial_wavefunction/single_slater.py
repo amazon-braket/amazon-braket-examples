@@ -7,7 +7,7 @@ from afqmc.estimators.local_energy import local_energy_generic_cholesky
 
 class SingleSlater:
     def __init__(self, prop: ChemicalProperties, psi0: np.ndarray):
-        '''This class defines the multi-Slater trial wavefunction using CI type expansions.
+        '''This class defines a single-Slater-determinant (Hartree-Fock) trial wavefunction.
         Args:
             prop: ChemicalProperties dataclass
             psi0: the reference Slater determinant for expansion, usually the Hartree-Fock state
@@ -42,7 +42,7 @@ class SingleSlater:
             
         
     def compute_trial_energy(self, prop):
-        '''This function computes the energy expectation value of trial state
+        r'''This function computes the energy expectation value of trial state
         \langle \Psi_T|H|\Psi_T\rangle / \langle \Psi_T|\Psi_T\rangle
         Args:
             prop: ChemicalProperties
@@ -53,7 +53,7 @@ class SingleSlater:
     
     
     def compute_trial_one_body(self, v):
-        '''This function computes the expectation value of one-body operator v
+        r'''This function computes the expectation value of one-body operator v
         \langle \Psi_T|v|\Psi_T\rangle / \langle \Psi_T|\Psi_T\rangle
         '''
         # assuming the v is in spin-orbital basis
@@ -63,15 +63,15 @@ class SingleSlater:
     
     
     def compute_ovlp(self, walker):
-        '''This function computes the overlap between MSD trial and a walker, using generalized Wick's theorem
-        \langle \Psi_T|\phi \rangle = \langle \psi_0|\phi\rangle (c_0^* + \sum_i c_i^* 
+        r'''This function computes the overlap between the trial and a walker, using generalized Wick's theorem
+        \langle \Psi_T|\phi \rangle = \langle \psi_0|\phi\rangle (c_0^* + \sum_i c_i^*
         \langle \psi_0|\prod_{\mu} a_{p_{\mu}}^{\dagger} a_{t_{\mu}}|\phi\rangle / \langle \psi_0|\phi \rangle)
         ''' 
         return np.linalg.det(self.psi0.T.conj() @ walker)
     
     
     def compute_one_body_local(self, walker, v):
-        '''This function computes the local one-body estimator using generalized Wick's theorem:
+        r'''This function computes the local one-body estimator using generalized Wick's theorem:
         \langle \Psi_T|v|\phi\rangle / \langle \Psi_T|\phi\rangle
         Args:
             walker:
@@ -87,7 +87,12 @@ class SingleSlater:
             v_a, v_b = v[::2, ::2], v[1::2, 1::2]
         elif v.shape[0] == self.nbasis:   # h1e already in spatial orbital
             v_a, v_b = v, v
-        
+        else:
+            raise Exception(
+                f"one-body operator has leading dimension {v.shape[0]}; expected "
+                f"{self.spinbasis} (spin-orbital) or {self.nbasis} (spatial)."
+            )
+
         # define the Greens and modified Green's function with input walker state
         Ga = gab(self.psia, walker[::2, ::2])
         Ga = np.array(Ga, dtype=np.complex128)

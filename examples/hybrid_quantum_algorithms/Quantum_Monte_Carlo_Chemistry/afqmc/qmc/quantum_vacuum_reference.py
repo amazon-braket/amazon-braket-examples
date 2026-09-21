@@ -91,7 +91,7 @@ def cqa_imag_time_propogator(
         weight (float): weight for sampling.
         prop (ChemicalProperties): Chemical properties from q_chemistry_preparation.
         E_shift (float): Reference energy, i.e. Hartree-Fock energy
-        dev (qml.Device): Pennylane device
+        dev (qp.Device): Pennylane device
     Returns:
         E_loc: quantum local energy
         new_walker: new walker for the next time step

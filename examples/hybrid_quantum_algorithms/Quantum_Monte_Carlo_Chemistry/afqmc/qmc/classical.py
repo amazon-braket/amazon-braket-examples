@@ -36,12 +36,7 @@ def classical_afqmc(
         (num_steps, dtau, trial, prop, E_shift, walker, weight)
         for walker, weight in zip(walkers, weights)
     ]
-    
-    inputs = [
-        (num_steps, dtau, trial, prop, E_shift, walker, weight)
-        for walker, weight in zip(walkers, weights)
-    ]
-    
+
     # parallelize with multiprocessing
     with mp.Pool(max_pool) as pool:
         results = list(pool.map(full_imag_time_evolution_wrapper, inputs))
