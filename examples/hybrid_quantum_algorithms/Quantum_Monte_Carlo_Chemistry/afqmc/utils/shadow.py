@@ -6,18 +6,27 @@ This file contains functions to sample classical shadows for performing shadow t
 
 def calculate_classical_shadow(circuit_template, Q_list):
     """
-    Given a circuit template, run one shadow circuit per random rotation and collect the results in a
-    compact "structure-of-arrays" format that stores only the raw generators of each snapshot -- the
-    measured bitstrings and the signed permutation matrices -- rather than the dense covariance/rotation
-    matrices. The matrices are reconstructed cheaply on the fly during post-processing. This keeps both
-    the stored/serialized size and the multiprocessing pickling cost small (O(N_snap * n) integers
-    instead of O(N_snap * n^2) complex numbers).
-    *Note that although this function could fit for a real QPU on Braket, it's recommended for simulator use only.
+    Collect matchgate shadows by running every random rotation through ONE broadcast circuit
+    rather than one circuit per snapshot.
+
+    Each Q is compiled classically into (schedule, angles, pauli_vector) by
+    compile_gaussian_givens; the schedule (rotation topology) is identical for all Q of the
+    same size, so only the angles and Pauli layer vary. Stacking those across all snapshots
+    and passing them to a single fixed-topology QNode lets the simulator evaluate the whole
+    batch in one vectorized call (and maps cleanly onto Braket program sets / concurrent
+    execution on hardware).
+
+    Results are stored in a compact "structure-of-arrays" format that keeps only the raw
+    generators of each snapshot -- the measured bitstrings and the signed permutation matrices
+    -- rather than the dense covariance/rotation matrices, which are reconstructed cheaply on
+    the fly during post-processing. This keeps both the stored/serialized size and the
+    multiprocessing pickling cost small (O(N_snap * n) integers instead of O(N_snap * n^2)
+    complex numbers).
     Args:
-        circuit_template (function): a Pennylane QNode that takes a signed permutation matrix Q and
-            returns qp.counts().
-        Q_list (list): random signed permutation matrices (dense, needed to build the circuits);
-            one shadow circuit is run per entry.
+        circuit_template (function): a Pennylane QNode taking (thetas, paulis) -- stacked
+            rotation angles of shape (N_snap, n_rot) and Pauli vectors of shape (N_snap, 2n)
+            -- and returning qp.counts() broadcast over the batch dimension.
+        Q_list (list): random signed permutation matrices (dense); one snapshot per entry.
     Returns:
         shadow (dict): compact shadow with arrays
             "perm"    (N_snap, 2n) int16 : column of the +/-1 entry in each row of Q,
@@ -26,16 +35,27 @@ def calculate_classical_shadow(circuit_template, Q_list):
             "count"   (N_out,)     int32 : shot count for each outcome,
             "snap_id" (N_out,)     int32 : index of the snapshot each outcome belongs to.
     """
+    # Imported here (not at module scope) to avoid a circular import: matchgate imports
+    # construct_covariance from this module.
+    from afqmc.utils.matchgate import compile_gaussian_givens
+
     n_snap = len(Q_list)
     dim = Q_list[0].shape[0]  # 2n Majorana / mode dimension
     n = dim // 2
 
     perm = np.zeros((n_snap, dim), dtype=np.int16)
     sign = np.zeros((n_snap, dim), dtype=np.int8)
-    bits, count, snap_id = [], [], []
     for s, Q in enumerate(Q_list):
         perm[s], sign[s] = signed_permutation_to_compact(Q)
-        counts = circuit_template(Q)
+
+    # Classically compile every snapshot, then run them all through one broadcast circuit.
+    compiled = [compile_gaussian_givens(Q) for Q in Q_list]
+    thetas = np.stack([angles for _, angles, _ in compiled])
+    paulis = np.stack([pauli_vector for _, _, pauli_vector in compiled])
+    counts_batch = circuit_template(thetas, paulis)
+
+    bits, count, snap_id = [], [], []
+    for s, counts in enumerate(counts_batch):
         for b_str, c in counts.items():
             bits.append([int(ch) for ch in b_str])
             count.append(int(c))
