@@ -6,6 +6,8 @@ from afqmc.utils.linalg import reortho
 from afqmc.trial_wavefunction.quantum_ovlp import QTrial
 
 #-----------------------------------------------------------------------------------------------------
+# The following is for consistent quantum assisted QC-AFQMC variant
+
 def cqa_afqmc(
     num_walkers: int,
     num_steps: int,
@@ -19,30 +21,34 @@ def cqa_afqmc(
         num_walkers (int): Number of walkers.
         num_steps (int): Number of (imaginary) time steps
         dtau (float): Increment of each time step
-        trial (QTrial): quantum trial wavefunction (matchgate-shadow based).
+        trial (QTrial): quantum trial wavefunction (matchgate-shadow based). Carries the
+            noiseless classical reference energy trial.E_shift.
         psi0 (np.ndarray): initial walker state.
         max_pool (int, optional): Max workers. Defaults to 8.
     Returns:
-        energies: energies
+        (local_energies, weights)
     """
-    # reference energy E_shift = <Psi_Q|H|Psi_Q>, estimated from the matchgate shadows
-    E_shift = trial.compute_trial_energy_shadow()
+    # Reference energy E_shift = <HF|H|HF> is the classical Hartree-Fock energy carried on the
+    # trial (noiseless, no circuit); used only for population control.
+    E_shift = trial.E_shift
     walkers = [psi0] * num_walkers
     weights = [1.0] * num_walkers
-    
+
     inputs = [
         (num_steps, dtau, trial, E_shift, walker, weight)
         for walker, weight in zip(walkers, weights)
     ]
-    
-    # parallelize with multiprocessing
-    with mp.Pool(max_pool) as pool:
-        results = list(pool.map(cqa_imag_time_evolution_wrapper, inputs))
-        
+
+    if max_pool == 1:
+        # One walker per task (e.g. Slurm array element): run serially to avoid a redundant
+        # subprocess fork and trial pickling.
+        results = [cqa_imag_time_evolution_wrapper(args) for args in inputs]
+    else:
+        with mp.Pool(max_pool) as pool:
+            results = list(pool.map(cqa_imag_time_evolution_wrapper, inputs))
+
     local_energies, weights = map(np.array, zip(*results))
-    energies = np.real(np.average(local_energies, weights=weights, axis=0))
-    
-    return energies
+    return local_energies, weights
 
 
 def cqa_imag_time_evolution_wrapper(args):
@@ -62,9 +68,9 @@ def cqa_imag_time_evolution(
     
     energy_list, weights = [], [1.0]
     for time in range(num_steps):
-        E_loc, walker, weight = cqa_imag_time_propogator(
-            dtau, trial, walker, weight, E_shift
-        )
+        if time%25 == 0:
+            print(f"Time step {time} / {num_steps}")
+        E_loc, walker, weight = cqa_imag_time_propogator(dtau, trial, walker, weight, E_shift)
         energy_list.append(E_loc)
         weights.append(weight)
         
@@ -79,15 +85,14 @@ def cqa_imag_time_propogator(
     weight: float,
     E_shift: float,
 ):
-    """Imaginary time propogator with quantum propagation of a single walker and energy evaluation.
+    """Imaginary time propagator with quantum propagation of a single walker and energy evaluation.
     Args:
         dtau (float): imaginary time step size
         trial (QTrial): trial state as np.ndarray, e.g., for h2 HartreeFock state.
         walker (np.ndarray): normalized walker state as np.ndarray, others are the same as trial
         weight (float): weight for sampling.
         prop (ChemicalProperties): Chemical properties from q_chemistry_preparation.
-        E_shift (float): Reference energy, i.e. Hartree-Fock energy
-        shadow
+        E_shift (float): Reference energy, i.e. Hartree-Fock energy shadow
     Returns:
         E_loc: quantum local energy
         new_walker: new walker for the next time step
