@@ -147,6 +147,36 @@ def compact_to_signed_permutation(perm, sign):
     return Q
 
 
+def shadow_from_json(output, Q_save):
+    '''Convert the on-disk shadow JSON ({output, Q_save}) into the compact in-memory dict, without
+    materializing any dense covariance/rotation matrices.
+    Args:
+        output: list (per snapshot) of {bitstring: count} dicts.
+        Q_save: list (per snapshot) of signed, 1-indexed permutation vectors.
+    Returns:
+        shadow (dict): arrays perm/sign (N_snap, 2n) int; bits (N_out, n) uint8; count/snap_id (N_out,) int.
+    '''
+    q_save = np.asarray(Q_save)                       # (N_snap, 2n), signed 1-indexed
+    perm = (np.abs(q_save) - 1).astype(np.int16)
+    sign = np.sign(q_save).astype(np.int8)
+    n = q_save.shape[1] // 2                           # number of qubits (fermionic modes)
+
+    bits, count, snap_id = [], [], []
+    for s, counts in enumerate(output):
+        for b_str, c in counts.items():
+            bits.append([int(ch) for ch in b_str])
+            count.append(int(c))
+            snap_id.append(s)
+
+    return {
+        "perm": perm,
+        "sign": sign,
+        "bits": np.asarray(bits, dtype=np.uint8).reshape(-1, n),
+        "count": np.asarray(count, dtype=np.int32),
+        "snap_id": np.asarray(snap_id, dtype=np.int32),
+    }
+
+
 def normalize_shadow(shadow):
     '''Return a shadow in the compact dict format, accepting either that dict or the legacy
     (outcomes, Q_list) tuple so that previously saved shadows still load.
