@@ -28704,6 +28704,6 @@
       "MAX_WAVEFORM_SAMPLES": 65536.0,
       "MAX_PULSE_LENGTH": 0.067
     },
-    "nativeGateCalibrationsRef": "https://dsq6c4wdong7p.cloudfront.net/native_gate_calibrations/device:arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q?versionId=Ow1pKi7xb5MZuMOKiJUukcx62syafAS5"
+    "nativeGateCalibrationsRef": "https://braket-device-info.us-west-1.api.aws/arn:aws:braket:us-west-1::device/qpu/rigetti/Cepheus-1-108Q/native_gate_calibrations?versionId=iFCgyksVIWQZ9pkOKKJ0aSsHwX_8pvqY"
   }
 }
