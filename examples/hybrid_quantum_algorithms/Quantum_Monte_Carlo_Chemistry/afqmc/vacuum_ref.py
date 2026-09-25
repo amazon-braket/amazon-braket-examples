@@ -1,6 +1,6 @@
-import os, time
+import time
 import numpy as np
-import pennylane as qml
+import pennylane as qp
 from pyscf import fci, gto
 from afqmc.utils.chemical_preparation import chemistry_preparation
 from afqmc.trial_wavefunction.quantum_vacuum_reference import QTrial
@@ -14,12 +14,11 @@ def run(
     dtau: float,
     max_pool: int,
 ) -> None:
-    """Run the entire QC-AFQMC algorithm.
+    """Run the entire QC-AFQMC algorithm (vacuum-reference variant).
     Args:
         num_walkers (int): Number of walkers.
         num_steps (int): Number of (imaginary) time steps
         dtau (float): Increment of each time step
-        quantum_evaluations_every_n_steps (int): How often to evaluate the energy using quantum
         max_pool (int): Max workers.
     """
     # perform HF calculations, where the geometry information and basis set are defined
@@ -40,11 +39,16 @@ def run(
     symbols = ["H", "H"]
     geometry = np.array([[0., 0., 0.], [0., 0., 0.75*Angstrom_to_Bohr]])
     
-    hamiltonian, _ = qml.qchem.molecular_hamiltonian(symbols, geometry, charge=0, basis='sto-3g')
-    psi0 = np.array([[1, 0], [0, 1], [0, 0], [0, 0]])
-    
-    # define the quantum trial state
-    q_trial = QTrial(prop, [0,1], V_T)
+    hamiltonian, _ = qp.qchem.molecular_hamiltonian(symbols, geometry, charge=0, basis='sto-3g')
+
+    # initial HF walker (spin-orbital Slater determinant) and occupied-orbital list, derived from
+    # the molecule: N = nup + ndown electrons occupy the lowest N spin orbitals of 2*nbasis.
+    num_electrons = prop.nup + prop.ndown
+    psi0 = np.eye(2 * prop.nbasis, num_electrons)
+    initial_state = list(range(num_electrons))
+
+    # define the quantum trial state (V_T is the ansatz; it must act on 2*prop.nbasis wires)
+    q_trial = QTrial(prop, initial_state, V_T)
 
     # Start QC-QFQMC computation
     start = time.time()
@@ -68,4 +72,4 @@ def run(
 
 
 def V_T():
-    qml.DoubleExcitation(0.12, wires=[0,1,2,3])
+    qp.DoubleExcitation(0.12, wires=[0,1,2,3])

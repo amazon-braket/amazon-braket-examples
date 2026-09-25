@@ -1,91 +1,118 @@
-# This class defines the quantum trial wavefunction where all the relevant local quantities 
-# are computed from overlaps <\Psi_Q|\phi_l>
+# This class defines the quantum trial wavefunction where all relevant local quantities are
+# computed from matchgate-shadow overlaps <\Psi_Q|\phi_l>. It runs no quantum circuit: the walker
+# overlaps come from the shadows, while the (noiseless) reference energy E_shift and mean-field
+# shift mf_shift are taken from the classical Hartree-Fock reference.
 
 import copy
 import numpy as np
-import pennylane as qml
 from scipy.special import comb
-from typing import List
 from itertools import product
-from openfermion.ops import general_basis_change
 from afqmc.estimators.ci import get_hmatel, get_one_body_matel
-from afqmc.utils.chemical_preparation import R_basis_change, rotated_hamiltonian_preparation, ChemicalProperties
-from afqmc.utils.quantum import amplitude_estimate, pauli_expect
+from afqmc.estimators.greens_function import gab
+from afqmc.estimators.local_energy import local_energy_generic_cholesky
+from afqmc.utils.chemical_preparation import (R_basis_change, rotated_hamiltonian_preparation,
+                                              ChemicalProperties, _general_basis_change)
+from afqmc.utils.shadow import normalize_shadow, compact_to_signed_permutation, covariance_from_bits
 from afqmc.utils.matchgate import ovlp_reconstruction
 
 
 class QTrial:
-    def __init__(self, prop: ChemicalProperties, initial_state: List, ansatz_circuit, dev="lightning.qubit",
-                 ifshadow=False, shadow=None, comb_coeffs=[]):
-        '''This class defines the quantum trial wavefunction.
+    def __init__(self, prop: ChemicalProperties, shadow, comb_coeffs=None):
+        '''This class defines the quantum trial wavefunction, evaluated from matchgate shadows.
+        The walker overlaps come from the shadows; the reference energy E_shift and the mean-field
+        shift mf_shift are computed from the classical Hartree-Fock reference (noiseless, no circuit).
         Args:
-            prop: ChemicalProperties dataclass
-            initial_state: the initial occupied orbitals as a list
-            ansatz_circuit: pennylane circuit
-            dev: only support for simulators, e.g., 'lightning.qubit';
-            ifshadow (bool): Use shadow tomography or not;
-            shadow: format being (outcomes, Q_list), where 'outcomes' contains the measurement statistics;
-                    and 'Q_list' contains the random signed permutation matrix being sampled.
+            prop: ChemicalProperties dataclass.
+            shadow: matchgate shadow of the trial state -- the compact dict from
+                afqmc.utils.shadow.shadow_from_json (a legacy (outcomes, Q_list) tuple is also
+                accepted and normalized).
+            comb_coeffs: optional channel-inversion coefficients for noisy shadows; if None they
+                are computed for noiseless shadows.
         '''
         self.name = "QTrial"
         self.num_qubits = 2*prop.nbasis     # JW transformation is assumed
         self.num_particles = prop.nup + prop.ndown
-        self.initial_state = initial_state
-        self.q_trial = ansatz_circuit
-        self.dev = dev
-        
+
         self.nup, self.ndown = prop.nup, prop.ndown
         self.nbasis = prop.nbasis
         self.h1e, self.eri = prop.h1e, prop.eri
         self.h_chem = copy.deepcopy(prop.h_chem)
         self.v_gamma, self.L_gamma = prop.v_gamma, prop.L_gamma
         self.nuclear_repulsion = prop.nuclear_repulsion
-        self.lambda_l, self.U_l = prop.lambda_l, prop.U_l
-        
-        # define mean-field shift
-        self.mf_shift = 1.j*self.compute_trial_one_body(self.L_gamma)
-            
+
+        # --- classical Hartree-Fock reference for the noiseless shift terms (no circuit, no shadow) ---
+        # HF Slater determinant: the lowest N = nup + ndown spin orbitals of 2*nbasis are occupied.
+        hf = np.eye(self.num_qubits, self.num_particles)
+        Ga = gab(hf[::2, ::2],  hf[::2, ::2])        # spin-up HF one-particle density matrix
+        Gb = gab(hf[1::2, 1::2], hf[1::2, 1::2])      # spin-down HF one-particle density matrix
+        # mean-field shift  mf_shift = i <HF|L_gamma|HF>  (same contraction as the classical trial)
+        self.mf_shift = np.array([
+            1j * (np.einsum("ij,ij->", L[::2, ::2], Ga) + np.einsum("ij,ij->", L[1::2, 1::2], Gb))
+            for L in self.L_gamma
+        ])
+        # reference energy  E_shift = <HF|H|HF>  (Hartree-Fock energy) for population control
+        self.E_shift = np.real(local_energy_generic_cholesky(prop, [Ga, Gb])[2])
+
         # define mean-field subtracted one-body term v_0.
         self.v_0 = copy.deepcopy(prop.h_chem)
         for i in range(len(self.v_gamma)):
             self.v_0 -= self.mf_shift[i]*self.v_gamma[i]
-        
-        # define possible excitations of walker state, this may be moved to walker class in the future
-        # create single excitation list
+
+        # define possible excitations of walker state (spin-conserving singles and doubles)
         self.single_excitations = [c for c in product(np.arange(self.num_particles, self.nbasis*2, 2), np.arange(0, self.num_particles, 2))]
         self.single_excitations += [c for c in product(np.arange(self.num_particles+1, self.nbasis*2, 2), np.arange(1, self.num_particles, 2))]
-        
+
         self.double_excitations = []
         for i in range(len(self.single_excitations)):
             for j in range(i+1, len(self.single_excitations)):
                 if self.single_excitations[j][0] != self.single_excitations[i][0] and self.single_excitations[j][1] != self.single_excitations[i][1]:
                     self.double_excitations.append((self.single_excitations[i] + self.single_excitations[j]))
-            
-        
-        # processing the shadow-related quantities
-        self.ifshadow = ifshadow
-        if self.ifshadow:
-            if shadow == None:
-                raise Exception("shadow can not be None or empty if shadow tomography is used.")
-            else:
-                self.b_lists, self.Q_list = shadow
-                self.shadow_order = int(self.num_qubits - self.num_particles//2)
-        
-        if self.ifshadow:
-            if comb_coeffs == []:
-                # we treat it as noiseless shadows
-                self.comb_coeffs = np.array([])
-                for k in range(self.shadow_order + 1):
-                    self.comb_coeffs = np.append(
-                        self.comb_coeffs,
-                        [comb(2*self.num_qubits, 2*k)/comb(self.num_qubits,k)]
-                    )
-            else:
-                if len(comb_coeffs) < (self.shadow_order+1):
-                    raise Exception("The length of the comb coeffs can not be smaller than dim")
-                self.comb_coeffs = comb_coeffs[:self.shadow_order+1]
-    
-    
+
+        # process the shadow (compact dict, or a legacy (outcomes, Q_list) tuple)
+        if shadow is None:
+            raise Exception("shadow can not be None; QTrial is evaluated from matchgate shadows.")
+        self.shadow = normalize_shadow(shadow)
+        self.shadow_order = int(self.num_qubits - self.num_particles//2)
+        if comb_coeffs is None:
+            # noiseless shadows: comb_coeffs[k] = C(2n,2k)/C(n,k) is the degree-2k channel inverse
+            self.comb_coeffs = np.array([
+                comb(2*self.num_qubits, 2*k)/comb(self.num_qubits, k)
+                for k in range(self.shadow_order + 1)
+            ])
+        else:
+            if len(comb_coeffs) < (self.shadow_order+1):
+                raise Exception("The length of the comb coeffs can not be smaller than dim")
+            self.comb_coeffs = comb_coeffs[:self.shadow_order+1]
+
+        # lazily-built cache of reconstructed covariances Q^T C_b Q (one per outcome), reused across
+        # walkers/excitations; dropped on pickling (see __getstate__) so mp.Pool workers stay light.
+        self._c_hats = None
+        self._c_weights = None
+
+    def _reconstructed_covariances(self):
+        """Reconstructed covariances c_hats[i] = Q^T C_b Q for every measurement outcome, plus the
+        shot-count weights. The dense signed permutation for each snapshot is rebuilt once and each
+        outcome's covariance is reconstructed on the fly from the compact bitstrings.
+        """
+        dim = 2 * self.num_qubits
+        perm, sign = self.shadow["perm"], self.shadow["sign"]
+        bits, counts, snap_id = self.shadow["bits"], self.shadow["count"], self.shadow["snap_id"]
+        q_dense = [compact_to_signed_permutation(perm[s], sign[s]).astype(np.complex128)
+                   for s in range(perm.shape[0])]
+        c_hats = np.empty((len(counts), dim, dim), dtype=np.complex128)
+        for i in range(len(counts)):
+            Qc = q_dense[snap_id[i]]
+            c_hats[i] = Qc.T @ covariance_from_bits(bits[i]) @ Qc
+        return c_hats, counts.astype(np.float64)
+
+    def __getstate__(self):
+        # Drop the (large, reconstructible) covariance cache before pickling so the object stays
+        # compact when sent to multiprocessing workers; each worker rebuilds it lazily on first use.
+        state = self.__dict__.copy()
+        state["_c_hats"] = None
+        state["_c_weights"] = None
+        return state
+
     def generate_excited_slater(self, excitation: tuple):
         """This function assumes the number of spin_up and spin_down electrons are the same."""
         
@@ -107,68 +134,14 @@ class QTrial:
         return excited_slater
     
     
-    def compute_trial_energy(self, hamiltonian):
-        """This function estimates the integral $\langle \Psi_Q|H|\Psi_Q\rangle$.
-        Args:
-            hamiltonian: hamiltonian class from pennylane, nuclear repulsion energy included; 
-        Returns:
-            energy: np.complex128
-        """
-        device = qml.device(self.dev, wires=self.num_qubits)
-        @qml.qnode(device, interface=None, diff_method=None)
-        def compute_hamiltonian_expectation(initial_state, q_trial, hamiltonian):
-            for i in initial_state:
-                qml.PauliX(wires=i)
-            q_trial()
-            return qml.expval(hamiltonian)
-        
-        energy = compute_hamiltonian_expectation(self.initial_state, self.q_trial, hamiltonian)
-        return energy
-    
-    
-    def compute_trial_one_body(self, one_body_list):
-        '''This function computes the expectation value of one-body operator of quantum trial state
-        <\Psi_Q|v|\Psi_Q>
-        Args:
-            one_body_list: a list of real-symmetric or hermitian one-body operators
-        Returns:
-            expectation: np.array
-        '''
-        num_qubits = self.num_qubits
-        
-        Id = np.identity(num_qubits)
-        expectation = np.array([])
-        pauli_dict = {i: pauli_expect(self.initial_state, self.q_trial,
-                                      Id, [i], self.dev) for i in range(num_qubits)}
-        
-        for one_body in one_body_list:
-            value = 0.0 + 0.0j
-            # check if the one-body term is already diagonal or not
-            if np.count_nonzero(np.round(one_body - np.diag(np.diagonal(one_body)), 7)) != 0:
-                lamb, U = np.linalg.eigh(one_body)
-                pauli_dict_2 = {i: pauli_expect(self.initial_state, self.q_trial,
-                                                U, [i], self.dev) for i in range(num_qubits)}
-                for i in range(num_qubits):
-                    expectation_value = 0.5 * (1.0 - pauli_dict_2.get(i))
-                    value += lamb[i] * expectation_value
-            else:
-                for i in range(num_qubits):
-                    expectation_value = 0.5 * (1.0 - pauli_dict.get(i))
-                    value += one_body[i, i] * expectation_value
-            expectation = np.append(expectation, value)
-            
-        return expectation
-
-
     def compute_ovlp(self, walker):
-        if self.ifshadow:
-            return ovlp_reconstruction(self.b_lists, self.Q_list, self.comb_coeffs, walker)
-        else:
-            return amplitude_estimate(walker, self.q_trial, self.dev)
+        if self._c_hats is None:
+            self._c_hats, self._c_weights = self._reconstructed_covariances()
+        return ovlp_reconstruction(self._c_hats, self._c_weights, self.comb_coeffs, walker)
     
     
     def compute_one_body_local(self, walker, one_body_list, ovlp, ovlp_dict):
-        """This function computes the expectation value of one-body operator between q trial state and walker 
+        r"""This function computes the expectation value of one-body operator between q trial state and walker 
         <\Psi_Q|v|\phi> / <\Psi_Q|\phi>; The idea is to rewrite the general Slater determinant into a linear
         combination after the operation of number operators, where the rows and columns of that orbital are
         cleaned up.
@@ -184,8 +157,8 @@ class QTrial:
         expectation = np.array([])
         
         for one_body in one_body_list:
-            one_body_rotated = general_basis_change(one_body[::2, ::2], R, (1, 0))
-            
+            one_body_rotated = _general_basis_change(one_body[::2, ::2], R, (1, 0))
+
             # define the Hartree-Fock Slater
             dj = np.arange(num_particles)
             value = ovlp * get_one_body_matel(one_body_rotated, dj, dj)
@@ -203,7 +176,7 @@ class QTrial:
     
     
     def compute_local_energy(self, walker, ovlp, ovlp_dict=None):
-        """This function estimates the integral $\langle \Psi_Q|H|\phi_l\rangle$ with rotated basis.
+        r"""This function estimates the integral $\langle \Psi_Q|H|\phi_l\rangle$ with rotated basis.
         Args:
             walker: np.ndarray; matrix representation of the walker state, not necessarily orthonormalized.
             ovlp: amplitude between walker and the quantum trial state
@@ -217,29 +190,17 @@ class QTrial:
         U_phi = np.kron(R, np.eye(2))
         h1e_rot, eri_rot = rotated_hamiltonian_preparation(self.h1e, self.eri, walker)
         
-        # here we create a dictionary to save the ovlp needed for diagonal one-body terms;
+        # Build (once) the overlaps with singly- and doubly-excited walker determinants. When a
+        # populated ovlp_dict is passed in, reuse it instead of recomputing these overlaps.
         if not ovlp_dict:
             ovlp_dict = {(): ovlp}
-            # loop over the possible single excitations and save them
-            for key in self.single_excitations:
-                # generate excited Slater determinant in the rotated basis
+            for key in self.single_excitations + self.double_excitations:
+                # generate the excited Slater determinant in the rotated basis, rotate it back to
+                # the canonical basis through R, and reconstruct its overlap from the shadows
                 phi_exc_rot = self.generate_excited_slater(key)
-                
-                # rotate it back to canonical basis through R
                 phi_exc = U_phi @ phi_exc_rot
-                phi_exc_ovlp = self.compute_ovlp(phi_exc)
-                ovlp_dict.update({key: phi_exc_ovlp})
-        
-        # compute the overlap with double excitation Slaters
-        for key in self.double_excitations:
-            # generate excited Slater determinant in the rotated basis
-            phi_exc_rot = self.generate_excited_slater(key)
-            
-            # rotate it back to canonical basis through R
-            phi_exc = U_phi @ phi_exc_rot
-            phi_exc_ovlp = self.compute_ovlp(phi_exc)
-            ovlp_dict.update({key: phi_exc_ovlp})
-        
+                ovlp_dict[key] = self.compute_ovlp(phi_exc)
+
         dj = np.arange(num_particles)
         energy += ovlp * get_hmatel(h1e_rot, eri_rot, dj, dj)[0]
         

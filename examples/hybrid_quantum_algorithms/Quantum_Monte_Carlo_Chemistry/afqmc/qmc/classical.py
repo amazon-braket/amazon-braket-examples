@@ -26,7 +26,9 @@ def classical_afqmc(
         max_pool (int, optional): Max workers. Defaults to 8.
         
     Returns:
-        energies, weights, weighted_mean: Energies,
+        (local_energies, weights): raw per-walker local energies and weights. Callers that want a
+        single curve compute np.average(local_energies, weights=weights, axis=0); returning the raw
+        arrays lets the Batch driver aggregate across array jobs.
     """
     E_shift = trial.compute_trial_energy(prop)
     walkers = [trial.psi0] * num_walkers
@@ -36,19 +38,13 @@ def classical_afqmc(
         (num_steps, dtau, trial, prop, E_shift, walker, weight)
         for walker, weight in zip(walkers, weights)
     ]
-    
-    inputs = [
-        (num_steps, dtau, trial, prop, E_shift, walker, weight)
-        for walker, weight in zip(walkers, weights)
-    ]
-    
+
     # parallelize with multiprocessing
     with mp.Pool(max_pool) as pool:
         results = list(pool.map(full_imag_time_evolution_wrapper, inputs))
         
     local_energies, weights = map(np.array, zip(*results))
-    energies = np.real(np.average(local_energies, weights=weights, axis=0))
-    return local_energies, energies
+    return local_energies, weights
 
 
 def full_imag_time_evolution_wrapper(args):

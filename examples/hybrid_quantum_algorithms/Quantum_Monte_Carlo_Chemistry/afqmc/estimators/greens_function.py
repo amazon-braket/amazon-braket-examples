@@ -3,7 +3,7 @@ import scipy.linalg
 
 
 def gab(A, B):
-    """This function computes the one-body Green's function
+    r"""This function computes the one-body Green's function
     G_pq = (V_{\phi} (U_{\psi}^{\dagger} V_{\phi})^{-1} U_{\psi}^{\dagger})_{qp}
     Args:
         psi, phi: np.ndarray
