@@ -44,7 +44,9 @@
     "error mitigation":[],
     "error correction":["error detection", "error correction"],
     "ionq":[],
-    "parameters" :["freeparameter","freeparameterexpression"],
+    "free parameters" :["freeparameter","freeparameterexpression"],
+    "hyperparameters":["hyperparameter"],
+    "optimizers":["optimizer"],
     "iqm":[],
     "rigetti":["rigetti","cepheus"],
     "unitary": [".unitary","custom unitary"]
