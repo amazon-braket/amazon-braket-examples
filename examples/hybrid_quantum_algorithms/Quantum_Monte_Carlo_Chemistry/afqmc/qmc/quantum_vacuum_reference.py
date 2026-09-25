@@ -27,7 +27,9 @@ def cqa_afqmc(
         psi0 (np.ndarray): initial walker state.
         max_pool (int, optional): Max workers. Defaults to 8.
     Returns:
-        energies: energies
+        (local_energies, weights): raw per-walker local energies and weights. Callers that want a
+        single curve compute np.average(local_energies, weights=weights, axis=0). This matches
+        qmc.quantum_shadow.cqa_afqmc so the two variants return the same shape.
     """
     E_shift = trial.compute_trial_energy(hamiltonian)
     weights = [1.0] * num_walkers
@@ -43,9 +45,8 @@ def cqa_afqmc(
         results = list(pool.map(cqa_imag_time_evolution_wrapper, inputs))
         
     local_energies, weights = map(np.array, zip(*results))
-    energies = np.real(np.average(local_energies, weights=weights, axis=0))
-    
-    return energies
+
+    return local_energies, weights
 
 
 def cqa_imag_time_evolution_wrapper(args):

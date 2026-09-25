@@ -68,8 +68,6 @@ def cqa_imag_time_evolution(
     
     energy_list, weights = [], [1.0]
     for time in range(num_steps):
-        if time%25 == 0:
-            print(f"Time step {time} / {num_steps}")
         E_loc, walker, weight = cqa_imag_time_propogator(dtau, trial, walker, weight, E_shift)
         energy_list.append(E_loc)
         weights.append(weight)
