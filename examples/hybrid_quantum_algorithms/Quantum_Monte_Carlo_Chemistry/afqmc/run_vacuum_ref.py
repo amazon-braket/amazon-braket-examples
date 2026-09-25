@@ -1,4 +1,4 @@
-import os, time
+import time
 import numpy as np
 import pennylane as qp
 from pyscf import fci, gto
