@@ -629,12 +629,14 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | error mitigation |  [GSm](#GSm)<a name="index_GSm"></a>, [REMm](#REMm)<a name="index_REMm"></a>, [EMWm](#EMWm)<a name="index_EMWm"></a>, [AQEMW](#AQEMW)<a name="index_AQEMW"></a>, [EMIQ](#EMIQ)<a name="index_EMIQ"></a>, [ZNEm](#ZNEm)<a name="index_ZNEm"></a>, [TPS](#TPS)<a name="index_TPS"></a>| <br>
  | estimator  |  [BNPQis](#BNPQis)<a name="index_BNPQis"></a>| <br>
  | estimators |  [EVPrS](#EVPrS)| <br>
- | gates      |  [IQMNG](#IQMNG)<a name="index_IQMNG"></a>, [BSQG](#BSQG)<a name="index_BSQG"></a>| <br>
+ | free parameters |  [DDQC](#DDQC)<a name="index_DDQC"></a>, [QAOA](#QAOA)<a name="index_QAOA"></a>, [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG)<a name="index_BSQG"></a>, [EMWm](#EMWm)| <br>
+ | gates      |  [IQMNG](#IQMNG)<a name="index_IQMNG"></a>, [BSQG](#BSQG)| <br>
  | gpus       |  [PTQML](#PTQML)<a name="index_PTQML"></a>, [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
  | graph      |  [MIS](#MIS), [MWIS](#MWIS)| <br>
- | hamiltonian |  [QAOA](#QAOA)<a name="index_QAOA"></a>, [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [DSVSG](#DSVSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS), [EMWm](#EMWm), [AQEMW](#AQEMW), [MEOQis](#MEOQis)<a name="index_MEOQis"></a>, [BNPQis](#BNPQis)| <br>
+ | hamiltonian |  [QAOA](#QAOA), [VQEChem](#VQEChem), [VQETFIM](#VQETFIM)<a name="index_VQETFIM"></a>, [NQD](#NQD), [QNES](#QNES)<a name="index_QNES"></a>, [GOQ](#GOQ)<a name="index_GOQ"></a>, [HGV](#HGV), [AGC](#AGC), [GSAHS](#GSAHS), [GSA](#GSA), [OPRS](#OPRS), [PTA](#PTA), [MIS](#MIS), [RLS](#RLS), [SPL](#SPL), [SLGRA](#SLGRA), [MWIS](#MWIS), [PSG](#PSG), [DSVSG](#DSVSG), [GSPrS](#GSPrS)<a name="index_GSPrS"></a>, [EVPrS](#EVPrS), [EMWm](#EMWm), [AQEMW](#AQEMW), [MEOQis](#MEOQis)<a name="index_MEOQis"></a>, [BNPQis](#BNPQis)| <br>
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [HJQis](#HJQis)<a name="index_HJQis"></a>| <br>
  | hybrid jobs |  [HJQis](#HJQis)| <br>
+ | hyperparameters |  [QMLHJ](#QMLHJ), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ), [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
  | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Barrier](#Barrier), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
  | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL), [OvQBP](#OvQBP)<a name="index_OvQBP"></a>, [HJQis](#HJQis)| <br>
@@ -642,14 +644,14 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
  | mitiq      |  [GSm](#GSm), [REMm](#REMm), [ZNEm](#ZNEm), [TPS](#TPS), [EMWm](#EMWm)| <br>
  | model      |  [VQETFIM](#VQETFIM)| <br>
- | moments    |  [DDQC](#DDQC)<a name="index_DDQC"></a>| <br>
+ | moments    |  [DDQC](#DDQC)| <br>
  | native gates |  [VC](#VC), [IQMNG](#IQMNG), [IonNG](#IonNG), [LEmu](#LEmu), [NGPQis](#NGPQis)| <br>
  | noise      |  [GSOQ](#GSOQ), [RNG](#RNG), [SN](#SN), [NM](#NM), [NM](#NM), [NQD](#NQD), [SNCP](#SNCP), [LEmu](#LEmu), [ZNEm](#ZNEm), [EmuQis](#EmuQis)| <br>
  | open quantum systems |  [GSOQ](#GSOQ), [SN](#SN), [SNCP](#SNCP), [OQSDC](#OQSDC)| <br>
  | openqasm   |  [GSOQ](#GSOQ), [Barrier](#Barrier), [AOQLS](#AOQLS)<a name="index_AOQLS"></a>, [DCOQ3](#DCOQ3), [TQCBr](#TQCBr)| <br>
  | optimization |  [QNES](#QNES), [GOQ](#GOQ), [MIS](#MIS), [MWIS](#MWIS), [MEOQis](#MEOQis)| <br>
+ | optimizers |  [QAOA](#QAOA), [QHJP](#QHJP), [QNES](#QNES), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [MEOQis](#MEOQis)| <br>
  | parallel   |  [CGPPL](#CGPPL), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG)| <br>
- | parameters |  [DDQC](#DDQC), [QAOA](#QAOA), [BE](#BE)<a name="index_BE"></a>, [NGC](#NGC), [BSQG](#BSQG), [EMWm](#EMWm)| <br>
  | pauli operators |  [GSPrS](#GSPrS), [EVPrS](#EVPrS)| <br>
  | pennylane  |  [GSHJ](#GSHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [CHJS](#CHJS), [CPL](#CPL), [CGPPL](#CGPPL), [GOQ](#GOQ), [HGV](#HGV), [SNCP](#SNCP), [TRU](#TRU), [AGC](#AGC), [SPL](#SPL)| <br>
  | physics    |  [VQETFIM](#VQETFIM), [SLGRA](#SLGRA)| <br>
