@@ -1,19 +1,19 @@
 amazon-braket-default-simulator==1.40.2
 amazon-braket-pennylane-plugin==1.35.2
 amazon-braket-schemas==1.32.1.post0
-amazon-braket-sdk==1.127.2
+amazon-braket-sdk==1.127.3.post0
 amazon-braket-algorithm-library==1.7.10.post0
 awscli==1.46.1
-boto3==1.43.103
-botocore==1.43.103
+boto3==1.43.108
+botocore==1.43.108
 cuda-quantum-cu12==0.16.0; sys_platform=="linux"
 cudaq-qec-cu12==0.8.0; sys_platform=="linux"
 cvxpy==1.9.3
-ipykernel==7.3.0
+ipykernel==7.4.0
 jax==0.6.2 # JAX >0.6.2 not compatible with PennyLane
 jaxlib==0.6.2
 jinja2==3.1.6
-markupsafe==3.0.3
+markupsafe==3.0.4
 matplotlib==3.11.2
 mypy-extensions==1.1.0
 numpy==2.2.6
