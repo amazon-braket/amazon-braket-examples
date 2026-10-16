@@ -27,7 +27,7 @@ phases:
       - conda config --set channel_priority strict
       - conda config --set solver libmamba
       - pip install 'setuptools<70'
-      - conda install -y -q -c conda-forge conda-pack=0.8.1
+      - conda install -y -q -c conda-forge conda-pack=0.8.1 zstandard
   build:
     commands:
       - BRAKET_ENV=Braket
