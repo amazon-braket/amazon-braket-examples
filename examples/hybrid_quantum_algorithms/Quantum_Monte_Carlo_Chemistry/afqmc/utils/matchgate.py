@@ -260,7 +260,7 @@ def compile_gaussian_givens(orthogonal_matrix: np.ndarray):
             map(lambda x: (x[0].conj().T, x[1]), reversed(right_rotations))):
         schedule.append((i, j))
         theta = np.arcsin(np.real(gmat[1, 0]))
-        thetas.append(-theta)            # change into Kianna's convention
+        thetas.append(theta)
 
     # final layer of Pauli gates to implement phases, which must be \pm 1 since
     # orthogonal matrices are real
