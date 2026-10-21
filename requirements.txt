@@ -1,11 +1,11 @@
-amazon-braket-default-simulator==1.40.2
+amazon-braket-default-simulator==1.41.0
 amazon-braket-pennylane-plugin==1.35.2
 amazon-braket-schemas==1.32.1.post0
 amazon-braket-sdk==1.127.3.post0
 amazon-braket-algorithm-library==1.7.10.post0
 awscli==1.46.1
-boto3==1.43.111
-botocore==1.43.111
+boto3==1.43.114
+botocore==1.43.114
 certifi==2026.10.19
 cuda-quantum-cu12==0.16.0; sys_platform=="linux"
 cudaq-qec-cu12==0.8.0; sys_platform=="linux"
@@ -27,7 +27,7 @@ pennylane-lightning==0.45.0
 pylatexenc==2.11
 qiskit-aer==0.17.2
 qiskit-algorithms==0.4.0
-qiskit-braket-provider==0.25.0
+qiskit-braket-provider==0.26.1
 qiskit-optimization==0.7.0
-qiskit==2.5.2
+qiskit==2.6.0
 scipy==1.17.1
