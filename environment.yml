@@ -2,7 +2,9 @@ name: Braket
 channels:
   - conda-forge
 dependencies:
+  - ca-certificates>=2026.10.19
   - libstdcxx-ng
+  - pip>=26.2.2
   - python=3.12
   - pip:
       - -r requirements.txt
