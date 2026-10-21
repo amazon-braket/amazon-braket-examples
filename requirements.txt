@@ -6,6 +6,7 @@ amazon-braket-algorithm-library==1.7.10.post0
 awscli==1.46.1
 boto3==1.43.111
 botocore==1.43.111
+certifi==2026.10.19
 cuda-quantum-cu12==0.16.0; sys_platform=="linux"
 cudaq-qec-cu12==0.8.0; sys_platform=="linux"
 cvxpy==1.9.3
