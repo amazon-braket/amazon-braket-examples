@@ -1,0 +1,4 @@
+# Jupyter MCP Server for JupyterSystemEnv on notebook-al2023-v1 (CPython 3.10).
+jupyter-server-mcp==0.4.1
+jupyter-ai-tools==0.8.0
+jupyterlab-commands-toolkit==0.3.1
