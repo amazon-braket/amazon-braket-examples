@@ -25,6 +25,7 @@ pandas==2.3.3 # pandas >=3.0.0 not compatible with JAX 0.6.2
 pennylane==0.45.1
 pennylane-lightning==0.45.0
 pylatexenc==2.11
+pyscf==2.15.0 # see https://github.com/pyscf/pyscf/issues/3659
 qiskit-aer==0.18.0
 qiskit-algorithms==0.4.0
 qiskit-braket-provider==0.27.0
