@@ -1,0 +1,10 @@
+# The AWS MCP proxy environment for Braket notebook instances.
+# The pipeline builds it with conda and packs it with conda-pack, like environment.yml.
+name: McpProxy
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - pip
+  - pip:
+      - -r mcp-proxy-requirements.txt
