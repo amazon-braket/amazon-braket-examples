@@ -261,6 +261,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial introduces the mitiq library
 
+-  [**Quantum Error Correction with Dynamic Circuits**](examples/experimental_capabilities/dynamic_circuits/6_Quantum_Error_Correction_with_Dynamic_Circuits.ipynb) [(QECDC)](#index_QECDC)<a name="QECDC"></a>
+
+  This tutorial implements the three-qubit bit-flip code with dynamic circuits, using mid-circuit measurements for syndrome extraction and real-time feedforward to actively correct errors. You will encode a logical qubit, verify the syndrome table, decode with a one-hot feedforward decoder, and run a noise sweep comparing the logical and physical error rates.
+
 
 ---
 
@@ -426,6 +430,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 
   This tutorial shows how we can specify experimental dynamic circuit instructions using OpenQASM 3.0 on Amazon Braket. 
 
+-  [**Quantum Error Correction with Dynamic Circuits**](examples/experimental_capabilities/dynamic_circuits/6_Quantum_Error_Correction_with_Dynamic_Circuits.ipynb) [(QECDC)](#index_QECDC)
+
+  This tutorial implements the three-qubit bit-flip code with dynamic circuits, using mid-circuit measurements for syndrome extraction and real-time feedforward to actively correct errors. You will encode a logical qubit, verify the syndrome table, decode with a one-hot feedforward decoder, and run a noise sweep comparing the logical and physical error rates.
+
 
 ---
 
@@ -451,6 +459,10 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
 -  [**Getting Started with Dynamic Circuits on IQM**](examples/experimental_capabilities/dynamic_circuits/0_Intro_to_Dynamic_Circuits_on_IQM.ipynb) [(GSDCI)](#index_GSDCI)
 
   This tutorial introduces experimental support for dynamic circuits on IQM Garnet, including support for mid-circuit measurements and feedforward control, as well as recommended practices and capabilities of the service. 
+
+-  [**Quantum Error Correction with Dynamic Circuits**](examples/experimental_capabilities/dynamic_circuits/6_Quantum_Error_Correction_with_Dynamic_Circuits.ipynb) [(QECDC)](#index_QECDC)
+
+  This tutorial implements the three-qubit bit-flip code with dynamic circuits, using mid-circuit measurements for syndrome extraction and real-time feedforward to actively correct errors. You will encode a logical qubit, verify the syndrome table, decode with a one-hot feedforward decoder, and run a noise sweep comparing the logical and physical error rates.
 
 
 ---
@@ -626,6 +638,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | devices    |  [NM](#NM), [AQQD](#AQQD), [GDCDP](#GDCDP), [NGC](#NGC), [LEmu](#LEmu)| <br>
  | dynamic circuits |  [DCOQ3](#DCOQ3)<a name="index_DCOQ3"></a>| <br>
  | emulator   |  [LEmu](#LEmu), [EmuQis](#EmuQis)| <br>
+ | error correction |  [QECDC](#QECDC)<a name="index_QECDC"></a>| <br>
  | error mitigation |  [GSm](#GSm)<a name="index_GSm"></a>, [REMm](#REMm)<a name="index_REMm"></a>, [EMWm](#EMWm)<a name="index_EMWm"></a>, [AQEMW](#AQEMW)<a name="index_AQEMW"></a>, [EMIQ](#EMIQ)<a name="index_EMIQ"></a>, [ZNEm](#ZNEm)<a name="index_ZNEm"></a>, [TPS](#TPS)<a name="index_TPS"></a>| <br>
  | estimator  |  [BNPQis](#BNPQis)<a name="index_BNPQis"></a>| <br>
  | estimators |  [EVPrS](#EVPrS)| <br>
@@ -636,7 +649,7 @@ Welcome to the primary repository for Amazon Braket examples and tutorials. Lear
  | hybrid job |  [GSHJ](#GSHJ), [QMLHJ](#QMLHJ)<a name="index_QMLHJ"></a>, [QHJP](#QHJP)<a name="index_QHJP"></a>, [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ)<a name="index_RJNHJ"></a>, [CHJS](#CHJS), [CPL](#CPL)<a name="index_CPL"></a>, [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [HJQis](#HJQis)<a name="index_HJQis"></a>| <br>
  | hybrid jobs |  [HJQis](#HJQis)| <br>
  | ionq       |  [RQCQ](#RQCQ), [VC](#VC), [RNG](#RNG)<a name="index_RNG"></a>, [EMIQ](#EMIQ), [IonNG](#IonNG)<a name="index_IonNG"></a>, [GDCDP](#GDCDP)| <br>
- | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Barrier](#Barrier), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>| <br>
+ | iqm        |  [RQCQ](#RQCQ), [VC](#VC), [Barrier](#Barrier), [Grover](#Grover), [IQMNG](#IQMNG), [GSDCI](#GSDCI)<a name="index_GSDCI"></a>, [DCC](#DCC), [HNDC](#HNDC), [OQSDC](#OQSDC)<a name="index_OQSDC"></a>, [QECDC](#QECDC)| <br>
  | job        |  [RQCQ](#RQCQ), [GSHJ](#GSHJ), [QMLHJ](#QMLHJ), [QHJP](#QHJP), [BYOC](#BYOC), [ESHJ](#ESHJ), [PTQML](#PTQML), [QNES](#QNES), [RJNHJ](#RJNHJ), [CHJS](#CHJS), [CPL](#CPL), [GOQ](#GOQ), [HGV](#HGV), [HCQJ](#HCQJ), [SQPG](#SQPG), [PSG](#PSG), [DSVSG](#DSVSG), [IntroSL](#IntroSL), [OvQBP](#OvQBP)<a name="index_OvQBP"></a>, [HJQis](#HJQis)| <br>
  | kraus      |  [GSOQ](#GSOQ), [SN](#SN)<a name="index_SN"></a>, [SNCP](#SNCP)<a name="index_SNCP"></a>| <br>
  | local simulator |  [RQCS](#RQCS)<a name="index_RQCS"></a>, [ESHJ](#ESHJ), [CGPPL](#CGPPL)<a name="index_CGPPL"></a>, [RLS](#RLS), [SPL](#SPL)| <br>
