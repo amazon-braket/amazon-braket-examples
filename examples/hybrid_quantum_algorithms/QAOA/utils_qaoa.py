@@ -16,8 +16,8 @@ def ZZgate(q1, q2, gamma):
     # get a circuit
     circ_zz = Circuit()
 
-    # construct decomposition of ZZ
-    circ_zz.cnot(q1, q2).rz(q2, gamma).cnot(q1, q2)
+    # Rz uses a half-angle in the exponent.
+    circ_zz.cnot(q1, q2).rz(q2, 2 * gamma).cnot(q1, q2)
 
     return circ_zz
 

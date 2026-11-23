@@ -56,3 +56,17 @@ updates:
        dev-dependencies:
           patterns:
             - "*"
+
+  # Notebook LCC pins: the Jupyter MCP Server (jupyter-ai-requirements.txt) and the AWS MCP
+  # proxy (mcp-proxy-requirements.txt). The notebook release pipeline tests each bump on
+  # notebook instances before release.
+  - package-ecosystem: "pip"
+    directory: "/jupyter-ai"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: infra
+    groups:
+       jupyter-ai:
+          patterns:
+            - "*"
